@@ -87,7 +87,7 @@ class CharmedChars : JavaPlugin() {
         ) {
             oraxenLoaded = true
             CompatibilitiesManager.addCompatibility("McLetterNumberBlocks", ItemManager::class.java)
-            val oraxenFolder: File /* TODO: class org.jetbrains.kotlin.nj2k.types.JKJavaNullPrimitiveType */? =
+            val oraxenFolder: File =
                 OraxenPlugin.get().dataFolder
             try {
                 FileUtils.copyResourcesRecursively(

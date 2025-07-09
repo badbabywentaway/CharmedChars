@@ -1,0 +1,721 @@
+
+a_block:
+  displayname: "<#D5D6D8>A Block"
+  material: PAPER
+  Pack:
+    generate_model: false
+    model: default/a_block
+  Mechanics:
+    noteblock:
+      break_sound: block.glass.break
+      place_sound: block.glass.place
+      custom_variation: 5
+      model: default/a_block
+      hardness: 1
+      drop:
+        silktouch: false
+        loots:
+          - { oraxen_item: a_block, probability: 1.0 }
+
+b_block:
+  displayname: "<#D5D6D8>B Block"
+  material: PAPER
+  Pack:
+    generate_model: false
+    model: default/b_block
+  Mechanics:
+    noteblock:
+      break_sound: block.glass.break
+      place_sound: block.glass.place
+      custom_variation: 6
+      model: default/b_block
+      hardness: 1
+      drop:
+        silktouch: false
+        loots:
+          - { oraxen_item: b_block, probability: 1.0 }
+
+c_block:
+  displayname: "<#D5D6D8>C Block"
+  material: PAPER
+  Pack:
+    generate_model: false
+    model: default/c_block
+  Mechanics:
+    noteblock:
+      break_sound: block.glass.break
+      place_sound: block.glass.place
+      custom_variation: 7
+      model: default/c_block
+      hardness: 1
+      drop:
+        silktouch: false
+        loots:
+          - { oraxen_item: c_block, probability: 1.0 }
+
+d_block:
+  displayname: "<#D5D6D8>D Block"
+  material: PAPER
+  Pack:
+    generate_model: false
+    model: default/d_block
+  Mechanics:
+    noteblock:
+      break_sound: block.glass.break
+      place_sound: block.glass.place
+      custom_variation: 8
+      model: default/d_block
+      hardness: 1
+      drop:
+        silktouch: false
+        loots:
+          - { oraxen_item: d_block, probability: 1.0 }
+
+e_block:
+  displayname: "<#D5D6D8>E Block"
+  material: PAPER
+  Pack:
+    generate_model: false
+    model: default/e_block
+  Mechanics:
+    noteblock:
+      break_sound: block.glass.break
+      place_sound: block.glass.place
+      custom_variation: 9
+      model: default/e_block
+      hardness: 1
+      drop:
+        silktouch: false
+        loots:
+          - { oraxen_item: e_block, probability: 1.0 }
+
+f_block:
+  displayname: "<#D5D6D8>F Block"
+  material: PAPER
+  Pack:
+    generate_model: false
+    model: default/f_block
+  Mechanics:
+    noteblock:
+      break_sound: block.glass.break
+      place_sound: block.glass.place
+      custom_variation: 10
+      model: default/f_block
+      hardness: 1
+      drop:
+        silktouch: false
+        loots:
+          - { oraxen_item: f_block, probability: 1.0 }
+
+g_block:
+  displayname: "<#D5D6D8>G Block"
+  material: PAPER
+  Pack:
+    generate_model: false
+    model: default/g_block
+  Mechanics:
+    noteblock:
+      break_sound: block.glass.break
+      place_sound: block.glass.place
+      custom_variation: 11
+      model: default/g_block
+      hardness: 1
+      drop:
+        silktouch: false
+        loots:
+          - { oraxen_item: g_block, probability: 1.0 }
+
+h_block:
+  displayname: "<#D5D6D8>H Block"
+  material: PAPER
+  Pack:
+    generate_model: false
+    model: default/h_block
+  Mechanics:
+    noteblock:
+      break_sound: block.glass.break
+      place_sound: block.glass.place
+      custom_variation: 12
+      model: default/h_block
+      hardness: 1
+      drop:
+        silktouch: false
+        loots:
+          - { oraxen_item: h_block, probability: 1.0 }
+
+i_block:
+  displayname: "<#D5D6D8>I Block"
+  material: PAPER
+  Pack:
+    generate_model: false
+    model: default/i_block
+  Mechanics:
+    noteblock:
+      break_sound: block.glass.break
+      place_sound: block.glass.place
+      custom_variation: 13
+      model: default/i_block
+      hardness: 1
+      drop:
+        silktouch: false
+        loots:
+          - { oraxen_item: i_block, probability: 1.0 }
+
+j_block:
+  displayname: "<#D5D6D8>J Block"
+  material: PAPER
+  Pack:
+    generate_model: false
+    model: default/j_block
+  Mechanics:
+    noteblock:
+      break_sound: block.glass.break
+      place_sound: block.glass.place
+      custom_variation: 14
+      model: default/j_block
+      hardness: 1
+      drop:
+        silktouch: false
+        loots:
+          - { oraxen_item: j_block, probability: 1.0 }
+
+k_block:
+  displayname: "<#D5D6D8>K Block"
+  material: PAPER
+  Pack:
+    generate_model: false
+    model: default/k_block
+  Mechanics:
+    noteblock:
+      break_sound: block.glass.break
+      place_sound: block.glass.place
+      custom_variation: 15
+      model: default/k_block
+      hardness: 1
+      drop:
+        silktouch: false
+        loots:
+          - { oraxen_item: k_block, probability: 1.0 }
+
+l_block:
+  displayname: "<#D5D6D8>L Block"
+  material: PAPER
+  Pack:
+    generate_model: false
+    model: default/l_block
+  Mechanics:
+    noteblock:
+      break_sound: block.glass.break
+      place_sound: block.glass.place
+      custom_variation: 16
+      model: default/l_block
+      hardness: 1
+      drop:
+        silktouch: false
+        loots:
+          - { oraxen_item: l_block, probability: 1.0 }
+
+m_block:
+  displayname: "<#D5D6D8>M Block"
+  material: PAPER
+  Pack:
+    generate_model: false
+    model: default/m_block
+  Mechanics:
+    noteblock:
+      break_sound: block.glass.break
+      place_sound: block.glass.place
+      custom_variation: 17
+      model: default/m_block
+      hardness: 1
+      drop:
+        silktouch: false
+        loots:
+          - { oraxen_item: m_block, probability: 1.0 }
+
+n_block:
+  displayname: "<#D5D6D8>N Block"
+  material: PAPER
+  Pack:
+    generate_model: false
+    model: default/n_block
+  Mechanics:
+    noteblock:
+      break_sound: block.glass.break
+      place_sound: block.glass.place
+      custom_variation: 18
+      model: default/n_block
+      hardness: 1
+      drop:
+        silktouch: false
+        loots:
+          - { oraxen_item: n_block, probability: 1.0 }
+
+o_block:
+  displayname: "<#D5D6D8>O Block"
+  material: PAPER
+  Pack:
+    generate_model: false
+    model: default/o_block
+  Mechanics:
+    noteblock:
+      break_sound: block.glass.break
+      place_sound: block.glass.place
+      custom_variation: 19
+      model: default/o_block
+      hardness: 1
+      drop:
+        silktouch: false
+        loots:
+          - { oraxen_item: o_block, probability: 1.0 }
+
+p_block:
+  displayname: "<#D5D6D8>P Block"
+  material: PAPER
+  Pack:
+    generate_model: false
+    model: default/p_block
+  Mechanics:
+    noteblock:
+      break_sound: block.glass.break
+      place_sound: block.glass.place
+      custom_variation: 20
+      model: default/p_block
+      hardness: 1
+      drop:
+        silktouch: false
+        loots:
+          - { oraxen_item: p_block, probability: 1.0 }
+
+q_block:
+  displayname: "<#D5D6D8>Q Block"
+  material: PAPER
+  Pack:
+    generate_model: false
+    model: default/q_block
+  Mechanics:
+    noteblock:
+      break_sound: block.glass.break
+      place_sound: block.glass.place
+      custom_variation: 21
+      model: default/q_block
+      hardness: 1
+      drop:
+        silktouch: false
+        loots:
+          - { oraxen_item: q_block, probability: 1.0 }
+
+r_block:
+  displayname: "<#D5D6D8>R Block"
+  material: PAPER
+  Pack:
+    generate_model: false
+    model: default/r_block
+  Mechanics:
+    noteblock:
+      break_sound: block.glass.break
+      place_sound: block.glass.place
+      custom_variation: 22
+      model: default/r_block
+      hardness: 1
+      drop:
+        silktouch: false
+        loots:
+          - { oraxen_item: r_block, probability: 1.0 }
+
+s_block:
+  displayname: "<#D5D6D8>S Block"
+  material: PAPER
+  Pack:
+    generate_model: false
+    model: default/s_block
+  Mechanics:
+    noteblock:
+      break_sound: block.glass.break
+      place_sound: block.glass.place
+      custom_variation: 23
+      model: default/s_block
+      hardness: 1
+      drop:
+        silktouch: false
+        loots:
+          - { oraxen_item: s_block, probability: 1.0 }
+
+t_block:
+  displayname: "<#D5D6D8>T Block"
+  material: PAPER
+  Pack:
+    generate_model: false
+    model: default/t_block
+  Mechanics:
+    noteblock:
+      break_sound: block.glass.break
+      place_sound: block.glass.place
+      custom_variation: 24
+      model: default/t_block
+      hardness: 1
+      drop:
+        silktouch: false
+        loots:
+          - { oraxen_item: t_block, probability: 1.0 }
+
+u_block:
+  displayname: "<#D5D6D8>U Block"
+  material: PAPER
+  Pack:
+    generate_model: false
+    model: default/u_block
+  Mechanics:
+    noteblock:
+      break_sound: block.glass.break
+      place_sound: block.glass.place
+      custom_variation: 25
+      model: default/u_block
+      hardness: 1
+      drop:
+        silktouch: false
+        loots:
+          - { oraxen_item: u_block, probability: 1.0 }
+
+v_block:
+  displayname: "<#D5D6D8>V Block"
+  material: PAPER
+  Pack:
+    generate_model: false
+    model: default/v_block
+  Mechanics:
+    noteblock:
+      break_sound: block.glass.break
+      place_sound: block.glass.place
+      custom_variation: 26
+      model: default/v_block
+      hardness: 1
+      drop:
+        silktouch: false
+        loots:
+          - { oraxen_item: v_block, probability: 1.0 }
+
+w_block:
+  displayname: "<#D5D6D8>W Block"
+  material: PAPER
+  Pack:
+    generate_model: false
+    model: default/w_block
+  Mechanics:
+    noteblock:
+      break_sound: block.glass.break
+      place_sound: block.glass.place
+      custom_variation: 27
+      model: default/w_block
+      hardness: 1
+      drop:
+        silktouch: false
+        loots:
+          - { oraxen_item: w_block, probability: 1.0 }
+
+x_block:
+  displayname: "<#D5D6D8>X Block"
+  material: PAPER
+  Pack:
+    generate_model: false
+    model: default/x_block
+  Mechanics:
+    noteblock:
+      break_sound: block.glass.break
+      place_sound: block.glass.place
+      custom_variation: 28
+      model: default/x_block
+      hardness: 1
+      drop:
+        silktouch: false
+        loots:
+          - { oraxen_item: x_block, probability: 1.0 }
+
+y_block:
+  displayname: "<#D5D6D8>Y Block"
+  material: PAPER
+  Pack:
+    generate_model: false
+    model: default/y_block
+  Mechanics:
+    noteblock:
+      break_sound: block.glass.break
+      place_sound: block.glass.place
+      custom_variation: 29
+      model: default/y_block
+      hardness: 1
+      drop:
+        silktouch: false
+        loots:
+          - { oraxen_item: y_block, probability: 1.0 }
+
+z_block:
+  displayname: "<#D5D6D8>Z Block"
+  material: PAPER
+  Pack:
+    generate_model: false
+    model: default/z_block
+  Mechanics:
+    noteblock:
+      break_sound: block.glass.break
+      place_sound: block.glass.place
+      custom_variation: 30
+      model: default/z_block
+      hardness: 1
+      drop:
+        silktouch: false
+        loots:
+          - { oraxen_item: z_block, probability: 1.0 }
+
+0_block:
+  displayname: "<#D5D6D8>0 Block"
+  material: PAPER
+  Pack:
+    generate_model: false
+    model: default/0_block
+  Mechanics:
+    noteblock:
+      break_sound: block.glass.break
+      place_sound: block.glass.place
+      custom_variation: 31
+      model: default/0_block
+      hardness: 1
+      drop:
+        silktouch: false
+        loots:
+          - { oraxen_item: 0_block, probability: 1.0 }
+
+1_block:
+  displayname: "<#D5D6D8>1 Block"
+  material: PAPER
+  Pack:
+    generate_model: false
+    model: default/1_block
+  Mechanics:
+    noteblock:
+      break_sound: block.glass.break
+      place_sound: block.glass.place
+      custom_variation: 32
+      model: default/1_block
+      hardness: 1
+      drop:
+        silktouch: false
+        loots:
+          - { oraxen_item: 1_block, probability: 1.0 }
+
+2_block:
+  displayname: "<#D5D6D8>2 Block"
+  material: PAPER
+  Pack:
+    generate_model: false
+    model: default/2_block
+  Mechanics:
+    noteblock:
+      break_sound: block.glass.break
+      place_sound: block.glass.place
+      custom_variation: 33
+      model: default/2_block
+      hardness: 1
+      drop:
+        silktouch: false
+        loots:
+          - { oraxen_item: 2_block, probability: 1.0 }
+
+3_block:
+  displayname: "<#D5D6D8>3 Block"
+  material: PAPER
+  Pack:
+    generate_model: false
+    model: default/3_block
+  Mechanics:
+    noteblock:
+      break_sound: block.glass.break
+      place_sound: block.glass.place
+      custom_variation: 34
+      model: default/3_block
+      hardness: 1
+      drop:
+        silktouch: false
+        loots:
+          - { oraxen_item: 3_block, probability: 1.0 }
+
+4_block:
+  displayname: "<#D5D6D8>4 Block"
+  material: PAPER
+  Pack:
+    generate_model: false
+    model: default/4_block
+  Mechanics:
+    noteblock:
+      break_sound: block.glass.break
+      place_sound: block.glass.place
+      custom_variation: 35
+      model: default/4_block
+      hardness: 1
+      drop:
+        silktouch: false
+        loots:
+          - { oraxen_item: 4_block, probability: 1.0 }
+
+5_block:
+  displayname: "<#D5D6D8>5 Block"
+  material: PAPER
+  Pack:
+    generate_model: false
+    model: default/5_block
+  Mechanics:
+    noteblock:
+      break_sound: block.glass.break
+      place_sound: block.glass.place
+      custom_variation: 36
+      model: default/5_block
+      hardness: 1
+      drop:
+        silktouch: false
+        loots:
+          - { oraxen_item: 5_block, probability: 1.0 }
+
+6_block:
+  displayname: "<#D5D6D8>6 Block"
+  material: PAPER
+  Pack:
+    generate_model: false
+    model: default/6_block
+  Mechanics:
+    noteblock:
+      break_sound: block.glass.break
+      place_sound: block.glass.place
+      custom_variation: 37
+      model: default/6_block
+      hardness: 1
+      drop:
+        silktouch: false
+        loots:
+          - { oraxen_item: 6_block, probability: 1.0 }
+
+7_block:
+  displayname: "<#D5D6D8>7 Block"
+  material: PAPER
+  Pack:
+    generate_model: false
+    model: default/7_block
+  Mechanics:
+    noteblock:
+      break_sound: block.glass.break
+      place_sound: block.glass.place
+      custom_variation: 38
+      model: default/7_block
+      hardness: 1
+      drop:
+        silktouch: false
+        loots:
+          - { oraxen_item: 7_block, probability: 1.0 }
+
+8_block:
+  displayname: "<#D5D6D8>8 Block"
+  material: PAPER
+  Pack:
+    generate_model: false
+    model: default/8_block
+  Mechanics:
+    noteblock:
+      break_sound: block.glass.break
+      place_sound: block.glass.place
+      custom_variation: 39
+      model: default/8_block
+      hardness: 1
+      drop:
+        silktouch: false
+        loots:
+          - { oraxen_item: 8_block, probability: 1.0 }
+
+9_block:
+  displayname: "<#D5D6D8>9 Block"
+  material: PAPER
+  Pack:
+    generate_model: false
+    model: default/9_block
+  Mechanics:
+    noteblock:
+      break_sound: block.glass.break
+      place_sound: block.glass.place
+      custom_variation: 40
+      model: default/9_block
+      hardness: 1
+      drop:
+        silktouch: false
+        loots:
+          - { oraxen_item: 9_block, probability: 1.0 }
+
+plus_block:
+  displayname: "<#D5D6D8>+ Block"
+  material: PAPER
+  Pack:
+    generate_model: false
+    model: default/plus
+  Mechanics:
+    noteblock:
+      break_sound: block.glass.break
+      place_sound: block.glass.place
+      custom_variation: 41
+      model: default/plus
+      hardness: 1
+      drop:
+        silktouch: false
+        loots:
+          - { oraxen_item: plus_block, probability: 1.0 }
+
+minus_block:
+  displayname: "<#D5D6D8>- Block"
+  material: PAPER
+  Pack:
+    generate_model: false
+    model: default/minus
+  Mechanics:
+    noteblock:
+      break_sound: block.glass.break
+      place_sound: block.glass.place
+      custom_variation: 42
+      model: default/minus
+      hardness: 1
+      drop:
+        silktouch: false
+        loots:
+          - { oraxen_item: minus_block, probability: 1.0 }
+
+multiply_block:
+  displayname: "<#D5D6D8>Multiply Block"
+  material: PAPER
+  Pack:
+    generate_model: false
+    model: default/multiply
+  Mechanics:
+    noteblock:
+      break_sound: block.glass.break
+      place_sound: block.glass.place
+      custom_variation: 43
+      model: default/multiply
+      hardness: 1
+      drop:
+        silktouch: false
+        loots:
+          - { oraxen_item: multiply_block, probability: 1.0 }
+
+divide_block:
+  displayname: "<#D5D6D8>Divide Block"
+  material: PAPER
+  Pack:
+    generate_model: false
+    model: default/division
+  Mechanics:
+    noteblock:
+      break_sound: block.glass.break
+      place_sound: block.glass.place
+      custom_variation: 44
+      model: default/division
+      hardness: 1
+      drop:
+        silktouch: false
+        loots:
+          - { oraxen_item: divide_block, probability: 1.0 }
+

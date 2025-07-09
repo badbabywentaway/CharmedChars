@@ -7,24 +7,17 @@ import org.bukkit.command.CommandSender
 import org.bukkit.command.TabCompleter
 import org.bukkit.inventory.ItemStack
 import org.bukkit.util.StringUtil
+import org.stephanosbad.charmedChars.Items.LetterBlock
+import org.stephanosbad.charmedChars.Items.NonAlphaNumBlocks
+import org.stephanosbad.charmedChars.Items.NumericBlock
 import java.lang.String
 import java.util.*
 import kotlin.Array
 import kotlin.Boolean
-import kotlin.Unit
-import kotlin.collections.ArrayList
-import kotlin.collections.MutableList
-import kotlin.collections.filter
-import kotlin.collections.toCharArray
-import kotlin.sequences.filter
-import kotlin.text.filter
-import kotlin.text.split
-import kotlin.text.toCharArray
-import kotlin.text.toLowerCase
 
 class CharBlock : CommandExecutor, TabCompleter {
     override fun onCommand(sender: CommandSender, command: Command, label: kotlin.String, args: Array<out kotlin.String>): Boolean {
-        if (sender !== sender.getServer().getConsoleSender()) return true
+        if (sender !== sender.server.consoleSender) return true
 
         if (args.size < 2) {
             return true
@@ -33,7 +26,7 @@ class CharBlock : CommandExecutor, TabCompleter {
         val givePlayerName = args[0]
         val givePlayer = Bukkit.getPlayerExact(givePlayerName)
 
-        if (givePlayer == null || !givePlayer.isOnline()) {
+        if (givePlayer == null || !givePlayer.isOnline) {
             return true
         }
 
@@ -41,24 +34,24 @@ class CharBlock : CommandExecutor, TabCompleter {
 
         for (c in characterString.toCharArray()) {
             var dropStack: ItemStack? = null
-            for (test in NonAlphaNumBlocks.values()) {
-                if (test.charVal === c) {
+            for (test in NonAlphaNumBlocks.entries) {
+                if (test.charVal == c) {
                     dropStack = test.itemStack
                 }
             }
             if (dropStack == null) {
-                val isThere: Unit /* TODO: class org.jetbrains.kotlin.nj2k.types.JKJavaNullPrimitiveType */? =
-                    Arrays.stream(LetterBlock.values()).filter({ it -> it.character === c }).findFirst()
-                if (!isThere.isEmpty()) {
+                val isThere =
+                    Arrays.stream(LetterBlock.entries.toTypedArray()).filter({ it -> it.character == c }).findFirst()
+                if (!isThere.isEmpty) {
                     dropStack = isThere.get().itemStack
                 } else {
-                    val isThereNum: Unit /* TODO: class org.jetbrains.kotlin.nj2k.types.JKJavaNullPrimitiveType */? =
-                        Arrays.stream(NumericBlock.values()).filter({ it -> it.c === c }).findFirst()
-                    if (!isThereNum.isEmpty()) dropStack = isThereNum.get().itemStack
+                    val isThereNum =
+                        Arrays.stream(NumericBlock.entries.toTypedArray()).filter({ it -> it.c == c }).findFirst()
+                    if (!isThereNum.isEmpty) dropStack = isThereNum.get().itemStack
                 }
             }
-            if (givePlayer.getLocation().getWorld() != null) {
-                givePlayer.getLocation().getWorld().dropItemNaturally(givePlayer.getLocation(), dropStack!!)
+            if (givePlayer.location.world != null) {
+                givePlayer.location.world.dropItemNaturally(givePlayer.getLocation(), dropStack!!)
             }
         }
 
@@ -74,10 +67,10 @@ class CharBlock : CommandExecutor, TabCompleter {
         var completions: MutableList<kotlin.String?> = ArrayList<kotlin.String?>()
         val mainArg: kotlin.String?
 
-        if (args.size == 0) return null
+        if (args.isEmpty()) return null
 
         if (args.size == 1) {
-            mainArg = args[0]!!.lowercase(Locale.getDefault())
+            mainArg = args[0].lowercase(Locale.getDefault())
             val onlinePlayers: MutableList<kotlin.String?> = ArrayList<kotlin.String?>()
             for (p in Bukkit.getOnlinePlayers()) {
                 onlinePlayers.add(p.name)
@@ -87,13 +80,13 @@ class CharBlock : CommandExecutor, TabCompleter {
 
         if (args.size == 2) {
             val characterMatches: MutableList<kotlin.String?> = ArrayList<kotlin.String?>()
-            for (letter in LetterBlock.values()) {
+            for (letter in LetterBlock.entries) {
                 characterMatches.add(String.valueOf(letter.character))
             }
-            for (number in NumericBlock.values()) {
+            for (number in NumericBlock.entries) {
                 characterMatches.add(String.valueOf(number.c))
             }
-            for (non in NonAlphaNumBlocks.values()) {
+            for (non in NonAlphaNumBlocks.entries) {
                 characterMatches.add(non.oraxenBlockName.lowercase().split("_")[0])
             }
             completions = characterMatches

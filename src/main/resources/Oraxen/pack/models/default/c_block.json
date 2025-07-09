@@ -1,0 +1,7 @@
+{
+    "parent": "default/letter_block",
+    "textures": {
+        "letter": "default/uc",
+        "side" : "default/block_side"
+    }
+}

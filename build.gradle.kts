@@ -20,6 +20,8 @@ repositories {
     }
     maven("https://jitpack.io")
     maven ("https://repo.oraxen.com/releases")
+    maven ("https://maven.enginehub.org/repo/") // EngineHub's repository
+
 }
 
 dependencies {
@@ -27,6 +29,9 @@ dependencies {
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
     compileOnly("com.github.MilkBowl:VaultAPI:1.7")
     compileOnly("io.th0rgal:oraxen:1.190.0")
+    compileOnly("com.sk89q.worldguard:worldguard-bukkit:7.0.14")
+    compileOnly("com.github.GriefPrevention:GriefPrevention:16.18.4")
+
 }
 
 tasks {

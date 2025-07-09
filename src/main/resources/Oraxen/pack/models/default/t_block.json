@@ -1,0 +1,7 @@
+{
+    "parent": "default/letter_block",
+    "textures": {
+        "letter": "default/ut",
+        "side" : "default/block_side"
+    }
+}

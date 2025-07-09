@@ -1,0 +1,7 @@
+{
+    "parent": "default/letter_block",
+    "textures": {
+        "letter": "default/n1",
+        "side" : "default/block_side"
+    }
+}

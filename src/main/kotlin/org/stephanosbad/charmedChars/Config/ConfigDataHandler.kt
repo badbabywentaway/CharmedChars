@@ -4,7 +4,9 @@ import org.bukkit.Bukkit
 import org.bukkit.Location
 import org.bukkit.Material
 import org.bukkit.configuration.file.YamlConfiguration
+import org.stephanosbad.charmedChars.CharmedChars
 import org.stephanosbad.charmedChars.Commands.CharBlock
+import org.stephanosbad.charmedChars.Utility.LocationPair
 import java.io.File
 import java.io.IOException
 import java.io.InputStream
@@ -14,7 +16,7 @@ class ConfigDataHandler(
     /**
      * parent plugin reference
      */
-    private val plugin: CharBlock
+    private val plugin: CharmedChars
 ) {
     /**
      * configuration loaded from yaml file
@@ -34,7 +36,7 @@ class ConfigDataHandler(
     @Throws(IOException::class)
     fun loadConfig() {
         if (file == null) {
-            file = File(plugin.getDataFolder(), CONFIG_FILE_NAME)
+            file = File(plugin.dataFolder, CONFIG_FILE_NAME)
             Bukkit.getLogger().info("File: " + file!!.getCanonicalPath())
         }
 
@@ -92,15 +94,15 @@ class ConfigDataHandler(
         dropReward1.put("multiplier", 0.01)
         dropReward1.put("minimumThreshold", 200.0)
         dropReward1.put("maximumRewardCap", 50.0)
-        val dropsConfiguration = List.of<MutableMap<String?, Any?>?>(dropReward, dropReward1)
+        val dropsConfiguration = listOf<MutableMap<String?, Any?>?>(dropReward, dropReward1)
         configuration!!.set("Drop", dropsConfiguration)
         configuration!!.save(file!!)
     }
 
     fun SampleLocationPair(): LocationPair {
         return LocationPair(
-            Location(plugin.getServer().getWorld("world"), -10.0, 0.0, -10.0),
-            Location(plugin.getServer().getWorld("world"), 10.0, 0.0, 10.0)
+            Location(plugin.server.getWorld("world"), -10.0, 0.0, -10.0),
+            Location(plugin.server.getWorld("world"), 10.0, 0.0, 10.0)
         )
     }
 
