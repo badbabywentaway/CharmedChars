@@ -40,8 +40,7 @@ class CharmedChars : JavaPlugin() {
     companion object {
         var oraxenPlugin: Plugin? = null
 
-        fun getRecursive( directory: File): List<File?>
-        {
+        fun getRecursive(directory: File): List<File?> {
 
             val retValue = mutableListOf<File?>()
             val faFiles: Array<File?>? = directory.listFiles()
@@ -73,7 +72,7 @@ class CharmedChars : JavaPlugin() {
 
         configDataHandler = ConfigDataHandler(this)
         try {
-            configDataHandler.loadConfig()
+            configDataHandler!!.loadConfig()
         } catch (e: IOException) {
             e.printStackTrace()
         }
@@ -84,15 +83,15 @@ class CharmedChars : JavaPlugin() {
         }
 
         if ((OraxenPlugin.get()
-                .also { org.stephanosbad.charmedChars.McLetterNumberBlocks.oraxenPlugin = it }) != null
+                .also { oraxenPlugin = it }) != null
         ) {
             oraxenLoaded = true
             CompatibilitiesManager.addCompatibility("McLetterNumberBlocks", ItemManager::class.java)
-            val oraxenFolder: Unit /* TODO: class org.jetbrains.kotlin.nj2k.types.JKJavaNullPrimitiveType */? =
-                OraxenPlugin.get().getDataFolder()
+            val oraxenFolder: File /* TODO: class org.jetbrains.kotlin.nj2k.types.JKJavaNullPrimitiveType */? =
+                OraxenPlugin.get().dataFolder
             try {
                 FileUtils.copyResourcesRecursively(
-                    Objects.requireNonNull<T?>(this.javaClass.getResource("/Oraxen")),
+                    Objects.requireNonNull(this.javaClass.getResource("/Oraxen")),
                     oraxenFolder
                 )
             } catch (e: Exception) {
@@ -112,7 +111,6 @@ class CharmedChars : JavaPlugin() {
             getCommand(CharBlock.CommandName)!!.setTabCompleter(CharBlock())
         }
         Bukkit.getPluginManager().registerEvents(ItemManager(this), this)
-
 
 
     }
@@ -139,4 +137,5 @@ class CharmedChars : JavaPlugin() {
         econ = rsp.getProvider()
         return econ != null
     }
+}
 
