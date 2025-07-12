@@ -1,0 +1,5 @@
+Manifest-Version: 1.0
+Main-Class: CharmedChars
+Class-Path: "C:\Users\steve\OneDrive\Documents\GitHub\CharmedChars\src\m
+ ain\kotlin\org\stephanosbad\charmedChars\CharmedChars.kt"
+
