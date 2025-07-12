@@ -1,7 +1,7 @@
 name: CharmedChars
 version: '1.0-SNAPSHOT'
 main: org.stephanosbad.charmedChars.CharmedChars
-api-version: '1.21.6'
+api-version: '1.21'
 load: STARTUP
 authors: [ Stephy Badbaby ]
 description: Closed Java Spigot plugin for Minecraft Java Edition (18+)

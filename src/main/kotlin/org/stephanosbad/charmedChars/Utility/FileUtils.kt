@@ -1,6 +1,7 @@
 package org.stephanosbad.charmedChars.Utility
 
-import org.apache.commons.lang.StringUtils
+
+import org.apache.commons.lang3.StringUtils
 import java.io.*
 import java.net.JarURLConnection
 import java.net.URL

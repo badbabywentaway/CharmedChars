@@ -7,7 +7,7 @@ import org.stephanosbad.charmedChars.Config.ConfigDataHandler
 import org.stephanosbad.charmedChars.Items.ItemManager
 import org.stephanosbad.charmedChars.Utility.FileUtils
 import org.stephanosbad.charmedChars.Utility.WordDict
-import net.milkbowl.vault.economy.Economy
+//import net.milkbowl.vault.economy.Economy
 import org.bukkit.plugin.Plugin
 import org.bukkit.plugin.RegisteredServiceProvider
 import org.bukkit.plugin.java.JavaPlugin
@@ -22,7 +22,7 @@ class CharmedChars : JavaPlugin() {
     /**
      * Economy plugin
      */
-    var econ: Economy? = null
+    //var econ: Economy? = null
 
     /**
      * Is Vault economy available
@@ -101,9 +101,9 @@ class CharmedChars : JavaPlugin() {
             }
         }
 
-        if (setupEconomy()) {
+       /* if (setupEconomy()) {
             vaultEconomyEnabled = setupEconomy()
-        }
+        }*/
         println("Vault " + (if (vaultEconomyEnabled) "confirmed." else "not available."))
 
         if (getCommand(CharBlock.CommandName) != null) {
@@ -125,7 +125,7 @@ class CharmedChars : JavaPlugin() {
      * Set up economy plugin (Vault alone as of now)
      * @return Successfulness
      */
-    private fun setupEconomy(): Boolean {
+    /*private fun setupEconomy(): Boolean {
         if (getServer().getPluginManager().getPlugin("Vault") == null) {
             return false
         }
@@ -136,6 +136,6 @@ class CharmedChars : JavaPlugin() {
         }
         econ = rsp.getProvider()
         return econ != null
-    }
+    }*/
 }
 

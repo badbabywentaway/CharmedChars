@@ -27,7 +27,7 @@ repositories {
 dependencies {
     compileOnly("io.papermc.paper:paper-api:1.21.6-R0.1-SNAPSHOT")
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
-    compileOnly("com.github.MilkBowl:VaultAPI:1.7")
+    //compileOnly("com.github.MilkBowl:VaultAPI:1.7.3")
     compileOnly("io.th0rgal:oraxen:1.190.0")
     compileOnly("com.sk89q.worldguard:worldguard-bukkit:7.0.14")
     compileOnly("com.github.GriefPrevention:GriefPrevention:16.18.4")
@@ -59,4 +59,8 @@ tasks.processResources {
     filesMatching("plugin.yml") {
         expand(props)
     }
+}
+
+tasks.shadowJar {
+    archiveClassifier.set("") // Remove classifier from shadowed JAR
 }

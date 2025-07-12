@@ -22,7 +22,6 @@ import org.stephanosbad.charmedChars.Commands.CharBlock
 import org.stephanosbad.charmedChars.Rewards.DropReward
 import org.stephanosbad.charmedChars.Rewards.Reward
 import org.stephanosbad.charmedChars.Rewards.RewardType
-import org.stephanosbad.charmedChars.Rewards.VaultCurrencyReward
 import org.stephanosbad.charmedChars.Utility.LocationPair
 import org.stephanosbad.charmedChars.Utility.SimpleTuple
 import org.stephanosbad.charmedChars.Utility.WordDict
@@ -280,9 +279,9 @@ class ItemManager @JvmOverloads constructor(localPlugin: CharmedChars? = null) :
      */
     private fun applyScore(player: Player, score: Double) {
         for (reward in rewards) {
-            if (reward is VaultCurrencyReward) {
+            /*if (reward is VaultCurrencyReward) {
                 reward.applyReward(player, score)
-            } else if (reward is DropReward) {
+            } else */if (reward is DropReward) {
                 reward.applyReward(player, player.location, score)
             }
         }
@@ -439,7 +438,7 @@ class ItemManager @JvmOverloads constructor(localPlugin: CharmedChars? = null) :
             val configuration =
                 plugin.configDataHandler!!.configuration!!
             when (t) {
-                RewardType.VaultCurrency -> {
+                /*RewardType.VaultCurrency -> {
                     try {
                         val vaultConfig =
                             configuration.getConfigurationSection("VaultCurrency")!!
@@ -460,7 +459,7 @@ class ItemManager @JvmOverloads constructor(localPlugin: CharmedChars? = null) :
                     } catch (e: Error) {
                         Bukkit.getLogger().info(e.toString())
                     }
-                }
+                }*/
 
                 RewardType.Drop -> {
                     val listOfDropConfigs =
