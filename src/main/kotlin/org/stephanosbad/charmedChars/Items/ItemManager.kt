@@ -1,5 +1,8 @@
 package org.stephanosbad.charmedChars.Items
 
+import com.sk89q.worldguard.WorldGuard
+import com.sk89q.worldguard.bukkit.WorldGuardPlugin
+import me.ryanhamshire.GriefPrevention.GriefPrevention
 import org.bukkit.Bukkit
 import org.bukkit.Location
 import org.bukkit.Material
@@ -133,31 +136,31 @@ class ItemManager @JvmOverloads constructor(localPlugin: CharmedChars? = null) :
      */
     @EventHandler
     fun onBreakWoodOrLetter(e: BlockBreakEvent) {
-        val player = e.getPlayer()
-        player.getInventory().getItemInMainHand()
-        player.getInventory().getItemInMainHand().getEnchantments()
+        val player = e.player
+        player.inventory.itemInMainHand
+        player.inventory.itemInMainHand.enchantments
 
-        if (!(player.getInventory().getItemInMainHand().containsEnchantment(Enchantment.SILK_TOUCH))) {
+        if (!(player.inventory.itemInMainHand.containsEnchantment(Enchantment.SILK_TOUCH))) {
             //If there is no silk touch on it
 
-            val material = e.getBlock().getBlockData().getMaterial()
+            val material = e.getBlock().blockData.material
             if (list.containsKey(material)) {
-                val hand = e.getPlayer().getInventory().getItemInMainHand()
+                val hand = e.player.inventory.itemInMainHand
 
 
                 //Must be gold item in hand
-                if (hand.getItemMeta() == null) {
+                if (hand.itemMeta == null) {
                     return
                 }
-                if (!hand.getType().name.lowercase().contains("gold") &&
-                    !hand.getItemMeta().getItemName().lowercase().contains("gold")
+                if (!hand.type.name.lowercase().contains("gold") &&
+                    true != hand.itemMeta.displayName()?.examinableName()?.lowercase()?.contains("gold")
                 ) {
                     return
                 }
 
                 var chance = .03
                 if (hand.containsEnchantment(Enchantment.LOOTING)) {
-                    when (hand.getEnchantments().get(Enchantment.LOOTING)) {
+                    when (hand.enchantments[Enchantment.LOOTING]) {
                         1 -> chance = .05
                         2 -> chance = .08
                         3 -> chance = .1
@@ -191,28 +194,28 @@ class ItemManager @JvmOverloads constructor(localPlugin: CharmedChars? = null) :
             return
         }
         if (block != null) {
-            e.setCancelled(true)
-            e.getBlock().setType(Material.AIR)
+            e.isCancelled = true
+            e.getBlock().type = Material.AIR
             if (listForNumberDrops.containsKey(oldMaterial)) {
-                player.world.dropItemNaturally(e.getBlock().getLocation(), randomNumAndCharacter()!!)
+                player.world.dropItemNaturally(e.getBlock().location, randomNumAndCharacter()!!)
             }
-            player.world.dropItemNaturally(e.getBlock().getLocation(), block)
-            player.world.dropItemNaturally(e.getBlock().getLocation(), ItemStack(material, 1))
+            player.world.dropItemNaturally(e.getBlock().location, block)
+            player.world.dropItemNaturally(e.getBlock().location, ItemStack(material, 1))
         }
     }
 
     private fun randomNumAndCharacter(): ItemStack? {
         if (characterBlocksAvailableInNether == null) {
             characterBlocksAvailableInNether = ArrayList<ItemStack?>()
-            for (x in NumericBlock.values()) {
+            for (x in NumericBlock.entries) {
                 characterBlocksAvailableInNether!!.add(x.itemStack)
             }
-            for (x in NonAlphaNumBlocks.values()) {
+            for (x in NonAlphaNumBlocks.entries) {
                 characterBlocksAvailableInNether!!.add(x.itemStack)
             }
         }
 
-        return characterBlocksAvailableInNether!!.get((Math.random() * characterBlocksAvailableInNether!!.size).toInt())
+        return characterBlocksAvailableInNether!![(Math.random() * characterBlocksAvailableInNether!!.size).toInt()]
     }
 
     /**
@@ -223,10 +226,10 @@ class ItemManager @JvmOverloads constructor(localPlugin: CharmedChars? = null) :
         val hand = e.player.inventory.itemInMainHand
 
         if (protectedSpot(e.player, e.getBlock().location, e.getBlock())) {
-            e.getPlayer().sendMessage("Protected block: " + e.getBlock().location)
+            e.player.sendMessage("Protected block: " + e.getBlock().location)
             return
         }
-        if (hand.getItemMeta() == null) {
+        if (hand.itemMeta == null) {
             return
         }
         if (!hand.type.name.lowercase().contains("gold")) {
@@ -254,7 +257,7 @@ class ItemManager @JvmOverloads constructor(localPlugin: CharmedChars? = null) :
         }
         if (WordDict.singleton!!.Words.contains(outString.toString().lowercase())) {
             e.isCancelled = true
-            e.player.sendMessage("Hit: " + score)
+            e.player.sendMessage("Hit: $score")
 
             for (locationOfBlock in blockArray) {
                 e.getBlock().world.getBlockAt(locationOfBlock).type = Material.AIR
@@ -464,12 +467,12 @@ class ItemManager @JvmOverloads constructor(localPlugin: CharmedChars? = null) :
                             if (drop !is MutableMap<*, *>) {
                                 continue
                             }
-                            val dropParams = drop as MutableMap<String?, Any?>?
-                            val materialName = dropParams!!.get("materialName") as String?
-                            val minimumRewardCount = dropParams.get("minimumRewardCount") as Double
-                            val multiplier = dropParams.get("multiplier") as Double
-                            val minimumThreshold = dropParams.get("minimumThreshold") as Double
-                            val maximumRewardCap = dropParams.get("maximumRewardCap") as Double
+                            val dropParams = drop as MutableMap<*, *>?
+                            val materialName = dropParams!!["materialName"] as String?
+                            val minimumRewardCount = dropParams["minimumRewardCount"] as Double
+                            val multiplier = dropParams["multiplier"] as Double
+                            val minimumThreshold = dropParams["minimumThreshold"] as Double
+                            val maximumRewardCap = dropParams["maximumRewardCap"] as Double
                             rewards.add(
                                 DropReward(
                                     materialName,
@@ -486,8 +489,6 @@ class ItemManager @JvmOverloads constructor(localPlugin: CharmedChars? = null) :
                         }
                     }
                 }
-
-                else -> {}
             }
         }
     }
