@@ -1,6 +1,5 @@
 package org.stephanosbad.charmedChars.Items
 
-import io.th0rgal.oraxen.api.OraxenItems
 import org.bukkit.inventory.ItemStack
 
 enum class NumericBlock(val c: Char) {
@@ -16,5 +15,5 @@ enum class NumericBlock(val c: Char) {
     BLOCK_9('9'),
     ;
 
-    val itemStack: ItemStack? = OraxenItems.getItemById(c.toString() + "_block").build()
+    val itemStack: ItemStack = CustomBlock.getInstance(c.toString() + "_block")!!.itemStack!!
 }

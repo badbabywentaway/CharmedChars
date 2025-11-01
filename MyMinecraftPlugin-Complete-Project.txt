@@ -1,0 +1,315 @@
+MyMinecraftPlugin - Complete IntelliJ Project\n=========================================\n\n📋 SETUP INSTRUCTIONS:\n1. Create new directory: MyMinecraftPlugin\n2. Create the directory structure as shown below\n3. Copy each file content into the appropriate location\n4. Open IntelliJ IDEA → File → Open → Select your project folder\n5. Import as Gradle Project (should detect automatically)\n6. Wait for Gradle sync to download dependencies\n7. Update package names: Replace 'com.yourname.myplugin' with your package\n8. Build the project: ./gradlew build\n9. Test with server: ./gradlew runServer\n\n⚠️  REQUIREMENTS:\n- Java 17 or higher\n- IntelliJ IDEA Community/Ultimate\n- Internet connection for dependencies\n\n🚀 FEATURES INCLUDED:\n- Custom Blocks (Magic Stone, Enchanted Log, Crystal Block)\n- Custom Textures with auto-distribution\n- Kotlin Coroutines for async operations\n- Paper API with Adventure text components\n- Gradle build system with Kotlin DSL\n- Hot configuration reload\n- Built-in test server integration\n\nFILES:\n======\n\n📄 FILE: settings.gradle.kts\n---------------------------\npluginManagement {
+    repositories {
+        gradlePluginPortal()
+        maven("https://repo.papermc.io/repository/maven-public/")
+    }
+}
+
+rootProject.name = "MyMinecraftPlugin"\n\n============================================================\n\n📄 FILE: gradle.properties\n-------------------------\n# Gradle Properties
+org.gradle.jvmargs=-Xmx2G
+org.gradle.caching=true
+org.gradle.parallel=true
+
+# Plugin Properties
+group=com.yourname.myplugin
+version=1.0.0
+description=A skeleton Minecraft plugin written in Kotlin for Paper
+
+# Dependency Versions
+kotlinVersion=1.9.22
+paperVersion=1.20.4-R0.1-SNAPSHOT
+coroutinesVersion=1.7.3\n\n============================================================\n\n📄 FILE: build.gradle.kts\n------------------------\nimport org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+
+plugins {
+    kotlin("jvm") version "1.9.22"
+    id("com.github.johnrengelman.shadow") version "8.1.1"
+    id("xyz.jpenilla.run-paper") version "2.2.2"
+}
+
+group = property("group")!!
+version = property("version")!!
+description = property("description")!!
+
+repositories {
+    mavenCentral()
+    maven("https://repo.papermc.io/repository/maven-public/") { name = "papermc-repo" }
+    maven("https://oss.sonatype.org/content/groups/public/") { name = "sonatype" }
+    maven("https://jitpack.io") { name = "jitpack" }
+}
+
+dependencies {
+    compileOnly("io.papermc.paper:paper-api:${property("paperVersion")}")
+    implementation("org.jetbrains.kotlin:kotlin-stdlib:${property("kotlinVersion")}")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:${property("coroutinesVersion")}")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-jdk8:${property("coroutinesVersion")}")
+    
+    testImplementation("org.jetbrains.kotlin:kotlin-test:${property("kotlinVersion")}")
+    testImplementation("io.mockk:mockk:1.13.8")
+    testImplementation("org.junit.jupiter:junit-jupiter:5.10.1")
+}
+
+java {
+    toolchain.languageVersion.set(JavaLanguageVersion.of(17))
+}
+
+tasks.withType<KotlinCompile> {
+    kotlinOptions {
+        jvmTarget = "17"
+        freeCompilerArgs = listOf("-Xjsr305=strict")
+    }
+}
+
+tasks.processResources {
+    val props = mapOf("version" to version, "description" to description, "apiVersion" to "1.20")
+    inputs.properties(props)
+    filteringCharset = "UTF-8"
+    filesMatching("plugin.yml") { expand(props) }
+}
+
+tasks.shadowJar {
+    archiveBaseName.set("MyMinecraftPlugin")
+    archiveClassifier.set("")
+    relocate("kotlin", "com.yourname.myplugin.kotlin")
+    relocate("kotlinx.coroutines", "com.yourname.myplugin.kotlinx.coroutines")
+    minimize()
+}
+
+tasks.build { dependsOn(tasks.shadowJar) }
+tasks.runServer { minecraftVersion("1.20.4") }
+tasks.test { useJUnitPlatform() }\n\n============================================================\n\n📄 FILE: src/main/resources/plugin.yml\n-------------------------------------\nname: MyMinecraftPlugin
+version: ${version}
+main: com.yourname.myplugin.MyPlugin
+api-version: ${apiVersion}
+author: YourName
+description: ${description}
+website: https://yourwebsite.com
+
+commands:
+  example:
+    description: An example command
+    usage: /example [player]
+    permission: myplugin.example
+    aliases: [ex, demo]
+  reload:
+    description: Reload the plugin configuration
+    usage: /myplugin reload
+    permission: myplugin.admin
+  blocks:
+    description: Manage custom blocks
+    usage: /blocks <give|list> [type] [player] [amount]
+    permission: myplugin.blocks
+    aliases: [customblocks, cb]
+  textures:
+    description: Manage custom textures and resource packs
+    usage: /textures <download|status|regenerate|help>
+    permission: myplugin.textures
+    aliases: [resourcepack, rp, pack]
+
+permissions:
+  myplugin.example:
+    description: Allows use of the example command
+    default: op
+  myplugin.admin:
+    description: Admin permissions for the plugin
+    default: op
+  myplugin.blocks:
+    description: Allows management of custom blocks
+    default: op
+  myplugin.textures:
+    description: Allows downloading custom textures
+    default: true
+  myplugin.*:
+    description: Gives access to all MyPlugin permissions
+    children:
+      myplugin.example: true
+      myplugin.admin: true
+      myplugin.blocks: true
+      myplugin.textures: true
+    default: op\n\n============================================================\n\n📄 FILE: src/main/resources/config.yml\n-------------------------------------\n# MyMinecraftPlugin Configuration
+
+welcome-message: "Welcome to our awesome Paper server!"
+
+# Debug settings
+debug-mode: false
+
+# Chat moderation
+blocked-words:
+  - "badword1"
+  - "badword2"
+
+# Command limits
+max-players-per-command: 5
+
+# Paper-specific features
+use-paper-features: true
+async-processing: true
+
+# Custom Blocks System
+custom-blocks:
+  enabled: true
+  hardness: 2.0
+  drop-exp: true
+  particle-effects: true
+  sound-effects: true
+
+# Custom Textures System
+custom-textures:
+  enabled: true
+  auto-generate: true
+  pack-format: 18
+  resolution: 16
+  auto-distribute: true
+  pack-url: ""
+  force-pack: false
+  prompt: "This server uses custom textures for special blocks!"\n\n============================================================\n\n📄 FILE: src/main/kotlin/com/yourname/myplugin/MyPlugin.kt\n---------------------------------------------------------\npackage com.yourname.myplugin
+
+import com.yourname.myplugin.blocks.CustomBlockListener
+import com.yourname.myplugin.blocks.CustomBlocks
+import com.yourname.myplugin.commands.BlocksCommand
+import com.yourname.myplugin.commands.ExampleCommand
+import com.yourname.myplugin.commands.ReloadCommand
+import com.yourname.myplugin.graphics.TextureCommand
+import com.yourname.myplugin.graphics.TextureManager
+import com.yourname.myplugin.listeners.ExampleListener
+import com.yourname.myplugin.utils.ConfigManager
+import kotlinx.coroutines.*
+import net.kyori.adventure.text.Component
+import net.kyori.adventure.text.format.NamedTextColor
+import org.bukkit.plugin.java.JavaPlugin
+import kotlin.coroutines.CoroutineContext
+
+class MyPlugin : JavaPlugin(), CoroutineScope {
+    
+    private val job = SupervisorJob()
+    override val coroutineContext: CoroutineContext
+        get() = Dispatchers.Main + job
+    
+    lateinit var configManager: ConfigManager
+        private set
+    lateinit var customBlocks: CustomBlocks
+        private set
+    lateinit var textureManager: TextureManager
+        private set
+        
+    val customBlockData = mutableMapOf<String, String>()
+    
+    override fun onEnable() {
+        configManager = ConfigManager(this)
+        configManager.loadConfig()
+        
+        textureManager = TextureManager(this)
+        customBlocks = CustomBlocks(this)
+        customBlocks.registerCustomBlocks()
+        
+        if (configManager.customTexturesEnabled) {
+            launch {
+                delay(2000)
+                textureManager.initialize()
+            }
+        }
+        
+        getCommand("example")?.setExecutor(ExampleCommand(this))
+        getCommand("reload")?.setExecutor(ReloadCommand(this))
+        getCommand("blocks")?.setExecutor(BlocksCommand(this))
+        getCommand("textures")?.setExecutor(TextureCommand(this))
+        
+        server.pluginManager.registerEvents(ExampleListener(this), this)
+        server.pluginManager.registerEvents(CustomBlockListener(this), this)
+        
+        launch {
+            delay(1000)
+            logger.info("Async startup completed!")
+        }
+        
+        logger.info("MyMinecraftPlugin v${description.version} has been enabled!")
+        server.consoleSender.sendMessage(
+            Component.text("Plugin loaded successfully! Built with Gradle + Kotlin")
+                .color(NamedTextColor.GREEN)
+        )
+        
+        if (configManager.customBlocksEnabled) {
+            server.consoleSender.sendMessage(
+                Component.text("Custom blocks system enabled!")
+                    .color(NamedTextColor.AQUA)
+            )
+        }
+        
+        if (configManager.customTexturesEnabled) {
+            server.consoleSender.sendMessage(
+                Component.text("Custom textures system enabled!")
+                    .color(NamedTextColor.LIGHT_PURPLE)
+            )
+        }
+    }
+    
+    override fun onDisable() {
+        job.cancel()
+        logger.info("MyMinecraftPlugin has been disabled!")
+        
+        server.consoleSender.sendMessage(
+            Component.text("Plugin unloaded successfully!")
+                .color(NamedTextColor.YELLOW)
+        )
+    }
+    
+    fun reload() {
+        launch {
+            configManager.reloadConfig()
+            
+            if (configManager.customBlocksEnabled) {
+                customBlocks.registerCustomBlocks()
+            }
+            
+            if (configManager.customTexturesEnabled) {
+                textureManager.regenerateResourcePack()
+            }
+            
+            logger.info("Plugin configuration reloaded!")
+            
+            server.consoleSender.sendMessage(
+                Component.text("Configuration reloaded!")
+                    .color(NamedTextColor.GREEN)
+            )
+        }
+    }
+    
+    fun runAsync(block: suspend CoroutineScope.() -> Unit) {
+        launch(Dispatchers.IO) {
+            block()
+        }
+    }
+}\n\n============================================================\n\n📄 FILE: README.md\n-----------------\n# MyMinecraftPlugin (Kotlin + Paper + Gradle)
+
+A modern Minecraft plugin for Paper servers, built with Kotlin and Gradle.
+
+## Features
+
+- **Modern Kotlin**: Written entirely in Kotlin with coroutines for async operations
+- **Paper API**: Uses Paper's enhanced API with Adventure text components  
+- **Gradle Build**: Modern build system with Kotlin DSL
+- **Custom Blocks**: Magic Stone, Enchanted Log, Crystal Block
+- **Custom Textures**: Automatic resource pack generation and distribution
+
+## Commands
+
+- `/example` - Basic greeting command with async processing
+- `/blocks give <type> [player] [amount]` - Give custom blocks
+- `/textures download` - Get custom textures resource pack
+
+## Installation
+
+1. Ensure you're running Paper 1.20.4 or later
+2. Place the plugin JAR in your server's `plugins/` folder
+3. Restart your server
+4. Configure in `plugins/MyMinecraftPlugin/config.yml`
+
+## Building
+
+```bash
+./gradlew build          # Build the plugin
+./gradlew runServer      # Start test server
+```
+
+## License
+
+MIT License\n\n============================================================\n\n

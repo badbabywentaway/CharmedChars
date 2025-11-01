@@ -1,13 +1,52 @@
 name: CharmedChars
-version: '1.0-SNAPSHOT'
+version: ${version}
 main: org.stephanosbad.charmedChars.CharmedChars
 api-version: '1.21'
 load: STARTUP
-authors: [ Stephy Badbaby ]
-description: Closed Java Spigot plugin for Minecraft Java Edition (18+)
-depend: [ Oraxen ]
-softdepend: [ WorldGuard, GriefPrevention ]
+authors: [ StephanosBad ]
+description: Closed Java Spigot plugin for Minecraft Java Edition
 commands:
-  charblock:
-    usage: /charblock <player> <string>
+  charmedChars:
+    usage: /charmedChars <player> <string>
     description: Give a string of letter or number blocks to a player.
+  example:
+    description: An example command
+    usage: /example [player]
+    permission: charmedChars.example
+    aliases: [ex, demo]
+  reload:
+    description: Reload the plugin configuration
+    usage: /charmedChars reload
+    permission: charmedChars.admin
+  blocks:
+    description: Manage custom blocks
+    usage: /blocks <give|list> [type] [player] [amount]
+    permission: charmedChars.blocks
+    aliases: [customblocks, cb]
+  textures:
+    description: Manage custom textures and resource packs
+    usage: /textures <download|status|regenerate|help>
+    permission: charmedChars.textures
+    aliases: [resourcepack, rp, pack]
+
+permissions:
+  charmedChars.example:
+    description: Allows use of the example command
+    default: op
+  charmedChars.admin:
+    description: Admin permissions for the plugin
+    default: op
+  charmedChars.blocks:
+    description: Allows management of custom blocks
+    default: op
+  charmedChars.textures:
+    description: Allows downloading custom textures
+    default: true
+  charmedChars.*:
+    description: Gives access to all MyPlugin permissions
+    children:
+      charmedChars.example: true
+      charmedChars.admin: true
+      charmedChars.blocks: true
+      charmedChars.textures: true
+    default: op

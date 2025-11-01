@@ -1,0 +1,46 @@
+# MyMinecraftPlugin - Project Structure
+
+## 📁 Directory Structure:
+MyMinecraftPlugin/
+├── build.gradle.kts              # Main build configuration
+├── settings.gradle.kts           # Project settings  
+├── gradle.properties             # Build properties
+├── gradlew                       # Gradle wrapper (Unix)
+├── gradlew.bat                   # Gradle wrapper (Windows)
+├── gradle/wrapper/
+│   └── gradle-wrapper.properties
+└── src/main/
+    ├── kotlin/com/yourname/myplugin/
+    │   ├── MyPlugin.kt            # Main plugin class
+    │   ├── blocks/
+    │   │   ├── CustomBlocks.kt    # Block registry & factory
+    │   │   └── CustomBlockListener.kt # Block interactions
+    │   ├── graphics/
+    │   │   ├── TextureManager.kt  # Texture & resource pack system
+    │   │   └── TextureCommand.kt  # Texture commands
+    │   ├── commands/
+    │   │   ├── ExampleCommand.kt  # Example command with coroutines
+    │   │   ├── ReloadCommand.kt   # Hot reload command
+    │   │   └── BlocksCommand.kt   # Custom blocks management
+    │   ├── listeners/
+    │   │   └── ExampleListener.kt # Event listeners with async chat
+    │   └── utils/
+    │       └── ConfigManager.kt   # Configuration management
+    └── resources/
+        ├── plugin.yml             # Plugin metadata & commands
+        └── config.yml             # Default configuration
+
+## 🚀 Features:
+- Custom Blocks: Magic Stone, Enchanted Log, Crystal Block
+- Custom Textures: Auto-generated resource packs with distribution
+- Kotlin + Coroutines: Modern async programming
+- Paper API: Enhanced Minecraft server API with Adventure
+- Gradle: Fast builds with Kotlin DSL
+
+## ⚙️ Setup:
+1. Create directory structure as shown above
+2. Copy file contents from the complete download
+3. Import into IntelliJ IDEA as Gradle project
+4. Update package names from 'com.yourname.myplugin'
+5. Build: ./gradlew build
+6. Test: ./gradlew runServer

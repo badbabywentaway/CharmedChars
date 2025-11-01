@@ -23,9 +23,9 @@ object FileUtils {
         toCopy: File,
         destDir: File
     ): Boolean {
-        assert(destDir.isDirectory())
+        assert(destDir.isDirectory)
 
-        if (!toCopy.isDirectory()) {
+        if (!toCopy.isDirectory) {
             return copyFile(toCopy, File(destDir, toCopy.getName()))
         } else {
             val newDestDir = File(destDir, toCopy.getName())
@@ -46,19 +46,19 @@ object FileUtils {
         destDir: File?,
         jarConnection: JarURLConnection
     ): Boolean {
-        val jarFile = jarConnection.getJarFile()
+        val jarFile = jarConnection.jarFile
 
         val e = jarFile.entries()
         while (e.hasMoreElements()) {
             val entry = e.nextElement()
-            if (entry.getName().startsWith(jarConnection.getEntryName())) {
+            if (entry.getName().startsWith(jarConnection.entryName)) {
                 val filename = StringUtils.removeStart(
                     entry.getName(),  //
-                    jarConnection.getEntryName()
+                    jarConnection.entryName
                 )
 
                 val f = File(destDir, filename)
-                if (!entry.isDirectory()) {
+                if (!entry.isDirectory) {
                     val entryInputStream = jarFile.getInputStream(entry)
                     if (!copyStream(entryInputStream, f)) {
                         return false
@@ -68,7 +68,7 @@ object FileUtils {
                     if (!ensureDirectoryExists(f)) {
                         throw IOException(
                             "Could not create directory: "
-                                    + f.getAbsolutePath()
+                                    + f.absolutePath
                         )
                     }
                 }

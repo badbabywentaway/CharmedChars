@@ -7,60 +7,34 @@ plugins {
 
 }
 
-group = "org.stephanosbad"
-version = "1.0-SNAPSHOT"
+group = property("group")!!
+version = property("version")!!
 
 repositories {
     mavenCentral()
-    maven("https://repo.papermc.io/repository/maven-public/") {
-        name = "papermc-repo"
-    }
-    maven("https://oss.sonatype.org/content/groups/public/") {
-        name = "sonatype"
-    }
-    maven("https://jitpack.io")
-    maven ("https://repo.oraxen.com/releases")
-    maven ("https://maven.enginehub.org/repo/") // EngineHub's repository
-
+    maven("https://repo.papermc.io/repository/maven-public/") { name = "papermc-repo" }
+    maven("https://oss.sonatype.org/content/groups/public/") { name = "sonatype" }
+    maven("https://jitpack.io") { name = "jitpack" }
 }
 
 dependencies {
-    compileOnly("io.papermc.paper:paper-api:1.21.6-R0.1-SNAPSHOT")
-    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
-    //compileOnly("com.github.MilkBowl:VaultAPI:1.7.3")
-    compileOnly("io.th0rgal:oraxen:1.190.0")
-    compileOnly("com.sk89q.worldguard:worldguard-bukkit:7.0.14")
-    compileOnly("com.github.GriefPrevention:GriefPrevention:16.18.4")
+    compileOnly("io.papermc.paper:paper-api:${property("paperVersion")}")
+    implementation("org.jetbrains.kotlin:kotlin-stdlib:${property("kotlinVersion")}")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:${property("coroutinesVersion")}")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-jdk8:${property("coroutinesVersion")}")
 
+    testImplementation("org.jetbrains.kotlin:kotlin-test:${property("kotlinVersion")}")
+    testImplementation("io.mockk:mockk:1.13.8")
+    testImplementation("org.junit.jupiter:junit-jupiter:5.10.1")
 }
-
-tasks {
-    runServer {
-        // Configure the Minecraft version for our task.
-        // This is the only required configuration besides applying the plugin.
-        // Your plugin's jar (or shadowJar if present) will be used automatically.
-        minecraftVersion("1.21")
+    tasks.shadowJar {
+        archiveBaseName.set("MyMinecraftPlugin")
+        archiveClassifier.set("")
+        relocate("kotlin", "com.yourname.myplugin.kotlin")
+        relocate("kotlinx.coroutines", "com.yourname.myplugin.kotlinx.coroutines")
+        minimize()
     }
-}
 
-val targetJavaVersion = 21
-kotlin {
-    jvmToolchain(targetJavaVersion)
-}
-
-tasks.build {
-    dependsOn("shadowJar")
-}
-
-tasks.processResources {
-    val props = mapOf("version" to version)
-    inputs.properties(props)
-    filteringCharset = "UTF-8"
-    filesMatching("plugin.yml") {
-        expand(props)
-    }
-}
-
-tasks.shadowJar {
-    archiveClassifier.set("") // Remove classifier from shadowed JAR
-}
+    tasks.build { dependsOn(tasks.shadowJar) }
+    tasks.runServer { minecraftVersion("1.20.4") }
+    tasks.test { useJUnitPlatform() }

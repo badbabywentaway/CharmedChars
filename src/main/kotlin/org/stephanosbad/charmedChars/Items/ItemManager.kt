@@ -1,11 +1,5 @@
 package org.stephanosbad.charmedChars.Items
 
-import me.ryanhamshire.GriefPrevention.GriefPrevention
-import com.sk89q.worldguard.WorldGuard
-import com.sk89q.worldguard.bukkit.WorldGuardPlugin
-import io.th0rgal.oraxen.api.OraxenBlocks
-import io.th0rgal.oraxen.api.OraxenItems
-import io.th0rgal.oraxen.compatibilities.CompatibilityProvider
 import org.bukkit.Bukkit
 import org.bukkit.Location
 import org.bukkit.Material
@@ -29,7 +23,7 @@ import java.util.*
 import java.util.concurrent.atomic.AtomicReference
 
 class ItemManager @JvmOverloads constructor(localPlugin: CharmedChars? = null) :
-    CompatibilityProvider<CharmedChars>(), Listener {
+    Listener {
     /**
      * Wood material list.
      */
@@ -89,12 +83,13 @@ class ItemManager @JvmOverloads constructor(localPlugin: CharmedChars? = null) :
      */
     var rewards: MutableList<Reward> = ArrayList<Reward>()
 
+    var plugin = localPlugin!!
+
     /**
      * Constructor
      * @param localPlugin - Master plugin
      */
     init {
-        this.plugin = localPlugin
         try {
             worldGuardPlugin = WorldGuardPlugin.inst()
             worldGuard = WorldGuard.getInstance()
@@ -234,9 +229,7 @@ class ItemManager @JvmOverloads constructor(localPlugin: CharmedChars? = null) :
         if (hand.getItemMeta() == null) {
             return
         }
-        if (!hand.type.name.lowercase().contains("gold") &&
-            !hand.itemMeta.itemName.lowercase().contains("gold")
-        ) {
+        if (!hand.type.name.lowercase().contains("gold")) {
             return
         }
 
@@ -350,7 +343,7 @@ class ItemManager @JvmOverloads constructor(localPlugin: CharmedChars? = null) :
         val match: AtomicReference<SimpleTuple<Char, Double>> = AtomicReference(SimpleTuple('\u0000', 0.0))
         val variation = getCustomVariation(testBlock)
         if (Arrays.stream(LetterBlock.entries.toTypedArray()).anyMatch({ v ->
-                val found = variation == v.customVariation
+                val found = variation == v.id
                 if (found) {
                     match.set(SimpleTuple(v.character, v.frequencyFactor))
                 }
@@ -366,13 +359,14 @@ class ItemManager @JvmOverloads constructor(localPlugin: CharmedChars? = null) :
      * @param block - noteblock block
      * @return - Oraxen's noteblock variation code
      */
-    fun getCustomVariation(block: Block?): Int {
+    fun getCustomVariation(block: Block?): String? {
         /*NoteBlock noteBlock = (NoteBlock) block.getState().getBlockData();
         NoteBlockMechanic mech = NoteBlockMechanicFactory.getBlockMechanic((int) (noteBlock
                 .getInstrument().getType()) * 25 + (int) noteBlock.getNote().getId()
                 + (noteBlock.isPowered() ? 400 : 0) - 26);
         return mech.getCustomVariation();*/
-        return OraxenBlocks.getNoteBlockMechanic(block).getCustomVariation()
+        var retValue = CustomBlock.byAlreadyPlaced(block)?.id
+        return retValue
     }
 
     /**
@@ -499,14 +493,7 @@ class ItemManager @JvmOverloads constructor(localPlugin: CharmedChars? = null) :
     }
 
     companion object {
-        /**
-         * Retrieve letter blocks. Right now Oraxen only.
-         * @param commandString - Name of oraxen item.
-         * @return - ItemStack of a single letter/number block
-         */
-        fun getBlocks(commandString: String?): ItemStack? {
-            return OraxenItems.getItemById(commandString).build()
-        }
+
 
         val characterBlockNames: MutableSet<String?>
             /**

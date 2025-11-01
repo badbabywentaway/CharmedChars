@@ -19,7 +19,7 @@ class LocationPair
      * @return
      */
     fun check(location: Location): Boolean {
-        return location.world === first.getWorld() &&
+        return location.world == first.world &&
                 inMcRange(location.x, first.x, second.x) &&
                 inMcRange(location.z, first.z, second.z)
     }

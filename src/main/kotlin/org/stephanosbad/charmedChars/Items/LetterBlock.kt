@@ -1,6 +1,5 @@
 package org.stephanosbad.charmedChars.Items
 
-import io.th0rgal.oraxen.api.OraxenItems
 import org.bukkit.inventory.ItemStack
 import java.util.*
 
@@ -52,7 +51,7 @@ enum class LetterBlock(
      */
     val character: Char = this.name[0]
 
-    val itemStack: ItemStack?
+    val itemStack: ItemStack
 
     /**
      * Hit range low (randomizer)
@@ -85,7 +84,7 @@ enum class LetterBlock(
      * @param customVariation - Oraxen noteblock variation
      */
     init {
-        this.itemStack = OraxenItems.getItemById(id).build()
+        this.itemStack = CustomBlock.getInstance(id)!!.itemStack!!
     }
 
     companion object {
