@@ -51,7 +51,7 @@ class CharBlock : CommandExecutor, TabCompleter {
                 }
             }
             if (givePlayer.location.world != null) {
-                givePlayer.location.world.dropItemNaturally(givePlayer.getLocation(), dropStack!!)
+                givePlayer.location.world.dropItemNaturally(givePlayer.location, dropStack!!)
             }
         }
 

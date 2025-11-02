@@ -1,6 +1,7 @@
 package org.stephanosbad.charmedChars.Items
 
 import org.bukkit.inventory.ItemStack
+import org.stephanosbad.charmedChars.Block.CustomBlock
 import java.util.*
 
 enum class LetterBlock(

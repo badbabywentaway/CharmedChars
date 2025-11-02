@@ -17,8 +17,13 @@ import org.bukkit.plugin.java.JavaPlugin
 import org.bukkit.Bukkit
 import org.stephanosbad.charmedChars.Block.CustomBlockListener
 import org.stephanosbad.charmedChars.Block.CustomBlocks
+import org.stephanosbad.charmedChars.Commands.BlocksCommand
+import org.stephanosbad.charmedChars.Commands.ExampleCommand
+import org.stephanosbad.charmedChars.Commands.ReloadCommand
+import org.stephanosbad.charmedChars.Commands.TextureCommand
 import org.stephanosbad.charmedChars.Utility.ConfigManager
 import org.stephanosbad.charmedChars.graphics.TextureManager
+import org.stephanosbad.charmedChars.listeners.ExampleListener
 import java.io.File
 import java.io.IOException
 import java.util.*

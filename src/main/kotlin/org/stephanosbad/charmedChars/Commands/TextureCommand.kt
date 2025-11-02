@@ -1,4 +1,4 @@
-package org.stephanosbad.charmedChars.graphics
+package org.stephanosbad.charmedChars.Commands
 
 import net.kyori.adventure.text.Component
 import net.kyori.adventure.text.format.NamedTextColor

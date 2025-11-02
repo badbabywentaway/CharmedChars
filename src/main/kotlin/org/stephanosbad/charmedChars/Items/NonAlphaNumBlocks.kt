@@ -2,6 +2,7 @@ package org.stephanosbad.charmedChars.Items
 
 
 import org.bukkit.inventory.ItemStack
+import org.stephanosbad.charmedChars.Block.CustomBlock
 
 enum class NonAlphaNumBlocks(val charVal: Char, blockName: String) {
     PLUS('+', "plus_block"),

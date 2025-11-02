@@ -14,6 +14,7 @@ import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
 import org.bukkit.event.block.BlockBreakEvent
 import org.bukkit.inventory.ItemStack
+import org.stephanosbad.charmedChars.Block.CustomBlock
 import org.stephanosbad.charmedChars.CharmedChars
 import org.stephanosbad.charmedChars.Commands.CharBlock
 import org.stephanosbad.charmedChars.Rewards.DropReward
