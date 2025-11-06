@@ -69,7 +69,7 @@ class TextureManager(private val plugin: CharmedChars) {
             {
                 "pack": {
                     "pack_format": 18,
-                    "description": "MyMinecraftPlugin Custom Blocks"
+                    "description": "CharmedChars Custom Blocks"
                 }
             }
         """.trimIndent()

@@ -1,4 +1,4 @@
-package org.stephanosbad.charmedChars.Block
+package org.stephanosbad.charmedChars.listeners
 
 import kotlinx.coroutines.launch
 import net.kyori.adventure.text.Component
@@ -17,8 +17,8 @@ import org.bukkit.event.player.PlayerInteractEvent
 import org.bukkit.inventory.EquipmentSlot
 import org.bukkit.potion.PotionEffect
 import org.bukkit.potion.PotionEffectType
+import org.stephanosbad.charmedChars.Block.CustomBlocks
 import org.stephanosbad.charmedChars.CharmedChars
-import kotlin.text.get
 
 /**
  * Handles custom block interactions and behaviors
@@ -39,7 +39,7 @@ class CustomBlockListener(private val plugin: CharmedChars) : Listener {
 
         // Handle specific placement effects
         when (blockType) {
-            CustomBlocks.MAGIC_STONE -> {
+            CustomBlocks.Companion.MAGIC_STONE -> {
                 // Particle effect on placement
                 spawnParticleEffect(block.location, Particle.ENCHANT, 20)
                 player.playSound(block.location, Sound.BLOCK_ENCHANTMENT_TABLE_USE, 1.0f, 1.2f)
@@ -50,7 +50,7 @@ class CustomBlockListener(private val plugin: CharmedChars) : Listener {
                 )
             }
 
-            CustomBlocks.ENCHANTED_LOG -> {
+            CustomBlocks.Companion.ENCHANTED_LOG -> {
                 spawnParticleEffect(block.location, Particle.HAPPY_VILLAGER, 15)
                 player.playSound(block.location, Sound.BLOCK_WOOD_PLACE, 1.0f, 0.8f)
 
@@ -60,7 +60,7 @@ class CustomBlockListener(private val plugin: CharmedChars) : Listener {
                 )
             }
 
-            CustomBlocks.CRYSTAL_BLOCK -> {
+            CustomBlocks.Companion.CRYSTAL_BLOCK -> {
                 spawnParticleEffect(block.location, Particle.END_ROD, 25)
                 player.playSound(block.location, Sound.BLOCK_AMETHYST_BLOCK_PLACE, 1.0f, 1.0f)
 
@@ -86,7 +86,7 @@ class CustomBlockListener(private val plugin: CharmedChars) : Listener {
 
         // Handle custom block breaking
         when (blockType) {
-            CustomBlocks.MAGIC_STONE -> {
+            CustomBlocks.Companion.MAGIC_STONE -> {
                 // Drop the custom item
                 val item = plugin.customBlocks.createMagicStone()
                 block.world.dropItemNaturally(block.location, item)
@@ -99,7 +99,7 @@ class CustomBlockListener(private val plugin: CharmedChars) : Listener {
                 player.giveExp(10)
             }
 
-            CustomBlocks.ENCHANTED_LOG -> {
+            CustomBlocks.Companion.ENCHANTED_LOG -> {
                 val item = plugin.customBlocks.createEnchantedLog()
                 block.world.dropItemNaturally(block.location, item)
 
@@ -110,7 +110,7 @@ class CustomBlockListener(private val plugin: CharmedChars) : Listener {
                 player.giveExp(15)
             }
 
-            CustomBlocks.CRYSTAL_BLOCK -> {
+            CustomBlocks.Companion.CRYSTAL_BLOCK -> {
                 val item = plugin.customBlocks.createCrystalBlock()
                 block.world.dropItemNaturally(block.location, item)
 
@@ -139,7 +139,7 @@ class CustomBlockListener(private val plugin: CharmedChars) : Listener {
 
         // Handle right-click interactions
         when (blockType) {
-            CustomBlocks.MAGIC_STONE -> {
+            CustomBlocks.Companion.MAGIC_STONE -> {
                 event.isCancelled = true
 
                 plugin.launch {
@@ -169,7 +169,7 @@ class CustomBlockListener(private val plugin: CharmedChars) : Listener {
                 }
             }
 
-            CustomBlocks.CRYSTAL_BLOCK -> {
+            CustomBlocks.Companion.CRYSTAL_BLOCK -> {
                 event.isCancelled = true
 
                 player.sendMessage(

@@ -15,7 +15,7 @@ import org.stephanosbad.charmedChars.Utility.WordDict
 import org.bukkit.plugin.Plugin
 import org.bukkit.plugin.java.JavaPlugin
 import org.bukkit.Bukkit
-import org.stephanosbad.charmedChars.Block.CustomBlockListener
+import org.stephanosbad.charmedChars.listeners.CustomBlockListener
 import org.stephanosbad.charmedChars.Block.CustomBlocks
 import org.stephanosbad.charmedChars.Commands.BlocksCommand
 import org.stephanosbad.charmedChars.Commands.ExampleCommand
@@ -48,26 +48,26 @@ class CharmedChars : JavaPlugin(), CoroutineScope {
     // In production, you should use a database or persistent file storage
     val customBlockData = mutableMapOf<String, String>()
     companion object {
-        var oraxenPlugin: Plugin? = null
-
-        fun getRecursive(directory: File): List<File?> {
-
-            val retValue = mutableListOf<File?>()
-            val faFiles: Array<File?>? = directory.listFiles()
-            for (file in faFiles!!) {
-                if (file!!.getName().matches("^(.*?)".toRegex())) {
-                    retValue.add(file)
-                }
-                if (file.isDirectory()) {
-                    retValue.addAll(
-                        getRecursive(
-                            file
-                        )
-                    )
-                }
-            }
-            return retValue
-        }
+//        var oraxenPlugin: Plugin? = null
+//
+//        fun getRecursive(directory: File): List<File?> {
+//
+//            val retValue = mutableListOf<File?>()
+//            val faFiles: Array<File?>? = directory.listFiles()
+//            for (file in faFiles!!) {
+//                if (file!!.getName().matches("^(.*?)".toRegex())) {
+//                    retValue.add(file)
+//                }
+//                if (file.isDirectory()) {
+//                    retValue.addAll(
+//                        getRecursive(
+//                            file
+//                        )
+//                    )
+//                }
+//            }
+//            return retValue
+//        }
     }
 
     /**
