@@ -10,11 +10,10 @@ import net.kyori.adventure.text.format.NamedTextColor
 import org.stephanosbad.charmedChars.Commands.CharBlock
 import org.stephanosbad.charmedChars.Config.ConfigDataHandler
 import org.stephanosbad.charmedChars.Items.ItemManager
-import org.stephanosbad.charmedChars.Utility.FileUtils
 import org.stephanosbad.charmedChars.Utility.WordDict
-import org.bukkit.plugin.Plugin
 import org.bukkit.plugin.java.JavaPlugin
 import org.bukkit.Bukkit
+import org.stephanosbad.charmedChars.Block.CustomBlockEngine
 import org.stephanosbad.charmedChars.listeners.CustomBlockListener
 import org.stephanosbad.charmedChars.Block.CustomBlocks
 import org.stephanosbad.charmedChars.Commands.BlocksCommand
@@ -24,9 +23,7 @@ import org.stephanosbad.charmedChars.Commands.TextureCommand
 import org.stephanosbad.charmedChars.Utility.ConfigManager
 import org.stephanosbad.charmedChars.graphics.TextureManager
 import org.stephanosbad.charmedChars.listeners.ExampleListener
-import java.io.File
 import java.io.IOException
-import java.util.*
 import kotlin.coroutines.CoroutineContext
 
 class CharmedChars : JavaPlugin(), CoroutineScope {
@@ -43,6 +40,10 @@ class CharmedChars : JavaPlugin(), CoroutineScope {
 
     lateinit var textureManager: TextureManager
         private set
+
+    lateinit var customBlockEngine: CustomBlockEngine
+        private set
+
 
     // In-memory storage for custom block data
     // In production, you should use a database or persistent file storage
@@ -121,6 +122,8 @@ class CharmedChars : JavaPlugin(), CoroutineScope {
         // Initialize custom blocks system
         customBlocks = CustomBlocks(this)
         customBlocks.registerCustomBlocks()
+
+        customBlockEngine = CustomBlockEngine(this, 1100)
 
         // Initialize textures system
         if (configManager.customTexturesEnabled) {

@@ -1,7 +1,9 @@
 package org.stephanosbad.charmedChars.Items
 
 import org.bukkit.inventory.ItemStack
-import org.stephanosbad.charmedChars.Block.CustomBlock
+import org.stephanosbad.charmedChars.Block.BlockColor
+import org.stephanosbad.charmedChars.Block.BlockLetter
+import org.stephanosbad.charmedChars.Block.CustomBlockEngine
 import java.util.*
 
 enum class LetterBlock(
@@ -52,7 +54,7 @@ enum class LetterBlock(
      */
     val character: Char = this.name[0]
 
-    val itemStack: ItemStack
+    val itemStacks: MutableMap<BlockColor, ItemStack?> = mutableMapOf()
 
     /**
      * Hit range low (randomizer)
@@ -67,7 +69,7 @@ enum class LetterBlock(
     /**
      * Oraxen ID
      */
-    val id: String = this.character.lowercaseChar().toString() + "_block"
+    val letterBlockId  = BlockLetter.entries.firstOrNull{ it.filenameBase == this.character.lowercaseChar().toString()}
 
     /**
      * Determine if letter is hit by randomizer
@@ -85,7 +87,11 @@ enum class LetterBlock(
      * @param customVariation - Oraxen noteblock variation
      */
     init {
-        this.itemStack = CustomBlock.getInstance(id)!!.itemStack!!
+        letterBlockId?.let {
+            for (color in BlockColor.entries) {
+                this.itemStacks[color] = CustomBlockEngine.getInstance(color, this)!!.itemStack!!
+            }
+        }
     }
 
     companion object {
@@ -122,8 +128,8 @@ enum class LetterBlock(
          * Letter block random picker. Weighted by rarity.
          * @return Item stack of single letter block
          */
-        fun randomPickOraxenBlock(): ItemStack? {
-            return randomPick()!!.itemStack
+        fun randomPickBlock(): ItemStack? {
+            return randomPick()!!.itemStacks[BlockColor.getRand()]
         }
     }
 }

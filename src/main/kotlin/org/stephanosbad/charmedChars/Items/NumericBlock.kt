@@ -1,7 +1,7 @@
 package org.stephanosbad.charmedChars.Items
 
 import org.bukkit.inventory.ItemStack
-import org.stephanosbad.charmedChars.Block.CustomBlock
+import org.stephanosbad.charmedChars.Block.CustomBlockEngine
 
 enum class NumericBlock(val c: Char) {
     BLOCK_0('0'),
@@ -16,5 +16,5 @@ enum class NumericBlock(val c: Char) {
     BLOCK_9('9'),
     ;
 
-    val itemStack: ItemStack = CustomBlock.getInstance(c.toString() + "_block")!!.itemStack!!
+    val itemStack: ItemStack = CustomBlockEngine.getInstance(c.toString() + "_block")!!.itemStack!!
 }

@@ -14,7 +14,10 @@ import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
 import org.bukkit.event.block.BlockBreakEvent
 import org.bukkit.inventory.ItemStack
+import org.stephanosbad.charmedChars.Block.BlockColor
+import org.stephanosbad.charmedChars.Block.BlockLetter
 import org.stephanosbad.charmedChars.Block.CustomBlock
+import org.stephanosbad.charmedChars.Block.CustomBlockEngine
 import org.stephanosbad.charmedChars.CharmedChars
 import org.stephanosbad.charmedChars.Commands.CharBlock
 import org.stephanosbad.charmedChars.Rewards.DropReward
@@ -188,7 +191,7 @@ class ItemManager @JvmOverloads constructor(localPlugin: CharmedChars? = null) :
      */
     private fun woodBlockBreak(e: BlockBreakEvent, material: Material, oldMaterial: Material?) {
         val block =
-            LetterBlock.randomPickOraxenBlock()
+            LetterBlock.randomPickBlock()
         val player = e.player
         if (protectedSpot(player, e.getBlock().getLocation(), e.getBlock())) {
             player.sendMessage("Protected.")
@@ -243,18 +246,40 @@ class ItemManager @JvmOverloads constructor(localPlugin: CharmedChars? = null) :
         if (c.first == '\u0000') {
             return
         }
-        val lateralDirection: LateralDirection = checkLateralBlocks(e.getPlayer(), testBlock)
+        val lateralDirection: LateralDirection = checkLateralBlocks(e.player, testBlock)
+
         val outString = StringBuilder()
         val blockArray: MutableList<Location> = ArrayList<Location>(mutableListOf<Location?>())
+        var isSameColor = true;
+        var colorTest: BlockColor? = null
+
 
         if (lateralDirection.isValid) {
+
+
             while (c.first != '\u0000') {
                 score += c.second + 10
                 blockArray.add(testBlock.location)
                 outString.append(c.first)
                 testBlock = offsetBlock(testBlock, lateralDirection)
                 c = testForLetter(e.player, testBlock)
+                if(isSameColor)
+                {
+                    var getColor = plugin.customBlockEngine.letterBlockKeys.entries.firstOrNull{ it.value.second == getNoteblockNumber(testBlock) }?.key?.first
+                    if(colorTest == null)
+                    {
+                         colorTest = getColor
+                    }
+                    else if (colorTest != getColor)
+                    {
+                        isSameColor = false
+                    }
+                }
             }
+        }
+        if(isSameColor && colorTest != null)
+        {
+            e.player.sendMessage("Triple Score! All Blocks Are ${colorTest.name}!")
         }
         if (WordDict.singleton!!.Words.contains(outString.toString().lowercase())) {
             e.isCancelled = true
@@ -347,7 +372,7 @@ class ItemManager @JvmOverloads constructor(localPlugin: CharmedChars? = null) :
         val match: AtomicReference<SimpleTuple<Char, Double>> = AtomicReference(SimpleTuple('\u0000', 0.0))
         val variation = getCustomVariation(testBlock)
         if (Arrays.stream(LetterBlock.entries.toTypedArray()).anyMatch({ v ->
-                val found = variation == v.id
+                val found = variation == v
                 if (found) {
                     match.set(SimpleTuple(v.character, v.frequencyFactor))
                 }
@@ -358,18 +383,24 @@ class ItemManager @JvmOverloads constructor(localPlugin: CharmedChars? = null) :
         return SimpleTuple('\u0000', 0.0)
     }
 
+    fun getNoteblockNumber(testBlock: Block) : Int?
+    {
+        return testBlock.drops.firstOrNull()?.itemMeta?.customModelData
+
+    }
+
     /**
      * Get "noteblock" variation code. When Oraxen obsoletes this, this will change.
      * @param block - noteblock block
      * @return - Oraxen's noteblock variation code
      */
-    fun getCustomVariation(block: Block?): String? {
+    fun getCustomVariation(block: Block?): LetterBlock? {
         /*NoteBlock noteBlock = (NoteBlock) block.getState().getBlockData();
         NoteBlockMechanic mech = NoteBlockMechanicFactory.getBlockMechanic((int) (noteBlock
                 .getInstrument().getType()) * 25 + (int) noteBlock.getNote().getId()
                 + (noteBlock.isPowered() ? 400 : 0) - 26);
         return mech.getCustomVariation();*/
-        var retValue = CustomBlock.byAlreadyPlaced(block)?.id
+        var retValue = CustomBlockEngine.byAlreadyPlaced(block)?.id
         return retValue
     }
 
@@ -497,18 +528,5 @@ class ItemManager @JvmOverloads constructor(localPlugin: CharmedChars? = null) :
     companion object {
 
 
-        val characterBlockNames: MutableSet<String?>
-            /**
-             * Retrieve all character block names
-             * @return All Oraxen character block names.
-             */
-            get() {
-                val retValue = HashSet<String?>()
-
-                for (letter in LetterBlock.entries) {
-                    retValue.add(letter.id)
-                }
-                return retValue
-            }
     }
 }

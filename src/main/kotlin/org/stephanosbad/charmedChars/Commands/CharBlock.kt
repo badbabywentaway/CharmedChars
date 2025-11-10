@@ -43,7 +43,7 @@ class CharBlock : CommandExecutor, TabCompleter {
                 val isThere =
                     Arrays.stream(LetterBlock.entries.toTypedArray()).filter({ it -> it.character == c }).findFirst()
                 if (!isThere.isEmpty) {
-                    dropStack = isThere.get().itemStack
+                    dropStack = isThere.get().itemStacks
                 } else {
                     val isThereNum =
                         Arrays.stream(NumericBlock.entries.toTypedArray()).filter({ it -> it.c == c }).findFirst()
