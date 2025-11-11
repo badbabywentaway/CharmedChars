@@ -87,7 +87,7 @@ class CharBlock : CommandExecutor, TabCompleter {
                 characterMatches.add(String.valueOf(number.c))
             }
             for (non in NonAlphaNumBlocks.entries) {
-                characterMatches.add(non.oraxenBlockName.lowercase().split("_")[0])
+                characterMatches.add(non.nonAlphaNumBlockName.lowercase().split("_")[0])
             }
             completions = characterMatches
         }
