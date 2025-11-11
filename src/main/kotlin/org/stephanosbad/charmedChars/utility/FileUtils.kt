@@ -1,4 +1,4 @@
-package org.stephanosbad.charmedChars.Utility
+package org.stephanosbad.charmedChars.utility
 
 
 import org.apache.commons.lang3.StringUtils
@@ -82,13 +82,13 @@ object FileUtils {
     ): Boolean {
         try {
             val urlConnection = originUrl.openConnection()
-            if (urlConnection is JarURLConnection) {
-                return copyJarResourcesRecursively(
+            return if (urlConnection is JarURLConnection) {
+                copyJarResourcesRecursively(
                     destination,
                     urlConnection
                 )
             } else {
-                return copyFilesRecusively(
+                copyFilesRecusively(
                     File(originUrl.getPath()),
                     destination
                 )

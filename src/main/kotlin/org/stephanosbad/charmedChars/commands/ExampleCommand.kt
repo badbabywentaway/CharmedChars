@@ -1,4 +1,4 @@
-package org.stephanosbad.charmedChars.Commands
+package org.stephanosbad.charmedChars.commands
 
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -31,7 +31,7 @@ class ExampleCommand(private val plugin: CharmedChars) : CommandExecutor, TabCom
                     return true
                 }
 
-                if (!sender.hasPermission("myplugin.example")) {
+                if (!sender.hasPermission("charmedChars.example")) {
                     sender.sendMessage(
                         Component.text("You don't have permission to use this command!")
                             .color(NamedTextColor.RED)
@@ -65,7 +65,7 @@ class ExampleCommand(private val plugin: CharmedChars) : CommandExecutor, TabCom
             }
 
             1 -> {
-                if (!sender.hasPermission("myplugin.admin")) {
+                if (!sender.hasPermission("charmedChars.admin")) {
                     sender.sendMessage(
                         Component.text("You need admin permission to target other players!")
                             .color(NamedTextColor.RED)
@@ -118,7 +118,7 @@ class ExampleCommand(private val plugin: CharmedChars) : CommandExecutor, TabCom
     ): List<String> {
         return when (args.size) {
             1 -> {
-                if (sender.hasPermission("myplugin.admin")) {
+                if (sender.hasPermission("charmedChars.admin")) {
                     Bukkit.getOnlinePlayers()
                         .map { it.name }
                         .filter { it.startsWith(args[0], ignoreCase = true) }

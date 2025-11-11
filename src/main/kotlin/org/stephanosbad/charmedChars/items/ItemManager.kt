@@ -1,4 +1,4 @@
-package org.stephanosbad.charmedChars.Items
+package org.stephanosbad.charmedChars.items
 
 import com.sk89q.worldguard.WorldGuard
 import com.sk89q.worldguard.bukkit.WorldGuardPlugin
@@ -14,17 +14,14 @@ import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
 import org.bukkit.event.block.BlockBreakEvent
 import org.bukkit.inventory.ItemStack
-import org.stephanosbad.charmedChars.Items.BlockColor
-import org.stephanosbad.charmedChars.Block.CustomBlock
-import org.stephanosbad.charmedChars.Block.CustomBlockEngine
+import org.stephanosbad.charmedChars.block.CustomBlockEngine
 import org.stephanosbad.charmedChars.CharmedChars
-import org.stephanosbad.charmedChars.Commands.CharBlock
-import org.stephanosbad.charmedChars.Rewards.DropReward
-import org.stephanosbad.charmedChars.Rewards.Reward
-import org.stephanosbad.charmedChars.Rewards.RewardType
-import org.stephanosbad.charmedChars.Utility.LocationPair
-import org.stephanosbad.charmedChars.Utility.SimpleTuple
-import org.stephanosbad.charmedChars.Utility.WordDict
+import org.stephanosbad.charmedChars.rewards.DropReward
+import org.stephanosbad.charmedChars.rewards.Reward
+import org.stephanosbad.charmedChars.rewards.RewardType
+import org.stephanosbad.charmedChars.utility.LocationPair
+import org.stephanosbad.charmedChars.utility.SimpleTuple
+import org.stephanosbad.charmedChars.utility.WordDict
 import java.util.*
 import java.util.concurrent.atomic.AtomicReference
 
@@ -192,7 +189,7 @@ class ItemManager @JvmOverloads constructor(localPlugin: CharmedChars? = null) :
         val block =
             LetterBlock.randomPickBlock()
         val player = e.player
-        if (protectedSpot(player, e.getBlock().getLocation(), e.getBlock())) {
+        if (protectedSpot(player, e.getBlock().location, e.getBlock())) {
             player.sendMessage("Protected.")
             return
         }
@@ -251,7 +248,7 @@ class ItemManager @JvmOverloads constructor(localPlugin: CharmedChars? = null) :
 
         val outString = StringBuilder()
         val blockArray: MutableList<Location> = ArrayList<Location>(mutableListOf<Location?>())
-        var isSameColor = true;
+        var isSameColor = true
         var colorTest: BlockColor? = null
 
 
@@ -282,7 +279,7 @@ class ItemManager @JvmOverloads constructor(localPlugin: CharmedChars? = null) :
         {
             e.player.sendMessage("Triple Score! All Blocks Are ${colorTest.name}!")
         }
-        if (WordDict.singleton!!.Words.contains(outString.toString().lowercase())) {
+        if (WordDict.singleton!!.words.contains(outString.toString().lowercase())) {
             e.isCancelled = true
             e.player.sendMessage("Hit: $score")
 
@@ -364,7 +361,7 @@ class ItemManager @JvmOverloads constructor(localPlugin: CharmedChars? = null) :
      */
     fun testForLetter(player: Player?, testBlock: Block): SimpleTuple<Char, Double> {
         if (protectedSpot(player, testBlock.location, testBlock)) {
-            Bukkit.getLogger().info("Part of word is protected: " + testBlock.getLocation())
+            Bukkit.getLogger().info("Part of word is protected: " + testBlock.location)
             return SimpleTuple('\u0000', 0.0)
         }
         if (testBlock.state.blockData !is NoteBlock) {
@@ -372,13 +369,13 @@ class ItemManager @JvmOverloads constructor(localPlugin: CharmedChars? = null) :
         }
         val match: AtomicReference<SimpleTuple<Char, Double>> = AtomicReference(SimpleTuple('\u0000', 0.0))
         val variation = getCustomVariation(testBlock)
-        if (Arrays.stream(LetterBlock.entries.toTypedArray()).anyMatch({ v ->
+        if (Arrays.stream(LetterBlock.entries.toTypedArray()).anyMatch { v ->
                 val found = variation == v
                 if (found) {
                     match.set(SimpleTuple(v.character, v.frequencyFactor))
                 }
                 found
-            })) {
+            }) {
             return match.get()
         }
         return SimpleTuple('\u0000', 0.0)
@@ -396,11 +393,6 @@ class ItemManager @JvmOverloads constructor(localPlugin: CharmedChars? = null) :
      * @return - Oraxen's noteblock variation code
      */
     fun getCustomVariation(block: Block?): LetterBlock? {
-        /*NoteBlock noteBlock = (NoteBlock) block.getState().getBlockData();
-        NoteBlockMechanic mech = NoteBlockMechanicFactory.getBlockMechanic((int) (noteBlock
-                .getInstrument().getType()) * 25 + (int) noteBlock.getNote().getId()
-                + (noteBlock.isPowered() ? 400 : 0) - 26);
-        return mech.getCustomVariation();*/
         var retValue = CustomBlockEngine.byAlreadyPlaced(block)?.id
         return retValue
     }
@@ -468,29 +460,6 @@ class ItemManager @JvmOverloads constructor(localPlugin: CharmedChars? = null) :
             val configuration =
                 plugin.configDataHandler!!.configuration!!
             when (t) {
-                /*RewardType.VaultCurrency -> {
-                    try {
-                        val vaultConfig =
-                            configuration.getConfigurationSection("VaultCurrency")!!
-                        val minimumRewardCount: Double = vaultConfig.getDouble("minimumRewardCount")
-                        val multiplier: Double = vaultConfig.getDouble("multiplier")
-                        val minimumThreshold: Double = vaultConfig.getDouble("minimumThreshold")
-                        val maximumRewardCap: Double = vaultConfig.getDouble("maximumRewardCap")
-                        val vaultReward = VaultCurrencyReward(
-                            plugin,
-                            minimumRewardCount,
-                            multiplier,
-                            minimumThreshold,
-                            maximumRewardCap
-                        )
-                        rewards.add(vaultReward)
-                    } catch (e: Exception) {
-                        Bukkit.getLogger().info(e.toString())
-                    } catch (e: Error) {
-                        Bukkit.getLogger().info(e.toString())
-                    }
-                }*/
-
                 RewardType.Drop -> {
                     val listOfDropConfigs =
                         checkNotNull(configuration.getList("Drop"))
@@ -526,8 +495,5 @@ class ItemManager @JvmOverloads constructor(localPlugin: CharmedChars? = null) :
         }
     }
 
-    companion object {
-
-
-    }
+    companion object
 }

@@ -1,14 +1,5 @@
-package org.stephanosbad.charmedChars.Block
-// ============================================================================
-// FILE: src/main/kotlin/com/yourname/myplugin/blocks/CustomBlocks.kt
-// Block registry and factory for custom blocks with texture support
-// ============================================================================
+package org.stephanosbad.charmedChars.block
 
-//package com.yourname.myplugin.blocks
-
-
-//import net.kyori.adventure.text.Component
-//import net.kyori.adventure.text.format.NamedTextColor
 import net.kyori.adventure.text.Component
 import net.kyori.adventure.text.format.NamedTextColor
 import org.stephanosbad.charmedChars.CharmedChars

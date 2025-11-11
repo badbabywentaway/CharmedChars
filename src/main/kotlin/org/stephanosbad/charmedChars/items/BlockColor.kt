@@ -1,4 +1,4 @@
-package org.stephanosbad.charmedChars.Items
+package org.stephanosbad.charmedChars.items
 
 enum class BlockColor(val directoryName: String)
 {

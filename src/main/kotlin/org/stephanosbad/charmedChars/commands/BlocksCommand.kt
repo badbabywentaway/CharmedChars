@@ -1,4 +1,4 @@
-package org.stephanosbad.charmedChars.Commands
+package org.stephanosbad.charmedChars.commands
 
 
 import net.kyori.adventure.text.Component
@@ -8,7 +8,7 @@ import org.bukkit.command.CommandExecutor
 import org.bukkit.command.CommandSender
 import org.bukkit.command.TabCompleter
 import org.bukkit.entity.Player
-import org.stephanosbad.charmedChars.Block.CustomBlocks
+import org.stephanosbad.charmedChars.block.CustomBlocks
 import org.stephanosbad.charmedChars.CharmedChars
 
 /**
@@ -28,7 +28,7 @@ class BlocksCommand(private val plugin: CharmedChars) : CommandExecutor, TabComp
         label: String,
         args: Array<out String>
     ): Boolean {
-        if (!sender.hasPermission("myplugin.blocks")) {
+        if (!sender.hasPermission("charmedChars.blocks")) {
             sender.sendMessage(
                 Component.text("You don't have permission to use this command!")
                     .color(NamedTextColor.RED)

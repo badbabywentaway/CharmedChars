@@ -1,9 +1,9 @@
-package org.stephanosbad.charmedChars.Block
+package org.stephanosbad.charmedChars.block
 
 import org.bukkit.inventory.ItemStack
-import org.stephanosbad.charmedChars.Items.LetterBlock
-import org.stephanosbad.charmedChars.Items.NonAlphaNumBlocks
-import org.stephanosbad.charmedChars.Items.NumericBlock
+import org.stephanosbad.charmedChars.items.LetterBlock
+import org.stephanosbad.charmedChars.items.NonAlphaNumBlocks
+import org.stephanosbad.charmedChars.items.NumericBlock
 
 data class CustomBlock(
     val id: LetterBlock?,

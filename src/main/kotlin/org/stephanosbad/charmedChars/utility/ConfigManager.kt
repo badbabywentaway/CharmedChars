@@ -1,4 +1,4 @@
-package org.stephanosbad.charmedChars.Utility
+package org.stephanosbad.charmedChars.utility
 
 import org.bukkit.configuration.file.FileConfiguration
 import org.stephanosbad.charmedChars.CharmedChars

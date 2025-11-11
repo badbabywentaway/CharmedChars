@@ -1,4 +1,4 @@
-package org.stephanosbad.charmedChars.Commands
+package org.stephanosbad.charmedChars.commands
 
 import org.bukkit.Bukkit
 import org.bukkit.command.Command
@@ -7,10 +7,10 @@ import org.bukkit.command.CommandSender
 import org.bukkit.command.TabCompleter
 import org.bukkit.inventory.ItemStack
 import org.bukkit.util.StringUtil
-import org.stephanosbad.charmedChars.Items.BlockColor
-import org.stephanosbad.charmedChars.Items.LetterBlock
-import org.stephanosbad.charmedChars.Items.NonAlphaNumBlocks
-import org.stephanosbad.charmedChars.Items.NumericBlock
+import org.stephanosbad.charmedChars.items.BlockColor
+import org.stephanosbad.charmedChars.items.LetterBlock
+import org.stephanosbad.charmedChars.items.NonAlphaNumBlocks
+import org.stephanosbad.charmedChars.items.NumericBlock
 import java.lang.String
 import java.util.*
 import kotlin.Array
@@ -49,12 +49,12 @@ class CharBlock : CommandExecutor, TabCompleter {
             }
             if (dropStack == null) {
                 val isThere =
-                    Arrays.stream(LetterBlock.entries.toTypedArray()).filter({ it -> it.character == c }).findFirst()
+                    Arrays.stream(LetterBlock.entries.toTypedArray()).filter { it -> it.character == c }.findFirst()
                 if (!isThere.isEmpty) {
                     dropStack = isThere.get().itemStacks[blockColor]
                 } else {
                     val isThereNum =
-                        Arrays.stream(NumericBlock.entries.toTypedArray()).filter({ it -> it.c == c }).findFirst()
+                        Arrays.stream(NumericBlock.entries.toTypedArray()).filter { it -> it.c == c }.findFirst()
                     if (!isThereNum.isEmpty) dropStack = isThereNum.get().itemStacks[blockColor]
                 }
             }
@@ -77,17 +77,24 @@ class CharBlock : CommandExecutor, TabCompleter {
 
         if (args.isEmpty()) return null
 
+
         if (args.size == 1) {
-
-        }
-
-        if (args.size == 2) {
-            mainArg = args[0].lowercase(Locale.getDefault())
+            mainArg = args[0].lowercase()
             val onlinePlayers: MutableList<kotlin.String?> = ArrayList<kotlin.String?>()
             for (p in Bukkit.getOnlinePlayers()) {
                 onlinePlayers.add(p.name)
             }
             StringUtil.copyPartialMatches<MutableList<kotlin.String?>?>(mainArg, onlinePlayers, completions)
+        }
+
+        if (args.size == 2) {
+            val player = args[1].lowercase()
+            val colorMatches: MutableList<kotlin.String?> = ArrayList<kotlin.String?>()
+            for (c in BlockColor.entries)
+            {
+                colorMatches.add(c.name.lowercase())
+            }
+            StringUtil.copyPartialMatches<MutableList<kotlin.String?>?>(player, colorMatches, completions)
         }
 
         if (args.size == 3) {

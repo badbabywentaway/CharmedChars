@@ -1,4 +1,4 @@
-package org.stephanosbad.charmedChars.Utility
+package org.stephanosbad.charmedChars.utility
 
 /**
  * @param <T>

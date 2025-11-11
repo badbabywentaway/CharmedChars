@@ -1,4 +1,4 @@
-package org.stephanosbad.charmedChars.Utility
+package org.stephanosbad.charmedChars.utility
 
 import com.google.gson.Gson
 import org.stephanosbad.charmedChars.CharmedChars
@@ -12,7 +12,7 @@ class WordDict {
     /**
      *
      */
-    var Words: HashSet<String?> = HashSet<String?>()
+    var words: HashSet<String?> = HashSet<String?>()
 
     companion object {
         var singleton: WordDict? = null

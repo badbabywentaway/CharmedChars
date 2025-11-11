@@ -1,4 +1,4 @@
-package org.stephanosbad.charmedChars.Commands
+package org.stephanosbad.charmedChars.commands
 
 import kotlinx.coroutines.launch
 import net.kyori.adventure.text.Component
@@ -16,7 +16,7 @@ class ReloadCommand(private val plugin: CharmedChars) : CommandExecutor {
         label: String,
         args: Array<out String>
     ): Boolean {
-        if (!sender.hasPermission("myplugin.admin")) {
+        if (!sender.hasPermission("charmedChars.admin")) {
             sender.sendMessage(
                 Component.text("You don't have permission to use this command!")
                     .color(NamedTextColor.RED)

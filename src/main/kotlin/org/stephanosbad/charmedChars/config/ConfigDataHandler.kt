@@ -1,16 +1,13 @@
-package org.stephanosbad.charmedChars.Config
+package org.stephanosbad.charmedChars.config
 
 import org.bukkit.Bukkit
 import org.bukkit.Location
 import org.bukkit.Material
 import org.bukkit.configuration.file.YamlConfiguration
 import org.stephanosbad.charmedChars.CharmedChars
-import org.stephanosbad.charmedChars.Commands.CharBlock
-import org.stephanosbad.charmedChars.Utility.LocationPair
+import org.stephanosbad.charmedChars.utility.LocationPair
 import java.io.File
 import java.io.IOException
-import java.io.InputStream
-import java.util.List
 
 class ConfigDataHandler(
     /**
@@ -44,7 +41,7 @@ class ConfigDataHandler(
             createBlank()
         }
         configuration = YamlConfiguration.loadConfiguration(file!!)
-        val defaultStream: InputStream? = plugin.getResource(CONFIG_FILE_NAME)
+
     }
 
     /**
@@ -72,7 +69,7 @@ class ConfigDataHandler(
      */
     @Throws(IOException::class)
     fun writeToYaml() {
-        val loc: LocationPair = SampleLocationPair()
+        val loc: LocationPair = sampleLocationPair()
         configuration!!.set("exclude.from", loc.first)
         configuration!!.set("exclude.to", loc.second)
 
@@ -99,7 +96,7 @@ class ConfigDataHandler(
         configuration!!.save(file!!)
     }
 
-    fun SampleLocationPair(): LocationPair {
+    fun sampleLocationPair(): LocationPair {
         return LocationPair(
             Location(plugin.server.getWorld("world"), -10.0, 0.0, -10.0),
             Location(plugin.server.getWorld("world"), 10.0, 0.0, 10.0)

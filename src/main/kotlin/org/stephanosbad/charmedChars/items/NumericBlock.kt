@@ -1,8 +1,7 @@
-package org.stephanosbad.charmedChars.Items
+package org.stephanosbad.charmedChars.items
 
 import org.bukkit.inventory.ItemStack
-import org.stephanosbad.charmedChars.Items.BlockColor
-import org.stephanosbad.charmedChars.Block.CustomBlockEngine
+import org.stephanosbad.charmedChars.block.CustomBlockEngine
 
 enum class NumericBlock(val c: Char) {
     BLOCK_0('0'),

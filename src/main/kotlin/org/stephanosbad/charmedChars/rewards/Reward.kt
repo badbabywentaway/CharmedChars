@@ -1,4 +1,4 @@
-package org.stephanosbad.charmedChars.Rewards
+package org.stephanosbad.charmedChars.rewards
 
 abstract class Reward
 /**

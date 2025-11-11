@@ -7,20 +7,20 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import net.kyori.adventure.text.Component
 import net.kyori.adventure.text.format.NamedTextColor
-import org.stephanosbad.charmedChars.Commands.CharBlock
-import org.stephanosbad.charmedChars.Config.ConfigDataHandler
-import org.stephanosbad.charmedChars.Items.ItemManager
-import org.stephanosbad.charmedChars.Utility.WordDict
+import org.stephanosbad.charmedChars.commands.CharBlock
+import org.stephanosbad.charmedChars.config.ConfigDataHandler
+import org.stephanosbad.charmedChars.items.ItemManager
+import org.stephanosbad.charmedChars.utility.WordDict
 import org.bukkit.plugin.java.JavaPlugin
 import org.bukkit.Bukkit
-import org.stephanosbad.charmedChars.Block.CustomBlockEngine
+import org.stephanosbad.charmedChars.block.CustomBlockEngine
 import org.stephanosbad.charmedChars.listeners.CustomBlockListener
-import org.stephanosbad.charmedChars.Block.CustomBlocks
-import org.stephanosbad.charmedChars.Commands.BlocksCommand
-import org.stephanosbad.charmedChars.Commands.ExampleCommand
-import org.stephanosbad.charmedChars.Commands.ReloadCommand
-import org.stephanosbad.charmedChars.Commands.TextureCommand
-import org.stephanosbad.charmedChars.Utility.ConfigManager
+import org.stephanosbad.charmedChars.block.CustomBlocks
+import org.stephanosbad.charmedChars.commands.BlocksCommand
+import org.stephanosbad.charmedChars.commands.ExampleCommand
+import org.stephanosbad.charmedChars.commands.ReloadCommand
+import org.stephanosbad.charmedChars.commands.TextureCommand
+import org.stephanosbad.charmedChars.utility.ConfigManager
 import org.stephanosbad.charmedChars.graphics.TextureManager
 import org.stephanosbad.charmedChars.listeners.ExampleListener
 import java.io.IOException
@@ -197,23 +197,6 @@ class CharmedChars : JavaPlugin(), CoroutineScope {
         )
         println("Minecraft Letter/Number Block Plugin Stopping")
     }
-
-    /**
-     * Set up economy plugin (Vault alone as of now)
-     * @return Successfulness
-     */
-    /*private fun setupEconomy(): Boolean {
-        if (getServer().getPluginManager().getPlugin("Vault") == null) {
-            return false
-        }
-        val rsp: RegisteredServiceProvider<Economy?>? =
-            getServer().getServicesManager().getRegistration<Economy?>(Economy::class.java)
-        if (rsp == null) {
-            return false
-        }
-        econ = rsp.getProvider()
-        return econ != null
-    }*/
 
     fun reload() {
         launch {

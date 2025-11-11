@@ -1,8 +1,7 @@
-package org.stephanosbad.charmedChars.Items
+package org.stephanosbad.charmedChars.items
 
 import org.bukkit.inventory.ItemStack
-import org.stephanosbad.charmedChars.Items.BlockColor
-import org.stephanosbad.charmedChars.Block.CustomBlockEngine
+import org.stephanosbad.charmedChars.block.CustomBlockEngine
 import java.util.*
 
 enum class LetterBlock(
@@ -14,8 +13,9 @@ enum class LetterBlock(
      * Score facter of letter
      */
     val frequencyFactor: Double,
+
     /**
-     * Oraxen Noteblock variation
+     *  Noteblock variation
      */
     val customVariation: Int
 ) {
@@ -83,7 +83,7 @@ enum class LetterBlock(
      * Constructor
      * @param frequencyPercent - Frequency of letter found in real life via info received by Oxford publication.
      * @param frequencyFactor - Score facter of letter
-     * @param customVariation - Oraxen noteblock variation
+     * @param customVariation - noteblock variation
      */
     init {
         //letterBlockId?.let {

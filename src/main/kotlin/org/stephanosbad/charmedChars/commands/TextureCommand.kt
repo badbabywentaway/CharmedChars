@@ -1,4 +1,4 @@
-package org.stephanosbad.charmedChars.Commands
+package org.stephanosbad.charmedChars.commands
 
 import net.kyori.adventure.text.Component
 import net.kyori.adventure.text.format.NamedTextColor
@@ -20,7 +20,7 @@ class TextureCommand(private val plugin: CharmedChars) : CommandExecutor, TabCom
         label: String,
         args: Array<out String>
     ): Boolean {
-        if (!sender.hasPermission("myplugin.textures")) {
+        if (!sender.hasPermission("charmedChars.textures")) {
             sender.sendMessage(
                 Component.text("You don't have permission to use texture commands!")
                     .color(NamedTextColor.RED)
@@ -43,7 +43,7 @@ class TextureCommand(private val plugin: CharmedChars) : CommandExecutor, TabCom
             }
 
             "regenerate", "regen" -> {
-                if (!sender.hasPermission("myplugin.textures.admin")) {
+                if (!sender.hasPermission("charmedChars.textures.admin")) {
                     sender.sendMessage(
                         Component.text("You don't have permission to regenerate resource packs!")
                             .color(NamedTextColor.RED)
@@ -106,7 +106,7 @@ class TextureCommand(private val plugin: CharmedChars) : CommandExecutor, TabCom
                         .color(NamedTextColor.YELLOW)
                 )
 
-                if (sender.hasPermission("myplugin.textures.admin")) {
+                if (sender.hasPermission("charmedChars.textures.admin")) {
                     sender.sendMessage(
                         Component.text("  /textures regenerate - Rebuild resource pack")
                             .color(NamedTextColor.AQUA)
@@ -141,7 +141,7 @@ class TextureCommand(private val plugin: CharmedChars) : CommandExecutor, TabCom
         return when (args.size) {
             1 -> {
                 val commands = mutableListOf("download", "status", "help")
-                if (sender.hasPermission("myplugin.textures.admin")) {
+                if (sender.hasPermission("charmedChars.textures.admin")) {
                     commands.add("regenerate")
                 }
                 commands.filter { it.startsWith(args[0], ignoreCase = true) }

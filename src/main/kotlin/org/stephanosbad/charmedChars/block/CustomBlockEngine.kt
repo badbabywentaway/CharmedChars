@@ -1,4 +1,4 @@
-package org.stephanosbad.charmedChars.Block
+package org.stephanosbad.charmedChars.block
 
 import net.kyori.adventure.text.Component
 import net.kyori.adventure.text.format.NamedTextColor
@@ -7,10 +7,10 @@ import org.bukkit.NamespacedKey
 import org.bukkit.block.Block
 import org.bukkit.inventory.ItemStack
 import org.stephanosbad.charmedChars.CharmedChars
-import org.stephanosbad.charmedChars.Items.BlockColor
-import org.stephanosbad.charmedChars.Items.LetterBlock
-import org.stephanosbad.charmedChars.Items.NonAlphaNumBlocks
-import org.stephanosbad.charmedChars.Items.NumericBlock
+import org.stephanosbad.charmedChars.items.BlockColor
+import org.stephanosbad.charmedChars.items.LetterBlock
+import org.stephanosbad.charmedChars.items.NonAlphaNumBlocks
+import org.stephanosbad.charmedChars.items.NumericBlock
 
 
 class CustomBlockEngine(private val plugin: CharmedChars, var initialBlockCode: Int) {

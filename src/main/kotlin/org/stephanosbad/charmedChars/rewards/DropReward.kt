@@ -1,10 +1,10 @@
-package org.stephanosbad.charmedChars.Rewards
+package org.stephanosbad.charmedChars.rewards
 
 import org.bukkit.Location
 import org.bukkit.Material
 import org.bukkit.entity.Player
 import org.bukkit.inventory.ItemStack
-import org.stephanosbad.charmedChars.Utility.ColorPrint
+import org.stephanosbad.charmedChars.utility.ColorPrint
 import kotlin.math.roundToInt
 
 class DropReward(
