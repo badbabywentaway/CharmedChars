@@ -7,6 +7,7 @@ import org.bukkit.command.CommandSender
 import org.bukkit.command.TabCompleter
 import org.bukkit.inventory.ItemStack
 import org.bukkit.util.StringUtil
+import org.stephanosbad.charmedChars.Items.BlockColor
 import org.stephanosbad.charmedChars.Items.LetterBlock
 import org.stephanosbad.charmedChars.Items.NonAlphaNumBlocks
 import org.stephanosbad.charmedChars.Items.NumericBlock
@@ -19,7 +20,7 @@ class CharBlock : CommandExecutor, TabCompleter {
     override fun onCommand(sender: CommandSender, command: Command, label: kotlin.String, args: Array<out kotlin.String>): Boolean {
         if (sender !== sender.server.consoleSender) return true
 
-        if (args.size < 2) {
+        if (args.size < 3) {
             return true
         }
 
@@ -30,24 +31,31 @@ class CharBlock : CommandExecutor, TabCompleter {
             return true
         }
 
-        val characterString = args[1].lowercase()
+        val colorName = args[1]
+        val blockColor =  BlockColor.entries.firstOrNull { colorName.lowercase() ==  it.name.lowercase()}
+        if(blockColor == null)
+        {
+            return true
+        }
+
+        val characterString = args[2].lowercase()
 
         for (c in characterString.toCharArray()) {
             var dropStack: ItemStack? = null
             for (test in NonAlphaNumBlocks.entries) {
                 if (test.charVal == c) {
-                    dropStack = test.itemStack
+                    dropStack = test.itemStacks[blockColor]
                 }
             }
             if (dropStack == null) {
                 val isThere =
                     Arrays.stream(LetterBlock.entries.toTypedArray()).filter({ it -> it.character == c }).findFirst()
                 if (!isThere.isEmpty) {
-                    dropStack = isThere.get().itemStacks
+                    dropStack = isThere.get().itemStacks[blockColor]
                 } else {
                     val isThereNum =
                         Arrays.stream(NumericBlock.entries.toTypedArray()).filter({ it -> it.c == c }).findFirst()
-                    if (!isThereNum.isEmpty) dropStack = isThereNum.get().itemStack
+                    if (!isThereNum.isEmpty) dropStack = isThereNum.get().itemStacks[blockColor]
                 }
             }
             if (givePlayer.location.world != null) {
@@ -70,6 +78,10 @@ class CharBlock : CommandExecutor, TabCompleter {
         if (args.isEmpty()) return null
 
         if (args.size == 1) {
+
+        }
+
+        if (args.size == 2) {
             mainArg = args[0].lowercase(Locale.getDefault())
             val onlinePlayers: MutableList<kotlin.String?> = ArrayList<kotlin.String?>()
             for (p in Bukkit.getOnlinePlayers()) {
@@ -78,7 +90,7 @@ class CharBlock : CommandExecutor, TabCompleter {
             StringUtil.copyPartialMatches<MutableList<kotlin.String?>?>(mainArg, onlinePlayers, completions)
         }
 
-        if (args.size == 2) {
+        if (args.size == 3) {
             val characterMatches: MutableList<kotlin.String?> = ArrayList<kotlin.String?>()
             for (letter in LetterBlock.entries) {
                 characterMatches.add(String.valueOf(letter.character))

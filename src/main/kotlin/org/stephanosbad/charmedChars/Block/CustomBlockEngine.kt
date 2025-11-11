@@ -7,6 +7,7 @@ import org.bukkit.NamespacedKey
 import org.bukkit.block.Block
 import org.bukkit.inventory.ItemStack
 import org.stephanosbad.charmedChars.CharmedChars
+import org.stephanosbad.charmedChars.Items.BlockColor
 import org.stephanosbad.charmedChars.Items.LetterBlock
 import org.stephanosbad.charmedChars.Items.NonAlphaNumBlocks
 import org.stephanosbad.charmedChars.Items.NumericBlock
@@ -17,32 +18,32 @@ class CustomBlockEngine(private val plugin: CharmedChars, var initialBlockCode: 
     init{
         globalPlugin = plugin
     }
-    val letterBlockKeys = buildMap<Pair<BlockColor, BlockLetter>, Pair<NamespacedKey, Int>> {
+    val letterBlockKeys = buildMap<Pair<BlockColor, LetterBlock>, Pair<NamespacedKey, Int>> {
 
         BlockColor.entries.forEach {
             var color = it
-            BlockLetter.entries.forEach {
-                put(Pair(color, it), Pair(NamespacedKey(plugin, "${color.directoryName}_${it.filenameBase}"), initialBlockCode++))
+            LetterBlock.entries.forEach {
+                put(Pair(color, it), Pair(NamespacedKey(plugin, "${color.directoryName}_${it.name.lowercase()}"), initialBlockCode++))
             }
         }
     }
 
-    val numberBlockKeys = buildMap<Pair<BlockColor, BlockNumber>, Pair<NamespacedKey, Int>> {
+    val numberBlockKeys = buildMap<Pair<BlockColor, NumericBlock>, Pair<NamespacedKey, Int>> {
 
         BlockColor.entries.forEach {
             var color = it
-            BlockNumber.entries.forEach {
-                put(Pair(color, it), Pair(NamespacedKey(plugin, "${color.directoryName}_${it.filenameBase}"), initialBlockCode++))
+            NumericBlock.entries.forEach {
+                put(Pair(color, it), Pair(NamespacedKey(plugin, "${color.directoryName}_${it.c}"), initialBlockCode++))
             }
         }
     }
 
-    val characterBlockKeys = buildMap<Pair<BlockColor, BlockCharacter>, Pair<NamespacedKey, Int>> {
+    val characterBlockKeys = buildMap<Pair<BlockColor, NonAlphaNumBlocks>, Pair<NamespacedKey, Int>> {
 
         BlockColor.entries.forEach {
             var color = it
-            BlockCharacter.entries.forEach {
-                put(Pair(color, it), Pair(NamespacedKey(plugin, "${color.directoryName}_${it.filenameBase}"), initialBlockCode++))
+            NonAlphaNumBlocks.entries.forEach {
+                put(Pair(color, it), Pair(NamespacedKey(plugin, "${color.directoryName}_${it.nonAlphaNumBlockName}"), initialBlockCode++))
             }
         }
     }
@@ -65,8 +66,8 @@ class CustomBlockEngine(private val plugin: CharmedChars, var initialBlockCode: 
         fun getInstance(color: BlockColor, letterBlock: LetterBlock): CustomBlock? {
 
 
-            var blockLetter = BlockLetter.entries.firstOrNull { it.filenameBase == letterBlock.character.toString() }
-            var letterBlockKey = globalPlugin?.customBlockEngine?.letterBlockKeys[Pair(color, blockLetter )]
+            //var blockLetter = BlockLetter.entries.firstOrNull { it.filenameBase == letterBlock.character.toString() }
+            var letterBlockKey = globalPlugin?.customBlockEngine?.letterBlockKeys[Pair(color, letterBlock )]
             letterBlockKey?.let{
                 val item = ItemStack(Material.NOTE_BLOCK)
                 val meta = item.itemMeta
@@ -91,8 +92,8 @@ class CustomBlockEngine(private val plugin: CharmedChars, var initialBlockCode: 
         }
 
         fun getInstance(color: BlockColor, nonAlphaNumeric: NonAlphaNumBlocks): CustomBlock?{
-            var blockLetter = BlockCharacter.entries.firstOrNull { it.filenameBase == nonAlphaNumeric.nonAlphaNumBlockName }
-            var letterBlockKey = globalPlugin?.customBlockEngine?.characterBlockKeys[Pair(color, blockLetter )]
+            //var blockLetter = NonAlphaNumBlocks.entries.firstOrNull { it.filenameBase == nonAlphaNumeric.nonAlphaNumBlockName }
+            var letterBlockKey = globalPlugin?.customBlockEngine?.characterBlockKeys[Pair(color, nonAlphaNumeric )]
             letterBlockKey?.let {
                 val item = ItemStack(Material.NOTE_BLOCK)
                 val meta = item.itemMeta
@@ -116,8 +117,8 @@ class CustomBlockEngine(private val plugin: CharmedChars, var initialBlockCode: 
         }
 
         fun getInstance(color: BlockColor, numericBlock: NumericBlock): CustomBlock?{
-            var blockNumber = BlockNumber.entries.firstOrNull { it.filenameBase == numericBlock.name }
-            var numberBlockKey = globalPlugin?.customBlockEngine?.numberBlockKeys[Pair(color, blockNumber )]
+            //var blockNumber = BlockNumber.entries.firstOrNull { it.filenameBase == numericBlock.name }
+            var numberBlockKey = globalPlugin?.customBlockEngine?.numberBlockKeys[Pair(color, numericBlock )]
             numberBlockKey?.let {
                 val item = ItemStack(Material.NOTE_BLOCK)
                 val meta = item.itemMeta

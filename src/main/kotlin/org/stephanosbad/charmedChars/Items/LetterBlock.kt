@@ -1,8 +1,7 @@
 package org.stephanosbad.charmedChars.Items
 
 import org.bukkit.inventory.ItemStack
-import org.stephanosbad.charmedChars.Block.BlockColor
-import org.stephanosbad.charmedChars.Block.BlockLetter
+import org.stephanosbad.charmedChars.Items.BlockColor
 import org.stephanosbad.charmedChars.Block.CustomBlockEngine
 import java.util.*
 
@@ -69,7 +68,7 @@ enum class LetterBlock(
     /**
      * Oraxen ID
      */
-    val letterBlockId  = BlockLetter.entries.firstOrNull{ it.filenameBase == this.character.lowercaseChar().toString()}
+    //val letterBlockId  = BlockLetter.entries.firstOrNull{ it.filenameBase == this.character.lowercaseChar().toString()}
 
     /**
      * Determine if letter is hit by randomizer
@@ -87,11 +86,11 @@ enum class LetterBlock(
      * @param customVariation - Oraxen noteblock variation
      */
     init {
-        letterBlockId?.let {
+        //letterBlockId?.let {
             for (color in BlockColor.entries) {
                 this.itemStacks[color] = CustomBlockEngine.getInstance(color, this)!!.itemStack!!
             }
-        }
+        //}
     }
 
     companion object {
