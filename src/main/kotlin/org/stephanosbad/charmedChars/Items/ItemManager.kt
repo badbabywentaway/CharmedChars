@@ -210,11 +210,13 @@ class ItemManager @JvmOverloads constructor(localPlugin: CharmedChars? = null) :
     private fun randomNumAndCharacter(): ItemStack? {
         if (characterBlocksAvailableInNether == null) {
             characterBlocksAvailableInNether = ArrayList<ItemStack?>()
-            for (x in NumericBlock.entries) {
-                characterBlocksAvailableInNether!!.add(x.itemStack)
-            }
-            for (x in NonAlphaNumBlocks.entries) {
-                characterBlocksAvailableInNether!!.add(x.itemStack)
+            for (c in BlockColor.entries) {
+                for (x in NumericBlock.entries) {
+                    characterBlocksAvailableInNether!!.add(x.itemStacks[c])
+                }
+                for (x in NonAlphaNumBlocks.entries) {
+                    characterBlocksAvailableInNether!!.add(x.itemStacks[c])
+                }
             }
         }
 
