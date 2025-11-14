@@ -30,7 +30,7 @@ class CharmedChars : JavaPlugin(), CoroutineScope {
 
     private val job = SupervisorJob()
     override val coroutineContext: CoroutineContext
-        get() = Dispatchers.Main + job
+        get() = Dispatchers.Default + job
 
     lateinit var configManager: ConfigManager
         private set
