@@ -55,7 +55,7 @@ class CustomBlockEngine(private val plugin: CharmedChars, var initialBlockCode: 
             var meta = block?.drops?.firstOrNull()?.itemMeta
             var localBlockEngine = globalPlugin?.customBlockEngine
 
-            if(meta != null && localBlockEngine != null)
+            if(meta != null && localBlockEngine != null && meta.hasCustomModelData())
             {
                 var letterBlockKey = LetterBlock.entries.firstOrNull { it.customVariation == meta.customModelData }
                 return letterBlockKey?.let { CustomBlock(it) }
