@@ -190,19 +190,25 @@ class ItemManager @JvmOverloads constructor(localPlugin: CharmedChars? = null) :
         val block =
             LetterBlock.randomPickBlock()
         val player = e.player
+
+        if (block == null) {
+            plugin.logger.warning("Failed to generate letter block - randomPickBlock() returned null")
+            plugin.logger.warning("This likely means CustomBlockEngine.getInstance() is returning null")
+            return
+        }
+
         if (protectedSpot(player, e.getBlock().location, e.getBlock())) {
             player.sendMessage("Protected.")
             return
         }
-        if (block != null) {
-            e.isCancelled = true
-            e.getBlock().type = Material.AIR
-            if (listForNumberDrops.containsKey(oldMaterial)) {
-                player.world.dropItemNaturally(e.getBlock().location, randomNumAndCharacter()!!)
-            }
-            player.world.dropItemNaturally(e.getBlock().location, block)
-            player.world.dropItemNaturally(e.getBlock().location, ItemStack(material, 1))
+
+        e.isCancelled = true
+        e.getBlock().type = Material.AIR
+        if (listForNumberDrops.containsKey(oldMaterial)) {
+            player.world.dropItemNaturally(e.getBlock().location, randomNumAndCharacter()!!)
         }
+        player.world.dropItemNaturally(e.getBlock().location, block)
+        player.world.dropItemNaturally(e.getBlock().location, ItemStack(material, 1))
     }
 
     private fun randomNumAndCharacter(): ItemStack? {

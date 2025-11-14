@@ -19,7 +19,11 @@ enum class NumericBlock(val c: Char) {
     private val _itemStacks: MutableMap<BlockColor, ItemStack?> by lazy {
         mutableMapOf<BlockColor, ItemStack?>().apply {
             for (color in BlockColor.entries) {
-                this[color] = CustomBlockEngine.getInstance(color, this@NumericBlock)?.itemStack
+                val customBlock = CustomBlockEngine.getInstance(color, this@NumericBlock)
+                if (customBlock == null) {
+                    System.err.println("WARNING: CustomBlockEngine.getInstance returned null for ${color.name} ${this@NumericBlock.c}")
+                }
+                this[color] = customBlock?.itemStack
             }
         }
     }

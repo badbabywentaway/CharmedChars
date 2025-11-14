@@ -56,7 +56,13 @@ enum class LetterBlock(
     private val _itemStacks: MutableMap<BlockColor, ItemStack?> by lazy {
         mutableMapOf<BlockColor, ItemStack?>().apply {
             for (color in BlockColor.entries) {
-                this[color] = CustomBlockEngine.getInstance(color, this@LetterBlock)?.itemStack
+                val customBlock = CustomBlockEngine.getInstance(color, this@LetterBlock)
+                if (customBlock == null) {
+                    System.err.println("WARNING: CustomBlockEngine.getInstance returned null for ${color.name} ${this@LetterBlock.character}")
+                    System.err.println("globalPlugin = ${CustomBlockEngine.globalPlugin}")
+                    System.err.println("customBlockEngine = ${CustomBlockEngine.globalPlugin?.customBlockEngine}")
+                }
+                this[color] = customBlock?.itemStack
             }
         }
     }
