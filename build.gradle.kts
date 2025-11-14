@@ -31,11 +31,15 @@ dependencies {
     testImplementation("org.junit.jupiter:junit-jupiter:5.11.4")
 }
     tasks.shadowJar {
-        archiveBaseName.set("MyMinecraftPlugin")
+        archiveBaseName.set("CharmedChars")
         archiveClassifier.set("")
-        relocate("kotlin", "com.yourname.myplugin.kotlin")
-        relocate("kotlinx.coroutines", "com.yourname.myplugin.kotlinx.coroutines")
+        archiveVersion.set(project.version.toString())
+        relocate("kotlin", "org.stephanosbad.charmedchars.kotlin")
+        relocate("kotlinx.coroutines", "org.stephanosbad.charmedchars.kotlinx.coroutines")
         minimize()
+
+        // Output location
+        destinationDirectory.set(file("${project.buildDir}/libs"))
     }
 
     tasks.build { dependsOn(tasks.shadowJar) }
