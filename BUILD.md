@@ -4,37 +4,69 @@
 
 ### Quick Build (Recommended)
 
+#### Linux / macOS / WSL
+
 Use the provided build script:
 
 ```bash
 ./build-plugin.sh
 ```
 
-This script will:
+Or use Make:
+
+```bash
+make build
+```
+
+#### Windows Command Prompt
+
+```cmd
+build-plugin.bat
+```
+
+#### Windows PowerShell
+
+```powershell
+.\build-plugin.ps1
+```
+
+These scripts will:
 1. Clean previous builds
 2. Compile and package the plugin
 3. Show the location of the generated JAR file
 
 ### Manual Gradle Commands
 
-#### Build the plugin JAR:
+#### Linux / macOS / WSL
+
 ```bash
+# Build the plugin JAR
 ./gradlew shadowJar
-```
 
-#### Clean and build:
-```bash
+# Clean and build
 ./gradlew clean shadowJar
-```
 
-#### Build with tests:
-```bash
+# Build with tests
 ./gradlew clean build
+
+# Build without daemon (CI/CD)
+./gradlew shadowJar --no-daemon
 ```
 
-#### Build without daemon (CI/CD):
-```bash
-./gradlew shadowJar --no-daemon
+#### Windows
+
+```cmd
+# Build the plugin JAR
+gradlew.bat shadowJar
+
+# Clean and build
+gradlew.bat clean shadowJar
+
+# Build with tests
+gradlew.bat clean build
+
+# Build without daemon (CI/CD)
+gradlew.bat shadowJar --no-daemon
 ```
 
 ## Output Location
@@ -60,8 +92,14 @@ The build process uses the Shadow plugin to:
 
 After building, copy the JAR to your PaperMC server:
 
+### Linux / macOS / WSL
 ```bash
 cp build/libs/CharmedChars-1.0.0.jar /path/to/server/plugins/
+```
+
+### Windows
+```cmd
+copy build\libs\CharmedChars-1.0.0.jar C:\path\to\server\plugins\
 ```
 
 Then restart your server.
@@ -76,8 +114,14 @@ The plugin requires:
 
 For development with auto-reload:
 
+### Linux / macOS / WSL
 ```bash
 ./gradlew runServer
 ```
 
-This will start a test server with the plugin installed.
+### Windows
+```cmd
+gradlew.bat runServer
+```
+
+This will start a test server with the plugin installed at `run/` directory.
