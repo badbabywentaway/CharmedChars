@@ -37,6 +37,12 @@ class TextureManager(private val plugin: CharmedChars) {
         const val CRYSTAL_BLOCK_TEXTURE = "crystal_block"
     }
 
+    /**
+     * Initialize the texture manager and generate the resource pack
+     *
+     * DEPENDENCY REQUIREMENT: CustomBlockEngine must be initialized before calling this method.
+     * The resource pack generation reads custom model data IDs from CustomBlockEngine.
+     */
     fun initialize() {
         createDirectories()
         generateResourcePack()
@@ -148,10 +154,20 @@ class TextureManager(private val plugin: CharmedChars) {
 
     /**
      * Generate note_block.json with custom model data overrides for all our character blocks
+     *
+     * IMPORTANT: This method requires CustomBlockEngine to be initialized first.
+     * CustomBlockEngine must be initialized before calling textureManager.initialize()
      */
     private fun generateNoteBlockItemModel() {
         val noteBlockFile = File(itemModelsDir, "note_block.json")
         val overrides = mutableListOf<String>()
+
+        // Safety check: Ensure CustomBlockEngine is initialized
+        if (!plugin::customBlockEngine.isInitialized) {
+            plugin.logger.severe("CustomBlockEngine not initialized! Cannot generate note_block.json")
+            plugin.logger.severe("Make sure CustomBlockEngine is created before calling textureManager.initialize()")
+            return
+        }
 
         val customBlockEngine = plugin.customBlockEngine
         var modelDataCounter = 0

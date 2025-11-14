@@ -116,19 +116,22 @@ class CharmedChars : JavaPlugin(), CoroutineScope {
         configManager = ConfigManager(this)
         configManager.loadConfig()
 
-        // Initialize texture manager
+        // Initialize texture manager (constructor only, not initialized yet)
         textureManager = TextureManager(this)
 
         // Initialize custom blocks system
         customBlocks = CustomBlocks(this)
         customBlocks.registerCustomBlocks()
 
+        // IMPORTANT: CustomBlockEngine must be initialized BEFORE textureManager.initialize()
+        // TextureManager depends on CustomBlockEngine for generating note_block.json
         customBlockEngine = CustomBlockEngine(this, 1100)
 
         // Initialize textures system
+        // Note: Runs asynchronously to avoid blocking server startup, but CustomBlockEngine
+        // is already initialized synchronously above, so no race condition exists
         if (configManager.customTexturesEnabled) {
             launch {
-                delay(2000) // Wait for other systems to load
                 textureManager.initialize()
             }
         }
