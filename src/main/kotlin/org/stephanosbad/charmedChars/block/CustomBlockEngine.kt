@@ -111,13 +111,21 @@ class CustomBlockEngine(private val plugin: CharmedChars, var initialBlockCode: 
 
         fun getInstance(color: BlockColor, letterBlock: LetterBlock): CustomBlock? {
 
+            System.err.println("DEBUG getInstance: Creating letter block for ${color.name} ${letterBlock.character}")
+            System.err.println("DEBUG getInstance: globalPlugin = ${globalPlugin}")
+            System.err.println("DEBUG getInstance: customBlockEngine = ${globalPlugin?.customBlockEngine}")
 
             //var blockLetter = BlockLetter.entries.firstOrNull { it.filenameBase == letterBlock.character.toString() }
             var letterBlockKey = globalPlugin?.customBlockEngine?.letterBlockKeys[Pair(color, letterBlock )]
+
+            System.err.println("DEBUG getInstance: letterBlockKey = ${letterBlockKey}")
+
             letterBlockKey?.let{
+                System.err.println("DEBUG getInstance: Creating ItemStack with NOTE_BLOCK material")
                 val item = ItemStack(Material.NOTE_BLOCK)
                 val meta = item.itemMeta
 
+                System.err.println("DEBUG getInstance: Setting display name and custom model data")
                 meta.displayName(
                     Component.text("${color.name} ${letterBlock.character} Block")
                         .color(when(color){
@@ -127,12 +135,14 @@ class CustomBlockEngine(private val plugin: CharmedChars, var initialBlockCode: 
                         })
                 )
                 meta.setCustomModelData(letterBlockKey.second)
+                System.err.println("DEBUG getInstance: Custom model data set to ${letterBlockKey.second}")
                 item.itemMeta = meta
 
+                System.err.println("DEBUG getInstance: Successfully created CustomBlock")
                 return CustomBlock(letterBlock, item)
             }
 
-
+            System.err.println("ERROR getInstance: letterBlockKey was null, returning null!")
             return null
 
         }

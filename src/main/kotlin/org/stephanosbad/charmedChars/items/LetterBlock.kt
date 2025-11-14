@@ -129,7 +129,29 @@ enum class LetterBlock(
          * @return Item stack of single letter block
          */
         fun randomPickBlock(): ItemStack? {
-            return randomPick()!!.itemStacks[BlockColor.getRand()]
+            val pickedLetter = randomPick()
+            val pickedColor = BlockColor.getRand()
+
+            System.err.println("DEBUG randomPickBlock: Picked letter = ${pickedLetter?.character}, color = ${pickedColor?.name}")
+
+            if (pickedLetter == null) {
+                System.err.println("ERROR: randomPick() returned null!")
+                return null
+            }
+
+            val itemStack = pickedLetter.itemStacks[pickedColor]
+
+            if (itemStack == null) {
+                System.err.println("ERROR: itemStacks[${pickedColor?.name}] returned null for letter ${pickedLetter.character}")
+                System.err.println("Available colors in itemStacks: ${pickedLetter.itemStacks.keys}")
+            } else {
+                System.err.println("DEBUG: Successfully got itemStack - type: ${itemStack.type}, hasItemMeta: ${itemStack.hasItemMeta()}")
+                if (itemStack.hasItemMeta()) {
+                    System.err.println("DEBUG: ItemMeta customModelData: ${itemStack.itemMeta?.customModelData}")
+                }
+            }
+
+            return itemStack
         }
     }
 }

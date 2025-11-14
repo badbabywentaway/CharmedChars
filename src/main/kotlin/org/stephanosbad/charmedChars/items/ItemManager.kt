@@ -138,26 +138,31 @@ class ItemManager @JvmOverloads constructor(localPlugin: CharmedChars? = null) :
     @EventHandler
     fun onBreakWoodOrLetter(e: BlockBreakEvent) {
         val player = e.player
-        player.inventory.itemInMainHand
-        player.inventory.itemInMainHand.enchantments
+        val hand = player.inventory.itemInMainHand
+        val material = e.getBlock().blockData.material
 
-        if (!(player.inventory.itemInMainHand.containsEnchantment(Enchantment.SILK_TOUCH))) {
+        plugin.logger.info("onBreakWoodOrLetter: Player ${player.name} broke ${material} at ${e.block.location}")
+        plugin.logger.info("Tool in hand: ${hand.type}, Has silk touch: ${hand.containsEnchantment(Enchantment.SILK_TOUCH)}")
+
+        if (!(hand.containsEnchantment(Enchantment.SILK_TOUCH))) {
             //If there is no silk touch on it
 
-            val material = e.getBlock().blockData.material
             if (list.containsKey(material)) {
-                val hand = e.player.inventory.itemInMainHand
-
+                plugin.logger.info("Material $material is in wood list - checking for gold tool")
 
                 //Must be gold item in hand
                 if (hand.itemMeta == null) {
+                    plugin.logger.info("No ItemMeta on tool, returning")
                     return
                 }
                 if (!hand.type.name.lowercase().contains("gold") &&
                     true != hand.itemMeta.displayName()?.examinableName()?.lowercase()?.contains("gold")
                 ) {
+                    plugin.logger.info("Tool is not gold (${hand.type.name}), returning")
                     return
                 }
+
+                plugin.logger.info("Gold tool detected!")
 
                 var chance = .03
                 if (hand.containsEnchantment(Enchantment.LOOTING)) {
@@ -169,14 +174,22 @@ class ItemManager @JvmOverloads constructor(localPlugin: CharmedChars? = null) :
                     }
                 }
 
+                plugin.logger.info("Drop chance: $chance (${chance * 100}%)")
+
                 if (Math.random() < chance) {
+                    plugin.logger.info("RNG SUCCESS! Calling woodBlockBreak()")
                     //check wood
                     woodBlockBreak(e, list.get(material)!!, material)
+                } else {
+                    plugin.logger.info("RNG failed, no letter block drop this time")
                 }
             } else {
+                plugin.logger.info("Material $material not in wood list - checking if it's a letter block")
                 //check letter
                 letterBlockBreak(e)
             }
+        } else {
+            plugin.logger.info("Silk touch detected, skipping letter block logic")
         }
     }
 
@@ -187,28 +200,60 @@ class ItemManager @JvmOverloads constructor(localPlugin: CharmedChars? = null) :
      * @param oldMaterial - Old material of block
      */
     private fun woodBlockBreak(e: BlockBreakEvent, material: Material, oldMaterial: Material?) {
+        plugin.logger.info("========== WOOD BLOCK BREAK DEBUG ==========")
+        plugin.logger.info("Breaking log at: ${e.block.location}")
+        plugin.logger.info("Old material: $oldMaterial")
+        plugin.logger.info("Will be replaced with: $material")
+
         val block =
             LetterBlock.randomPickBlock()
         val player = e.player
 
         if (block == null) {
-            plugin.logger.warning("Failed to generate letter block - randomPickBlock() returned null")
+            plugin.logger.warning("CRITICAL: Failed to generate letter block - randomPickBlock() returned null")
             plugin.logger.warning("This likely means CustomBlockEngine.getInstance() is returning null")
             return
         }
 
+        plugin.logger.info("Letter block generated successfully")
+        plugin.logger.info("Block type: ${block.type}")
+        plugin.logger.info("Block amount: ${block.amount}")
+        plugin.logger.info("Has ItemMeta: ${block.hasItemMeta()}")
+
+        if (block.hasItemMeta()) {
+            val meta = block.itemMeta
+            plugin.logger.info("ItemMeta display name: ${meta?.displayName()}")
+            plugin.logger.info("ItemMeta has custom model data: ${meta?.hasCustomModelData()}")
+            if (meta?.hasCustomModelData() == true) {
+                plugin.logger.info("Custom model data value: ${meta.customModelData}")
+            } else {
+                plugin.logger.warning("WARNING: Letter block has no custom model data!")
+            }
+        } else {
+            plugin.logger.warning("WARNING: Letter block has no ItemMeta!")
+        }
+
         if (protectedSpot(player, e.getBlock().location, e.getBlock())) {
             player.sendMessage("Protected.")
+            plugin.logger.info("Location is protected, aborting drop")
             return
         }
 
         e.isCancelled = true
         e.getBlock().type = Material.AIR
+
         if (listForNumberDrops.containsKey(oldMaterial)) {
-            player.world.dropItemNaturally(e.getBlock().location, randomNumAndCharacter()!!)
+            val numChar = randomNumAndCharacter()
+            plugin.logger.info("Dropping numeric/character block for nether wood: ${numChar?.type}")
+            player.world.dropItemNaturally(e.getBlock().location, numChar!!)
         }
+
+        plugin.logger.info("Dropping letter block at location: ${e.block.location}")
         player.world.dropItemNaturally(e.getBlock().location, block)
+
+        plugin.logger.info("Dropping stripped log: $material")
         player.world.dropItemNaturally(e.getBlock().location, ItemStack(material, 1))
+        plugin.logger.info("========== END WOOD BLOCK BREAK DEBUG ==========")
     }
 
     private fun randomNumAndCharacter(): ItemStack? {
