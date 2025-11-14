@@ -18,38 +18,67 @@ class CustomBlockEngine(private val plugin: CharmedChars, var initialBlockCode: 
     init{
         globalPlugin = plugin
     }
-    val letterBlockKeys = buildMap<Pair<BlockColor, LetterBlock>, Pair<NamespacedKey, Int>> {
 
-        BlockColor.entries.forEach {
-            var color = it
-            LetterBlock.entries.forEach {
-                put(Pair(color, it), Pair(NamespacedKey(plugin, "${color.directoryName}_${it.name.lowercase()}"), initialBlockCode++))
+    companion object {
+        // Color offsets for custom model data
+        const val CYAN_OFFSET = 1100
+        const val MAGENTA_OFFSET = 1200
+        const val YELLOW_OFFSET = 1300
+        const val NUMBER_OFFSET = 1400  // Numbers: 1400-1409 per color (0-9)
+        const val OPERATOR_OFFSET = 1500  // Operators: 1500+ per color
+
+        internal var globalPlugin : CharmedChars? = null
+
+        fun getColorOffset(color: BlockColor): Int {
+            return when(color) {
+                BlockColor.CYAN -> CYAN_OFFSET
+                BlockColor.MAGENTA -> MAGENTA_OFFSET
+                BlockColor.YELLOW -> YELLOW_OFFSET
+            }
+        }
+    }
+
+    val letterBlockKeys = buildMap<Pair<BlockColor, LetterBlock>, Pair<NamespacedKey, Int>> {
+        BlockColor.entries.forEach { color ->
+            LetterBlock.entries.forEach { letter ->
+                val customModelData = getColorOffset(color) + letter.customVariation
+                put(
+                    Pair(color, letter),
+                    Pair(NamespacedKey(plugin, "${color.directoryName}_${letter.name.lowercase()}"), customModelData)
+                )
             }
         }
     }
 
     val numberBlockKeys = buildMap<Pair<BlockColor, NumericBlock>, Pair<NamespacedKey, Int>> {
-
-        BlockColor.entries.forEach {
-            var color = it
-            NumericBlock.entries.forEach {
-                put(Pair(color, it), Pair(NamespacedKey(plugin, "${color.directoryName}_${it.c}"), initialBlockCode++))
+        var numberIndex = 0
+        BlockColor.entries.forEach { color ->
+            NumericBlock.entries.forEach { number ->
+                val customModelData = getColorOffset(color) + NUMBER_OFFSET + numberIndex
+                put(
+                    Pair(color, number),
+                    Pair(NamespacedKey(plugin, "${color.directoryName}_${number.c}"), customModelData)
+                )
+                numberIndex++
             }
+            numberIndex = 0  // Reset for next color
         }
     }
 
     val characterBlockKeys = buildMap<Pair<BlockColor, NonAlphaNumBlocks>, Pair<NamespacedKey, Int>> {
-
-        BlockColor.entries.forEach {
-            var color = it
-            NonAlphaNumBlocks.entries.forEach {
-                put(Pair(color, it), Pair(NamespacedKey(plugin, "${color.directoryName}_${it.nonAlphaNumBlockName}"), initialBlockCode++))
+        var charIndex = 0
+        BlockColor.entries.forEach { color ->
+            NonAlphaNumBlocks.entries.forEach { char ->
+                val customModelData = getColorOffset(color) + OPERATOR_OFFSET + charIndex
+                put(
+                    Pair(color, char),
+                    Pair(NamespacedKey(plugin, "${color.directoryName}_${char.nonAlphaNumBlockName}"), customModelData)
+                )
+                charIndex++
             }
+            charIndex = 0  // Reset for next color
         }
     }
-
-    companion object {
-        internal var globalPlugin : CharmedChars? = null
         fun byAlreadyPlaced(block: Block?): CustomBlock? {
 
             var meta = block?.drops?.firstOrNull()?.itemMeta
@@ -57,8 +86,27 @@ class CustomBlockEngine(private val plugin: CharmedChars, var initialBlockCode: 
 
             if(meta != null && localBlockEngine != null && meta.hasCustomModelData())
             {
-                var letterBlockKey = LetterBlock.entries.firstOrNull { it.customVariation == meta.customModelData }
-                return letterBlockKey?.let { CustomBlock(it) }
+                val customModelData = meta.customModelData
+
+                // Determine color by custom model data range
+                val color: BlockColor = when {
+                    customModelData >= YELLOW_OFFSET -> BlockColor.YELLOW
+                    customModelData >= MAGENTA_OFFSET -> BlockColor.MAGENTA
+                    customModelData >= CYAN_OFFSET -> BlockColor.CYAN
+                    else -> return null
+                }
+
+                val baseVariation = customModelData - getColorOffset(color)
+
+                // Try to find letter block
+                val letterBlock = LetterBlock.entries.firstOrNull { it.customVariation == baseVariation }
+                if (letterBlock != null) {
+                    return localBlockEngine.letterBlockKeys[Pair(color, letterBlock)]?.let { (key, _) ->
+                        CustomBlock(letterBlock, localBlockEngine.getInstance(color, letterBlock)?.itemStack)
+                    }
+                }
+
+                return null
             }
             return null
         }
