@@ -15,9 +15,15 @@ import java.util.zip.ZipOutputStream
 class TextureManager(private val plugin: CharmedChars) {
 
     private val resourcePackDir = File(plugin.dataFolder, "resourcepack")
-    private val texturesDir = File(resourcePackDir, "assets/minecraft/textures/block")
-    private val modelsDir = File(resourcePackDir, "assets/minecraft/models/block")
+    private val texturesDir = File(resourcePackDir, "assets/minecraft/textures")
+    private val blockModelsDir = File(resourcePackDir, "assets/minecraft/models/block")
+    private val itemModelsDir = File(resourcePackDir, "assets/minecraft/models/item")
     private val blockstatesDir = File(resourcePackDir, "assets/minecraft/blockstates")
+
+    // Source directories from our created assets
+    private val sourceTexturesDir = File(plugin.dataFolder.parentFile.parentFile.parentFile, "src/main/resources/pack/assets/minecraft/textures")
+    private val sourceBlockModelsDir = File(plugin.dataFolder.parentFile.parentFile.parentFile, "src/main/resources/pack/models/block")
+    private val sourceItemModelsDir = File(plugin.dataFolder.parentFile.parentFile.parentFile, "src/main/resources/pack/models/item")
 
     companion object {
         // Custom model data values for each block type
@@ -38,10 +44,16 @@ class TextureManager(private val plugin: CharmedChars) {
     }
 
     private fun createDirectories() {
-        listOf(resourcePackDir, texturesDir, modelsDir, blockstatesDir).forEach { dir ->
+        listOf(resourcePackDir, texturesDir, blockModelsDir, itemModelsDir, blockstatesDir).forEach { dir ->
             if (!dir.exists()) {
                 dir.mkdirs()
             }
+        }
+        // Create color subdirectories
+        listOf("cyan", "magenta", "yellow").forEach { color ->
+            File(texturesDir, color).mkdirs()
+            File(blockModelsDir, color).mkdirs()
+            File(itemModelsDir, color).mkdirs()
         }
     }
 
@@ -66,81 +78,44 @@ class TextureManager(private val plugin: CharmedChars) {
     private fun generatePackMcmeta() {
         val packMcmeta = File(resourcePackDir, "pack.mcmeta")
         val content = """
-            {
-                "pack": {
-                    "pack_format": 18,
-                    "description": "CharmedChars Custom Blocks"
-                }
-            }
+{
+    "pack": {
+        "pack_format": 18,
+        "description": "CharmedChars Letter, Number & Symbol Blocks"
+    }
+}
         """.trimIndent()
 
         packMcmeta.writeText(content)
     }
 
     /**
-     * Generate custom block models
+     * Generate custom block models by copying from source directory
      */
     private fun generateBlockModels() {
-        // Magic Stone model
-        generateBlockModel(
-            "magic_stone",
-            MAGIC_STONE_TEXTURE,
-            """
-            {
-                "parent": "block/cube_all",
-                "textures": {
-                    "all": "block/$MAGIC_STONE_TEXTURE"
-                }
-            }
-            """.trimIndent()
-        )
+        plugin.logger.info("Copying block models...")
 
-        // Enchanted Log model
-        generateBlockModel(
-            "enchanted_log",
-            ENCHANTED_LOG_TEXTURE,
-            """
-            {
-                "parent": "block/cube_column",
-                "textures": {
-                    "end": "block/${ENCHANTED_LOG_TEXTURE}_top",
-                    "side": "block/$ENCHANTED_LOG_TEXTURE"
-                }
-            }
-            """.trimIndent()
-        )
+        if (!sourceBlockModelsDir.exists()) {
+            plugin.logger.warning("Source block models directory not found: ${sourceBlockModelsDir.absolutePath}")
+            return
+        }
 
-        // Crystal Block model
-        generateBlockModel(
-            "crystal_block",
-            CRYSTAL_BLOCK_TEXTURE,
-            """
-            {
-                "parent": "block/cube_all",
-                "textures": {
-                    "all": "block/$CRYSTAL_BLOCK_TEXTURE"
-                },
-                "elements": [
-                    {
-                        "from": [0, 0, 0],
-                        "to": [16, 16, 16],
-                        "faces": {
-                            "down": {"texture": "#all", "cullface": "down"},
-                            "up": {"texture": "#all", "cullface": "up"},
-                            "north": {"texture": "#all", "cullface": "north"},
-                            "south": {"texture": "#all", "cullface": "south"},
-                            "west": {"texture": "#all", "cullface": "west"},
-                            "east": {"texture": "#all", "cullface": "east"}
-                        }
-                    }
-                ]
+        listOf("cyan", "magenta", "yellow").forEach { color ->
+            val sourceColorDir = File(sourceBlockModelsDir, color)
+            val destColorDir = File(blockModelsDir, color)
+
+            if (sourceColorDir.exists() && sourceColorDir.isDirectory) {
+                sourceColorDir.listFiles()?.filter { it.extension == "json" }?.forEach { jsonFile ->
+                    val destFile = File(destColorDir, jsonFile.name)
+                    jsonFile.copyTo(destFile, overwrite = true)
+                }
+                plugin.logger.info("Copied ${sourceColorDir.listFiles()?.size ?: 0} block models for $color")
             }
-            """.trimIndent()
-        )
+        }
     }
 
     private fun generateBlockModel(name: String, texture: String, modelJson: String) {
-        val modelFile = File(modelsDir, "$name.json")
+        val modelFile = File(blockModelsDir, "$name.json")
         modelFile.writeText(modelJson)
     }
 
@@ -154,13 +129,98 @@ class TextureManager(private val plugin: CharmedChars) {
     }
 
     private fun generateItemModels() {
-        val itemModelsDir = File(resourcePackDir, "assets/minecraft/models/item")
-        itemModelsDir.mkdirs()
+        plugin.logger.info("Generating item models...")
 
-        // Generate item models that override base materials with custom model data
-        generateItemModelOverride("smooth_stone", MAGIC_STONE_MODEL, "block/magic_stone")
-        generateItemModelOverride("dark_oak_log", ENCHANTED_LOG_MODEL, "block/enchanted_log")
-        generateItemModelOverride("amethyst_block", CRYSTAL_BLOCK_MODEL, "block/crystal_block")
+        // First, copy our color-organized item models
+        if (sourceItemModelsDir.exists()) {
+            listOf("cyan", "magenta", "yellow").forEach { color ->
+                val sourceColorDir = File(sourceItemModelsDir, color)
+                val destColorDir = File(itemModelsDir, color)
+
+                if (sourceColorDir.exists() && sourceColorDir.isDirectory) {
+                    sourceColorDir.listFiles()?.filter { it.extension == "json" }?.forEach { jsonFile ->
+                        val destFile = File(destColorDir, jsonFile.name)
+                        jsonFile.copyTo(destFile, overwrite = true)
+                    }
+                    plugin.logger.info("Copied ${sourceColorDir.listFiles()?.size ?: 0} item models for $color")
+                }
+            }
+        }
+
+        // Generate note_block.json with all custom model data overrides
+        generateNoteBlockItemModel()
+    }
+
+    /**
+     * Generate note_block.json with custom model data overrides for all our character blocks
+     */
+    private fun generateNoteBlockItemModel() {
+        val noteBlockFile = File(itemModelsDir, "note_block.json")
+        val overrides = mutableListOf<String>()
+
+        val customBlockEngine = plugin.customBlockEngine
+        var modelDataCounter = 0
+
+        // Add letter blocks
+        customBlockEngine.letterBlockKeys.forEach { (colorLetterPair, keyDataPair) ->
+            val (color, letter) = colorLetterPair
+            val (_, customModelData) = keyDataPair
+            overrides.add("""
+                {
+                    "predicate": {
+                        "custom_model_data": $customModelData
+                    },
+                    "model": "item/${color.directoryName}/${letter.character}"
+                }""".trimIndent())
+            modelDataCounter++
+        }
+
+        // Add number blocks
+        customBlockEngine.numberBlockKeys.forEach { (colorNumberPair, keyDataPair) ->
+            val (color, number) = colorNumberPair
+            val (_, customModelData) = keyDataPair
+            overrides.add("""
+                {
+                    "predicate": {
+                        "custom_model_data": $customModelData
+                    },
+                    "model": "item/${color.directoryName}/${number.c}"
+                }""".trimIndent())
+            modelDataCounter++
+        }
+
+        // Add character blocks (operators)
+        customBlockEngine.characterBlockKeys.forEach { (colorCharPair, keyDataPair) ->
+            val (color, char) = colorCharPair
+            val (_, customModelData) = keyDataPair
+            val modelName = when(char.charVal) {
+                '+' -> "plus"
+                '-' -> "minus"
+                '*' -> "multiply"
+                '/' -> "division"
+                else -> char.nonAlphaNumBlockName
+            }
+            overrides.add("""
+                {
+                    "predicate": {
+                        "custom_model_data": $customModelData
+                    },
+                    "model": "item/${color.directoryName}/$modelName"
+                }""".trimIndent())
+            modelDataCounter++
+        }
+
+        val noteBlockJson = """
+{
+    "parent": "block/note_block",
+    "overrides": [
+        ${overrides.joinToString(",\n        ")}
+    ]
+}
+        """.trimIndent()
+
+        noteBlockFile.writeText(noteBlockJson)
+        plugin.logger.info("Generated note_block.json with $modelDataCounter custom model data overrides")
     }
 
     private fun generateItemModelOverride(baseMaterial: String, customModelData: Int, model: String) {
@@ -188,81 +248,36 @@ class TextureManager(private val plugin: CharmedChars) {
     }
 
     /**
-     * Generate placeholder texture files with descriptions
+     * Copy texture PNG files from source directory
      */
     private fun generateTextureFiles() {
-        // Create texture placeholder files with instructions
-        val textureInfo = File(texturesDir, "TEXTURE_INFO.txt")
-        val instructions = """
-            Custom Block Textures for MyMinecraftPlugin
-            ==========================================
-            
-            To add custom textures:
-            1. Place your 16x16 PNG texture files in this directory
-            2. Name them exactly as follows:
-               - magic_stone.png (for Magic Stone block)
-               - enchanted_log.png (for Enchanted Log side)
-               - enchanted_log_top.png (for Enchanted Log top/bottom)
-               - crystal_block.png (for Crystal Block)
-            
-            3. Restart the server to regenerate the resource pack
-            4. Players can download the pack with /blocks resourcepack
-            
-            Texture Requirements:
-            - 16x16 pixels (standard Minecraft block size)
-            - PNG format
-            - Avoid transparency for solid blocks
-            - Use vibrant colors for magical blocks
-            
-            Example texture descriptions:
-            - Magic Stone: Purple/pink stone with glowing runes
-            - Enchanted Log: Dark wood with green magical veins
-            - Crystal Block: Translucent crystal with rainbow reflections
-            
-        """.trimIndent()
+        plugin.logger.info("Copying texture files...")
 
-        textureInfo.writeText(instructions)
+        if (!sourceTexturesDir.exists()) {
+            plugin.logger.warning("Source textures directory not found: ${sourceTexturesDir.absolutePath}")
+            return
+        }
 
-        // Generate sample texture URLs/references
-        generateSampleTextureReferences()
-    }
+        listOf("cyan", "magenta", "yellow").forEach { color ->
+            val sourceColorDir = File(sourceTexturesDir, color)
+            val destColorDir = File(texturesDir, color)
 
-    private fun generateSampleTextureReferences() {
-        val samplesDir = File(texturesDir, "samples")
-        samplesDir.mkdirs()
-
-        val sampleInfo = File(samplesDir, "sample_textures.json")
-        val samples = """
-            {
-                "magic_stone": {
-                    "description": "Mystical purple stone with glowing runes",
-                    "base_color": "#8A2BE2",
-                    "glow_effect": true,
-                    "pattern": "runic_symbols"
-                },
-                "enchanted_log": {
-                    "description": "Dark oak with green magical veins",
-                    "base_color": "#3C2415", 
-                    "accent_color": "#00FF7F",
-                    "pattern": "magical_veins"
-                },
-                "crystal_block": {
-                    "description": "Translucent crystal with rainbow prismatic effect",
-                    "base_color": "#E6E6FA",
-                    "effect": "prismatic",
-                    "transparency": 0.8
+            if (sourceColorDir.exists() && sourceColorDir.isDirectory) {
+                sourceColorDir.listFiles()?.filter { it.extension == "png" }?.forEach { pngFile ->
+                    val destFile = File(destColorDir, pngFile.name)
+                    pngFile.copyTo(destFile, overwrite = true)
                 }
+                plugin.logger.info("Copied ${sourceColorDir.listFiles()?.filter { it.extension == "png" }?.size ?: 0} textures for $color")
             }
-        """.trimIndent()
-
-        sampleInfo.writeText(samples)
+        }
     }
+
 
     /**
      * Create the final resource pack ZIP file
      */
     private fun createResourcePackZip() {
-        val zipFile = File(plugin.dataFolder, "MyMinecraftPlugin-ResourcePack.zip")
+        val zipFile = File(plugin.dataFolder, "CharmedChars-ResourcePack.zip")
 
         try {
             ZipOutputStream(FileOutputStream(zipFile)).use { zip ->
@@ -322,7 +337,7 @@ class TextureManager(private val plugin: CharmedChars) {
             return
         }
 
-        val resourcePackFile = File(plugin.dataFolder, "MyMinecraftPlugin-ResourcePack.zip")
+        val resourcePackFile = File(plugin.dataFolder, "CharmedChars-ResourcePack.zip")
         if (!resourcePackFile.exists()) {
             player.sendMessage(
                 Component.text("Resource pack not found! Contact an administrator.")
@@ -369,7 +384,7 @@ class TextureManager(private val plugin: CharmedChars) {
      */
     fun isTextureSystemReady(): Boolean {
         return plugin.configManager.customTexturesEnabled &&
-                File(plugin.dataFolder, "MyMinecraftPlugin-ResourcePack.zip").exists()
+                File(plugin.dataFolder, "CharmedChars-ResourcePack.zip").exists()
     }
 
     /**
