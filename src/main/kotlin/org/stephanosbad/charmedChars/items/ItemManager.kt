@@ -433,25 +433,28 @@ class ItemManager @JvmOverloads constructor(localPlugin: CharmedChars? = null) :
         var configuration = plugin.configDataHandler!!.configuration!!
 
         if (exclude == null) {
-            exclude = LocationPair(
-
-                configuration.getLocation("exclude.from", null)!!,
-                configuration.getLocation("exclude.to", null)!!
-            )
+            val excludeFrom = configuration.getLocation("exclude.from", null)
+            val excludeTo = configuration.getLocation("exclude.to", null)
+            if (excludeFrom != null && excludeTo != null) {
+                exclude = LocationPair(excludeFrom, excludeTo)
+                this.exclude = exclude
+            }
         }
 
         if (include == null) {
-            include = LocationPair(
-                configuration.getLocation("include.from", null)!!,
-                configuration.getLocation("include.to", null)!!
-            )
+            val includeFrom = configuration.getLocation("include.from", null)
+            val includeTo = configuration.getLocation("include.to", null)
+            if (includeFrom != null && includeTo != null) {
+                include = LocationPair(includeFrom, includeTo)
+                this.include = include
+            }
         }
 
-        if (exclude.isValid && exclude.check(location)) {
+        if (exclude != null && exclude.isValid && exclude.check(location)) {
             return true
         }
 
-        return include.isValid && !include.check(location)
+        return include != null && include.isValid && !include.check(location)
     }
 
     /**
