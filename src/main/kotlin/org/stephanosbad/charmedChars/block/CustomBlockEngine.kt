@@ -101,9 +101,7 @@ class CustomBlockEngine(private val plugin: CharmedChars, var initialBlockCode: 
                 // Try to find letter block
                 val letterBlock = LetterBlock.entries.firstOrNull { it.customVariation == baseVariation }
                 if (letterBlock != null) {
-                    return localBlockEngine.letterBlockKeys[Pair(color, letterBlock)]?.let { (key, _) ->
-                        CustomBlock(letterBlock, localBlockEngine.getInstance(color, letterBlock)?.itemStack)
-                    }
+                    return getInstance(color, letterBlock)
                 }
 
                 return null
