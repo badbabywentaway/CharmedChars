@@ -1,7 +1,7 @@
 
 plugins {
     kotlin("jvm") version "2.2.0"
-    id("com.gradleup.shadow") version "8.3.0"
+    id("com.gradleup.shadow") version "8.3.5"
     id("xyz.jpenilla.run-paper") version "2.3.1"
 
 
@@ -27,8 +27,8 @@ dependencies {
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-jdk8:${property("coroutinesVersion")}")
 
     testImplementation("org.jetbrains.kotlin:kotlin-test:${property("kotlinVersion")}")
-    testImplementation("io.mockk:mockk:1.13.8")
-    testImplementation("org.junit.jupiter:junit-jupiter:5.10.1")
+    testImplementation("io.mockk:mockk:1.13.14")
+    testImplementation("org.junit.jupiter:junit-jupiter:5.11.4")
 }
     tasks.shadowJar {
         archiveBaseName.set("MyMinecraftPlugin")
@@ -39,5 +39,5 @@ dependencies {
     }
 
     tasks.build { dependsOn(tasks.shadowJar) }
-    tasks.runServer { minecraftVersion("1.20.4") }
+    tasks.runServer { minecraftVersion("1.21.4") }
     tasks.test { useJUnitPlatform() }
