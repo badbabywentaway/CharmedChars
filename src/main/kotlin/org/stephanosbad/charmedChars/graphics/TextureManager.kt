@@ -114,11 +114,6 @@ class TextureManager(private val plugin: CharmedChars) {
         }
     }
 
-    private fun generateBlockModel(name: String, texture: String, modelJson: String) {
-        val modelFile = File(blockModelsDir, "$name.json")
-        modelFile.writeText(modelJson)
-    }
-
     /**
      * Generate blockstate files for custom blocks
      */
@@ -221,30 +216,6 @@ class TextureManager(private val plugin: CharmedChars) {
 
         noteBlockFile.writeText(noteBlockJson)
         plugin.logger.info("Generated note_block.json with $modelDataCounter custom model data overrides")
-    }
-
-    private fun generateItemModelOverride(baseMaterial: String, customModelData: Int, model: String) {
-        val itemModelsDir = File(resourcePackDir, "assets/minecraft/models/item")
-        val itemFile = File(itemModelsDir, "$baseMaterial.json")
-
-        val content = """
-            {
-                "parent": "item/generated",
-                "textures": {
-                    "layer0": "block/$baseMaterial"
-                },
-                "overrides": [
-                    {
-                        "predicate": {
-                            "custom_model_data": $customModelData
-                        },
-                        "model": "$model"
-                    }
-                ]
-            }
-        """.trimIndent()
-
-        itemFile.writeText(content)
     }
 
     /**
