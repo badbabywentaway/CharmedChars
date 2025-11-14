@@ -16,15 +16,16 @@ enum class NumericBlock(val c: Char) {
     BLOCK_9('9'),
     ;
 
-    val itemStacks: MutableMap<BlockColor, ItemStack?> = mutableMapOf()
+    private val _itemStacks: MutableMap<BlockColor, ItemStack?> by lazy {
+        mutableMapOf<BlockColor, ItemStack?>().apply {
+            for (color in BlockColor.entries) {
+                this[color] = CustomBlockEngine.getInstance(color, this@NumericBlock)?.itemStack
+            }
+        }
+    }
+
+    val itemStacks: MutableMap<BlockColor, ItemStack?>
+        get() = _itemStacks
 
     //val nonBlockId  = BlockLetter.entries.firstOrNull{ it.filenameBase == c.toString()}
-
-    init {
-
-            for (color in BlockColor.entries) {
-                this.itemStacks[color] = CustomBlockEngine.getInstance(color, this)!!.itemStack!!
-            }
-
-    }
 }

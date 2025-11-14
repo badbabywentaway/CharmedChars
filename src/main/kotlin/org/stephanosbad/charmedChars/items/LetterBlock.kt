@@ -53,7 +53,16 @@ enum class LetterBlock(
      */
     val character: Char = this.name[0]
 
-    val itemStacks: MutableMap<BlockColor, ItemStack?> = mutableMapOf()
+    private val _itemStacks: MutableMap<BlockColor, ItemStack?> by lazy {
+        mutableMapOf<BlockColor, ItemStack?>().apply {
+            for (color in BlockColor.entries) {
+                this[color] = CustomBlockEngine.getInstance(color, this@LetterBlock)?.itemStack
+            }
+        }
+    }
+
+    val itemStacks: MutableMap<BlockColor, ItemStack?>
+        get() = _itemStacks
 
     /**
      * Hit range low (randomizer)
@@ -77,20 +86,6 @@ enum class LetterBlock(
      */
     private fun isHit(testValue: Double): Boolean {
         return (testValue >= hitLow) && (testValue < hitHigh)
-    }
-
-    /**
-     * Constructor
-     * @param frequencyPercent - Frequency of letter found in real life via info received by Oxford publication.
-     * @param frequencyFactor - Score facter of letter
-     * @param customVariation - noteblock variation
-     */
-    init {
-        //letterBlockId?.let {
-            for (color in BlockColor.entries) {
-                this.itemStacks[color] = CustomBlockEngine.getInstance(color, this)!!.itemStack!!
-            }
-        //}
     }
 
     companion object {

@@ -10,15 +10,16 @@ enum class NonAlphaNumBlocks(val charVal: Char, blockName: String) {
     MULTIPLY('*', "multiply_block"),
     DIVISION('/', "divide_block");
 
-    val itemStacks: MutableMap<BlockColor, ItemStack?> = mutableMapOf()
+    private val _itemStacks: MutableMap<BlockColor, ItemStack?> by lazy {
+        mutableMapOf<BlockColor, ItemStack?>().apply {
+            for (color in BlockColor.entries) {
+                this[color] = CustomBlockEngine.getInstance(color, this@NonAlphaNumBlocks)?.itemStack
+            }
+        }
+    }
+
+    val itemStacks: MutableMap<BlockColor, ItemStack?>
+        get() = _itemStacks
 
     val nonAlphaNumBlockName = blockName
-
-    init {
-
-            for (color in BlockColor.entries) {
-                this.itemStacks[color] = CustomBlockEngine.getInstance(color, this)!!.itemStack!!
-            }
-
-    }
 }
