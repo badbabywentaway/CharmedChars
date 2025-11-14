@@ -19,25 +19,6 @@ class CustomBlockEngine(private val plugin: CharmedChars, var initialBlockCode: 
         globalPlugin = plugin
     }
 
-    companion object {
-        // Color offsets for custom model data
-        const val CYAN_OFFSET = 1100
-        const val MAGENTA_OFFSET = 1200
-        const val YELLOW_OFFSET = 1300
-        const val NUMBER_OFFSET = 1400  // Numbers: 1400-1409 per color (0-9)
-        const val OPERATOR_OFFSET = 1500  // Operators: 1500+ per color
-
-        internal var globalPlugin : CharmedChars? = null
-
-        fun getColorOffset(color: BlockColor): Int {
-            return when(color) {
-                BlockColor.CYAN -> CYAN_OFFSET
-                BlockColor.MAGENTA -> MAGENTA_OFFSET
-                BlockColor.YELLOW -> YELLOW_OFFSET
-            }
-        }
-    }
-
     val letterBlockKeys = buildMap<Pair<BlockColor, LetterBlock>, Pair<NamespacedKey, Int>> {
         BlockColor.entries.forEach { color ->
             LetterBlock.entries.forEach { letter ->
@@ -79,6 +60,25 @@ class CustomBlockEngine(private val plugin: CharmedChars, var initialBlockCode: 
             charIndex = 0  // Reset for next color
         }
     }
+
+    companion object {
+        // Color offsets for custom model data
+        const val CYAN_OFFSET = 1100
+        const val MAGENTA_OFFSET = 1200
+        const val YELLOW_OFFSET = 1300
+        const val NUMBER_OFFSET = 300  // Numbers: offset + 300 + index (0-9)
+        const val OPERATOR_OFFSET = 400  // Operators: offset + 400 + index
+
+        internal var globalPlugin : CharmedChars? = null
+
+        fun getColorOffset(color: BlockColor): Int {
+            return when(color) {
+                BlockColor.CYAN -> CYAN_OFFSET
+                BlockColor.MAGENTA -> MAGENTA_OFFSET
+                BlockColor.YELLOW -> YELLOW_OFFSET
+            }
+        }
+
         fun byAlreadyPlaced(block: Block?): CustomBlock? {
 
             var meta = block?.drops?.firstOrNull()?.itemMeta
