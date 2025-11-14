@@ -40,6 +40,7 @@ class ItemManager @JvmOverloads constructor(localPlugin: CharmedChars? = null) :
             put(Material.BIRCH_LOG, Material.STRIPPED_BIRCH_LOG)
             put(Material.MANGROVE_LOG, Material.STRIPPED_MANGROVE_LOG)
             put(Material.CHERRY_LOG, Material.STRIPPED_CHERRY_LOG)
+            put(Material.PALE_OAK_LOG, Material.STRIPPED_PALE_OAK_LOG)
             put(Material.WARPED_STEM, Material.STRIPPED_WARPED_STEM)
             put(Material.CRIMSON_STEM, Material.STRIPPED_CRIMSON_STEM)
             put(Material.BAMBOO_BLOCK, Material.STRIPPED_BAMBOO_BLOCK)
