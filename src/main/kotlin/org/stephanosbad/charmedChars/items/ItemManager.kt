@@ -278,6 +278,7 @@ class ItemManager @JvmOverloads constructor(localPlugin: CharmedChars? = null) :
         }
         if(isSameColor && colorTest != null)
         {
+            score *= 3
             e.player.sendMessage("Triple Score! All Blocks Are ${colorTest.name}!")
         }
         if (WordDict.singleton!!.words.contains(outString.toString().lowercase())) {
