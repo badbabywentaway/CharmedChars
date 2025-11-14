@@ -20,10 +20,11 @@ class TextureManager(private val plugin: CharmedChars) {
     private val itemModelsDir = File(resourcePackDir, "assets/minecraft/models/item")
     private val blockstatesDir = File(resourcePackDir, "assets/minecraft/blockstates")
 
-    // Source directories from our created assets
-    private val sourceTexturesDir = File(plugin.dataFolder.parentFile.parentFile.parentFile, "src/main/resources/pack/assets/minecraft/textures")
-    private val sourceBlockModelsDir = File(plugin.dataFolder.parentFile.parentFile.parentFile, "src/main/resources/pack/models/block")
-    private val sourceItemModelsDir = File(plugin.dataFolder.parentFile.parentFile.parentFile, "src/main/resources/pack/models/item")
+    // Extracted resource directories (copied from JAR on first run)
+    private val extractedPackDir = File(plugin.dataFolder, "extracted_pack")
+    private val sourceTexturesDir = File(extractedPackDir, "assets/minecraft/textures")
+    private val sourceBlockModelsDir = File(extractedPackDir, "models/block")
+    private val sourceItemModelsDir = File(extractedPackDir, "models/item")
 
     companion object {
         // Custom model data values for each block type
@@ -45,8 +46,158 @@ class TextureManager(private val plugin: CharmedChars) {
      */
     fun initialize() {
         createDirectories()
+        extractResourcePackAssets()
         generateResourcePack()
         plugin.logger.info("Custom textures system initialized!")
+    }
+
+    /**
+     * Extract resource pack assets from the plugin JAR to the filesystem
+     * This is necessary because resources are packaged inside the JAR in production
+     */
+    private fun extractResourcePackAssets() {
+        if (extractedPackDir.exists()) {
+            plugin.logger.info("Resource pack assets already extracted, skipping...")
+            return
+        }
+
+        plugin.logger.info("Extracting resource pack assets...")
+        extractedPackDir.mkdirs()
+
+        // Define resource paths to extract
+        val resourcePaths = listOf(
+            "pack/assets/minecraft/textures/cyan",
+            "pack/assets/minecraft/textures/magenta",
+            "pack/assets/minecraft/textures/yellow",
+            "pack/models/block/cyan",
+            "pack/models/block/magenta",
+            "pack/models/block/yellow",
+            "pack/models/item/cyan",
+            "pack/models/item/magenta",
+            "pack/models/item/yellow"
+        )
+
+        var extractedAny = false
+        resourcePaths.forEach { resourcePath ->
+            try {
+                if (extractResourceDirectory(resourcePath)) {
+                    extractedAny = true
+                }
+            } catch (e: Exception) {
+                plugin.logger.warning("Failed to extract resource directory: $resourcePath - ${e.message}")
+            }
+        }
+
+        // If we didn't extract from JAR, try to copy from classpath resources
+        if (!extractedAny) {
+            plugin.logger.info("Not running from JAR, extracting from classpath resources...")
+            extractFromClasspath()
+        }
+
+        plugin.logger.info("Resource pack assets extracted successfully!")
+    }
+
+    /**
+     * Extract resources from classpath (for development mode)
+     */
+    private fun extractFromClasspath() {
+        val colors = listOf("cyan", "magenta", "yellow")
+
+        colors.forEach { color ->
+            // Extract textures
+            extractClasspathDirectory("pack/assets/minecraft/textures/$color",
+                File(extractedPackDir, "assets/minecraft/textures/$color"))
+
+            // Extract block models
+            extractClasspathDirectory("pack/models/block/$color",
+                File(extractedPackDir, "models/block/$color"))
+
+            // Extract item models
+            extractClasspathDirectory("pack/models/item/$color",
+                File(extractedPackDir, "models/item/$color"))
+        }
+    }
+
+    /**
+     * Extract a directory from classpath to filesystem
+     */
+    private fun extractClasspathDirectory(resourcePath: String, destDir: File) {
+        destDir.mkdirs()
+
+        // Try to get resource as URL
+        val resourceUrl = plugin::class.java.classLoader.getResource(resourcePath) ?: run {
+            plugin.logger.warning("Resource not found: $resourcePath")
+            return
+        }
+
+        val uri = try {
+            resourceUrl.toURI()
+        } catch (e: Exception) {
+            plugin.logger.warning("Failed to convert resource URL to URI: $resourcePath")
+            return
+        }
+
+        val resourceFile = File(uri)
+        if (resourceFile.exists() && resourceFile.isDirectory) {
+            resourceFile.listFiles()?.forEach { file ->
+                if (file.isFile) {
+                    file.copyTo(File(destDir, file.name), overwrite = true)
+                }
+            }
+            plugin.logger.info("Copied ${resourceFile.listFiles()?.size ?: 0} files from $resourcePath")
+        }
+    }
+
+    /**
+     * Extract a directory from plugin resources to the filesystem
+     * Returns true if successfully extracted from JAR, false otherwise
+     */
+    private fun extractResourceDirectory(resourcePath: String): Boolean {
+        // Get the JAR file
+        val jarFile = try {
+            File(plugin::class.java.protectionDomain.codeSource.location.toURI())
+        } catch (e: Exception) {
+            plugin.logger.warning("Failed to locate plugin JAR: ${e.message}")
+            return false
+        }
+
+        if (!jarFile.exists() || !jarFile.name.endsWith(".jar")) {
+            // Development mode - resources might be on filesystem
+            return false
+        }
+
+        java.util.jar.JarFile(jarFile).use { jar ->
+            val entries = jar.entries()
+            var extractedCount = 0
+
+            while (entries.hasMoreElements()) {
+                val entry = entries.nextElement()
+                val entryName = entry.name
+
+                if (entryName.startsWith(resourcePath) && !entry.isDirectory) {
+                    // Calculate destination path (remove "pack/" prefix)
+                    val relativePath = entryName.removePrefix("pack/")
+                    val destFile = File(extractedPackDir, relativePath)
+
+                    // Create parent directories
+                    destFile.parentFile?.mkdirs()
+
+                    // Extract file
+                    jar.getInputStream(entry).use { input ->
+                        destFile.outputStream().use { output ->
+                            input.copyTo(output)
+                        }
+                    }
+                    extractedCount++
+                }
+            }
+
+            if (extractedCount > 0) {
+                plugin.logger.info("Extracted $extractedCount files from $resourcePath")
+            }
+
+            return extractedCount > 0
+        }
     }
 
     private fun createDirectories() {
