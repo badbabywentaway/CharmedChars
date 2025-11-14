@@ -44,6 +44,8 @@ class CharmedChars : JavaPlugin(), CoroutineScope {
     lateinit var customBlockEngine: CustomBlockEngine
         private set
 
+    val isCustomBlockEngineInitialized: Boolean
+        get() = ::customBlockEngine.isInitialized
 
     // In-memory storage for custom block data
     // In production, you should use a database or persistent file storage

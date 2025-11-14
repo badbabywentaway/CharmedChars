@@ -163,7 +163,7 @@ class TextureManager(private val plugin: CharmedChars) {
         val overrides = mutableListOf<String>()
 
         // Safety check: Ensure CustomBlockEngine is initialized
-        if (!plugin::customBlockEngine.isInitialized) {
+        if (!plugin.isCustomBlockEngineInitialized) {
             plugin.logger.severe("CustomBlockEngine not initialized! Cannot generate note_block.json")
             plugin.logger.severe("Make sure CustomBlockEngine is created before calling textureManager.initialize()")
             return
