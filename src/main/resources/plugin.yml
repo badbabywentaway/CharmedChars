@@ -32,6 +32,11 @@ commands:
     usage: /debugitem
     permission: charmedChars.admin
     aliases: [itemdebug, checkitem]
+  debugpack:
+    description: Debug resource pack status and configuration
+    usage: /debugpack
+    permission: charmedChars.admin
+    aliases: [packdebug, checkpack]
 
 permissions:
   charmedChars.blocks:
