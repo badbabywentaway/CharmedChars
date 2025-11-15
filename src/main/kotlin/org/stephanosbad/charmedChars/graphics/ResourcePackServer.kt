@@ -80,8 +80,17 @@ class ResourcePackServer(private val plugin: CharmedChars) {
     fun getResourcePackUrl(): String {
         if (!isRunning()) return ""
 
-        val host = plugin.configManager.selfHostAddress
+        val configuredHost = plugin.configManager.selfHostAddress
         val port = plugin.configManager.selfHostPort
+
+        // If configured address is 0.0.0.0 (bind to all interfaces),
+        // we need to use the actual server IP for the client URL
+        val host = if (configuredHost == "0.0.0.0") {
+            // Use the server's IP address or localhost
+            plugin.server.ip.ifBlank { "localhost" }
+        } else {
+            configuredHost
+        }
 
         return "http://$host:$port/CharmedChars-ResourcePack.zip"
     }

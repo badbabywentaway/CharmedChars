@@ -26,8 +26,9 @@ custom-textures:
   # Automatically generate resource pack on startup
   auto-generate: true
 
-  # Resource pack format version (18 for Minecraft 1.20.2+)
-  pack-format: 18
+  # Resource pack format version (42 for Minecraft 1.21.4+)
+  # Note: This value is not currently used - the plugin hardcodes pack format 42
+  pack-format: 42
 
   # Texture resolution (16x16)
   resolution: 16
@@ -49,9 +50,10 @@ custom-textures:
     port: 8080
 
     # Address to bind to
-    # "0.0.0.0" = accept connections from anywhere
-    # "127.0.0.1" = only localhost (for testing)
-    # Your server IP = accept from that IP only
+    # "0.0.0.0" = accept connections from anywhere (recommended)
+    #             The plugin will automatically use your server's IP for the client URL
+    # "127.0.0.1" = only localhost (for testing single-player)
+    # Your server IP = accept from that specific IP only
     address: "0.0.0.0"
 
   # ===== EXTERNAL HOSTING (OPTIONAL) =====
