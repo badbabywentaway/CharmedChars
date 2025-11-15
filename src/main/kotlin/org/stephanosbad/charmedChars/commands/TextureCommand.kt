@@ -38,7 +38,7 @@ class TextureCommand(private val plugin: CharmedChars) : CommandExecutor, TabCom
                     return true
                 }
 
-                plugin.textureManager.sendResourcePackToPlayer(sender)
+                plugin.textureManager.sendResourcePackToPlayer(sender, sendManualInstructions = true)
                 return true
             }
 

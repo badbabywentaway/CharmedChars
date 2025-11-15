@@ -147,6 +147,7 @@ class CharmedChars : JavaPlugin(), CoroutineScope {
         // Register event listeners
         server.pluginManager.registerEvents(ExampleListener(this), this)
         server.pluginManager.registerEvents(CustomBlockListener(this), this)
+        server.pluginManager.registerEvents(org.stephanosbad.charmedChars.listeners.ResourcePackListener(this), this)
 
         // Async startup operations
         launch {

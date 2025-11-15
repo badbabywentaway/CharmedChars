@@ -7,8 +7,10 @@ import org.bukkit.entity.Player
 import org.bukkit.inventory.ItemStack
 import org.stephanosbad.charmedChars.CharmedChars
 import java.io.File
+import java.io.FileInputStream
 import java.io.FileOutputStream
 import java.io.IOException
+import java.security.MessageDigest
 import java.util.zip.ZipEntry
 import java.util.zip.ZipOutputStream
 
@@ -25,6 +27,9 @@ class TextureManager(private val plugin: CharmedChars) {
     private val sourceTexturesDir = File(extractedPackDir, "assets/minecraft/textures")
     private val sourceBlockModelsDir = File(extractedPackDir, "models/block")
     private val sourceItemModelsDir = File(extractedPackDir, "models/item")
+
+    // Resource pack SHA-1 hash for verification
+    private var resourcePackHash: String? = null
 
     companion object {
         // Custom model data values for each block type
@@ -423,9 +428,28 @@ class TextureManager(private val plugin: CharmedChars) {
             }
 
             plugin.logger.info("Resource pack ZIP created: ${zipFile.absolutePath}")
+
+            // Generate SHA-1 hash for resource pack verification
+            resourcePackHash = generateSHA1(zipFile)
+            plugin.logger.info("Resource pack SHA-1: $resourcePackHash")
         } catch (e: IOException) {
             plugin.logger.severe("Failed to create resource pack ZIP: ${e.message}")
         }
+    }
+
+    /**
+     * Generate SHA-1 hash of a file
+     */
+    private fun generateSHA1(file: File): String {
+        val digest = MessageDigest.getInstance("SHA-1")
+        FileInputStream(file).use { fis ->
+            val buffer = ByteArray(8192)
+            var bytesRead: Int
+            while (fis.read(buffer).also { bytesRead = it } != -1) {
+                digest.update(buffer, 0, bytesRead)
+            }
+        }
+        return digest.digest().joinToString("") { "%02x".format(it) }
     }
 
     private fun addDirectoryToZip(zip: ZipOutputStream, directory: File, basePath: String) {
@@ -464,9 +488,9 @@ class TextureManager(private val plugin: CharmedChars) {
     }
 
     /**
-     * Send resource pack to player
+     * Send resource pack to player automatically
      */
-    fun sendResourcePackToPlayer(player: Player) {
+    fun sendResourcePackToPlayer(player: Player, sendManualInstructions: Boolean = false) {
         if (!plugin.configManager.customTexturesEnabled) {
             player.sendMessage(
                 Component.text("Custom textures are disabled on this server.")
@@ -484,8 +508,43 @@ class TextureManager(private val plugin: CharmedChars) {
             return
         }
 
-        // In a real implementation, you'd host this on a web server
-        // For now, provide instructions to manually install
+        // Get resource pack URL from config
+        val resourcePackUrl = plugin.configManager.resourcePackUrl
+
+        if (resourcePackUrl.isNotBlank() && resourcePackHash != null) {
+            // Send resource pack automatically using Paper API
+            try {
+                player.setResourcePack(
+                    resourcePackUrl,
+                    resourcePackHash,
+                    Component.text("CharmedChars requires a custom resource pack to display letter blocks correctly.")
+                        .color(NamedTextColor.YELLOW),
+                    plugin.configManager.resourcePackRequired
+                )
+
+                player.sendMessage(
+                    Component.text("Sending resource pack... Please accept the download prompt!")
+                        .color(NamedTextColor.GREEN)
+                )
+            } catch (e: Exception) {
+                plugin.logger.warning("Failed to send resource pack to ${player.name}: ${e.message}")
+                sendManualInstructionsToPlayer(player, resourcePackFile)
+            }
+        } else if (sendManualInstructions) {
+            // Fall back to manual instructions
+            sendManualInstructionsToPlayer(player, resourcePackFile)
+        } else {
+            player.sendMessage(
+                Component.text("Resource pack URL not configured! Use '/textures download' for manual installation.")
+                    .color(NamedTextColor.YELLOW)
+            )
+        }
+    }
+
+    /**
+     * Send manual installation instructions to player
+     */
+    private fun sendManualInstructionsToPlayer(player: Player, resourcePackFile: File) {
         player.sendMessage(
             Component.text("Custom Textures Available!")
                 .color(NamedTextColor.GOLD)
@@ -516,6 +575,11 @@ class TextureManager(private val plugin: CharmedChars) {
                 .color(NamedTextColor.AQUA)
         )
     }
+
+    /**
+     * Get the resource pack SHA-1 hash
+     */
+    fun getResourcePackHash(): String? = resourcePackHash
 
     /**
      * Check if custom textures are enabled and resource pack exists

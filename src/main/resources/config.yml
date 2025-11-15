@@ -1,0 +1,96 @@
+# CharmedChars Configuration File
+# Letter block word-building game for Minecraft
+
+# Welcome message shown to players
+welcome-message: "Welcome to CharmedChars! Mine logs with gold tools to find letter blocks!"
+
+# Enable debug mode for verbose logging
+debug-mode: false
+
+# Blocked words that cannot be scored
+blocked-words:
+  - "badword1"
+  - "badword2"
+
+# Maximum players affected per command
+max-players-per-command: 5
+
+# Enable async processing for better performance
+async-processing: true
+
+# Custom Blocks Configuration
+custom-blocks:
+  # Enable custom decorative blocks (Magic Stone, Enchanted Log, etc.)
+  enabled: true
+
+  # Block hardness (mining time)
+  hardness: 2.0
+
+# Custom Textures Configuration
+custom-textures:
+  # Enable custom textures system
+  enabled: true
+
+  # Automatically generate resource pack on startup
+  auto-generate: true
+
+  # Resource pack format version (18 for Minecraft 1.20.2+)
+  pack-format: 18
+
+  # Texture resolution (16x16)
+  resolution: 16
+
+  # ===== AUTOMATIC RESOURCE PACK DELIVERY =====
+  # URL where the resource pack is hosted
+  # Examples:
+  #   - HTTP: "http://yourserver.com/CharmedChars-ResourcePack.zip"
+  #   - HTTPS: "https://yourserver.com/resourcepacks/CharmedChars-ResourcePack.zip"
+  #   - File (local testing): "file:///C:/path/to/CharmedChars-ResourcePack.zip"
+  #
+  # Leave empty ("") to disable automatic sending (players must install manually)
+  # For local testing, use file:// URL pointing to the generated ZIP
+  # For production servers, host the ZIP on a web server and use HTTP/HTTPS URL
+  resource-pack-url: ""
+
+  # Whether resource pack is required (kicks player if they decline)
+  # Set to true to enforce resource pack usage
+  # Set to false to make it optional
+  resource-pack-required: false
+
+  # Automatically send resource pack when players join
+  # If false, players must use /textures download command
+  auto-send-on-join: true
+
+# Letter Block Drop Configuration
+letter-blocks:
+  # Base drop chance when breaking logs with gold tools (3%)
+  drop-chance: 0.03
+
+  # Drop chance multiplier with Looting enchantment
+  looting-multipliers:
+    1: 1.67  # Looting I: 5%
+    2: 2.67  # Looting II: 8%
+    3: 3.33  # Looting III: 10%
+
+  # Additional drops for nether wood (warped/crimson stems)
+  nether-drops-numbers: true
+  nether-drops-operators: true
+
+# Word Scoring Configuration
+scoring:
+  # Base score multiplier
+  base-multiplier: 10
+
+  # Bonus multiplier for same-color words
+  same-color-multiplier: 3
+
+  # Minimum word length to score
+  min-word-length: 2
+
+# Protection Integration
+protection:
+  # Respect WorldGuard regions
+  worldguard-integration: true
+
+  # Respect GriefPrevention claims
+  griefprevention-integration: true

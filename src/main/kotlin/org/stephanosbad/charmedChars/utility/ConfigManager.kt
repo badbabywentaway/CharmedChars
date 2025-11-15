@@ -46,6 +46,15 @@ class ConfigManager(private val plugin: CharmedChars) {
     val textureResolution: Int
         get() = config.getInt("custom-textures.resolution", 16)
 
+    val resourcePackUrl: String
+        get() = config.getString("custom-textures.resource-pack-url") ?: ""
+
+    val resourcePackRequired: Boolean
+        get() = config.getBoolean("custom-textures.resource-pack-required", false)
+
+    val resourcePackAutoSend: Boolean
+        get() = config.getBoolean("custom-textures.auto-send-on-join", true)
+
     fun reloadConfig() {
         plugin.reloadConfig()
         this.config = plugin.config
