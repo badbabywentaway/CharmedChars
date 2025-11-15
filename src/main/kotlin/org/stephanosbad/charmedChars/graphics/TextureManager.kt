@@ -480,7 +480,7 @@ class TextureManager(private val plugin: CharmedChars) {
 
         // Get resource pack URL - prefer self-hosted if available
         val resourcePackUrl = if (plugin.configManager.selfHostEnabled &&
-                                   ::plugin.resourcePackServer.isInitialized &&
+                                   plugin::resourcePackServer.isInitialized &&
                                    plugin.resourcePackServer.isRunning()) {
             plugin.resourcePackServer.getResourcePackUrl()
         } else {
@@ -493,9 +493,9 @@ class TextureManager(private val plugin: CharmedChars) {
                 player.setResourcePack(
                     resourcePackUrl,
                     resourcePackHash,
+                    plugin.configManager.resourcePackRequired,
                     Component.text("CharmedChars requires a custom resource pack to display letter blocks correctly.")
-                        .color(NamedTextColor.YELLOW),
-                    plugin.configManager.resourcePackRequired
+                        .color(NamedTextColor.YELLOW)
                 )
 
                 player.sendMessage(
