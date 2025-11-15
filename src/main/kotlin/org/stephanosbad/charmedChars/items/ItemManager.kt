@@ -306,9 +306,7 @@ class ItemManager @JvmOverloads constructor(localPlugin: CharmedChars? = null) :
      */
     private fun applyScore(player: Player, score: Double) {
         for (reward in rewards) {
-            /*if (reward is VaultCurrencyReward) {
-                reward.applyReward(player, score)
-            } else */if (reward is DropReward) {
+            if (reward is DropReward) {
                 reward.applyReward(player, player.location, score)
             }
         }

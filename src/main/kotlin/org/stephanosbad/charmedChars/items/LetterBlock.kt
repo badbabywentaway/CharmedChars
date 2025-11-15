@@ -76,11 +76,6 @@ enum class LetterBlock(
     private var hitHigh = 0.0
 
     /**
-     * Oraxen ID
-     */
-    //val letterBlockId  = BlockLetter.entries.firstOrNull{ it.filenameBase == this.character.lowercaseChar().toString()}
-
-    /**
      * Determine if letter is hit by randomizer
      * @param testValue - hit value
      * @return - Veracity of hit

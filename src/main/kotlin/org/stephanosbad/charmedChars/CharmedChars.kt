@@ -44,29 +44,6 @@ class CharmedChars : JavaPlugin(), CoroutineScope {
     lateinit var resourcePackServer: org.stephanosbad.charmedChars.graphics.ResourcePackServer
         private set
 
-    companion object {
-//        var oraxenPlugin: Plugin? = null
-//
-//        fun getRecursive(directory: File): List<File?> {
-//
-//            val retValue = mutableListOf<File?>()
-//            val faFiles: Array<File?>? = directory.listFiles()
-//            for (file in faFiles!!) {
-//                if (file!!.getName().matches("^(.*?)".toRegex())) {
-//                    retValue.add(file)
-//                }
-//                if (file.isDirectory()) {
-//                    retValue.addAll(
-//                        getRecursive(
-//                            file
-//                        )
-//                    )
-//                }
-//            }
-//            return retValue
-//        }
-    }
-
     /**
      * Location of configuration data handler
      */
@@ -88,25 +65,6 @@ class CharmedChars : JavaPlugin(), CoroutineScope {
         } catch (e: IOException) {
             e.printStackTrace()
         }
-
-
-//        var itemsAdderFolder = getPackUrl(true)
-//            try {
-//                FileUtils.copyResourcesRecursively(
-//                    Objects.requireNonNull(this.javaClass.getResource("/Oraxen")),
-//                    File(itemsAdderFolder!!)
-//                )
-//            } catch (e: Exception) {
-//                e.printStackTrace()
-//            } catch (e: Error) {
-//                e.printStackTrace()
-//            }
-
-
-       /* if (setupEconomy()) {
-            vaultEconomyEnabled = setupEconomy()
-        }*/
-        //println("Vault " + (if (vaultEconomyEnabled) "confirmed." else "not available."))
 
         // Initialize config manager
         configManager = ConfigManager(this)

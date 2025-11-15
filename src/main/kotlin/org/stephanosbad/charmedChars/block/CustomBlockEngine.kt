@@ -134,7 +134,6 @@ class CustomBlockEngine(private val plugin: CharmedChars, var initialBlockCode: 
         }
 
         fun getInstance(color: BlockColor, nonAlphaNumeric: NonAlphaNumBlocks): CustomBlock?{
-            //var blockLetter = NonAlphaNumBlocks.entries.firstOrNull { it.filenameBase == nonAlphaNumeric.nonAlphaNumBlockName }
             var letterBlockKey = globalPlugin?.customBlockEngine?.characterBlockKeys[Pair(color, nonAlphaNumeric )]
             letterBlockKey?.let {
                 val item = ItemStack(Material.NOTE_BLOCK)
@@ -159,7 +158,6 @@ class CustomBlockEngine(private val plugin: CharmedChars, var initialBlockCode: 
         }
 
         fun getInstance(color: BlockColor, numericBlock: NumericBlock): CustomBlock?{
-            //var blockNumber = BlockNumber.entries.firstOrNull { it.filenameBase == numericBlock.name }
             var numberBlockKey = globalPlugin?.customBlockEngine?.numberBlockKeys[Pair(color, numericBlock )]
             numberBlockKey?.let {
                 val item = ItemStack(Material.NOTE_BLOCK)

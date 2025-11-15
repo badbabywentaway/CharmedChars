@@ -30,6 +30,4 @@ enum class NumericBlock(val c: Char) {
 
     val itemStacks: MutableMap<BlockColor, ItemStack?>
         get() = _itemStacks
-
-    //val nonBlockId  = BlockLetter.entries.firstOrNull{ it.filenameBase == c.toString()}
 }
