@@ -444,7 +444,10 @@ class TextureManager(private val plugin: CharmedChars) {
         }
 
         val noteBlockJson = """{
-    "parent": "block/note_block",
+    "parent": "minecraft:item/generated",
+    "textures": {
+        "layer0": "minecraft:block/note_block"
+    },
     "overrides": [
         ${overrides.joinToString(",\n        ")}
     ]
