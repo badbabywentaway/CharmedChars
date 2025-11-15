@@ -14,6 +14,7 @@ import org.stephanosbad.charmedChars.utility.WordDict
 import org.bukkit.plugin.java.JavaPlugin
 import org.bukkit.Bukkit
 import org.stephanosbad.charmedChars.block.CustomBlockEngine
+import org.stephanosbad.charmedChars.commands.DebugItemCommand
 import org.stephanosbad.charmedChars.commands.ExampleCommand
 import org.stephanosbad.charmedChars.commands.ReloadCommand
 import org.stephanosbad.charmedChars.commands.TextureCommand
@@ -98,6 +99,7 @@ class CharmedChars : JavaPlugin(), CoroutineScope {
         getCommand("example")?.setExecutor(ExampleCommand(this))
         getCommand("reload")?.setExecutor(ReloadCommand(this))
         getCommand("textures")?.setExecutor(TextureCommand(this))
+        getCommand("debugitem")?.setExecutor(DebugItemCommand(this))
 
         // Register event listeners
         server.pluginManager.registerEvents(ExampleListener(this), this)

@@ -23,6 +23,11 @@ commands:
     usage: /textures <download|status|regenerate|help>
     permission: charmedChars.textures
     aliases: [resourcepack, rp, pack]
+  debugitem:
+    description: Debug item in main hand (shows custom model data)
+    usage: /debugitem
+    permission: charmedChars.admin
+    aliases: [itemdebug, checkitem]
 
 permissions:
   charmedChars.example:
