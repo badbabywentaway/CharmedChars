@@ -113,7 +113,7 @@ class CustomBlockEngine(private val plugin: CharmedChars, var initialBlockCode: 
             var letterBlockKey = globalPlugin?.customBlockEngine?.letterBlockKeys[Pair(color, letterBlock )]
 
             letterBlockKey?.let{
-                val item = ItemStack(Material.CHARBLOCK)
+                val item = ItemStack(Material.NOTE_BLOCK)
                 val meta = item.itemMeta
 
                 meta.displayName(
@@ -136,7 +136,7 @@ class CustomBlockEngine(private val plugin: CharmedChars, var initialBlockCode: 
         fun getInstance(color: BlockColor, nonAlphaNumeric: NonAlphaNumBlocks): CustomBlock?{
             var letterBlockKey = globalPlugin?.customBlockEngine?.characterBlockKeys[Pair(color, nonAlphaNumeric )]
             letterBlockKey?.let {
-                val item = ItemStack(Material.CHARBLOCK)
+                val item = ItemStack(Material.NOTE_BLOCK)
                 val meta = item.itemMeta
 
                 meta.displayName(
@@ -160,7 +160,7 @@ class CustomBlockEngine(private val plugin: CharmedChars, var initialBlockCode: 
         fun getInstance(color: BlockColor, numericBlock: NumericBlock): CustomBlock?{
             var numberBlockKey = globalPlugin?.customBlockEngine?.numberBlockKeys[Pair(color, numericBlock )]
             numberBlockKey?.let {
-                val item = ItemStack(Material.CHARBLOCK)
+                val item = ItemStack(Material.NOTE_BLOCK)
                 val meta = item.itemMeta
 
                 meta.displayName(

@@ -78,7 +78,7 @@ class CharmedChars : JavaPlugin(), CoroutineScope {
         textureManager = TextureManager(this)
 
         // IMPORTANT: CustomBlockEngine must be initialized BEFORE textureManager.initialize()
-        // TextureManager depends on CustomBlockEngine for generating charblock.json
+        // TextureManager depends on CustomBlockEngine for generating note_block.json
         customBlockEngine = CustomBlockEngine(this, 1100)
 
         // Initialize resource pack server
