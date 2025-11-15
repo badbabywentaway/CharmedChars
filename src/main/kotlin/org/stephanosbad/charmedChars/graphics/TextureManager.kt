@@ -299,7 +299,7 @@ class TextureManager(private val plugin: CharmedChars) {
         customBlockEngine.letterBlockKeys.forEach { (colorLetterPair, keyDataPair) ->
             val (color, letter) = colorLetterPair
             val (_, customModelData) = keyDataPair
-            allBlocks.add(customModelData to (color.directoryName to letter.character.toString()))
+            allBlocks.add(customModelData to (color.directoryName to letter.character.lowercaseChar().toString()))
         }
 
         // Add number blocks
@@ -420,7 +420,7 @@ class TextureManager(private val plugin: CharmedChars) {
                     "predicate": {
                         "custom_model_data": $customModelData
                     },
-                    "model": "item/${color.directoryName}/${letter.character}"
+                    "model": "item/${color.directoryName}/${letter.character.lowercaseChar()}"
                 }""".trimIndent())
             modelDataCounter++
         }
