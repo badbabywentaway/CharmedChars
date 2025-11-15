@@ -326,7 +326,7 @@ class TextureManager(private val plugin: CharmedChars) {
                     "predicate": {
                         "custom_model_data": $customModelData
                     },
-                    "model": "item/${color.directoryName}/${letter.character}"
+                    "model": "item/${color.directoryName}/${letter.character.lowercaseChar()}"
                 }""".trimIndent())
             modelDataCounter++
         }
