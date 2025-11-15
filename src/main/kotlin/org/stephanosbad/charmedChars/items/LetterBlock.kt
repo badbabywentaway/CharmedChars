@@ -57,11 +57,6 @@ enum class LetterBlock(
         mutableMapOf<BlockColor, ItemStack?>().apply {
             for (color in BlockColor.entries) {
                 val customBlock = CustomBlockEngine.getInstance(color, this@LetterBlock)
-                if (customBlock == null) {
-                    System.err.println("WARNING: CustomBlockEngine.getInstance returned null for ${color.name} ${this@LetterBlock.character}")
-                    System.err.println("globalPlugin = ${CustomBlockEngine.globalPlugin}")
-                    System.err.println("customBlockEngine = ${CustomBlockEngine.globalPlugin?.customBlockEngine}")
-                }
                 this[color] = customBlock?.itemStack
             }
         }
@@ -129,27 +124,9 @@ enum class LetterBlock(
          * @return Item stack of single letter block
          */
         fun randomPickBlock(): ItemStack? {
-            val pickedLetter = randomPick()
+            val pickedLetter = randomPick() ?: return null
             val pickedColor = BlockColor.getRand()
-
-            System.err.println("DEBUG randomPickBlock: Picked letter = ${pickedLetter?.character}, color = ${pickedColor?.name}")
-
-            if (pickedLetter == null) {
-                System.err.println("ERROR: randomPick() returned null!")
-                return null
-            }
-
             val itemStack = pickedLetter.itemStacks[pickedColor]
-
-            if (itemStack == null) {
-                System.err.println("ERROR: itemStacks[${pickedColor?.name}] returned null for letter ${pickedLetter.character}")
-                System.err.println("Available colors in itemStacks: ${pickedLetter.itemStacks.keys}")
-            } else {
-                System.err.println("DEBUG: Successfully got itemStack - type: ${itemStack.type}, hasItemMeta: ${itemStack.hasItemMeta()}")
-                if (itemStack.hasItemMeta()) {
-                    System.err.println("DEBUG: ItemMeta customModelData: ${itemStack.itemMeta?.customModelData}")
-                }
-            }
 
             // Clone ItemStack to avoid reference sharing bug
             return itemStack?.clone()
