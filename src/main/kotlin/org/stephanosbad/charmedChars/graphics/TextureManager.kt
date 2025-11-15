@@ -377,6 +377,12 @@ class TextureManager(private val plugin: CharmedChars) {
 
         noteBlockFile.writeText(noteBlockJson)
         plugin.logger.info("Generated note_block.json with $modelDataCounter custom model data overrides")
+
+        // Log first few overrides for debugging
+        if (overrides.isNotEmpty()) {
+            plugin.logger.info("Sample overrides (first 3):")
+            overrides.take(3).forEach { plugin.logger.info(it) }
+        }
     }
 
     /**
