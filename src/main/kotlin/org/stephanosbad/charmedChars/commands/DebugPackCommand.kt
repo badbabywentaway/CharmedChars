@@ -98,6 +98,46 @@ class DebugPackCommand(private val plugin: CharmedChars) : CommandExecutor {
             }
         }
 
+        // Check blockstates/note_block.json (critical for placed blocks!)
+        val noteBlockState = File(resourcePackDir, "assets/minecraft/blockstates/note_block.json")
+        sender.sendMessage(
+            Component.text("blockstates/note_block.json Exists: ${noteBlockState.exists()}")
+                .color(if (noteBlockState.exists()) NamedTextColor.GREEN else NamedTextColor.RED)
+        )
+
+        if (noteBlockState.exists()) {
+            try {
+                val content = noteBlockState.readText()
+                val lines = content.lines()
+                sender.sendMessage(
+                    Component.text("blockstates/note_block.json (first 10 lines):")
+                        .color(NamedTextColor.YELLOW)
+                )
+                lines.take(10).forEach { line ->
+                    sender.sendMessage(
+                        Component.text("  $line")
+                            .color(NamedTextColor.GRAY)
+                    )
+                }
+                if (lines.size > 10) {
+                    sender.sendMessage(
+                        Component.text("  ... (${lines.size - 10} more lines)")
+                            .color(NamedTextColor.GRAY)
+                    )
+                }
+            } catch (e: Exception) {
+                sender.sendMessage(
+                    Component.text("Error reading blockstates/note_block.json: ${e.message}")
+                        .color(NamedTextColor.RED)
+                )
+            }
+        } else {
+            sender.sendMessage(
+                Component.text("WARNING: Blockstate file missing! Placed blocks will show as note blocks.")
+                    .color(NamedTextColor.RED)
+            )
+        }
+
         // Check custom textures config
         sender.sendMessage(
             Component.text("Custom Textures Enabled: ${plugin.configManager.customTexturesEnabled}")
