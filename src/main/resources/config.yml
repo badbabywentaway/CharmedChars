@@ -30,8 +30,10 @@ custom-textures:
   # Note: This value is not currently used - the plugin hardcodes pack format 42
   pack-format: 42
 
-  # Texture resolution (16x16)
-  resolution: 16
+  # Texture resolution (512x512)
+  # Standard Minecraft resolutions: 16, 32, 64, 128, 256, 512
+  # Higher = better quality but larger resource pack size
+  resolution: 512
 
   # ===== AUTOMATIC RESOURCE PACK DELIVERY =====
 
