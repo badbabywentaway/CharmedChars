@@ -321,13 +321,12 @@ class TextureManager(private val plugin: CharmedChars) {
         customBlockEngine.letterBlockKeys.forEach { (colorLetterPair, keyDataPair) ->
             val (color, letter) = colorLetterPair
             val (_, customModelData) = keyDataPair
-            overrides.add("""
-                {
-                    "predicate": {
-                        "custom_model_data": $customModelData
-                    },
-                    "model": "item/${color.directoryName}/${letter.character}"
-                }""".trimIndent())
+            overrides.add("""{
+    "predicate": {
+        "custom_model_data": $customModelData
+    },
+    "model": "item/${color.directoryName}/${letter.character}"
+}""")
             modelDataCounter++
         }
 
@@ -335,13 +334,12 @@ class TextureManager(private val plugin: CharmedChars) {
         customBlockEngine.numberBlockKeys.forEach { (colorNumberPair, keyDataPair) ->
             val (color, number) = colorNumberPair
             val (_, customModelData) = keyDataPair
-            overrides.add("""
-                {
-                    "predicate": {
-                        "custom_model_data": $customModelData
-                    },
-                    "model": "item/${color.directoryName}/${number.c}"
-                }""".trimIndent())
+            overrides.add("""{
+    "predicate": {
+        "custom_model_data": $customModelData
+    },
+    "model": "item/${color.directoryName}/${number.c}"
+}""")
             modelDataCounter++
         }
 
@@ -356,24 +354,21 @@ class TextureManager(private val plugin: CharmedChars) {
                 '/' -> "division"
                 else -> char.nonAlphaNumBlockName
             }
-            overrides.add("""
-                {
-                    "predicate": {
-                        "custom_model_data": $customModelData
-                    },
-                    "model": "item/${color.directoryName}/$modelName"
-                }""".trimIndent())
+            overrides.add("""{
+    "predicate": {
+        "custom_model_data": $customModelData
+    },
+    "model": "item/${color.directoryName}/$modelName"
+}""")
             modelDataCounter++
         }
 
-        val noteBlockJson = """
-{
+        val noteBlockJson = """{
     "parent": "block/note_block",
     "overrides": [
         ${overrides.joinToString(",\n        ")}
     ]
-}
-        """.trimIndent()
+}"""
 
         noteBlockFile.writeText(noteBlockJson)
         plugin.logger.info("Generated note_block.json with $modelDataCounter custom model data overrides")

@@ -9,6 +9,10 @@ commands:
   charmedChars:
     usage: /charmedChars <player> <string>
     description: Give a string of letter or number blocks to a player.
+  charblock:
+    usage: /charblock <player> <color> <text>
+    description: Give custom character blocks to a player.
+    permission: charmedChars.blocks
   example:
     description: An example command
     usage: /example [player]
