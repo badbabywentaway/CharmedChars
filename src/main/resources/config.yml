@@ -26,10 +26,11 @@ custom-textures:
   # Automatically generate resource pack on startup
   auto-generate: true
 
-  # Resource pack format version (34 for Minecraft 1.21-1.21.1)
-  # Note: This value is not currently used - the plugin hardcodes pack format 34
-  # Pack format reference: 18 (1.20.2-1.20.4), 32 (1.20.5-1.20.6), 34 (1.21-1.21.1), 42 (1.21.2-1.21.3), 46 (1.21.4+)
-  pack-format: 34
+  # Resource pack format version (69 for Minecraft 1.21.9-1.21.10)
+  # Note: This value is not currently used - the plugin hardcodes min_format: [69, 0], max_format: [69, 0]
+  # MC 1.21.9+ uses new array-based format system instead of single pack_format number
+  # Legacy pack_format reference: 18 (1.20.2-1.20.4), 32 (1.20.5-1.20.6), 34 (1.21-1.21.1), 42 (1.21.2-1.21.3)
+  pack-format: 69
 
   # Texture resolution (512x512)
   # Standard Minecraft resolutions: 16, 32, 64, 128, 256, 512

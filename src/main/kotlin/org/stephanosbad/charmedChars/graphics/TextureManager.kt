@@ -231,12 +231,9 @@ class TextureManager(private val plugin: CharmedChars) {
         val content = """
 {
     "pack": {
-        "pack_format": 34,
-        "supported_formats": {
-            "min_inclusive": 18,
-            "max_inclusive": 34
-        },
-        "description": "CharmedChars Letter, Number & Symbol Blocks"
+        "description": "CharmedChars Letter, Number & Symbol Blocks",
+        "min_format": [69, 0],
+        "max_format": [69, 0]
     }
 }
         """.trimIndent()
