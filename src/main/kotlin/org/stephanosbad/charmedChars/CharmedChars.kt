@@ -47,6 +47,9 @@ class CharmedChars : JavaPlugin(), CoroutineScope {
     val isCustomBlockEngineInitialized: Boolean
         get() = ::customBlockEngine.isInitialized
 
+    lateinit var resourcePackServer: org.stephanosbad.charmedChars.graphics.ResourcePackServer
+        private set
+
     // In-memory storage for custom block data
     // In production, you should use a database or persistent file storage
     val customBlockData = mutableMapOf<String, String>()
@@ -129,12 +132,17 @@ class CharmedChars : JavaPlugin(), CoroutineScope {
         // TextureManager depends on CustomBlockEngine for generating note_block.json
         customBlockEngine = CustomBlockEngine(this, 1100)
 
+        // Initialize resource pack server
+        resourcePackServer = org.stephanosbad.charmedChars.graphics.ResourcePackServer(this)
+
         // Initialize textures system
         // Note: Runs asynchronously to avoid blocking server startup, but CustomBlockEngine
         // is already initialized synchronously above, so no race condition exists
         if (configManager.customTexturesEnabled) {
             launch {
                 textureManager.initialize()
+                // Start HTTP server after resource pack is generated
+                resourcePackServer.start()
             }
         }
 
@@ -188,8 +196,12 @@ class CharmedChars : JavaPlugin(), CoroutineScope {
 
     override fun onDisable() {
         // Plugin shutdown logic
-        // Plugin shutdown logic
         saveCustomBlockData()
+
+        // Stop HTTP server
+        if (::resourcePackServer.isInitialized) {
+            resourcePackServer.stop()
+        }
 
         // Cancel all coroutines
         job.cancel()

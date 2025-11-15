@@ -508,8 +508,14 @@ class TextureManager(private val plugin: CharmedChars) {
             return
         }
 
-        // Get resource pack URL from config
-        val resourcePackUrl = plugin.configManager.resourcePackUrl
+        // Get resource pack URL - prefer self-hosted if available
+        val resourcePackUrl = if (plugin.configManager.selfHostEnabled &&
+                                   ::plugin.resourcePackServer.isInitialized &&
+                                   plugin.resourcePackServer.isRunning()) {
+            plugin.resourcePackServer.getResourcePackUrl()
+        } else {
+            plugin.configManager.resourcePackUrl
+        }
 
         if (resourcePackUrl.isNotBlank() && resourcePackHash != null) {
             // Send resource pack automatically using Paper API

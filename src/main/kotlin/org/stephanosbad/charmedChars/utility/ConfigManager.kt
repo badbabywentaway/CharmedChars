@@ -55,6 +55,15 @@ class ConfigManager(private val plugin: CharmedChars) {
     val resourcePackAutoSend: Boolean
         get() = config.getBoolean("custom-textures.auto-send-on-join", true)
 
+    val selfHostEnabled: Boolean
+        get() = config.getBoolean("custom-textures.self-host.enabled", true)
+
+    val selfHostPort: Int
+        get() = config.getInt("custom-textures.self-host.port", 8080)
+
+    val selfHostAddress: String
+        get() = config.getString("custom-textures.self-host.address") ?: "0.0.0.0"
+
     fun reloadConfig() {
         plugin.reloadConfig()
         this.config = plugin.config

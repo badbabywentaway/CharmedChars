@@ -41,15 +41,36 @@ custom-textures:
   resolution: 16
 
   # ===== AUTOMATIC RESOURCE PACK DELIVERY =====
-  # URL where the resource pack is hosted
+
+  # ===== SELF-HOSTING (EASIEST OPTION) =====
+  # The plugin can host the resource pack directly from the Minecraft server
+  # No external web server needed!
+  self-host:
+    # Enable built-in HTTP server for resource pack hosting
+    # If enabled, the plugin will automatically serve the resource pack
+    # and players will download it directly from the Minecraft server
+    enabled: true
+
+    # Port for the HTTP server
+    # Make sure this port is open in your firewall
+    # Common choices: 8080, 8888, 9000
+    port: 8080
+
+    # Address to bind to
+    # "0.0.0.0" = accept connections from anywhere
+    # "127.0.0.1" = only localhost (for testing)
+    # Your server IP = accept from that IP only
+    address: "0.0.0.0"
+
+  # ===== EXTERNAL HOSTING (OPTIONAL) =====
+  # If self-hosting is disabled, you can specify an external URL
   # Examples:
   #   - HTTP: "http://yourserver.com/CharmedChars-ResourcePack.zip"
   #   - HTTPS: "https://yourserver.com/resourcepacks/CharmedChars-ResourcePack.zip"
   #   - File (local testing): "file:///C:/path/to/CharmedChars-ResourcePack.zip"
   #
-  # Leave empty ("") to disable automatic sending (players must install manually)
-  # For local testing, use file:// URL pointing to the generated ZIP
-  # For production servers, host the ZIP on a web server and use HTTP/HTTPS URL
+  # Leave empty ("") to use self-hosting
+  # Only used if self-host.enabled is false
   resource-pack-url: ""
 
   # Whether resource pack is required (kicks player if they decline)
