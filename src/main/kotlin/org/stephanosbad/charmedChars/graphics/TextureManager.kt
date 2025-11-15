@@ -654,10 +654,19 @@ class TextureManager(private val plugin: CharmedChars) {
 
     /**
      * Regenerate resource pack (useful for adding new textures)
+     * Forces re-extraction of assets from the JAR to ensure all files are up-to-date
      */
     fun regenerateResourcePack() {
         plugin.launch {
             try {
+                // Delete extracted_pack directory to force re-extraction
+                if (extractedPackDir.exists()) {
+                    plugin.logger.info("Deleting extracted pack directory to force re-extraction...")
+                    extractedPackDir.deleteRecursively()
+                }
+
+                // Re-extract and regenerate
+                extractResourcePackAssets()
                 generateResourcePack()
                 plugin.logger.info("Resource pack regenerated successfully!")
             } catch (e: Exception) {
