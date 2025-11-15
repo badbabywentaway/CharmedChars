@@ -18,14 +18,6 @@ max-players-per-command: 5
 # Enable async processing for better performance
 async-processing: true
 
-# Custom Blocks Configuration
-custom-blocks:
-  # Enable custom decorative blocks (Magic Stone, Enchanted Log, etc.)
-  enabled: true
-
-  # Block hardness (mining time)
-  hardness: 2.0
-
 # Custom Textures Configuration
 custom-textures:
   # Enable custom textures system

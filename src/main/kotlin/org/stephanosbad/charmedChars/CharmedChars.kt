@@ -14,9 +14,6 @@ import org.stephanosbad.charmedChars.utility.WordDict
 import org.bukkit.plugin.java.JavaPlugin
 import org.bukkit.Bukkit
 import org.stephanosbad.charmedChars.block.CustomBlockEngine
-import org.stephanosbad.charmedChars.listeners.CustomBlockListener
-import org.stephanosbad.charmedChars.block.CustomBlocks
-import org.stephanosbad.charmedChars.commands.BlocksCommand
 import org.stephanosbad.charmedChars.commands.ExampleCommand
 import org.stephanosbad.charmedChars.commands.ReloadCommand
 import org.stephanosbad.charmedChars.commands.TextureCommand
@@ -35,9 +32,6 @@ class CharmedChars : JavaPlugin(), CoroutineScope {
     lateinit var configManager: ConfigManager
         private set
 
-    lateinit var customBlocks: CustomBlocks
-        private set
-
     lateinit var textureManager: TextureManager
         private set
 
@@ -50,9 +44,6 @@ class CharmedChars : JavaPlugin(), CoroutineScope {
     lateinit var resourcePackServer: org.stephanosbad.charmedChars.graphics.ResourcePackServer
         private set
 
-    // In-memory storage for custom block data
-    // In production, you should use a database or persistent file storage
-    val customBlockData = mutableMapOf<String, String>()
     companion object {
 //        var oraxenPlugin: Plugin? = null
 //
@@ -124,10 +115,6 @@ class CharmedChars : JavaPlugin(), CoroutineScope {
         // Initialize texture manager (constructor only, not initialized yet)
         textureManager = TextureManager(this)
 
-        // Initialize custom blocks system
-        customBlocks = CustomBlocks(this)
-        customBlocks.registerCustomBlocks()
-
         // IMPORTANT: CustomBlockEngine must be initialized BEFORE textureManager.initialize()
         // TextureManager depends on CustomBlockEngine for generating note_block.json
         customBlockEngine = CustomBlockEngine(this, 1100)
@@ -149,12 +136,10 @@ class CharmedChars : JavaPlugin(), CoroutineScope {
         // Register commands
         getCommand("example")?.setExecutor(ExampleCommand(this))
         getCommand("reload")?.setExecutor(ReloadCommand(this))
-        getCommand("blocks")?.setExecutor(BlocksCommand(this))
         getCommand("textures")?.setExecutor(TextureCommand(this))
 
         // Register event listeners
         server.pluginManager.registerEvents(ExampleListener(this), this)
-        server.pluginManager.registerEvents(CustomBlockListener(this), this)
         server.pluginManager.registerEvents(org.stephanosbad.charmedChars.listeners.ResourcePackListener(this), this)
 
         // Async startup operations
@@ -170,13 +155,6 @@ class CharmedChars : JavaPlugin(), CoroutineScope {
             Component.text("Plugin loaded successfully! Built with Gradle + Kotlin")
                 .color(NamedTextColor.GREEN)
         )
-
-        if (configManager.customBlocksEnabled) {
-            server.consoleSender.sendMessage(
-                Component.text("Custom blocks system enabled!")
-                    .color(NamedTextColor.AQUA)
-            )
-        }
 
         if (configManager.customTexturesEnabled) {
             server.consoleSender.sendMessage(
@@ -195,9 +173,6 @@ class CharmedChars : JavaPlugin(), CoroutineScope {
     }
 
     override fun onDisable() {
-        // Plugin shutdown logic
-        saveCustomBlockData()
-
         // Stop HTTP server
         if (::resourcePackServer.isInitialized) {
             resourcePackServer.stop()
@@ -220,11 +195,6 @@ class CharmedChars : JavaPlugin(), CoroutineScope {
         launch {
             configManager.reloadConfig()
 
-            // Reload custom blocks if needed
-            if (configManager.customBlocksEnabled) {
-                customBlocks.registerCustomBlocks()
-            }
-
             // Reload textures if needed
             if (configManager.customTexturesEnabled) {
                 textureManager.regenerateResourcePack()
@@ -244,21 +214,6 @@ class CharmedChars : JavaPlugin(), CoroutineScope {
         launch(Dispatchers.IO) {
             block()
         }
-    }
-
-    // Custom block data persistence methods
-    // In production, implement proper database/file storage
-    private fun saveCustomBlockData() {
-        if (customBlockData.isEmpty()) return
-
-        logger.info("Saving ${customBlockData.size} custom block locations...")
-        // TODO: Implement persistent storage (JSON file, database, etc.)
-        // For now, data is lost on server restart
-    }
-
-    private fun loadCustomBlockData() {
-        // TODO: Load custom block data from persistent storage
-        logger.info("Loading custom block data...")
     }
 
 }

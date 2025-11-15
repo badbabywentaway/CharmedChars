@@ -28,12 +28,6 @@ class ConfigManager(private val plugin: CharmedChars) {
     val asyncProcessingEnabled: Boolean
         get() = config.getBoolean("async-processing", true)
 
-    val customBlocksEnabled: Boolean
-        get() = config.getBoolean("custom-blocks.enabled", true)
-
-    val customBlockHardness: Double
-        get() = config.getDouble("custom-blocks.hardness", 2.0)
-
     val customTexturesEnabled: Boolean
         get() = config.getBoolean("custom-textures.enabled", true)
 

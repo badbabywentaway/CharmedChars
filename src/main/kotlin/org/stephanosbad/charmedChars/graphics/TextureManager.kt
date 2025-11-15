@@ -31,17 +31,6 @@ class TextureManager(private val plugin: CharmedChars) {
     // Resource pack SHA-1 hash for verification
     private var resourcePackHash: String? = null
 
-    companion object {
-        // Custom model data values for each block type
-        const val MAGIC_STONE_MODEL = 1001
-        const val ENCHANTED_LOG_MODEL = 1002
-        const val CRYSTAL_BLOCK_MODEL = 1003
-
-        // Texture file names
-        const val MAGIC_STONE_TEXTURE = "magic_stone"
-        const val ENCHANTED_LOG_TEXTURE = "enchanted_log"
-        const val CRYSTAL_BLOCK_TEXTURE = "crystal_block"
-    }
 
     /**
      * Initialize the texture manager and generate the resource pack
@@ -466,25 +455,6 @@ class TextureManager(private val plugin: CharmedChars) {
                 zip.closeEntry()
             }
         }
-    }
-
-    /**
-     * Apply custom model data to an item for custom textures
-     */
-    fun applyCustomTexture(item: ItemStack, blockType: String): ItemStack {
-        val meta = item.itemMeta ?: return item
-
-        val customModelData = when (blockType) {
-            "magic_stone" -> MAGIC_STONE_MODEL
-            "enchanted_log" -> ENCHANTED_LOG_MODEL
-            "crystal_block" -> CRYSTAL_BLOCK_MODEL
-            else -> return item
-        }
-
-        meta.setCustomModelData(customModelData)
-        item.itemMeta = meta
-
-        return item
     }
 
     /**

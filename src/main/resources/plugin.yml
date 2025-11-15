@@ -18,11 +18,6 @@ commands:
     description: Reload the plugin configuration
     usage: /charmedChars reload
     permission: charmedChars.admin
-  blocks:
-    description: Manage custom blocks
-    usage: /blocks <give|list> [type] [player] [amount]
-    permission: charmedChars.blocks
-    aliases: [customblocks, cb]
   textures:
     description: Manage custom textures and resource packs
     usage: /textures <download|status|regenerate|help>
@@ -36,9 +31,6 @@ permissions:
   charmedChars.admin:
     description: Admin permissions for the plugin
     default: op
-  charmedChars.blocks:
-    description: Allows management of custom blocks
-    default: op
   charmedChars.textures:
     description: Allows downloading custom textures
     default: true
@@ -47,6 +39,5 @@ permissions:
     children:
       charmedChars.example: true
       charmedChars.admin: true
-      charmedChars.blocks: true
       charmedChars.textures: true
     default: op
