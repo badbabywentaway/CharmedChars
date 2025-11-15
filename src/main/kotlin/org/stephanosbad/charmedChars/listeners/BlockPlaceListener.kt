@@ -1,6 +1,8 @@
 package org.stephanosbad.charmedChars.listeners
 
+import org.bukkit.Instrument
 import org.bukkit.Material
+import org.bukkit.Note
 import org.bukkit.block.data.type.NoteBlock
 import org.bukkit.event.EventHandler
 import org.bukkit.event.EventPriority
@@ -39,10 +41,10 @@ class BlockPlaceListener(private val plugin: CharmedChars) : Listener {
 
             val relativeValue = customModelData - 1100  // Offset to 0-based
             val note = relativeValue % 25  // 25 possible notes
-            val instrumentIndex = (relativeValue / 25) % NoteBlock.Instrument.values().size
+            val instrumentIndex = (relativeValue / 25) % Instrument.values().size
 
-            noteBlockData.note = org.bukkit.Note(note)
-            noteBlockData.instrument = NoteBlock.Instrument.values()[instrumentIndex]
+            noteBlockData.note = Note(note)
+            noteBlockData.instrument = Instrument.values()[instrumentIndex]
 
             placedBlock.blockData = noteBlockData
 
