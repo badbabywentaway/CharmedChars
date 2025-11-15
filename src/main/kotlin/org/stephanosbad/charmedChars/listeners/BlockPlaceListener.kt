@@ -48,7 +48,9 @@ class BlockPlaceListener(private val plugin: CharmedChars) : Listener {
 
             placedBlock.blockData = noteBlockData
 
-            plugin.logger.fine("Placed custom block with CMD=$customModelData -> instrument=${noteBlockData.instrument}, note=${noteBlockData.note.id}")
+            plugin.logger.info("Placed custom block: CMD=$customModelData -> instrument=${noteBlockData.instrument}, note=${noteBlockData.note.id} (relativeValue=$relativeValue)")
+        } else {
+            plugin.logger.warning("Block placed is not a NoteBlock! Type: ${placedBlock.type}, BlockData: ${placedBlock.blockData}")
         }
     }
 }

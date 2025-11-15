@@ -353,6 +353,19 @@ class TextureManager(private val plugin: CharmedChars) {
 
         blockstateFile.writeText(blockstateJson)
         plugin.logger.info("Generated note_block blockstate with ${allBlocks.size} variants")
+
+        // Log sample mappings for debugging
+        if (allBlocks.isNotEmpty()) {
+            plugin.logger.info("Sample blockstate mappings (first 3):")
+            allBlocks.take(3).forEach { (customModelData, colorAndName) ->
+                val (color, name) = colorAndName
+                val relativeValue = customModelData - 1100
+                val note = relativeValue % 25
+                val instrumentIndex = (relativeValue / 25) % instruments.size
+                val instrument = instruments[instrumentIndex]
+                plugin.logger.info("  CMD=$customModelData -> instrument=$instrument,note=$note -> block/$color/$name")
+            }
+        }
     }
 
     private fun generateItemModels() {
