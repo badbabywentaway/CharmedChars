@@ -44,6 +44,9 @@ class CharmedChars : JavaPlugin(), CoroutineScope {
     lateinit var resourcePackServer: org.stephanosbad.charmedChars.graphics.ResourcePackServer
         private set
 
+    val isResourcePackServerInitialized: Boolean
+        get() = ::resourcePackServer.isInitialized
+
     /**
      * Location of configuration data handler
      */
