@@ -34,6 +34,9 @@ commands:
     aliases: [itemdebug, checkitem]
 
 permissions:
+  charmedChars.blocks:
+    description: Allows giving character blocks to players
+    default: op
   charmedChars.example:
     description: Allows use of the example command
     default: op
@@ -46,6 +49,7 @@ permissions:
   charmedChars.*:
     description: Gives access to all MyPlugin permissions
     children:
+      charmedChars.blocks: true
       charmedChars.example: true
       charmedChars.admin: true
       charmedChars.textures: true

@@ -1,10 +1,13 @@
 package org.stephanosbad.charmedChars.commands
 
+import net.kyori.adventure.text.Component
+import net.kyori.adventure.text.format.NamedTextColor
 import org.bukkit.Bukkit
 import org.bukkit.command.Command
 import org.bukkit.command.CommandExecutor
 import org.bukkit.command.CommandSender
 import org.bukkit.command.TabCompleter
+import org.bukkit.entity.Player
 import org.bukkit.inventory.ItemStack
 import org.bukkit.util.StringUtil
 import org.stephanosbad.charmedChars.items.BlockColor
@@ -18,9 +21,24 @@ import kotlin.Boolean
 
 class CharBlock : CommandExecutor, TabCompleter {
     override fun onCommand(sender: CommandSender, command: Command, label: kotlin.String, args: Array<out kotlin.String>): Boolean {
-        if (sender !== sender.server.consoleSender) return true
+        // Check permission
+        if (!sender.hasPermission("charmedChars.blocks")) {
+            sender.sendMessage(
+                Component.text("You don't have permission to use this command.")
+                    .color(NamedTextColor.RED)
+            )
+            return true
+        }
 
         if (args.size < 3) {
+            sender.sendMessage(
+                Component.text("Usage: /charblock <player> <color> <text>")
+                    .color(NamedTextColor.RED)
+            )
+            sender.sendMessage(
+                Component.text("Colors: cyan, magenta, yellow")
+                    .color(NamedTextColor.GRAY)
+            )
             return true
         }
 
@@ -28,6 +46,10 @@ class CharBlock : CommandExecutor, TabCompleter {
         val givePlayer = Bukkit.getPlayerExact(givePlayerName)
 
         if (givePlayer == null || !givePlayer.isOnline) {
+            sender.sendMessage(
+                Component.text("Player '$givePlayerName' not found or offline.")
+                    .color(NamedTextColor.RED)
+            )
             return true
         }
 
@@ -35,33 +57,67 @@ class CharBlock : CommandExecutor, TabCompleter {
         val blockColor =  BlockColor.entries.firstOrNull { colorName.lowercase() ==  it.name.lowercase()}
         if(blockColor == null)
         {
+            sender.sendMessage(
+                Component.text("Invalid color '$colorName'. Use: cyan, magenta, or yellow")
+                    .color(NamedTextColor.RED)
+            )
             return true
         }
 
         val characterString = args[2].lowercase()
+        var blocksGiven = 0
 
         for (c in characterString.toCharArray()) {
-            var dropStack: ItemStack? = null
+            var itemStack: ItemStack? = null
+
+            // Try non-alphanumeric blocks first
             for (test in NonAlphaNumBlocks.entries) {
                 if (test.charVal == c) {
-                    dropStack = test.itemStacks[blockColor]?.clone()
+                    itemStack = test.itemStacks[blockColor]?.clone()
                 }
             }
-            if (dropStack == null) {
-                // Compare uppercase since LetterBlock.character is uppercase
+
+            if (itemStack == null) {
+                // Try letter blocks (uppercase)
                 val isThere =
                     Arrays.stream(LetterBlock.entries.toTypedArray()).filter { it -> it.character == c.uppercaseChar() }.findFirst()
                 if (!isThere.isEmpty) {
-                    dropStack = isThere.get().itemStacks[blockColor]?.clone()
+                    itemStack = isThere.get().itemStacks[blockColor]?.clone()
                 } else {
+                    // Try number blocks
                     val isThereNum =
                         Arrays.stream(NumericBlock.entries.toTypedArray()).filter { it -> it.c == c }.findFirst()
-                    if (!isThereNum.isEmpty) dropStack = isThereNum.get().itemStacks[blockColor]?.clone()
+                    if (!isThereNum.isEmpty) {
+                        itemStack = isThereNum.get().itemStacks[blockColor]?.clone()
+                    }
                 }
             }
-            if (givePlayer.location.world != null && dropStack != null) {
-                givePlayer.location.world.dropItemNaturally(givePlayer.location, dropStack)
+
+            if (itemStack != null) {
+                // Give directly to inventory, or drop if full
+                val remaining = givePlayer.inventory.addItem(itemStack)
+                if (remaining.isNotEmpty()) {
+                    // Inventory full, drop the item
+                    givePlayer.location.world?.dropItemNaturally(givePlayer.location, itemStack)
+                }
+                blocksGiven++
             }
+        }
+
+        if (blocksGiven > 0) {
+            sender.sendMessage(
+                Component.text("Gave $blocksGiven ${blockColor.name.lowercase()} blocks to ${givePlayer.name}")
+                    .color(NamedTextColor.GREEN)
+            )
+            givePlayer.sendMessage(
+                Component.text("You received $blocksGiven ${blockColor.name.lowercase()} character blocks")
+                    .color(NamedTextColor.GREEN)
+            )
+        } else {
+            sender.sendMessage(
+                Component.text("No valid characters found in '$characterString'")
+                    .color(NamedTextColor.YELLOW)
+            )
         }
 
         return true
