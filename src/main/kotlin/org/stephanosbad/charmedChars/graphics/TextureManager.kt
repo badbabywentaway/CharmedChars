@@ -269,9 +269,89 @@ class TextureManager(private val plugin: CharmedChars) {
      * Generate blockstate files for custom blocks
      */
     private fun generateBlockStates() {
-        // Note: Since we're using custom model data on items rather than actual blocks,
-        // we override the base block models through item models
+        // Generate note_block blockstate file that maps instrument+note to models
+        generateNoteBlockBlockstate()
+
+        // Generate item models with custom model data
         generateItemModels()
+    }
+
+    /**
+     * Generate note_block.json blockstate file
+     * Maps instrument + note combinations to block models based on custom model data
+     */
+    private fun generateNoteBlockBlockstate() {
+        val blockstateFile = File(blockstatesDir, "note_block.json")
+        val variants = mutableListOf<String>()
+
+        if (!plugin.isCustomBlockEngineInitialized) {
+            plugin.logger.warning("CustomBlockEngine not initialized! Cannot generate note_block blockstate")
+            return
+        }
+
+        val customBlockEngine = plugin.customBlockEngine
+
+        // Map each custom model data value to an instrument+note combination
+        val allBlocks = mutableListOf<Pair<Int, Pair<String, String>>>()  // (customModelData, (color, name))
+
+        // Add letter blocks
+        customBlockEngine.letterBlockKeys.forEach { (colorLetterPair, keyDataPair) ->
+            val (color, letter) = colorLetterPair
+            val (_, customModelData) = keyDataPair
+            allBlocks.add(customModelData to (color.directoryName to letter.character.toString()))
+        }
+
+        // Add number blocks
+        customBlockEngine.numberBlockKeys.forEach { (colorNumberPair, keyDataPair) ->
+            val (color, number) = colorNumberPair
+            val (_, customModelData) = keyDataPair
+            allBlocks.add(customModelData to (color.directoryName to number.c.toString()))
+        }
+
+        // Add character blocks
+        customBlockEngine.characterBlockKeys.forEach { (colorCharPair, keyDataPair) ->
+            val (color, char) = colorCharPair
+            val (_, customModelData) = keyDataPair
+            val modelName = when(char.charVal) {
+                '+' -> "plus"
+                '-' -> "minus"
+                '*' -> "multiply"
+                '/' -> "division"
+                else -> char.nonAlphaNumBlockName
+            }
+            allBlocks.add(customModelData to (color.directoryName to modelName))
+        }
+
+        // Sort by custom model data to ensure consistent ordering
+        allBlocks.sortBy { it.first }
+
+        // Get note block instruments
+        val instruments = listOf("harp", "basedrum", "snare", "hat", "bass", "flute", "bell",
+                                 "guitar", "chime", "xylophone", "iron_xylophone", "cow_bell",
+                                 "didgeridoo", "bit", "banjo", "pling")
+
+        // Map custom model data to instrument+note combinations
+        allBlocks.forEachIndexed { index, (customModelData, colorAndName) ->
+            val (color, name) = colorAndName
+            val relativeValue = customModelData - 1100
+            val note = relativeValue % 25
+            val instrumentIndex = (relativeValue / 25) % instruments.size
+            val instrument = instruments[instrumentIndex]
+
+            variants.add(""""instrument=$instrument,note=$note":{"model":"block/$color/$name"}""")
+        }
+
+        // Add default variant for regular note blocks (no custom data)
+        variants.add(0, """"instrument=harp,note=0":{"model":"block/note_block"}""")
+
+        val blockstateJson = """{
+    "variants":{
+        ${variants.joinToString(",\n        ")}
+    }
+}"""
+
+        blockstateFile.writeText(blockstateJson)
+        plugin.logger.info("Generated note_block blockstate with ${allBlocks.size} variants")
     }
 
     private fun generateItemModels() {
