@@ -415,12 +415,13 @@ class TextureManager(private val plugin: CharmedChars) {
         customBlockEngine.letterBlockKeys.forEach { (colorLetterPair, keyDataPair) ->
             val (color, letter) = colorLetterPair
             val (_, customModelData) = keyDataPair
-            overrides.add("""{
-    "predicate": {
-        "custom_model_data": $customModelData
-    },
-    "model": "item/${color.directoryName}/${letter.character}"
-}""")
+            overrides.add("""
+                {
+                    "predicate": {
+                        "custom_model_data": $customModelData
+                    },
+                    "model": "item/${color.directoryName}/${letter.character}"
+                }""".trimIndent())
             modelDataCounter++
         }
 
@@ -428,12 +429,13 @@ class TextureManager(private val plugin: CharmedChars) {
         customBlockEngine.numberBlockKeys.forEach { (colorNumberPair, keyDataPair) ->
             val (color, number) = colorNumberPair
             val (_, customModelData) = keyDataPair
-            overrides.add("""{
-    "predicate": {
-        "custom_model_data": $customModelData
-    },
-    "model": "item/${color.directoryName}/${number.c}"
-}""")
+            overrides.add("""
+                {
+                    "predicate": {
+                        "custom_model_data": $customModelData
+                    },
+                    "model": "item/${color.directoryName}/${number.c}"
+                }""".trimIndent())
             modelDataCounter++
         }
 
@@ -448,12 +450,13 @@ class TextureManager(private val plugin: CharmedChars) {
                 '/' -> "division"
                 else -> char.nonAlphaNumBlockName
             }
-            overrides.add("""{
-    "predicate": {
-        "custom_model_data": $customModelData
-    },
-    "model": "item/${color.directoryName}/$modelName"
-}""")
+            overrides.add("""
+                {
+                    "predicate": {
+                        "custom_model_data": $customModelData
+                    },
+                    "model": "item/${color.directoryName}/$modelName"
+                }""".trimIndent())
             modelDataCounter++
         }
 
