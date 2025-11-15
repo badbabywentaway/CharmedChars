@@ -1,6 +1,6 @@
 
 plugins {
-    kotlin("jvm") version "2.2.0"
+    kotlin("jvm") version "2.2.21"
     id("com.gradleup.shadow") version "8.3.5"
     id("xyz.jpenilla.run-paper") version "2.3.1"
 
@@ -43,5 +43,5 @@ dependencies {
     }
 
     tasks.build { dependsOn(tasks.shadowJar) }
-    tasks.runServer { minecraftVersion("1.21.4") }
+    tasks.runServer { minecraftVersion("1.21.10") }
     tasks.test { useJUnitPlatform() }
