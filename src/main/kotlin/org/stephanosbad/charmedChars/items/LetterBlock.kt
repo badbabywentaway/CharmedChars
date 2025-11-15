@@ -151,7 +151,8 @@ enum class LetterBlock(
                 }
             }
 
-            return itemStack
+            // Clone ItemStack to avoid reference sharing bug
+            return itemStack?.clone()
         }
     }
 }

@@ -269,7 +269,9 @@ class ItemManager @JvmOverloads constructor(localPlugin: CharmedChars? = null) :
             }
         }
 
-        return characterBlocksAvailableInNether!![(Math.random() * characterBlocksAvailableInNether!!.size).toInt()]
+        // Clone ItemStack to avoid reference sharing bug
+        val selectedItem = characterBlocksAvailableInNether!![(Math.random() * characterBlocksAvailableInNether!!.size).toInt()]
+        return selectedItem?.clone()
     }
 
     /**
