@@ -44,22 +44,23 @@ class CharBlock : CommandExecutor, TabCompleter {
             var dropStack: ItemStack? = null
             for (test in NonAlphaNumBlocks.entries) {
                 if (test.charVal == c) {
-                    dropStack = test.itemStacks[blockColor]
+                    dropStack = test.itemStacks[blockColor]?.clone()
                 }
             }
             if (dropStack == null) {
+                // Compare uppercase since LetterBlock.character is uppercase
                 val isThere =
-                    Arrays.stream(LetterBlock.entries.toTypedArray()).filter { it -> it.character == c }.findFirst()
+                    Arrays.stream(LetterBlock.entries.toTypedArray()).filter { it -> it.character == c.uppercaseChar() }.findFirst()
                 if (!isThere.isEmpty) {
-                    dropStack = isThere.get().itemStacks[blockColor]
+                    dropStack = isThere.get().itemStacks[blockColor]?.clone()
                 } else {
                     val isThereNum =
                         Arrays.stream(NumericBlock.entries.toTypedArray()).filter { it -> it.c == c }.findFirst()
-                    if (!isThereNum.isEmpty) dropStack = isThereNum.get().itemStacks[blockColor]
+                    if (!isThereNum.isEmpty) dropStack = isThereNum.get().itemStacks[blockColor]?.clone()
                 }
             }
-            if (givePlayer.location.world != null) {
-                givePlayer.location.world.dropItemNaturally(givePlayer.location, dropStack!!)
+            if (givePlayer.location.world != null && dropStack != null) {
+                givePlayer.location.world.dropItemNaturally(givePlayer.location, dropStack)
             }
         }
 
