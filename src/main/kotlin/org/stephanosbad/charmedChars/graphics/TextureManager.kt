@@ -231,7 +231,7 @@ class TextureManager(private val plugin: CharmedChars) {
         val content = """
 {
     "pack": {
-        "pack_format": 18,
+        "pack_format": 42,
         "description": "CharmedChars Letter, Number & Symbol Blocks"
     }
 }
@@ -293,23 +293,23 @@ class TextureManager(private val plugin: CharmedChars) {
             }
         }
 
-        // Generate note_block.json with all custom model data overrides
-        generateNoteBlockItemModel()
+        // Generate charblock.json with all custom model data overrides
+        generateCharblockItemModel()
     }
 
     /**
-     * Generate note_block.json with custom model data overrides for all our character blocks
+     * Generate charblock.json with custom model data overrides for all our character blocks
      *
      * IMPORTANT: This method requires CustomBlockEngine to be initialized first.
      * CustomBlockEngine must be initialized before calling textureManager.initialize()
      */
-    private fun generateNoteBlockItemModel() {
-        val noteBlockFile = File(itemModelsDir, "note_block.json")
+    private fun generateCharblockItemModel() {
+        val charblockFile = File(itemModelsDir, "charblock.json")
         val overrides = mutableListOf<String>()
 
         // Safety check: Ensure CustomBlockEngine is initialized
         if (!plugin.isCustomBlockEngineInitialized) {
-            plugin.logger.severe("CustomBlockEngine not initialized! Cannot generate note_block.json")
+            plugin.logger.severe("CustomBlockEngine not initialized! Cannot generate charblock.json")
             plugin.logger.severe("Make sure CustomBlockEngine is created before calling textureManager.initialize()")
             return
         }
@@ -363,15 +363,15 @@ class TextureManager(private val plugin: CharmedChars) {
             modelDataCounter++
         }
 
-        val noteBlockJson = """{
-    "parent": "block/note_block",
+        val charblockJson = """{
+    "parent": "block/charblock",
     "overrides": [
         ${overrides.joinToString(",\n        ")}
     ]
 }"""
 
-        noteBlockFile.writeText(noteBlockJson)
-        plugin.logger.info("Generated note_block.json with $modelDataCounter custom model data overrides")
+        charblockFile.writeText(charblockJson)
+        plugin.logger.info("Generated charblock.json with $modelDataCounter custom model data overrides")
 
         // Log first few overrides for debugging
         if (overrides.isNotEmpty()) {
