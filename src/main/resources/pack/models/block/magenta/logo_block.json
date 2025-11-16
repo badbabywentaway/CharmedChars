@@ -1,6 +1,6 @@
 {
     "parent": "block/cube_all",
     "textures": {
-        "all": "minecraft:magenta/logo_block"
+        "all": "minecraft:block/magenta/logo_block"
     }
 }

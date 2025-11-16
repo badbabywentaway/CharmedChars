@@ -1,6 +1,6 @@
 {
     "parent": "block/cube_all",
     "textures": {
-        "all": "minecraft:yellow/a"
+        "all": "minecraft:block/yellow/a"
     }
 }
