@@ -1,6 +1,8 @@
 package org.stephanosbad.charmedChars.listeners
 
+import org.bukkit.Bukkit
 import org.bukkit.Material
+import org.bukkit.block.data.type.NoteBlock
 import org.bukkit.event.EventHandler
 import org.bukkit.event.EventPriority
 import org.bukkit.event.Listener
@@ -65,25 +67,39 @@ class NoteBlockInteractListener(private val plugin: CharmedChars) : Listener {
         }
     }
 
-    @EventHandler(priority = EventPriority.LOWEST, ignoreCancelled = false)
-    fun onBlockPhysics(event: BlockPhysicsEvent) {
-        // Prevent custom note blocks from changing when blocks are placed next to them
-        // LOWEST priority = runs FIRST, before Minecraft processes the physics update
+    @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = false)
+    fun onBlockPhysicsMonitor(event: BlockPhysicsEvent) {
+        // MONITOR priority runs LAST - restore block data if it was changed
         val block = event.block
 
         if (block.type != Material.NOTE_BLOCK) return
 
-        plugin.logger.info("[NoteBlock Debug] BlockPhysicsEvent for note block at ${block.location}")
+        val currentData = block.blockData as? NoteBlock ?: return
+        val currentNote = currentData.note.id
+        val currentInstrument = currentData.instrument
+
+        plugin.logger.info("[NoteBlock Debug] BlockPhysicsEvent MONITOR for note block at ${block.location}, note=$currentNote, instrument=$currentInstrument")
 
         // Check if this is a custom block using the CustomBlockEngine
         val customBlock = CustomBlockEngine.byAlreadyPlaced(block)
-        plugin.logger.info("[NoteBlock Debug] CustomBlock detection in BlockPhysics: ${if (customBlock != null) "FOUND" else "NULL"}")
 
         if (customBlock != null) {
-            // This is a custom block - cancel the physics event to prevent state changes
-            event.isCancelled = true
             val blockChar = customBlock.id?.character ?: customBlock.nonId?.nonAlphaNumBlockName ?: customBlock.numberId?.c?.toString() ?: "unknown"
-            plugin.logger.info("[NoteBlock] Blocked physics update for custom note block '$blockChar' at ${block.location}")
+            plugin.logger.info("[NoteBlock Debug] Custom block '$blockChar' detected in MONITOR")
+
+            // The block data should match what we expect from the custom model data
+            // If it doesn't, it means something changed it - restore it on the next tick
+            val expectedData = block.blockData as NoteBlock
+            if (currentNote != expectedData.note.id || currentInstrument != expectedData.instrument) {
+                plugin.logger.warning("[NoteBlock] Custom block data was modified! Scheduling restore...")
+                // Restore on next tick to ensure it takes effect after all event processing
+                Bukkit.getScheduler().runTask(plugin, Runnable {
+                    if (block.type == Material.NOTE_BLOCK) {
+                        block.blockData = expectedData
+                        plugin.logger.info("[NoteBlock] Restored block data for '$blockChar' at ${block.location}")
+                    }
+                })
+            }
         }
     }
 
@@ -94,27 +110,38 @@ class NoteBlockInteractListener(private val plugin: CharmedChars) : Listener {
 
         if (block.type != Material.NOTE_BLOCK) return
 
-        plugin.logger.info("[NoteBlock Debug] BlockBreakEvent for note block at ${block.location}")
+        plugin.logger.info("[NoteBlock Debug] BlockBreakEvent for note block at ${block.location}, cancelled=${event.isCancelled}")
 
         // Check if this is a custom block using the CustomBlockEngine
         val customBlock = CustomBlockEngine.byAlreadyPlaced(block)
         plugin.logger.info("[NoteBlock Debug] CustomBlock detection in BlockBreak: ${if (customBlock != null) "FOUND" else "NULL"}")
 
         if (customBlock != null) {
+            val blockChar = customBlock.id?.character ?: customBlock.nonId?.nonAlphaNumBlockName ?: customBlock.numberId?.c?.toString() ?: "unknown"
+            plugin.logger.info("[NoteBlock] Processing break for custom block '$blockChar'")
+
             // This is a custom block - prevent default behavior and handle it ourselves
             event.isCancelled = true
+            event.isDropItems = false
 
-            // Manually remove the block
-            block.type = Material.AIR
+            plugin.logger.info("[NoteBlock Debug] Event cancelled, dropping item and removing block")
 
+            // Drop the custom item
             val itemStack = customBlock.itemStack
             if (itemStack != null) {
                 block.world.dropItemNaturally(block.location, itemStack)
-                val blockChar = customBlock.id?.character ?: customBlock.nonId?.nonAlphaNumBlockName ?: customBlock.numberId?.c?.toString() ?: "unknown"
-                plugin.logger.info("[NoteBlock] Dropped custom item for note block '$blockChar' and removed block at ${block.location}")
+                plugin.logger.info("[NoteBlock] Dropped custom item for '$blockChar'")
             } else {
-                plugin.logger.warning("[NoteBlock] CustomBlock itemStack is null for block at ${block.location}")
+                plugin.logger.warning("[NoteBlock] CustomBlock itemStack is null")
             }
+
+            // Manually remove the block on next tick to ensure event cancellation takes effect
+            Bukkit.getScheduler().runTask(plugin, Runnable {
+                if (block.type == Material.NOTE_BLOCK) {
+                    block.type = Material.AIR
+                    plugin.logger.info("[NoteBlock] Removed block '$blockChar' at ${block.location}")
+                }
+            })
         }
     }
 }
