@@ -134,6 +134,7 @@ class CharmedChars : JavaPlugin(), CoroutineScope {
         }
         Bukkit.getPluginManager().registerEvents(ItemManager(this), this)
         Bukkit.getPluginManager().registerEvents(org.stephanosbad.charmedChars.listeners.BlockPlaceListener(this), this)
+        Bukkit.getPluginManager().registerEvents(org.stephanosbad.charmedChars.listeners.NoteBlockInteractListener(this), this)
         Bukkit.getPluginManager().registerEvents(org.stephanosbad.charmedChars.listeners.ResourcePackListener(this), this)
 
 
