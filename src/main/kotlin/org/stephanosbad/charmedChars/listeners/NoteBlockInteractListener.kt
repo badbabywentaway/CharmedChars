@@ -94,7 +94,7 @@ class NoteBlockInteractListener(private val plugin: CharmedChars) : Listener {
                 if (meta.hasCustomModelData()) {
                     val customModelData = meta.customModelData
                     val relativeValue = customModelData - 1100
-                    val expectedNote = relativeValue % 25
+                    val expectedNote = (relativeValue % 25).toByte()
                     val expectedInstrumentIndex = (relativeValue / 25) % org.bukkit.Instrument.values().size
                     val expectedInstrument = org.bukkit.Instrument.values()[expectedInstrumentIndex]
 
@@ -105,7 +105,7 @@ class NoteBlockInteractListener(private val plugin: CharmedChars) : Listener {
 
                         // Create the correct block data
                         val correctData = block.blockData.clone() as NoteBlock
-                        correctData.note = org.bukkit.Note(expectedNote)
+                        correctData.note = org.bukkit.Note(expectedNote.toInt())
                         correctData.instrument = expectedInstrument
 
                         // Restore on next tick to ensure it takes effect after all event processing
