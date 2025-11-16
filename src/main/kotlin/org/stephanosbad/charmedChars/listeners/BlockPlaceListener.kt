@@ -16,19 +16,29 @@ import org.stephanosbad.charmedChars.CharmedChars
  */
 class BlockPlaceListener(private val plugin: CharmedChars) : Listener {
 
-    @EventHandler(priority = EventPriority.NORMAL)
+    @EventHandler(priority = EventPriority.LOWEST)
     fun onBlockPlace(event: BlockPlaceEvent) {
         val itemInHand = event.itemInHand
 
+        plugin.logger.info("[BlockPlace Debug] Block place event: ${event.block.type} at ${event.block.location}")
+
         // Only process note blocks with custom model data
         if (itemInHand.type != Material.NOTE_BLOCK) return
-        if (!itemInHand.hasItemMeta()) return
+        if (!itemInHand.hasItemMeta()) {
+            plugin.logger.info("[BlockPlace Debug] Note block has no item meta")
+            return
+        }
 
         val meta = itemInHand.itemMeta
-        if (!meta.hasCustomModelData()) return
+        if (!meta.hasCustomModelData()) {
+            plugin.logger.info("[BlockPlace Debug] Note block has no custom model data")
+            return
+        }
 
         val customModelData = meta.customModelData
         val placedBlock = event.blockPlaced
+
+        plugin.logger.info("[BlockPlace Debug] Placing custom note block with CMD=$customModelData at ${placedBlock.location}")
 
         // Set the note block's instrument and note based on custom model data
         // This allows the resource pack to show different textures via blockstates
@@ -48,9 +58,13 @@ class BlockPlaceListener(private val plugin: CharmedChars) : Listener {
 
             placedBlock.blockData = noteBlockData
 
-            plugin.logger.info("Placed custom block: CMD=$customModelData -> instrument=${noteBlockData.instrument}, note=${noteBlockData.note.id} (relativeValue=$relativeValue)")
+            plugin.logger.info("[BlockPlace] Placed custom block: CMD=$customModelData -> instrument=${noteBlockData.instrument}, note=${noteBlockData.note.id} (relativeValue=$relativeValue) at ${placedBlock.location}")
+
+            // Verify the data was set correctly
+            val verifyData = placedBlock.blockData as NoteBlock
+            plugin.logger.info("[BlockPlace Debug] Verification - instrument=${verifyData.instrument}, note=${verifyData.note.id}")
         } else {
-            plugin.logger.warning("Block placed is not a NoteBlock! Type: ${placedBlock.type}, BlockData: ${placedBlock.blockData}")
+            plugin.logger.warning("[BlockPlace] Block placed is not a NoteBlock! Type: ${placedBlock.type}, BlockData: ${placedBlock.blockData}")
         }
     }
 }
