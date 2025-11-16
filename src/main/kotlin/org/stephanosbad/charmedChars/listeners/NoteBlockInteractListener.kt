@@ -1,8 +1,9 @@
 package org.stephanosbad.charmedChars.listeners
 
 import org.bukkit.Bukkit
-import org.bukkit.Location
 import org.bukkit.Material
+import org.bukkit.NamespacedKey
+import org.bukkit.block.Block
 import org.bukkit.block.data.type.NoteBlock
 import org.bukkit.event.EventHandler
 import org.bukkit.event.EventPriority
@@ -13,22 +14,48 @@ import org.bukkit.event.block.BlockPlaceEvent
 import org.bukkit.event.block.BlockPhysicsEvent
 import org.bukkit.event.block.NotePlayEvent
 import org.bukkit.event.player.PlayerInteractEvent
+import org.bukkit.persistence.PersistentDataType
 import org.stephanosbad.charmedChars.CharmedChars
-import org.stephanosbad.charmedChars.block.CustomBlockEngine
-import java.util.concurrent.ConcurrentHashMap
 
 /**
  * Prevents custom note blocks from being interacted with (prevents note cycling)
  * Custom letter/number blocks should not change their instrument/note when clicked
+ * Uses PersistentDataContainer to store custom model data in chunks
  */
 class NoteBlockInteractListener(private val plugin: CharmedChars) : Listener {
 
-    // Track custom noteblocks by location -> customModelData
-    private val customBlocks = ConcurrentHashMap<Location, Int>()
+    /**
+     * Get the custom model data stored in PDC for a block
+     */
+    private fun getCustomModelData(block: Block): Int? {
+        val chunk = block.chunk
+        val key = NamespacedKey(plugin, "noteblock_${block.x}_${block.y}_${block.z}")
+        return chunk.persistentDataContainer.get(key, PersistentDataType.INTEGER)
+    }
+
+    /**
+     * Store custom model data in PDC for a block
+     */
+    private fun setCustomModelData(block: Block, customModelData: Int) {
+        val chunk = block.chunk
+        val key = NamespacedKey(plugin, "noteblock_${block.x}_${block.y}_${block.z}")
+        chunk.persistentDataContainer.set(key, PersistentDataType.INTEGER, customModelData)
+        plugin.logger.info("[NoteBlock PDC] Stored CMD=$customModelData for block at ${block.location}")
+    }
+
+    /**
+     * Remove custom model data from PDC for a block
+     */
+    private fun removeCustomModelData(block: Block) {
+        val chunk = block.chunk
+        val key = NamespacedKey(plugin, "noteblock_${block.x}_${block.y}_${block.z}")
+        chunk.persistentDataContainer.remove(key)
+        plugin.logger.info("[NoteBlock PDC] Removed data for block at ${block.location}")
+    }
 
     @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
     fun onBlockPlaceMonitor(event: BlockPlaceEvent) {
-        // Track placed custom blocks
+        // Store custom model data in PDC when placing custom blocks
         val itemInHand = event.itemInHand
         if (itemInHand.type != Material.NOTE_BLOCK) return
         if (!itemInHand.hasItemMeta()) return
@@ -37,10 +64,7 @@ class NoteBlockInteractListener(private val plugin: CharmedChars) : Listener {
         if (!meta.hasCustomModelData()) return
 
         val customModelData = meta.customModelData
-        val location = event.blockPlaced.location
-
-        customBlocks[location] = customModelData
-        plugin.logger.info("[NoteBlock] Tracked custom block CMD=$customModelData at $location")
+        setCustomModelData(event.blockPlaced, customModelData)
     }
 
     @EventHandler(priority = EventPriority.LOWEST, ignoreCancelled = false)
@@ -53,12 +77,12 @@ class NoteBlockInteractListener(private val plugin: CharmedChars) : Listener {
         // Only care about note blocks
         if (clickedBlock.type != Material.NOTE_BLOCK) return
 
-        // Check if this location is tracked as a custom block
-        val customModelData = customBlocks[clickedBlock.location]
+        // Check if this block has custom model data stored in PDC
+        val customModelData = getCustomModelData(clickedBlock)
         if (customModelData != null) {
             // This is a custom block - cancel the interaction to prevent note cycling
             event.isCancelled = true
-            plugin.logger.info("[NoteBlock] Blocked interaction with tracked custom block CMD=$customModelData at ${clickedBlock.location}")
+            plugin.logger.info("[NoteBlock] Blocked interaction with custom block CMD=$customModelData at ${clickedBlock.location}")
         }
     }
 
@@ -69,12 +93,12 @@ class NoteBlockInteractListener(private val plugin: CharmedChars) : Listener {
 
         if (block.type != Material.NOTE_BLOCK) return
 
-        // Check if this location is tracked as a custom block
-        val customModelData = customBlocks[block.location]
+        // Check if this block has custom model data stored in PDC
+        val customModelData = getCustomModelData(block)
         if (customModelData != null) {
             // This is a custom block - cancel the note play event
             event.isCancelled = true
-            plugin.logger.info("[NoteBlock] Blocked note play for tracked custom block CMD=$customModelData at ${block.location}")
+            plugin.logger.info("[NoteBlock] Blocked note play for custom block CMD=$customModelData at ${block.location}")
         }
     }
 
@@ -85,8 +109,8 @@ class NoteBlockInteractListener(private val plugin: CharmedChars) : Listener {
 
         if (block.type != Material.NOTE_BLOCK) return
 
-        // Check if this location is tracked as a custom block
-        val originalCMD = customBlocks[block.location] ?: return
+        // Check if this block has custom model data stored in PDC
+        val originalCMD = getCustomModelData(block) ?: return
 
         val currentData = block.blockData as? NoteBlock ?: return
         val currentNote = currentData.note.id
@@ -129,10 +153,10 @@ class NoteBlockInteractListener(private val plugin: CharmedChars) : Listener {
 
         plugin.logger.info("[NoteBlock Debug] BlockBreakEvent HIGHEST for note block at ${block.location}, cancelled=${event.isCancelled}")
 
-        // Check if this location is tracked as a custom block
-        val customModelData = customBlocks[block.location]
+        // Check if this block has custom model data stored in PDC
+        val customModelData = getCustomModelData(block)
         if (customModelData != null) {
-            plugin.logger.info("[NoteBlock] Processing break for tracked custom block CMD=$customModelData")
+            plugin.logger.info("[NoteBlock] Processing break for custom block CMD=$customModelData")
 
             // This is a custom block - prevent default behavior and handle it ourselves
             event.isCancelled = true
@@ -150,8 +174,8 @@ class NoteBlockInteractListener(private val plugin: CharmedChars) : Listener {
             block.world.dropItemNaturally(block.location, itemStack)
             plugin.logger.info("[NoteBlock] Dropped custom item CMD=$customModelData")
 
-            // Remove from tracking
-            customBlocks.remove(block.location)
+            // Remove from PDC
+            removeCustomModelData(block)
 
             // Manually remove the block on next tick to ensure event cancellation takes effect
             Bukkit.getScheduler().runTask(plugin, Runnable {
@@ -165,9 +189,9 @@ class NoteBlockInteractListener(private val plugin: CharmedChars) : Listener {
 
     @EventHandler(priority = EventPriority.MONITOR)
     fun onBlockBreakMonitor(event: BlockBreakEvent) {
-        // Clean up tracking even if the event was cancelled or handled by someone else
+        // Clean up PDC even if the event was cancelled or handled by someone else
         if (event.block.type == Material.NOTE_BLOCK) {
-            customBlocks.remove(event.block.location)
+            removeCustomModelData(event.block)
         }
     }
 }
