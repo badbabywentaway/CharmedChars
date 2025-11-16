@@ -5,6 +5,7 @@ import org.bukkit.event.EventHandler
 import org.bukkit.event.EventPriority
 import org.bukkit.event.Listener
 import org.bukkit.event.block.Action
+import org.bukkit.event.block.BlockPhysicsEvent
 import org.bukkit.event.block.NotePlayEvent
 import org.bukkit.event.player.PlayerInteractEvent
 import org.stephanosbad.charmedChars.CharmedChars
@@ -60,6 +61,27 @@ class NoteBlockInteractListener(private val plugin: CharmedChars) : Listener {
             event.isCancelled = true
             val blockChar = customBlock.id?.character ?: customBlock.nonId?.nonAlphaNumBlockName ?: customBlock.numberId?.c?.toString() ?: "unknown"
             plugin.logger.info("[NoteBlock] Blocked note play for custom note block '$blockChar' at ${block.location}")
+        }
+    }
+
+    @EventHandler(priority = EventPriority.LOWEST, ignoreCancelled = false)
+    fun onBlockPhysics(event: BlockPhysicsEvent) {
+        // Prevent custom note blocks from changing when blocks are placed next to them
+        val block = event.block
+
+        if (block.type != Material.NOTE_BLOCK) return
+
+        plugin.logger.info("[NoteBlock Debug] BlockPhysicsEvent for note block at ${block.location}")
+
+        // Check if this is a custom block using the CustomBlockEngine
+        val customBlock = CustomBlockEngine.byAlreadyPlaced(block)
+        plugin.logger.info("[NoteBlock Debug] CustomBlock detection in BlockPhysics: ${if (customBlock != null) "FOUND" else "NULL"}")
+
+        if (customBlock != null) {
+            // This is a custom block - cancel the physics event to prevent state changes
+            event.isCancelled = true
+            val blockChar = customBlock.id?.character ?: customBlock.nonId?.nonAlphaNumBlockName ?: customBlock.numberId?.c?.toString() ?: "unknown"
+            plugin.logger.info("[NoteBlock] Blocked physics update for custom note block '$blockChar' at ${block.location}")
         }
     }
 }
