@@ -85,76 +85,83 @@ class CustomBlockEngine(private val plugin: CharmedChars, var initialBlockCode: 
                 return null
             }
 
-            val drops = block.drops
-            globalPlugin?.logger?.info("[CustomBlockEngine Debug] Block drops: ${drops.size} items")
-
-            val firstDrop = drops.firstOrNull()
-            if (firstDrop == null) {
-                globalPlugin?.logger?.info("[CustomBlockEngine Debug] No drops found")
+            if (block.type != Material.NOTE_BLOCK) {
+                globalPlugin?.logger?.info("[CustomBlockEngine Debug] Block is not a NOTE_BLOCK")
                 return null
             }
 
-            globalPlugin?.logger?.info("[CustomBlockEngine Debug] First drop: ${firstDrop.type}, hasItemMeta=${firstDrop.hasItemMeta()}")
-
-            var meta = firstDrop.itemMeta
-            if (meta == null) {
-                globalPlugin?.logger?.info("[CustomBlockEngine Debug] ItemMeta is null")
+            // Get the note block data to reverse-engineer the custom model data
+            val noteBlockData = block.blockData as? org.bukkit.block.data.type.NoteBlock
+            if (noteBlockData == null) {
+                globalPlugin?.logger?.info("[CustomBlockEngine Debug] Could not get NoteBlock data")
                 return null
             }
 
-            globalPlugin?.logger?.info("[CustomBlockEngine Debug] HasCustomModelData: ${meta.hasCustomModelData()}")
+            val note = noteBlockData.note.id
+            val instrument = noteBlockData.instrument
+            val instrumentIndex = org.bukkit.Instrument.values().indexOf(instrument)
 
-            var localBlockEngine = globalPlugin?.customBlockEngine
+            globalPlugin?.logger?.info("[CustomBlockEngine Debug] Note: $note, Instrument: $instrument (index: $instrumentIndex)")
 
-            if(meta.hasCustomModelData() && localBlockEngine != null)
-            {
-                val customModelData = meta.customModelData
-                globalPlugin?.logger?.info("[CustomBlockEngine Debug] CustomModelData: $customModelData")
+            // Reverse the mapping from BlockPlaceListener
+            // Original: relativeValue = customModelData - 1100
+            //          note = relativeValue % 25
+            //          instrumentIndex = (relativeValue / 25) % Instrument.values().size
+            // Reverse: relativeValue = instrumentIndex * 25 + note
+            //          customModelData = relativeValue + 1100
+            val relativeValue = instrumentIndex * 25 + note
+            val customModelData = relativeValue + CYAN_OFFSET
 
-                // Determine color by custom model data range
-                val color: BlockColor = when {
-                    customModelData >= YELLOW_OFFSET -> BlockColor.YELLOW
-                    customModelData >= MAGENTA_OFFSET -> BlockColor.MAGENTA
-                    customModelData >= CYAN_OFFSET -> BlockColor.CYAN
-                    else -> {
-                        globalPlugin?.logger?.info("[CustomBlockEngine Debug] CustomModelData $customModelData is below CYAN_OFFSET ($CYAN_OFFSET)")
-                        return null
-                    }
-                }
+            globalPlugin?.logger?.info("[CustomBlockEngine Debug] Calculated customModelData: $customModelData (relativeValue: $relativeValue)")
 
-                val baseVariation = customModelData - getColorOffset(color)
-                globalPlugin?.logger?.info("[CustomBlockEngine Debug] Color: $color, baseVariation: $baseVariation")
-
-                // Try to find letter block
-                val letterBlock = LetterBlock.entries.firstOrNull { it.customVariation == baseVariation }
-                if (letterBlock != null) {
-                    globalPlugin?.logger?.info("[CustomBlockEngine Debug] Found letter block: ${letterBlock.character}")
-                    return getInstance(color, letterBlock)
-                }
-
-                // Try to find number block
-                val numberIndex = baseVariation - NUMBER_OFFSET
-                if (numberIndex >= 0) {
-                    val numberBlock = NumericBlock.entries.getOrNull(numberIndex)
-                    if (numberBlock != null) {
-                        globalPlugin?.logger?.info("[CustomBlockEngine Debug] Found number block: ${numberBlock.c}")
-                        return getInstance(color, numberBlock)
-                    }
-                }
-
-                // Try to find character block
-                val charIndex = baseVariation - OPERATOR_OFFSET
-                if (charIndex >= 0) {
-                    val charBlock = NonAlphaNumBlocks.entries.getOrNull(charIndex)
-                    if (charBlock != null) {
-                        globalPlugin?.logger?.info("[CustomBlockEngine Debug] Found character block: ${charBlock.nonAlphaNumBlockName}")
-                        return getInstance(color, charBlock)
-                    }
-                }
-
-                globalPlugin?.logger?.info("[CustomBlockEngine Debug] No matching block type found for baseVariation: $baseVariation")
+            val localBlockEngine = globalPlugin?.customBlockEngine
+            if (localBlockEngine == null) {
+                globalPlugin?.logger?.info("[CustomBlockEngine Debug] CustomBlockEngine is null")
                 return null
             }
+
+            // Determine color by custom model data range
+            val color: BlockColor = when {
+                customModelData >= YELLOW_OFFSET -> BlockColor.YELLOW
+                customModelData >= MAGENTA_OFFSET -> BlockColor.MAGENTA
+                customModelData >= CYAN_OFFSET -> BlockColor.CYAN
+                else -> {
+                    globalPlugin?.logger?.info("[CustomBlockEngine Debug] CustomModelData $customModelData is below CYAN_OFFSET ($CYAN_OFFSET)")
+                    return null
+                }
+            }
+
+            val baseVariation = customModelData - getColorOffset(color)
+            globalPlugin?.logger?.info("[CustomBlockEngine Debug] Color: $color, baseVariation: $baseVariation")
+
+            // Try to find letter block
+            val letterBlock = LetterBlock.entries.firstOrNull { it.customVariation == baseVariation }
+            if (letterBlock != null) {
+                globalPlugin?.logger?.info("[CustomBlockEngine Debug] Found letter block: ${letterBlock.character}")
+                return getInstance(color, letterBlock)
+            }
+
+            // Try to find number block
+            val numberIndex = baseVariation - NUMBER_OFFSET
+            if (numberIndex >= 0 && numberIndex < NumericBlock.entries.size) {
+                val numberBlock = NumericBlock.entries.getOrNull(numberIndex)
+                if (numberBlock != null) {
+                    globalPlugin?.logger?.info("[CustomBlockEngine Debug] Found number block: ${numberBlock.c}")
+                    return getInstance(color, numberBlock)
+                }
+            }
+
+            // Try to find character block
+            val charIndex = baseVariation - OPERATOR_OFFSET
+            if (charIndex >= 0 && charIndex < NonAlphaNumBlocks.entries.size) {
+                val charBlock = NonAlphaNumBlocks.entries.getOrNull(charIndex)
+                if (charBlock != null) {
+                    globalPlugin?.logger?.info("[CustomBlockEngine Debug] Found character block: ${charBlock.nonAlphaNumBlockName}")
+                    return getInstance(color, charBlock)
+                }
+            }
+
+            globalPlugin?.logger?.info("[CustomBlockEngine Debug] No matching block type found for baseVariation: $baseVariation")
             return null
         }
 
