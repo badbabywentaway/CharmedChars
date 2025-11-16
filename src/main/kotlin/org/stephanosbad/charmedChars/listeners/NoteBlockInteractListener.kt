@@ -31,7 +31,8 @@ class NoteBlockInteractListener(private val plugin: CharmedChars) : Listener {
         if (customBlock != null) {
             // This is a custom block - cancel the interaction to prevent note cycling
             event.isCancelled = true
-            plugin.logger.fine("Blocked interaction with custom note block '${customBlock.id.character}' at ${clickedBlock.location}")
+            val blockChar = customBlock.id?.character ?: customBlock.nonId?.nonAlphaNumBlockName ?: customBlock.numberId?.c?.toString() ?: "unknown"
+            plugin.logger.fine("Blocked interaction with custom note block '$blockChar' at ${clickedBlock.location}")
         }
     }
 
@@ -47,7 +48,8 @@ class NoteBlockInteractListener(private val plugin: CharmedChars) : Listener {
         if (customBlock != null) {
             // This is a custom block - cancel the note play event
             event.isCancelled = true
-            plugin.logger.fine("Blocked note play for custom note block '${customBlock.id.character}' at ${block.location}")
+            val blockChar = customBlock.id?.character ?: customBlock.nonId?.nonAlphaNumBlockName ?: customBlock.numberId?.c?.toString() ?: "unknown"
+            plugin.logger.fine("Blocked note play for custom note block '$blockChar' at ${block.location}")
         }
     }
 }
