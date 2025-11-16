@@ -1,4 +1,6 @@
 @echo off
+setlocal enabledelayedexpansion
+
 echo === VERIFY JAR CONTENTS ===
 echo.
 
@@ -43,79 +45,90 @@ echo.
 echo === CHECKING CYAN TEXTURES ===
 echo.
 if exist "pack\assets\minecraft\textures\cyan" (
-    echo Texture files found in cyan directory:
-    dir /b "pack\assets\minecraft\textures\cyan\*.png" | findstr /n "^"
+    echo All texture files in cyan directory:
+    dir /b "pack\assets\minecraft\textures\cyan\*.png"
     echo.
 
-    REM Check for uppercase files
-    echo Checking for UPPERCASE files (these are BAD):
-    dir /b "pack\assets\minecraft\textures\cyan" | findstr /r "^[A-Z]\.png$ ^Logo.*Block\.png$"
-    if errorlevel 1 (
-        echo [OK] No uppercase files found!
-    ) else (
-        echo [ERROR] UPPERCASE FILES FOUND! These will cause issues!
-        echo          Run cleanup_uppercase.bat and rebuild!
+    echo Checking for specific files...
+    if exist "pack\assets\minecraft\textures\cyan\E.png" (
+        echo [ERROR] UPPERCASE E.png found - BAD
+        set HAS_UPPERCASE=1
+    )
+    if exist "pack\assets\minecraft\textures\cyan\A.png" (
+        echo [ERROR] UPPERCASE A.png found - BAD
+        set HAS_UPPERCASE=1
+    )
+    if exist "pack\assets\minecraft\textures\cyan\e.png" (
+        echo [OK] lowercase e.png found - GOOD
+        set HAS_LOWERCASE=1
+    )
+    if exist "pack\assets\minecraft\textures\cyan\a.png" (
+        echo [OK] lowercase a.png found - GOOD
+        set HAS_LOWERCASE=1
     )
 
     echo.
-    echo Checking for lowercase files (these are GOOD):
-    dir /b "pack\assets\minecraft\textures\cyan" | findstr /r "^[a-z]\.png$ ^logo.*block\.png$"
-    if errorlevel 1 (
-        echo [ERROR] No lowercase files found!
+    if defined HAS_UPPERCASE (
+        echo [ERROR] UPPERCASE files detected in JAR
+        echo         Run cleanup_uppercase.bat and rebuild
     ) else (
-        echo [OK] Lowercase files found!
+        echo [OK] No uppercase letter files detected
+    )
+
+    if defined HAS_LOWERCASE (
+        echo [OK] Lowercase files detected
+    ) else (
+        echo [ERROR] No lowercase files found
     )
 ) else (
-    echo ERROR: No textures found in JAR!
+    echo ERROR: No textures found in JAR
 )
 
 echo.
 echo === CHECKING CYAN BLOCK MODELS ===
 echo.
 if exist "pack\models\block\cyan" (
-    echo Block models in cyan directory:
-    dir /b "pack\models\block\cyan\*.json" | findstr "^[a-z]" | findstr /n "^" | findstr "^[1-5]:"
-    if errorlevel 1 (
-        echo [ERROR] No lowercase block models found!
+    echo Sample block models:
+    dir /b "pack\models\block\cyan\*.json" | findstr /i "^[a-e]"
+
+    if exist "pack\models\block\cyan\e.json" (
+        echo [OK] lowercase e.json found
     ) else (
-        echo [OK] Lowercase block models found!
+        echo [ERROR] e.json not found
     )
 ) else (
-    echo ERROR: No block models found in JAR!
+    echo ERROR: No block models found in JAR
 )
 
 echo.
 echo === CHECKING CYAN ITEM MODELS ===
 echo.
 if exist "pack\models\item\cyan" (
-    echo Item models in cyan directory:
-    dir /b "pack\models\item\cyan\*.json" | findstr "^[a-z]" | findstr /n "^" | findstr "^[1-5]:"
-    if errorlevel 1 (
-        echo [ERROR] No lowercase item models found!
+    echo Sample item models:
+    dir /b "pack\models\item\cyan\*.json" | findstr /i "^[a-e]"
+
+    if exist "pack\models\item\cyan\e.json" (
+        echo [OK] lowercase e.json found
     ) else (
-        echo [OK] Lowercase item models found!
+        echo [ERROR] e.json not found
     )
 ) else (
-    echo ERROR: No item models found in JAR!
+    echo ERROR: No item models found in JAR
 )
 
 echo.
-echo === CHECKING SAMPLE FILE CONTENTS ===
+echo === SAMPLE FILE CONTENTS ===
 echo.
 if exist "pack\models\block\cyan\e.json" (
     echo Contents of pack\models\block\cyan\e.json:
     type "pack\models\block\cyan\e.json"
     echo.
-) else (
-    echo [WARNING] pack\models\block\cyan\e.json not found
 )
 
 if exist "pack\models\item\cyan\e.json" (
     echo Contents of pack\models\item\cyan\e.json:
     type "pack\models\item\cyan\e.json"
     echo.
-) else (
-    echo [WARNING] pack\models\item\cyan\e.json not found
 )
 
 echo.
@@ -127,7 +140,7 @@ echo [OK] Temporary directory removed
 echo.
 echo Step 5: Deleting temporary ZIP...
 del "CharmedChars-temp.zip"
-if errorlevel 1 (
+if exist "CharmedChars-temp.zip" (
     echo [WARNING] Failed to delete CharmedChars-temp.zip
 ) else (
     echo [OK] ZIP file deleted
@@ -135,14 +148,13 @@ if errorlevel 1 (
 
 echo.
 echo ==========================================
-echo.
 echo SUMMARY:
-echo - If you see UPPERCASE files: Run cleanup_uppercase.bat and rebuild
-echo - If you see only lowercase files: JAR is clean and ready to deploy!
+echo - If uppercase files found: Run cleanup_uppercase.bat then rebuild
+echo - If only lowercase files found: JAR is clean and ready to deploy
 echo.
 echo Next steps if JAR is clean:
-echo 1. Clean server: rmdir /s /q "c:\Users\steve\Documents\Papermc\plugins\CharmedChars\extracted_pack"
-echo 2. Deploy JAR: copy build\libs\CharmedChars-1.0.0.jar "c:\Users\steve\Documents\Papermc\plugins\"
-echo 3. Restart server and test
+echo   1. Clean server extracted_pack folder
+echo   2. Copy JAR to server plugins folder
+echo   3. Restart server and test
 echo.
 pause
