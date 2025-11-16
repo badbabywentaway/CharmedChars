@@ -87,18 +87,36 @@ class NoteBlockInteractListener(private val plugin: CharmedChars) : Listener {
             val blockChar = customBlock.id?.character ?: customBlock.nonId?.nonAlphaNumBlockName ?: customBlock.numberId?.c?.toString() ?: "unknown"
             plugin.logger.info("[NoteBlock Debug] Custom block '$blockChar' detected in MONITOR")
 
-            // The block data should match what we expect from the custom model data
-            // If it doesn't, it means something changed it - restore it on the next tick
-            val expectedData = block.blockData as NoteBlock
-            if (currentNote != expectedData.note.id || currentInstrument != expectedData.instrument) {
-                plugin.logger.warning("[NoteBlock] Custom block data was modified! Scheduling restore...")
-                // Restore on next tick to ensure it takes effect after all event processing
-                Bukkit.getScheduler().runTask(plugin, Runnable {
-                    if (block.type == Material.NOTE_BLOCK) {
-                        block.blockData = expectedData
-                        plugin.logger.info("[NoteBlock] Restored block data for '$blockChar' at ${block.location}")
+            // Calculate what the note/instrument SHOULD be from the custom model data
+            val itemStack = customBlock.itemStack
+            if (itemStack != null && itemStack.hasItemMeta()) {
+                val meta = itemStack.itemMeta
+                if (meta.hasCustomModelData()) {
+                    val customModelData = meta.customModelData
+                    val relativeValue = customModelData - 1100
+                    val expectedNote = relativeValue % 25
+                    val expectedInstrumentIndex = (relativeValue / 25) % org.bukkit.Instrument.values().size
+                    val expectedInstrument = org.bukkit.Instrument.values()[expectedInstrumentIndex]
+
+                    plugin.logger.info("[NoteBlock Debug] Expected: note=$expectedNote, instrument=$expectedInstrument | Current: note=$currentNote, instrument=$currentInstrument")
+
+                    if (currentNote != expectedNote || currentInstrument != expectedInstrument) {
+                        plugin.logger.warning("[NoteBlock] Custom block data was modified! Current: note=$currentNote, instrument=$currentInstrument, Expected: note=$expectedNote, instrument=$expectedInstrument. Scheduling restore...")
+
+                        // Create the correct block data
+                        val correctData = block.blockData.clone() as NoteBlock
+                        correctData.note = org.bukkit.Note(expectedNote)
+                        correctData.instrument = expectedInstrument
+
+                        // Restore on next tick to ensure it takes effect after all event processing
+                        Bukkit.getScheduler().runTask(plugin, Runnable {
+                            if (block.type == Material.NOTE_BLOCK) {
+                                block.blockData = correctData
+                                plugin.logger.info("[NoteBlock] Restored block data for '$blockChar' to note=$expectedNote, instrument=$expectedInstrument at ${block.location}")
+                            }
+                        })
                     }
-                })
+                }
             }
         }
     }
