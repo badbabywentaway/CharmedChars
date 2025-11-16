@@ -299,7 +299,7 @@ class TextureManager(private val plugin: CharmedChars) {
         customBlockEngine.letterBlockKeys.forEach { (colorLetterPair, keyDataPair) ->
             val (color, letter) = colorLetterPair
             val (_, customModelData) = keyDataPair
-            allBlocks.add(customModelData to (color.directoryName to letter.character.toString()))
+            allBlocks.add(customModelData to (color.directoryName to letter.character.lowercaseChar().toString()))
         }
 
         // Add number blocks
@@ -353,6 +353,19 @@ class TextureManager(private val plugin: CharmedChars) {
 
         blockstateFile.writeText(blockstateJson)
         plugin.logger.info("Generated note_block blockstate with ${allBlocks.size} variants")
+
+        // Log sample mappings for debugging
+        if (allBlocks.isNotEmpty()) {
+            plugin.logger.info("Sample blockstate mappings (first 3):")
+            allBlocks.take(3).forEach { (customModelData, colorAndName) ->
+                val (color, name) = colorAndName
+                val relativeValue = customModelData - 1100
+                val note = relativeValue % 25
+                val instrumentIndex = (relativeValue / 25) % instruments.size
+                val instrument = instruments[instrumentIndex]
+                plugin.logger.info("  CMD=$customModelData -> instrument=$instrument,note=$note -> block/$color/$name")
+            }
+        }
     }
 
     private fun generateItemModels() {
@@ -402,12 +415,13 @@ class TextureManager(private val plugin: CharmedChars) {
         customBlockEngine.letterBlockKeys.forEach { (colorLetterPair, keyDataPair) ->
             val (color, letter) = colorLetterPair
             val (_, customModelData) = keyDataPair
-            overrides.add("""{
-    "predicate": {
-        "custom_model_data": $customModelData
-    },
-    "model": "item/${color.directoryName}/${letter.character}"
-}""")
+            overrides.add("""
+                {
+                    "predicate": {
+                        "custom_model_data": $customModelData
+                    },
+                    "model": "item/${color.directoryName}/${letter.character.lowercaseChar()}"
+                }""".trimIndent())
             modelDataCounter++
         }
 
@@ -415,12 +429,13 @@ class TextureManager(private val plugin: CharmedChars) {
         customBlockEngine.numberBlockKeys.forEach { (colorNumberPair, keyDataPair) ->
             val (color, number) = colorNumberPair
             val (_, customModelData) = keyDataPair
-            overrides.add("""{
-    "predicate": {
-        "custom_model_data": $customModelData
-    },
-    "model": "item/${color.directoryName}/${number.c}"
-}""")
+            overrides.add("""
+                {
+                    "predicate": {
+                        "custom_model_data": $customModelData
+                    },
+                    "model": "item/${color.directoryName}/${number.c}"
+                }""".trimIndent())
             modelDataCounter++
         }
 
@@ -435,12 +450,13 @@ class TextureManager(private val plugin: CharmedChars) {
                 '/' -> "division"
                 else -> char.nonAlphaNumBlockName
             }
-            overrides.add("""{
-    "predicate": {
-        "custom_model_data": $customModelData
-    },
-    "model": "item/${color.directoryName}/$modelName"
-}""")
+            overrides.add("""
+                {
+                    "predicate": {
+                        "custom_model_data": $customModelData
+                    },
+                    "model": "item/${color.directoryName}/$modelName"
+                }""".trimIndent())
             modelDataCounter++
         }
 
