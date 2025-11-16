@@ -1,6 +1,6 @@
 {
     "parent": "block/cube_all",
     "textures": {
-        "all": "minecraft:cyan/a"
+        "all": "minecraft:block/cyan/a"
     }
 }

@@ -17,14 +17,14 @@ import java.util.zip.ZipOutputStream
 class TextureManager(private val plugin: CharmedChars) {
 
     private val resourcePackDir = File(plugin.dataFolder, "resourcepack")
-    private val texturesDir = File(resourcePackDir, "assets/minecraft/textures")
+    private val texturesDir = File(resourcePackDir, "assets/minecraft/textures/block")
     private val blockModelsDir = File(resourcePackDir, "assets/minecraft/models/block")
     private val itemModelsDir = File(resourcePackDir, "assets/minecraft/models/item")
     private val blockstatesDir = File(resourcePackDir, "assets/minecraft/blockstates")
 
     // Extracted resource directories (copied from JAR on first run)
     private val extractedPackDir = File(plugin.dataFolder, "extracted_pack")
-    private val sourceTexturesDir = File(extractedPackDir, "assets/minecraft/textures")
+    private val sourceTexturesDir = File(extractedPackDir, "assets/minecraft/textures/block")
     private val sourceBlockModelsDir = File(extractedPackDir, "models/block")
     private val sourceItemModelsDir = File(extractedPackDir, "models/item")
 
@@ -60,9 +60,9 @@ class TextureManager(private val plugin: CharmedChars) {
 
         // Define resource paths to extract
         val resourcePaths = listOf(
-            "pack/assets/minecraft/textures/cyan",
-            "pack/assets/minecraft/textures/magenta",
-            "pack/assets/minecraft/textures/yellow",
+            "pack/assets/minecraft/textures/block/cyan",
+            "pack/assets/minecraft/textures/block/magenta",
+            "pack/assets/minecraft/textures/block/yellow",
             "pack/models/block/cyan",
             "pack/models/block/magenta",
             "pack/models/block/yellow",
@@ -99,8 +99,8 @@ class TextureManager(private val plugin: CharmedChars) {
 
         colors.forEach { color ->
             // Extract textures
-            extractClasspathDirectory("pack/assets/minecraft/textures/$color",
-                File(extractedPackDir, "assets/minecraft/textures/$color"))
+            extractClasspathDirectory("pack/assets/minecraft/textures/block/$color",
+                File(extractedPackDir, "assets/minecraft/textures/block/$color"))
 
             // Extract block models
             extractClasspathDirectory("pack/models/block/$color",
