@@ -87,7 +87,7 @@ class NoteBlockInteractListener(private val plugin: CharmedChars) : Listener {
         }
     }
 
-    @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = false)
+    @EventHandler(priority = EventPriority.LOWEST, ignoreCancelled = false)
     fun onBlockBreak(event: BlockBreakEvent) {
         // Ensure custom note blocks drop the correct item with custom model data
         val block = event.block
@@ -101,14 +101,17 @@ class NoteBlockInteractListener(private val plugin: CharmedChars) : Listener {
         plugin.logger.info("[NoteBlock Debug] CustomBlock detection in BlockBreak: ${if (customBlock != null) "FOUND" else "NULL"}")
 
         if (customBlock != null) {
-            // This is a custom block - cancel default drops and drop the custom item
-            event.isDropItems = false
+            // This is a custom block - prevent default behavior and handle it ourselves
+            event.isCancelled = true
+
+            // Manually remove the block
+            block.type = Material.AIR
 
             val itemStack = customBlock.itemStack
             if (itemStack != null) {
                 block.world.dropItemNaturally(block.location, itemStack)
                 val blockChar = customBlock.id?.character ?: customBlock.nonId?.nonAlphaNumBlockName ?: customBlock.numberId?.c?.toString() ?: "unknown"
-                plugin.logger.info("[NoteBlock] Dropped custom item for note block '$blockChar' at ${block.location}")
+                plugin.logger.info("[NoteBlock] Dropped custom item for note block '$blockChar' and removed block at ${block.location}")
             } else {
                 plugin.logger.warning("[NoteBlock] CustomBlock itemStack is null for block at ${block.location}")
             }
