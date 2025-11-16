@@ -60,9 +60,9 @@ class TextureManager(private val plugin: CharmedChars) {
 
         // Define resource paths to extract
         val resourcePaths = listOf(
-            "pack/assets/minecraft/textures/cyan",
-            "pack/assets/minecraft/textures/magenta",
-            "pack/assets/minecraft/textures/yellow",
+            "pack/assets/minecraft/textures/block/cyan",
+            "pack/assets/minecraft/textures/block/magenta",
+            "pack/assets/minecraft/textures/block/yellow",
             "pack/models/block/cyan",
             "pack/models/block/magenta",
             "pack/models/block/yellow",
@@ -99,8 +99,8 @@ class TextureManager(private val plugin: CharmedChars) {
 
         colors.forEach { color ->
             // Extract textures
-            extractClasspathDirectory("pack/assets/minecraft/textures/$color",
-                File(extractedPackDir, "assets/minecraft/textures/$color"))
+            extractClasspathDirectory("pack/assets/minecraft/textures/block/$color",
+                File(extractedPackDir, "assets/minecraft/textures/block/$color"))
 
             // Extract block models
             extractClasspathDirectory("pack/models/block/$color",
