@@ -223,10 +223,10 @@ class CharBlock : CommandExecutor, TabCompleter {
         if (args.size == 3) {
             val characterMatches: MutableList<kotlin.String?> = ArrayList<kotlin.String?>()
             for (letter in LetterBlock.entries) {
-                characterMatches.add(String.valueOf(letter.character))
+                characterMatches.add(letter.character.toString())
             }
             for (number in NumericBlock.entries) {
-                characterMatches.add(String.valueOf(number.c))
+                characterMatches.add(number.c.toString())
             }
             for (non in NonAlphaNumBlocks.entries) {
                 characterMatches.add(non.nonAlphaNumBlockName.lowercase().split("_")[0])
