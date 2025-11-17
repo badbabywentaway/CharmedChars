@@ -11,7 +11,6 @@ import org.bukkit.event.Listener
 import org.bukkit.event.block.Action
 import org.bukkit.event.block.BlockBreakEvent
 import org.bukkit.event.block.BlockDamageEvent
-import org.bukkit.event.block.BlockPhysicsEvent
 import org.bukkit.event.block.NotePlayEvent
 import org.bukkit.event.player.PlayerInteractEvent
 import org.bukkit.persistence.PersistentDataType
@@ -21,11 +20,14 @@ import org.stephanosbad.charmedChars.CharmedChars
  * Handles custom note block protection, state management and breaking
  * Uses PersistentDataContainer to store custom model data in chunks
  *
- * Protection layers (all at HIGHEST/LOWEST priority for early intervention):
- * 1. PlayerInteractEvent (LOWEST) - Prevents clicking noteblocks (stops note cycling)
+ * Protection layers:
+ * 1. PlayerInteractEvent (LOWEST) - Denies noteblock interaction (stops note cycling)
  * 2. NotePlayEvent (LOWEST) - Prevents sound from playing
- * 3. BlockPhysicsEvent (HIGHEST) - Cancels physics to prevent state changes from adjacent blocks
- * 4. BlockBreakEvent (HIGHEST) - Custom drops with correct CMD
+ * 3. BlockBreakEvent (HIGHEST) - Custom drops with correct CMD
+ * 4. BlockPlaceListener (HIGHEST) - Sets and re-applies correct note/instrument state
+ *
+ * Note: BlockPhysicsEvent is NOT cancelled - this allows block placement to work.
+ * Any state changes are fixed by BlockPlaceListener's re-application on next tick.
  */
 class NoteBlockInteractListener(private val plugin: CharmedChars) : Listener {
 
@@ -123,19 +125,9 @@ class NoteBlockInteractListener(private val plugin: CharmedChars) : Listener {
         // Check if this block has custom model data stored in PDC
         val customModelData = getCustomModelData(clickedBlock)
         if (customModelData != null) {
-            val itemInHand = event.item
-
-            if (itemInHand != null && itemInHand.type.isBlock) {
-                // Player is holding a block - don't interfere at all
-                // Let the event pass through naturally for placement
-                // BlockPhysicsEvent and BlockPlaceEvent re-application will fix any state changes
-                plugin.logger.info("[NoteBlock] Player holding block, allowing event to pass through for placement")
-                return
-            } else {
-                // Player is empty-handed or holding non-block - deny interaction
-                event.setUseInteractedBlock(org.bukkit.event.Event.Result.DENY)
-                plugin.logger.info("[NoteBlock] Denied interaction with custom block CMD=$customModelData")
-            }
+            // ALWAYS deny interaction with custom noteblocks to prevent note cycling
+            event.setUseInteractedBlock(org.bukkit.event.Event.Result.DENY)
+            plugin.logger.info("[NoteBlock] Denied interaction with custom block CMD=$customModelData")
         }
     }
 
@@ -152,22 +144,6 @@ class NoteBlockInteractListener(private val plugin: CharmedChars) : Listener {
             // This is a custom block - cancel the note play event
             event.isCancelled = true
             plugin.logger.info("[NoteBlock] Blocked note play for custom block CMD=$customModelData at ${block.location}")
-        }
-    }
-
-    @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = false)
-    fun onBlockPhysics(event: BlockPhysicsEvent) {
-        // HIGHEST priority runs early - prevent state changes before they happen
-        val block = event.block
-
-        if (block.type != Material.NOTE_BLOCK) return
-
-        // Check if this is a custom block
-        val customModelData = getCustomModelData(block)
-        if (customModelData != null) {
-            // This is a custom block - cancel physics to prevent any state changes
-            event.isCancelled = true
-            plugin.logger.info("[NoteBlock] Blocked BlockPhysicsEvent for custom block CMD=$customModelData at ${block.location}")
         }
     }
 
