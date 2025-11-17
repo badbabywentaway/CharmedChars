@@ -6,7 +6,7 @@ load: STARTUP
 depend: [ItemsAdder]
 softdepend: [ProtocolLib, WorldGuard, GriefPrevention]
 authors: [ StephanosBad ]
-description: Closed Java Spigot plugin for Minecraft Java Edition
+description: Open source word-forming puzzle game plugin for Minecraft (LGPL v3)
 commands:
   charmedChars:
     usage: /charmedChars <player> <string>

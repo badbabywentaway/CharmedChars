@@ -5,7 +5,7 @@ A word-forming puzzle game for Minecraft where players collect letter blocks fro
 ## ⚠️ Important Licensing Information
 
 ### CharmedChars License
-CharmedChars is **open source** (planned for LGPL v3 licensing).
+CharmedChars is **open source** software licensed under **GNU LGPL v3**.
 
 ### Required Dependency - ItemsAdder
 **CRITICAL NOTICE**: CharmedChars requires **ItemsAdder**, which is a **proprietary/commercial plugin**.
@@ -202,7 +202,7 @@ See `VERSION.md` for complete changelog and version history.
 
 ## License
 
-CharmedChars: **To be licensed under GNU LGPL v3** (pending license file addition)
+CharmedChars: **GNU LGPL v3** (see LICENSE.txt)
 
 **Dependency Licenses:**
 - **ItemsAdder**: Proprietary/Commercial (NOT open source) - **required dependency**
