@@ -8,8 +8,10 @@ import java.nio.file.Files
 
 class ItemsAdderSetup(private val plugin: CharmedChars) {
 
-    private val itemsAdderDataFolder = File(plugin.server.pluginManager.getPlugin("ItemsAdder")?.dataFolder?.parentFile, "ItemsAdder/data")
-    private val charmedCharsIAFolder = File(itemsAdderDataFolder, "charmedchars")
+    private val itemsAdderFolder = File(plugin.server.pluginManager.getPlugin("ItemsAdder")?.dataFolder?.parentFile, "ItemsAdder")
+    private val itemsAdderDataFolder = File(itemsAdderFolder, "data")
+    private val itemsAdderContentsFolder = File(itemsAdderFolder, "contents")
+    private val charmedCharsIAFolder = File(itemsAdderContentsFolder, "charmedchars")
 
     /**
      * Check if ItemsAdder is installed and accessible
