@@ -1,5 +1,7 @@
 package org.stephanosbad.charmedChars.items
 
+import kotlin.random.Random
+
 enum class BlockColor(val directoryName: String)
 {
     CYAN("cyan"),
@@ -8,7 +10,7 @@ enum class BlockColor(val directoryName: String)
 
     companion object {
         fun getRand(): BlockColor {
-            return entries[(Math.random() * entries.size).toInt()]
+            return entries.random()
         }
     }
 }

@@ -156,12 +156,13 @@ class ItemManager @JvmOverloads constructor(localPlugin: CharmedChars? = null) :
                     return
                 }
 
-                var chance = .03
+                var chance = plugin.configManager.letterBlockDropChance
                 if (hand.containsEnchantment(Enchantment.LOOTING)) {
+                    val baseChance = plugin.configManager.letterBlockDropChance
                     when (hand.enchantments[Enchantment.LOOTING]) {
-                        1 -> chance = .05
-                        2 -> chance = .08
-                        3 -> chance = .1
+                        1 -> chance = baseChance * plugin.configManager.lootingMultiplier1
+                        2 -> chance = baseChance * plugin.configManager.lootingMultiplier2
+                        3 -> chance = baseChance * plugin.configManager.lootingMultiplier3
                         else -> {}
                     }
                 }

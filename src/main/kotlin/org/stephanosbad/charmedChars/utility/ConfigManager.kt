@@ -58,6 +58,19 @@ class ConfigManager(private val plugin: CharmedChars) {
     val selfHostAddress: String
         get() = config.getString("custom-textures.self-host.address") ?: "0.0.0.0"
 
+    // Letter Block Drop Configuration
+    val letterBlockDropChance: Double
+        get() = config.getDouble("letter-blocks.drop-chance", 0.06)
+
+    val lootingMultiplier1: Double
+        get() = config.getDouble("letter-blocks.looting-multipliers.1", 1.67)
+
+    val lootingMultiplier2: Double
+        get() = config.getDouble("letter-blocks.looting-multipliers.2", 2.67)
+
+    val lootingMultiplier3: Double
+        get() = config.getDouble("letter-blocks.looting-multipliers.3", 3.33)
+
     fun reloadConfig() {
         plugin.reloadConfig()
         this.config = plugin.config
