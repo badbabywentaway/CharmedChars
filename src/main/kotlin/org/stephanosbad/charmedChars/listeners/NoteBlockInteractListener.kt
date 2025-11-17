@@ -10,7 +10,7 @@ import org.bukkit.event.EventPriority
 import org.bukkit.event.Listener
 import org.bukkit.event.block.Action
 import org.bukkit.event.block.BlockBreakEvent
-import org.bukkit.event.block.BlockPlaceEvent
+import org.bukkit.event.block.BlockDamageEvent
 import org.bukkit.event.block.BlockPhysicsEvent
 import org.bukkit.event.block.NotePlayEvent
 import org.bukkit.event.player.PlayerInteractEvent
@@ -58,18 +58,16 @@ class NoteBlockInteractListener(private val plugin: CharmedChars) : Listener {
         plugin.logger.info("[NoteBlock PDC] Removed data for block at ${block.location}")
     }
 
-    @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
-    fun onBlockPlaceMonitor(event: BlockPlaceEvent) {
-        // Store custom model data in PDC when placing custom blocks
-        val itemInHand = event.itemInHand
-        if (itemInHand.type != Material.NOTE_BLOCK) return
-        if (!itemInHand.hasItemMeta()) return
+    @EventHandler(priority = EventPriority.MONITOR)
+    fun onBlockDamage(event: BlockDamageEvent) {
+        // Debug handler to see if blocks are being damaged at all
+        val block = event.block
+        plugin.logger.info("[NoteBlock Debug] BlockDamageEvent for block type=${block.type} at ${block.location}, instaBreak=${event.instaBreak}, player=${event.player.name}, gameMode=${event.player.gameMode}")
 
-        val meta = itemInHand.itemMeta
-        if (!meta.hasCustomModelData()) return
-
-        val customModelData = meta.customModelData
-        setCustomModelData(event.blockPlaced, customModelData)
+        if (block.type == Material.NOTE_BLOCK) {
+            val customModelData = getCustomModelData(block)
+            plugin.logger.info("[NoteBlock Debug] BlockDamage on noteblock, CMD=$customModelData")
+        }
     }
 
     @EventHandler(priority = EventPriority.LOWEST, ignoreCancelled = false)

@@ -3,12 +3,14 @@ package org.stephanosbad.charmedChars.listeners
 import org.bukkit.Bukkit
 import org.bukkit.Instrument
 import org.bukkit.Material
+import org.bukkit.NamespacedKey
 import org.bukkit.Note
 import org.bukkit.block.data.type.NoteBlock
 import org.bukkit.event.EventHandler
 import org.bukkit.event.EventPriority
 import org.bukkit.event.Listener
 import org.bukkit.event.block.BlockPlaceEvent
+import org.bukkit.persistence.PersistentDataType
 import org.stephanosbad.charmedChars.CharmedChars
 
 /**
@@ -17,7 +19,7 @@ import org.stephanosbad.charmedChars.CharmedChars
  */
 class BlockPlaceListener(private val plugin: CharmedChars) : Listener {
 
-    @EventHandler(priority = EventPriority.LOWEST)
+    @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
     fun onBlockPlace(event: BlockPlaceEvent) {
         val itemInHand = event.itemInHand
 
@@ -61,12 +63,23 @@ class BlockPlaceListener(private val plugin: CharmedChars) : Listener {
 
             plugin.logger.info("[BlockPlace] Placed custom block: CMD=$customModelData -> instrument=${noteBlockData.instrument}, note=${noteBlockData.note.id} (relativeValue=$relativeValue) at ${placedBlock.location}")
 
-            // Verify the data was set correctly
-            val verifyData = placedBlock.blockData as NoteBlock
-            plugin.logger.info("[BlockPlace Debug] Verification - instrument=${verifyData.instrument}, note=${verifyData.note.id}")
+            // Store custom model data in PDC for this block
+            val chunk = placedBlock.chunk
+            val key = NamespacedKey(plugin, "noteblock_${placedBlock.x}_${placedBlock.y}_${placedBlock.z}")
+            chunk.persistentDataContainer.set(key, PersistentDataType.INTEGER, customModelData)
+            plugin.logger.info("[NoteBlock PDC] Stored CMD=$customModelData for block at ${placedBlock.location}")
 
-            // Note: Fake blocks disabled - event cancellation handles interaction prevention
-            // The resource pack shows the correct texture based on note/instrument data
+            // Schedule a task to re-apply the block data on the next tick
+            // This ensures our changes stick even if Minecraft modifies it based on the block below
+            Bukkit.getScheduler().runTask(plugin, Runnable {
+                if (placedBlock.type == Material.NOTE_BLOCK) {
+                    val finalData = placedBlock.blockData as NoteBlock
+                    finalData.note = Note(note)
+                    finalData.instrument = Instrument.values()[instrumentIndex]
+                    placedBlock.blockData = finalData
+                    plugin.logger.info("[BlockPlace] Re-applied block data on next tick: instrument=${finalData.instrument}, note=${finalData.note.id}")
+                }
+            })
         } else {
             plugin.logger.warning("[BlockPlace] Block placed is not a NoteBlock! Type: ${placedBlock.type}, BlockData: ${placedBlock.blockData}")
         }
