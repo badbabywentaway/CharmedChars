@@ -125,7 +125,17 @@ class NoteBlockInteractListener(private val plugin: CharmedChars) : Listener {
         // Check if this block has custom model data stored in PDC
         val customModelData = getCustomModelData(clickedBlock)
         if (customModelData != null) {
-            // ALWAYS deny interaction with custom noteblocks to prevent note cycling
+            val itemInHand = event.item
+
+            // If player is holding a placeable block, allow event to pass through
+            // This allows block placement to work naturally
+            // Any state changes to existing blocks will be fixed by BlockPlaceListener re-application
+            if (itemInHand != null && itemInHand.type.isBlock) {
+                plugin.logger.info("[NoteBlock] Player holding placeable block, allowing event for placement")
+                return
+            }
+
+            // Player is empty-handed or holding non-block item - deny interaction
             event.setUseInteractedBlock(org.bukkit.event.Event.Result.DENY)
             plugin.logger.info("[NoteBlock] Denied interaction with custom block CMD=$customModelData")
         }
