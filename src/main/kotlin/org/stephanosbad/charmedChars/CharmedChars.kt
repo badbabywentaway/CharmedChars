@@ -134,13 +134,10 @@ class CharmedChars : JavaPlugin(), CoroutineScope {
         }
         Bukkit.getPluginManager().registerEvents(ItemManager(this), this)
 
-        // Register ProtocolLib packet interception for preventing noteblock interactions
-        org.stephanosbad.charmedChars.listeners.ProtocolLibInteractionListener(this)
-
         // Register block place listener
         Bukkit.getPluginManager().registerEvents(org.stephanosbad.charmedChars.listeners.BlockPlaceListener(this), this)
 
-        // Register noteblock state management and breaking listener
+        // Register noteblock state management, interaction prevention, and breaking listener
         Bukkit.getPluginManager().registerEvents(org.stephanosbad.charmedChars.listeners.NoteBlockInteractListener(this), this)
 
         Bukkit.getPluginManager().registerEvents(org.stephanosbad.charmedChars.listeners.ResourcePackListener(this), this)
