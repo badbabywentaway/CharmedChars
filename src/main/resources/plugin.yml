@@ -24,21 +24,6 @@ commands:
     description: Reload the plugin configuration
     usage: /charmedChars reload
     permission: charmedChars.admin
-  textures:
-    description: Manage custom textures and resource packs
-    usage: /textures <download|status|regenerate|help>
-    permission: charmedChars.textures
-    aliases: [resourcepack, rp, pack]
-  debugitem:
-    description: Debug item in main hand (shows custom model data)
-    usage: /debugitem
-    permission: charmedChars.admin
-    aliases: [itemdebug, checkitem]
-  debugpack:
-    description: Debug resource pack status and configuration
-    usage: /debugpack
-    permission: charmedChars.admin
-    aliases: [packdebug, checkpack]
 
 permissions:
   charmedChars.blocks:
@@ -50,14 +35,10 @@ permissions:
   charmedChars.admin:
     description: Admin permissions for the plugin
     default: op
-  charmedChars.textures:
-    description: Allows downloading custom textures
-    default: true
   charmedChars.*:
-    description: Gives access to all MyPlugin permissions
+    description: Gives access to all CharmedChars permissions
     children:
       charmedChars.blocks: true
       charmedChars.example: true
       charmedChars.admin: true
-      charmedChars.textures: true
     default: op
