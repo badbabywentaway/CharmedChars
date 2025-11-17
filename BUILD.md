@@ -125,3 +125,33 @@ gradlew.bat runServer
 ```
 
 This will start a test server with the plugin installed at `run/` directory.
+
+---
+
+## Development
+
+### Code Organization
+
+The codebase is organized into the following packages:
+- `commands/` - Command handlers and executors
+- `config/` - Configuration management
+- `integration/` - Third-party plugin integrations (ItemsAdder)
+- `items/` - Letter block enums and item management
+- `rewards/` - Reward system implementation
+- `utility/` - Utility classes and helpers
+
+### Documentation
+
+All classes include comprehensive KDoc documentation following Kotlin best practices. The documentation covers:
+- Class-level descriptions
+- Parameter and return value documentation
+- Usage examples where helpful
+- Algorithm explanations for complex logic
+
+### Development Notes
+
+- LGPL v3 compliance, comprehensive documentation, and code organization were completed with assistance from Claude (Anthropic)
+- All source files include proper LGPL v3 license headers
+- Public APIs are fully documented for developers using this plugin as a library
+
+---
