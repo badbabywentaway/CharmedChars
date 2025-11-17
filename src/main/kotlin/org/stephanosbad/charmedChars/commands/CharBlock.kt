@@ -31,10 +31,7 @@ import org.stephanosbad.charmedChars.items.BlockColor
 import org.stephanosbad.charmedChars.items.LetterBlock
 import org.stephanosbad.charmedChars.items.NonAlphaNumBlocks
 import org.stephanosbad.charmedChars.items.NumericBlock
-import java.lang.String
 import java.util.*
-import kotlin.Array
-import kotlin.Boolean
 
 class CharBlock : CommandExecutor, TabCompleter {
     override fun onCommand(sender: CommandSender, command: Command, label: kotlin.String, args: Array<out kotlin.String>): Boolean {
