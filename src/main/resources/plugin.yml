@@ -29,6 +29,11 @@ commands:
     usage: /iastatus
     permission: charmedchars.admin
     aliases: [itemsadderstatus, charmeddebug]
+  iasetup:
+    description: Auto-setup ItemsAdder configuration (copy configs & textures)
+    usage: /iasetup [force]
+    permission: charmedchars.admin
+    aliases: [setupitemsadder, iaconfig]
 
 permissions:
   charmedChars.blocks:

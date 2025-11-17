@@ -6,7 +6,34 @@ You're getting "No valid characters found in 'hello'" because **ItemsAdder doesn
 
 The blocks need to be registered with ItemsAdder before they can be used.
 
-## Quick Setup (5 Steps)
+## ⚡ AUTOMATIC Setup (Easiest - 3 Steps!)
+
+### 1. Run Auto-Setup Command
+```
+/iasetup
+```
+
+This automatically:
+- Copies blocks.yml configuration to ItemsAdder
+- Copies all 123 texture files to ItemsAdder
+- Creates proper directory structure
+- Shows you exactly what was done
+
+### 2. Generate Resource Pack
+```
+/iazip
+```
+
+### 3. Restart Server
+```
+/stop
+```
+
+**That's it!** CharmedChars is now ready to use.
+
+---
+
+## 🔧 Manual Setup (If you prefer - 5 Steps)
 
 ### 1. Install ItemsAdder
 

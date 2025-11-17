@@ -16,6 +16,8 @@ import org.bukkit.Bukkit
 import org.stephanosbad.charmedChars.commands.ExampleCommand
 import org.stephanosbad.charmedChars.commands.ItemsAdderStatusCommand
 import org.stephanosbad.charmedChars.commands.ReloadCommand
+import org.stephanosbad.charmedChars.commands.SetupItemsAdderCommand
+import org.stephanosbad.charmedChars.integration.ItemsAdderSetup
 import org.stephanosbad.charmedChars.utility.ConfigManager
 import org.stephanosbad.charmedChars.listeners.ExampleListener
 import java.io.IOException
@@ -60,6 +62,7 @@ class CharmedChars : JavaPlugin(), CoroutineScope {
         getCommand("example")?.setExecutor(ExampleCommand(this))
         getCommand("reload")?.setExecutor(ReloadCommand(this))
         getCommand("iastatus")?.setExecutor(ItemsAdderStatusCommand())
+        getCommand("iasetup")?.setExecutor(SetupItemsAdderCommand(this))
 
         // Register event listeners
         server.pluginManager.registerEvents(ExampleListener(this), this)
@@ -77,6 +80,12 @@ class CharmedChars : JavaPlugin(), CoroutineScope {
             Component.text("CharmedChars loaded successfully with ItemsAdder integration!")
                 .color(NamedTextColor.GREEN)
         )
+
+        // Check ItemsAdder setup status
+        launch {
+            delay(2000) // Wait for ItemsAdder to fully load
+            checkItemsAdderSetup()
+        }
 
         if (getCommand(CharBlock.CommandName) != null) {
             getCommand(CharBlock.CommandName)!!.setExecutor(CharBlock())
@@ -118,6 +127,46 @@ class CharmedChars : JavaPlugin(), CoroutineScope {
     fun runAsync(block: suspend CoroutineScope.() -> Unit) {
         launch(Dispatchers.IO) {
             block()
+        }
+    }
+
+    /**
+     * Check if ItemsAdder is set up and notify admins if not
+     */
+    private fun checkItemsAdderSetup() {
+        val setup = ItemsAdderSetup(this)
+
+        if (!setup.isItemsAdderAvailable()) {
+            logger.warning("========================================")
+            logger.warning("ItemsAdder plugin not found!")
+            logger.warning("CharmedChars requires ItemsAdder to function.")
+            logger.warning("Please install ItemsAdder from SpigotMC.")
+            logger.warning("========================================")
+            return
+        }
+
+        if (!setup.isAlreadySetup()) {
+            logger.warning("========================================")
+            logger.warning("ItemsAdder is installed but not configured!")
+            logger.warning("")
+            logger.warning("Run one of these commands to setup:")
+            logger.warning("  /iasetup     - Auto-copy configs & textures")
+            logger.warning("  OR manually copy files (see docs)")
+            logger.warning("")
+            logger.warning("Then run /iazip and restart the server.")
+            logger.warning("========================================")
+
+            // Notify online ops
+            server.scheduler.runTask(this, Runnable {
+                server.onlinePlayers.filter { it.isOp }.forEach { player ->
+                    player.sendMessage(
+                        Component.text("⚠ CharmedChars needs setup! Run /iasetup to auto-configure ItemsAdder")
+                            .color(NamedTextColor.GOLD)
+                    )
+                }
+            })
+        } else {
+            logger.info("ItemsAdder configuration found. Ready to use!")
         }
     }
 
