@@ -264,16 +264,21 @@ class ItemManager @JvmOverloads constructor(localPlugin: CharmedChars? = null) :
         val hasZAdjacent = testForLetter(e.player, world.getBlockAt(x, y, z + 1)).first != '\u0000' ||
                           testForLetter(e.player, world.getBlockAt(x, y, z - 1)).first != '\u0000'
 
-        // Determine which axis the word is on
+        // Determine scan direction based on which adjacent blocks have letters
         val lateralDirection: LateralDirection
-        if (hasXAdjacent && !hasZAdjacent) {
-            // Word is on X-axis, scan left to find start
+        val hasXPlus = testForLetter(e.player, world.getBlockAt(x + 1, y, z)).first != '\u0000'
+        val hasXMinus = testForLetter(e.player, world.getBlockAt(x - 1, y, z)).first != '\u0000'
+        val hasZPlus = testForLetter(e.player, world.getBlockAt(x, y, z + 1)).first != '\u0000'
+        val hasZMinus = testForLetter(e.player, world.getBlockAt(x, y, z - 1)).first != '\u0000'
+
+        if ((hasXPlus || hasXMinus) && !hasZPlus && !hasZMinus) {
+            // Word is on X-axis - scan in the positive X direction
             lateralDirection = LateralDirection(1, 0)
-            Bukkit.getLogger().info("[${e.player.name}] Word axis: X-axis")
-        } else if (hasZAdjacent && !hasXAdjacent) {
-            // Word is on Z-axis, scan forward to find start
+            Bukkit.getLogger().info("[${e.player.name}] Word axis: X-axis, scanning +X direction")
+        } else if ((hasZPlus || hasZMinus) && !hasXPlus && !hasXMinus) {
+            // Word is on Z-axis - scan in the positive Z direction
             lateralDirection = LateralDirection(0, 1)
-            Bukkit.getLogger().info("[${e.player.name}] Word axis: Z-axis")
+            Bukkit.getLogger().info("[${e.player.name}] Word axis: Z-axis, scanning +Z direction")
         } else if (!hasXAdjacent && !hasZAdjacent) {
             // Single letter word
             lateralDirection = LateralDirection(1, 0)
@@ -285,24 +290,9 @@ class ItemManager @JvmOverloads constructor(localPlugin: CharmedChars? = null) :
             return
         }
 
-        // Find the start of the word by scanning backwards
-        val reverseDirection = LateralDirection(-lateralDirection.xOffset, -lateralDirection.zOffset)
-        var startBlock = brokenBlock
-        var prevBlock = offsetBlock(startBlock, reverseDirection)
-        var scanCount = 0
-        while (testForLetter(e.player, prevBlock).first != '\u0000') {
-            startBlock = prevBlock
-            prevBlock = offsetBlock(startBlock, reverseDirection)
-            scanCount++
-        }
-
-        if (scanCount > 0) {
-            Bukkit.getLogger().info("[${e.player.name}] Scanned backward $scanCount block(s) to find word start")
-        }
-        Bukkit.getLogger().info("[${e.player.name}] Word start at (${startBlock.x}, ${startBlock.y}, ${startBlock.z})")
-
-        // Now scan forward from the start to build the complete word
-        var testBlock = startBlock
+        // Build word starting from the broken block (treat it as first letter)
+        Bukkit.getLogger().info("[${e.player.name}] Starting word from broken block at (${brokenBlock.x}, ${brokenBlock.y}, ${brokenBlock.z})")
+        var testBlock = brokenBlock
         var score = 0.0
         val outString = StringBuilder()
         val blockArray: MutableList<Location> = ArrayList<Location>(mutableListOf<Location?>())
