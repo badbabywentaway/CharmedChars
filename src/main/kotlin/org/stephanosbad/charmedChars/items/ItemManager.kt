@@ -355,6 +355,9 @@ class ItemManager @JvmOverloads constructor(localPlugin: CharmedChars? = null) :
             Bukkit.getLogger().info("[${e.player.name}] ✓ HIT! Final score: ${"%.1f".format(score)}")
             e.player.sendMessage("Hit: $score")
 
+            // Cancel the event to prevent vanilla block drops
+            e.isCancelled = true
+
             // Remove all blocks in the word using ItemsAdder API
             for (locationOfBlock in blockArray) {
                 val block = locationOfBlock.world.getBlockAt(locationOfBlock)
