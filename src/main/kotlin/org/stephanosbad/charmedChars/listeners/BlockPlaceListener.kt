@@ -19,7 +19,7 @@ import org.stephanosbad.charmedChars.CharmedChars
  */
 class BlockPlaceListener(private val plugin: CharmedChars) : Listener {
 
-    @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
+    @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = false)
     fun onBlockPlace(event: BlockPlaceEvent) {
         val itemInHand = event.itemInHand
 

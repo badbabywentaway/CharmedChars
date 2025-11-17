@@ -58,16 +58,55 @@ class NoteBlockInteractListener(private val plugin: CharmedChars) : Listener {
         plugin.logger.info("[NoteBlock PDC] Removed data for block at ${block.location}")
     }
 
-    @EventHandler(priority = EventPriority.MONITOR)
+    @EventHandler(priority = EventPriority.LOWEST, ignoreCancelled = false)
     fun onBlockDamage(event: BlockDamageEvent) {
         // Debug handler to see if blocks are being damaged at all
         val block = event.block
-        plugin.logger.info("[NoteBlock Debug] BlockDamageEvent for block type=${block.type} at ${block.location}, instaBreak=${event.instaBreak}, player=${event.player.name}, gameMode=${event.player.gameMode}")
+        plugin.logger.info("[NoteBlock Debug] BlockDamageEvent for block type=${block.type} at ${block.location}, instaBreak=${event.instaBreak}, player=${event.player.name}, gameMode=${event.player.gameMode}, cancelled=${event.isCancelled}")
 
         if (block.type == Material.NOTE_BLOCK) {
             val customModelData = getCustomModelData(block)
             plugin.logger.info("[NoteBlock Debug] BlockDamage on noteblock, CMD=$customModelData")
+
+            // If it's an instant break in creative mode, manually trigger break logic
+            if (event.instaBreak && customModelData != null) {
+                plugin.logger.info("[NoteBlock Debug] Instant break detected for custom block, manually handling...")
+
+                // Cancel the default damage behavior
+                event.isCancelled = true
+
+                // Schedule break handling on next tick
+                Bukkit.getScheduler().runTask(plugin, Runnable {
+                    handleCustomBlockBreak(block, customModelData, event.player)
+                })
+            }
         }
+    }
+
+    /**
+     * Manually handle breaking a custom noteblock
+     */
+    private fun handleCustomBlockBreak(block: org.bukkit.block.Block, customModelData: Int, player: org.bukkit.entity.Player) {
+        if (block.type != Material.NOTE_BLOCK) return
+
+        plugin.logger.info("[NoteBlock] Manually breaking custom block CMD=$customModelData")
+
+        // Create the item with the original custom model data
+        val itemStack = org.bukkit.inventory.ItemStack(Material.NOTE_BLOCK)
+        val meta = itemStack.itemMeta
+        meta.setCustomModelData(customModelData)
+        itemStack.itemMeta = meta
+
+        // Drop the item at block location
+        block.world.dropItemNaturally(block.location, itemStack)
+        plugin.logger.info("[NoteBlock] Dropped custom item CMD=$customModelData")
+
+        // Remove from PDC
+        removeCustomModelData(block)
+
+        // Remove the block
+        block.type = Material.AIR
+        plugin.logger.info("[NoteBlock] Removed block at ${block.location}")
     }
 
     @EventHandler(priority = EventPriority.LOWEST, ignoreCancelled = false)
