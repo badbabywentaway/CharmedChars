@@ -57,9 +57,13 @@ CharmedChars follows [Semantic Versioning](https://semver.org/):
 - **ItemsAdder**: 3.6.3-beta-14 or higher
 
 ### Optional Dependencies
-- **WorldGuard**: 7.0.14+ (for region protection)
-- **GriefPrevention**: 16.15.0+ (for claim protection)
+**The plugin works perfectly without these! They are soft dependencies only.**
+
+- **WorldGuard**: 7.0.14+ (for region protection - can be disabled in config)
+- **GriefPrevention**: 16.15.0+ (for claim protection - can be disabled in config)
 - **ProtocolLib**: 5.3.0+ (for advanced features)
+
+Note: Protection plugins are completely optional. If not installed, the plugin functions normally. If installed, they can be enabled/disabled via the `protection` section in config.yml.
 
 ---
 
@@ -76,7 +80,7 @@ CharmedChars follows [Semantic Versioning](https://semver.org/):
 - **ItemsAdder Integration**: Custom blocks with 512x512 textures
 - **Three Block Colors**: Cyan, Magenta, Yellow
 - **26 Letters + Numbers + Operators**: Full alphabet plus 0-9 and +, -, *, /
-- **Protection Support**: Integrates with WorldGuard and GriefPrevention
+- **Optional Protection Support**: Optional integration with WorldGuard and GriefPrevention (soft dependencies)
 - **Configurable Drop Rates**: Adjustable via config with Looting enchantment support
 
 ### Administration
@@ -92,11 +96,14 @@ CharmedChars follows [Semantic Versioning](https://semver.org/):
 1. Download CharmedChars-1.0.0.jar
 2. Place in `plugins/` folder
 3. Install ItemsAdder (required dependency)
-4. Start server to generate config
-5. Run `/iasetup` to auto-configure ItemsAdder
-6. Run `/iazip` to generate resource pack
-7. Restart server
-8. Players automatically receive resource pack on join
+4. **(Optional)** Install WorldGuard and/or GriefPrevention for protection support
+5. Start server to generate config
+6. Run `/iasetup` to auto-configure ItemsAdder
+7. Run `/iazip` to generate resource pack
+8. Restart server
+9. Players automatically receive resource pack on join
+
+**Note**: The plugin works without WorldGuard or GriefPrevention. Protection integrations can be enabled/disabled in config.yml under the `protection` section.
 
 See `QUICK_SETUP.md` for detailed installation instructions.
 

@@ -106,10 +106,14 @@ scoring:
   # Minimum word length to score
   min-word-length: 2
 
-# Protection Integration
+# Protection Integration (Optional Plugins)
+# These plugins are OPTIONAL soft dependencies - the plugin works without them
+# Set to false to disable integration even if the plugin is installed
 protection:
-  # Respect WorldGuard regions
+  # Respect WorldGuard regions (requires WorldGuard plugin)
+  # If WorldGuard is not installed, this setting has no effect
   worldguard-integration: true
 
-  # Respect GriefPrevention claims
+  # Respect GriefPrevention claims (requires GriefPrevention plugin)
+  # If GriefPrevention is not installed, this setting has no effect
   griefprevention-integration: true

@@ -95,31 +95,35 @@ class ItemManager @JvmOverloads constructor(localPlugin: CharmedChars? = null) :
      * @param localPlugin - Master plugin
      */
     init {
+        // WorldGuard integration (optional soft dependency)
         try {
             worldGuardPlugin = WorldGuardPlugin.inst()
             worldGuard = WorldGuard.getInstance()
             if (worldGuardPlugin != null && worldGuard != null) {
-                Bukkit.getLogger().info("WorldGuard found.")
+                val status = if (plugin.configManager.worldGuardIntegration) "enabled" else "disabled in config"
+                Bukkit.getLogger().info("WorldGuard found - integration $status")
             } else {
                 throw NullPointerException("Class variable did not instantiate")
             }
         } catch (e: Exception) {
-            Bukkit.getLogger().info("WorldGuard not available.")
+            Bukkit.getLogger().info("WorldGuard not available (optional)")
         } catch (e: Error) {
-            Bukkit.getLogger().info("WorldGuard not available.")
+            Bukkit.getLogger().info("WorldGuard not available (optional)")
         }
 
+        // GriefPrevention integration (optional soft dependency)
         try {
             griefPrevention = GriefPrevention.instance
             if (griefPrevention != null) {
-                Bukkit.getLogger().info("GriefPrevention found.")
+                val status = if (plugin.configManager.griefPreventionIntegration) "enabled" else "disabled in config"
+                Bukkit.getLogger().info("GriefPrevention found - integration $status")
             } else {
                 throw NullPointerException("Class variable did not instantiate")
             }
         } catch (e: Exception) {
-            Bukkit.getLogger().info("GriefPrevention not available.")
+            Bukkit.getLogger().info("GriefPrevention not available (optional)")
         } catch (e: Error) {
-            Bukkit.getLogger().info("GriefPrevention not available.")
+            Bukkit.getLogger().info("GriefPrevention not available (optional)")
         }
 
         try {
@@ -506,16 +510,22 @@ class ItemManager @JvmOverloads constructor(localPlugin: CharmedChars? = null) :
      * @return - verification that location is being protected
      */
     fun protectedSpot(player: Player?, location: Location, block: Block?): Boolean {
-        var griefPrevention = this.griefPrevention
-        if (griefPrevention != null && griefPrevention.allowBreak(player, block, location) != null) {
-            return true
+        // Check GriefPrevention if enabled in config
+        if (plugin.configManager.griefPreventionIntegration) {
+            var griefPrevention = this.griefPrevention
+            if (griefPrevention != null && griefPrevention.allowBreak(player, block, location) != null) {
+                return true
+            }
         }
-        var worldGuardPlugin = this.worldGuardPlugin
 
-        if (worldGuardPlugin != null &&
-            !worldGuardPlugin.createProtectionQuery().testBlockBreak(player, block)
-        ) {
-            return true
+        // Check WorldGuard if enabled in config
+        if (plugin.configManager.worldGuardIntegration) {
+            var worldGuardPlugin = this.worldGuardPlugin
+            if (worldGuardPlugin != null &&
+                !worldGuardPlugin.createProtectionQuery().testBlockBreak(player, block)
+            ) {
+                return true
+            }
         }
 
         return ourConfigProtects(location)

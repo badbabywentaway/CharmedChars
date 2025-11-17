@@ -71,6 +71,13 @@ class ConfigManager(private val plugin: CharmedChars) {
     val lootingMultiplier3: Double
         get() = config.getDouble("letter-blocks.looting-multipliers.3", 3.33)
 
+    // Protection Integration
+    val worldGuardIntegration: Boolean
+        get() = config.getBoolean("protection.worldguard-integration", true)
+
+    val griefPreventionIntegration: Boolean
+        get() = config.getBoolean("protection.griefprevention-integration", true)
+
     fun reloadConfig() {
         plugin.reloadConfig()
         this.config = plugin.config
