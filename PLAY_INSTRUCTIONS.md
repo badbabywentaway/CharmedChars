@@ -2,6 +2,8 @@
 
 Welcome to CharmedChars! This is a word-forming puzzle game in Minecraft where you collect letter blocks, arrange them into words, and score points for rewards.
 
+> **Note**: CharmedChars requires ItemsAdder (a proprietary plugin, purchased separately). See `README.md` or `QUICK_SETUP.md` for installation details.
+
 ## Quick Start
 
 1. **Mine logs with gold tools** to collect letter blocks
