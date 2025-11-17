@@ -82,14 +82,14 @@ custom-textures:
 
 # Letter Block Drop Configuration
 letter-blocks:
-  # Base drop chance when breaking logs with gold tools (3%)
-  drop-chance: 0.03
+  # Base drop chance when breaking logs with gold tools (6%)
+  drop-chance: 0.06
 
   # Drop chance multiplier with Looting enchantment
   looting-multipliers:
-    1: 1.67  # Looting I: 5%
-    2: 2.67  # Looting II: 8%
-    3: 3.33  # Looting III: 10%
+    1: 1.67  # Looting I: 10%
+    2: 2.67  # Looting II: 16%
+    3: 3.33  # Looting III: 20%
 
   # Additional drops for nether wood (warped/crimson stems)
   nether-drops-numbers: true

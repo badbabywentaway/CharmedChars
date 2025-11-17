@@ -21,10 +21,10 @@ Welcome to CharmedChars! This is a word-forming puzzle game in Minecraft where y
 - Bamboo blocks
 
 **Drop Chances:**
-- Base chance: **3%** per log broken
-- With Looting I: **5%**
-- With Looting II: **8%**
-- With Looting III: **10%**
+- Base chance: **6%** per log broken
+- With Looting I: **10%**
+- With Looting II: **16%**
+- With Looting III: **20%**
 
 **Special Nether Wood Bonus:**
 - Warped and Crimson Stems can also drop **number blocks (0-9)** and **operator blocks (+, -, *, /)**
@@ -202,7 +202,7 @@ When you score a word, you receive item drops based on your score. The default r
 
 ### Getting More Letter Blocks
 
-- Use **gold axes** with **Looting III** for 10% drop chance
+- Use **gold axes** with **Looting III** for 20% drop chance
 - Mine **Nether wood** to also collect number and operator blocks
 - Farm wood in bulk - the more logs, the more letters!
 
@@ -298,7 +298,7 @@ Permission: `charmedchars.blocks`
 
 - Make sure you're using a **GOLD tool** (axe, pickaxe, shovel)
 - Check that you're mining **wood logs** (not planks)
-- Drop chance is 3% - keep mining!
+- Drop chance is 6% - keep mining!
 
 ### Word says "Miss" but should be valid
 

@@ -534,11 +534,11 @@ Adjust letter block drop rates:
 
 ```yaml
 letter-blocks:
-  drop-chance: 0.05  # 5% base chance
+  drop-chance: 0.06  # 6% base chance
   looting-multipliers:
-    1: 1.5   # Looting I: 7.5%
-    2: 2.0   # Looting II: 10%
-    3: 2.5   # Looting III: 12.5%
+    1: 1.67  # Looting I: 10%
+    2: 2.67  # Looting II: 16%
+    3: 3.33  # Looting III: 20%
 ```
 
 ---
