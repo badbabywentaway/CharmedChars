@@ -116,7 +116,31 @@ class CharBlock : CommandExecutor, TabCompleter {
         } else {
             sender.sendMessage(
                 Component.text("No valid characters found in '$characterString'")
+                    .color(NamedTextColor.RED)
+            )
+            sender.sendMessage(
+                Component.text("This likely means ItemsAdder hasn't been configured yet.")
                     .color(NamedTextColor.YELLOW)
+            )
+            sender.sendMessage(
+                Component.text("Please ensure you've:")
+                    .color(NamedTextColor.GRAY)
+            )
+            sender.sendMessage(
+                Component.text("  1. Copied configs to plugins/ItemsAdder/data/charmedchars/")
+                    .color(NamedTextColor.GRAY)
+            )
+            sender.sendMessage(
+                Component.text("  2. Copied textures to ItemsAdder folder")
+                    .color(NamedTextColor.GRAY)
+            )
+            sender.sendMessage(
+                Component.text("  3. Run /iazip to register items")
+                    .color(NamedTextColor.GRAY)
+            )
+            sender.sendMessage(
+                Component.text("See: itemsadder-config/README.md for full setup")
+                    .color(NamedTextColor.AQUA)
             )
         }
 

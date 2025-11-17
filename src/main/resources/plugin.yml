@@ -24,6 +24,11 @@ commands:
     description: Reload the plugin configuration
     usage: /charmedChars reload
     permission: charmedChars.admin
+  iastatus:
+    description: Check ItemsAdder integration status
+    usage: /iastatus
+    permission: charmedchars.admin
+    aliases: [itemsadderstatus, charmeddebug]
 
 permissions:
   charmedChars.blocks:

@@ -14,6 +14,7 @@ import org.stephanosbad.charmedChars.utility.WordDict
 import org.bukkit.plugin.java.JavaPlugin
 import org.bukkit.Bukkit
 import org.stephanosbad.charmedChars.commands.ExampleCommand
+import org.stephanosbad.charmedChars.commands.ItemsAdderStatusCommand
 import org.stephanosbad.charmedChars.commands.ReloadCommand
 import org.stephanosbad.charmedChars.utility.ConfigManager
 import org.stephanosbad.charmedChars.listeners.ExampleListener
@@ -58,6 +59,7 @@ class CharmedChars : JavaPlugin(), CoroutineScope {
         // Register commands
         getCommand("example")?.setExecutor(ExampleCommand(this))
         getCommand("reload")?.setExecutor(ReloadCommand(this))
+        getCommand("iastatus")?.setExecutor(ItemsAdderStatusCommand())
 
         // Register event listeners
         server.pluginManager.registerEvents(ExampleListener(this), this)
