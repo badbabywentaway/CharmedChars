@@ -111,9 +111,9 @@ class NoteBlockInteractListener(private val plugin: CharmedChars) : Listener {
 
     @EventHandler(priority = EventPriority.LOWEST, ignoreCancelled = false)
     fun onPlayerInteract(event: PlayerInteractEvent) {
-        // Handle both left and right clicks on blocks
-        if (event.action != Action.RIGHT_CLICK_BLOCK &&
-            event.action != Action.LEFT_CLICK_BLOCK) return
+        // Only handle RIGHT clicks (note cycling)
+        // Left clicks are handled by BlockDamageEvent/BlockBreakEvent
+        if (event.action != Action.RIGHT_CLICK_BLOCK) return
 
         val clickedBlock = event.clickedBlock ?: return
 
@@ -123,9 +123,9 @@ class NoteBlockInteractListener(private val plugin: CharmedChars) : Listener {
         // Check if this block has custom model data stored in PDC
         val customModelData = getCustomModelData(clickedBlock)
         if (customModelData != null) {
-            // This is a custom block - cancel the interaction to prevent note cycling
+            // This is a custom block - cancel right-click to prevent note cycling
             event.isCancelled = true
-            plugin.logger.info("[NoteBlock] Blocked interaction with custom block CMD=$customModelData at ${clickedBlock.location}")
+            plugin.logger.info("[NoteBlock] Blocked RIGHT-CLICK interaction with custom block CMD=$customModelData at ${clickedBlock.location}")
         }
     }
 
