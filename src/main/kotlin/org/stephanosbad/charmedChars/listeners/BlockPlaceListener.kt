@@ -71,10 +71,8 @@ class BlockPlaceListener(private val plugin: CharmedChars) : Listener {
             val verifyData = placedBlock.blockData as NoteBlock
             plugin.logger.info("[BlockPlace Debug] Verification - instrument=${verifyData.instrument}, note=${verifyData.note.id}")
 
-            // Send fake block to nearby players using ProtocolLib
-            Bukkit.getScheduler().runTaskLater(plugin, Runnable {
-                fakeBlockListener?.sendFakeBlockToNearbyPlayers(placedBlock, Material.BARRIER)
-            }, 1L) // Delay 1 tick to ensure block is fully placed
+            // Note: Fake blocks disabled - event cancellation handles interaction prevention
+            // The resource pack shows the correct texture based on note/instrument data
         } else {
             plugin.logger.warning("[BlockPlace] Block placed is not a NoteBlock! Type: ${placedBlock.type}, BlockData: ${placedBlock.blockData}")
         }
