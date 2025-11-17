@@ -368,6 +368,9 @@ class ItemManager @JvmOverloads constructor(localPlugin: CharmedChars? = null) :
                 }
             }
 
+            // Cancel the event to prevent the broken block from dropping as an item
+            e.isCancelled = true
+
             applyScore(e.player, score)
         } else {
             Bukkit.getLogger().info("[${e.player.name}] ✗ MISS - Word not in dictionary")
