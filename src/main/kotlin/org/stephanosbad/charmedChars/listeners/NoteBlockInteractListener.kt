@@ -126,14 +126,14 @@ class NoteBlockInteractListener(private val plugin: CharmedChars) : Listener {
             val itemInHand = event.item
 
             if (itemInHand != null && itemInHand.type.isBlock) {
-                // Player is holding a block - allow placement but deny noteblock interaction
-                event.setUseInteractedBlock(org.bukkit.event.Event.Result.DENY)
-                event.setUseItemInHand(org.bukkit.event.Event.Result.ALLOW)
-                plugin.logger.info("[NoteBlock] Denied noteblock interaction, allowed item use for placement")
+                // Player is holding a block - don't interfere at all
+                // Let the event pass through naturally for placement
+                // BlockPhysicsEvent and BlockPlaceEvent re-application will fix any state changes
+                plugin.logger.info("[NoteBlock] Player holding block, allowing event to pass through for placement")
+                return
             } else {
-                // Player is empty-handed or holding non-block - deny everything
+                // Player is empty-handed or holding non-block - deny interaction
                 event.setUseInteractedBlock(org.bukkit.event.Event.Result.DENY)
-                event.setUseItemInHand(org.bukkit.event.Event.Result.DENY)
                 plugin.logger.info("[NoteBlock] Denied interaction with custom block CMD=$customModelData")
             }
         }
