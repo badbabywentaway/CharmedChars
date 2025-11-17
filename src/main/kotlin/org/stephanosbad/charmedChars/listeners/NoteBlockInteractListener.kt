@@ -123,7 +123,15 @@ class NoteBlockInteractListener(private val plugin: CharmedChars) : Listener {
         // Check if this block has custom model data stored in PDC
         val customModelData = getCustomModelData(clickedBlock)
         if (customModelData != null) {
-            // This is a custom block - cancel right-click to prevent note cycling
+            // Check if player is holding an item (trying to place something)
+            val itemInHand = event.item
+            if (itemInHand != null && itemInHand.type.isBlock) {
+                // Player is holding a block to place - allow the placement
+                plugin.logger.info("[NoteBlock] Allowing block placement next to custom noteblock at ${clickedBlock.location}")
+                return
+            }
+
+            // Player is empty-handed or holding non-block item - prevent note cycling
             event.isCancelled = true
             plugin.logger.info("[NoteBlock] Blocked RIGHT-CLICK interaction with custom block CMD=$customModelData at ${clickedBlock.location}")
         }
