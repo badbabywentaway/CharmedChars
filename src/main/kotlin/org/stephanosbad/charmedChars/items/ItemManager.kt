@@ -355,17 +355,19 @@ class ItemManager @JvmOverloads constructor(localPlugin: CharmedChars? = null) :
             Bukkit.getLogger().info("[${e.player.name}] ✓ HIT! Final score: ${"%.1f".format(score)}")
             e.player.sendMessage("Hit: $score")
 
-            // Remove all blocks in the word (including the broken block)
-            // Do this BEFORE canceling to ensure blocks are removed
+            // Remove all blocks in the word using ItemsAdder API
             for (locationOfBlock in blockArray) {
                 val block = locationOfBlock.world.getBlockAt(locationOfBlock)
-                // Don't break the originally broken block here - let the event handle it
-                if (locationOfBlock != brokenBlock.location) {
+                // Use ItemsAdder API to properly remove custom blocks
+                val customBlock = CustomBlock.byAlreadyPlaced(block)
+                if (customBlock != null) {
+                    customBlock.remove()
+                    Bukkit.getLogger().info("[${e.player.name}] Removed custom block at (${block.x}, ${block.y}, ${block.z})")
+                } else {
+                    // Fallback to vanilla removal if not a custom block
                     block.type = Material.AIR
                 }
             }
-            // The event will naturally break the block the player clicked on
-            // No need to cancel it
 
             applyScore(e.player, score)
         } else {
