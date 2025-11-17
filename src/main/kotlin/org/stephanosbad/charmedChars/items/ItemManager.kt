@@ -245,43 +245,80 @@ class ItemManager @JvmOverloads constructor(localPlugin: CharmedChars? = null) :
             return
         }
 
-        var testBlock = e.getBlock()
-        var score = 0.0
-        var c: SimpleTuple<Char, Double> = testForLetter(e.player, testBlock)
+        val brokenBlock = e.getBlock()
+        var c: SimpleTuple<Char, Double> = testForLetter(e.player, brokenBlock)
         if (c.first == '\u0000') {
             return
         }
-        val lateralDirection: LateralDirection = checkLateralBlocks(e.player, testBlock)
 
+        // Determine the axis by checking adjacent blocks
+        val world = brokenBlock.world
+        val x = brokenBlock.x
+        val y = brokenBlock.y
+        val z = brokenBlock.z
+
+        val hasXAdjacent = testForLetter(e.player, world.getBlockAt(x + 1, y, z)).first != '\u0000' ||
+                          testForLetter(e.player, world.getBlockAt(x - 1, y, z)).first != '\u0000'
+        val hasZAdjacent = testForLetter(e.player, world.getBlockAt(x, y, z + 1)).first != '\u0000' ||
+                          testForLetter(e.player, world.getBlockAt(x, y, z - 1)).first != '\u0000'
+
+        // Determine which axis the word is on
+        val lateralDirection: LateralDirection
+        if (hasXAdjacent && !hasZAdjacent) {
+            // Word is on X-axis, scan left to find start
+            lateralDirection = LateralDirection(1, 0)
+        } else if (hasZAdjacent && !hasXAdjacent) {
+            // Word is on Z-axis, scan forward to find start
+            lateralDirection = LateralDirection(0, 1)
+        } else if (!hasXAdjacent && !hasZAdjacent) {
+            // Single letter word
+            lateralDirection = LateralDirection(1, 0)
+        } else {
+            // Invalid: word goes in multiple directions (diagonal or cross)
+            e.player.sendMessage("Miss")
+            return
+        }
+
+        // Find the start of the word by scanning backwards
+        val reverseDirection = LateralDirection(-lateralDirection.xOffset, -lateralDirection.zOffset)
+        var startBlock = brokenBlock
+        var prevBlock = offsetBlock(startBlock, reverseDirection)
+        while (testForLetter(e.player, prevBlock).first != '\u0000') {
+            startBlock = prevBlock
+            prevBlock = offsetBlock(startBlock, reverseDirection)
+        }
+
+        // Now scan forward from the start to build the complete word
+        var testBlock = startBlock
+        var score = 0.0
         val outString = StringBuilder()
         val blockArray: MutableList<Location> = ArrayList<Location>(mutableListOf<Location?>())
         var isSameColor = true
         var colorTest: BlockColor? = null
 
+        c = testForLetter(e.player, testBlock)
+        while (c.first != '\u0000') {
+            score += c.second + 10
+            blockArray.add(testBlock.location)
+            outString.append(c.first)
 
-        if (lateralDirection.isValid) {
-
-
-            while (c.first != '\u0000') {
-                score += c.second + 10
-                blockArray.add(testBlock.location)
-                outString.append(c.first)
-                testBlock = offsetBlock(testBlock, lateralDirection)
-                c = testForLetter(e.player, testBlock)
-                if(isSameColor)
+            if(isSameColor)
+            {
+                var getColor = getBlockColor(testBlock)
+                if(colorTest == null)
                 {
-                    var getColor = getBlockColor(testBlock)
-                    if(colorTest == null)
-                    {
-                         colorTest = getColor
-                    }
-                    else if (colorTest != getColor)
-                    {
-                        isSameColor = false
-                    }
+                     colorTest = getColor
+                }
+                else if (colorTest != getColor)
+                {
+                    isSameColor = false
                 }
             }
+
+            testBlock = offsetBlock(testBlock, lateralDirection)
+            c = testForLetter(e.player, testBlock)
         }
+
         if(isSameColor && colorTest != null)
         {
             score *= 3
