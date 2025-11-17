@@ -30,14 +30,12 @@ import org.stephanosbad.charmedChars.items.ItemManager
 import org.stephanosbad.charmedChars.utility.WordDict
 import org.bukkit.plugin.java.JavaPlugin
 import org.bukkit.Bukkit
-import org.stephanosbad.charmedChars.commands.ExampleCommand
 import org.stephanosbad.charmedChars.commands.ItemsAdderStatusCommand
 import org.stephanosbad.charmedChars.commands.ReloadCommand
 import org.stephanosbad.charmedChars.commands.SetupItemsAdderCommand
 import org.stephanosbad.charmedChars.commands.VersionCommand
 import org.stephanosbad.charmedChars.integration.ItemsAdderSetup
 import org.stephanosbad.charmedChars.utility.ConfigManager
-import org.stephanosbad.charmedChars.listeners.ExampleListener
 import java.io.IOException
 import kotlin.coroutines.CoroutineContext
 
@@ -77,14 +75,10 @@ class CharmedChars : JavaPlugin(), CoroutineScope {
         configManager.loadConfig()
 
         // Register commands
-        getCommand("example")?.setExecutor(ExampleCommand(this))
         getCommand("reload")?.setExecutor(ReloadCommand(this))
         getCommand("iastatus")?.setExecutor(ItemsAdderStatusCommand())
         getCommand("iasetup")?.setExecutor(SetupItemsAdderCommand(this))
         getCommand("version")?.setExecutor(VersionCommand(this))
-
-        // Register event listeners
-        server.pluginManager.registerEvents(ExampleListener(this), this)
 
         // Async startup operations
         launch {
@@ -139,13 +133,6 @@ class CharmedChars : JavaPlugin(), CoroutineScope {
                 Component.text("CharmedChars configuration reloaded!")
                     .color(NamedTextColor.GREEN)
             )
-        }
-    }
-
-    // Utility function for async operations
-    fun runAsync(block: suspend CoroutineScope.() -> Unit) {
-        launch(Dispatchers.IO) {
-            block()
         }
     }
 

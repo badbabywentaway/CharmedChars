@@ -15,11 +15,6 @@ commands:
     usage: /charblock <player> <color> <text>
     description: Give custom character blocks to a player.
     permission: charmedChars.blocks
-  example:
-    description: An example command
-    usage: /example [player]
-    permission: charmedChars.example
-    aliases: [ex, demo]
   reload:
     description: Reload the plugin configuration
     usage: /charmedChars reload
@@ -43,9 +38,6 @@ permissions:
   charmedChars.blocks:
     description: Allows giving character blocks to players
     default: op
-  charmedChars.example:
-    description: Allows use of the example command
-    default: op
   charmedChars.admin:
     description: Admin permissions for the plugin
     default: op
@@ -53,6 +45,5 @@ permissions:
     description: Gives access to all CharmedChars permissions
     children:
       charmedChars.blocks: true
-      charmedChars.example: true
       charmedChars.admin: true
     default: op
