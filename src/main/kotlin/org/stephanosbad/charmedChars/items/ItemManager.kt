@@ -2,6 +2,8 @@ package org.stephanosbad.charmedChars.items
 
 import com.sk89q.worldguard.WorldGuard
 import com.sk89q.worldguard.bukkit.WorldGuardPlugin
+import dev.lone.itemsadder.api.CustomBlock
+import dev.lone.itemsadder.api.CustomStack
 import me.ryanhamshire.GriefPrevention.GriefPrevention
 import org.bukkit.Bukkit
 import org.bukkit.Location
@@ -14,7 +16,6 @@ import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
 import org.bukkit.event.block.BlockBreakEvent
 import org.bukkit.inventory.ItemStack
-import org.stephanosbad.charmedChars.block.CustomBlockEngine
 import org.stephanosbad.charmedChars.CharmedChars
 import org.stephanosbad.charmedChars.rewards.DropReward
 import org.stephanosbad.charmedChars.rewards.Reward
@@ -269,7 +270,7 @@ class ItemManager @JvmOverloads constructor(localPlugin: CharmedChars? = null) :
                 c = testForLetter(e.player, testBlock)
                 if(isSameColor)
                 {
-                    var getColor = plugin.customBlockEngine.letterBlockKeys.entries.firstOrNull{ it.value.second == getNoteblockNumber(testBlock) }?.key?.first
+                    var getColor = getBlockColor(testBlock)
                     if(colorTest == null)
                     {
                          colorTest = getColor
@@ -393,13 +394,49 @@ class ItemManager @JvmOverloads constructor(localPlugin: CharmedChars? = null) :
     }
 
     /**
-     * Get "noteblock" variation code. When Oraxen obsoletes this, this will change.
-     * @param block - noteblock block
-     * @return - Oraxen's noteblock variation code
+     * Get custom block variation using ItemsAdder API
+     * @param block - block to check
+     * @return - LetterBlock if it's a letter block, null otherwise
      */
     fun getCustomVariation(block: Block?): LetterBlock? {
-        var retValue = CustomBlockEngine.byAlreadyPlaced(block)?.id
-        return retValue
+        if (block == null) return null
+
+        val customBlock = CustomBlock.byAlreadyPlaced(block) ?: return null
+        val namespacedId = customBlock.namespacedID
+
+        // Parse the ItemsAdder ID (e.g., "charmedchars:cyan_a")
+        if (!namespacedId.startsWith("charmedchars:")) return null
+
+        val parts = namespacedId.substring("charmedchars:".length).split("_")
+        if (parts.size != 2) return null
+
+        val letter = parts[1].uppercase()
+
+        // Find the matching LetterBlock
+        return LetterBlock.entries.firstOrNull { it.name == letter }
+    }
+
+    /**
+     * Get the color of a custom block using ItemsAdder API
+     * @param block - block to check
+     * @return - BlockColor if it's a custom block, null otherwise
+     */
+    fun getBlockColor(block: Block?): BlockColor? {
+        if (block == null) return null
+
+        val customBlock = CustomBlock.byAlreadyPlaced(block) ?: return null
+        val namespacedId = customBlock.namespacedID
+
+        // Parse the ItemsAdder ID (e.g., "charmedchars:cyan_a")
+        if (!namespacedId.startsWith("charmedchars:")) return null
+
+        val parts = namespacedId.substring("charmedchars:".length).split("_")
+        if (parts.isEmpty()) return null
+
+        val colorName = parts[0].uppercase()
+
+        // Find the matching BlockColor
+        return BlockColor.entries.firstOrNull { it.name == colorName }
     }
 
     /**

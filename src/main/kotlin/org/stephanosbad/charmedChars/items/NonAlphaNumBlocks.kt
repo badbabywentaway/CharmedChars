@@ -1,23 +1,24 @@
 package org.stephanosbad.charmedChars.items
 
 
+import dev.lone.itemsadder.api.CustomStack
 import org.bukkit.inventory.ItemStack
-import org.stephanosbad.charmedChars.block.CustomBlockEngine
 
 enum class NonAlphaNumBlocks(val charVal: Char, blockName: String) {
-    PLUS('+', "plus_block"),
-    MINUS('-', "minus_block"),
-    MULTIPLY('*', "multiply_block"),
-    DIVISION('/', "divide_block");
+    PLUS('+', "plus"),
+    MINUS('-', "minus"),
+    MULTIPLY('*', "multiply"),
+    DIVISION('/', "division");
 
     private val _itemStacks: MutableMap<BlockColor, ItemStack?> by lazy {
         mutableMapOf<BlockColor, ItemStack?>().apply {
             for (color in BlockColor.entries) {
-                val customBlock = CustomBlockEngine.getInstance(color, this@NonAlphaNumBlocks)
-                if (customBlock == null) {
-                    System.err.println("WARNING: CustomBlockEngine.getInstance returned null for ${color.name} ${this@NonAlphaNumBlocks.nonAlphaNumBlockName}")
+                val itemId = "charmedchars:${color.directoryName}_${this@NonAlphaNumBlocks.nonAlphaNumBlockName}"
+                val customStack = CustomStack.getInstance(itemId)
+                if (customStack == null) {
+                    System.err.println("WARNING: ItemsAdder CustomStack.getInstance returned null for $itemId")
                 }
-                this[color] = customBlock?.itemStack
+                this[color] = customStack?.itemStack
             }
         }
     }

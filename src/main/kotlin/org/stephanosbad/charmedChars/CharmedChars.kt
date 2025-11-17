@@ -13,14 +13,9 @@ import org.stephanosbad.charmedChars.items.ItemManager
 import org.stephanosbad.charmedChars.utility.WordDict
 import org.bukkit.plugin.java.JavaPlugin
 import org.bukkit.Bukkit
-import org.stephanosbad.charmedChars.block.CustomBlockEngine
-import org.stephanosbad.charmedChars.commands.DebugItemCommand
-import org.stephanosbad.charmedChars.commands.DebugPackCommand
 import org.stephanosbad.charmedChars.commands.ExampleCommand
 import org.stephanosbad.charmedChars.commands.ReloadCommand
-import org.stephanosbad.charmedChars.commands.TextureCommand
 import org.stephanosbad.charmedChars.utility.ConfigManager
-import org.stephanosbad.charmedChars.graphics.TextureManager
 import org.stephanosbad.charmedChars.listeners.ExampleListener
 import java.io.IOException
 import kotlin.coroutines.CoroutineContext
@@ -33,21 +28,6 @@ class CharmedChars : JavaPlugin(), CoroutineScope {
 
     lateinit var configManager: ConfigManager
         private set
-
-    lateinit var textureManager: TextureManager
-        private set
-
-    lateinit var customBlockEngine: CustomBlockEngine
-        private set
-
-    val isCustomBlockEngineInitialized: Boolean
-        get() = ::customBlockEngine.isInitialized
-
-    lateinit var resourcePackServer: org.stephanosbad.charmedChars.graphics.ResourcePackServer
-        private set
-
-    val isResourcePackServerInitialized: Boolean
-        get() = ::resourcePackServer.isInitialized
 
     /**
      * Location of configuration data handler
@@ -75,37 +55,12 @@ class CharmedChars : JavaPlugin(), CoroutineScope {
         configManager = ConfigManager(this)
         configManager.loadConfig()
 
-        // Initialize texture manager (constructor only, not initialized yet)
-        textureManager = TextureManager(this)
-
-        // IMPORTANT: CustomBlockEngine must be initialized BEFORE textureManager.initialize()
-        // TextureManager depends on CustomBlockEngine for generating note_block.json
-        customBlockEngine = CustomBlockEngine(this, 1100)
-
-        // Initialize resource pack server
-        resourcePackServer = org.stephanosbad.charmedChars.graphics.ResourcePackServer(this)
-
-        // Initialize textures system
-        // Note: Runs asynchronously to avoid blocking server startup, but CustomBlockEngine
-        // is already initialized synchronously above, so no race condition exists
-        if (configManager.customTexturesEnabled) {
-            launch {
-                textureManager.initialize()
-                // Start HTTP server after resource pack is generated
-                resourcePackServer.start()
-            }
-        }
-
         // Register commands
         getCommand("example")?.setExecutor(ExampleCommand(this))
         getCommand("reload")?.setExecutor(ReloadCommand(this))
-        getCommand("textures")?.setExecutor(TextureCommand(this))
-        getCommand("debugitem")?.setExecutor(DebugItemCommand(this))
-        getCommand("debugpack")?.setExecutor(DebugPackCommand(this))
 
         // Register event listeners
         server.pluginManager.registerEvents(ExampleListener(this), this)
-        server.pluginManager.registerEvents(org.stephanosbad.charmedChars.listeners.ResourcePackListener(this), this)
 
         // Async startup operations
         launch {
@@ -114,19 +69,12 @@ class CharmedChars : JavaPlugin(), CoroutineScope {
         }
 
         // Plugin startup logic using Paper's Adventure API
-        logger.info("MyMinecraftPlugin v${description.version} has been enabled!")
+        logger.info("CharmedChars v${description.version} has been enabled!")
 
         server.consoleSender.sendMessage(
-            Component.text("Plugin loaded successfully! Built with Gradle + Kotlin")
+            Component.text("CharmedChars loaded successfully with ItemsAdder integration!")
                 .color(NamedTextColor.GREEN)
         )
-
-        if (configManager.customTexturesEnabled) {
-            server.consoleSender.sendMessage(
-                Component.text("Custom textures system enabled!")
-                    .color(NamedTextColor.LIGHT_PURPLE)
-            )
-        }
 
         if (getCommand(CharBlock.CommandName) != null) {
             getCommand(CharBlock.CommandName)!!.setExecutor(CharBlock())
@@ -134,49 +82,31 @@ class CharmedChars : JavaPlugin(), CoroutineScope {
         }
         Bukkit.getPluginManager().registerEvents(ItemManager(this), this)
 
-        // Register block place listener
-        Bukkit.getPluginManager().registerEvents(org.stephanosbad.charmedChars.listeners.BlockPlaceListener(this), this)
-
-        // Register noteblock state management, interaction prevention, and breaking listener
-        Bukkit.getPluginManager().registerEvents(org.stephanosbad.charmedChars.listeners.NoteBlockInteractListener(this), this)
-
-        Bukkit.getPluginManager().registerEvents(org.stephanosbad.charmedChars.listeners.ResourcePackListener(this), this)
-
 
     }
 
     override fun onDisable() {
-        // Stop HTTP server
-        if (::resourcePackServer.isInitialized) {
-            resourcePackServer.stop()
-        }
-
         // Cancel all coroutines
         job.cancel()
 
         // Plugin shutdown logic
-        logger.info("MyMinecraftPlugin has been disabled!")
+        logger.info("CharmedChars has been disabled!")
 
         server.consoleSender.sendMessage(
-            Component.text("Plugin unloaded successfully!")
+            Component.text("CharmedChars unloaded successfully!")
                 .color(NamedTextColor.YELLOW)
         )
-        println("Minecraft Letter/Number Block Plugin Stopping")
+        println("CharmedChars Plugin Stopping")
     }
 
     fun reload() {
         launch {
             configManager.reloadConfig()
 
-            // Reload textures if needed
-            if (configManager.customTexturesEnabled) {
-                textureManager.regenerateResourcePack()
-            }
-
-            logger.info("Plugin configuration reloaded!")
+            logger.info("CharmedChars configuration reloaded!")
 
             server.consoleSender.sendMessage(
-                Component.text("Configuration reloaded!")
+                Component.text("CharmedChars configuration reloaded!")
                     .color(NamedTextColor.GREEN)
             )
         }

@@ -1,0 +1,2353 @@
+info:
+  namespace: charmedchars
+
+items:
+  # ==================== CYAN LETTER BLOCKS ====================
+  cyan_a:
+    display_name: "Cyan A Block"
+    permission: charmedchars.block
+    resource:
+      material: PAPER
+      generate: true
+      textures:
+        - block/cyan/a
+    specific_properties:
+      block:
+        placed_model:
+          type: REAL_NOTE
+          break_particles_material: NOTE_BLOCK
+        break_tools_whitelist:
+          - _AXE
+          - _PICKAXE
+        hardness: 0.8
+        light_level: 0
+
+  cyan_b:
+    display_name: "Cyan B Block"
+    permission: charmedchars.block
+    resource:
+      material: PAPER
+      generate: true
+      textures:
+        - block/cyan/b
+    specific_properties:
+      block:
+        placed_model:
+          type: REAL_NOTE
+          break_particles_material: NOTE_BLOCK
+        break_tools_whitelist:
+          - _AXE
+          - _PICKAXE
+        hardness: 0.8
+        light_level: 0
+
+  cyan_c:
+    display_name: "Cyan C Block"
+    permission: charmedchars.block
+    resource:
+      material: PAPER
+      generate: true
+      textures:
+        - block/cyan/c
+    specific_properties:
+      block:
+        placed_model:
+          type: REAL_NOTE
+          break_particles_material: NOTE_BLOCK
+        break_tools_whitelist:
+          - _AXE
+          - _PICKAXE
+        hardness: 0.8
+        light_level: 0
+
+  cyan_d:
+    display_name: "Cyan D Block"
+    permission: charmedchars.block
+    resource:
+      material: PAPER
+      generate: true
+      textures:
+        - block/cyan/d
+    specific_properties:
+      block:
+        placed_model:
+          type: REAL_NOTE
+          break_particles_material: NOTE_BLOCK
+        break_tools_whitelist:
+          - _AXE
+          - _PICKAXE
+        hardness: 0.8
+        light_level: 0
+
+  cyan_e:
+    display_name: "Cyan E Block"
+    permission: charmedchars.block
+    resource:
+      material: PAPER
+      generate: true
+      textures:
+        - block/cyan/e
+    specific_properties:
+      block:
+        placed_model:
+          type: REAL_NOTE
+          break_particles_material: NOTE_BLOCK
+        break_tools_whitelist:
+          - _AXE
+          - _PICKAXE
+        hardness: 0.8
+        light_level: 0
+
+  cyan_f:
+    display_name: "Cyan F Block"
+    permission: charmedchars.block
+    resource:
+      material: PAPER
+      generate: true
+      textures:
+        - block/cyan/f
+    specific_properties:
+      block:
+        placed_model:
+          type: REAL_NOTE
+          break_particles_material: NOTE_BLOCK
+        break_tools_whitelist:
+          - _AXE
+          - _PICKAXE
+        hardness: 0.8
+        light_level: 0
+
+  cyan_g:
+    display_name: "Cyan G Block"
+    permission: charmedchars.block
+    resource:
+      material: PAPER
+      generate: true
+      textures:
+        - block/cyan/g
+    specific_properties:
+      block:
+        placed_model:
+          type: REAL_NOTE
+          break_particles_material: NOTE_BLOCK
+        break_tools_whitelist:
+          - _AXE
+          - _PICKAXE
+        hardness: 0.8
+        light_level: 0
+
+  cyan_h:
+    display_name: "Cyan H Block"
+    permission: charmedchars.block
+    resource:
+      material: PAPER
+      generate: true
+      textures:
+        - block/cyan/h
+    specific_properties:
+      block:
+        placed_model:
+          type: REAL_NOTE
+          break_particles_material: NOTE_BLOCK
+        break_tools_whitelist:
+          - _AXE
+          - _PICKAXE
+        hardness: 0.8
+        light_level: 0
+
+  cyan_i:
+    display_name: "Cyan I Block"
+    permission: charmedchars.block
+    resource:
+      material: PAPER
+      generate: true
+      textures:
+        - block/cyan/i
+    specific_properties:
+      block:
+        placed_model:
+          type: REAL_NOTE
+          break_particles_material: NOTE_BLOCK
+        break_tools_whitelist:
+          - _AXE
+          - _PICKAXE
+        hardness: 0.8
+        light_level: 0
+
+  cyan_j:
+    display_name: "Cyan J Block"
+    permission: charmedchars.block
+    resource:
+      material: PAPER
+      generate: true
+      textures:
+        - block/cyan/j
+    specific_properties:
+      block:
+        placed_model:
+          type: REAL_NOTE
+          break_particles_material: NOTE_BLOCK
+        break_tools_whitelist:
+          - _AXE
+          - _PICKAXE
+        hardness: 0.8
+        light_level: 0
+
+  cyan_k:
+    display_name: "Cyan K Block"
+    permission: charmedchars.block
+    resource:
+      material: PAPER
+      generate: true
+      textures:
+        - block/cyan/k
+    specific_properties:
+      block:
+        placed_model:
+          type: REAL_NOTE
+          break_particles_material: NOTE_BLOCK
+        break_tools_whitelist:
+          - _AXE
+          - _PICKAXE
+        hardness: 0.8
+        light_level: 0
+
+  cyan_l:
+    display_name: "Cyan L Block"
+    permission: charmedchars.block
+    resource:
+      material: PAPER
+      generate: true
+      textures:
+        - block/cyan/l
+    specific_properties:
+      block:
+        placed_model:
+          type: REAL_NOTE
+          break_particles_material: NOTE_BLOCK
+        break_tools_whitelist:
+          - _AXE
+          - _PICKAXE
+        hardness: 0.8
+        light_level: 0
+
+  cyan_m:
+    display_name: "Cyan M Block"
+    permission: charmedchars.block
+    resource:
+      material: PAPER
+      generate: true
+      textures:
+        - block/cyan/m
+    specific_properties:
+      block:
+        placed_model:
+          type: REAL_NOTE
+          break_particles_material: NOTE_BLOCK
+        break_tools_whitelist:
+          - _AXE
+          - _PICKAXE
+        hardness: 0.8
+        light_level: 0
+
+  cyan_n:
+    display_name: "Cyan N Block"
+    permission: charmedchars.block
+    resource:
+      material: PAPER
+      generate: true
+      textures:
+        - block/cyan/n
+    specific_properties:
+      block:
+        placed_model:
+          type: REAL_NOTE
+          break_particles_material: NOTE_BLOCK
+        break_tools_whitelist:
+          - _AXE
+          - _PICKAXE
+        hardness: 0.8
+        light_level: 0
+
+  cyan_o:
+    display_name: "Cyan O Block"
+    permission: charmedchars.block
+    resource:
+      material: PAPER
+      generate: true
+      textures:
+        - block/cyan/o
+    specific_properties:
+      block:
+        placed_model:
+          type: REAL_NOTE
+          break_particles_material: NOTE_BLOCK
+        break_tools_whitelist:
+          - _AXE
+          - _PICKAXE
+        hardness: 0.8
+        light_level: 0
+
+  cyan_p:
+    display_name: "Cyan P Block"
+    permission: charmedchars.block
+    resource:
+      material: PAPER
+      generate: true
+      textures:
+        - block/cyan/p
+    specific_properties:
+      block:
+        placed_model:
+          type: REAL_NOTE
+          break_particles_material: NOTE_BLOCK
+        break_tools_whitelist:
+          - _AXE
+          - _PICKAXE
+        hardness: 0.8
+        light_level: 0
+
+  cyan_q:
+    display_name: "Cyan Q Block"
+    permission: charmedchars.block
+    resource:
+      material: PAPER
+      generate: true
+      textures:
+        - block/cyan/q
+    specific_properties:
+      block:
+        placed_model:
+          type: REAL_NOTE
+          break_particles_material: NOTE_BLOCK
+        break_tools_whitelist:
+          - _AXE
+          - _PICKAXE
+        hardness: 0.8
+        light_level: 0
+
+  cyan_r:
+    display_name: "Cyan R Block"
+    permission: charmedchars.block
+    resource:
+      material: PAPER
+      generate: true
+      textures:
+        - block/cyan/r
+    specific_properties:
+      block:
+        placed_model:
+          type: REAL_NOTE
+          break_particles_material: NOTE_BLOCK
+        break_tools_whitelist:
+          - _AXE
+          - _PICKAXE
+        hardness: 0.8
+        light_level: 0
+
+  cyan_s:
+    display_name: "Cyan S Block"
+    permission: charmedchars.block
+    resource:
+      material: PAPER
+      generate: true
+      textures:
+        - block/cyan/s
+    specific_properties:
+      block:
+        placed_model:
+          type: REAL_NOTE
+          break_particles_material: NOTE_BLOCK
+        break_tools_whitelist:
+          - _AXE
+          - _PICKAXE
+        hardness: 0.8
+        light_level: 0
+
+  cyan_t:
+    display_name: "Cyan T Block"
+    permission: charmedchars.block
+    resource:
+      material: PAPER
+      generate: true
+      textures:
+        - block/cyan/t
+    specific_properties:
+      block:
+        placed_model:
+          type: REAL_NOTE
+          break_particles_material: NOTE_BLOCK
+        break_tools_whitelist:
+          - _AXE
+          - _PICKAXE
+        hardness: 0.8
+        light_level: 0
+
+  cyan_u:
+    display_name: "Cyan U Block"
+    permission: charmedchars.block
+    resource:
+      material: PAPER
+      generate: true
+      textures:
+        - block/cyan/u
+    specific_properties:
+      block:
+        placed_model:
+          type: REAL_NOTE
+          break_particles_material: NOTE_BLOCK
+        break_tools_whitelist:
+          - _AXE
+          - _PICKAXE
+        hardness: 0.8
+        light_level: 0
+
+  cyan_v:
+    display_name: "Cyan V Block"
+    permission: charmedchars.block
+    resource:
+      material: PAPER
+      generate: true
+      textures:
+        - block/cyan/v
+    specific_properties:
+      block:
+        placed_model:
+          type: REAL_NOTE
+          break_particles_material: NOTE_BLOCK
+        break_tools_whitelist:
+          - _AXE
+          - _PICKAXE
+        hardness: 0.8
+        light_level: 0
+
+  cyan_w:
+    display_name: "Cyan W Block"
+    permission: charmedchars.block
+    resource:
+      material: PAPER
+      generate: true
+      textures:
+        - block/cyan/w
+    specific_properties:
+      block:
+        placed_model:
+          type: REAL_NOTE
+          break_particles_material: NOTE_BLOCK
+        break_tools_whitelist:
+          - _AXE
+          - _PICKAXE
+        hardness: 0.8
+        light_level: 0
+
+  cyan_x:
+    display_name: "Cyan X Block"
+    permission: charmedchars.block
+    resource:
+      material: PAPER
+      generate: true
+      textures:
+        - block/cyan/x
+    specific_properties:
+      block:
+        placed_model:
+          type: REAL_NOTE
+          break_particles_material: NOTE_BLOCK
+        break_tools_whitelist:
+          - _AXE
+          - _PICKAXE
+        hardness: 0.8
+        light_level: 0
+
+  cyan_y:
+    display_name: "Cyan Y Block"
+    permission: charmedchars.block
+    resource:
+      material: PAPER
+      generate: true
+      textures:
+        - block/cyan/y
+    specific_properties:
+      block:
+        placed_model:
+          type: REAL_NOTE
+          break_particles_material: NOTE_BLOCK
+        break_tools_whitelist:
+          - _AXE
+          - _PICKAXE
+        hardness: 0.8
+        light_level: 0
+
+  cyan_z:
+    display_name: "Cyan Z Block"
+    permission: charmedchars.block
+    resource:
+      material: PAPER
+      generate: true
+      textures:
+        - block/cyan/z
+    specific_properties:
+      block:
+        placed_model:
+          type: REAL_NOTE
+          break_particles_material: NOTE_BLOCK
+        break_tools_whitelist:
+          - _AXE
+          - _PICKAXE
+        hardness: 0.8
+        light_level: 0
+
+  # ==================== MAGENTA LETTER BLOCKS ====================
+  magenta_a:
+    display_name: "Magenta A Block"
+    permission: charmedchars.block
+    resource:
+      material: PAPER
+      generate: true
+      textures:
+        - block/magenta/a
+    specific_properties:
+      block:
+        placed_model:
+          type: REAL_NOTE
+          break_particles_material: NOTE_BLOCK
+        break_tools_whitelist:
+          - _AXE
+          - _PICKAXE
+        hardness: 0.8
+        light_level: 0
+
+  magenta_b:
+    display_name: "Magenta B Block"
+    permission: charmedchars.block
+    resource:
+      material: PAPER
+      generate: true
+      textures:
+        - block/magenta/b
+    specific_properties:
+      block:
+        placed_model:
+          type: REAL_NOTE
+          break_particles_material: NOTE_BLOCK
+        break_tools_whitelist:
+          - _AXE
+          - _PICKAXE
+        hardness: 0.8
+        light_level: 0
+
+  magenta_c:
+    display_name: "Magenta C Block"
+    permission: charmedchars.block
+    resource:
+      material: PAPER
+      generate: true
+      textures:
+        - block/magenta/c
+    specific_properties:
+      block:
+        placed_model:
+          type: REAL_NOTE
+          break_particles_material: NOTE_BLOCK
+        break_tools_whitelist:
+          - _AXE
+          - _PICKAXE
+        hardness: 0.8
+        light_level: 0
+
+  magenta_d:
+    display_name: "Magenta D Block"
+    permission: charmedchars.block
+    resource:
+      material: PAPER
+      generate: true
+      textures:
+        - block/magenta/d
+    specific_properties:
+      block:
+        placed_model:
+          type: REAL_NOTE
+          break_particles_material: NOTE_BLOCK
+        break_tools_whitelist:
+          - _AXE
+          - _PICKAXE
+        hardness: 0.8
+        light_level: 0
+
+  magenta_e:
+    display_name: "Magenta E Block"
+    permission: charmedchars.block
+    resource:
+      material: PAPER
+      generate: true
+      textures:
+        - block/magenta/e
+    specific_properties:
+      block:
+        placed_model:
+          type: REAL_NOTE
+          break_particles_material: NOTE_BLOCK
+        break_tools_whitelist:
+          - _AXE
+          - _PICKAXE
+        hardness: 0.8
+        light_level: 0
+
+  magenta_f:
+    display_name: "Magenta F Block"
+    permission: charmedchars.block
+    resource:
+      material: PAPER
+      generate: true
+      textures:
+        - block/magenta/f
+    specific_properties:
+      block:
+        placed_model:
+          type: REAL_NOTE
+          break_particles_material: NOTE_BLOCK
+        break_tools_whitelist:
+          - _AXE
+          - _PICKAXE
+        hardness: 0.8
+        light_level: 0
+
+  magenta_g:
+    display_name: "Magenta G Block"
+    permission: charmedchars.block
+    resource:
+      material: PAPER
+      generate: true
+      textures:
+        - block/magenta/g
+    specific_properties:
+      block:
+        placed_model:
+          type: REAL_NOTE
+          break_particles_material: NOTE_BLOCK
+        break_tools_whitelist:
+          - _AXE
+          - _PICKAXE
+        hardness: 0.8
+        light_level: 0
+
+  magenta_h:
+    display_name: "Magenta H Block"
+    permission: charmedchars.block
+    resource:
+      material: PAPER
+      generate: true
+      textures:
+        - block/magenta/h
+    specific_properties:
+      block:
+        placed_model:
+          type: REAL_NOTE
+          break_particles_material: NOTE_BLOCK
+        break_tools_whitelist:
+          - _AXE
+          - _PICKAXE
+        hardness: 0.8
+        light_level: 0
+
+  magenta_i:
+    display_name: "Magenta I Block"
+    permission: charmedchars.block
+    resource:
+      material: PAPER
+      generate: true
+      textures:
+        - block/magenta/i
+    specific_properties:
+      block:
+        placed_model:
+          type: REAL_NOTE
+          break_particles_material: NOTE_BLOCK
+        break_tools_whitelist:
+          - _AXE
+          - _PICKAXE
+        hardness: 0.8
+        light_level: 0
+
+  magenta_j:
+    display_name: "Magenta J Block"
+    permission: charmedchars.block
+    resource:
+      material: PAPER
+      generate: true
+      textures:
+        - block/magenta/j
+    specific_properties:
+      block:
+        placed_model:
+          type: REAL_NOTE
+          break_particles_material: NOTE_BLOCK
+        break_tools_whitelist:
+          - _AXE
+          - _PICKAXE
+        hardness: 0.8
+        light_level: 0
+
+  magenta_k:
+    display_name: "Magenta K Block"
+    permission: charmedchars.block
+    resource:
+      material: PAPER
+      generate: true
+      textures:
+        - block/magenta/k
+    specific_properties:
+      block:
+        placed_model:
+          type: REAL_NOTE
+          break_particles_material: NOTE_BLOCK
+        break_tools_whitelist:
+          - _AXE
+          - _PICKAXE
+        hardness: 0.8
+        light_level: 0
+
+  magenta_l:
+    display_name: "Magenta L Block"
+    permission: charmedchars.block
+    resource:
+      material: PAPER
+      generate: true
+      textures:
+        - block/magenta/l
+    specific_properties:
+      block:
+        placed_model:
+          type: REAL_NOTE
+          break_particles_material: NOTE_BLOCK
+        break_tools_whitelist:
+          - _AXE
+          - _PICKAXE
+        hardness: 0.8
+        light_level: 0
+
+  magenta_m:
+    display_name: "Magenta M Block"
+    permission: charmedchars.block
+    resource:
+      material: PAPER
+      generate: true
+      textures:
+        - block/magenta/m
+    specific_properties:
+      block:
+        placed_model:
+          type: REAL_NOTE
+          break_particles_material: NOTE_BLOCK
+        break_tools_whitelist:
+          - _AXE
+          - _PICKAXE
+        hardness: 0.8
+        light_level: 0
+
+  magenta_n:
+    display_name: "Magenta N Block"
+    permission: charmedchars.block
+    resource:
+      material: PAPER
+      generate: true
+      textures:
+        - block/magenta/n
+    specific_properties:
+      block:
+        placed_model:
+          type: REAL_NOTE
+          break_particles_material: NOTE_BLOCK
+        break_tools_whitelist:
+          - _AXE
+          - _PICKAXE
+        hardness: 0.8
+        light_level: 0
+
+  magenta_o:
+    display_name: "Magenta O Block"
+    permission: charmedchars.block
+    resource:
+      material: PAPER
+      generate: true
+      textures:
+        - block/magenta/o
+    specific_properties:
+      block:
+        placed_model:
+          type: REAL_NOTE
+          break_particles_material: NOTE_BLOCK
+        break_tools_whitelist:
+          - _AXE
+          - _PICKAXE
+        hardness: 0.8
+        light_level: 0
+
+  magenta_p:
+    display_name: "Magenta P Block"
+    permission: charmedchars.block
+    resource:
+      material: PAPER
+      generate: true
+      textures:
+        - block/magenta/p
+    specific_properties:
+      block:
+        placed_model:
+          type: REAL_NOTE
+          break_particles_material: NOTE_BLOCK
+        break_tools_whitelist:
+          - _AXE
+          - _PICKAXE
+        hardness: 0.8
+        light_level: 0
+
+  magenta_q:
+    display_name: "Magenta Q Block"
+    permission: charmedchars.block
+    resource:
+      material: PAPER
+      generate: true
+      textures:
+        - block/magenta/q
+    specific_properties:
+      block:
+        placed_model:
+          type: REAL_NOTE
+          break_particles_material: NOTE_BLOCK
+        break_tools_whitelist:
+          - _AXE
+          - _PICKAXE
+        hardness: 0.8
+        light_level: 0
+
+  magenta_r:
+    display_name: "Magenta R Block"
+    permission: charmedchars.block
+    resource:
+      material: PAPER
+      generate: true
+      textures:
+        - block/magenta/r
+    specific_properties:
+      block:
+        placed_model:
+          type: REAL_NOTE
+          break_particles_material: NOTE_BLOCK
+        break_tools_whitelist:
+          - _AXE
+          - _PICKAXE
+        hardness: 0.8
+        light_level: 0
+
+  magenta_s:
+    display_name: "Magenta S Block"
+    permission: charmedchars.block
+    resource:
+      material: PAPER
+      generate: true
+      textures:
+        - block/magenta/s
+    specific_properties:
+      block:
+        placed_model:
+          type: REAL_NOTE
+          break_particles_material: NOTE_BLOCK
+        break_tools_whitelist:
+          - _AXE
+          - _PICKAXE
+        hardness: 0.8
+        light_level: 0
+
+  magenta_t:
+    display_name: "Magenta T Block"
+    permission: charmedchars.block
+    resource:
+      material: PAPER
+      generate: true
+      textures:
+        - block/magenta/t
+    specific_properties:
+      block:
+        placed_model:
+          type: REAL_NOTE
+          break_particles_material: NOTE_BLOCK
+        break_tools_whitelist:
+          - _AXE
+          - _PICKAXE
+        hardness: 0.8
+        light_level: 0
+
+  magenta_u:
+    display_name: "Magenta U Block"
+    permission: charmedchars.block
+    resource:
+      material: PAPER
+      generate: true
+      textures:
+        - block/magenta/u
+    specific_properties:
+      block:
+        placed_model:
+          type: REAL_NOTE
+          break_particles_material: NOTE_BLOCK
+        break_tools_whitelist:
+          - _AXE
+          - _PICKAXE
+        hardness: 0.8
+        light_level: 0
+
+  magenta_v:
+    display_name: "Magenta V Block"
+    permission: charmedchars.block
+    resource:
+      material: PAPER
+      generate: true
+      textures:
+        - block/magenta/v
+    specific_properties:
+      block:
+        placed_model:
+          type: REAL_NOTE
+          break_particles_material: NOTE_BLOCK
+        break_tools_whitelist:
+          - _AXE
+          - _PICKAXE
+        hardness: 0.8
+        light_level: 0
+
+  magenta_w:
+    display_name: "Magenta W Block"
+    permission: charmedchars.block
+    resource:
+      material: PAPER
+      generate: true
+      textures:
+        - block/magenta/w
+    specific_properties:
+      block:
+        placed_model:
+          type: REAL_NOTE
+          break_particles_material: NOTE_BLOCK
+        break_tools_whitelist:
+          - _AXE
+          - _PICKAXE
+        hardness: 0.8
+        light_level: 0
+
+  magenta_x:
+    display_name: "Magenta X Block"
+    permission: charmedchars.block
+    resource:
+      material: PAPER
+      generate: true
+      textures:
+        - block/magenta/x
+    specific_properties:
+      block:
+        placed_model:
+          type: REAL_NOTE
+          break_particles_material: NOTE_BLOCK
+        break_tools_whitelist:
+          - _AXE
+          - _PICKAXE
+        hardness: 0.8
+        light_level: 0
+
+  magenta_y:
+    display_name: "Magenta Y Block"
+    permission: charmedchars.block
+    resource:
+      material: PAPER
+      generate: true
+      textures:
+        - block/magenta/y
+    specific_properties:
+      block:
+        placed_model:
+          type: REAL_NOTE
+          break_particles_material: NOTE_BLOCK
+        break_tools_whitelist:
+          - _AXE
+          - _PICKAXE
+        hardness: 0.8
+        light_level: 0
+
+  magenta_z:
+    display_name: "Magenta Z Block"
+    permission: charmedchars.block
+    resource:
+      material: PAPER
+      generate: true
+      textures:
+        - block/magenta/z
+    specific_properties:
+      block:
+        placed_model:
+          type: REAL_NOTE
+          break_particles_material: NOTE_BLOCK
+        break_tools_whitelist:
+          - _AXE
+          - _PICKAXE
+        hardness: 0.8
+        light_level: 0
+
+  # ==================== YELLOW LETTER BLOCKS ====================
+  yellow_a:
+    display_name: "Yellow A Block"
+    permission: charmedchars.block
+    resource:
+      material: PAPER
+      generate: true
+      textures:
+        - block/yellow/a
+    specific_properties:
+      block:
+        placed_model:
+          type: REAL_NOTE
+          break_particles_material: NOTE_BLOCK
+        break_tools_whitelist:
+          - _AXE
+          - _PICKAXE
+        hardness: 0.8
+        light_level: 0
+
+  yellow_b:
+    display_name: "Yellow B Block"
+    permission: charmedchars.block
+    resource:
+      material: PAPER
+      generate: true
+      textures:
+        - block/yellow/b
+    specific_properties:
+      block:
+        placed_model:
+          type: REAL_NOTE
+          break_particles_material: NOTE_BLOCK
+        break_tools_whitelist:
+          - _AXE
+          - _PICKAXE
+        hardness: 0.8
+        light_level: 0
+
+  yellow_c:
+    display_name: "Yellow C Block"
+    permission: charmedchars.block
+    resource:
+      material: PAPER
+      generate: true
+      textures:
+        - block/yellow/c
+    specific_properties:
+      block:
+        placed_model:
+          type: REAL_NOTE
+          break_particles_material: NOTE_BLOCK
+        break_tools_whitelist:
+          - _AXE
+          - _PICKAXE
+        hardness: 0.8
+        light_level: 0
+
+  yellow_d:
+    display_name: "Yellow D Block"
+    permission: charmedchars.block
+    resource:
+      material: PAPER
+      generate: true
+      textures:
+        - block/yellow/d
+    specific_properties:
+      block:
+        placed_model:
+          type: REAL_NOTE
+          break_particles_material: NOTE_BLOCK
+        break_tools_whitelist:
+          - _AXE
+          - _PICKAXE
+        hardness: 0.8
+        light_level: 0
+
+  yellow_e:
+    display_name: "Yellow E Block"
+    permission: charmedchars.block
+    resource:
+      material: PAPER
+      generate: true
+      textures:
+        - block/yellow/e
+    specific_properties:
+      block:
+        placed_model:
+          type: REAL_NOTE
+          break_particles_material: NOTE_BLOCK
+        break_tools_whitelist:
+          - _AXE
+          - _PICKAXE
+        hardness: 0.8
+        light_level: 0
+
+  yellow_f:
+    display_name: "Yellow F Block"
+    permission: charmedchars.block
+    resource:
+      material: PAPER
+      generate: true
+      textures:
+        - block/yellow/f
+    specific_properties:
+      block:
+        placed_model:
+          type: REAL_NOTE
+          break_particles_material: NOTE_BLOCK
+        break_tools_whitelist:
+          - _AXE
+          - _PICKAXE
+        hardness: 0.8
+        light_level: 0
+
+  yellow_g:
+    display_name: "Yellow G Block"
+    permission: charmedchars.block
+    resource:
+      material: PAPER
+      generate: true
+      textures:
+        - block/yellow/g
+    specific_properties:
+      block:
+        placed_model:
+          type: REAL_NOTE
+          break_particles_material: NOTE_BLOCK
+        break_tools_whitelist:
+          - _AXE
+          - _PICKAXE
+        hardness: 0.8
+        light_level: 0
+
+  yellow_h:
+    display_name: "Yellow H Block"
+    permission: charmedchars.block
+    resource:
+      material: PAPER
+      generate: true
+      textures:
+        - block/yellow/h
+    specific_properties:
+      block:
+        placed_model:
+          type: REAL_NOTE
+          break_particles_material: NOTE_BLOCK
+        break_tools_whitelist:
+          - _AXE
+          - _PICKAXE
+        hardness: 0.8
+        light_level: 0
+
+  yellow_i:
+    display_name: "Yellow I Block"
+    permission: charmedchars.block
+    resource:
+      material: PAPER
+      generate: true
+      textures:
+        - block/yellow/i
+    specific_properties:
+      block:
+        placed_model:
+          type: REAL_NOTE
+          break_particles_material: NOTE_BLOCK
+        break_tools_whitelist:
+          - _AXE
+          - _PICKAXE
+        hardness: 0.8
+        light_level: 0
+
+  yellow_j:
+    display_name: "Yellow J Block"
+    permission: charmedchars.block
+    resource:
+      material: PAPER
+      generate: true
+      textures:
+        - block/yellow/j
+    specific_properties:
+      block:
+        placed_model:
+          type: REAL_NOTE
+          break_particles_material: NOTE_BLOCK
+        break_tools_whitelist:
+          - _AXE
+          - _PICKAXE
+        hardness: 0.8
+        light_level: 0
+
+  yellow_k:
+    display_name: "Yellow K Block"
+    permission: charmedchars.block
+    resource:
+      material: PAPER
+      generate: true
+      textures:
+        - block/yellow/k
+    specific_properties:
+      block:
+        placed_model:
+          type: REAL_NOTE
+          break_particles_material: NOTE_BLOCK
+        break_tools_whitelist:
+          - _AXE
+          - _PICKAXE
+        hardness: 0.8
+        light_level: 0
+
+  yellow_l:
+    display_name: "Yellow L Block"
+    permission: charmedchars.block
+    resource:
+      material: PAPER
+      generate: true
+      textures:
+        - block/yellow/l
+    specific_properties:
+      block:
+        placed_model:
+          type: REAL_NOTE
+          break_particles_material: NOTE_BLOCK
+        break_tools_whitelist:
+          - _AXE
+          - _PICKAXE
+        hardness: 0.8
+        light_level: 0
+
+  yellow_m:
+    display_name: "Yellow M Block"
+    permission: charmedchars.block
+    resource:
+      material: PAPER
+      generate: true
+      textures:
+        - block/yellow/m
+    specific_properties:
+      block:
+        placed_model:
+          type: REAL_NOTE
+          break_particles_material: NOTE_BLOCK
+        break_tools_whitelist:
+          - _AXE
+          - _PICKAXE
+        hardness: 0.8
+        light_level: 0
+
+  yellow_n:
+    display_name: "Yellow N Block"
+    permission: charmedchars.block
+    resource:
+      material: PAPER
+      generate: true
+      textures:
+        - block/yellow/n
+    specific_properties:
+      block:
+        placed_model:
+          type: REAL_NOTE
+          break_particles_material: NOTE_BLOCK
+        break_tools_whitelist:
+          - _AXE
+          - _PICKAXE
+        hardness: 0.8
+        light_level: 0
+
+  yellow_o:
+    display_name: "Yellow O Block"
+    permission: charmedchars.block
+    resource:
+      material: PAPER
+      generate: true
+      textures:
+        - block/yellow/o
+    specific_properties:
+      block:
+        placed_model:
+          type: REAL_NOTE
+          break_particles_material: NOTE_BLOCK
+        break_tools_whitelist:
+          - _AXE
+          - _PICKAXE
+        hardness: 0.8
+        light_level: 0
+
+  yellow_p:
+    display_name: "Yellow P Block"
+    permission: charmedchars.block
+    resource:
+      material: PAPER
+      generate: true
+      textures:
+        - block/yellow/p
+    specific_properties:
+      block:
+        placed_model:
+          type: REAL_NOTE
+          break_particles_material: NOTE_BLOCK
+        break_tools_whitelist:
+          - _AXE
+          - _PICKAXE
+        hardness: 0.8
+        light_level: 0
+
+  yellow_q:
+    display_name: "Yellow Q Block"
+    permission: charmedchars.block
+    resource:
+      material: PAPER
+      generate: true
+      textures:
+        - block/yellow/q
+    specific_properties:
+      block:
+        placed_model:
+          type: REAL_NOTE
+          break_particles_material: NOTE_BLOCK
+        break_tools_whitelist:
+          - _AXE
+          - _PICKAXE
+        hardness: 0.8
+        light_level: 0
+
+  yellow_r:
+    display_name: "Yellow R Block"
+    permission: charmedchars.block
+    resource:
+      material: PAPER
+      generate: true
+      textures:
+        - block/yellow/r
+    specific_properties:
+      block:
+        placed_model:
+          type: REAL_NOTE
+          break_particles_material: NOTE_BLOCK
+        break_tools_whitelist:
+          - _AXE
+          - _PICKAXE
+        hardness: 0.8
+        light_level: 0
+
+  yellow_s:
+    display_name: "Yellow S Block"
+    permission: charmedchars.block
+    resource:
+      material: PAPER
+      generate: true
+      textures:
+        - block/yellow/s
+    specific_properties:
+      block:
+        placed_model:
+          type: REAL_NOTE
+          break_particles_material: NOTE_BLOCK
+        break_tools_whitelist:
+          - _AXE
+          - _PICKAXE
+        hardness: 0.8
+        light_level: 0
+
+  yellow_t:
+    display_name: "Yellow T Block"
+    permission: charmedchars.block
+    resource:
+      material: PAPER
+      generate: true
+      textures:
+        - block/yellow/t
+    specific_properties:
+      block:
+        placed_model:
+          type: REAL_NOTE
+          break_particles_material: NOTE_BLOCK
+        break_tools_whitelist:
+          - _AXE
+          - _PICKAXE
+        hardness: 0.8
+        light_level: 0
+
+  yellow_u:
+    display_name: "Yellow U Block"
+    permission: charmedchars.block
+    resource:
+      material: PAPER
+      generate: true
+      textures:
+        - block/yellow/u
+    specific_properties:
+      block:
+        placed_model:
+          type: REAL_NOTE
+          break_particles_material: NOTE_BLOCK
+        break_tools_whitelist:
+          - _AXE
+          - _PICKAXE
+        hardness: 0.8
+        light_level: 0
+
+  yellow_v:
+    display_name: "Yellow V Block"
+    permission: charmedchars.block
+    resource:
+      material: PAPER
+      generate: true
+      textures:
+        - block/yellow/v
+    specific_properties:
+      block:
+        placed_model:
+          type: REAL_NOTE
+          break_particles_material: NOTE_BLOCK
+        break_tools_whitelist:
+          - _AXE
+          - _PICKAXE
+        hardness: 0.8
+        light_level: 0
+
+  yellow_w:
+    display_name: "Yellow W Block"
+    permission: charmedchars.block
+    resource:
+      material: PAPER
+      generate: true
+      textures:
+        - block/yellow/w
+    specific_properties:
+      block:
+        placed_model:
+          type: REAL_NOTE
+          break_particles_material: NOTE_BLOCK
+        break_tools_whitelist:
+          - _AXE
+          - _PICKAXE
+        hardness: 0.8
+        light_level: 0
+
+  yellow_x:
+    display_name: "Yellow X Block"
+    permission: charmedchars.block
+    resource:
+      material: PAPER
+      generate: true
+      textures:
+        - block/yellow/x
+    specific_properties:
+      block:
+        placed_model:
+          type: REAL_NOTE
+          break_particles_material: NOTE_BLOCK
+        break_tools_whitelist:
+          - _AXE
+          - _PICKAXE
+        hardness: 0.8
+        light_level: 0
+
+  yellow_y:
+    display_name: "Yellow Y Block"
+    permission: charmedchars.block
+    resource:
+      material: PAPER
+      generate: true
+      textures:
+        - block/yellow/y
+    specific_properties:
+      block:
+        placed_model:
+          type: REAL_NOTE
+          break_particles_material: NOTE_BLOCK
+        break_tools_whitelist:
+          - _AXE
+          - _PICKAXE
+        hardness: 0.8
+        light_level: 0
+
+  yellow_z:
+    display_name: "Yellow Z Block"
+    permission: charmedchars.block
+    resource:
+      material: PAPER
+      generate: true
+      textures:
+        - block/yellow/z
+    specific_properties:
+      block:
+        placed_model:
+          type: REAL_NOTE
+          break_particles_material: NOTE_BLOCK
+        break_tools_whitelist:
+          - _AXE
+          - _PICKAXE
+        hardness: 0.8
+        light_level: 0
+
+  # ==================== NUMBER BLOCKS ====================
+  # Cyan Numbers
+  cyan_0:
+    display_name: "Cyan 0 Block"
+    permission: charmedchars.block
+    resource:
+      material: PAPER
+      generate: true
+      textures:
+        - block/cyan/0
+    specific_properties:
+      block:
+        placed_model:
+          type: REAL_NOTE
+          break_particles_material: NOTE_BLOCK
+        break_tools_whitelist:
+          - _AXE
+          - _PICKAXE
+        hardness: 0.8
+        light_level: 0
+
+  cyan_1:
+    display_name: "Cyan 1 Block"
+    permission: charmedchars.block
+    resource:
+      material: PAPER
+      generate: true
+      textures:
+        - block/cyan/1
+    specific_properties:
+      block:
+        placed_model:
+          type: REAL_NOTE
+          break_particles_material: NOTE_BLOCK
+        break_tools_whitelist:
+          - _AXE
+          - _PICKAXE
+        hardness: 0.8
+        light_level: 0
+
+  cyan_2:
+    display_name: "Cyan 2 Block"
+    permission: charmedchars.block
+    resource:
+      material: PAPER
+      generate: true
+      textures:
+        - block/cyan/2
+    specific_properties:
+      block:
+        placed_model:
+          type: REAL_NOTE
+          break_particles_material: NOTE_BLOCK
+        break_tools_whitelist:
+          - _AXE
+          - _PICKAXE
+        hardness: 0.8
+        light_level: 0
+
+  cyan_3:
+    display_name: "Cyan 3 Block"
+    permission: charmedchars.block
+    resource:
+      material: PAPER
+      generate: true
+      textures:
+        - block/cyan/3
+    specific_properties:
+      block:
+        placed_model:
+          type: REAL_NOTE
+          break_particles_material: NOTE_BLOCK
+        break_tools_whitelist:
+          - _AXE
+          - _PICKAXE
+        hardness: 0.8
+        light_level: 0
+
+  cyan_4:
+    display_name: "Cyan 4 Block"
+    permission: charmedchars.block
+    resource:
+      material: PAPER
+      generate: true
+      textures:
+        - block/cyan/4
+    specific_properties:
+      block:
+        placed_model:
+          type: REAL_NOTE
+          break_particles_material: NOTE_BLOCK
+        break_tools_whitelist:
+          - _AXE
+          - _PICKAXE
+        hardness: 0.8
+        light_level: 0
+
+  cyan_5:
+    display_name: "Cyan 5 Block"
+    permission: charmedchars.block
+    resource:
+      material: PAPER
+      generate: true
+      textures:
+        - block/cyan/5
+    specific_properties:
+      block:
+        placed_model:
+          type: REAL_NOTE
+          break_particles_material: NOTE_BLOCK
+        break_tools_whitelist:
+          - _AXE
+          - _PICKAXE
+        hardness: 0.8
+        light_level: 0
+
+  cyan_6:
+    display_name: "Cyan 6 Block"
+    permission: charmedchars.block
+    resource:
+      material: PAPER
+      generate: true
+      textures:
+        - block/cyan/6
+    specific_properties:
+      block:
+        placed_model:
+          type: REAL_NOTE
+          break_particles_material: NOTE_BLOCK
+        break_tools_whitelist:
+          - _AXE
+          - _PICKAXE
+        hardness: 0.8
+        light_level: 0
+
+  cyan_7:
+    display_name: "Cyan 7 Block"
+    permission: charmedchars.block
+    resource:
+      material: PAPER
+      generate: true
+      textures:
+        - block/cyan/7
+    specific_properties:
+      block:
+        placed_model:
+          type: REAL_NOTE
+          break_particles_material: NOTE_BLOCK
+        break_tools_whitelist:
+          - _AXE
+          - _PICKAXE
+        hardness: 0.8
+        light_level: 0
+
+  cyan_8:
+    display_name: "Cyan 8 Block"
+    permission: charmedchars.block
+    resource:
+      material: PAPER
+      generate: true
+      textures:
+        - block/cyan/8
+    specific_properties:
+      block:
+        placed_model:
+          type: REAL_NOTE
+          break_particles_material: NOTE_BLOCK
+        break_tools_whitelist:
+          - _AXE
+          - _PICKAXE
+        hardness: 0.8
+        light_level: 0
+
+  cyan_9:
+    display_name: "Cyan 9 Block"
+    permission: charmedchars.block
+    resource:
+      material: PAPER
+      generate: true
+      textures:
+        - block/cyan/9
+    specific_properties:
+      block:
+        placed_model:
+          type: REAL_NOTE
+          break_particles_material: NOTE_BLOCK
+        break_tools_whitelist:
+          - _AXE
+          - _PICKAXE
+        hardness: 0.8
+        light_level: 0
+
+  # Magenta Numbers
+  magenta_0:
+    display_name: "Magenta 0 Block"
+    permission: charmedchars.block
+    resource:
+      material: PAPER
+      generate: true
+      textures:
+        - block/magenta/0
+    specific_properties:
+      block:
+        placed_model:
+          type: REAL_NOTE
+          break_particles_material: NOTE_BLOCK
+        break_tools_whitelist:
+          - _AXE
+          - _PICKAXE
+        hardness: 0.8
+        light_level: 0
+
+  magenta_1:
+    display_name: "Magenta 1 Block"
+    permission: charmedchars.block
+    resource:
+      material: PAPER
+      generate: true
+      textures:
+        - block/magenta/1
+    specific_properties:
+      block:
+        placed_model:
+          type: REAL_NOTE
+          break_particles_material: NOTE_BLOCK
+        break_tools_whitelist:
+          - _AXE
+          - _PICKAXE
+        hardness: 0.8
+        light_level: 0
+
+  magenta_2:
+    display_name: "Magenta 2 Block"
+    permission: charmedchars.block
+    resource:
+      material: PAPER
+      generate: true
+      textures:
+        - block/magenta/2
+    specific_properties:
+      block:
+        placed_model:
+          type: REAL_NOTE
+          break_particles_material: NOTE_BLOCK
+        break_tools_whitelist:
+          - _AXE
+          - _PICKAXE
+        hardness: 0.8
+        light_level: 0
+
+  magenta_3:
+    display_name: "Magenta 3 Block"
+    permission: charmedchars.block
+    resource:
+      material: PAPER
+      generate: true
+      textures:
+        - block/magenta/3
+    specific_properties:
+      block:
+        placed_model:
+          type: REAL_NOTE
+          break_particles_material: NOTE_BLOCK
+        break_tools_whitelist:
+          - _AXE
+          - _PICKAXE
+        hardness: 0.8
+        light_level: 0
+
+  magenta_4:
+    display_name: "Magenta 4 Block"
+    permission: charmedchars.block
+    resource:
+      material: PAPER
+      generate: true
+      textures:
+        - block/magenta/4
+    specific_properties:
+      block:
+        placed_model:
+          type: REAL_NOTE
+          break_particles_material: NOTE_BLOCK
+        break_tools_whitelist:
+          - _AXE
+          - _PICKAXE
+        hardness: 0.8
+        light_level: 0
+
+  magenta_5:
+    display_name: "Magenta 5 Block"
+    permission: charmedchars.block
+    resource:
+      material: PAPER
+      generate: true
+      textures:
+        - block/magenta/5
+    specific_properties:
+      block:
+        placed_model:
+          type: REAL_NOTE
+          break_particles_material: NOTE_BLOCK
+        break_tools_whitelist:
+          - _AXE
+          - _PICKAXE
+        hardness: 0.8
+        light_level: 0
+
+  magenta_6:
+    display_name: "Magenta 6 Block"
+    permission: charmedchars.block
+    resource:
+      material: PAPER
+      generate: true
+      textures:
+        - block/magenta/6
+    specific_properties:
+      block:
+        placed_model:
+          type: REAL_NOTE
+          break_particles_material: NOTE_BLOCK
+        break_tools_whitelist:
+          - _AXE
+          - _PICKAXE
+        hardness: 0.8
+        light_level: 0
+
+  magenta_7:
+    display_name: "Magenta 7 Block"
+    permission: charmedchars.block
+    resource:
+      material: PAPER
+      generate: true
+      textures:
+        - block/magenta/7
+    specific_properties:
+      block:
+        placed_model:
+          type: REAL_NOTE
+          break_particles_material: NOTE_BLOCK
+        break_tools_whitelist:
+          - _AXE
+          - _PICKAXE
+        hardness: 0.8
+        light_level: 0
+
+  magenta_8:
+    display_name: "Magenta 8 Block"
+    permission: charmedchars.block
+    resource:
+      material: PAPER
+      generate: true
+      textures:
+        - block/magenta/8
+    specific_properties:
+      block:
+        placed_model:
+          type: REAL_NOTE
+          break_particles_material: NOTE_BLOCK
+        break_tools_whitelist:
+          - _AXE
+          - _PICKAXE
+        hardness: 0.8
+        light_level: 0
+
+  magenta_9:
+    display_name: "Magenta 9 Block"
+    permission: charmedchars.block
+    resource:
+      material: PAPER
+      generate: true
+      textures:
+        - block/magenta/9
+    specific_properties:
+      block:
+        placed_model:
+          type: REAL_NOTE
+          break_particles_material: NOTE_BLOCK
+        break_tools_whitelist:
+          - _AXE
+          - _PICKAXE
+        hardness: 0.8
+        light_level: 0
+
+  # Yellow Numbers
+  yellow_0:
+    display_name: "Yellow 0 Block"
+    permission: charmedchars.block
+    resource:
+      material: PAPER
+      generate: true
+      textures:
+        - block/yellow/0
+    specific_properties:
+      block:
+        placed_model:
+          type: REAL_NOTE
+          break_particles_material: NOTE_BLOCK
+        break_tools_whitelist:
+          - _AXE
+          - _PICKAXE
+        hardness: 0.8
+        light_level: 0
+
+  yellow_1:
+    display_name: "Yellow 1 Block"
+    permission: charmedchars.block
+    resource:
+      material: PAPER
+      generate: true
+      textures:
+        - block/yellow/1
+    specific_properties:
+      block:
+        placed_model:
+          type: REAL_NOTE
+          break_particles_material: NOTE_BLOCK
+        break_tools_whitelist:
+          - _AXE
+          - _PICKAXE
+        hardness: 0.8
+        light_level: 0
+
+  yellow_2:
+    display_name: "Yellow 2 Block"
+    permission: charmedchars.block
+    resource:
+      material: PAPER
+      generate: true
+      textures:
+        - block/yellow/2
+    specific_properties:
+      block:
+        placed_model:
+          type: REAL_NOTE
+          break_particles_material: NOTE_BLOCK
+        break_tools_whitelist:
+          - _AXE
+          - _PICKAXE
+        hardness: 0.8
+        light_level: 0
+
+  yellow_3:
+    display_name: "Yellow 3 Block"
+    permission: charmedchars.block
+    resource:
+      material: PAPER
+      generate: true
+      textures:
+        - block/yellow/3
+    specific_properties:
+      block:
+        placed_model:
+          type: REAL_NOTE
+          break_particles_material: NOTE_BLOCK
+        break_tools_whitelist:
+          - _AXE
+          - _PICKAXE
+        hardness: 0.8
+        light_level: 0
+
+  yellow_4:
+    display_name: "Yellow 4 Block"
+    permission: charmedchars.block
+    resource:
+      material: PAPER
+      generate: true
+      textures:
+        - block/yellow/4
+    specific_properties:
+      block:
+        placed_model:
+          type: REAL_NOTE
+          break_particles_material: NOTE_BLOCK
+        break_tools_whitelist:
+          - _AXE
+          - _PICKAXE
+        hardness: 0.8
+        light_level: 0
+
+  yellow_5:
+    display_name: "Yellow 5 Block"
+    permission: charmedchars.block
+    resource:
+      material: PAPER
+      generate: true
+      textures:
+        - block/yellow/5
+    specific_properties:
+      block:
+        placed_model:
+          type: REAL_NOTE
+          break_particles_material: NOTE_BLOCK
+        break_tools_whitelist:
+          - _AXE
+          - _PICKAXE
+        hardness: 0.8
+        light_level: 0
+
+  yellow_6:
+    display_name: "Yellow 6 Block"
+    permission: charmedchars.block
+    resource:
+      material: PAPER
+      generate: true
+      textures:
+        - block/yellow/6
+    specific_properties:
+      block:
+        placed_model:
+          type: REAL_NOTE
+          break_particles_material: NOTE_BLOCK
+        break_tools_whitelist:
+          - _AXE
+          - _PICKAXE
+        hardness: 0.8
+        light_level: 0
+
+  yellow_7:
+    display_name: "Yellow 7 Block"
+    permission: charmedchars.block
+    resource:
+      material: PAPER
+      generate: true
+      textures:
+        - block/yellow/7
+    specific_properties:
+      block:
+        placed_model:
+          type: REAL_NOTE
+          break_particles_material: NOTE_BLOCK
+        break_tools_whitelist:
+          - _AXE
+          - _PICKAXE
+        hardness: 0.8
+        light_level: 0
+
+  yellow_8:
+    display_name: "Yellow 8 Block"
+    permission: charmedchars.block
+    resource:
+      material: PAPER
+      generate: true
+      textures:
+        - block/yellow/8
+    specific_properties:
+      block:
+        placed_model:
+          type: REAL_NOTE
+          break_particles_material: NOTE_BLOCK
+        break_tools_whitelist:
+          - _AXE
+          - _PICKAXE
+        hardness: 0.8
+        light_level: 0
+
+  yellow_9:
+    display_name: "Yellow 9 Block"
+    permission: charmedchars.block
+    resource:
+      material: PAPER
+      generate: true
+      textures:
+        - block/yellow/9
+    specific_properties:
+      block:
+        placed_model:
+          type: REAL_NOTE
+          break_particles_material: NOTE_BLOCK
+        break_tools_whitelist:
+          - _AXE
+          - _PICKAXE
+        hardness: 0.8
+        light_level: 0
+
+  # ==================== SPECIAL CHARACTER BLOCKS ====================
+  # Plus Blocks
+  cyan_plus:
+    display_name: "Cyan + Block"
+    permission: charmedchars.block
+    resource:
+      material: PAPER
+      generate: true
+      textures:
+        - block/cyan/plus
+    specific_properties:
+      block:
+        placed_model:
+          type: REAL_NOTE
+          break_particles_material: NOTE_BLOCK
+        break_tools_whitelist:
+          - _AXE
+          - _PICKAXE
+        hardness: 0.8
+        light_level: 0
+
+  magenta_plus:
+    display_name: "Magenta + Block"
+    permission: charmedchars.block
+    resource:
+      material: PAPER
+      generate: true
+      textures:
+        - block/magenta/plus
+    specific_properties:
+      block:
+        placed_model:
+          type: REAL_NOTE
+          break_particles_material: NOTE_BLOCK
+        break_tools_whitelist:
+          - _AXE
+          - _PICKAXE
+        hardness: 0.8
+        light_level: 0
+
+  yellow_plus:
+    display_name: "Yellow + Block"
+    permission: charmedchars.block
+    resource:
+      material: PAPER
+      generate: true
+      textures:
+        - block/yellow/plus
+    specific_properties:
+      block:
+        placed_model:
+          type: REAL_NOTE
+          break_particles_material: NOTE_BLOCK
+        break_tools_whitelist:
+          - _AXE
+          - _PICKAXE
+        hardness: 0.8
+        light_level: 0
+
+  # Minus Blocks
+  cyan_minus:
+    display_name: "Cyan - Block"
+    permission: charmedchars.block
+    resource:
+      material: PAPER
+      generate: true
+      textures:
+        - block/cyan/minus
+    specific_properties:
+      block:
+        placed_model:
+          type: REAL_NOTE
+          break_particles_material: NOTE_BLOCK
+        break_tools_whitelist:
+          - _AXE
+          - _PICKAXE
+        hardness: 0.8
+        light_level: 0
+
+  magenta_minus:
+    display_name: "Magenta - Block"
+    permission: charmedchars.block
+    resource:
+      material: PAPER
+      generate: true
+      textures:
+        - block/magenta/minus
+    specific_properties:
+      block:
+        placed_model:
+          type: REAL_NOTE
+          break_particles_material: NOTE_BLOCK
+        break_tools_whitelist:
+          - _AXE
+          - _PICKAXE
+        hardness: 0.8
+        light_level: 0
+
+  yellow_minus:
+    display_name: "Yellow - Block"
+    permission: charmedchars.block
+    resource:
+      material: PAPER
+      generate: true
+      textures:
+        - block/yellow/minus
+    specific_properties:
+      block:
+        placed_model:
+          type: REAL_NOTE
+          break_particles_material: NOTE_BLOCK
+        break_tools_whitelist:
+          - _AXE
+          - _PICKAXE
+        hardness: 0.8
+        light_level: 0
+
+  # Multiply Blocks
+  cyan_multiply:
+    display_name: "Cyan × Block"
+    permission: charmedchars.block
+    resource:
+      material: PAPER
+      generate: true
+      textures:
+        - block/cyan/multiply
+    specific_properties:
+      block:
+        placed_model:
+          type: REAL_NOTE
+          break_particles_material: NOTE_BLOCK
+        break_tools_whitelist:
+          - _AXE
+          - _PICKAXE
+        hardness: 0.8
+        light_level: 0
+
+  magenta_multiply:
+    display_name: "Magenta × Block"
+    permission: charmedchars.block
+    resource:
+      material: PAPER
+      generate: true
+      textures:
+        - block/magenta/multiply
+    specific_properties:
+      block:
+        placed_model:
+          type: REAL_NOTE
+          break_particles_material: NOTE_BLOCK
+        break_tools_whitelist:
+          - _AXE
+          - _PICKAXE
+        hardness: 0.8
+        light_level: 0
+
+  yellow_multiply:
+    display_name: "Yellow × Block"
+    permission: charmedchars.block
+    resource:
+      material: PAPER
+      generate: true
+      textures:
+        - block/yellow/multiply
+    specific_properties:
+      block:
+        placed_model:
+          type: REAL_NOTE
+          break_particles_material: NOTE_BLOCK
+        break_tools_whitelist:
+          - _AXE
+          - _PICKAXE
+        hardness: 0.8
+        light_level: 0
+
+  # Division Blocks
+  cyan_division:
+    display_name: "Cyan ÷ Block"
+    permission: charmedchars.block
+    resource:
+      material: PAPER
+      generate: true
+      textures:
+        - block/cyan/division
+    specific_properties:
+      block:
+        placed_model:
+          type: REAL_NOTE
+          break_particles_material: NOTE_BLOCK
+        break_tools_whitelist:
+          - _AXE
+          - _PICKAXE
+        hardness: 0.8
+        light_level: 0
+
+  magenta_division:
+    display_name: "Magenta ÷ Block"
+    permission: charmedchars.block
+    resource:
+      material: PAPER
+      generate: true
+      textures:
+        - block/magenta/division
+    specific_properties:
+      block:
+        placed_model:
+          type: REAL_NOTE
+          break_particles_material: NOTE_BLOCK
+        break_tools_whitelist:
+          - _AXE
+          - _PICKAXE
+        hardness: 0.8
+        light_level: 0
+
+  yellow_division:
+    display_name: "Yellow ÷ Block"
+    permission: charmedchars.block
+    resource:
+      material: PAPER
+      generate: true
+      textures:
+        - block/yellow/division
+    specific_properties:
+      block:
+        placed_model:
+          type: REAL_NOTE
+          break_particles_material: NOTE_BLOCK
+        break_tools_whitelist:
+          - _AXE
+          - _PICKAXE
+        hardness: 0.8
+        light_level: 0
+
+  # ==================== LOGO BLOCK ====================
+  cyan_logo:
+    display_name: "Cyan Logo Block"
+    permission: charmedchars.block
+    resource:
+      material: PAPER
+      generate: true
+      textures:
+        - block/cyan/logo_block
+    specific_properties:
+      block:
+        placed_model:
+          type: REAL_NOTE
+          break_particles_material: NOTE_BLOCK
+        break_tools_whitelist:
+          - _AXE
+          - _PICKAXE
+        hardness: 0.8
+        light_level: 0
+
+  magenta_logo:
+    display_name: "Magenta Logo Block"
+    permission: charmedchars.block
+    resource:
+      material: PAPER
+      generate: true
+      textures:
+        - block/magenta/logo_block
+    specific_properties:
+      block:
+        placed_model:
+          type: REAL_NOTE
+          break_particles_material: NOTE_BLOCK
+        break_tools_whitelist:
+          - _AXE
+          - _PICKAXE
+        hardness: 0.8
+        light_level: 0
+
+  yellow_logo:
+    display_name: "Yellow Logo Block"
+    permission: charmedchars.block
+    resource:
+      material: PAPER
+      generate: true
+      textures:
+        - block/yellow/logo_block
+    specific_properties:
+      block:
+        placed_model:
+          type: REAL_NOTE
+          break_particles_material: NOTE_BLOCK
+        break_tools_whitelist:
+          - _AXE
+          - _PICKAXE
+        hardness: 0.8
+        light_level: 0

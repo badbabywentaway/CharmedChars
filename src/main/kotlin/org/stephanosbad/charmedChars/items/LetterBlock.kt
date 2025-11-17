@@ -1,7 +1,7 @@
 package org.stephanosbad.charmedChars.items
 
+import dev.lone.itemsadder.api.CustomStack
 import org.bukkit.inventory.ItemStack
-import org.stephanosbad.charmedChars.block.CustomBlockEngine
 import java.util.*
 
 enum class LetterBlock(
@@ -15,7 +15,7 @@ enum class LetterBlock(
     val frequencyFactor: Double,
 
     /**
-     *  Noteblock variation
+     *  Noteblock variation (legacy - kept for compatibility)
      */
     val customVariation: Int
 ) {
@@ -56,8 +56,9 @@ enum class LetterBlock(
     private val _itemStacks: MutableMap<BlockColor, ItemStack?> by lazy {
         mutableMapOf<BlockColor, ItemStack?>().apply {
             for (color in BlockColor.entries) {
-                val customBlock = CustomBlockEngine.getInstance(color, this@LetterBlock)
-                this[color] = customBlock?.itemStack
+                val itemId = "charmedchars:${color.directoryName}_${this@LetterBlock.character.lowercase()}"
+                val customStack = CustomStack.getInstance(itemId)
+                this[color] = customStack?.itemStack
             }
         }
     }
