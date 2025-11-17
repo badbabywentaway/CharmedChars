@@ -23,22 +23,56 @@ import java.io.File
 import java.io.FileOutputStream
 import java.nio.file.Files
 
+/**
+ * Automatic setup utility for ItemsAdder integration
+ *
+ * Handles copying CharmedChars custom block configurations and textures to the
+ * ItemsAdder plugin directory. Automates the manual setup process by:
+ * - Creating the required directory structure
+ * - Copying blocks.yml configuration (123 blocks total)
+ * - Copying all texture files (123 PNG files in 3 colors)
+ * - Enabling the charmedchars namespace in items_packs.yml
+ * - Creating a README with setup instructions
+ *
+ * @property plugin The CharmedChars plugin instance
+ */
 class ItemsAdderSetup(private val plugin: CharmedChars) {
 
+    /**
+     * ItemsAdder plugin root folder
+     */
     private val itemsAdderFolder = File(plugin.server.pluginManager.getPlugin("ItemsAdder")?.dataFolder?.parentFile, "ItemsAdder")
+
+    /**
+     * ItemsAdder data folder (for items_packs.yml)
+     */
     private val itemsAdderDataFolder = File(itemsAdderFolder, "data")
+
+    /**
+     * ItemsAdder contents folder (for custom namespaces)
+     */
     private val itemsAdderContentsFolder = File(itemsAdderFolder, "contents")
+
+    /**
+     * CharmedChars namespace folder within ItemsAdder
+     */
     private val charmedCharsIAFolder = File(itemsAdderContentsFolder, "charmedchars")
 
     /**
-     * Check if ItemsAdder is installed and accessible
+     * Checks if ItemsAdder is installed and loaded
+     *
+     * @return true if ItemsAdder plugin is available
      */
     fun isItemsAdderAvailable(): Boolean {
         return plugin.server.pluginManager.getPlugin("ItemsAdder") != null
     }
 
     /**
-     * Check if CharmedChars configuration already exists in ItemsAdder
+     * Checks if CharmedChars configuration already exists in ItemsAdder
+     *
+     * Verifies whether blocks.yml has already been copied to the ItemsAdder directory.
+     *
+     * @return true if the configuration file exists
      */
     fun isAlreadySetup(): Boolean {
         val configFile = File(charmedCharsIAFolder, "configs/blocks.yml")
@@ -46,8 +80,18 @@ class ItemsAdderSetup(private val plugin: CharmedChars) {
     }
 
     /**
-     * Automatically setup ItemsAdder configuration by copying from plugin resources
-     * @return SetupResult with status and messages
+     * Performs automatic setup of ItemsAdder configuration
+     *
+     * Executes the complete setup process:
+     * 1. Verifies ItemsAdder is installed
+     * 2. Checks if already setup (returns early if so)
+     * 3. Creates directory structure
+     * 4. Enables charmedchars namespace in items_packs.yml
+     * 5. Copies blocks.yml configuration
+     * 6. Copies all texture files (123 textures across 3 colors)
+     * 7. Creates README with instructions
+     *
+     * @return SetupResult containing success status, messages, and whether it was already setup
      */
     fun autoSetup(): SetupResult {
         val messages = mutableListOf<String>()
@@ -190,7 +234,12 @@ class ItemsAdderSetup(private val plugin: CharmedChars) {
     }
 
     /**
-     * Enable the charmedchars namespace in items_packs.yml
+     * Enables the charmedchars namespace in ItemsAdder's items_packs.yml
+     *
+     * Modifies items_packs.yml to include the charmedchars namespace with enabled: true.
+     * If the file doesn't exist or is malformed, creates a new one with charmedchars enabled.
+     *
+     * @return true if the namespace was enabled successfully
      */
     private fun enableNamespace(): Boolean {
         try {
@@ -234,7 +283,9 @@ class ItemsAdderSetup(private val plugin: CharmedChars) {
     }
 
     /**
-     * Create a new items_packs.yml file with charmedchars enabled
+     * Creates a new items_packs.yml configuration with charmedchars enabled
+     *
+     * @return The YAML content as a string with charmedchars namespace enabled
      */
     private fun createItemsPacksYml(): String {
         return """
@@ -248,7 +299,14 @@ packs:
     }
 
     /**
-     * Copy a resource from the plugin JAR to a file on disk
+     * Copies a resource from the plugin JAR to a file on disk
+     *
+     * Extracts a resource from the plugin's JAR file and writes it to the specified
+     * destination file. Used for copying configuration files and textures.
+     *
+     * @param resourcePath The path to the resource within the JAR
+     * @param targetFile The destination file on disk
+     * @return true if the copy succeeded, false if the resource was not found or copy failed
      */
     private fun copyResourceToFile(resourcePath: String, targetFile: File): Boolean {
         try {
@@ -270,7 +328,13 @@ packs:
     }
 
     /**
-     * Create a README file with setup instructions
+     * Creates a README.txt file with setup instructions and block information
+     *
+     * Generates a comprehensive README documenting:
+     * - What the auto-setup created
+     * - Next steps for completing setup (run /iazip, restart server)
+     * - Block naming conventions
+     * - Usage examples
      */
     private fun createReadme() {
         val readmeFile = File(charmedCharsIAFolder, "README.txt")
@@ -323,7 +387,11 @@ For more information, see the CharmedChars documentation.
     }
 
     /**
-     * Result of the setup operation
+     * Result of an automatic setup operation
+     *
+     * @property success Whether the setup completed successfully
+     * @property alreadySetup Whether the configuration already existed (setup was skipped)
+     * @property messages List of informational messages about the setup process
      */
     data class SetupResult(
         val success: Boolean,

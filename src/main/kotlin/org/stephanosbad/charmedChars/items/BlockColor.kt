@@ -19,13 +19,29 @@ package org.stephanosbad.charmedChars.items
 
 import kotlin.random.Random
 
+/**
+ * Enum representing the three available block colors
+ *
+ * Letter blocks come in three colors (cyan, magenta, yellow). When all letters
+ * in a word are the same color, the player receives a 3x score multiplier bonus.
+ *
+ * @property directoryName The directory name used in ItemsAdder custom block IDs
+ */
 enum class BlockColor(val directoryName: String)
 {
+    /** Cyan colored blocks */
     CYAN("cyan"),
+    /** Magenta colored blocks */
     MAGENTA("magenta"),
+    /** Yellow colored blocks */
     YELLOW("yellow");
 
     companion object {
+        /**
+         * Returns a random block color
+         *
+         * @return Randomly selected color (CYAN, MAGENTA, or YELLOW)
+         */
         fun getRand(): BlockColor {
             return entries.random()
         }

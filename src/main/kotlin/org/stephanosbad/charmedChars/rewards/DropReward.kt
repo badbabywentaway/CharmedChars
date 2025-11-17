@@ -23,47 +23,63 @@ import org.bukkit.entity.Player
 import org.bukkit.inventory.ItemStack
 import kotlin.math.roundToInt
 
+/**
+ * Item drop reward implementation
+ *
+ * Spawns Minecraft items naturally at the player's location when they form valid words.
+ * The number of items dropped is calculated based on the word score using the
+ * parent Reward class formula, then rounded to an integer.
+ *
+ * Example configuration (from config.yml):
+ * ```
+ * - materialName: IRON_INGOT
+ *   minimumRewardCount: 1.0
+ *   multiplier: 0.01
+ *   minimumThreshold: 100.0
+ *   maximumRewardCap: 20.0
+ * ```
+ * This would drop 1-20 iron ingots based on word scores from 100-2000.
+ *
+ * @property materialName The Minecraft material name (e.g., "IRON_INGOT", "GOLD_NUGGET")
+ */
 class DropReward(
-    /**
-     * Name of MC material to drop for rewards.
-     */
     var materialName: String?,
     minimumRewardCount: Double,
     multiplier: Double,
     minimumThreshold: Double,
     maximumRewardCap: Double
 ) : Reward(minimumRewardCount, multiplier, minimumThreshold, maximumRewardCap) {
+
     /**
-     * Set material based on name
+     * The resolved Minecraft material to drop
+     *
+     * Initialized from materialName in the constructor.
+     */
+    private var material: Material? = null
+
+    /**
+     * Resolves the material name to a Minecraft Material enum value
      */
     private fun setMaterial() {
         material = Material.valueOf(materialName!!)
     }
 
     /**
-     * MC material to drop for rewards.
-     */
-    private var material: Material? = null
-
-    /**
-     * Constructor
-     *
-     * @param materialName       - Name of MC material to drop for rewards.
-     * @param minimumRewardCount - Minimum number of rewards to drop.
-     * @param multiplier         - Multiply factor (by score)
-     * @param minimumThreshold   - Minimum score to apply reward
-     * @param maximumRewardCap   - Maximum number of rewards of this type.
+     * Initializes the material from the material name
      */
     init {
         setMaterial()
     }
 
     /**
-     * Apply the reward. Drops are location specific.
+     * Applies the drop reward to the player
      *
-     * @param player - player.
-     * @param location - location to drop the reward.
-     * @param score    - score in which to apply reward.
+     * Calculates the reward amount based on the score, spawns items at the specified
+     * location, and sends a message to the player showing what they received.
+     *
+     * @param player The player who formed the word
+     * @param location The location where items should be dropped
+     * @param score The word score used to calculate reward amount
      */
     fun applyReward(player: Player, location: Location, score: Double) {
         var netAmount: Double = if (score >= minimumThreshold)

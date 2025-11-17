@@ -24,20 +24,38 @@ import java.io.FileNotFoundException
 import java.io.InputStreamReader
 
 /**
+ * Dictionary for word validation
  *
+ * Loads and manages the dictionary of valid English words from Words.json.
+ * Used to validate whether player-formed letter sequences are legitimate words.
+ * The dictionary is loaded once at plugin initialization and stored as a singleton.
  */
 class WordDict {
     /**
+     * HashSet of valid lowercase English words
      *
+     * Loaded from Words.json in the plugin resources.
+     * Words are stored in lowercase for case-insensitive matching.
      */
     @SerializedName("Words")
     var words: HashSet<String?> = HashSet<String?>()
 
     companion object {
+        /**
+         * Singleton instance of the word dictionary
+         *
+         * Initialized by calling init() during plugin startup.
+         */
         var singleton: WordDict? = null
 
         /**
-         * @throws FileNotFoundException
+         * Initializes the word dictionary from Words.json
+         *
+         * Loads the JSON dictionary file from plugin resources and deserializes it
+         * into a WordDict instance. Logs the number of words loaded.
+         *
+         * @param sourceClass The CharmedChars plugin instance (used to access resources)
+         * @throws FileNotFoundException if Words.json is not found in plugin resources
          */
         @Throws(FileNotFoundException::class)
         fun init(sourceClass: CharmedChars) {

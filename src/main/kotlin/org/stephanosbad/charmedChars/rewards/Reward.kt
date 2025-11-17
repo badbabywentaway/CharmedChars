@@ -17,14 +17,25 @@
  */
 package org.stephanosbad.charmedChars.rewards
 
-abstract class Reward
 /**
- * Constructor
- * @param minimumRewardCount - Minimum number of rewards to drop.
- * @param multiplier - Multiply factor (by score)
- * @param minimumThreshold - Minimum score to apply reward
- * @param maximumRewardCap - Maximum number of rewards of this type.
- */ internal constructor(
+ * Abstract base class for word score rewards
+ *
+ * Rewards are given to players when they form valid words. The reward amount
+ * is calculated based on the word score using a configurable formula:
+ *
+ * If score >= minimumThreshold:
+ *   amount = (score - threshold) * multiplier + minimumRewardCount
+ * Else:
+ *   amount = minimumRewardCount
+ *
+ * The final amount is capped at maximumRewardCap.
+ *
+ * @property minimumRewardCount Base reward amount (always given if any reward is given)
+ * @property multiplier Multiplier applied to score above threshold
+ * @property minimumThreshold Minimum score required to apply the multiplier
+ * @property maximumRewardCap Maximum reward amount (prevents excessive rewards)
+ */
+abstract class Reward internal constructor(
     var minimumRewardCount: Double,
     var multiplier: Double,
     var minimumThreshold: Double,

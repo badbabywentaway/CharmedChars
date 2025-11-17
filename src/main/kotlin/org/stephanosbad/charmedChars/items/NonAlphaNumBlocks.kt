@@ -21,12 +21,24 @@ package org.stephanosbad.charmedChars.items
 import dev.lone.itemsadder.api.CustomStack
 import org.bukkit.inventory.ItemStack
 
+/**
+ * Enum of operator/symbol blocks (+, -, *, /)
+ *
+ * These special character blocks can be obtained from nether wood when operator
+ * drops are enabled in config.yml. Each operator is available in three colors.
+ *
+ * @property charVal The character symbol this block represents
+ * @property nonAlphaNumBlockName The ItemsAdder block name for this operator
+ */
 enum class NonAlphaNumBlocks(val charVal: Char, blockName: String) {
     PLUS('+', "plus"),
     MINUS('-', "minus"),
     MULTIPLY('*', "multiply"),
     DIVISION('/', "division");
 
+    /**
+     * Lazy-initialized map of ItemStacks for each block color
+     */
     private val _itemStacks: MutableMap<BlockColor, ItemStack?> by lazy {
         mutableMapOf<BlockColor, ItemStack?>().apply {
             for (color in BlockColor.entries) {
@@ -40,8 +52,14 @@ enum class NonAlphaNumBlocks(val charVal: Char, blockName: String) {
         }
     }
 
+    /**
+     * Map of ItemStacks for each block color (cyan, magenta, yellow)
+     */
     val itemStacks: MutableMap<BlockColor, ItemStack?>
         get() = _itemStacks
 
+    /**
+     * The ItemsAdder block name for this operator
+     */
     val nonAlphaNumBlockName = blockName
 }

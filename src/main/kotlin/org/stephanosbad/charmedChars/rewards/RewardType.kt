@@ -17,6 +17,26 @@
  */
 package org.stephanosbad.charmedChars.rewards
 
+/**
+ * Enum of available reward types
+ *
+ * Defines the types of rewards that can be configured for valid words.
+ * Used by ConfigDataHandler when loading reward configurations from config.yml.
+ *
+ * Currently supported reward types:
+ * - Drop: Spawns Minecraft items at the player's location
+ *
+ * Future reward types could include:
+ * - Economy: Give money (requires Vault)
+ * - Experience: Give XP points
+ * - Custom: Execute custom commands
+ */
 enum class RewardType {
+    /**
+     * Item drop reward type
+     *
+     * Configured in config.yml under the "Drop" section.
+     * See DropReward class for implementation.
+     */
     Drop
 }

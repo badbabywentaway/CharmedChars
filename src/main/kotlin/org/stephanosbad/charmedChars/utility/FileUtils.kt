@@ -23,7 +23,21 @@ import java.io.*
 import java.net.JarURLConnection
 import java.net.URL
 
+/**
+ * Utility object for file and directory operations
+ *
+ * Provides methods for copying files, directories, and JAR resources recursively.
+ * Used primarily for the ItemsAdder auto-setup functionality to copy configuration
+ * files and textures from plugin resources to the ItemsAdder directory.
+ */
 object FileUtils {
+    /**
+     * Copies a single file to a destination
+     *
+     * @param toCopy The source file to copy
+     * @param destFile The destination file path
+     * @return true if the copy succeeded, false otherwise
+     */
     fun copyFile(toCopy: File, destFile: File): Boolean {
         try {
             return copyStream(
@@ -36,6 +50,16 @@ object FileUtils {
         return false
     }
 
+    /**
+     * Recursively copies files and directories
+     *
+     * If the source is a file, copies it to the destination directory.
+     * If the source is a directory, creates it in the destination and recursively copies all children.
+     *
+     * @param toCopy The source file or directory to copy
+     * @param destDir The destination directory
+     * @return true if all copies succeeded, false if any failed
+     */
     private fun copyFilesRecusively(
         toCopy: File,
         destDir: File
@@ -58,6 +82,17 @@ object FileUtils {
         return true
     }
 
+    /**
+     * Recursively copies resources from a JAR file
+     *
+     * Extracts all entries from a JAR that match the specified entry path,
+     * preserving the directory structure in the destination.
+     *
+     * @param destDir The destination directory for extracted files
+     * @param jarConnection The JAR URL connection providing access to the JAR contents
+     * @return true if all extractions succeeded, false if any failed
+     * @throws IOException if file operations fail
+     */
     @Throws(IOException::class)
     fun copyJarResourcesRecursively(
         destDir: File?,
@@ -94,7 +129,17 @@ object FileUtils {
         return true
     }
 
-    fun copyResourcesRecursively( //
+    /**
+     * Copies resources recursively from a URL (supports both JAR and file URLs)
+     *
+     * Automatically detects whether the source is a JAR resource or filesystem path
+     * and uses the appropriate copy method.
+     *
+     * @param originUrl The URL of the resource to copy (can be jar: or file: URL)
+     * @param destination The destination directory
+     * @return true if the copy succeeded, false otherwise
+     */
+    fun copyResourcesRecursively(
         originUrl: URL, destination: File
     ): Boolean {
         try {
@@ -116,6 +161,13 @@ object FileUtils {
         return false
     }
 
+    /**
+     * Copies data from an input stream to a file
+     *
+     * @param `is` The input stream to read from
+     * @param f The destination file
+     * @return true if the copy succeeded, false otherwise
+     */
     private fun copyStream(`is`: InputStream, f: File): Boolean {
         try {
             return copyStream(`is`, FileOutputStream(f))
@@ -125,6 +177,16 @@ object FileUtils {
         return false
     }
 
+    /**
+     * Copies data from an input stream to an output stream
+     *
+     * Reads from the input stream in 1024-byte chunks and writes to the output stream.
+     * Closes both streams when complete.
+     *
+     * @param `is` The input stream to read from
+     * @param os The output stream to write to
+     * @return true if the copy succeeded, false otherwise
+     */
     private fun copyStream(`is`: InputStream, os: OutputStream): Boolean {
         try {
             val buf = ByteArray(1024)
@@ -142,6 +204,12 @@ object FileUtils {
         return false
     }
 
+    /**
+     * Ensures a directory exists, creating it if necessary
+     *
+     * @param f The directory to check/create
+     * @return true if the directory exists or was created successfully
+     */
     private fun ensureDirectoryExists(f: File): Boolean {
         return f.exists() || f.mkdir()
     }

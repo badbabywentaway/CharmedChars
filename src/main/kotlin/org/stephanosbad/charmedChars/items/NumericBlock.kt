@@ -20,6 +20,15 @@ package org.stephanosbad.charmedChars.items
 import dev.lone.itemsadder.api.CustomStack
 import org.bukkit.inventory.ItemStack
 
+/**
+ * Enum of numeric blocks (0-9)
+ *
+ * Number blocks can be obtained from nether wood (warped/crimson stems) when
+ * nether drops are enabled in config.yml. Each number is available in three
+ * colors (cyan, magenta, yellow).
+ *
+ * @property c The numeric character this block represents
+ */
 enum class NumericBlock(val c: Char) {
     BLOCK_0('0'),
     BLOCK_1('1'),
@@ -33,6 +42,9 @@ enum class NumericBlock(val c: Char) {
     BLOCK_9('9'),
     ;
 
+    /**
+     * Lazy-initialized map of ItemStacks for each block color
+     */
     private val _itemStacks: MutableMap<BlockColor, ItemStack?> by lazy {
         mutableMapOf<BlockColor, ItemStack?>().apply {
             for (color in BlockColor.entries) {
@@ -46,6 +58,9 @@ enum class NumericBlock(val c: Char) {
         }
     }
 
+    /**
+     * Map of ItemStacks for each block color (cyan, magenta, yellow)
+     */
     val itemStacks: MutableMap<BlockColor, ItemStack?>
         get() = _itemStacks
 }

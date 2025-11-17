@@ -17,16 +17,25 @@
  */
 package org.stephanosbad.charmedChars.items
 
-class LateralDirection
 /**
- * Constructor
- * @param xOffset x axis direction.
- * @param zOffset z axis direction
- */(var xOffset: Int, var zOffset: Int) {
+ * Represents a lateral direction in the X-Z plane
+ *
+ * Used to track the direction when scanning letter blocks to form words.
+ * Words must be formed in a single cardinal direction (±X or ±Z), not diagonally.
+ *
+ * @property xOffset The offset in the X direction (-1, 0, or 1)
+ * @property zOffset The offset in the Z direction (-1, 0, or 1)
+ */
+class LateralDirection(var xOffset: Int, var zOffset: Int) {
+    /**
+     * Checks if this direction is valid (non-zero)
+     *
+     * A valid direction must have at least one non-zero offset.
+     * Valid examples: (1,0), (0,1), (-1,0), (0,-1)
+     * Invalid: (0,0)
+     *
+     * @return true if the direction has at least one non-zero component
+     */
     val isValid: Boolean
-        /**
-         * Check if this direction is orthogonal
-         * @return Validity
-         */
         get() = xOffset != 0 || zOffset != 0
 }

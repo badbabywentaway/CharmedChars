@@ -26,27 +26,39 @@ import org.stephanosbad.charmedChars.utility.LocationPair
 import java.io.File
 import java.io.IOException
 
-class ConfigDataHandler(
+/**
+ * Handler for reward and zone configuration data
+ *
+ * Manages config.yml which contains:
+ * - Drop reward configurations (materials, multipliers, thresholds)
+ * - Include/exclude zones for letter block mechanics
+ * - Legacy VaultCurrency configuration (deprecated)
+ *
+ * This is separate from ConfigManager which handles plugin settings.
+ *
+ * @property plugin The CharmedChars plugin instance
+ */
+class ConfigDataHandler(private val plugin: CharmedChars) {
     /**
-     * parent plugin reference
-     */
-    private val plugin: CharmedChars
-) {
-    /**
-     * configuration loaded from yaml file
+     * The loaded YAML configuration instance
+     *
+     * Contains reward configurations and zone definitions.
      */
     var configuration: YamlConfiguration? = null
 
     /**
-     * file from which to load configuration
+     * The config.yml file handle
      */
     private var file: File? = null
 
     /**
-     * load config from file
-     * @throws IOException - file or folder issues
+     * Loads configuration from config.yml
+     *
+     * Creates a default configuration file if it doesn't exist, then loads it.
+     * The default file includes example reward configurations and zone definitions.
+     *
+     * @throws IOException if file operations fail
      */
-
     @Throws(IOException::class)
     fun loadConfig() {
         if (file == null) {
@@ -61,8 +73,12 @@ class ConfigDataHandler(
     }
 
     /**
-     * Recreate default example file
-     * @throws IOException - file or folder issue
+     * Creates a new default configuration file
+     *
+     * Deletes any existing file and creates a fresh config.yml with default
+     * reward and zone configurations.
+     *
+     * @throws IOException if file operations fail
      */
     @Throws(IOException::class)
     private fun createBlank() {
@@ -78,10 +94,15 @@ class ConfigDataHandler(
         writeToYaml()
     }
 
-
     /**
-     * Write default to yaml
-     * @throws IOException - file or folder issue
+     * Writes default configuration values to config.yml
+     *
+     * Creates default configuration including:
+     * - Example exclusion zone (spawn area)
+     * - VaultCurrency configuration (legacy/deprecated)
+     * - Drop reward configurations (iron ingots and gold nuggets)
+     *
+     * @throws IOException if file write operations fail
      */
     @Throws(IOException::class)
     fun writeToYaml() {
@@ -112,6 +133,14 @@ class ConfigDataHandler(
         configuration!!.save(file!!)
     }
 
+    /**
+     * Creates a sample LocationPair for the default exclusion zone
+     *
+     * Returns a 20x20 block area centered at spawn (0,0) in the default world.
+     * This serves as an example exclusion zone where letter blocks won't work.
+     *
+     * @return A LocationPair defining a small spawn protection zone
+     */
     fun sampleLocationPair(): LocationPair {
         return LocationPair(
             Location(plugin.server.getWorld("world"), -10.0, 0.0, -10.0),
@@ -121,7 +150,7 @@ class ConfigDataHandler(
 
     companion object {
         /**
-         * hard coded config file name
+         * The name of the configuration file
          */
         var CONFIG_FILE_NAME: String = "config.yml"
     }

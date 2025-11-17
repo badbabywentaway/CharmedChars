@@ -18,11 +18,15 @@
 package org.stephanosbad.charmedChars.utility
 
 /**
- * @param <T>
- * @param <U>
-</U></T> */
-open class SimpleTuple<T, U>
-/**
- * @param first
- * @param second
- */(var first: T, var second: U)
+ * Generic tuple class for holding two values of potentially different types
+ *
+ * A simple data structure for pairing two related values. Used throughout the
+ * plugin for returning multiple values from functions (e.g., letter character
+ * and frequency score).
+ *
+ * @param T The type of the first value
+ * @param U The type of the second value
+ * @property first The first value in the tuple
+ * @property second The second value in the tuple
+ */
+open class SimpleTuple<T, U>(var first: T, var second: U)

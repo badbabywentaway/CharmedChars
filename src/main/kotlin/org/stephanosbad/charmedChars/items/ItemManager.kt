@@ -43,10 +43,26 @@ import org.stephanosbad.charmedChars.utility.WordDict
 import java.util.*
 import java.util.concurrent.atomic.AtomicReference
 
+/**
+ * Main event handler for letter block drops and word validation
+ *
+ * This class manages the core gameplay loop:
+ * - Dropping letter blocks when players mine logs with gold tools
+ * - Detecting when players break letter blocks to form words
+ * - Validating words against the dictionary
+ * - Calculating scores based on letter frequencies and color matching
+ * - Integrating with protection plugins (WorldGuard, GriefPrevention)
+ * - Distributing rewards for valid words
+ *
+ * @property plugin The CharmedChars plugin instance
+ */
 class ItemManager @JvmOverloads constructor(localPlugin: CharmedChars? = null) :
     Listener {
     /**
-     * Wood material list.
+     * Wood material list mapping regular logs to stripped logs
+     *
+     * When players mine these logs with gold tools (without Silk Touch), they have a chance
+     * to receive letter blocks and the log is converted to its stripped variant.
      */
     private val list: HashMap<Material?, Material?> = object : HashMap<Material?, Material?>() {
         init {
@@ -65,7 +81,12 @@ class ItemManager @JvmOverloads constructor(localPlugin: CharmedChars? = null) :
         }
     }
 
-
+    /**
+     * Nether wood materials that can drop number and operator blocks
+     *
+     * When players mine warped or crimson stems with gold tools, they receive
+     * number blocks (0-9) and operator blocks (+, -, *, /) in addition to letter blocks.
+     */
     private val listForNumberDrops: HashMap<Material?, Material?> = object : HashMap<Material?, Material?>() {
         init {
             put(Material.WARPED_STEM, Material.STRIPPED_WARPED_STEM)
@@ -73,43 +94,73 @@ class ItemManager @JvmOverloads constructor(localPlugin: CharmedChars? = null) :
         }
     }
 
+    /**
+     * Cached list of all numeric and operator block ItemStacks
+     *
+     * Lazy-initialized when first number/operator block needs to drop from nether wood.
+     * Includes all numeric blocks (0-9) and operators (+, -, *, /) in all three colors.
+     */
     private var characterBlocksAvailableInNether: MutableList<ItemStack?>? = null
 
     /**
-     * Exclusion zone for use of this plugin.
+     * Exclusion zone where letter block mechanics are disabled
+     *
+     * Defined in config.yml as a cuboid region (from/to coordinates).
+     * Players cannot obtain or use letter blocks in this zone.
      */
     private var exclude: LocationPair? = null
 
     /**
-     * Inclusion zone for use of this plugin. If defined, acts as an exclusive include.
+     * Inclusion zone where letter block mechanics are exclusively allowed
+     *
+     * If defined in config.yml, letter blocks work ONLY within this zone.
+     * All areas outside the inclusion zone are effectively excluded.
      */
     private var include: LocationPair? = null
 
     /**
-     * World Guard anti griefing tool. Accessor.
+     * WorldGuard integration instance (optional soft dependency)
+     *
+     * Used to check build permissions before allowing letter block placement/breaking.
+     * Null if WorldGuard is not installed.
      */
     var worldGuard: WorldGuard? = null
 
     /**
-     * World Guard anti griefing tool. Plugin accessor.
+     * WorldGuard plugin instance (optional soft dependency)
+     *
+     * Provides access to WorldGuard's protection query API.
+     * Null if WorldGuard is not installed.
      */
     var worldGuardPlugin: WorldGuardPlugin? = null
 
     /**
-     * Grief Prevention anti griefing tool. Accessor
+     * GriefPrevention integration instance (optional soft dependency)
+     *
+     * Used to check claim permissions before allowing letter block placement/breaking.
+     * Null if GriefPrevention is not installed.
      */
     var griefPrevention: GriefPrevention? = null
 
     /**
-     * Reward implementations
+     * List of configured rewards for valid words
+     *
+     * Populated from config.yml. Currently supports drop-based rewards
+     * (spawning items based on word score).
      */
     var rewards: MutableList<Reward> = ArrayList<Reward>()
 
+    /**
+     * Reference to the main CharmedChars plugin instance
+     */
     var plugin = localPlugin!!
 
     /**
-     * Constructor
-     * @param localPlugin - Master plugin
+     * Initializes the ItemManager and sets up integrations
+     *
+     * - Attempts to load WorldGuard integration (optional)
+     * - Attempts to load GriefPrevention integration (optional)
+     * - Loads reward configurations from config.yml
      */
     init {
         // WorldGuard integration (optional soft dependency)
@@ -153,9 +204,13 @@ class ItemManager @JvmOverloads constructor(localPlugin: CharmedChars? = null) :
     }
 
     /**
-     * combined action for wood block or letter block rewards
+     * Main event handler for block breaking
      *
-     * @param e - block break event
+     * Handles two scenarios:
+     * 1. Breaking logs with gold tools (without Silk Touch) - drops letter blocks
+     * 2. Breaking letter blocks - validates words and awards scores
+     *
+     * @param e The block break event from Bukkit/Spigot
      */
     @EventHandler
     fun onBreakWoodOrLetter(e: BlockBreakEvent) {
@@ -200,10 +255,16 @@ class ItemManager @JvmOverloads constructor(localPlugin: CharmedChars? = null) :
     }
 
     /**
-     * Check if it was a wood block that was broken.
-     * @param e - break event.
-     * @param material - Material to replace block
-     * @param oldMaterial - Old material of block
+     * Handles breaking wood blocks to drop letter blocks
+     *
+     * Called when a player breaks a log with a gold tool. Cancels the event,
+     * converts the log to its stripped variant, and drops a random letter block.
+     * If the broken wood is nether wood (warped/crimson stem), also drops a
+     * random number or operator block.
+     *
+     * @param e The block break event
+     * @param material The stripped wood material to drop
+     * @param oldMaterial The original wood material that was broken
      */
     private fun woodBlockBreak(e: BlockBreakEvent, material: Material, oldMaterial: Material?) {
         val block = LetterBlock.randomPickBlock()
@@ -231,6 +292,14 @@ class ItemManager @JvmOverloads constructor(localPlugin: CharmedChars? = null) :
         player.world.dropItemNaturally(e.getBlock().location, ItemStack(material, 1))
     }
 
+    /**
+     * Selects a random numeric or operator block
+     *
+     * Lazy-initializes the pool of all number (0-9) and operator (+, -, *, /) blocks
+     * in all three colors, then randomly selects one.
+     *
+     * @return A cloned ItemStack of a random number or operator block, or null if initialization fails
+     */
     private fun randomNumAndCharacter(): ItemStack? {
         if (characterBlocksAvailableInNether == null) {
             characterBlocksAvailableInNether = ArrayList<ItemStack?>()
@@ -250,8 +319,17 @@ class ItemManager @JvmOverloads constructor(localPlugin: CharmedChars? = null) :
     }
 
     /**
-     * Check if it was a letter block that was broken.
-     * @param e - break event.
+     * Handles breaking letter blocks to form and validate words
+     *
+     * This is the core word validation logic:
+     * 1. Detects the direction of adjacent letter blocks (X or Z axis)
+     * 2. Scans in that direction to build the complete word
+     * 3. Calculates score based on letter frequencies
+     * 4. Applies 3x multiplier if all letters are the same color
+     * 5. Validates against the dictionary
+     * 6. Removes all blocks and awards score if valid, or cancels event if invalid
+     *
+     * @param e The block break event
      */
     fun letterBlockBreak(e: BlockBreakEvent) {
         val hand = e.player.inventory.itemInMainHand
@@ -382,9 +460,13 @@ class ItemManager @JvmOverloads constructor(localPlugin: CharmedChars? = null) :
     }
 
     /**
-     * Apply the score to the player. Drops or cash.
-     * @param player - Player to apply score
-     * @param score - score
+     * Applies rewards based on the word score
+     *
+     * Iterates through all configured rewards (from config.yml) and applies them.
+     * Currently supports drop rewards (spawning items based on score).
+     *
+     * @param player The player who formed the valid word
+     * @param score The calculated word score (sum of letter frequencies + color bonus)
      */
     private fun applyScore(player: Player, score: Double) {
         for (reward in rewards) {
@@ -395,10 +477,11 @@ class ItemManager @JvmOverloads constructor(localPlugin: CharmedChars? = null) :
     }
 
     /**
-     * Find block adjacent to another
-     * @param testBlock - block from which to find the adjacent
-     * @param lateralDirection - Direction in which to test
-     * @return adjacent block
+     * Gets the block adjacent to the given block in the specified direction
+     *
+     * @param testBlock The starting block
+     * @param lateralDirection The direction (X or Z offset) to move
+     * @return The adjacent block in the specified direction
      */
     private fun offsetBlock(testBlock: Block, lateralDirection: LateralDirection): Block {
         val x =
@@ -410,10 +493,14 @@ class ItemManager @JvmOverloads constructor(localPlugin: CharmedChars? = null) :
     }
 
     /**
-     * Check the block for the next lateral block.
-     * @param player - player (used in grief protecting)
-     * @param testBlock - block under test
-     * @return Direction of block.
+     * Determines which lateral direction has letter blocks
+     *
+     * Checks all four cardinal directions (±X, ±Z) to find which one contains
+     * letter blocks adjacent to the test block.
+     *
+     * @param player The player (used for protection checks)
+     * @param testBlock The block to check around
+     * @return A LateralDirection indicating which direction has letters, or (0,0) if none/multiple
      */
     private fun checkLateralBlocks(player: Player?, testBlock: Block): LateralDirection {
         val retValue = LateralDirection(0, 0)
@@ -441,10 +528,14 @@ class ItemManager @JvmOverloads constructor(localPlugin: CharmedChars? = null) :
     }
 
     /**
-     * Test to see if this block is a letter block
-     * @param player - player who hit it. Used to null the result if letter block is grief protected.
-     * @param testBlock - block to test.
-     * @return - character of block and rarity score
+     * Tests if a block is a letter block and returns its character and score
+     *
+     * Uses ItemsAdder API to identify custom letter blocks. Returns null character ('\u0000')
+     * if the block is not a letter block, is protected, or is not a NoteBlock.
+     *
+     * @param player The player breaking the block (used for protection checks)
+     * @param testBlock The block to test
+     * @return A tuple containing the letter character and its frequency factor, or ('\u0000', 0.0) if not a letter
      */
     fun testForLetter(player: Player?, testBlock: Block): SimpleTuple<Char, Double> {
         if (protectedSpot(player, testBlock.location, testBlock)) {
@@ -467,6 +558,14 @@ class ItemManager @JvmOverloads constructor(localPlugin: CharmedChars? = null) :
         return SimpleTuple('\u0000', 0.0)
     }
 
+    /**
+     * Gets the custom model data number from a note block's drops
+     *
+     * This is a legacy method for compatibility with older note block-based implementations.
+     *
+     * @param testBlock The note block to check
+     * @return The custom model data value, or null if not found
+     */
     fun getNoteblockNumber(testBlock: Block) : Int?
     {
         return testBlock.drops.firstOrNull()?.itemMeta?.customModelData
@@ -474,9 +573,13 @@ class ItemManager @JvmOverloads constructor(localPlugin: CharmedChars? = null) :
     }
 
     /**
-     * Get custom block variation using ItemsAdder API
-     * @param block - block to check
-     * @return - LetterBlock if it's a letter block, null otherwise
+     * Identifies which letter a custom block represents
+     *
+     * Parses the ItemsAdder namespaced ID (e.g., "charmedchars:cyan_a") to extract
+     * the letter component and match it to a LetterBlock enum value.
+     *
+     * @param block The block to check
+     * @return The corresponding LetterBlock enum, or null if not a letter block
      */
     fun getCustomVariation(block: Block?): LetterBlock? {
         if (block == null) return null
@@ -497,9 +600,13 @@ class ItemManager @JvmOverloads constructor(localPlugin: CharmedChars? = null) :
     }
 
     /**
-     * Get the color of a custom block using ItemsAdder API
-     * @param block - block to check
-     * @return - BlockColor if it's a custom block, null otherwise
+     * Identifies the color of a custom block
+     *
+     * Parses the ItemsAdder namespaced ID (e.g., "charmedchars:cyan_a") to extract
+     * the color component and match it to a BlockColor enum value.
+     *
+     * @param block The block to check
+     * @return The corresponding BlockColor enum, or null if not a custom block
      */
     fun getBlockColor(block: Block?): BlockColor? {
         if (block == null) return null
@@ -520,11 +627,17 @@ class ItemManager @JvmOverloads constructor(localPlugin: CharmedChars? = null) :
     }
 
     /**
-     * Determine if this location is protected from this player
-     * @param player - MC Player
-     * @param location - location to examine
-     * @param block - block to examine (some grief plugins require this)
-     * @return - verification that location is being protected
+     * Checks if a location is protected from the player
+     *
+     * Checks multiple protection sources in order:
+     * 1. GriefPrevention claims (if enabled in config)
+     * 2. WorldGuard regions (if enabled in config)
+     * 3. Config-defined include/exclude zones
+     *
+     * @param player The player attempting to interact with the block
+     * @param location The location to check
+     * @param block The block to check (required by some protection plugins)
+     * @return true if the location is protected and the player cannot interact
      */
     fun protectedSpot(player: Player?, location: Location, block: Block?): Boolean {
         // Check GriefPrevention if enabled in config
@@ -549,9 +662,15 @@ class ItemManager @JvmOverloads constructor(localPlugin: CharmedChars? = null) :
     }
 
     /**
-     * Determine if our config protects this location
-     * @param location - location to examine
-     * @return - verification that location is being protected
+     * Checks if config-defined zones protect a location
+     *
+     * Evaluates include/exclude zones defined in config.yml:
+     * - If location is in an exclusion zone, returns true (protected)
+     * - If an inclusion zone is defined and location is outside it, returns true (protected)
+     * - Otherwise returns false (not protected)
+     *
+     * @param location The location to check
+     * @return true if the location is protected by config zones
      */
     private fun ourConfigProtects(location: Location): Boolean {
         var exclude = this.exclude
@@ -584,7 +703,11 @@ class ItemManager @JvmOverloads constructor(localPlugin: CharmedChars? = null) :
     }
 
     /**
-     * Setup rewards from config file
+     * Loads reward configurations from config.yml
+     *
+     * Parses the reward configurations and creates appropriate reward instances.
+     * Currently supports drop-based rewards with configurable materials, multipliers,
+     * thresholds, and caps.
      */
     private fun setRewards() {
         for (t in RewardType.entries) {

@@ -21,18 +21,30 @@ import dev.lone.itemsadder.api.CustomStack
 import org.bukkit.inventory.ItemStack
 import java.util.*
 
+/**
+ * Enum of letter blocks with frequency-based scoring
+ *
+ * Each letter has a frequency percentage and scoring factor based on real-world
+ * English letter frequencies from the Oxford Concise Dictionary (9th edition, 1995).
+ * Letters are weighted for random selection and assigned ItemsAdder custom blocks
+ * in three colors (cyan, magenta, yellow).
+ *
+ * @property frequencyPercent The frequency percentage of this letter in English text
+ * @property frequencyFactor The scoring factor for this letter (higher = rarer)
+ * @property customVariation Legacy note block variation ID (kept for compatibility)
+ */
 enum class LetterBlock(
     /**
-     * Frequency of letter found in real life via info received by Oxford publication.
+     * Frequency of letter found in real life via info received by Oxford publication
      */
     private val frequencyPercent: Double,
     /**
-     * Score facter of letter
+     * Score factor of letter (used for word scoring calculations)
      */
     val frequencyFactor: Double,
 
     /**
-     *  Noteblock variation (legacy - kept for compatibility)
+     * Noteblock variation (legacy - kept for compatibility)
      */
     val customVariation: Int
 ) {
@@ -66,10 +78,13 @@ enum class LetterBlock(
 
 
     /**
-     * letter block character
+     * The letter character this block represents (first character of enum name)
      */
     val character: Char = this.name[0]
 
+    /**
+     * Lazy-initialized map of ItemStacks for each block color
+     */
     private val _itemStacks: MutableMap<BlockColor, ItemStack?> by lazy {
         mutableMapOf<BlockColor, ItemStack?>().apply {
             for (color in BlockColor.entries) {
@@ -80,23 +95,27 @@ enum class LetterBlock(
         }
     }
 
+    /**
+     * Map of ItemStacks for each block color (cyan, magenta, yellow)
+     */
     val itemStacks: MutableMap<BlockColor, ItemStack?>
         get() = _itemStacks
 
     /**
-     * Hit range low (randomizer)
+     * Lower bound for random selection range
      */
     private var hitLow = 0.0
 
     /**
-     * Hit range high (randomizer)
+     * Upper bound for random selection range
      */
     private var hitHigh = 0.0
 
     /**
-     * Determine if letter is hit by randomizer
-     * @param testValue - hit value
-     * @return - Veracity of hit
+     * Determines if a random value falls within this letter's selection range
+     *
+     * @param testValue The random value to test
+     * @return true if the value is within [hitLow, hitHigh)
      */
     private fun isHit(testValue: Double): Boolean {
         return (testValue >= hitLow) && (testValue < hitHigh)
@@ -104,13 +123,18 @@ enum class LetterBlock(
 
     companion object {
         /**
-         * Maximum hit value.
+         * Maximum hit value for random selection (sum of all letter frequencies)
          */
         private val hitMax = sumAll()
 
         /**
-         * Maximum hit value.
-         * @return - Maximum hit value.
+         * Calculates the total frequency and initializes selection ranges
+         *
+         * Iterates through all letters and assigns each a range [hitLow, hitHigh)
+         * proportional to its frequency percentage. This enables frequency-weighted
+         * random letter selection.
+         *
+         * @return The total sum of all letter frequencies
          */
         private fun sumAll(): Double {
             var ret = 0.0
@@ -123,8 +147,12 @@ enum class LetterBlock(
         }
 
         /**
-         * rarity weighted random letter picker
-         * @return - picked letter
+         * Selects a random letter weighted by rarity
+         *
+         * Common letters (E, A, etc.) are more likely to be picked than rare
+         * letters (Z, Q, etc.) based on their frequency percentages.
+         *
+         * @return The randomly selected letter, or null if no match found
          */
         fun randomPick(): LetterBlock? {
             val randVal = Math.random() * hitMax
@@ -133,8 +161,12 @@ enum class LetterBlock(
         }
 
         /**
-         * Letter block random picker. Weighted by rarity.
-         * @return Item stack of single letter block
+         * Selects and creates a random letter block ItemStack
+         *
+         * Picks a random letter weighted by frequency and assigns it a random color.
+         * Returns a cloned ItemStack to prevent reference sharing bugs.
+         *
+         * @return The letter block ItemStack, or null if ItemsAdder blocks aren't loaded
          */
         fun randomPickBlock(): ItemStack? {
             val pickedLetter = randomPick() ?: return null

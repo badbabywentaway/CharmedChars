@@ -18,11 +18,14 @@
 package org.stephanosbad.charmedChars.utility
 
 /**
- * @param <T>
-</T> */
-open class SimplerTuple<T>
-/**
- * @param first
- * @param second
+ * Tuple class for holding two values of the same type
+ *
+ * A specialized version of SimpleTuple where both values have the same type.
+ * Extends SimpleTuple<T, T> for convenience. Used primarily for LocationPair
+ * where both values are Locations.
+ *
+ * @param T The type of both values
+ * @param first The first value in the tuple
+ * @param second The second value in the tuple
  */
-    (first: T, second: T) : SimpleTuple<T, T>(first, second)
+open class SimplerTuple<T>(first: T, second: T) : SimpleTuple<T, T>(first, second)
