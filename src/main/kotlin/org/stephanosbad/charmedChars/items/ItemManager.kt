@@ -251,8 +251,6 @@ class ItemManager @JvmOverloads constructor(localPlugin: CharmedChars? = null) :
             return
         }
 
-        Bukkit.getLogger().info("[${e.player.name}] Broken block letter: '${c.first}' at (${brokenBlock.x}, ${brokenBlock.y}, ${brokenBlock.z})")
-
         // Determine the axis by checking adjacent blocks
         val world = brokenBlock.world
         val x = brokenBlock.x
@@ -275,32 +273,25 @@ class ItemManager @JvmOverloads constructor(localPlugin: CharmedChars? = null) :
         if (hasXPlus && !hasXMinus && !hasZPlus && !hasZMinus) {
             // Only +X has letters
             lateralDirection = LateralDirection(1, 0)
-            Bukkit.getLogger().info("[${e.player.name}] Scanning in +X direction")
         } else if (hasXMinus && !hasXPlus && !hasZPlus && !hasZMinus) {
             // Only -X has letters
             lateralDirection = LateralDirection(-1, 0)
-            Bukkit.getLogger().info("[${e.player.name}] Scanning in -X direction")
         } else if (hasZPlus && !hasXPlus && !hasXMinus && !hasZMinus) {
             // Only +Z has letters
             lateralDirection = LateralDirection(0, 1)
-            Bukkit.getLogger().info("[${e.player.name}] Scanning in +Z direction")
         } else if (hasZMinus && !hasXPlus && !hasXMinus && !hasZPlus) {
             // Only -Z has letters
             lateralDirection = LateralDirection(0, -1)
-            Bukkit.getLogger().info("[${e.player.name}] Scanning in -Z direction")
         } else if (!hasXAdjacent && !hasZAdjacent) {
             // Single letter word
             lateralDirection = LateralDirection(1, 0)
-            Bukkit.getLogger().info("[${e.player.name}] Single letter word detected")
         } else {
             // Multiple directions have letters (invalid pattern)
-            Bukkit.getLogger().info("[${e.player.name}] Invalid: Letters in multiple directions")
             e.player.sendMessage("Miss")
             return
         }
 
         // Build word starting from the broken block (treat it as first letter)
-        Bukkit.getLogger().info("[${e.player.name}] Starting word from broken block at (${brokenBlock.x}, ${brokenBlock.y}, ${brokenBlock.z})")
         var testBlock = brokenBlock
         var score = 0.0
         val outString = StringBuilder()
@@ -314,7 +305,6 @@ class ItemManager @JvmOverloads constructor(localPlugin: CharmedChars? = null) :
             score += letterScore
             blockArray.add(testBlock.location)
             outString.append(c.first)
-            Bukkit.getLogger().info("[${e.player.name}] Letter '${c.first}' added (score: +${"%.1f".format(letterScore)})")
 
             if(isSameColor)
             {
@@ -326,7 +316,6 @@ class ItemManager @JvmOverloads constructor(localPlugin: CharmedChars? = null) :
                 else if (colorTest != getColor)
                 {
                     isSameColor = false
-                    Bukkit.getLogger().info("[${e.player.name}] Color mismatch detected - no color bonus")
                 }
             }
 
@@ -334,24 +323,16 @@ class ItemManager @JvmOverloads constructor(localPlugin: CharmedChars? = null) :
             c = testForLetter(e.player, testBlock)
         }
 
-        Bukkit.getLogger().info("[${e.player.name}] Complete word: '${outString.toString()}' (${blockArray.size} letters)")
-
-        Bukkit.getLogger().info("[${e.player.name}] Base score: ${"%.1f".format(score)}")
-
         if(isSameColor && colorTest != null)
         {
-            val oldScore = score
             score *= 3
-            Bukkit.getLogger().info("[${e.player.name}] Color bonus applied! ${colorTest.name} x3 (${"%.1f".format(oldScore)} → ${"%.1f".format(score)})")
             e.player.sendMessage("Triple Score! All Blocks Are ${colorTest.name}!")
         }
 
         val wordLowercase = outString.toString().lowercase()
         val isInDictionary = WordDict.singleton!!.words.contains(wordLowercase)
-        Bukkit.getLogger().info("[${e.player.name}] Dictionary lookup: '$wordLowercase' → ${if (isInDictionary) "FOUND" else "NOT FOUND"}")
 
         if (isInDictionary) {
-            Bukkit.getLogger().info("[${e.player.name}] ✓ HIT! Final score: ${"%.1f".format(score)}")
             e.player.sendMessage("Hit: $score")
 
             // Remove all blocks in the word using ItemsAdder API
@@ -361,7 +342,6 @@ class ItemManager @JvmOverloads constructor(localPlugin: CharmedChars? = null) :
                 val customBlock = CustomBlock.byAlreadyPlaced(block)
                 if (customBlock != null) {
                     customBlock.remove()
-                    Bukkit.getLogger().info("[${e.player.name}] Removed custom block at (${block.x}, ${block.y}, ${block.z})")
                 } else {
                     // Fallback to vanilla removal if not a custom block
                     block.type = Material.AIR
@@ -373,7 +353,6 @@ class ItemManager @JvmOverloads constructor(localPlugin: CharmedChars? = null) :
 
             applyScore(e.player, score)
         } else {
-            Bukkit.getLogger().info("[${e.player.name}] ✗ MISS - Word not in dictionary")
             e.player.sendMessage("Miss")
             // Cancel the event so the block doesn't break on a miss
             e.isCancelled = true
@@ -447,7 +426,6 @@ class ItemManager @JvmOverloads constructor(localPlugin: CharmedChars? = null) :
      */
     fun testForLetter(player: Player?, testBlock: Block): SimpleTuple<Char, Double> {
         if (protectedSpot(player, testBlock.location, testBlock)) {
-            Bukkit.getLogger().info("Part of word is protected: " + testBlock.location)
             return SimpleTuple('\u0000', 0.0)
         }
         if (testBlock.state.blockData !is NoteBlock) {

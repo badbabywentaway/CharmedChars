@@ -34,7 +34,6 @@ class ConfigDataHandler(
     fun loadConfig() {
         if (file == null) {
             file = File(plugin.dataFolder, CONFIG_FILE_NAME)
-            Bukkit.getLogger().info("File: " + file!!.getCanonicalPath())
         }
 
         if (!file!!.exists()) {
