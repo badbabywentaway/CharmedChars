@@ -4,7 +4,6 @@ import org.bukkit.Location
 import org.bukkit.Material
 import org.bukkit.entity.Player
 import org.bukkit.inventory.ItemStack
-import org.stephanosbad.charmedChars.utility.ColorPrint
 import kotlin.math.roundToInt
 
 class DropReward(
@@ -62,7 +61,7 @@ class DropReward(
             return
         }
         if (count > 0) {
-            ColorPrint.sendPlayer(player, "$count x $materialName")
+            player.sendMessage("§e+$count x $materialName")
             location.world.dropItemNaturally(location, ItemStack(material!!, count))
         }
     }
