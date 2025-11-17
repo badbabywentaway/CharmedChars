@@ -8,19 +8,16 @@ import org.bukkit.block.data.type.NoteBlock
 import org.bukkit.event.EventHandler
 import org.bukkit.event.EventPriority
 import org.bukkit.event.Listener
-import org.bukkit.event.block.Action
 import org.bukkit.event.block.BlockBreakEvent
 import org.bukkit.event.block.BlockPlaceEvent
 import org.bukkit.event.block.BlockPhysicsEvent
-import org.bukkit.event.block.NotePlayEvent
-import org.bukkit.event.player.PlayerInteractEvent
 import org.bukkit.persistence.PersistentDataType
 import org.stephanosbad.charmedChars.CharmedChars
 
 /**
- * Prevents custom note blocks from being interacted with (prevents note cycling)
- * Custom letter/number blocks should not change their instrument/note when clicked
+ * Handles custom note block state management and breaking
  * Uses PersistentDataContainer to store custom model data in chunks
+ * Note: Interaction prevention is handled by ProtocolLib (see ProtocolLibInteractionListener)
  */
 class NoteBlockInteractListener(private val plugin: CharmedChars) : Listener {
 
@@ -67,40 +64,8 @@ class NoteBlockInteractListener(private val plugin: CharmedChars) : Listener {
         setCustomModelData(event.blockPlaced, customModelData)
     }
 
-    @EventHandler(priority = EventPriority.LOWEST, ignoreCancelled = false)
-    fun onPlayerInteract(event: PlayerInteractEvent) {
-        // Handle both left and right clicks on blocks
-        if (event.action != Action.RIGHT_CLICK_BLOCK && event.action != Action.LEFT_CLICK_BLOCK) return
-
-        val clickedBlock = event.clickedBlock ?: return
-
-        // Only care about note blocks
-        if (clickedBlock.type != Material.NOTE_BLOCK) return
-
-        // Check if this block has custom model data stored in PDC
-        val customModelData = getCustomModelData(clickedBlock)
-        if (customModelData != null) {
-            // This is a custom block - cancel the interaction to prevent note cycling
-            event.isCancelled = true
-            plugin.logger.info("[NoteBlock] Blocked interaction with custom block CMD=$customModelData at ${clickedBlock.location}")
-        }
-    }
-
-    @EventHandler(priority = EventPriority.LOWEST, ignoreCancelled = false)
-    fun onNotePlay(event: NotePlayEvent) {
-        // Prevent custom note blocks from playing sounds and changing notes
-        val block = event.block
-
-        if (block.type != Material.NOTE_BLOCK) return
-
-        // Check if this block has custom model data stored in PDC
-        val customModelData = getCustomModelData(block)
-        if (customModelData != null) {
-            // This is a custom block - cancel the note play event
-            event.isCancelled = true
-            plugin.logger.info("[NoteBlock] Blocked note play for custom block CMD=$customModelData at ${block.location}")
-        }
-    }
+    // Note: Player interaction prevention is now handled by ProtocolLib packet interception
+    // See ProtocolLibInteractionListener.kt for packet-level blocking
 
     @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = false)
     fun onBlockPhysicsMonitor(event: BlockPhysicsEvent) {

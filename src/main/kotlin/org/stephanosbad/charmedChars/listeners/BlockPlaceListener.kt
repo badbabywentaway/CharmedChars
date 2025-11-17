@@ -17,12 +17,6 @@ import org.stephanosbad.charmedChars.CharmedChars
  */
 class BlockPlaceListener(private val plugin: CharmedChars) : Listener {
 
-    private var fakeBlockListener: FakeBlockListener? = null
-
-    fun setFakeBlockListener(listener: FakeBlockListener) {
-        this.fakeBlockListener = listener
-    }
-
     @EventHandler(priority = EventPriority.LOWEST)
     fun onBlockPlace(event: BlockPlaceEvent) {
         val itemInHand = event.itemInHand
