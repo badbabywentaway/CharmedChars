@@ -1,5 +1,19 @@
 # Quick Setup Guide - ItemsAdder Integration
 
+## ⚠️ Required Dependency Notice
+
+**ItemsAdder is a REQUIRED proprietary plugin that is NOT included with CharmedChars.**
+
+Before proceeding with setup:
+- **Purchase/Download ItemsAdder** from [SpigotMC](https://www.spigotmc.org/resources/itemsadder.73355/) or official sources
+- **Install ItemsAdder** on your server first (version 3.6.3-beta-14 or higher)
+- **Comply with ItemsAdder's license terms** - it is a commercial plugin
+- CharmedChars only interfaces with ItemsAdder's public API and does not bundle ItemsAdder
+
+CharmedChars is open source, but it depends on ItemsAdder (proprietary) as a runtime dependency.
+
+---
+
 ## The Problem
 
 You're getting "No valid characters found in 'hello'" because **ItemsAdder doesn't know about the CharmedChars blocks yet**.

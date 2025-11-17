@@ -56,6 +56,15 @@ CharmedChars follows [Semantic Versioning](https://semver.org/):
 ### Required Dependencies
 - **ItemsAdder**: 3.6.3-beta-14 or higher
 
+**⚠️ IMPORTANT - ItemsAdder Licensing Notice:**
+
+ItemsAdder is a **proprietary/commercial plugin** and is **NOT included** with CharmedChars. You must:
+- Purchase and download ItemsAdder separately from [SpigotMC](https://www.spigotmc.org/resources/itemsadder.73355/) or the official source
+- Comply with ItemsAdder's own license terms
+- ItemsAdder is required for CharmedChars to function - it is a runtime dependency only
+
+CharmedChars itself is open source, but it requires ItemsAdder (a proprietary plugin) to operate. CharmedChars only interfaces with ItemsAdder's public API and does not bundle or redistribute any ItemsAdder code.
+
 ### Optional Dependencies
 **The plugin works perfectly without these! They are soft dependencies only.**
 
