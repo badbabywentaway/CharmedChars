@@ -251,7 +251,7 @@ class ItemManager @JvmOverloads constructor(localPlugin: CharmedChars? = null) :
             return
         }
 
-        e.player.sendMessage("§7[DEBUG] Broken block letter: '${c.first}' at (${brokenBlock.x}, ${brokenBlock.y}, ${brokenBlock.z})")
+        Bukkit.getLogger().info("[${e.player.name}] Broken block letter: '${c.first}' at (${brokenBlock.x}, ${brokenBlock.y}, ${brokenBlock.z})")
 
         // Determine the axis by checking adjacent blocks
         val world = brokenBlock.world
@@ -269,18 +269,18 @@ class ItemManager @JvmOverloads constructor(localPlugin: CharmedChars? = null) :
         if (hasXAdjacent && !hasZAdjacent) {
             // Word is on X-axis, scan left to find start
             lateralDirection = LateralDirection(1, 0)
-            e.player.sendMessage("§7[DEBUG] Word axis: X-axis")
+            Bukkit.getLogger().info("[${e.player.name}] Word axis: X-axis")
         } else if (hasZAdjacent && !hasXAdjacent) {
             // Word is on Z-axis, scan forward to find start
             lateralDirection = LateralDirection(0, 1)
-            e.player.sendMessage("§7[DEBUG] Word axis: Z-axis")
+            Bukkit.getLogger().info("[${e.player.name}] Word axis: Z-axis")
         } else if (!hasXAdjacent && !hasZAdjacent) {
             // Single letter word
             lateralDirection = LateralDirection(1, 0)
-            e.player.sendMessage("§7[DEBUG] Single letter word detected")
+            Bukkit.getLogger().info("[${e.player.name}] Single letter word detected")
         } else {
             // Invalid: word goes in multiple directions (diagonal or cross)
-            e.player.sendMessage("§c[DEBUG] Invalid: Word goes in multiple directions")
+            Bukkit.getLogger().info("[${e.player.name}] Invalid: Word goes in multiple directions")
             e.player.sendMessage("Miss")
             return
         }
@@ -297,9 +297,9 @@ class ItemManager @JvmOverloads constructor(localPlugin: CharmedChars? = null) :
         }
 
         if (scanCount > 0) {
-            e.player.sendMessage("§7[DEBUG] Scanned backward $scanCount block(s) to find word start")
+            Bukkit.getLogger().info("[${e.player.name}] Scanned backward $scanCount block(s) to find word start")
         }
-        e.player.sendMessage("§7[DEBUG] Word start at (${startBlock.x}, ${startBlock.y}, ${startBlock.z})")
+        Bukkit.getLogger().info("[${e.player.name}] Word start at (${startBlock.x}, ${startBlock.y}, ${startBlock.z})")
 
         // Now scan forward from the start to build the complete word
         var testBlock = startBlock
@@ -315,7 +315,7 @@ class ItemManager @JvmOverloads constructor(localPlugin: CharmedChars? = null) :
             score += letterScore
             blockArray.add(testBlock.location)
             outString.append(c.first)
-            e.player.sendMessage("§7[DEBUG] Letter '${c.first}' added (score: +${"%.1f".format(letterScore)})")
+            Bukkit.getLogger().info("[${e.player.name}] Letter '${c.first}' added (score: +${"%.1f".format(letterScore)})")
 
             if(isSameColor)
             {
@@ -327,7 +327,7 @@ class ItemManager @JvmOverloads constructor(localPlugin: CharmedChars? = null) :
                 else if (colorTest != getColor)
                 {
                     isSameColor = false
-                    e.player.sendMessage("§7[DEBUG] Color mismatch detected - no color bonus")
+                    Bukkit.getLogger().info("[${e.player.name}] Color mismatch detected - no color bonus")
                 }
             }
 
@@ -335,25 +335,25 @@ class ItemManager @JvmOverloads constructor(localPlugin: CharmedChars? = null) :
             c = testForLetter(e.player, testBlock)
         }
 
-        e.player.sendMessage("§7[DEBUG] Complete word: '${outString.toString()}' (${blockArray.size} letters)")
+        Bukkit.getLogger().info("[${e.player.name}] Complete word: '${outString.toString()}' (${blockArray.size} letters)")
 
-        e.player.sendMessage("§7[DEBUG] Base score: ${"%.1f".format(score)}")
+        Bukkit.getLogger().info("[${e.player.name}] Base score: ${"%.1f".format(score)}")
 
         if(isSameColor && colorTest != null)
         {
             val oldScore = score
             score *= 3
-            e.player.sendMessage("§7[DEBUG] Color bonus applied! ${colorTest.name} x3 (${"%.1f".format(oldScore)} → ${"%.1f".format(score)})")
+            Bukkit.getLogger().info("[${e.player.name}] Color bonus applied! ${colorTest.name} x3 (${"%.1f".format(oldScore)} → ${"%.1f".format(score)})")
             e.player.sendMessage("Triple Score! All Blocks Are ${colorTest.name}!")
         }
 
         val wordLowercase = outString.toString().lowercase()
         val isInDictionary = WordDict.singleton!!.words.contains(wordLowercase)
-        e.player.sendMessage("§7[DEBUG] Dictionary lookup: '$wordLowercase' → ${if (isInDictionary) "FOUND" else "NOT FOUND"}")
+        Bukkit.getLogger().info("[${e.player.name}] Dictionary lookup: '$wordLowercase' → ${if (isInDictionary) "FOUND" else "NOT FOUND"}")
 
         if (isInDictionary) {
             e.isCancelled = true
-            e.player.sendMessage("§a[DEBUG] ✓ HIT! Final score: ${"%.1f".format(score)}")
+            Bukkit.getLogger().info("[${e.player.name}] ✓ HIT! Final score: ${"%.1f".format(score)}")
             e.player.sendMessage("Hit: $score")
 
             for (locationOfBlock in blockArray) {
@@ -361,7 +361,7 @@ class ItemManager @JvmOverloads constructor(localPlugin: CharmedChars? = null) :
             }
             applyScore(e.player, score)
         } else {
-            e.player.sendMessage("§c[DEBUG] ✗ MISS - Word not in dictionary")
+            Bukkit.getLogger().info("[${e.player.name}] ✗ MISS - Word not in dictionary")
             e.player.sendMessage("Miss")
         }
     }
