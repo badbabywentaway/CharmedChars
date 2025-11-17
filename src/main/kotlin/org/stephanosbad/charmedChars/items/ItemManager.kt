@@ -264,28 +264,37 @@ class ItemManager @JvmOverloads constructor(localPlugin: CharmedChars? = null) :
         val hasZAdjacent = testForLetter(e.player, world.getBlockAt(x, y, z + 1)).first != '\u0000' ||
                           testForLetter(e.player, world.getBlockAt(x, y, z - 1)).first != '\u0000'
 
-        // Determine scan direction based on which adjacent blocks have letters
-        val lateralDirection: LateralDirection
+        // Check all 4 directions to find which one has letter blocks
         val hasXPlus = testForLetter(e.player, world.getBlockAt(x + 1, y, z)).first != '\u0000'
         val hasXMinus = testForLetter(e.player, world.getBlockAt(x - 1, y, z)).first != '\u0000'
         val hasZPlus = testForLetter(e.player, world.getBlockAt(x, y, z + 1)).first != '\u0000'
         val hasZMinus = testForLetter(e.player, world.getBlockAt(x, y, z - 1)).first != '\u0000'
 
-        if ((hasXPlus || hasXMinus) && !hasZPlus && !hasZMinus) {
-            // Word is on X-axis - scan in the positive X direction
+        // Determine scan direction - pick one of the 4 cardinal directions that has letters
+        val lateralDirection: LateralDirection
+        if (hasXPlus && !hasXMinus && !hasZPlus && !hasZMinus) {
+            // Only +X has letters
             lateralDirection = LateralDirection(1, 0)
-            Bukkit.getLogger().info("[${e.player.name}] Word axis: X-axis, scanning +X direction")
-        } else if ((hasZPlus || hasZMinus) && !hasXPlus && !hasXMinus) {
-            // Word is on Z-axis - scan in the positive Z direction
+            Bukkit.getLogger().info("[${e.player.name}] Scanning in +X direction")
+        } else if (hasXMinus && !hasXPlus && !hasZPlus && !hasZMinus) {
+            // Only -X has letters
+            lateralDirection = LateralDirection(-1, 0)
+            Bukkit.getLogger().info("[${e.player.name}] Scanning in -X direction")
+        } else if (hasZPlus && !hasXPlus && !hasXMinus && !hasZMinus) {
+            // Only +Z has letters
             lateralDirection = LateralDirection(0, 1)
-            Bukkit.getLogger().info("[${e.player.name}] Word axis: Z-axis, scanning +Z direction")
+            Bukkit.getLogger().info("[${e.player.name}] Scanning in +Z direction")
+        } else if (hasZMinus && !hasXPlus && !hasXMinus && !hasZPlus) {
+            // Only -Z has letters
+            lateralDirection = LateralDirection(0, -1)
+            Bukkit.getLogger().info("[${e.player.name}] Scanning in -Z direction")
         } else if (!hasXAdjacent && !hasZAdjacent) {
             // Single letter word
             lateralDirection = LateralDirection(1, 0)
             Bukkit.getLogger().info("[${e.player.name}] Single letter word detected")
         } else {
-            // Invalid: word goes in multiple directions (diagonal or cross)
-            Bukkit.getLogger().info("[${e.player.name}] Invalid: Word goes in multiple directions")
+            // Multiple directions have letters (invalid pattern)
+            Bukkit.getLogger().info("[${e.player.name}] Invalid: Letters in multiple directions")
             e.player.sendMessage("Miss")
             return
         }
