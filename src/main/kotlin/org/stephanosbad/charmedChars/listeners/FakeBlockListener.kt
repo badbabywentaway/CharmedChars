@@ -100,13 +100,11 @@ class FakeBlockListener(private val plugin: CharmedChars) : Listener {
      */
     fun sendFakeBlocksForChunk(player: Player, chunk: Chunk) {
         val world = chunk.world
-        val chunkX = chunk.x * 16
-        val chunkZ = chunk.z * 16
 
         // Scan the chunk for custom noteblocks
         for (x in 0..15) {
             for (z in 0..15) {
-                for (y in world.minHeight..world.maxHeight) {
+                for (y in world.minHeight until world.maxHeight) {  // Use 'until' instead of '..' to exclude maxHeight
                     val block = chunk.getBlock(x, y, z)
                     if (block.type == Material.NOTE_BLOCK) {
                         if (getCustomModelData(block) != null) {
@@ -141,7 +139,7 @@ class FakeBlockListener(private val plugin: CharmedChars) : Listener {
         val world = chunk.world
         for (x in 0..15) {
             for (z in 0..15) {
-                for (y in world.minHeight..world.maxHeight) {
+                for (y in world.minHeight until world.maxHeight) {  // Use 'until' instead of '..' to exclude maxHeight
                     val block = chunk.getBlock(x, y, z)
                     if (block.type == Material.NOTE_BLOCK) {
                         if (getCustomModelData(block) != null) {
