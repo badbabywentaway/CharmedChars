@@ -133,7 +133,16 @@ class CharmedChars : JavaPlugin(), CoroutineScope {
             getCommand(CharBlock.CommandName)!!.tabCompleter = CharBlock()
         }
         Bukkit.getPluginManager().registerEvents(ItemManager(this), this)
-        Bukkit.getPluginManager().registerEvents(org.stephanosbad.charmedChars.listeners.BlockPlaceListener(this), this)
+
+        // Register ProtocolLib-based fake block listener first
+        val fakeBlockListener = org.stephanosbad.charmedChars.listeners.FakeBlockListener(this)
+        Bukkit.getPluginManager().registerEvents(fakeBlockListener, this)
+
+        // Register block place listener and link it to fake block listener
+        val blockPlaceListener = org.stephanosbad.charmedChars.listeners.BlockPlaceListener(this)
+        blockPlaceListener.setFakeBlockListener(fakeBlockListener)
+        Bukkit.getPluginManager().registerEvents(blockPlaceListener, this)
+
         Bukkit.getPluginManager().registerEvents(org.stephanosbad.charmedChars.listeners.NoteBlockInteractListener(this), this)
         Bukkit.getPluginManager().registerEvents(org.stephanosbad.charmedChars.listeners.ResourcePackListener(this), this)
 

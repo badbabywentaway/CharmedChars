@@ -15,12 +15,14 @@ repositories {
     maven("https://repo.papermc.io/repository/maven-public/") { name = "papermc-repo" }
     maven("https://oss.sonatype.org/content/groups/public/") { name = "sonatype" }
     maven("https://jitpack.io") { name = "jitpack" }
-    maven ("https://maven.enginehub.org/repo/" )
+    maven("https://maven.enginehub.org/repo/")
+    maven("https://repo.dmulloy2.net/repository/public/") { name = "protocollib-repo" }
 }
 
 dependencies {
     compileOnly("io.papermc.paper:paper-api:${property("paperVersion")}")
-    compileOnly ("com.sk89q.worldguard:worldguard-bukkit:${property("worldGuardVersion")}")
+    compileOnly("com.sk89q.worldguard:worldguard-bukkit:${property("worldGuardVersion")}")
+    compileOnly("com.comphenix.protocol:ProtocolLib:5.3.0")
     implementation("com.github.GriefPrevention:GriefPrevention:${property("griefPreventionVersion")}")
     implementation("org.jetbrains.kotlin:kotlin-stdlib:${property("kotlinVersion")}")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:${property("coroutinesVersion")}")

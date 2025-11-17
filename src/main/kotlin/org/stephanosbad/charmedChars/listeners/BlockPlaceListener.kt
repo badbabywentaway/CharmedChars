@@ -1,5 +1,6 @@
 package org.stephanosbad.charmedChars.listeners
 
+import org.bukkit.Bukkit
 import org.bukkit.Instrument
 import org.bukkit.Material
 import org.bukkit.Note
@@ -15,6 +16,12 @@ import org.stephanosbad.charmedChars.CharmedChars
  * Sets the note block's instrument and note based on custom model data
  */
 class BlockPlaceListener(private val plugin: CharmedChars) : Listener {
+
+    private var fakeBlockListener: FakeBlockListener? = null
+
+    fun setFakeBlockListener(listener: FakeBlockListener) {
+        this.fakeBlockListener = listener
+    }
 
     @EventHandler(priority = EventPriority.LOWEST)
     fun onBlockPlace(event: BlockPlaceEvent) {
@@ -63,6 +70,11 @@ class BlockPlaceListener(private val plugin: CharmedChars) : Listener {
             // Verify the data was set correctly
             val verifyData = placedBlock.blockData as NoteBlock
             plugin.logger.info("[BlockPlace Debug] Verification - instrument=${verifyData.instrument}, note=${verifyData.note.id}")
+
+            // Send fake block to nearby players using ProtocolLib
+            Bukkit.getScheduler().runTaskLater(plugin, Runnable {
+                fakeBlockListener?.sendFakeBlockToNearbyPlayers(placedBlock, Material.BARRIER)
+            }, 1L) // Delay 1 tick to ensure block is fully placed
         } else {
             plugin.logger.warning("[BlockPlace] Block placed is not a NoteBlock! Type: ${placedBlock.type}, BlockData: ${placedBlock.blockData}")
         }
