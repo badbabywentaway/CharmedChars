@@ -352,17 +352,27 @@ class ItemManager @JvmOverloads constructor(localPlugin: CharmedChars? = null) :
         Bukkit.getLogger().info("[${e.player.name}] Dictionary lookup: '$wordLowercase' → ${if (isInDictionary) "FOUND" else "NOT FOUND"}")
 
         if (isInDictionary) {
-            e.isCancelled = true
             Bukkit.getLogger().info("[${e.player.name}] ✓ HIT! Final score: ${"%.1f".format(score)}")
             e.player.sendMessage("Hit: $score")
 
+            // Remove all blocks in the word (including the broken block)
+            // Do this BEFORE canceling to ensure blocks are removed
             for (locationOfBlock in blockArray) {
-                e.getBlock().world.getBlockAt(locationOfBlock).type = Material.AIR
+                val block = locationOfBlock.world.getBlockAt(locationOfBlock)
+                // Don't break the originally broken block here - let the event handle it
+                if (locationOfBlock != brokenBlock.location) {
+                    block.type = Material.AIR
+                }
             }
+            // The event will naturally break the block the player clicked on
+            // No need to cancel it
+
             applyScore(e.player, score)
         } else {
             Bukkit.getLogger().info("[${e.player.name}] ✗ MISS - Word not in dictionary")
             e.player.sendMessage("Miss")
+            // Cancel the event so the block doesn't break on a miss
+            e.isCancelled = true
         }
     }
 
