@@ -99,20 +99,31 @@ class FakeBlockListener(private val plugin: CharmedChars) : Listener {
      * Send fake blocks for all custom noteblocks in a chunk to a player
      */
     fun sendFakeBlocksForChunk(player: Player, chunk: Chunk) {
-        val world = chunk.world
+        try {
+            val world = chunk.world
+            var blockCount = 0
 
-        // Scan the chunk for custom noteblocks
-        for (x in 0..15) {
-            for (z in 0..15) {
-                for (y in world.minHeight until world.maxHeight) {  // Use 'until' instead of '..' to exclude maxHeight
-                    val block = chunk.getBlock(x, y, z)
-                    if (block.type == Material.NOTE_BLOCK) {
-                        if (getCustomModelData(block) != null) {
-                            sendFakeBlock(player, block, Material.BARRIER)
+            // Scan the chunk for custom noteblocks
+            for (x in 0..15) {
+                for (z in 0..15) {
+                    for (y in world.minHeight until world.maxHeight) {  // Use 'until' instead of '..' to exclude maxHeight
+                        val block = chunk.getBlock(x, y, z)
+                        if (block.type == Material.NOTE_BLOCK) {
+                            if (getCustomModelData(block) != null) {
+                                sendFakeBlock(player, block, Material.BARRIER)
+                                blockCount++
+                            }
                         }
                     }
                 }
             }
+
+            if (blockCount > 0) {
+                plugin.logger.info("[FakeBlock] Sent $blockCount fake blocks for chunk ${chunk.x},${chunk.z} to ${player.name}")
+            }
+        } catch (e: Exception) {
+            plugin.logger.warning("[FakeBlock] Error scanning chunk: ${e.message}")
+            e.printStackTrace()
         }
     }
 
@@ -126,9 +137,10 @@ class FakeBlockListener(private val plugin: CharmedChars) : Listener {
             packet.blockData.write(0, WrappedBlockData.createData(fakeType))
 
             protocolManager.sendServerPacket(player, packet)
-            plugin.logger.fine("[FakeBlock] Sent fake block (${fakeType}) to ${player.name} at ${block.location}")
+            plugin.logger.info("[FakeBlock] Sent fake block (${fakeType}) to ${player.name} at ${block.location}")
         } catch (e: Exception) {
-            plugin.logger.warning("[FakeBlock] Failed to send fake block: ${e.message}")
+            plugin.logger.warning("[FakeBlock] Failed to send fake block to ${player.name} at ${block.location}: ${e.message}")
+            e.printStackTrace()
         }
     }
 
@@ -195,11 +207,19 @@ class FakeBlockListener(private val plugin: CharmedChars) : Listener {
      * Send a fake block for a specific location to all nearby players
      */
     fun sendFakeBlockToNearbyPlayers(block: Block, fakeType: Material) {
-        val location = block.location
-        location.world.players.forEach { player ->
-            if (player.location.distance(location) < 128) { // Render distance check
-                sendFakeBlock(player, block, fakeType)
+        try {
+            val location = block.location
+            var playerCount = 0
+            location.world.players.forEach { player ->
+                if (player.location.distance(location) < 128) { // Render distance check
+                    sendFakeBlock(player, block, fakeType)
+                    playerCount++
+                }
             }
+            plugin.logger.info("[FakeBlock] Sent fake block at ${location} to $playerCount nearby players")
+        } catch (e: Exception) {
+            plugin.logger.warning("[FakeBlock] Error sending fake block to nearby players: ${e.message}")
+            e.printStackTrace()
         }
     }
 }
