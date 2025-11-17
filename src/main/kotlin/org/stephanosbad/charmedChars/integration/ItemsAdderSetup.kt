@@ -64,6 +64,15 @@ class ItemsAdderSetup(private val plugin: CharmedChars) {
             configsDir.mkdirs()
             texturesDir.mkdirs()
 
+            // Enable charmedchars namespace in items_packs.yml
+            messages.add("Enabling charmedchars namespace...")
+            if (enableNamespace()) {
+                messages.add("  ✓ items_packs.yml updated")
+            } else {
+                messages.add("  ✗ Failed to update items_packs.yml")
+                return SetupResult(false, false, messages)
+            }
+
             // Copy blocks.yml configuration
             messages.add("Copying blocks.yml configuration...")
             val blocksYml = copyResourceToFile(
@@ -159,6 +168,64 @@ class ItemsAdderSetup(private val plugin: CharmedChars) {
                 messages = messages
             )
         }
+    }
+
+    /**
+     * Enable the charmedchars namespace in items_packs.yml
+     */
+    private fun enableNamespace(): Boolean {
+        try {
+            val itemsPacksFile = File(itemsAdderDataFolder, "items_packs.yml")
+
+            val content = if (itemsPacksFile.exists()) {
+                // File exists, check if charmedchars is already enabled
+                val existingContent = itemsPacksFile.readText()
+
+                if (existingContent.contains("charmedchars:")) {
+                    // Already enabled, no need to modify
+                    return true
+                }
+
+                // Add charmedchars to existing file
+                val lines = existingContent.lines().toMutableList()
+                val packsIndex = lines.indexOfFirst { it.trim().startsWith("packs:") }
+
+                if (packsIndex != -1) {
+                    // Insert after packs: line
+                    lines.add(packsIndex + 1, "  charmedchars:")
+                    lines.add(packsIndex + 2, "    enabled: true")
+                    lines.joinToString("\n")
+                } else {
+                    // Malformed file, recreate it
+                    createItemsPacksYml()
+                }
+            } else {
+                // File doesn't exist, create it
+                createItemsPacksYml()
+            }
+
+            itemsPacksFile.writeText(content)
+            return true
+
+        } catch (e: Exception) {
+            plugin.logger.severe("Failed to enable namespace in items_packs.yml: ${e.message}")
+            e.printStackTrace()
+            return false
+        }
+    }
+
+    /**
+     * Create a new items_packs.yml file with charmedchars enabled
+     */
+    private fun createItemsPacksYml(): String {
+        return """
+# ItemsAdder items packs configuration
+# This file controls which custom item namespaces are loaded
+
+packs:
+  charmedchars:
+    enabled: true
+        """.trimIndent()
     }
 
     /**
