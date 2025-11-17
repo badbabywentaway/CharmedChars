@@ -25,8 +25,25 @@ import org.bukkit.command.CommandExecutor
 import org.bukkit.command.CommandSender
 import org.stephanosbad.charmedChars.CharmedChars
 
+/**
+ * Command handler for reloading the plugin configuration
+ *
+ * Allows administrators to reload config.yml without restarting the server.
+ * The reload operation is performed asynchronously to avoid blocking the main thread.
+ *
+ * @property plugin The CharmedChars plugin instance
+ */
 class ReloadCommand(private val plugin: CharmedChars) : CommandExecutor {
 
+    /**
+     * Executes the /reload command
+     *
+     * @param sender The command sender
+     * @param command The command instance
+     * @param label The command label used
+     * @param args Command arguments (unused)
+     * @return true if the command was handled successfully
+     */
     override fun onCommand(
         sender: CommandSender,
         command: Command,

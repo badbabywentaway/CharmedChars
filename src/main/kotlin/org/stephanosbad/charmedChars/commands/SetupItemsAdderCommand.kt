@@ -25,8 +25,25 @@ import org.bukkit.command.CommandSender
 import org.stephanosbad.charmedChars.CharmedChars
 import org.stephanosbad.charmedChars.integration.ItemsAdderSetup
 
+/**
+ * Command handler for automatic ItemsAdder setup
+ *
+ * Automatically copies CharmedChars configuration files and textures to the ItemsAdder
+ * plugin directory. Supports a "force" flag to overwrite existing files.
+ *
+ * @property plugin The CharmedChars plugin instance
+ */
 class SetupItemsAdderCommand(private val plugin: CharmedChars) : CommandExecutor {
 
+    /**
+     * Executes the /iasetup command
+     *
+     * @param sender The command sender
+     * @param command The command instance
+     * @param label The command label used
+     * @param args Command arguments: optional "force" flag to overwrite existing files
+     * @return true if the command was handled successfully
+     */
     override fun onCommand(sender: CommandSender, command: Command, label: String, args: Array<out String>): Boolean {
         // Check for force flag
         val force = args.isNotEmpty() && args[0].equals("force", ignoreCase = true)

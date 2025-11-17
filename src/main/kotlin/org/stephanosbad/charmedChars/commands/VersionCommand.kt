@@ -25,8 +25,25 @@ import org.bukkit.command.CommandExecutor
 import org.bukkit.command.CommandSender
 import org.stephanosbad.charmedChars.CharmedChars
 
+/**
+ * Command handler for displaying plugin version information
+ *
+ * Shows the plugin version, API version, author, recent changes, and
+ * a link to the full changelog in VERSION.md.
+ *
+ * @property plugin The CharmedChars plugin instance
+ */
 class VersionCommand(private val plugin: CharmedChars) : CommandExecutor {
 
+    /**
+     * Executes the /version command
+     *
+     * @param sender The command sender
+     * @param command The command instance
+     * @param label The command label used
+     * @param args Command arguments (unused)
+     * @return true if the command was handled successfully
+     */
     override fun onCommand(
         sender: CommandSender,
         command: Command,

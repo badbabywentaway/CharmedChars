@@ -26,7 +26,24 @@ import org.bukkit.command.CommandSender
 import org.stephanosbad.charmedChars.items.BlockColor
 import org.stephanosbad.charmedChars.items.LetterBlock
 
+/**
+ * Command handler for checking ItemsAdder integration status
+ *
+ * Tests whether ItemsAdder is installed and properly configured with CharmedChars
+ * custom blocks. Checks sample blocks from each color and provides detailed
+ * diagnostics and setup instructions if blocks are missing.
+ */
 class ItemsAdderStatusCommand : CommandExecutor {
+
+    /**
+     * Executes the /iastatus command
+     *
+     * @param sender The command sender
+     * @param command The command instance
+     * @param label The command label used
+     * @param args Command arguments (unused)
+     * @return true if the command was handled successfully
+     */
     override fun onCommand(sender: CommandSender, command: Command, label: String, args: Array<out String>): Boolean {
         sender.sendMessage(
             Component.text("=== ItemsAdder Integration Status ===")

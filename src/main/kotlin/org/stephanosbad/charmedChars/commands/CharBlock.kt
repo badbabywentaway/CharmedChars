@@ -33,7 +33,24 @@ import org.stephanosbad.charmedChars.items.NonAlphaNumBlocks
 import org.stephanosbad.charmedChars.items.NumericBlock
 import java.util.*
 
+/**
+ * Command handler for giving character blocks to players
+ *
+ * Allows administrators to give letter blocks, number blocks, and operator blocks
+ * to players with a specified color. Validates player names, colors, and characters,
+ * and provides helpful error messages and setup instructions if ItemsAdder is not configured.
+ */
 class CharBlock : CommandExecutor, TabCompleter {
+
+    /**
+     * Executes the /charblock command
+     *
+     * @param sender The command sender (player or console)
+     * @param command The command instance
+     * @param label The command label used
+     * @param args Command arguments: [player] [color] [text]
+     * @return true if the command was handled successfully
+     */
     override fun onCommand(sender: CommandSender, command: Command, label: kotlin.String, args: Array<out kotlin.String>): Boolean {
         // Check permission
         if (!sender.hasPermission("charmedChars.blocks")) {
@@ -163,6 +180,15 @@ class CharBlock : CommandExecutor, TabCompleter {
         return true
     }
 
+    /**
+     * Provides tab completion for the /charblock command
+     *
+     * @param sender The command sender
+     * @param cmd The command instance
+     * @param label The command label
+     * @param args Current command arguments
+     * @return List of completion suggestions
+     */
     override fun onTabComplete(
         sender: CommandSender,
         cmd: Command,
@@ -218,7 +244,7 @@ class CharBlock : CommandExecutor, TabCompleter {
 
     companion object {
         /**
-         * String which to use for registering this command
+         * The command name used to register this command executor
          */
         var CommandName: kotlin.String = "charblock"
     }

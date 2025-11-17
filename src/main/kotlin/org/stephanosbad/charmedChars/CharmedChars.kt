@@ -39,20 +39,39 @@ import org.stephanosbad.charmedChars.utility.ConfigManager
 import java.io.IOException
 import kotlin.coroutines.CoroutineContext
 
+/**
+ * CharmedChars - Main plugin class for the word-forming puzzle game
+ *
+ * This plugin allows players to collect letter blocks by mining logs with gold tools,
+ * arrange them into words, and earn rewards based on word scores. It integrates with
+ * ItemsAdder for custom blocks and supports optional protection plugins.
+ *
+ * @property configManager Configuration manager for accessing plugin settings
+ * @property configDataHandler Handler for configuration data and rewards
+ */
 class CharmedChars : JavaPlugin(), CoroutineScope {
 
     private val job = SupervisorJob()
     override val coroutineContext: CoroutineContext
         get() = Dispatchers.Default + job
 
+    /**
+     * Configuration manager for accessing plugin settings
+     */
     lateinit var configManager: ConfigManager
         private set
 
     /**
-     * Location of configuration data handler
+     * Configuration data handler for rewards and gameplay settings
      */
     var configDataHandler: ConfigDataHandler? = null
 
+    /**
+     * Called when the plugin is enabled
+     *
+     * Initializes configuration, registers commands and event listeners,
+     * loads the word dictionary, and checks ItemsAdder setup status.
+     */
     override fun onEnable() {
 
         // Plugin startup logic
@@ -109,6 +128,11 @@ class CharmedChars : JavaPlugin(), CoroutineScope {
 
     }
 
+    /**
+     * Called when the plugin is disabled
+     *
+     * Cancels all running coroutines and performs cleanup operations.
+     */
     override fun onDisable() {
         // Cancel all coroutines
         job.cancel()
@@ -123,6 +147,12 @@ class CharmedChars : JavaPlugin(), CoroutineScope {
         println("CharmedChars Plugin Stopping")
     }
 
+    /**
+     * Reloads the plugin configuration
+     *
+     * Asynchronously reloads the configuration from config.yml and notifies
+     * the command sender of the result.
+     */
     fun reload() {
         launch {
             configManager.reloadConfig()
@@ -137,7 +167,11 @@ class CharmedChars : JavaPlugin(), CoroutineScope {
     }
 
     /**
-     * Check if ItemsAdder is set up and notify admins if not
+     * Checks if ItemsAdder is properly set up and notifies administrators
+     *
+     * Verifies that ItemsAdder plugin is installed and configured with CharmedChars
+     * custom blocks. If not configured, sends warnings to the console and notifies
+     * online operators with setup instructions.
      */
     private fun checkItemsAdderSetup() {
         val setup = ItemsAdderSetup(this)
