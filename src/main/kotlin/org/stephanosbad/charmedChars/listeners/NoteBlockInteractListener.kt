@@ -21,11 +21,11 @@ import org.stephanosbad.charmedChars.CharmedChars
  * Handles custom note block protection, state management and breaking
  * Uses PersistentDataContainer to store custom model data in chunks
  *
- * Protection layers:
- * 1. PlayerInteractEvent - Prevents clicking noteblocks (stops note cycling)
- * 2. NotePlayEvent - Prevents sound from playing
- * 3. BlockPhysicsEvent - Restores state if changed by adjacent blocks
- * 4. BlockBreakEvent - Custom drops with correct CMD
+ * Protection layers (all at HIGHEST/LOWEST priority for early intervention):
+ * 1. PlayerInteractEvent (LOWEST) - Prevents clicking noteblocks (stops note cycling)
+ * 2. NotePlayEvent (LOWEST) - Prevents sound from playing
+ * 3. BlockPhysicsEvent (HIGHEST) - Cancels physics to prevent state changes from adjacent blocks
+ * 4. BlockBreakEvent (HIGHEST) - Custom drops with correct CMD
  */
 class NoteBlockInteractListener(private val plugin: CharmedChars) : Listener {
 
@@ -108,45 +108,19 @@ class NoteBlockInteractListener(private val plugin: CharmedChars) : Listener {
         }
     }
 
-    @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = false)
-    fun onBlockPhysicsMonitor(event: BlockPhysicsEvent) {
-        // MONITOR priority runs LAST - restore block data if it was changed
+    @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = false)
+    fun onBlockPhysics(event: BlockPhysicsEvent) {
+        // HIGHEST priority runs early - prevent state changes before they happen
         val block = event.block
 
         if (block.type != Material.NOTE_BLOCK) return
 
-        // Check if this block has custom model data stored in PDC
-        val originalCMD = getCustomModelData(block) ?: return
-
-        val currentData = block.blockData as? NoteBlock ?: return
-        val currentNote = currentData.note.id
-        val currentInstrument = currentData.instrument
-
-        plugin.logger.info("[NoteBlock Debug] BlockPhysicsEvent MONITOR for tracked block CMD=$originalCMD at ${block.location}, current: note=$currentNote, instrument=$currentInstrument")
-
-        // Calculate what the note/instrument SHOULD be from the ORIGINAL custom model data
-        val relativeValue = originalCMD - 1100
-        val expectedNote = (relativeValue % 25).toByte()
-        val expectedInstrumentIndex = (relativeValue / 25) % org.bukkit.Instrument.values().size
-        val expectedInstrument = org.bukkit.Instrument.values()[expectedInstrumentIndex]
-
-        plugin.logger.info("[NoteBlock Debug] Expected: note=$expectedNote, instrument=$expectedInstrument | Current: note=$currentNote, instrument=$currentInstrument")
-
-        if (currentNote != expectedNote || currentInstrument != expectedInstrument) {
-            plugin.logger.warning("[NoteBlock] Custom block data was modified! Current: note=$currentNote, instrument=$currentInstrument, Expected: note=$expectedNote, instrument=$expectedInstrument. Scheduling restore...")
-
-            // Create the correct block data
-            val correctData = block.blockData.clone() as NoteBlock
-            correctData.note = org.bukkit.Note(expectedNote.toInt())
-            correctData.instrument = expectedInstrument
-
-            // Restore on next tick to ensure it takes effect after all event processing
-            Bukkit.getScheduler().runTask(plugin, Runnable {
-                if (block.type == Material.NOTE_BLOCK) {
-                    block.blockData = correctData
-                    plugin.logger.info("[NoteBlock] Restored block data to note=$expectedNote, instrument=$expectedInstrument at ${block.location}")
-                }
-            })
+        // Check if this is a custom block
+        val customModelData = getCustomModelData(block)
+        if (customModelData != null) {
+            // This is a custom block - cancel physics to prevent any state changes
+            event.isCancelled = true
+            plugin.logger.info("[NoteBlock] Blocked BlockPhysicsEvent for custom block CMD=$customModelData at ${block.location}")
         }
     }
 
@@ -155,12 +129,14 @@ class NoteBlockInteractListener(private val plugin: CharmedChars) : Listener {
         // Ensure custom note blocks drop the correct item with custom model data
         val block = event.block
 
-        if (block.type != Material.NOTE_BLOCK) return
+        plugin.logger.info("[NoteBlock Debug] BlockBreakEvent HIGHEST for block type=${block.type} at ${block.location}, cancelled=${event.isCancelled}")
 
-        plugin.logger.info("[NoteBlock Debug] BlockBreakEvent HIGHEST for note block at ${block.location}, cancelled=${event.isCancelled}")
+        if (block.type != Material.NOTE_BLOCK) return
 
         // Check if this block has custom model data stored in PDC
         val customModelData = getCustomModelData(block)
+        plugin.logger.info("[NoteBlock Debug] Checked PDC, customModelData=$customModelData")
+
         if (customModelData != null) {
             plugin.logger.info("[NoteBlock] Processing break for custom block CMD=$customModelData")
 
