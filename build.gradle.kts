@@ -48,3 +48,33 @@ dependencies {
     tasks.build { dependsOn(tasks.shadowJar) }
     tasks.runServer { minecraftVersion("1.21.10") }
     tasks.test { useJUnitPlatform() }
+
+    // Version management task
+    tasks.register("version") {
+        group = "versioning"
+        description = "Display current plugin version"
+        doLast {
+            println("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━")
+            println("  CharmedChars - Version Info")
+            println("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━")
+            println("  Version: ${project.version}")
+            println("  Group: ${project.group}")
+            println("  Name: ${project.name}")
+            println("  Minecraft: 1.21.10")
+            println("  Kotlin: ${property("kotlinVersion")}")
+            println("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━")
+            println("  See VERSION.md for full changelog")
+            println("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━")
+        }
+    }
+
+    // Build with version info task
+    tasks.register("buildWithVersion") {
+        group = "build"
+        description = "Build plugin and display version information"
+        dependsOn(tasks.named("version"), tasks.build)
+        doLast {
+            println("\n✓ Build completed successfully!")
+            println("  Output: ${tasks.shadowJar.get().archiveFile.get().asFile.absolutePath}")
+        }
+    }

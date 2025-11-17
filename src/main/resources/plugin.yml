@@ -34,6 +34,10 @@ commands:
     usage: /iasetup [force]
     permission: charmedchars.admin
     aliases: [setupitemsadder, iaconfig]
+  version:
+    description: Display plugin version and recent changes
+    usage: /version
+    aliases: [ver, charmedcharsversion]
 
 permissions:
   charmedChars.blocks:
