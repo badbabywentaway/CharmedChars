@@ -119,27 +119,29 @@ class CharBlock : CommandExecutor, TabCompleter {
                     .color(NamedTextColor.RED)
             )
             sender.sendMessage(
-                Component.text("This likely means ItemsAdder hasn't been configured yet.")
+                Component.text("ItemsAdder hasn't been configured with CharmedChars blocks yet.")
                     .color(NamedTextColor.YELLOW)
             )
+            sender.sendMessage(Component.text(""))
             sender.sendMessage(
-                Component.text("Please ensure you've:")
+                Component.text("Quick Setup (3 steps):")
+                    .color(NamedTextColor.GOLD)
+            )
+            sender.sendMessage(
+                Component.text("  1. Run /iasetup (auto-copies configs & textures)")
                     .color(NamedTextColor.GRAY)
             )
             sender.sendMessage(
-                Component.text("  1. Copied configs to plugins/ItemsAdder/data/charmedchars/")
+                Component.text("  2. Run /iazip (generates resource pack)")
                     .color(NamedTextColor.GRAY)
             )
             sender.sendMessage(
-                Component.text("  2. Copied textures to ItemsAdder folder")
+                Component.text("  3. Restart server")
                     .color(NamedTextColor.GRAY)
             )
+            sender.sendMessage(Component.text(""))
             sender.sendMessage(
-                Component.text("  3. Run /iazip to register items")
-                    .color(NamedTextColor.GRAY)
-            )
-            sender.sendMessage(
-                Component.text("See: itemsadder-config/README.md for full setup")
+                Component.text("Check status: /iastatus")
                     .color(NamedTextColor.AQUA)
             )
         }
