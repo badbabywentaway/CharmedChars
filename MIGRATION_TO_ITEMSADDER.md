@@ -182,7 +182,38 @@ plugins/ItemsAdder/data/charmedchars/resourcepack/assets/charmedchars/textures/b
 └── yellow/ (same as cyan)
 ```
 
-### Step 4: Generate Resource Pack
+### Step 4: Enable Resource Pack Hosting
+
+**CRITICAL**: Configure ItemsAdder to send the resource pack to players.
+
+**Edit**: `plugins/ItemsAdder/config.yml`
+
+**Find the `resource-pack` section** and configure:
+
+```yaml
+resource-pack:
+  hosting:
+    # Option 1: Self-hosting (recommended for most servers)
+    self-host:
+      enabled: true        # ← Change to true!
+      server-ip: 'auto'    # Or your server IP
+      pack-port: 8163      # Port for resource pack HTTP server
+
+    # Option 2: External hosting (alternative)
+    # auto-external-host:
+    #   enabled: true      # Uses polymart.org to host
+
+  # Important settings
+  apply-on-join: true      # ← Must be true!
+  kick-player-on-decline: false
+  delay-ticks: 1
+```
+
+**Why this is critical**: Without resource pack hosting enabled, blocks will appear as paper items and plain noteblocks. Players must receive and load the resource pack to see custom textures.
+
+**Save the file.**
+
+### Step 5: Generate Resource Pack
 
 ```
 # In-game or console
@@ -195,7 +226,7 @@ This command:
 3. Creates the resource pack ZIP
 4. Makes blocks placeable
 
-### Step 5: Deploy Updated Plugin
+### Step 6: Deploy Updated Plugin
 
 1. Build the updated CharmedChars JAR
 2. Replace old JAR in `plugins/` folder
@@ -255,13 +286,32 @@ Place the block and verify it shows the correct texture
 
 ## Troubleshooting
 
-### Blocks don't have textures
+### Blocks don't have textures (showing as paper/noteblocks)
+
+**Most Common Cause**: Resource pack hosting not enabled in ItemsAdder
 
 **Solution**:
-1. Verify textures are in correct directory
+1. **Enable resource pack hosting** in `plugins/ItemsAdder/config.yml`:
+   ```yaml
+   resource-pack:
+     hosting:
+       self-host:
+         enabled: true        # ← MUST be true!
+         server-ip: 'auto'
+         pack-port: 8163
+     apply-on-join: true      # ← MUST be true!
+   ```
+
 2. Run `/iazip` to regenerate resource pack
-3. Ensure players accept the resource pack
-4. Check `ItemsAdder/logs/` for errors
+3. Restart server
+4. Rejoin - you should get resource pack download prompt
+5. Accept the resource pack
+
+**Other checks**:
+- Verify textures are in correct directory: `plugins/ItemsAdder/contents/charmedchars/resourcepack/...`
+- Ensure players accept the resource pack
+- Check `ItemsAdder/logs/` for errors
+- Verify pack generated: `plugins/ItemsAdder/resource_pack/` should exist
 
 ### Blocks can't be placed
 

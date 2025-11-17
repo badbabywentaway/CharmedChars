@@ -6,7 +6,7 @@ You're getting "No valid characters found in 'hello'" because **ItemsAdder doesn
 
 The blocks need to be registered with ItemsAdder before they can be used.
 
-## ⚡ AUTOMATIC Setup (Easiest - 3 Steps!)
+## ⚡ AUTOMATIC Setup (Easiest - 4 Steps!)
 
 ### 1. Run Auto-Setup Command
 ```
@@ -19,12 +19,32 @@ This automatically:
 - Creates proper directory structure
 - Shows you exactly what was done
 
-### 2. Generate Resource Pack
+### 2. Enable Resource Pack Hosting
+
+**CRITICAL**: ItemsAdder needs to send the resource pack to players.
+
+**Edit**: `plugins/ItemsAdder/config.yml`
+
+**Find the `resource-pack` section** and enable hosting:
+
+```yaml
+resource-pack:
+  hosting:
+    self-host:
+      enabled: true        # ← Change to true!
+      server-ip: 'auto'
+      pack-port: 8163
+  apply-on-join: true      # ← Make sure this is true
+```
+
+**Save the file.**
+
+### 3. Generate Resource Pack
 ```
 /iazip
 ```
 
-### 3. Restart Server
+### 4. Restart Server
 ```
 /stop
 ```
@@ -162,15 +182,30 @@ Should now give you cyan letter blocks: H, E, L, L, O
 3. Restart server
 4. Verify with `/plugins` command
 
-### Textures not showing
+### Textures not showing (blocks are paper/noteblocks)
 
-**Cause**: Resource pack issues
+**Cause**: Resource pack not being sent to players
 
-**Check**:
-1. Did you run `/iazip`?
-2. Did server generate resource pack successfully?
-3. Did you accept the resource pack prompt?
-4. Check `ItemsAdder/logs/` for errors
+**Solution**:
+1. **Enable resource pack hosting** in `plugins/ItemsAdder/config.yml`:
+   ```yaml
+   resource-pack:
+     hosting:
+       self-host:
+         enabled: true      # ← MUST be true!
+         server-ip: 'auto'
+         pack-port: 8163
+     apply-on-join: true    # ← MUST be true!
+   ```
+
+2. Run `/iazip` to regenerate pack
+3. Restart server
+4. Rejoin - you should get resource pack prompt
+
+**Additional checks**:
+- Did you accept the resource pack prompt when joining?
+- Check `ItemsAdder/logs/` for resource pack errors
+- Verify pack generated: `plugins/ItemsAdder/resource_pack/` should exist
 
 ### Blocks.yml errors
 
@@ -235,9 +270,11 @@ plugins/ItemsAdder/
    - [ ] ItemsAdder plugin installed
    - [ ] blocks.yml copied to ItemsAdder
    - [ ] Textures copied to ItemsAdder
+   - [ ] **Resource pack hosting enabled** in ItemsAdder config.yml
    - [ ] `/iazip` ran without errors
    - [ ] Server restarted
    - [ ] `/iastatus` shows blocks loaded
+   - [ ] Received resource pack prompt when joining
 
 ## Next Steps
 
