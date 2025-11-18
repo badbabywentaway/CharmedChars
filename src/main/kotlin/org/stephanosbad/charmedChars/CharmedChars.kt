@@ -36,6 +36,8 @@ import org.stephanosbad.charmedChars.commands.SetupItemsAdderCommand
 import org.stephanosbad.charmedChars.commands.VersionCommand
 import org.stephanosbad.charmedChars.integration.ItemsAdderSetup
 import org.stephanosbad.charmedChars.utility.ConfigManager
+import org.stephanosbad.charmedChars.database.StructureDatabase
+import org.stephanosbad.charmedChars.listeners.StructureListener
 import java.io.IOException
 import kotlin.coroutines.CoroutineContext
 
@@ -67,6 +69,12 @@ class CharmedChars : JavaPlugin(), CoroutineScope {
     var configDataHandler: ConfigDataHandler? = null
 
     /**
+     * Database manager for structure tracking
+     */
+    lateinit var structureDatabase: StructureDatabase
+        private set
+
+    /**
      * Called when the plugin is enabled
      *
      * Initializes configuration, registers commands and event listeners,
@@ -92,6 +100,10 @@ class CharmedChars : JavaPlugin(), CoroutineScope {
         // Initialize config manager
         configManager = ConfigManager(this)
         configManager.loadConfig()
+
+        // Initialize structure database
+        structureDatabase = StructureDatabase(this)
+        structureDatabase.initialize()
 
         // Register commands
         getCommand("reload")?.setExecutor(ReloadCommand(this))
@@ -123,7 +135,10 @@ class CharmedChars : JavaPlugin(), CoroutineScope {
             getCommand(CharBlock.CommandName)!!.setExecutor(CharBlock())
             getCommand(CharBlock.CommandName)!!.tabCompleter = CharBlock()
         }
+
+        // Register event listeners
         Bukkit.getPluginManager().registerEvents(ItemManager(this), this)
+        Bukkit.getPluginManager().registerEvents(StructureListener(this, structureDatabase), this)
 
 
     }
@@ -134,6 +149,11 @@ class CharmedChars : JavaPlugin(), CoroutineScope {
      * Cancels all running coroutines and performs cleanup operations.
      */
     override fun onDisable() {
+        // Close database connection
+        if (::structureDatabase.isInitialized) {
+            structureDatabase.close()
+        }
+
         // Cancel all coroutines
         job.cancel()
 
