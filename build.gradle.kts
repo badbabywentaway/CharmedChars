@@ -45,8 +45,7 @@ dependencies {
         archiveVersion.set(project.version.toString())
         relocate("kotlin", "org.stephanosbad.charmedchars.kotlin")
         relocate("kotlinx.coroutines", "org.stephanosbad.charmedchars.kotlinx.coroutines")
-        relocate("org.jetbrains.exposed", "org.stephanosbad.charmedchars.exposed")
-        relocate("org.sqlite", "org.stephanosbad.charmedchars.sqlite")
+        // Note: Exposed and SQLite NOT relocated to preserve ServiceLoader functionality
         // Note: minimize() removed to prevent stripping Exposed ORM runtime classes
 
         // Output location
