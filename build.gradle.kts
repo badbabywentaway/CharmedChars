@@ -47,7 +47,7 @@ dependencies {
         relocate("kotlinx.coroutines", "org.stephanosbad.charmedchars.kotlinx.coroutines")
         relocate("org.jetbrains.exposed", "org.stephanosbad.charmedchars.exposed")
         relocate("org.sqlite", "org.stephanosbad.charmedchars.sqlite")
-        minimize()
+        // Note: minimize() removed to prevent stripping Exposed ORM runtime classes
 
         // Output location
         destinationDirectory.set(file("${project.buildDir}/libs"))
