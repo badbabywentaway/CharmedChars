@@ -76,13 +76,43 @@ class BastionNumberGameListener(
         // Check if the broken block is a number block
         val firstDigit = getNumberFromBlock(brokenBlock) ?: return
 
+        // Check for 3-digit sequence first (before checking structure)
+        val sequence = findThreeDigitSequence(brokenBlock, firstDigit)
+
+        // If no sequence found, let the event proceed normally
+        if (sequence == null) {
+            return
+        }
+
         // Check if player is in a bastion remnant
         val chunk = location.chunk
         val registry = Registry.STRUCTURE
         val bastionRemnant = registry.get(NamespacedKey.minecraft("bastion_remnant"))
 
         if (bastionRemnant == null || chunk.getStructures(bastionRemnant).isEmpty()) {
-            return // Not in a bastion remnant
+            // Player has a 3-digit sequence but NOT in a bastion remnant
+            // Drop the blocks as items instead of removing them
+            event.isCancelled = true
+
+            for (block in sequence.blocks) {
+                val customBlock = CustomBlock.byAlreadyPlaced(block)
+                if (customBlock != null) {
+                    // Drop the custom block as an item
+                    val itemStack = customBlock.itemStack
+                    if (itemStack != null) {
+                        location.world.dropItemNaturally(block.location, itemStack)
+                    }
+                    customBlock.remove()
+                } else {
+                    block.type = Material.AIR
+                }
+            }
+
+            player.sendMessage(
+                Component.text("Number sequence detected, but you're not in a bastion! Blocks dropped.")
+                    .color(NamedTextColor.YELLOW)
+            )
+            return
         }
 
         // Get bastion data
@@ -103,14 +133,7 @@ class BastionNumberGameListener(
             return
         }
 
-        // Check for 3-digit sequence in all directions
-        val sequence = findThreeDigitSequence(brokenBlock, firstDigit)
-
-        if (sequence == null) {
-            return // No valid 3-digit sequence found
-        }
-
-        // Compare with bastion number
+        // Compare with bastion number (sequence already found above)
         if (sequence.number == bastionData.assignedNumber) {
             // SUCCESS! Give rewards
             event.isCancelled = true // Cancel the break event
