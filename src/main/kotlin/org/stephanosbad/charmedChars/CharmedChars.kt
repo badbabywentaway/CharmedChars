@@ -39,6 +39,7 @@ import org.stephanosbad.charmedChars.utility.ConfigManager
 import org.stephanosbad.charmedChars.database.StructureDatabase
 import org.stephanosbad.charmedChars.listeners.StructureListener
 import org.stephanosbad.charmedChars.listeners.FortressNumberGameListener
+import org.stephanosbad.charmedChars.listeners.BastionNumberGameListener
 import java.io.IOException
 import kotlin.coroutines.CoroutineContext
 
@@ -141,6 +142,7 @@ class CharmedChars : JavaPlugin(), CoroutineScope {
         Bukkit.getPluginManager().registerEvents(ItemManager(this), this)
         Bukkit.getPluginManager().registerEvents(StructureListener(this, structureDatabase), this)
         Bukkit.getPluginManager().registerEvents(FortressNumberGameListener(this, structureDatabase), this)
+        Bukkit.getPluginManager().registerEvents(BastionNumberGameListener(this, structureDatabase), this)
 
 
     }
