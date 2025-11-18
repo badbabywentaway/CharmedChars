@@ -38,6 +38,7 @@ import org.stephanosbad.charmedChars.integration.ItemsAdderSetup
 import org.stephanosbad.charmedChars.utility.ConfigManager
 import org.stephanosbad.charmedChars.database.StructureDatabase
 import org.stephanosbad.charmedChars.listeners.StructureListener
+import org.stephanosbad.charmedChars.listeners.FortressNumberGameListener
 import java.io.IOException
 import kotlin.coroutines.CoroutineContext
 
@@ -139,6 +140,7 @@ class CharmedChars : JavaPlugin(), CoroutineScope {
         // Register event listeners
         Bukkit.getPluginManager().registerEvents(ItemManager(this), this)
         Bukkit.getPluginManager().registerEvents(StructureListener(this, structureDatabase), this)
+        Bukkit.getPluginManager().registerEvents(FortressNumberGameListener(this, structureDatabase), this)
 
 
     }
