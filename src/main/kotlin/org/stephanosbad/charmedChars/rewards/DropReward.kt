@@ -34,7 +34,7 @@ import kotlin.math.roundToInt
  * ```
  * - materialName: IRON_INGOT
  *   minimumRewardCount: 1.0
- *   multiplier: 0.01pull
+ *   multiplier: 0.01
  *   minimumThreshold: 100.0
  *   maximumRewardCap: 20.0
  * ```
