@@ -192,11 +192,33 @@ class BastionNumberGameListener(
 
             plugin.logger.info("Player ${player.name} solved bastion remnant #${bastionData.assignedNumber} (${sequence.number})")
         } else {
-            // Wrong number
+            // Wrong number - drop blocks as items
+            event.isCancelled = true
+
+            for (block in sequence.blocks) {
+                val customBlock = CustomBlock.byAlreadyPlaced(block)
+                if (customBlock != null) {
+                    // Drop the custom block as an item
+                    val itemStack = customBlock.itemStack
+                    if (itemStack != null) {
+                        location.world.dropItemNaturally(block.location, itemStack)
+                    }
+                    customBlock.remove()
+                } else {
+                    block.type = Material.AIR
+                }
+            }
+
             player.sendMessage(
-                Component.text("Close, but not quite! This bastion's number is ${bastionData.assignedNumber}, not ${sequence.number}.")
+                Component.text("Wrong number! This bastion's number is ${bastionData.assignedNumber}, not ${sequence.number}.")
                     .color(NamedTextColor.RED)
             )
+            player.sendMessage(
+                Component.text("Number blocks dropped as items.")
+                    .color(NamedTextColor.YELLOW)
+            )
+
+            plugin.logger.info("Player ${player.name} guessed wrong for bastion remnant #${bastionData.assignedNumber} (guessed ${sequence.number})")
         }
     }
 
