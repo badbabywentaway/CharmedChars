@@ -177,6 +177,7 @@ None currently reported.
 
 **Author**: StephanosBad
 **Built with**: Kotlin, Paper API, ItemsAdder
+**Artwork**: Block textures by Gaia Temperini
 **Letter Frequencies**: Based on Oxford Concise Dictionary (9th edition, 1995)
 
 ---

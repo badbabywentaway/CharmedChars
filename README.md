@@ -237,6 +237,9 @@ This arrangement is permitted under LGPL v3 as ItemsAdder is treated as a "Syste
 - ItemsAdder (proprietary plugin - required)
 - Letter frequency data from Oxford Concise Dictionary (9th edition, 1995)
 
+**Artwork:**
+- Block textures by Gaia Temperini
+
 **Development:**
 - Documentation, LGPL v3 compliance, and code organization assisted by Claude (Anthropic)
 

@@ -2,6 +2,8 @@
 
 This directory contains the ItemsAdder configuration files for CharmedChars custom blocks.
 
+**Block Textures**: Created by Gaia Temperini
+
 ## Setup Instructions
 
 ### 1. Install ItemsAdder
