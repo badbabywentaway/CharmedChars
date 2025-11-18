@@ -30,6 +30,7 @@ import java.util.UUID
  * @property assignedNumber Three-digit number (100-999) assigned for guessing
  * @property discoveredBy UUID of the player who first discovered this structure
  * @property discoveredAt Timestamp (milliseconds since epoch) of discovery
+ * @property rewardsDispensed Whether rewards have been dispensed for this structure
  */
 data class StructureData(
     val id: Int,
@@ -39,7 +40,8 @@ data class StructureData(
     val chunkZ: Int,
     val assignedNumber: Int,
     val discoveredBy: UUID,
-    val discoveredAt: Long
+    val discoveredAt: Long,
+    val rewardsDispensed: Boolean = false
 ) {
     /**
      * Returns a unique key for this structure based on its location

@@ -33,6 +33,7 @@ import org.jetbrains.exposed.sql.Table
  * @property assignedNumber Three-digit number (100-999) assigned to this structure
  * @property discoveredBy UUID of the first player who discovered this structure
  * @property discoveredAt Timestamp when the structure was first discovered
+ * @property rewardsDispensed Whether rewards have been dispensed for this structure
  */
 object StructureTable : Table("nether_structures") {
     val id = integer("id").autoIncrement()
@@ -43,6 +44,7 @@ object StructureTable : Table("nether_structures") {
     val assignedNumber = integer("assigned_number")
     val discoveredBy = varchar("discovered_by", 36)
     val discoveredAt = long("discovered_at")
+    val rewardsDispensed = bool("rewards_dispensed").default(false)
 
     override val primaryKey = PrimaryKey(id)
 

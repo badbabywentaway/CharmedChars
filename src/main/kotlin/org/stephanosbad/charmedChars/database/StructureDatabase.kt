@@ -143,6 +143,7 @@ class StructureDatabase(private val plugin: CharmedChars) {
                     it[StructureTable.assignedNumber] = assignedNumber
                     it[StructureTable.discoveredBy] = discoveredBy.toString()
                     it[StructureTable.discoveredAt] = System.currentTimeMillis()
+                    it[StructureTable.rewardsDispensed] = false
                 } get StructureTable.id
 
                 StructureData(
@@ -153,7 +154,8 @@ class StructureDatabase(private val plugin: CharmedChars) {
                     chunkZ = chunkZ,
                     assignedNumber = assignedNumber,
                     discoveredBy = discoveredBy,
-                    discoveredAt = System.currentTimeMillis()
+                    discoveredAt = System.currentTimeMillis(),
+                    rewardsDispensed = false
                 )
             }
         }
@@ -202,6 +204,21 @@ class StructureDatabase(private val plugin: CharmedChars) {
     }
 
     /**
+     * Marks rewards as dispensed for a specific structure
+     *
+     * @param structureId The database ID of the structure
+     * @return true if the update was successful, false otherwise
+     */
+    fun markRewardsDispensed(structureId: Int): Boolean {
+        return transaction(database) {
+            val updated = StructureTable.update({ StructureTable.id eq structureId }) {
+                it[rewardsDispensed] = true
+            }
+            updated > 0
+        }
+    }
+
+    /**
      * Converts a database row to a StructureData object
      */
     private fun rowToStructureData(row: ResultRow): StructureData {
@@ -213,7 +230,8 @@ class StructureDatabase(private val plugin: CharmedChars) {
             chunkZ = row[StructureTable.chunkZ],
             assignedNumber = row[StructureTable.assignedNumber],
             discoveredBy = UUID.fromString(row[StructureTable.discoveredBy]),
-            discoveredAt = row[StructureTable.discoveredAt]
+            discoveredAt = row[StructureTable.discoveredAt],
+            rewardsDispensed = row[StructureTable.rewardsDispensed]
         )
     }
 
