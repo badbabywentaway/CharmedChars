@@ -30,13 +30,13 @@ import org.stephanosbad.charmedChars.CharmedChars
 import org.stephanosbad.charmedChars.database.StructureType
 
 /**
- * Command handler for administrators to view structure three-digit codes
+ * Command handler to view structure three-digit codes
  *
- * Allows server administrators to view the assigned three-digit number
+ * Allows players with permission to view the assigned three-digit number
  * for the fortress or bastion remnant they are currently standing in.
- * This is useful for debugging or assisting players.
+ * This is useful for debugging or assisting other players.
  *
- * Requires charmedchars.admin permission.
+ * Requires charmedchars.blocks permission.
  *
  * @property plugin Reference to the main plugin instance
  */
@@ -45,7 +45,7 @@ class StructureCodeCommand(private val plugin: CharmedChars) : CommandExecutor {
     /**
      * Executes the /structurecode command
      *
-     * Checks if the sender is a player with admin permissions, then
+     * Checks if the sender is a player with the required permission, then
      * detects if they are in a fortress or bastion remnant and displays
      * the assigned three-digit code.
      *
@@ -66,7 +66,7 @@ class StructureCodeCommand(private val plugin: CharmedChars) : CommandExecutor {
         }
 
         // Check permission
-        if (!sender.hasPermission("charmedchars.admin")) {
+        if (!sender.hasPermission("charmedchars.blocks")) {
             sender.sendMessage(
                 Component.text("You don't have permission to use this command.")
                     .color(NamedTextColor.RED)

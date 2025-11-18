@@ -34,9 +34,9 @@ commands:
     usage: /version
     aliases: [ver, charmedcharsversion]
   structurecode:
-    description: View the three-digit code for the current fortress or bastion (admin only)
+    description: View the three-digit code for the current fortress or bastion
     usage: /structurecode
-    permission: charmedchars.admin
+    permission: charmedchars.blocks
     aliases: [scode, fortresscode, bastioncode]
 
 permissions:
