@@ -255,6 +255,101 @@ class StructureDatabase(private val plugin: CharmedChars) {
     }
 
     /**
+     * Deletes a structure by its assigned number
+     *
+     * @param number The three-digit number to delete
+     * @return true if the structure was deleted, false if not found
+     */
+     fun deleteStructureByNumber(number: Int): Boolean {
+        return transaction(database) {
+            val structure = StructureTable.select { StructureTable.assignedNumber eq number }.firstOrNull()
+            if (structure != null) {
+                exec("DELETE FROM ${StructureTable.tableName} WHERE ${StructureTable.assignedNumber.name} = $number")
+                usedNumbers.remove(number)
+                true
+            } else {
+                false
+            }
+        }
+    }
+
+    /**
+     * Deletes a structure by its database ID
+     *
+     * @param structureId The database ID to delete
+     * @return true if the structure was deleted, false if not found
+     */
+    fun deleteStructureById(structureId: Int): Boolean {
+        return transaction(database) {
+            val structure = StructureTable.select {
+                StructureTable.id eq structureId
+            }.firstOrNull()
+
+            if (structure != null) {
+                exec("DELETE FROM ${StructureTable.tableName} WHERE ${StructureTable.id.name} = $structureId")
+                usedNumbers.remove(structure[StructureTable.assignedNumber])
+                true
+            } else {
+                false
+            }
+        }
+    }
+
+    /**
+     * Deletes all structures in a specific world
+     *
+     * @param worldName Name of the world
+     * @return Number of structures deleted
+     */
+    fun deleteStructuresByWorld(worldName: String): Int {
+        return transaction(database) {
+            val numbers = StructureTable.select {
+                StructureTable.worldName eq worldName
+            }.map { it[StructureTable.assignedNumber] }
+
+            exec("DELETE FROM ${StructureTable.tableName} WHERE ${StructureTable.worldName.name} = '$worldName'")
+
+            numbers.forEach { usedNumbers.remove(it) }
+            numbers.size
+        }
+    }
+
+    /**
+     * Deletes all structures of a specific type
+     *
+     * @param structureType Type of structure to delete
+     * @return Number of structures deleted
+     */
+    fun deleteStructuresByType(structureType: StructureType): Int {
+        return transaction(database) {
+            val numbers = StructureTable.select {
+                StructureTable.structureType eq structureType.name
+            }.map { it[StructureTable.assignedNumber] }
+
+            exec("DELETE FROM ${StructureTable.tableName} WHERE ${StructureTable.structureType.name} = '${structureType.name}'")
+
+            numbers.forEach { usedNumbers.remove(it) }
+            numbers.size
+        }
+    }
+
+    /**
+     * Purges the entire structure database
+     *
+     * WARNING: This deletes ALL structure data!
+     *
+     * @return Number of structures deleted
+     */
+    fun purgeAllStructures(): Int {
+        return transaction(database) {
+            val count = StructureTable.selectAll().count().toInt()
+            StructureTable.deleteAll()
+            usedNumbers.clear()
+            count
+        }
+    }
+
+    /**
      * Converts a database row to a StructureData object
      */
     private fun rowToStructureData(row: ResultRow): StructureData {

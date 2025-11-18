@@ -39,9 +39,9 @@ commands:
     permission: charmedchars.blocks
     aliases: [scode, fortresscode, bastioncode]
   structuredb:
-    description: View and query the structure database (admin only)
-    usage: /structuredb <list|player|lookup|stats> [args]
-    permission: charmedchars.admin
+    description: View, query, and manage the structure database
+    usage: /structuredb <list|player|lookup|stats|remove|purge> [args]
+    permission: charmedchars.blocks
     aliases: [sdb, structuredatabase]
 
 permissions:

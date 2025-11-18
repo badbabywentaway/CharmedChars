@@ -31,15 +31,17 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 /**
- * Command handler for viewing structure database information
+ * Command handler for viewing and managing structure database information
  *
- * Provides subcommands for operators to query and inspect the structure database:
+ * Provides subcommands to query, inspect, and manage the structure database:
  * - list [world] - List all structures, optionally filtered by world
  * - player <playerName> - View structures discovered by a specific player
  * - lookup <number> - Look up a structure by its assigned three-digit number
  * - stats - Show database statistics
+ * - remove <number> - Remove a structure by its assigned number
+ * - purge [all|world|fortress|bastion] - Delete structures by criteria
  *
- * Requires charmedchars.admin permission (ops only).
+ * Requires charmedchars.blocks permission.
  *
  * @property plugin Reference to the main plugin instance
  */
@@ -60,7 +62,7 @@ class StructureDatabaseCommand(private val plugin: CharmedChars) : CommandExecut
      */
     override fun onCommand(sender: CommandSender, command: Command, label: String, args: Array<out String>): Boolean {
         // Check permission
-        if (!sender.hasPermission("charmedchars.admin")) {
+        if (!sender.hasPermission("charmedchars.blocks")) {
             sender.sendMessage(
                 Component.text("You don't have permission to use this command.")
                     .color(NamedTextColor.RED)
@@ -78,6 +80,8 @@ class StructureDatabaseCommand(private val plugin: CharmedChars) : CommandExecut
             "player" -> handlePlayer(sender, args)
             "lookup" -> handleLookup(sender, args)
             "stats" -> handleStats(sender)
+            "remove" -> handleRemove(sender, args)
+            "purge" -> handlePurge(sender, args)
             else -> {
                 sender.sendMessage(
                     Component.text("Unknown subcommand: ${args[0]}")
@@ -133,6 +137,22 @@ class StructureDatabaseCommand(private val plugin: CharmedChars) : CommandExecut
         )
         sender.sendMessage(
             Component.text("    - Show database statistics")
+                .color(NamedTextColor.GRAY)
+        )
+        sender.sendMessage(
+            Component.text("  /structuredb remove <number>")
+                .color(NamedTextColor.RED)
+        )
+        sender.sendMessage(
+            Component.text("    - Remove a structure by its assigned number")
+                .color(NamedTextColor.GRAY)
+        )
+        sender.sendMessage(
+            Component.text("  /structuredb purge <all|world|fortress|bastion> [worldName]")
+                .color(NamedTextColor.DARK_RED)
+        )
+        sender.sendMessage(
+            Component.text("    - Delete structures (all, by world, or by type)")
                 .color(NamedTextColor.GRAY)
         )
         sender.sendMessage(
@@ -414,6 +434,152 @@ class StructureDatabaseCommand(private val plugin: CharmedChars) : CommandExecut
     }
 
     /**
+     * Handles the 'remove' subcommand
+     */
+    private fun handleRemove(sender: CommandSender, args: Array<out String>) {
+        if (args.size < 2) {
+            sender.sendMessage(
+                Component.text("Usage: /structuredb remove <number>")
+                    .color(NamedTextColor.RED)
+            )
+            return
+        }
+
+        val number = args[1].toIntOrNull()
+        if (number == null || number < 100 || number > 999) {
+            sender.sendMessage(
+                Component.text("Invalid number. Must be between 100 and 999.")
+                    .color(NamedTextColor.RED)
+            )
+            return
+        }
+
+        // Get structure info before deleting for confirmation message
+        val structure = plugin.structureDatabase.getStructureByNumber(number)
+        if (structure == null) {
+            sender.sendMessage(
+                Component.text("No structure found with number $number.")
+                    .color(NamedTextColor.YELLOW)
+            )
+            return
+        }
+
+        val deleted = plugin.structureDatabase.deleteStructureByNumber(number)
+        if (deleted) {
+            sender.sendMessage(
+                Component.text("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━")
+                    .color(NamedTextColor.RED)
+            )
+            sender.sendMessage(
+                Component.text("  Structure Removed")
+                    .color(NamedTextColor.RED)
+                    .decorate(TextDecoration.BOLD)
+            )
+            sender.sendMessage(
+                Component.text("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━")
+                    .color(NamedTextColor.RED)
+            )
+            sender.sendMessage(
+                Component.text("${structure.structureType.displayName} #$number has been deleted.")
+                    .color(NamedTextColor.WHITE)
+            )
+            sender.sendMessage(
+                Component.text("World: ${structure.worldName}")
+                    .color(NamedTextColor.GRAY)
+            )
+            sender.sendMessage(
+                Component.text("Location: Chunk (${structure.chunkX}, ${structure.chunkZ})")
+                    .color(NamedTextColor.GRAY)
+            )
+            plugin.logger.info("${sender.name} removed structure #$number (${structure.structureType.displayName})")
+        } else {
+            sender.sendMessage(
+                Component.text("Failed to delete structure #$number.")
+                    .color(NamedTextColor.RED)
+            )
+        }
+    }
+
+    /**
+     * Handles the 'purge' subcommand
+     */
+    private fun handlePurge(sender: CommandSender, args: Array<out String>) {
+        if (args.size < 2) {
+            sender.sendMessage(
+                Component.text("Usage: /structuredb purge <all|world|fortress|bastion> [worldName]")
+                    .color(NamedTextColor.RED)
+            )
+            return
+        }
+
+        val purgeType = args[1].lowercase()
+        val deletedCount: Int
+
+        when (purgeType) {
+            "all" -> {
+                deletedCount = plugin.structureDatabase.purgeAllStructures()
+                sender.sendMessage(
+                    Component.text("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━")
+                        .color(NamedTextColor.DARK_RED)
+                )
+                sender.sendMessage(
+                    Component.text("  DATABASE PURGED")
+                        .color(NamedTextColor.DARK_RED)
+                        .decorate(TextDecoration.BOLD)
+                )
+                sender.sendMessage(
+                    Component.text("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━")
+                        .color(NamedTextColor.DARK_RED)
+                )
+                sender.sendMessage(
+                    Component.text("Deleted $deletedCount structures from the database.")
+                        .color(NamedTextColor.WHITE)
+                )
+                plugin.logger.warning("${sender.name} purged ALL structures from the database ($deletedCount total)")
+            }
+            "world" -> {
+                if (args.size < 3) {
+                    sender.sendMessage(
+                        Component.text("Usage: /structuredb purge world <worldName>")
+                            .color(NamedTextColor.RED)
+                    )
+                    return
+                }
+                val worldName = args[2]
+                deletedCount = plugin.structureDatabase.deleteStructuresByWorld(worldName)
+                sender.sendMessage(
+                    Component.text("Deleted $deletedCount structures from world '$worldName'.")
+                        .color(NamedTextColor.YELLOW)
+                )
+                plugin.logger.info("${sender.name} deleted $deletedCount structures from world '$worldName'")
+            }
+            "fortress" -> {
+                deletedCount = plugin.structureDatabase.deleteStructuresByType(StructureType.FORTRESS)
+                sender.sendMessage(
+                    Component.text("Deleted $deletedCount Nether Fortress structures.")
+                        .color(NamedTextColor.GOLD)
+                )
+                plugin.logger.info("${sender.name} deleted $deletedCount fortress structures")
+            }
+            "bastion" -> {
+                deletedCount = plugin.structureDatabase.deleteStructuresByType(StructureType.BASTION_REMNANT)
+                sender.sendMessage(
+                    Component.text("Deleted $deletedCount Bastion Remnant structures.")
+                        .color(NamedTextColor.LIGHT_PURPLE)
+                )
+                plugin.logger.info("${sender.name} deleted $deletedCount bastion structures")
+            }
+            else -> {
+                sender.sendMessage(
+                    Component.text("Invalid purge type. Use: all, world, fortress, or bastion")
+                        .color(NamedTextColor.RED)
+                )
+                return
+            }
+        }
+    }
+
+    /**
      * Provides tab completion for command arguments
      */
     override fun onTabComplete(
@@ -422,15 +588,24 @@ class StructureDatabaseCommand(private val plugin: CharmedChars) : CommandExecut
         alias: String,
         args: Array<out String>
     ): List<String>? {
-        if (!sender.hasPermission("charmedchars.admin")) {
+        if (!sender.hasPermission("charmedchars.blocks")) {
             return emptyList()
         }
 
         return when (args.size) {
-            1 -> listOf("list", "player", "lookup", "stats").filter { it.startsWith(args[0].lowercase()) }
+            1 -> listOf("list", "player", "lookup", "stats", "remove", "purge").filter { it.startsWith(args[0].lowercase()) }
             2 -> when (args[0].lowercase()) {
                 "player" -> Bukkit.getOnlinePlayers().map { it.name }.filter { it.lowercase().startsWith(args[1].lowercase()) }
                 "list" -> Bukkit.getWorlds().map { it.name }.filter { it.lowercase().startsWith(args[1].lowercase()) }
+                "purge" -> listOf("all", "world", "fortress", "bastion").filter { it.startsWith(args[1].lowercase()) }
+                else -> emptyList()
+            }
+            3 -> when (args[0].lowercase()) {
+                "purge" -> if (args[1].lowercase() == "world") {
+                    Bukkit.getWorlds().map { it.name }.filter { it.lowercase().startsWith(args[2].lowercase()) }
+                } else {
+                    emptyList()
+                }
                 else -> emptyList()
             }
             else -> emptyList()
