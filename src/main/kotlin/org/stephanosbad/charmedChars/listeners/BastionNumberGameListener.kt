@@ -191,8 +191,38 @@ class BastionNumberGameListener(
             )
 
             plugin.logger.info("Player ${player.name} solved bastion remnant #${bastionData.assignedNumber} (${sequence.number})")
+        } else if (sequence.number > bastionData.assignedNumber) {
+            // Guessed too high - EXPLODE! (like sleeping in Nether)
+            event.isCancelled = true
+
+            // Remove blocks before explosion
+            for (block in sequence.blocks) {
+                val customBlock = CustomBlock.byAlreadyPlaced(block)
+                if (customBlock != null) {
+                    customBlock.remove()
+                } else {
+                    block.type = Material.AIR
+                }
+            }
+
+            // Create bed-like explosion (power 5.0, sets fire, breaks blocks)
+            val explosionLocation = brokenBlock.location.add(0.5, 0.5, 0.5)
+            location.world.createExplosion(
+                explosionLocation,
+                5.0f,      // Power (same as bed explosion)
+                true,      // Set fire
+                true       // Break blocks
+            )
+
+            player.sendMessage(
+                Component.text("TOO HIGH! The number is lower than ${sequence.number}!")
+                    .color(NamedTextColor.DARK_RED)
+                    .decorate(TextDecoration.BOLD)
+            )
+
+            plugin.logger.info("Player ${player.name} guessed too high for bastion remnant #${bastionData.assignedNumber} (guessed ${sequence.number}) - EXPLOSION!")
         } else {
-            // Wrong number - drop blocks as items
+            // Guessed too low - drop blocks as items
             event.isCancelled = true
 
             for (block in sequence.blocks) {
@@ -210,7 +240,7 @@ class BastionNumberGameListener(
             }
 
             player.sendMessage(
-                Component.text("Wrong number! This bastion's number is ${bastionData.assignedNumber}, not ${sequence.number}.")
+                Component.text("Too low! The number is higher than ${sequence.number}.")
                     .color(NamedTextColor.RED)
             )
             player.sendMessage(
@@ -218,7 +248,7 @@ class BastionNumberGameListener(
                     .color(NamedTextColor.YELLOW)
             )
 
-            plugin.logger.info("Player ${player.name} guessed wrong for bastion remnant #${bastionData.assignedNumber} (guessed ${sequence.number})")
+            plugin.logger.info("Player ${player.name} guessed too low for bastion remnant #${bastionData.assignedNumber} (guessed ${sequence.number})")
         }
     }
 
