@@ -127,9 +127,29 @@ class FortressNumberGameListener(
 
         // Check if rewards were already dispensed
         if (fortressData.rewardsDispensed) {
+            event.isCancelled = true
+
+            // Drop all blocks as items
+            for (block in sequence.blocks) {
+                val customBlock = CustomBlock.byAlreadyPlaced(block)
+                if (customBlock != null) {
+                    val itemStack = customBlock.itemStack
+                    if (itemStack != null) {
+                        location.world.dropItemNaturally(block.location, itemStack)
+                    }
+                    customBlock.remove()
+                } else {
+                    block.type = Material.AIR
+                }
+            }
+
             player.sendMessage(
                 Component.text("This fortress's treasure has already been claimed!")
                     .color(NamedTextColor.RED)
+            )
+            player.sendMessage(
+                Component.text("Number blocks dropped as items.")
+                    .color(NamedTextColor.YELLOW)
             )
             return
         }
