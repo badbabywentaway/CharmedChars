@@ -125,9 +125,20 @@ class BastionNumberGameListener(
                 }
             }
 
-            // Give ender pearls
-            val enderPearls = ItemStack(Material.ENDER_PEARL, 16)
-            player.inventory.addItem(enderPearls)
+            // Get reward configuration
+            val rewardMaterialName = plugin.configManager.bastionRewardMaterial
+            val rewardAmount = plugin.configManager.bastionRewardAmount
+
+            // Parse material and give reward
+            val rewardMaterial = Material.getMaterial(rewardMaterialName)
+            if (rewardMaterial != null) {
+                val rewardItem = ItemStack(rewardMaterial, rewardAmount)
+                player.inventory.addItem(rewardItem)
+            } else {
+                plugin.logger.warning("Invalid bastion reward material: $rewardMaterialName. Using ENDER_PEARL as fallback.")
+                val rewardItem = ItemStack(Material.ENDER_PEARL, rewardAmount)
+                player.inventory.addItem(rewardItem)
+            }
 
             // Mark rewards as dispensed
             database.markRewardsDispensed(bastionData.id)
@@ -147,7 +158,7 @@ class BastionNumberGameListener(
                     .color(NamedTextColor.DARK_PURPLE)
             )
             player.sendMessage(
-                Component.text("  Reward: 16 Ender Pearls")
+                Component.text("  Reward: $rewardAmount ${rewardMaterial?.name?.replace("_", " ") ?: rewardMaterialName}")
                     .color(NamedTextColor.GREEN)
                     .decorate(TextDecoration.BOLD)
             )

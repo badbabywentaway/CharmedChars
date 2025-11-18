@@ -126,9 +126,20 @@ class FortressNumberGameListener(
                 }
             }
 
-            // Give blaze rods
-            val blazeRods = ItemStack(Material.BLAZE_ROD, 12)
-            player.inventory.addItem(blazeRods)
+            // Get reward configuration
+            val rewardMaterialName = plugin.configManager.fortressRewardMaterial
+            val rewardAmount = plugin.configManager.fortressRewardAmount
+
+            // Parse material and give reward
+            val rewardMaterial = Material.getMaterial(rewardMaterialName)
+            if (rewardMaterial != null) {
+                val rewardItem = ItemStack(rewardMaterial, rewardAmount)
+                player.inventory.addItem(rewardItem)
+            } else {
+                plugin.logger.warning("Invalid fortress reward material: $rewardMaterialName. Using BLAZE_ROD as fallback.")
+                val rewardItem = ItemStack(Material.BLAZE_ROD, rewardAmount)
+                player.inventory.addItem(rewardItem)
+            }
 
             // Mark rewards as dispensed
             database.markRewardsDispensed(fortressData.id)
@@ -148,7 +159,7 @@ class FortressNumberGameListener(
                     .color(NamedTextColor.YELLOW)
             )
             player.sendMessage(
-                Component.text("  Reward: 12 Blaze Rods")
+                Component.text("  Reward: $rewardAmount ${rewardMaterial?.name?.replace("_", " ") ?: rewardMaterialName}")
                     .color(NamedTextColor.GREEN)
                     .decorate(TextDecoration.BOLD)
             )
