@@ -46,11 +46,13 @@ commands:
 
 permissions:
   charmedChars.blocks:
-    description: Allows giving character blocks to players
+    description: Allows giving character blocks to players and managing structures
     default: op
   charmedChars.admin:
-    description: Admin permissions for the plugin
+    description: Admin permissions for the plugin (includes block permissions)
     default: op
+    children:
+      charmedChars.blocks: true
   charmedChars.*:
     description: Gives access to all CharmedChars permissions
     children:
