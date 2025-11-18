@@ -33,6 +33,7 @@ import org.bukkit.Bukkit
 import org.stephanosbad.charmedChars.commands.ItemsAdderStatusCommand
 import org.stephanosbad.charmedChars.commands.ReloadCommand
 import org.stephanosbad.charmedChars.commands.SetupItemsAdderCommand
+import org.stephanosbad.charmedChars.commands.StructureCodeCommand
 import org.stephanosbad.charmedChars.commands.VersionCommand
 import org.stephanosbad.charmedChars.integration.ItemsAdderSetup
 import org.stephanosbad.charmedChars.utility.ConfigManager
@@ -112,6 +113,7 @@ class CharmedChars : JavaPlugin(), CoroutineScope {
         getCommand("iastatus")?.setExecutor(ItemsAdderStatusCommand())
         getCommand("iasetup")?.setExecutor(SetupItemsAdderCommand(this))
         getCommand("version")?.setExecutor(VersionCommand(this))
+        getCommand("structurecode")?.setExecutor(StructureCodeCommand(this))
 
         // Async startup operations
         launch {

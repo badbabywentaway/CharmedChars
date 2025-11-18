@@ -162,6 +162,31 @@ class StructureDatabase(private val plugin: CharmedChars) {
     }
 
     /**
+     * Gets a structure at the given location without creating a new one
+     *
+     * @param worldName Name of the world
+     * @param structureType Type of structure
+     * @param chunkX Chunk X-coordinate
+     * @param chunkZ Chunk Z-coordinate
+     * @return StructureData if found, null otherwise
+     */
+    fun getStructure(
+        worldName: String,
+        structureType: StructureType,
+        chunkX: Int,
+        chunkZ: Int
+    ): StructureData? {
+        return transaction(database) {
+            StructureTable.select {
+                (StructureTable.worldName eq worldName) and
+                (StructureTable.structureType eq structureType.name) and
+                (StructureTable.chunkX eq chunkX) and
+                (StructureTable.chunkZ eq chunkZ)
+            }.firstOrNull()?.let { rowToStructureData(it) }
+        }
+    }
+
+    /**
      * Gets a structure by its assigned number
      *
      * @param number The three-digit number to search for

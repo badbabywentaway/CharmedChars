@@ -33,6 +33,11 @@ commands:
     description: Display plugin version and recent changes
     usage: /version
     aliases: [ver, charmedcharsversion]
+  structurecode:
+    description: View the three-digit code for the current fortress or bastion (admin only)
+    usage: /structurecode
+    permission: charmedchars.admin
+    aliases: [scode, fortresscode, bastioncode]
 
 permissions:
   charmedChars.blocks:
