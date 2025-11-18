@@ -14,20 +14,47 @@ Initial release of CharmedChars - A word-forming puzzle game for Minecraft where
 
 ### Latest (Development Build)
 
+#### New Features
+- **Nether Structure Number Guessing Game** - Added mini-game for Bastion Remnants and Nether Fortresses
+  - Each structure assigned unique 3-digit number (100-999)
+  - Players break number block sequences to guess the structure's code
+  - Correct guess: Configurable rewards (default: 12 blaze rods for fortress, 16 ender pearls for bastion)
+  - Wrong guess (too high): Bed-like explosion (power 5.0)
+  - Wrong guess (too low): Blocks drop as items (recoverable)
+  - Sequence outside structure: Blocks drop as items with warning
+  - One-time rewards per structure with database tracking
+  - SQLite database with Exposed ORM for persistent tracking
+  - Structure discovery notifications when entering for first time
+
+- **Git Version Tagging Scripts** - Cross-platform scripts for semantic versioning
+  - Shell script (tag-version.sh) for Linux/Mac
+  - Batch script (tag-version.bat) for Windows
+  - Auto-increment version support (--major, --minor, --patch)
+  - Integration with gradle.properties
+  - Annotated and lightweight tag support
+
+- **Configurable Structure Rewards** - Server admins can customize number game rewards
+  - Configure material type and quantity in config.yml
+  - Supports any valid Minecraft material
+  - Separate configs for fortress and bastion rewards
+
 #### Bug Fixes
 - **Fixed letter block item drop after scoring** - Cancelled BlockBreakEvent to prevent the first letter from dropping as an item when a word is scored
 - **Fixed color randomization** - Replaced Math.random() with Kotlin's .random() to ensure all three colors (cyan, magenta, yellow) drop with equal probability
 - **Fixed hardcoded drop rates** - Updated ItemManager to read drop rates from config instead of using hardcoded values
 
-#### Features
-- **Doubled drop rates** - Increased base drop rate from 3% to 6%, with Looting levels now giving 10%, 16%, and 20% drop chances
-- **Comprehensive documentation** - Added PLAY_INSTRUCTIONS.md and REWARD_CONFIG.md with detailed gameplay and configuration guides
-- **Config-driven drop rates** - Drop chances now configurable via config.yml with looting multipliers
-
 #### Code Quality
+- **Comprehensive KDoc documentation** - Added detailed documentation to all classes
+- **LGPL v3 license compliance** - Added proper license headers to all source files
 - **Removed diagnostic logging** - Cleaned up verbose console logging during gameplay to reduce spam
 - **Deleted diagnostic files** - Removed 11 obsolete diagnostic/troubleshooting files and scripts
 - **Better randomization** - Using Kotlin's idiomatic random functions instead of Java's Math.random()
+
+#### Development Notes
+- Number guessing game system developed with assistance from Claude (Anthropic AI)
+- Database architecture, game logic, and explosion mechanics implemented using AI-assisted development
+- Cross-platform version tagging scripts created with AI assistance
+- All git commits include Co-Authored-By attribution for AI contributions
 
 ---
 

@@ -240,8 +240,16 @@ This arrangement is permitted under LGPL v3 as ItemsAdder is treated as a "Syste
 **Artwork:**
 - Block textures by Gaia Temperini
 
-**Development:**
-- Documentation, LGPL v3 compliance, and code organization assisted by Claude (Anthropic)
+**Development Assistance:**
+- AI-assisted development by Claude (Anthropic)
+- Features developed with AI assistance:
+  - Nether structure number guessing game (database, game logic, explosions)
+  - Git version tagging scripts (cross-platform automation)
+  - Configurable reward system
+  - LGPL v3 compliance implementation
+  - Comprehensive documentation and KDoc comments
+  - Code organization and architecture improvements
+- All AI-contributed code includes Co-Authored-By attribution in git commits
 
 ---
 
