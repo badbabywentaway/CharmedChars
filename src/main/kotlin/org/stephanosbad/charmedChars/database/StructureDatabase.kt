@@ -229,6 +229,17 @@ class StructureDatabase(private val plugin: CharmedChars) {
     }
 
     /**
+     * Gets all structures in the database
+     *
+     * @return List of all structures
+     */
+    fun getAllStructures(): List<StructureData> {
+        return transaction(database) {
+            StructureTable.selectAll().map { rowToStructureData(it) }
+        }
+    }
+
+    /**
      * Marks rewards as dispensed for a specific structure
      *
      * @param structureId The database ID of the structure
