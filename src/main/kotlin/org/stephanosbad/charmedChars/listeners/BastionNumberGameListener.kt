@@ -100,12 +100,25 @@ class BastionNumberGameListener(
             return
         }
 
-        // Get bastion data
+        // Get the structure's origin coordinates (using bounding box)
+        // This ensures all chunks of the same bastion use the same database entry
+        val structures = chunk.getStructures(bastionRemnant)
+        val structure = structures.firstOrNull()
+
+        if (structure == null) {
+            return
+        }
+
+        val boundingBox = structure.boundingBox
+        val originChunkX = (boundingBox.minX / 16).toInt()  // Convert block coords to chunk coords
+        val originChunkZ = (boundingBox.minZ / 16).toInt()
+
+        // Get bastion data using the structure's origin chunk
         val bastionData = database.getOrCreateStructure(
             worldName = location.world.name,
             structureType = StructureType.BASTION_REMNANT,
-            chunkX = chunk.x,
-            chunkZ = chunk.z,
+            chunkX = originChunkX,
+            chunkZ = originChunkZ,
             discoveredBy = player.uniqueId
         )
 

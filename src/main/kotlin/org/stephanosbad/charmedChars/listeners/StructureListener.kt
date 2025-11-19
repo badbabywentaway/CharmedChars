@@ -84,16 +84,19 @@ class StructureListener(
         val bastionRemnant = registry.get(NamespacedKey.minecraft("bastion_remnant"))
         val fortress = registry.get(NamespacedKey.minecraft("fortress"))
 
-        // Check if player is in either structure
+        // Check if player is in either structure and get the structure instance
         var structureType: StructureType? = null
+        var structure: org.bukkit.generator.structure.GeneratedStructure? = null
 
         if (bastionRemnant != null && chunk.getStructures(bastionRemnant).isNotEmpty()) {
             structureType = StructureType.BASTION_REMNANT
+            structure = chunk.getStructures(bastionRemnant).firstOrNull()
         } else if (fortress != null && chunk.getStructures(fortress).isNotEmpty()) {
             structureType = StructureType.FORTRESS
+            structure = chunk.getStructures(fortress).firstOrNull()
         }
 
-        if (structureType == null) {
+        if (structureType == null || structure == null) {
             // Player is not in any tracked structure
             val previousStructure = playerCurrentStructure.remove(player.uniqueId.toString())
             if (previousStructure != null) {
@@ -105,30 +108,34 @@ class StructureListener(
             return
         }
 
-        val chunkX = chunk.x
-        val chunkZ = chunk.z
         val worldName = location.world.name
 
-        // Create a key for tracking which structure type the player is in
-        // This prevents spam when moving between chunks within the same structure
-        val structureKey = "$worldName:${structureType.name}"
+        // Get the structure's origin coordinates from its bounding box
+        // This ensures all chunks of the same structure use the same database entry
+        val boundingBox = structure.boundingBox
+        val originChunkX = (boundingBox.minX / 16).toInt()  // Convert block coords to chunk coords
+        val originChunkZ = (boundingBox.minZ / 16).toInt()
 
-        // Check if player is still in the same structure type (ignoring chunk changes)
+        // Create a key for tracking which specific structure the player is in
+        // Uses origin coordinates to uniquely identify each structure instance
+        val structureKey = "$worldName:${structureType.name}:$originChunkX:$originChunkZ"
+
+        // Check if player is still in the same structure (ignoring chunk changes within it)
         val previousStructure = playerCurrentStructure[player.uniqueId.toString()]
         if (previousStructure == structureKey) {
             // Player is still in the same structure, no need to show messages
             return
         }
 
-        // Player entered a new structure type
+        // Player entered a new structure
         playerCurrentStructure[player.uniqueId.toString()] = structureKey
 
-        // Get or create structure record
+        // Get or create structure record using the structure's origin chunk
         val structureData = database.getOrCreateStructure(
             worldName = worldName,
             structureType = structureType,
-            chunkX = chunkX,
-            chunkZ = chunkZ,
+            chunkX = originChunkX,
+            chunkZ = originChunkZ,
             discoveredBy = player.uniqueId
         )
 
