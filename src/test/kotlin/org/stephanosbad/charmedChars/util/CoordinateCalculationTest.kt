@@ -35,9 +35,10 @@ class CoordinateCalculationTest {
 
     /**
      * Helper function that mimics the actual calculation used in listeners
+     * Uses Math.floorDiv for proper handling of negative coordinates
      */
     private fun blockToChunk(blockCoord: Int): Int {
-        return (blockCoord / 16).toInt()
+        return Math.floorDiv(blockCoord, 16)
     }
 
     // ==================== Positive Coordinate Tests ====================
@@ -61,21 +62,21 @@ class CoordinateCalculationTest {
 
     // ==================== Negative Coordinate Tests ====================
     // CRITICAL: Nether often has negative coordinates!
-    // NOTE: Java/Kotlin integer division truncates towards ZERO, not floor!
-    // This means: -1 / 16 = 0, not -1
-    // TODO: Consider using Math.floorDiv() for proper chunk calculation
+    // Using Math.floorDiv() for proper floor division (not truncation)
+    // floorDiv(-1, 16) = -1 (correct chunk)
+    // Regular division: -1 / 16 = 0 (incorrect!)
 
     @ParameterizedTest
     @CsvSource(
-        "-1, 0",      // TRUNCATION: -1/16 = 0 (not -1!) - Edge case near origin
-        "-15, 0",     // Still truncates to 0
-        "-16, -1",    // Now in chunk -1
-        "-17, -1",    // Middle of chunk -1
-        "-31, -1",    // End of chunk -1
-        "-32, -2",    // Start of chunk -2
-        "-100, -6",   // Far negative
+        "-1, -1",     // floorDiv: -1/16 = -1 (correct!)
+        "-15, -1",    // Still in chunk -1
+        "-16, -1",    // Exactly at chunk boundary
+        "-17, -2",    // Now in chunk -2
+        "-31, -2",    // Still chunk -2
+        "-32, -2",    // Exactly at chunk boundary
+        "-100, -7",   // Far negative
         "-256, -16",  // Very far negative
-        "-1000, -62", // Extremely far
+        "-1000, -63", // Extremely far
     )
     fun `negative block coordinates convert correctly to chunk coordinates`(blockX: Int, expectedChunk: Int) {
         val result = blockToChunk(blockX)
@@ -95,18 +96,20 @@ class CoordinateCalculationTest {
         assertEquals(1, blockToChunk(16))
         assertEquals(1, blockToChunk(31))
 
-        // NOTE: Due to truncation, negative coords near zero behave differently!
-        // Chunk 0 also includes blocks -1 to -15 (!)
-        assertEquals(0, blockToChunk(-1))    // TRUNCATION: -1/16 = 0
-        assertEquals(0, blockToChunk(-15))   // TRUNCATION: -15/16 = 0
+        // With Math.floorDiv, negative coords are properly handled
+        // Chunk -1: blocks -1 to -16
+        assertEquals(-1, blockToChunk(-1))    // floorDiv: -1/16 = -1
+        assertEquals(-1, blockToChunk(-15))   // floorDiv: -15/16 = -1
+        assertEquals(-1, blockToChunk(-16))   // floorDiv: -16/16 = -1
 
-        // Chunk -1: blocks -16 to -31
-        assertEquals(-1, blockToChunk(-16))
-        assertEquals(-1, blockToChunk(-31))
-
-        // Chunk -2: blocks -32 to -47
+        // Chunk -2: blocks -17 to -32
+        assertEquals(-2, blockToChunk(-17))
+        assertEquals(-2, blockToChunk(-31))
         assertEquals(-2, blockToChunk(-32))
-        assertEquals(-2, blockToChunk(-47))
+
+        // Chunk -3: blocks -33 to -48
+        assertEquals(-3, blockToChunk(-33))
+        assertEquals(-3, blockToChunk(-47))
     }
 
     @Test
@@ -140,14 +143,14 @@ class CoordinateCalculationTest {
         val maxBlockX = 100
 
         val originChunk = blockToChunk(minBlockX)
-        assertEquals(-3, originChunk, "Structure starting at block -50 should have origin chunk -3")
+        assertEquals(-4, originChunk, "Structure starting at block -50 should have origin chunk -4")
 
         val endChunk = blockToChunk(maxBlockX)
         assertEquals(6, endChunk, "Structure ending at block 100 should span to chunk 6")
 
-        // Structure spans 10 chunks total (-3 to 6)
+        // Structure spans 11 chunks total (-4 to 6)
         val spanChunks = endChunk - originChunk + 1
-        assertEquals(10, spanChunks)
+        assertEquals(11, spanChunks)
     }
 
     // ==================== Edge Case Tests ====================
@@ -187,7 +190,7 @@ class CoordinateCalculationTest {
         val originChunkZ = blockToChunk(minZ)
 
         assertEquals(12, originChunkX)   // 200 / 16 = 12
-        assertEquals(-9, originChunkZ)   // -150 / 16 = -9 (negative!)
+        assertEquals(-10, originChunkZ)   // floorDiv(-150, 16) = -10 (negative!)
     }
 
     @Test
@@ -199,8 +202,8 @@ class CoordinateCalculationTest {
         val originChunkX = blockToChunk(minX)
         val originChunkZ = blockToChunk(minZ)
 
-        assertEquals(-50, originChunkX)  // -800 / 16 = -50
-        assertEquals(-37, originChunkZ)  // -600 / 16 = -37
+        assertEquals(-50, originChunkX)  // floorDiv(-800, 16) = -50
+        assertEquals(-38, originChunkZ)  // floorDiv(-600, 16) = -38
     }
 
     @Test

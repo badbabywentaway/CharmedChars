@@ -102,8 +102,9 @@ class StructureCodeCommand(private val plugin: CharmedChars) : CommandExecutor {
             }
 
             val boundingBox = structure.boundingBox
-            val originChunkX = (boundingBox.minX / 16).toInt()
-            val originChunkZ = (boundingBox.minZ / 16).toInt()
+            // Use Math.floorDiv for proper handling of negative coordinates
+            val originChunkX = Math.floorDiv(boundingBox.minX.toInt(), 16)
+            val originChunkZ = Math.floorDiv(boundingBox.minZ.toInt(), 16)
 
             val fortressData = plugin.structureDatabase.getStructure(
                 worldName = location.world.name,
@@ -157,8 +158,9 @@ class StructureCodeCommand(private val plugin: CharmedChars) : CommandExecutor {
             }
 
             val boundingBox = structure.boundingBox
-            val originChunkX = (boundingBox.minX / 16).toInt()
-            val originChunkZ = (boundingBox.minZ / 16).toInt()
+            // Use Math.floorDiv for proper handling of negative coordinates
+            val originChunkX = Math.floorDiv(boundingBox.minX.toInt(), 16)
+            val originChunkZ = Math.floorDiv(boundingBox.minZ.toInt(), 16)
 
             val bastionData = plugin.structureDatabase.getStructure(
                 worldName = location.world.name,

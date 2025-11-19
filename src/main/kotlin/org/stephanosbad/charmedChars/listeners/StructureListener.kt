@@ -113,8 +113,9 @@ class StructureListener(
         // Get the structure's origin coordinates from its bounding box
         // This ensures all chunks of the same structure use the same database entry
         val boundingBox = structure.boundingBox
-        val originChunkX = (boundingBox.minX / 16).toInt()  // Convert block coords to chunk coords
-        val originChunkZ = (boundingBox.minZ / 16).toInt()
+        // Use Math.floorDiv for proper handling of negative coordinates in Nether
+        val originChunkX = Math.floorDiv(boundingBox.minX.toInt(), 16)
+        val originChunkZ = Math.floorDiv(boundingBox.minZ.toInt(), 16)
 
         // Create a key for tracking which specific structure the player is in
         // Uses origin coordinates to uniquely identify each structure instance

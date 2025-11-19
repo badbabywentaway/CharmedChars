@@ -132,8 +132,9 @@ class FortressNumberGameListener(
         }
 
         val boundingBox = structure.boundingBox
-        val originChunkX = (boundingBox.minX / 16).toInt()  // Convert block coords to chunk coords
-        val originChunkZ = (boundingBox.minZ / 16).toInt()
+        // Use Math.floorDiv for proper handling of negative coordinates
+        val originChunkX = Math.floorDiv(boundingBox.minX.toInt(), 16)
+        val originChunkZ = Math.floorDiv(boundingBox.minZ.toInt(), 16)
 
         // Get fortress data using the structure's origin chunk
         val fortressData = database.getOrCreateStructure(

@@ -3,8 +3,11 @@ plugins {
     kotlin("jvm") version "2.2.21"
     id("com.gradleup.shadow") version "8.3.5"
     id("xyz.jpenilla.run-paper") version "2.3.1"
+    jacoco
+}
 
-
+jacoco {
+    toolVersion = "0.8.12"
 }
 
 group = property("group")!!
@@ -61,7 +64,39 @@ dependencies {
 
     tasks.build { dependsOn(tasks.shadowJar) }
     tasks.runServer { minecraftVersion("1.21.10") }
-    tasks.test { useJUnitPlatform() }
+
+    tasks.test {
+        useJUnitPlatform()
+        finalizedBy(tasks.jacocoTestReport)
+    }
+
+    // JaCoCo test coverage reporting
+    tasks.jacocoTestReport {
+        dependsOn(tasks.test)
+        reports {
+            xml.required.set(true)
+            html.required.set(true)
+            csv.required.set(false)
+        }
+        classDirectories.setFrom(
+            files(classDirectories.files.map {
+                fileTree(it) {
+                    // Exclude generated classes and data classes
+                    exclude("**/*\$*.class")
+                }
+            })
+        )
+    }
+
+    tasks.jacocoTestCoverageVerification {
+        violationRules {
+            rule {
+                limit {
+                    minimum = "0.80".toBigDecimal()
+                }
+            }
+        }
+    }
 
     // Version management task
     tasks.register("version") {
