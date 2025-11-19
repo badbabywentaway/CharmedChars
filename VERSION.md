@@ -1,5 +1,102 @@
 # CharmedChars Version History
 
+## Version 1.1.1 - Critical Coordinate Bug Fix & Test Coverage
+
+### Release Date
+2025-11-19
+
+### Overview
+Critical bug fix release addressing a serious coordinate calculation bug affecting structures at negative coordinates in the Nether. Includes comprehensive unit test coverage to prevent future regressions.
+
+### Bug Fixes
+
+#### **Fixed Critical Negative Coordinate Calculation Bug** ⭐
+- **Problem**: Java/Kotlin integer division truncates toward ZERO, not floor
+  - Before: `-1 / 16 = 0` (INCORRECT!)
+  - After: `Math.floorDiv(-1, 16) = -1` (CORRECT!)
+- **Impact**: Structures at negative coordinates near zero (very common in Nether) were incorrectly identified
+- **Fix**: Replaced `(boundingBox.minX / 16).toInt()` with `Math.floorDiv(boundingBox.minX.toInt(), 16)` in all listeners and commands
+- **Example**: A bastion at block coordinates (-50, -600) was mapped to wrong chunk origin
+  - Before: Chunk (0, 0) - WRONG!
+  - After: Chunk (-4, -38) - CORRECT!
+
+#### Files Fixed
+- `FortressNumberGameListener.kt` - Origin calculation (lines 136-137)
+- `BastionNumberGameListener.kt` - Origin calculation (lines 114-115)
+- `StructureListener.kt` - Origin calculation (lines 117-118)
+- `StructureCodeCommand.kt` - Origin calculation (2 locations: lines 106-107, 162-163)
+
+### Testing & Quality Assurance
+
+#### **Comprehensive Unit Test Suite Added**
+- **SequenceDetectionTest** (279 lines) - Documents 3-digit sequence detection logic
+  - Tests valid directions (4 cardinal, horizontal only)
+  - Tests invalid sequences (diagonal, vertical, gaps)
+  - Tests number formation (hundreds-tens-ones)
+  - Tests ItemsAdder block identification
+
+- **ListenerConflictTest** (307 lines) - Verifies listener priority fixes from v1.1.0
+  - Documents fortress listener checking for bastion first
+  - Documents bastion listener early return behavior
+  - Verifies only fortress listener handles "not in structure" case
+
+- **DiscoveryMessageTest** (337 lines) - Verifies discovery notification fixes from v1.1.0
+  - Documents that discovery messages do not reveal assigned numbers
+  - Tests structure tracking key consistency across chunks
+  - Tests prevention of message spam when moving within same structure
+
+- **CoordinateCalculationTest** - Updated with Math.floorDiv expectations
+  - All 12+ test cases updated to reflect proper floor division
+  - Comprehensive documentation of negative coordinate handling
+  - Tests edge cases including Int.MIN_VALUE and Int.MAX_VALUE
+
+- **StructureDatabaseTest** - 26 existing tests (created in v1.1.0-dev)
+  - Database CRUD operations
+  - Unique number generation
+  - Multi-chunk structure handling
+
+#### **Test Coverage Infrastructure**
+- Added JaCoCo 0.8.12 for test coverage reporting
+- Configured 80% minimum coverage threshold
+- Fixed Java 23 compatibility with updated JaCoCo version
+- All 41+ tests passing
+
+### Technical Details
+
+**Coordinate Conversion Formula (OLD - INCORRECT):**
+```kotlin
+val originChunkX = (boundingBox.minX / 16).toInt()
+val originChunkZ = (boundingBox.minZ / 16).toInt()
+```
+
+**Coordinate Conversion Formula (NEW - CORRECT):**
+```kotlin
+val originChunkX = Math.floorDiv(boundingBox.minX.toInt(), 16)
+val originChunkZ = Math.floorDiv(boundingBox.minZ.toInt(), 16)
+```
+
+**Why This Matters:**
+Minecraft's Nether commonly generates structures at negative coordinates. The old truncating division would incorrectly map:
+- Blocks -1 to -15 → Chunk 0 (should be Chunk -1)
+- Blocks -16 to -31 → Chunk -1 (should be Chunk -2)
+- And so on...
+
+This caused different structures to share the same database entry or the same structure to have multiple entries.
+
+### Development Notes
+- Bug discovered through comprehensive unit testing
+- All fixes developed with assistance from Claude (Anthropic AI)
+- Git commits include Co-Authored-By attribution for AI contributions
+- Test-driven approach prevents future regressions
+
+### Upgrade Notes
+- **Highly Recommended**: This fix corrects structure identification in the Nether
+- Existing databases may contain incorrect entries for structures at negative coordinates
+- Consider purging and rediscovering Nether structures: `/structuredb purge <world>`
+- No breaking changes to API or configuration
+
+---
+
 ## Version 1.1.0 - Structure Number Game Bug Fixes
 
 ### Release Date

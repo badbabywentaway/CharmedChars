@@ -42,7 +42,7 @@ CharmedChars is **open source** software licensed under **GNU LGPL v3**.
 ### Installation
 
 1. **Purchase and install ItemsAdder** (required proprietary dependency)
-2. Download CharmedChars-1.0.0.jar
+2. Download CharmedChars-1.1.1.jar
 3. Place both plugins in `plugins/` folder
 4. Start server to generate configs
 5. Run `/iasetup` to auto-configure ItemsAdder
@@ -165,7 +165,7 @@ cd CharmedChars
 ./gradlew buildWithVersion
 ```
 
-Output: `build/libs/CharmedChars-1.0.0.jar`
+Output: `build/libs/CharmedChars-1.1.1.jar`
 
 **Note**: You still need to obtain ItemsAdder separately - it cannot be built from source as it is proprietary.
 
@@ -173,7 +173,7 @@ Output: `build/libs/CharmedChars-1.0.0.jar`
 
 ## Version
 
-Current Version: **1.0.0**
+Current Version: **1.1.1**
 
 Run `/version` in-game or `./gradlew version` to display version information.
 
