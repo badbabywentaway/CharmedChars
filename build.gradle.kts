@@ -35,9 +35,16 @@ dependencies {
     implementation("org.jetbrains.exposed:exposed-jdbc:0.48.0")
     implementation("org.xerial:sqlite-jdbc:3.45.1.0")
 
+    // Unit testing framework
     testImplementation("org.jetbrains.kotlin:kotlin-test:${property("kotlinVersion")}")
     testImplementation("io.mockk:mockk:1.13.14")
     testImplementation("org.junit.jupiter:junit-jupiter:5.11.4")
+
+    // MockBukkit for Paper API testing
+    testImplementation("com.github.seeseemelk:MockBukkit-v1.20:3.9.0")
+
+    // AssertJ for fluent assertions
+    testImplementation("org.assertj:assertj-core:3.25.1")
 }
     tasks.shadowJar {
         archiveBaseName.set("CharmedChars")
