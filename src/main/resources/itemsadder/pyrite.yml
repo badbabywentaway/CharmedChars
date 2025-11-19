@@ -1,0 +1,124 @@
+info:
+  namespace: charmedchars
+
+items:
+  # ==================== PYRITE (FOOL'S GOLD) MATERIALS ====================
+
+  pyrite_ingot:
+    display_name: "Pyrite Ingot"
+    permission: charmedchars.pyrite
+    resource:
+      material: GOLD_INGOT
+      generate: true
+      textures:
+        - item/pyrite/ingot
+    durability:
+      max_custom_durability: 1
+
+  pyrite_pickaxe:
+    display_name: "Pyrite Pickaxe"
+    permission: charmedchars.pyrite
+    lore:
+      - "&7A fool's gold pickaxe"
+      - "&7Works like gold for scoring words"
+      - "&7Iron-tier durability and stats"
+    resource:
+      material: GOLDEN_PICKAXE
+      generate: true
+      textures:
+        - item/pyrite/pickaxe
+    durability:
+      max_custom_durability: 250
+    specific_properties:
+      tool:
+        tier: IRON
+    attribute_modifiers:
+      GENERIC_ATTACK_DAMAGE:
+        amount: 4
+        operation: ADD_NUMBER
+        slot: HAND
+      GENERIC_ATTACK_SPEED:
+        amount: -2.8
+        operation: ADD_NUMBER
+        slot: HAND
+
+  pyrite_axe:
+    display_name: "Pyrite Axe"
+    permission: charmedchars.pyrite
+    lore:
+      - "&7A fool's gold axe"
+      - "&7Works like gold for scoring words"
+      - "&7Iron-tier durability and stats"
+    resource:
+      material: GOLDEN_AXE
+      generate: true
+      textures:
+        - item/pyrite/axe
+    durability:
+      max_custom_durability: 250
+    specific_properties:
+      tool:
+        tier: IRON
+    attribute_modifiers:
+      GENERIC_ATTACK_DAMAGE:
+        amount: 9
+        operation: ADD_NUMBER
+        slot: HAND
+      GENERIC_ATTACK_SPEED:
+        amount: -3.1
+        operation: ADD_NUMBER
+        slot: HAND
+
+  pyrite_shovel:
+    display_name: "Pyrite Shovel"
+    permission: charmedchars.pyrite
+    lore:
+      - "&7A fool's gold shovel"
+      - "&7Works like gold for scoring words"
+      - "&7Iron-tier durability and stats"
+    resource:
+      material: GOLDEN_SHOVEL
+      generate: true
+      textures:
+        - item/pyrite/shovel
+    durability:
+      max_custom_durability: 250
+    specific_properties:
+      tool:
+        tier: IRON
+    attribute_modifiers:
+      GENERIC_ATTACK_DAMAGE:
+        amount: 4.5
+        operation: ADD_NUMBER
+        slot: HAND
+      GENERIC_ATTACK_SPEED:
+        amount: -3.0
+        operation: ADD_NUMBER
+        slot: HAND
+
+  pyrite_hoe:
+    display_name: "Pyrite Hoe"
+    permission: charmedchars.pyrite
+    lore:
+      - "&7A fool's gold hoe"
+      - "&7Works like gold for scoring words"
+      - "&7Iron-tier durability and stats"
+    resource:
+      material: GOLDEN_HOE
+      generate: true
+      textures:
+        - item/pyrite/hoe
+    durability:
+      max_custom_durability: 250
+    specific_properties:
+      tool:
+        tier: IRON
+    attribute_modifiers:
+      GENERIC_ATTACK_DAMAGE:
+        amount: 1
+        operation: ADD_NUMBER
+        slot: HAND
+      GENERIC_ATTACK_SPEED:
+        amount: -2.0
+        operation: ADD_NUMBER
+        slot: HAND

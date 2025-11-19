@@ -211,10 +211,43 @@ class ItemManager @JvmOverloads constructor(localPlugin: CharmedChars? = null) :
     }
 
     /**
+     * Checks if an item is a valid tool for CharmedChars gameplay
+     *
+     * Valid tools are either:
+     * - Gold tools (vanilla Minecraft)
+     * - Pyrite tools (custom ItemsAdder tools)
+     *
+     * @param item The ItemStack to check
+     * @return true if the tool is valid for letter drops and word scoring
+     */
+    private fun isValidTool(item: ItemStack): Boolean {
+        if (item.itemMeta == null) {
+            return false
+        }
+
+        // Check if it's a gold tool (vanilla)
+        if (item.type.name.lowercase().contains("gold")) {
+            return true
+        }
+
+        // Check if display name contains "gold" (for any gold-like custom items)
+        if (item.itemMeta.displayName()?.examinableName()?.lowercase()?.contains("gold") == true) {
+            return true
+        }
+
+        // Check if it's a pyrite tool (custom ItemsAdder item)
+        if (item.itemMeta.displayName()?.examinableName()?.lowercase()?.contains("pyrite") == true) {
+            return true
+        }
+
+        return false
+    }
+
+    /**
      * Main event handler for block breaking
      *
      * Handles two scenarios:
-     * 1. Breaking logs with gold tools (without Silk Touch) - drops letter blocks
+     * 1. Breaking logs with gold/pyrite tools (without Silk Touch) - drops letter blocks
      * 2. Breaking letter blocks - validates words and awards scores
      *
      * @param e The block break event from Bukkit/Spigot
@@ -229,13 +262,8 @@ class ItemManager @JvmOverloads constructor(localPlugin: CharmedChars? = null) :
             //If there is no silk touch on it
 
             if (list.containsKey(material)) {
-                //Must be gold item in hand
-                if (hand.itemMeta == null) {
-                    return
-                }
-                if (!hand.type.name.lowercase().contains("gold") &&
-                    true != hand.itemMeta.displayName()?.examinableName()?.lowercase()?.contains("gold")
-                ) {
+                //Must be gold or pyrite tool in hand
+                if (!isValidTool(hand)) {
                     return
                 }
 
@@ -345,10 +373,9 @@ class ItemManager @JvmOverloads constructor(localPlugin: CharmedChars? = null) :
             e.player.sendMessage("Protected block: " + e.getBlock().location)
             return
         }
-        if (hand.itemMeta == null) {
-            return
-        }
-        if (!hand.type.name.lowercase().contains("gold")) {
+
+        // Must be gold or pyrite tool in hand
+        if (!isValidTool(hand)) {
             return
         }
 

@@ -1,0 +1,78 @@
+info:
+  namespace: charmedchars
+
+recipes:
+  # ==================== PYRITE INGOT RECIPE ====================
+  pyrite_ingot:
+    permission: charmedchars.pyrite
+    enabled: true
+    shaped:
+      pattern:
+        - IR
+      ingredients:
+        I: IRON_INGOT
+        R: REDSTONE
+      result:
+        item: charmedchars:pyrite_ingot
+        amount: 1
+
+  # ==================== PYRITE TOOL RECIPES ====================
+  pyrite_pickaxe:
+    permission: charmedchars.pyrite
+    enabled: true
+    shaped:
+      pattern:
+        - PPP
+        - " S "
+        - " S "
+      ingredients:
+        P: charmedchars:pyrite_ingot
+        S: STICK
+      result:
+        item: charmedchars:pyrite_pickaxe
+        amount: 1
+
+  pyrite_axe:
+    permission: charmedchars.pyrite
+    enabled: true
+    shaped:
+      pattern:
+        - PP
+        - PS
+        - " S"
+      ingredients:
+        P: charmedchars:pyrite_ingot
+        S: STICK
+      result:
+        item: charmedchars:pyrite_axe
+        amount: 1
+
+  pyrite_shovel:
+    permission: charmedchars.pyrite
+    enabled: true
+    shaped:
+      pattern:
+        - P
+        - S
+        - S
+      ingredients:
+        P: charmedchars:pyrite_ingot
+        S: STICK
+      result:
+        item: charmedchars:pyrite_shovel
+        amount: 1
+
+  pyrite_hoe:
+    permission: charmedchars.pyrite
+    enabled: true
+    shaped:
+      pattern:
+        - PP
+        - " S"
+        - " S"
+      ingredients:
+        P: charmedchars:pyrite_ingot
+        S: STICK
+      result:
+        item: charmedchars:pyrite_hoe
+        amount: 1
