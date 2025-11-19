@@ -150,17 +150,12 @@ class StructureListener(
                     .color(NamedTextColor.YELLOW)
             )
             player.sendMessage(
-                Component.text("  Assigned Number: ${structureData.assignedNumber}")
-                    .color(NamedTextColor.GREEN)
-                    .decorate(TextDecoration.BOLD)
-            )
-            player.sendMessage(
                 Component.text("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━")
                     .color(NamedTextColor.GOLD)
             )
         } else {
             player.sendMessage(
-                Component.text("Entered ${structureType.displayName} #${structureData.assignedNumber}")
+                Component.text("Entered ${structureType.displayName}")
                     .color(NamedTextColor.YELLOW)
             )
         }
