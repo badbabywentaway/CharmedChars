@@ -1,9 +1,76 @@
 # CharmedChars Version History
 
+## Version 1.1.0 - Structure Number Game Bug Fixes
+
+### Release Date
+2025-11-19
+
+### Overview
+Critical bug fix release addressing multiple issues with the Nether structure number guessing game introduced in 1.0.0. Fixes problems with multi-chunk structure detection, listener conflicts, and message spam.
+
+### Bug Fixes
+
+#### **Fixed Structure Discovery Message Spam**
+- Discovery announcements no longer repeat when moving between chunks within the same structure
+- Changed player tracking from chunk-specific to structure-type-only
+- Players now see "New Structure Discovered" only once per structure instance
+
+#### **Fixed Listener Conflict Causing Wrong Messages**
+- Resolved issue where FortressNumberGameListener would fire in bastions
+- Players in bastions no longer see "you're not in a fortress!" message
+- Each listener now checks for the OTHER structure type first and returns early
+- Only fortress listener handles "not in any structure" message
+
+#### **Fixed Multi-Chunk Structures Getting Separate Numbers** ⭐
+- **Critical Fix**: Structures spanning multiple chunks now share ONE database entry
+- Uses structure's bounding box origin coordinates instead of player's current chunk
+- All chunks within the same fortress/bastion now use the same 3-digit number
+- Prevents database pollution with duplicate entries for the same physical structure
+- Implementation: Convert block coordinates to chunk via `(boundingBox.minX / 16).toInt()`
+
+#### **Fixed /structurecode Command Not Finding Structures**
+- Command now uses structure origin coordinates matching database storage
+- Works correctly from any chunk within a fortress or bastion
+- Updated display to show "Origin:" instead of "Location:" for clarity
+
+### Technical Details
+
+All fixes use structure bounding box origin as the unique identifier:
+```kotlin
+val boundingBox = structure.boundingBox
+val originChunkX = (boundingBox.minX / 16).toInt()
+val originChunkZ = (boundingBox.minZ / 16).toInt()
+```
+
+### Files Modified
+- `BastionNumberGameListener.kt` - Origin-based lookup, listener priority
+- `FortressNumberGameListener.kt` - Origin-based lookup, listener priority
+- `StructureListener.kt` - Origin-based tracking and database queries
+- `StructureCodeCommand.kt` - Origin-based database queries
+
+### Database Compatibility
+- Existing structure databases will work but may contain duplicate entries
+- Consider purging old entries: `/structuredb purge <all|fortress|bastion>`
+- New structures will be tracked correctly using origin coordinates
+
+### Commands
+| Command | Description | Permission |
+|---------|-------------|------------|
+| `/structurecode` | View structure's 3-digit code | `charmedchars.blocks` |
+| `/structuredb list [world]` | List all tracked structures | `charmedchars.blocks` |
+| `/structuredb purge <all\|world\|fortress\|bastion>` | Remove structure entries | `charmedchars.blocks` |
+
+### Development Notes
+- All bug fixes developed with assistance from Claude (Anthropic AI)
+- Git commits include Co-Authored-By attribution for AI contributions
+- Comprehensive testing of multi-chunk structure behavior
+
+---
+
 ## Version 1.0.0 - Initial Release
 
 ### Release Date
-TBD
+2025-11-17
 
 ### Overview
 Initial release of CharmedChars - A word-forming puzzle game for Minecraft where players collect letter blocks from logs, arrange them into words, and earn rewards based on word scores.
@@ -227,4 +294,4 @@ Each version entry includes:
 
 ---
 
-*Last Updated: 2025-11-17*
+*Last Updated: 2025-11-19*
