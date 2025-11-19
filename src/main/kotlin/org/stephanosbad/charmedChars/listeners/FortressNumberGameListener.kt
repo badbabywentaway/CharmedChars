@@ -85,13 +85,19 @@ class FortressNumberGameListener(
             return
         }
 
-        // Check if player is in a fortress
+        // Check structure types
         val chunk = location.chunk
         val registry = Registry.STRUCTURE
         val fortress = registry.get(NamespacedKey.minecraft("fortress"))
+        val bastionRemnant = registry.get(NamespacedKey.minecraft("bastion_remnant"))
+
+        // If player is in a bastion, let the bastion listener handle it
+        if (bastionRemnant != null && chunk.getStructures(bastionRemnant).isNotEmpty()) {
+            return
+        }
 
         if (fortress == null || chunk.getStructures(fortress).isEmpty()) {
-            // Player has a 3-digit sequence but NOT in a fortress
+            // Player has a 3-digit sequence but NOT in a fortress (and not in bastion)
             // Drop the blocks as items instead of removing them
             event.isCancelled = true
 
@@ -110,7 +116,7 @@ class FortressNumberGameListener(
             }
 
             player.sendMessage(
-                Component.text("Number sequence detected, but you're not in a fortress! Blocks dropped.")
+                Component.text("Number sequence detected, but you're not in a fortress or bastion! Blocks dropped.")
                     .color(NamedTextColor.YELLOW)
             )
             return

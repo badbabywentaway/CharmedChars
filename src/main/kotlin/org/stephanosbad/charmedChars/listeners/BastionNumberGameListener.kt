@@ -84,34 +84,19 @@ class BastionNumberGameListener(
             return
         }
 
-        // Check if player is in a bastion remnant
+        // Check structure types
         val chunk = location.chunk
         val registry = Registry.STRUCTURE
         val bastionRemnant = registry.get(NamespacedKey.minecraft("bastion_remnant"))
+        val fortress = registry.get(NamespacedKey.minecraft("fortress"))
 
+        // If player is in a fortress, let the fortress listener handle it
+        if (fortress != null && chunk.getStructures(fortress).isNotEmpty()) {
+            return
+        }
+
+        // If player is not in a bastion remnant, ignore (fortress listener handles "not in any structure")
         if (bastionRemnant == null || chunk.getStructures(bastionRemnant).isEmpty()) {
-            // Player has a 3-digit sequence but NOT in a bastion remnant
-            // Drop the blocks as items instead of removing them
-            event.isCancelled = true
-
-            for (block in sequence.blocks) {
-                val customBlock = CustomBlock.byAlreadyPlaced(block)
-                if (customBlock != null) {
-                    // Drop the custom block as an item
-                    val itemStack = customBlock.itemStack
-                    if (itemStack != null) {
-                        location.world.dropItemNaturally(block.location, itemStack)
-                    }
-                    customBlock.remove()
-                } else {
-                    block.type = Material.AIR
-                }
-            }
-
-            player.sendMessage(
-                Component.text("Number sequence detected, but you're not in a bastion! Blocks dropped.")
-                    .color(NamedTextColor.YELLOW)
-            )
             return
         }
 
