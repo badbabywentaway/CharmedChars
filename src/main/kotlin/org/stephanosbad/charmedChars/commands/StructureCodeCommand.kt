@@ -91,11 +91,25 @@ class StructureCodeCommand(private val plugin: CharmedChars) : CommandExecutor {
         // Check for Nether Fortress
         val fortress = registry.get(NamespacedKey.minecraft("fortress"))
         if (fortress != null && chunk.getStructures(fortress).isNotEmpty()) {
+            // Get structure's origin coordinates from bounding box
+            val structure = chunk.getStructures(fortress).firstOrNull()
+            if (structure == null) {
+                sender.sendMessage(
+                    Component.text("Error: Could not get structure data.")
+                        .color(NamedTextColor.RED)
+                )
+                return true
+            }
+
+            val boundingBox = structure.boundingBox
+            val originChunkX = (boundingBox.minX / 16).toInt()
+            val originChunkZ = (boundingBox.minZ / 16).toInt()
+
             val fortressData = plugin.structureDatabase.getStructure(
                 worldName = location.world.name,
                 structureType = StructureType.FORTRESS,
-                chunkX = chunk.x,
-                chunkZ = chunk.z
+                chunkX = originChunkX,
+                chunkZ = originChunkZ
             )
 
             if (fortressData != null) {
@@ -118,7 +132,7 @@ class StructureCodeCommand(private val plugin: CharmedChars) : CommandExecutor {
                         .color(if (fortressData.rewardsDispensed) NamedTextColor.RED else NamedTextColor.GREEN)
                 )
                 sender.sendMessage(
-                    Component.text("  Location: (${chunk.x}, ${chunk.z})")
+                    Component.text("  Origin: ($originChunkX, $originChunkZ)")
                         .color(NamedTextColor.GRAY)
                 )
                 sender.sendMessage(
@@ -132,11 +146,25 @@ class StructureCodeCommand(private val plugin: CharmedChars) : CommandExecutor {
         // Check for Bastion Remnant
         val bastionRemnant = registry.get(NamespacedKey.minecraft("bastion_remnant"))
         if (bastionRemnant != null && chunk.getStructures(bastionRemnant).isNotEmpty()) {
+            // Get structure's origin coordinates from bounding box
+            val structure = chunk.getStructures(bastionRemnant).firstOrNull()
+            if (structure == null) {
+                sender.sendMessage(
+                    Component.text("Error: Could not get structure data.")
+                        .color(NamedTextColor.RED)
+                )
+                return true
+            }
+
+            val boundingBox = structure.boundingBox
+            val originChunkX = (boundingBox.minX / 16).toInt()
+            val originChunkZ = (boundingBox.minZ / 16).toInt()
+
             val bastionData = plugin.structureDatabase.getStructure(
                 worldName = location.world.name,
                 structureType = StructureType.BASTION_REMNANT,
-                chunkX = chunk.x,
-                chunkZ = chunk.z
+                chunkX = originChunkX,
+                chunkZ = originChunkZ
             )
 
             if (bastionData != null) {
@@ -159,7 +187,7 @@ class StructureCodeCommand(private val plugin: CharmedChars) : CommandExecutor {
                         .color(if (bastionData.rewardsDispensed) NamedTextColor.RED else NamedTextColor.GREEN)
                 )
                 sender.sendMessage(
-                    Component.text("  Location: (${chunk.x}, ${chunk.z})")
+                    Component.text("  Origin: ($originChunkX, $originChunkZ)")
                         .color(NamedTextColor.GRAY)
                 )
                 sender.sendMessage(
