@@ -38,3 +38,20 @@ protection:
   # Respect GriefPrevention claims (requires GriefPrevention plugin)
   # If GriefPrevention is not installed, this setting has no effect
   griefprevention-integration: true
+
+# Structure Number Guessing Game Rewards
+# Rewards for correctly guessing the 3-digit number assigned to structures
+structure-rewards:
+  # Nether Fortress rewards
+  fortress:
+    # Material to give as reward (Minecraft material name)
+    material: BLAZE_ROD
+    # Amount of items to give
+    amount: 12
+
+  # Bastion Remnant rewards
+  bastion:
+    # Material to give as reward (Minecraft material name)
+    material: ENDER_PEARL
+    # Amount of items to give
+    amount: 16

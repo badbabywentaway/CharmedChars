@@ -29,6 +29,12 @@ dependencies {
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:${property("coroutinesVersion")}")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-jdk8:${property("coroutinesVersion")}")
 
+    // Database dependencies for structure tracking
+    implementation("org.jetbrains.exposed:exposed-core:0.48.0")
+    implementation("org.jetbrains.exposed:exposed-dao:0.48.0")
+    implementation("org.jetbrains.exposed:exposed-jdbc:0.48.0")
+    implementation("org.xerial:sqlite-jdbc:3.45.1.0")
+
     testImplementation("org.jetbrains.kotlin:kotlin-test:${property("kotlinVersion")}")
     testImplementation("io.mockk:mockk:1.13.14")
     testImplementation("org.junit.jupiter:junit-jupiter:5.11.4")
@@ -39,7 +45,8 @@ dependencies {
         archiveVersion.set(project.version.toString())
         relocate("kotlin", "org.stephanosbad.charmedchars.kotlin")
         relocate("kotlinx.coroutines", "org.stephanosbad.charmedchars.kotlinx.coroutines")
-        minimize()
+        // Note: Exposed and SQLite NOT relocated to preserve ServiceLoader functionality
+        // Note: minimize() removed to prevent stripping Exposed ORM runtime classes
 
         // Output location
         destinationDirectory.set(file("${project.buildDir}/libs"))

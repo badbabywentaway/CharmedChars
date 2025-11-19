@@ -1,9 +1,76 @@
 # CharmedChars Version History
 
+## Version 1.1.0 - Structure Number Game Bug Fixes
+
+### Release Date
+2025-11-19
+
+### Overview
+Critical bug fix release addressing multiple issues with the Nether structure number guessing game introduced in 1.0.0. Fixes problems with multi-chunk structure detection, listener conflicts, and message spam.
+
+### Bug Fixes
+
+#### **Fixed Structure Discovery Message Spam**
+- Discovery announcements no longer repeat when moving between chunks within the same structure
+- Changed player tracking from chunk-specific to structure-type-only
+- Players now see "New Structure Discovered" only once per structure instance
+
+#### **Fixed Listener Conflict Causing Wrong Messages**
+- Resolved issue where FortressNumberGameListener would fire in bastions
+- Players in bastions no longer see "you're not in a fortress!" message
+- Each listener now checks for the OTHER structure type first and returns early
+- Only fortress listener handles "not in any structure" message
+
+#### **Fixed Multi-Chunk Structures Getting Separate Numbers** ⭐
+- **Critical Fix**: Structures spanning multiple chunks now share ONE database entry
+- Uses structure's bounding box origin coordinates instead of player's current chunk
+- All chunks within the same fortress/bastion now use the same 3-digit number
+- Prevents database pollution with duplicate entries for the same physical structure
+- Implementation: Convert block coordinates to chunk via `(boundingBox.minX / 16).toInt()`
+
+#### **Fixed /structurecode Command Not Finding Structures**
+- Command now uses structure origin coordinates matching database storage
+- Works correctly from any chunk within a fortress or bastion
+- Updated display to show "Origin:" instead of "Location:" for clarity
+
+### Technical Details
+
+All fixes use structure bounding box origin as the unique identifier:
+```kotlin
+val boundingBox = structure.boundingBox
+val originChunkX = (boundingBox.minX / 16).toInt()
+val originChunkZ = (boundingBox.minZ / 16).toInt()
+```
+
+### Files Modified
+- `BastionNumberGameListener.kt` - Origin-based lookup, listener priority
+- `FortressNumberGameListener.kt` - Origin-based lookup, listener priority
+- `StructureListener.kt` - Origin-based tracking and database queries
+- `StructureCodeCommand.kt` - Origin-based database queries
+
+### Database Compatibility
+- Existing structure databases will work but may contain duplicate entries
+- Consider purging old entries: `/structuredb purge <all|fortress|bastion>`
+- New structures will be tracked correctly using origin coordinates
+
+### Commands
+| Command | Description | Permission |
+|---------|-------------|------------|
+| `/structurecode` | View structure's 3-digit code | `charmedchars.blocks` |
+| `/structuredb list [world]` | List all tracked structures | `charmedchars.blocks` |
+| `/structuredb purge <all\|world\|fortress\|bastion>` | Remove structure entries | `charmedchars.blocks` |
+
+### Development Notes
+- All bug fixes developed with assistance from Claude (Anthropic AI)
+- Git commits include Co-Authored-By attribution for AI contributions
+- Comprehensive testing of multi-chunk structure behavior
+
+---
+
 ## Version 1.0.0 - Initial Release
 
 ### Release Date
-TBD
+2025-11-17
 
 ### Overview
 Initial release of CharmedChars - A word-forming puzzle game for Minecraft where players collect letter blocks from logs, arrange them into words, and earn rewards based on word scores.
@@ -14,20 +81,47 @@ Initial release of CharmedChars - A word-forming puzzle game for Minecraft where
 
 ### Latest (Development Build)
 
+#### New Features
+- **Nether Structure Number Guessing Game** - Added mini-game for Bastion Remnants and Nether Fortresses
+  - Each structure assigned unique 3-digit number (100-999)
+  - Players break number block sequences to guess the structure's code
+  - Correct guess: Configurable rewards (default: 12 blaze rods for fortress, 16 ender pearls for bastion)
+  - Wrong guess (too high): Bed-like explosion (power 5.0)
+  - Wrong guess (too low): Blocks drop as items (recoverable)
+  - Sequence outside structure: Blocks drop as items with warning
+  - One-time rewards per structure with database tracking
+  - SQLite database with Exposed ORM for persistent tracking
+  - Structure discovery notifications when entering for first time
+
+- **Git Version Tagging Scripts** - Cross-platform scripts for semantic versioning
+  - Shell script (tag-version.sh) for Linux/Mac
+  - Batch script (tag-version.bat) for Windows
+  - Auto-increment version support (--major, --minor, --patch)
+  - Integration with gradle.properties
+  - Annotated and lightweight tag support
+
+- **Configurable Structure Rewards** - Server admins can customize number game rewards
+  - Configure material type and quantity in config.yml
+  - Supports any valid Minecraft material
+  - Separate configs for fortress and bastion rewards
+
 #### Bug Fixes
 - **Fixed letter block item drop after scoring** - Cancelled BlockBreakEvent to prevent the first letter from dropping as an item when a word is scored
 - **Fixed color randomization** - Replaced Math.random() with Kotlin's .random() to ensure all three colors (cyan, magenta, yellow) drop with equal probability
 - **Fixed hardcoded drop rates** - Updated ItemManager to read drop rates from config instead of using hardcoded values
 
-#### Features
-- **Doubled drop rates** - Increased base drop rate from 3% to 6%, with Looting levels now giving 10%, 16%, and 20% drop chances
-- **Comprehensive documentation** - Added PLAY_INSTRUCTIONS.md and REWARD_CONFIG.md with detailed gameplay and configuration guides
-- **Config-driven drop rates** - Drop chances now configurable via config.yml with looting multipliers
-
 #### Code Quality
+- **Comprehensive KDoc documentation** - Added detailed documentation to all classes
+- **LGPL v3 license compliance** - Added proper license headers to all source files
 - **Removed diagnostic logging** - Cleaned up verbose console logging during gameplay to reduce spam
 - **Deleted diagnostic files** - Removed 11 obsolete diagnostic/troubleshooting files and scripts
 - **Better randomization** - Using Kotlin's idiomatic random functions instead of Java's Math.random()
+
+#### Development Notes
+- Number guessing game system developed with assistance from Claude (Anthropic AI)
+- Database architecture, game logic, and explosion mechanics implemented using AI-assisted development
+- Cross-platform version tagging scripts created with AI assistance
+- All git commits include Co-Authored-By attribution for AI contributions
 
 ---
 
@@ -200,4 +294,4 @@ Each version entry includes:
 
 ---
 
-*Last Updated: 2025-11-17*
+*Last Updated: 2025-11-19*
