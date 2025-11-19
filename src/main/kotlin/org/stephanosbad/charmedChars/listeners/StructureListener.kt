@@ -46,8 +46,8 @@ class StructureListener(
     private val database: StructureDatabase
 ) : Listener {
 
-    // Cache to track which structure each player is currently in
-    // Key: Player UUID, Value: Location key of current structure
+    // Cache to track which structure type each player is currently in
+    // Key: Player UUID, Value: Structure key (world:structureType)
     private val playerCurrentStructure = mutableMapOf<String, String>()
 
     /**
@@ -109,18 +109,19 @@ class StructureListener(
         val chunkZ = chunk.z
         val worldName = location.world.name
 
-        // Create a unique key for this structure location
-        val locationKey = "$worldName:$chunkX:$chunkZ:${structureType.name}"
+        // Create a key for tracking which structure type the player is in
+        // This prevents spam when moving between chunks within the same structure
+        val structureKey = "$worldName:${structureType.name}"
 
-        // Check if player just entered this structure
-        val previousLocation = playerCurrentStructure[player.uniqueId.toString()]
-        if (previousLocation == locationKey) {
-            // Player is still in the same structure, no need to process
+        // Check if player is still in the same structure type (ignoring chunk changes)
+        val previousStructure = playerCurrentStructure[player.uniqueId.toString()]
+        if (previousStructure == structureKey) {
+            // Player is still in the same structure, no need to show messages
             return
         }
 
-        // Player entered a new structure
-        playerCurrentStructure[player.uniqueId.toString()] = locationKey
+        // Player entered a new structure type
+        playerCurrentStructure[player.uniqueId.toString()] = structureKey
 
         // Get or create structure record
         val structureData = database.getOrCreateStructure(
