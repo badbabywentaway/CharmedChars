@@ -62,13 +62,24 @@ dependencies {
         archiveBaseName.set("CharmedChars")
         archiveClassifier.set("")
         archiveVersion.set(project.version.toString())
+
+        // Explicitly include dependencies from runtimeClasspath
+        configurations = listOf(project.configurations.runtimeClasspath.get())
+
+        // Relocate Kotlin and coroutines to avoid conflicts with other plugins
         relocate("kotlin", "org.stephanosbad.charmedchars.kotlin")
         relocate("kotlinx.coroutines", "org.stephanosbad.charmedchars.kotlinx.coroutines")
-        // Note: Exposed and SQLite NOT relocated to preserve ServiceLoader functionality
-        // Note: minimize() removed to prevent stripping Exposed ORM runtime classes
+
+        // Relocate Exposed and SQLite to avoid conflicts
+        relocate("org.jetbrains.exposed", "org.stephanosbad.charmedchars.exposed")
+        relocate("org.xerial", "org.stephanosbad.charmedchars.xerial")
+        relocate("org.sqlite", "org.stephanosbad.charmedchars.sqlite")
+
+        // Merge service files to preserve ServiceLoader functionality
+        mergeServiceFiles()
 
         // Output location
-        destinationDirectory.set(file("${project.buildDir}/libs"))
+        destinationDirectory.set(layout.buildDirectory.dir("libs"))
     }
 
     tasks.build { dependsOn(tasks.shadowJar) }
