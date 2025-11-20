@@ -70,12 +70,12 @@ dependencies {
         relocate("kotlin", "org.stephanosbad.charmedchars.kotlin")
         relocate("kotlinx.coroutines", "org.stephanosbad.charmedchars.kotlinx.coroutines")
 
-        // Relocate Exposed and SQLite to avoid conflicts
-        relocate("org.jetbrains.exposed", "org.stephanosbad.charmedchars.exposed")
-        relocate("org.xerial", "org.stephanosbad.charmedchars.xerial")
-        relocate("org.sqlite", "org.stephanosbad.charmedchars.sqlite")
+        // NOTE: Do NOT relocate Exposed or SQLite!
+        // - SQLite JDBC contains native libraries (.so/.dll/.dylib) that break when relocated
+        // - Exposed uses reflection and needs original package names
+        // These are kept at their original paths to avoid UnsatisfiedLinkError
 
-        // Merge service files to preserve ServiceLoader functionality
+        // Merge service files to preserve ServiceLoader functionality (JDBC drivers)
         mergeServiceFiles()
 
         // Output location
