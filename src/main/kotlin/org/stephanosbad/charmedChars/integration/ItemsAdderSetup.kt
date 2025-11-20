@@ -30,7 +30,8 @@ import java.nio.file.Files
  * ItemsAdder plugin directory. Automates the manual setup process by:
  * - Creating the required directory structure
  * - Copying blocks.yml configuration (123 blocks total)
- * - Copying all texture files (123 PNG files in 3 colors)
+ * - Copying pyrite.yml configuration (5 items + recipes)
+ * - Copying all texture files (123 block PNG files + 5 pyrite item textures)
  * - Enabling the charmedchars namespace in items_packs.yml
  * - Creating a README with setup instructions
  *
@@ -149,6 +150,19 @@ class ItemsAdderSetup(private val plugin: CharmedChars) {
                 return SetupResult(false, false, messages)
             }
 
+            // Copy pyrite.yml configuration
+            messages.add("Copying pyrite.yml configuration...")
+            val pyriteYml = copyResourceToFile(
+                "itemsadder/pyrite.yml",
+                File(configsDir, "pyrite.yml")
+            )
+            if (pyriteYml) {
+                messages.add("  ✓ pyrite.yml copied successfully")
+            } else {
+                messages.add("  ✗ Failed to copy pyrite.yml")
+                return SetupResult(false, false, messages)
+            }
+
             // Copy textures
             messages.add("Copying texture files...")
             var textureCount = 0
@@ -199,6 +213,23 @@ class ItemsAdderSetup(private val plugin: CharmedChars) {
             }
 
             messages.add("  ✓ Copied $textureCount texture files")
+
+            // Copy pyrite item textures
+            messages.add("Copying pyrite item textures...")
+            var pyriteTextureCount = 0
+            val pyriteItemTexturesDir = File(charmedCharsIAFolder, "resourcepack/assets/charmedchars/textures/item/pyrite")
+            pyriteItemTexturesDir.mkdirs()
+
+            val pyriteItems = listOf("ingot", "pickaxe", "axe", "shovel", "hoe")
+            for (item in pyriteItems) {
+                if (copyResourceToFile(
+                    "pack/assets/minecraft/textures/item/pyrite/$item.png",
+                    File(pyriteItemTexturesDir, "$item.png")
+                )) {
+                    pyriteTextureCount++
+                }
+            }
+            messages.add("  ✓ Copied $pyriteTextureCount pyrite texture files")
 
             // Create README
             messages.add("Creating README...")
