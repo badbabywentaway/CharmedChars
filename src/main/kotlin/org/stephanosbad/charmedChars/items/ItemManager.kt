@@ -19,7 +19,6 @@ package org.stephanosbad.charmedChars.items
 
 import dev.lone.itemsadder.api.CustomBlock
 import dev.lone.itemsadder.api.CustomStack
-import me.ryanhamshire.GriefPrevention.GriefPrevention
 import org.bukkit.Bukkit
 import org.bukkit.Location
 import org.bukkit.Material
@@ -141,8 +140,9 @@ class ItemManager @JvmOverloads constructor(localPlugin: CharmedChars? = null) :
      *
      * Used to check claim permissions before allowing letter block placement/breaking.
      * Null if GriefPrevention is not installed.
+     * Stored as Any? to avoid NoClassDefFoundError when GP is not present.
      */
-    var griefPrevention: GriefPrevention? = null
+    var griefPrevention: Any? = null
 
     /**
      * List of configured rewards for valid words
@@ -188,12 +188,13 @@ class ItemManager @JvmOverloads constructor(localPlugin: CharmedChars? = null) :
 
         // GriefPrevention integration (optional soft dependency)
         try {
-            griefPrevention = GriefPrevention.instance
-            if (griefPrevention != null) {
+            val gpPlugin = Bukkit.getPluginManager().getPlugin("GriefPrevention")
+            if (gpPlugin != null && gpPlugin.isEnabled) {
+                griefPrevention = gpPlugin
                 val status = if (plugin.configManager.griefPreventionIntegration) "enabled" else "disabled in config"
                 Bukkit.getLogger().info("GriefPrevention found - integration $status")
             } else {
-                throw NullPointerException("Class variable did not instantiate")
+                Bukkit.getLogger().info("GriefPrevention not available (optional)")
             }
         } catch (e: Exception) {
             Bukkit.getLogger().info("GriefPrevention not available (optional)")
@@ -696,10 +697,22 @@ class ItemManager @JvmOverloads constructor(localPlugin: CharmedChars? = null) :
      */
     fun protectedSpot(player: Player?, location: Location, block: Block?): Boolean {
         // Check GriefPrevention if enabled in config
-        if (plugin.configManager.griefPreventionIntegration) {
-            var griefPrevention = this.griefPrevention
-            if (griefPrevention != null && griefPrevention.allowBreak(player, block, location) != null) {
-                return true
+        if (plugin.configManager.griefPreventionIntegration && griefPrevention != null) {
+            try {
+                // Use reflection to avoid direct class dependency
+                val gpClass = griefPrevention!!.javaClass
+                val allowBreakMethod = gpClass.getMethod("allowBreak",
+                    org.bukkit.entity.Player::class.java,
+                    org.bukkit.block.Block::class.java,
+                    org.bukkit.Location::class.java
+                )
+                val result = allowBreakMethod.invoke(griefPrevention, player, block, location)
+                if (result != null) {
+                    return true
+                }
+            } catch (e: Exception) {
+                // If reflection fails, log and continue
+                Bukkit.getLogger().warning("GriefPrevention integration error: ${e.message}")
             }
         }
 
