@@ -49,6 +49,15 @@ dependencies {
     // AssertJ for fluent assertions
     testImplementation("org.assertj:assertj-core:3.25.1")
 }
+    tasks.processResources {
+        val props = mapOf("version" to project.version)
+        inputs.properties(props)
+        filteringCharset = "UTF-8"
+        filesMatching("plugin.yml") {
+            expand(props)
+        }
+    }
+
     tasks.shadowJar {
         archiveBaseName.set("CharmedChars")
         archiveClassifier.set("")
