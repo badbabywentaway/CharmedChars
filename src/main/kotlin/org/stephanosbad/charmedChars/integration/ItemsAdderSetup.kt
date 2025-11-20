@@ -85,16 +85,17 @@ class ItemsAdderSetup(private val plugin: CharmedChars) {
      *
      * Executes the complete setup process:
      * 1. Verifies ItemsAdder is installed
-     * 2. Checks if already setup (returns early if so)
+     * 2. Checks if already setup (deletes if force is true)
      * 3. Creates directory structure
      * 4. Enables charmedchars namespace in items_packs.yml
-     * 5. Copies blocks.yml configuration
-     * 6. Copies all texture files (123 textures across 3 colors)
+     * 5. Copies blocks.yml and pyrite.yml configurations
+     * 6. Copies all texture files (123 block textures + 5 pyrite textures)
      * 7. Creates README with instructions
      *
+     * @param force If true, deletes existing configuration and regenerates
      * @return SetupResult containing success status, messages, and whether it was already setup
      */
-    fun autoSetup(): SetupResult {
+    fun autoSetup(force: Boolean = false): SetupResult {
         val messages = mutableListOf<String>()
 
         // Check if ItemsAdder is available
@@ -108,15 +109,27 @@ class ItemsAdderSetup(private val plugin: CharmedChars) {
 
         // Check if already setup
         if (isAlreadySetup()) {
-            return SetupResult(
-                success = true,
-                alreadySetup = true,
-                messages = listOf(
-                    "CharmedChars ItemsAdder configuration already exists.",
-                    "Files are located in: ${charmedCharsIAFolder.absolutePath}",
-                    "To regenerate, delete the folder and run this command again."
+            if (force) {
+                // Force mode: delete existing files
+                messages.add("Force mode enabled - deleting existing configuration...")
+                try {
+                    charmedCharsIAFolder.deleteRecursively()
+                    messages.add("  ✓ Old configuration deleted")
+                } catch (e: Exception) {
+                    messages.add("  ✗ Failed to delete old configuration: ${e.message}")
+                    return SetupResult(false, false, messages)
+                }
+            } else {
+                return SetupResult(
+                    success = true,
+                    alreadySetup = true,
+                    messages = listOf(
+                        "CharmedChars ItemsAdder configuration already exists.",
+                        "Files are located in: ${charmedCharsIAFolder.absolutePath}",
+                        "To regenerate, delete the folder and run this command again."
+                    )
                 )
-            )
+            }
         }
 
         try {
