@@ -56,8 +56,8 @@ class SetupItemsAdderCommand(private val plugin: CharmedChars) : CommandExecutor
 
         val setup = ItemsAdderSetup(plugin)
 
-        // Run setup
-        val result = setup.autoSetup()
+        // Run setup with force flag
+        val result = setup.autoSetup(force)
 
         // Display messages with colors
         for (message in result.messages) {

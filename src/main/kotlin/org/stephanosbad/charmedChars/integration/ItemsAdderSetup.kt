@@ -30,7 +30,8 @@ import java.nio.file.Files
  * ItemsAdder plugin directory. Automates the manual setup process by:
  * - Creating the required directory structure
  * - Copying blocks.yml configuration (123 blocks total)
- * - Copying all texture files (123 PNG files in 3 colors)
+ * - Copying pyrite.yml configuration (5 items + recipes)
+ * - Copying all texture files (123 block PNG files + 5 pyrite item textures)
  * - Enabling the charmedchars namespace in items_packs.yml
  * - Creating a README with setup instructions
  *
@@ -84,16 +85,17 @@ class ItemsAdderSetup(private val plugin: CharmedChars) {
      *
      * Executes the complete setup process:
      * 1. Verifies ItemsAdder is installed
-     * 2. Checks if already setup (returns early if so)
+     * 2. Checks if already setup (deletes if force is true)
      * 3. Creates directory structure
      * 4. Enables charmedchars namespace in items_packs.yml
-     * 5. Copies blocks.yml configuration
-     * 6. Copies all texture files (123 textures across 3 colors)
+     * 5. Copies blocks.yml and pyrite.yml configurations
+     * 6. Copies all texture files (123 block textures + 5 pyrite textures)
      * 7. Creates README with instructions
      *
+     * @param force If true, deletes existing configuration and regenerates
      * @return SetupResult containing success status, messages, and whether it was already setup
      */
-    fun autoSetup(): SetupResult {
+    fun autoSetup(force: Boolean = false): SetupResult {
         val messages = mutableListOf<String>()
 
         // Check if ItemsAdder is available
@@ -107,15 +109,27 @@ class ItemsAdderSetup(private val plugin: CharmedChars) {
 
         // Check if already setup
         if (isAlreadySetup()) {
-            return SetupResult(
-                success = true,
-                alreadySetup = true,
-                messages = listOf(
-                    "CharmedChars ItemsAdder configuration already exists.",
-                    "Files are located in: ${charmedCharsIAFolder.absolutePath}",
-                    "To regenerate, delete the folder and run this command again."
+            if (force) {
+                // Force mode: delete existing files
+                messages.add("Force mode enabled - deleting existing configuration...")
+                try {
+                    charmedCharsIAFolder.deleteRecursively()
+                    messages.add("  ✓ Old configuration deleted")
+                } catch (e: Exception) {
+                    messages.add("  ✗ Failed to delete old configuration: ${e.message}")
+                    return SetupResult(false, false, messages)
+                }
+            } else {
+                return SetupResult(
+                    success = true,
+                    alreadySetup = true,
+                    messages = listOf(
+                        "CharmedChars ItemsAdder configuration already exists.",
+                        "Files are located in: ${charmedCharsIAFolder.absolutePath}",
+                        "To regenerate, delete the folder and run this command again."
+                    )
                 )
-            )
+            }
         }
 
         try {
@@ -146,6 +160,19 @@ class ItemsAdderSetup(private val plugin: CharmedChars) {
                 messages.add("  ✓ blocks.yml copied successfully")
             } else {
                 messages.add("  ✗ Failed to copy blocks.yml")
+                return SetupResult(false, false, messages)
+            }
+
+            // Copy pyrite.yml configuration
+            messages.add("Copying pyrite.yml configuration...")
+            val pyriteYml = copyResourceToFile(
+                "itemsadder/pyrite.yml",
+                File(configsDir, "pyrite.yml")
+            )
+            if (pyriteYml) {
+                messages.add("  ✓ pyrite.yml copied successfully")
+            } else {
+                messages.add("  ✗ Failed to copy pyrite.yml")
                 return SetupResult(false, false, messages)
             }
 
@@ -199,6 +226,23 @@ class ItemsAdderSetup(private val plugin: CharmedChars) {
             }
 
             messages.add("  ✓ Copied $textureCount texture files")
+
+            // Copy pyrite item textures
+            messages.add("Copying pyrite item textures...")
+            var pyriteTextureCount = 0
+            val pyriteItemTexturesDir = File(charmedCharsIAFolder, "resourcepack/assets/charmedchars/textures/item/pyrite")
+            pyriteItemTexturesDir.mkdirs()
+
+            val pyriteItems = listOf("ingot", "pickaxe", "axe", "shovel", "hoe")
+            for (item in pyriteItems) {
+                if (copyResourceToFile(
+                    "pack/assets/minecraft/textures/item/pyrite/$item.png",
+                    File(pyriteItemTexturesDir, "$item.png")
+                )) {
+                    pyriteTextureCount++
+                }
+            }
+            messages.add("  ✓ Copied $pyriteTextureCount pyrite texture files")
 
             // Create README
             messages.add("Creating README...")

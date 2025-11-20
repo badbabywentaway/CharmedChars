@@ -74,6 +74,12 @@ class FortressNumberGameListener(
             return
         }
 
+        // Check if player is using a gold or pyrite tool
+        val hand = player.inventory.itemInMainHand
+        if (!isValidTool(hand)) {
+            return
+        }
+
         // Check if the broken block is a number block
         val firstDigit = getNumberFromBlock(brokenBlock) ?: return
 
@@ -371,5 +377,37 @@ class FortressNumberGameListener(
 
         // Check if it's a digit
         return character.toIntOrNull()
+    }
+
+    /**
+     * Checks if an item is a valid tool for number sequence gameplay
+     *
+     * Valid tools include:
+     * - Vanilla gold tools
+     * - Pyrite tools (custom ItemsAdder tools)
+     *
+     * @param item The item to check
+     * @return true if the item is a valid gold or pyrite tool
+     */
+    private fun isValidTool(item: ItemStack): Boolean {
+        if (item.itemMeta == null) {
+            return false
+        }
+
+        // Check if it's a gold tool (vanilla)
+        if (item.type.name.lowercase().contains("gold")) {
+            return true
+        }
+
+        // Check if it's a pyrite tool using ItemsAdder API
+        val customStack = dev.lone.itemsadder.api.CustomStack.byItemStack(item)
+        if (customStack != null) {
+            val namespacedId = customStack.namespacedID.lowercase()
+            if (namespacedId.contains("pyrite")) {
+                return true
+            }
+        }
+
+        return false
     }
 }

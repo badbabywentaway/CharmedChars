@@ -1,9 +1,11 @@
 @echo off
-echo === DEPLOYING CLEAN JAR ===
+echo ===================================================
+echo    CharmedChars v1.1.2 - Clean Deployment Script
+echo ===================================================
 echo.
 
-REM Step 1: Delete old extracted_pack folder (removes cached uppercase files)
-echo Step 1: Deleting old extracted_pack folder...
+REM Step 1: Delete old CharmedChars plugin data
+echo Step 1: Cleaning CharmedChars plugin data...
 if exist "c:\Users\steve\Documents\Papermc\plugins\CharmedChars\extracted_pack" (
     rmdir /s /q "c:\Users\steve\Documents\Papermc\plugins\CharmedChars\extracted_pack"
     echo [OK] Old extracted_pack deleted
@@ -31,10 +33,30 @@ if exist "c:\Users\steve\Documents\Papermc\plugins\CharmedChars\resourcepack" (
     echo [INFO] No resourcepack folder found
 )
 
-REM Step 4: Copy new JAR
+REM Step 4: Clean ItemsAdder cache for pyrite items
 echo.
-echo Step 4: Copying new JAR...
-copy "build\libs\CharmedChars-1.0.0.jar" "c:\Users\steve\Documents\Papermc\plugins\" /Y
+echo Step 4: Cleaning ItemsAdder cache...
+if exist "c:\Users\steve\Documents\Papermc\plugins\ItemsAdder\data\items_packs\charmedchars" (
+    rmdir /s /q "c:\Users\steve\Documents\Papermc\plugins\ItemsAdder\data\items_packs\charmedchars"
+    echo [OK] ItemsAdder charmedchars pack cache deleted
+) else (
+    echo [INFO] No ItemsAdder cache found for charmedchars
+)
+
+REM Step 5: Delete old JAR file
+echo.
+echo Step 5: Deleting old JAR...
+if exist "c:\Users\steve\Documents\Papermc\plugins\CharmedChars-*.jar" (
+    del "c:\Users\steve\Documents\Papermc\plugins\CharmedChars-*.jar"
+    echo [OK] Old JAR deleted
+) else (
+    echo [INFO] No old JAR found
+)
+
+REM Step 6: Copy new JAR
+echo.
+echo Step 6: Copying new JAR (v1.1.2)...
+copy "build\libs\CharmedChars-1.1.2.jar" "c:\Users\steve\Documents\Papermc\plugins\" /Y
 if %ERRORLEVEL% EQU 0 (
     echo [OK] JAR copied successfully
 ) else (
@@ -44,18 +66,35 @@ if %ERRORLEVEL% EQU 0 (
 )
 
 echo.
-echo ==========================================
-echo [SUCCESS] Deployment complete!
+echo ===================================================
+echo [SUCCESS] CharmedChars v1.1.2 deployed successfully!
+echo ===================================================
 echo.
 echo Next steps:
 echo   1. Restart your Minecraft server
-echo   2. Watch server logs for these messages:
-echo      - "Custom textures system initialized!"
-echo      - "Resource pack ZIP created: ..."
-echo      - "Resource pack SHA-1: ..."
-echo   3. Check that this file was created:
-echo      plugins\CharmedChars\CharmedChars-ResourcePack.zip
-echo   4. Run: /charblock YourName cyan HELLO
-echo   5. Run: /debugitem (while holding a charmed block)
 echo.
+echo   2. After server starts, run ItemsAdder commands:
+echo      /iareload  (or restart again for full effect)
+echo      /iazip     (regenerate resource pack)
+echo.
+echo   3. Verify in server logs:
+echo      - ItemsAdder loaded charmedchars namespace
+echo      - Resource pack generated successfully
+echo.
+echo   4. Test letter blocks:
+echo      /iagive YourName charmedchars:cyan_a
+echo      Mine logs with gold/pyrite tools for letter drops
+echo.
+echo   5. Test NEW pyrite system:
+echo      /iagive YourName charmedchars:pyrite_ingot
+echo      /iagive YourName charmedchars:pyrite_pickaxe
+echo      Craft: Iron Ingot + Redstone = Pyrite Ingot
+echo.
+echo   6. Test Nether structure features:
+echo      /structurecode (while in fortress/bastion)
+echo      Break number sequences with gold/pyrite tools
+echo.
+echo ===================================================
+echo Version: 1.1.2 (Pyrite System + Word Length Rules)
+echo ===================================================
 pause

@@ -1,5 +1,157 @@
 # CharmedChars Version History
 
+## Version 1.1.2 - Pyrite (Fool's Gold) System & Gameplay Improvements
+
+### Release Date
+2025-11-20
+
+### Overview
+Major feature release introducing the Pyrite material system - an iron-tier alternative to gold tools with identical CharmedChars functionality. Includes word length validation rules to improve gameplay balance.
+
+### New Features
+
+#### **Pyrite (Fool's Gold) Material System** ⭐
+A craftable alternative to gold tools with better durability but same CharmedChars functionality.
+
+**Crafting:**
+- Pyrite Ingot: 1 Iron Ingot + 1 Redstone (shapeless)
+- Tools: Standard recipes using Pyrite Ingots + Sticks (same patterns as vanilla tools)
+
+**Items:**
+- `charmedchars:pyrite_ingot` - Crafting material
+- `charmedchars:pyrite_pickaxe` - 250 durability, iron-tier stats
+- `charmedchars:pyrite_axe` - 250 durability, iron-tier stats
+- `charmedchars:pyrite_shovel` - 250 durability, iron-tier stats
+- `charmedchars:pyrite_hoe` - 250 durability, iron-tier stats
+
+**Functionality:**
+- Works like gold for mining logs → letter block drops
+- Works like gold for breaking letter blocks → word scoring
+- Works like gold for breaking number sequences → fortress/bastion rewards
+- Iron-tier durability (250 uses vs gold's 32)
+- Iron-tier mining speed and enchantability
+
+#### **Minimum Word Length Rules** ⭐
+Prevents scoring of very short words to improve game balance.
+
+- **Single-color words:** Minimum 3 letters (e.g., "CAT" in all cyan)
+- **Multi-color words:** Minimum 4 letters (e.g., "CATS" in cyan+magenta)
+- Clear feedback messages when words are too short
+- Example: Breaking "IN" (2 letters) shows "Miss: single-color words must be at least 3 letters long"
+
+#### **Tool Validation for Number Sequences** ⭐
+Number sequences now require gold or pyrite tools to prevent unintended triggers.
+
+- Only gold or pyrite tools can break number sequences in fortresses/bastions
+- Prevents netherite, diamond, and other tools from accidentally triggering games
+- Consistent with letter block and word scoring tool requirements
+
+### Bug Fixes
+
+#### **Fixed Pyrite Tool Detection**
+- Changed from `displayName()` to ItemsAdder's `CustomStack.byItemStack()` API
+- Pyrite tools now properly recognized for all CharmedChars features
+- Added fallback to plain text display name serialization for compatibility
+
+#### **Fixed ItemsAdder Block Breaking Warnings**
+- Added pyrite tools to `break_tools_whitelist` for all 123 character blocks
+- Eliminated false "cannot use tool to break item" messages
+- Updated blocks.yml with `charmedchars:pyrite_axe` and `charmedchars:pyrite_pickaxe`
+
+#### **Fixed Pyrite Recipe Format**
+- Moved recipes from item-nested structure to global `recipes:` section
+- Added `crafting_table:` parent key as required by ItemsAdder
+- Fixed shapeless recipe format (changed from list to letter mapping)
+- Removed durability from pyrite_ingot to prevent spurious repair recipes
+
+### Configuration Changes
+
+#### **ItemsAdder Integration**
+- New file: `src/main/resources/itemsadder/pyrite.yml`
+- Auto-copied by `/iasetup` command
+- 5 items + 5 crafting recipes
+- Texture files included in resource pack
+
+#### **Build System**
+- Added `processResources` task to substitute version in plugin.yml
+- Version now correctly shows "1.1.2" instead of "${version}"
+
+### Technical Details
+
+**Tool Validation Logic (ItemManager.kt:223-252):**
+```kotlin
+private fun isValidTool(item: ItemStack): Boolean {
+    // 1. Check vanilla gold tools
+    if (item.type.name.lowercase().contains("gold")) return true
+
+    // 2. Check pyrite tools via ItemsAdder API
+    val customStack = CustomStack.byItemStack(item)
+    if (customStack?.namespacedID?.lowercase()?.contains("pyrite") == true) {
+        return true
+    }
+
+    // 3. Fallback to display name check
+    // ...
+}
+```
+
+**Word Length Validation (ItemManager.kt:477-486):**
+```kotlin
+val minimumLength = if (isSameColor) 3 else 4
+if (wordLength < minimumLength) {
+    e.player.sendMessage("Miss: $colorType words must be at least $minimumLength letters long")
+    e.isCancelled = true
+    return
+}
+```
+
+**Pyrite Recipe Structure:**
+```yaml
+recipes:
+  crafting_table:
+    pyrite_ingot_recipe:
+      enabled: true
+      shapeless: true
+      ingredients:
+        I: IRON_INGOT
+        R: REDSTONE
+      result:
+        item: charmedchars:pyrite_ingot
+        amount: 1
+```
+
+### Files Changed
+- `gradle.properties` - Version bump to 1.1.2
+- `src/main/resources/itemsadder/pyrite.yml` - New pyrite item definitions and recipes
+- `src/main/resources/itemsadder/blocks.yml` - Added pyrite tools to break_tools_whitelist (123 blocks)
+- `src/main/kotlin/org/stephanosbad/charmedChars/items/ItemManager.kt` - Tool validation + word length rules
+- `src/main/kotlin/org/stephanosbad/charmedChars/listeners/FortressNumberGameListener.kt` - Tool validation
+- `src/main/kotlin/org/stephanosbad/charmedChars/listeners/BastionNumberGameListener.kt` - Tool validation
+- `src/main/kotlin/org/stephanosbad/charmedChars/integration/ItemsAdderSetup.kt` - Pyrite texture copying
+- `build.gradle.kts` - Added processResources for version substitution
+- `DEPLOY_CLEAN_JAR.bat` - Version update
+- `VERSION.md` - This file
+- `PLAY_INSTRUCTIONS.md` - Added pyrite system documentation
+
+### Upgrade Notes
+
+**For Server Admins:**
+1. Replace JAR with CharmedChars-1.1.2.jar
+2. Run `/iasetup force` to regenerate ItemsAdder configs
+3. Run `/iazip` to rebuild resource pack
+4. Restart server completely (important for recipe cache)
+5. Pyrite recipes will be available in crafting tables
+
+**For Players:**
+- New pyrite tools available via crafting (cheaper than gold!)
+- Words shorter than 3-4 letters no longer score
+- Number sequences require gold/pyrite tools (prevents accidents)
+
+### Known Issues
+None
+
+---
+
 ## Version 1.1.1 - Critical Coordinate Bug Fix & Test Coverage
 
 ### Release Date
