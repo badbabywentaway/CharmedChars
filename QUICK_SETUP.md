@@ -23,8 +23,7 @@ The blocks need to be registered with ItemsAdder before they can be used.
 ## ⚡ AUTOMATIC Setup (Easiest - 4 Steps!)
 
 ### 1. Run Auto-Setup Command
-```
-/iasetup
+``/iasetup
 ```
 
 This automatically:

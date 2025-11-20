@@ -1,0 +1,166 @@
+info:
+  namespace: charmedchars
+
+recipes:
+  crafting_table:
+    pyrite_ingot_recipe:
+      enabled: true
+      shapeless: true
+      ingredients:
+        I: IRON_INGOT
+        R: REDSTONE
+      result:
+        item: charmedchars:pyrite_ingot
+        amount: 1
+
+    pyrite_pickaxe_recipe:
+      enabled: true
+      pattern:
+        - PPP
+        - " S "
+        - " S "
+      ingredients:
+        P: charmedchars:pyrite_ingot
+        S: STICK
+      result:
+        item: charmedchars:pyrite_pickaxe
+        amount: 1
+
+    pyrite_axe_recipe:
+      enabled: true
+      pattern:
+        - "PP "
+        - "PS "
+        - " S "
+      ingredients:
+        P: charmedchars:pyrite_ingot
+        S: STICK
+      result:
+        item: charmedchars:pyrite_axe
+        amount: 1
+
+    pyrite_shovel_recipe:
+      enabled: true
+      pattern:
+        - " P "
+        - " S "
+        - " S "
+      ingredients:
+        P: charmedchars:pyrite_ingot
+        S: STICK
+      result:
+        item: charmedchars:pyrite_shovel
+        amount: 1
+
+    pyrite_hoe_recipe:
+      enabled: true
+      pattern:
+        - "PP "
+        - " S "
+        - " S "
+      ingredients:
+        P: charmedchars:pyrite_ingot
+        S: STICK
+      result:
+        item: charmedchars:pyrite_hoe
+        amount: 1
+
+items:
+  # ==================== PYRITE (FOOL'S GOLD) MATERIALS ====================
+
+  pyrite_ingot:
+    display_name: "Pyrite Ingot"
+    permission: charmedchars.pyrite
+    resource:
+      material: GOLD_INGOT
+      generate: true
+      textures:
+        - item/pyrite/ingot
+
+  pyrite_pickaxe:
+    display_name: "Pyrite Pickaxe"
+    permission: charmedchars.pyrite
+    lore:
+      - "&7A fool's gold pickaxe"
+      - "&7Works like gold for scoring words"
+      - "&7Iron-tier durability and stats"
+    resource:
+      material: GOLDEN_PICKAXE
+      generate: true
+      textures:
+        - item/pyrite/pickaxe
+    durability:
+      max_custom_durability: 250
+    specific_properties:
+      tool:
+        tier: IRON
+    attribute_modifiers:
+      mainhand:
+        attackDamage: 4
+        attackSpeed: -2.8
+
+  pyrite_axe:
+    display_name: "Pyrite Axe"
+    permission: charmedchars.pyrite
+    lore:
+      - "&7A fool's gold axe"
+      - "&7Works like gold for scoring words"
+      - "&7Iron-tier durability and stats"
+    resource:
+      material: GOLDEN_AXE
+      generate: true
+      textures:
+        - item/pyrite/axe
+    durability:
+      max_custom_durability: 250
+    specific_properties:
+      tool:
+        tier: IRON
+    attribute_modifiers:
+      mainhand:
+        attackDamage: 9
+        attackSpeed: -3.1
+
+  pyrite_shovel:
+    display_name: "Pyrite Shovel"
+    permission: charmedchars.pyrite
+    lore:
+      - "&7A fool's gold shovel"
+      - "&7Works like gold for scoring words"
+      - "&7Iron-tier durability and stats"
+    resource:
+      material: GOLDEN_SHOVEL
+      generate: true
+      textures:
+        - item/pyrite/shovel
+    durability:
+      max_custom_durability: 250
+    specific_properties:
+      tool:
+        tier: IRON
+    attribute_modifiers:
+      mainhand:
+        attackDamage: 4.5
+        attackSpeed: -3.0
+
+  pyrite_hoe:
+    display_name: "Pyrite Hoe"
+    permission: charmedchars.pyrite
+    lore:
+      - "&7A fool's gold hoe"
+      - "&7Works like gold for scoring words"
+      - "&7Iron-tier durability and stats"
+    resource:
+      material: GOLDEN_HOE
+      generate: true
+      textures:
+        - item/pyrite/hoe
+    durability:
+      max_custom_durability: 250
+    specific_properties:
+      tool:
+        tier: IRON
+    attribute_modifiers:
+      mainhand:
+        attackDamage: 1
+        attackSpeed: -2.0

@@ -3,8 +3,11 @@ plugins {
     kotlin("jvm") version "2.2.21"
     id("com.gradleup.shadow") version "8.3.5"
     id("xyz.jpenilla.run-paper") version "2.3.1"
+    jacoco
+}
 
-
+jacoco {
+    toolVersion = "0.8.12"
 }
 
 group = property("group")!!
@@ -29,17 +32,40 @@ dependencies {
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:${property("coroutinesVersion")}")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-jdk8:${property("coroutinesVersion")}")
 
+    // Database dependencies for structure tracking
+    implementation("org.jetbrains.exposed:exposed-core:0.48.0")
+    implementation("org.jetbrains.exposed:exposed-dao:0.48.0")
+    implementation("org.jetbrains.exposed:exposed-jdbc:0.48.0")
+    implementation("org.xerial:sqlite-jdbc:3.45.1.0")
+
+    // Unit testing framework
     testImplementation("org.jetbrains.kotlin:kotlin-test:${property("kotlinVersion")}")
     testImplementation("io.mockk:mockk:1.13.14")
     testImplementation("org.junit.jupiter:junit-jupiter:5.11.4")
+
+    // MockBukkit for Paper API testing
+    testImplementation("com.github.seeseemelk:MockBukkit-v1.20:3.9.0")
+
+    // AssertJ for fluent assertions
+    testImplementation("org.assertj:assertj-core:3.25.1")
 }
+    tasks.processResources {
+        val props = mapOf("version" to project.version)
+        inputs.properties(props)
+        filteringCharset = "UTF-8"
+        filesMatching("plugin.yml") {
+            expand(props)
+        }
+    }
+
     tasks.shadowJar {
         archiveBaseName.set("CharmedChars")
         archiveClassifier.set("")
         archiveVersion.set(project.version.toString())
         relocate("kotlin", "org.stephanosbad.charmedchars.kotlin")
         relocate("kotlinx.coroutines", "org.stephanosbad.charmedchars.kotlinx.coroutines")
-        minimize()
+        // Note: Exposed and SQLite NOT relocated to preserve ServiceLoader functionality
+        // Note: minimize() removed to prevent stripping Exposed ORM runtime classes
 
         // Output location
         destinationDirectory.set(file("${project.buildDir}/libs"))
@@ -47,7 +73,39 @@ dependencies {
 
     tasks.build { dependsOn(tasks.shadowJar) }
     tasks.runServer { minecraftVersion("1.21.10") }
-    tasks.test { useJUnitPlatform() }
+
+    tasks.test {
+        useJUnitPlatform()
+        finalizedBy(tasks.jacocoTestReport)
+    }
+
+    // JaCoCo test coverage reporting
+    tasks.jacocoTestReport {
+        dependsOn(tasks.test)
+        reports {
+            xml.required.set(true)
+            html.required.set(true)
+            csv.required.set(false)
+        }
+        classDirectories.setFrom(
+            files(classDirectories.files.map {
+                fileTree(it) {
+                    // Exclude generated classes and data classes
+                    exclude("**/*\$*.class")
+                }
+            })
+        )
+    }
+
+    tasks.jacocoTestCoverageVerification {
+        violationRules {
+            rule {
+                limit {
+                    minimum = "0.80".toBigDecimal()
+                }
+            }
+        }
+    }
 
     // Version management task
     tasks.register("version") {

@@ -17,8 +17,6 @@
  */
 package org.stephanosbad.charmedChars.items
 
-import com.sk89q.worldguard.WorldGuard
-import com.sk89q.worldguard.bukkit.WorldGuardPlugin
 import dev.lone.itemsadder.api.CustomBlock
 import dev.lone.itemsadder.api.CustomStack
 import me.ryanhamshire.GriefPrevention.GriefPrevention
@@ -123,16 +121,20 @@ class ItemManager @JvmOverloads constructor(localPlugin: CharmedChars? = null) :
      *
      * Used to check build permissions before allowing letter block placement/breaking.
      * Null if WorldGuard is not installed.
+     *
+     * Note: Stored as Any? to avoid class loading errors when WorldGuard is not present.
      */
-    var worldGuard: WorldGuard? = null
+    var worldGuard: Any? = null
 
     /**
      * WorldGuard plugin instance (optional soft dependency)
      *
      * Provides access to WorldGuard's protection query API.
      * Null if WorldGuard is not installed.
+     *
+     * Note: Stored as Any? to avoid class loading errors when WorldGuard is not present.
      */
-    var worldGuardPlugin: WorldGuardPlugin? = null
+    var worldGuardPlugin: Any? = null
 
     /**
      * GriefPrevention integration instance (optional soft dependency)
@@ -165,17 +167,22 @@ class ItemManager @JvmOverloads constructor(localPlugin: CharmedChars? = null) :
     init {
         // WorldGuard integration (optional soft dependency)
         try {
-            worldGuardPlugin = WorldGuardPlugin.inst()
-            worldGuard = WorldGuard.getInstance()
+            val worldGuardPluginClass = Class.forName("com.sk89q.worldguard.bukkit.WorldGuardPlugin")
+            val worldGuardClass = Class.forName("com.sk89q.worldguard.WorldGuard")
+
+            val instMethod = worldGuardPluginClass.getMethod("inst")
+            val getInstanceMethod = worldGuardClass.getMethod("getInstance")
+
+            worldGuardPlugin = instMethod.invoke(null)
+            worldGuard = getInstanceMethod.invoke(null)
+
             if (worldGuardPlugin != null && worldGuard != null) {
                 val status = if (plugin.configManager.worldGuardIntegration) "enabled" else "disabled in config"
                 Bukkit.getLogger().info("WorldGuard found - integration $status")
-            } else {
-                throw NullPointerException("Class variable did not instantiate")
             }
-        } catch (e: Exception) {
+        } catch (e: ClassNotFoundException) {
             Bukkit.getLogger().info("WorldGuard not available (optional)")
-        } catch (e: Error) {
+        } catch (e: Exception) {
             Bukkit.getLogger().info("WorldGuard not available (optional)")
         }
 
@@ -204,10 +211,51 @@ class ItemManager @JvmOverloads constructor(localPlugin: CharmedChars? = null) :
     }
 
     /**
+     * Checks if an item is a valid tool for CharmedChars gameplay
+     *
+     * Valid tools are either:
+     * - Gold tools (vanilla Minecraft)
+     * - Pyrite tools (custom ItemsAdder tools)
+     *
+     * @param item The ItemStack to check
+     * @return true if the tool is valid for letter drops and word scoring
+     */
+    private fun isValidTool(item: ItemStack): Boolean {
+        if (item.itemMeta == null) {
+            return false
+        }
+
+        // Check if it's a gold tool (vanilla)
+        if (item.type.name.lowercase().contains("gold")) {
+            return true
+        }
+
+        // Check if it's a pyrite tool using ItemsAdder API
+        val customStack = CustomStack.byItemStack(item)
+        if (customStack != null) {
+            val namespacedId = customStack.namespacedID.lowercase()
+            if (namespacedId.contains("pyrite")) {
+                return true
+            }
+        }
+
+        // Fallback: check if display name contains "gold" (for any gold-like custom items)
+        val displayName = item.itemMeta.displayName()
+        if (displayName != null) {
+            val plainText = net.kyori.adventure.text.serializer.plain.PlainTextComponentSerializer.plainText().serialize(displayName).lowercase()
+            if (plainText.contains("gold") || plainText.contains("pyrite")) {
+                return true
+            }
+        }
+
+        return false
+    }
+
+    /**
      * Main event handler for block breaking
      *
      * Handles two scenarios:
-     * 1. Breaking logs with gold tools (without Silk Touch) - drops letter blocks
+     * 1. Breaking logs with gold/pyrite tools (without Silk Touch) - drops letter blocks
      * 2. Breaking letter blocks - validates words and awards scores
      *
      * @param e The block break event from Bukkit/Spigot
@@ -222,13 +270,8 @@ class ItemManager @JvmOverloads constructor(localPlugin: CharmedChars? = null) :
             //If there is no silk touch on it
 
             if (list.containsKey(material)) {
-                //Must be gold item in hand
-                if (hand.itemMeta == null) {
-                    return
-                }
-                if (!hand.type.name.lowercase().contains("gold") &&
-                    true != hand.itemMeta.displayName()?.examinableName()?.lowercase()?.contains("gold")
-                ) {
+                //Must be gold or pyrite tool in hand
+                if (!isValidTool(hand)) {
                     return
                 }
 
@@ -338,10 +381,9 @@ class ItemManager @JvmOverloads constructor(localPlugin: CharmedChars? = null) :
             e.player.sendMessage("Protected block: " + e.getBlock().location)
             return
         }
-        if (hand.itemMeta == null) {
-            return
-        }
-        if (!hand.type.name.lowercase().contains("gold")) {
+
+        // Must be gold or pyrite tool in hand
+        if (!isValidTool(hand)) {
             return
         }
 
@@ -430,6 +472,19 @@ class ItemManager @JvmOverloads constructor(localPlugin: CharmedChars? = null) :
         }
 
         val wordLowercase = outString.toString().lowercase()
+        val wordLength = wordLowercase.length
+
+        // Validate minimum word length
+        // Single color words: minimum 3 letters
+        // Multi-color words: minimum 4 letters
+        val minimumLength = if (isSameColor) 3 else 4
+        if (wordLength < minimumLength) {
+            val colorType = if (isSameColor) "single-color" else "multi-color"
+            e.player.sendMessage("Miss: $colorType words must be at least $minimumLength letters long")
+            e.isCancelled = true
+            return
+        }
+
         val isInDictionary = WordDict.singleton!!.words.contains(wordLowercase)
 
         if (isInDictionary) {
@@ -649,12 +704,19 @@ class ItemManager @JvmOverloads constructor(localPlugin: CharmedChars? = null) :
         }
 
         // Check WorldGuard if enabled in config
-        if (plugin.configManager.worldGuardIntegration) {
-            var worldGuardPlugin = this.worldGuardPlugin
-            if (worldGuardPlugin != null &&
-                !worldGuardPlugin.createProtectionQuery().testBlockBreak(player, block)
-            ) {
-                return true
+        if (plugin.configManager.worldGuardIntegration && worldGuardPlugin != null) {
+            try {
+                val createQueryMethod = worldGuardPlugin!!.javaClass.getMethod("createProtectionQuery")
+                val query = createQueryMethod.invoke(worldGuardPlugin)
+                val testBreakMethod = query.javaClass.getMethod("testBlockBreak", Player::class.java, Block::class.java)
+                val canBreak = testBreakMethod.invoke(query, player, block) as Boolean
+
+                if (!canBreak) {
+                    return true
+                }
+            } catch (e: Exception) {
+                // If WorldGuard check fails, log and continue
+                plugin.logger.warning("WorldGuard protection check failed: ${e.message}")
             }
         }
 

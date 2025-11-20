@@ -98,6 +98,38 @@ class ConfigManager(private val plugin: CharmedChars) {
         get() = config.getBoolean("protection.griefprevention-integration", true)
 
     /**
+     * Material name for fortress number game reward
+     *
+     * Default: BLAZE_ROD
+     */
+    val fortressRewardMaterial: String
+        get() = config.getString("structure-rewards.fortress.material", "BLAZE_ROD") ?: "BLAZE_ROD"
+
+    /**
+     * Amount of items to give for fortress number game reward
+     *
+     * Default: 12
+     */
+    val fortressRewardAmount: Int
+        get() = config.getInt("structure-rewards.fortress.amount", 12)
+
+    /**
+     * Material name for bastion remnant number game reward
+     *
+     * Default: ENDER_PEARL
+     */
+    val bastionRewardMaterial: String
+        get() = config.getString("structure-rewards.bastion.material", "ENDER_PEARL") ?: "ENDER_PEARL"
+
+    /**
+     * Amount of items to give for bastion remnant number game reward
+     *
+     * Default: 16
+     */
+    val bastionRewardAmount: Int
+        get() = config.getInt("structure-rewards.bastion.amount", 16)
+
+    /**
      * Reloads the configuration from disk
      *
      * Discards any in-memory changes and reloads from the config.yml file.

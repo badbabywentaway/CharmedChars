@@ -33,9 +33,15 @@ import org.bukkit.Bukkit
 import org.stephanosbad.charmedChars.commands.ItemsAdderStatusCommand
 import org.stephanosbad.charmedChars.commands.ReloadCommand
 import org.stephanosbad.charmedChars.commands.SetupItemsAdderCommand
+import org.stephanosbad.charmedChars.commands.StructureCodeCommand
+import org.stephanosbad.charmedChars.commands.StructureDatabaseCommand
 import org.stephanosbad.charmedChars.commands.VersionCommand
 import org.stephanosbad.charmedChars.integration.ItemsAdderSetup
 import org.stephanosbad.charmedChars.utility.ConfigManager
+import org.stephanosbad.charmedChars.database.StructureDatabase
+import org.stephanosbad.charmedChars.listeners.StructureListener
+import org.stephanosbad.charmedChars.listeners.FortressNumberGameListener
+import org.stephanosbad.charmedChars.listeners.BastionNumberGameListener
 import java.io.IOException
 import kotlin.coroutines.CoroutineContext
 
@@ -67,6 +73,12 @@ class CharmedChars : JavaPlugin(), CoroutineScope {
     var configDataHandler: ConfigDataHandler? = null
 
     /**
+     * Database manager for structure tracking
+     */
+    lateinit var structureDatabase: StructureDatabase
+        private set
+
+    /**
      * Called when the plugin is enabled
      *
      * Initializes configuration, registers commands and event listeners,
@@ -93,11 +105,19 @@ class CharmedChars : JavaPlugin(), CoroutineScope {
         configManager = ConfigManager(this)
         configManager.loadConfig()
 
+        // Initialize structure database
+        structureDatabase = StructureDatabase(this)
+        structureDatabase.initialize()
+
         // Register commands
         getCommand("reload")?.setExecutor(ReloadCommand(this))
         getCommand("iastatus")?.setExecutor(ItemsAdderStatusCommand())
         getCommand("iasetup")?.setExecutor(SetupItemsAdderCommand(this))
         getCommand("version")?.setExecutor(VersionCommand(this))
+        getCommand("structurecode")?.setExecutor(StructureCodeCommand(this))
+        val structureDbCommand = StructureDatabaseCommand(this)
+        getCommand("structuredb")?.setExecutor(structureDbCommand)
+        getCommand("structuredb")?.tabCompleter = structureDbCommand
 
         // Async startup operations
         launch {
@@ -123,7 +143,12 @@ class CharmedChars : JavaPlugin(), CoroutineScope {
             getCommand(CharBlock.CommandName)!!.setExecutor(CharBlock())
             getCommand(CharBlock.CommandName)!!.tabCompleter = CharBlock()
         }
+
+        // Register event listeners
         Bukkit.getPluginManager().registerEvents(ItemManager(this), this)
+        Bukkit.getPluginManager().registerEvents(StructureListener(this, structureDatabase), this)
+        Bukkit.getPluginManager().registerEvents(FortressNumberGameListener(this, structureDatabase), this)
+        Bukkit.getPluginManager().registerEvents(BastionNumberGameListener(this, structureDatabase), this)
 
 
     }
@@ -134,6 +159,11 @@ class CharmedChars : JavaPlugin(), CoroutineScope {
      * Cancels all running coroutines and performs cleanup operations.
      */
     override fun onDisable() {
+        // Close database connection
+        if (::structureDatabase.isInitialized) {
+            structureDatabase.close()
+        }
+
         // Cancel all coroutines
         job.cancel()
 
