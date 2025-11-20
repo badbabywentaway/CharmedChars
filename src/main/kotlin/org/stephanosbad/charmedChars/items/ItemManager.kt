@@ -472,6 +472,19 @@ class ItemManager @JvmOverloads constructor(localPlugin: CharmedChars? = null) :
         }
 
         val wordLowercase = outString.toString().lowercase()
+        val wordLength = wordLowercase.length
+
+        // Validate minimum word length
+        // Single color words: minimum 3 letters
+        // Multi-color words: minimum 4 letters
+        val minimumLength = if (isSameColor) 3 else 4
+        if (wordLength < minimumLength) {
+            val colorType = if (isSameColor) "single-color" else "multi-color"
+            e.player.sendMessage("Miss: $colorType words must be at least $minimumLength letters long")
+            e.isCancelled = true
+            return
+        }
+
         val isInDictionary = WordDict.singleton!!.words.contains(wordLowercase)
 
         if (isInDictionary) {
