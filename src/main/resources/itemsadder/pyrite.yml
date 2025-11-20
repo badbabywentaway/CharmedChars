@@ -76,8 +76,6 @@ items:
       generate: true
       textures:
         - item/pyrite/ingot
-    durability:
-      max_custom_durability: 1
 
   pyrite_pickaxe:
     display_name: "Pyrite Pickaxe"
