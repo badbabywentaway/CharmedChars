@@ -6,10 +6,12 @@ Welcome to CharmedChars! This is a word-forming puzzle game in Minecraft where y
 
 ## Quick Start
 
-1. **Mine logs with gold tools** to collect letter blocks
+1. **Mine logs with gold or pyrite tools** to collect letter blocks
 2. **Place letter blocks** in straight lines to form words
-3. **Break any letter** in your word with a gold tool to score
+3. **Break any letter** in your word with a gold or pyrite tool to score
 4. **Earn rewards** based on your word's score!
+
+> **New in v1.1.2:** Pyrite tools work just like gold but with iron-tier durability! Craft pyrite ingots from iron + redstone.
 
 ---
 
@@ -17,10 +19,11 @@ Welcome to CharmedChars! This is a word-forming puzzle game in Minecraft where y
 
 ### How to Get Letter Blocks
 
-**Mine any wood logs with GOLD TOOLS ONLY:**
+**Mine any wood logs with GOLD or PYRITE TOOLS:**
 - Oak, Spruce, Birch, Jungle, Acacia, Dark Oak, Mangrove, Cherry, Pale Oak
 - Warped Stems and Crimson Stems (Nether wood)
 - Bamboo blocks
+- **Tools:** Gold pickaxe, gold axe, pyrite pickaxe, or pyrite axe
 
 **Drop Chances:**
 - Base chance: **6%** per log broken
@@ -78,17 +81,20 @@ Invalid (diagonal):
 ### How to Score
 
 1. Form your word by placing letter blocks
-2. **Break any letter block** in the word using a **gold tool**
+2. **Break any letter block** in the word using a **gold or pyrite tool**
 3. The game will:
    - Detect the entire word automatically
    - Check if it's a valid English word
+   - Validate minimum length
    - Calculate your score
    - Remove all blocks if valid
    - Give you rewards based on score
 
 ### Valid Words
 
-- Minimum **2 letters** (default setting)
+- **Minimum length:**
+  - **Single-color words:** 3 letters minimum (e.g., "CAT" all cyan)
+  - **Multi-color words:** 4 letters minimum (e.g., "CATS" cyan+magenta)
 - Must be in the built-in English dictionary (~100,000+ words)
 - Must be a straight line (not diagonal)
 
@@ -259,15 +265,122 @@ Permission: `charmedchars.blocks`
 
 ---
 
-## 8. Frequently Asked Questions
+## 8. Pyrite (Fool's Gold) System
+
+**New in v1.1.2!** Pyrite tools are a craftable alternative to gold with better durability.
+
+### Why Use Pyrite?
+
+Gold tools have only **32 durability**, which breaks quickly. Pyrite tools have:
+- **250 durability** (same as iron tools)
+- **Iron-tier mining speed** (faster than gold!)
+- **Same CharmedChars functionality** (letter drops, word scoring, number sequences)
+- **Cheaper to obtain** (no gold mining needed!)
+
+### Crafting Pyrite
+
+#### Step 1: Craft Pyrite Ingots
+
+**Recipe:** Shapeless (put anywhere in crafting table)
+```
+Iron Ingot + Redstone = Pyrite Ingot
+```
+
+**How to get:**
+- `/iagive <player> charmedchars:pyrite_ingot` (admin command)
+- Craft yourself: 1 Iron Ingot + 1 Redstone
+
+#### Step 2: Craft Pyrite Tools
+
+Use standard tool recipes with Pyrite Ingots instead of gold:
+
+**Pyrite Pickaxe:**
+```
+[P] [P] [P]
+    [S]
+    [S]
+```
+
+**Pyrite Axe:**
+```
+[P] [P]
+[P] [S]
+    [S]
+```
+
+**Pyrite Shovel:**
+```
+    [P]
+    [S]
+    [S]
+```
+
+**Pyrite Hoe:**
+```
+[P] [P]
+    [S]
+    [S]
+```
+
+Where:
+- `P` = Pyrite Ingot
+- `S` = Stick
+
+### Pyrite Tool Stats
+
+All pyrite tools have:
+- **Durability:** 250 uses (vs gold's 32)
+- **Mining Speed:** Iron-tier (faster than gold)
+- **Enchantability:** Same as iron tools
+- **Attack Damage:** Iron-tier
+- **CharmedChars Features:** Identical to gold tools
+
+### Using Pyrite Tools
+
+Pyrite tools work **exactly like gold** for:
+
+✅ **Mining logs for letter blocks:**
+- Pyrite pickaxe or axe on any wood log
+- Same drop chances as gold tools
+- Same Looting enchantment bonuses
+
+✅ **Breaking letter blocks to score words:**
+- Use any pyrite tool
+- Same scoring system
+- Same rewards
+
+✅ **Breaking number sequences in Nether structures:**
+- Fortresses: Break 3-digit sequence for blaze rods
+- Bastions: Break 3-digit sequence for ender pearls
+
+### Comparison: Gold vs Pyrite
+
+| Feature | Gold Tools | Pyrite Tools |
+|---------|-----------|--------------|
+| **Durability** | 32 uses | 250 uses ✅ |
+| **Mining Speed** | Fast | Faster ✅ |
+| **Letter Drops** | Yes | Yes |
+| **Word Scoring** | Yes | Yes |
+| **Number Sequences** | Yes | Yes |
+| **Enchantable** | Low | Higher ✅ |
+| **Cost** | Gold ore/nuggets | Iron + Redstone ✅ |
+
+**Bottom line:** Pyrite is better than gold in every way except lore!
+
+---
+
+## 9. Frequently Asked Questions
 
 ### Q: My word didn't score. Why?
 
 **Possible reasons:**
 - Word is not in the dictionary (try a different word)
+- Word is too short:
+  - Single-color words need at least 3 letters
+  - Multi-color words need at least 4 letters
 - Blocks aren't in a straight line (check alignment)
 - Blocks are diagonal (must be horizontal or vertical)
-- Word has less than 2 letters (default minimum)
+- Not using a gold or pyrite tool
 
 ### Q: Can I use numbers and operators in words?
 
