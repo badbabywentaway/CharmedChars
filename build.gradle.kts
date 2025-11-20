@@ -27,7 +27,7 @@ dependencies {
     compileOnly("com.sk89q.worldguard:worldguard-bukkit:${property("worldGuardVersion")}")
     compileOnly("com.comphenix.protocol:ProtocolLib:5.3.0")
     compileOnly("com.github.LoneDev6:API-ItemsAdder:3.6.3-beta-14")
-    implementation("com.github.GriefPrevention:GriefPrevention:${property("griefPreventionVersion")}")
+    compileOnly("com.github.GriefPrevention:GriefPrevention:${property("griefPreventionVersion")}")
     implementation("org.jetbrains.kotlin:kotlin-stdlib:${property("kotlinVersion")}")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:${property("coroutinesVersion")}")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-jdk8:${property("coroutinesVersion")}")
