@@ -1,6 +1,70 @@
 info:
   namespace: charmedchars
 
+recipes:
+  crafting_table:
+    pyrite_ingot_recipe:
+      enabled: true
+      shapeless: true
+      ingredients:
+        I: IRON_INGOT
+        R: REDSTONE
+      result:
+        item: charmedchars:pyrite_ingot
+        amount: 1
+
+    pyrite_pickaxe_recipe:
+      enabled: true
+      pattern:
+        - PPP
+        - " S "
+        - " S "
+      ingredients:
+        P: charmedchars:pyrite_ingot
+        S: STICK
+      result:
+        item: charmedchars:pyrite_pickaxe
+        amount: 1
+
+    pyrite_axe_recipe:
+      enabled: true
+      pattern:
+        - "PP "
+        - "PS "
+        - " S "
+      ingredients:
+        P: charmedchars:pyrite_ingot
+        S: STICK
+      result:
+        item: charmedchars:pyrite_axe
+        amount: 1
+
+    pyrite_shovel_recipe:
+      enabled: true
+      pattern:
+        - " P "
+        - " S "
+        - " S "
+      ingredients:
+        P: charmedchars:pyrite_ingot
+        S: STICK
+      result:
+        item: charmedchars:pyrite_shovel
+        amount: 1
+
+    pyrite_hoe_recipe:
+      enabled: true
+      pattern:
+        - "PP "
+        - " S "
+        - " S "
+      ingredients:
+        P: charmedchars:pyrite_ingot
+        S: STICK
+      result:
+        item: charmedchars:pyrite_hoe
+        amount: 1
+
 items:
   # ==================== PYRITE (FOOL'S GOLD) MATERIALS ====================
 
@@ -14,17 +78,6 @@ items:
         - item/pyrite/ingot
     durability:
       max_custom_durability: 1
-    recipes:
-      crafting_table:
-        pyrite_ingot_recipe:
-          enabled: true
-          shapeless: true
-          ingredients:
-            I: IRON_INGOT
-            R: REDSTONE
-          result:
-            item: charmedchars:pyrite_ingot
-            amount: 1
 
   pyrite_pickaxe:
     display_name: "Pyrite Pickaxe"
@@ -47,20 +100,6 @@ items:
       mainhand:
         attackDamage: 4
         attackSpeed: -2.8
-    recipes:
-      crafting_table:
-        pyrite_pickaxe_recipe:
-          enabled: true
-          pattern:
-            - PPP
-            - " S "
-            - " S "
-          ingredients:
-            P: charmedchars:pyrite_ingot
-            S: STICK
-          result:
-            item: charmedchars:pyrite_pickaxe
-            amount: 1
 
   pyrite_axe:
     display_name: "Pyrite Axe"
@@ -83,20 +122,6 @@ items:
       mainhand:
         attackDamage: 9
         attackSpeed: -3.1
-    recipes:
-      crafting_table:
-        pyrite_axe_recipe:
-          enabled: true
-          pattern:
-            - "PP "
-            - "PS "
-            - " S "
-          ingredients:
-            P: charmedchars:pyrite_ingot
-            S: STICK
-          result:
-            item: charmedchars:pyrite_axe
-            amount: 1
 
   pyrite_shovel:
     display_name: "Pyrite Shovel"
@@ -119,20 +144,6 @@ items:
       mainhand:
         attackDamage: 4.5
         attackSpeed: -3.0
-    recipes:
-      crafting_table:
-        pyrite_shovel_recipe:
-          enabled: true
-          pattern:
-            - " P "
-            - " S "
-            - " S "
-          ingredients:
-            P: charmedchars:pyrite_ingot
-            S: STICK
-          result:
-            item: charmedchars:pyrite_shovel
-            amount: 1
 
   pyrite_hoe:
     display_name: "Pyrite Hoe"
@@ -155,17 +166,3 @@ items:
       mainhand:
         attackDamage: 1
         attackSpeed: -2.0
-    recipes:
-      crafting_table:
-        pyrite_hoe_recipe:
-          enabled: true
-          pattern:
-            - "PP "
-            - " S "
-            - " S "
-          ingredients:
-            P: charmedchars:pyrite_ingot
-            S: STICK
-          result:
-            item: charmedchars:pyrite_hoe
-            amount: 1
