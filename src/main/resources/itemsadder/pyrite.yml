@@ -17,7 +17,6 @@ items:
     recipes:
       shapeless:
         enabled: true
-        permission: charmedchars.pyrite
         ingredients:
           - IRON_INGOT
           - REDSTONE
@@ -49,7 +48,6 @@ items:
     recipes:
       shaped:
         enabled: true
-        permission: charmedchars.pyrite
         pattern:
           - PPP
           - " S "
@@ -85,7 +83,6 @@ items:
     recipes:
       shaped:
         enabled: true
-        permission: charmedchars.pyrite
         pattern:
           - "PP "
           - "PS "
@@ -121,7 +118,6 @@ items:
     recipes:
       shaped:
         enabled: true
-        permission: charmedchars.pyrite
         pattern:
           - " P "
           - " S "
@@ -157,7 +153,6 @@ items:
     recipes:
       shaped:
         enabled: true
-        permission: charmedchars.pyrite
         pattern:
           - "PP "
           - " S "

@@ -230,14 +230,22 @@ class ItemManager @JvmOverloads constructor(localPlugin: CharmedChars? = null) :
             return true
         }
 
-        // Check if display name contains "gold" (for any gold-like custom items)
-        if (item.itemMeta.displayName()?.examinableName()?.lowercase()?.contains("gold") == true) {
-            return true
+        // Check if it's a pyrite tool using ItemsAdder API
+        val customStack = CustomStack.byItemStack(item)
+        if (customStack != null) {
+            val namespacedId = customStack.namespacedID.lowercase()
+            if (namespacedId.contains("pyrite")) {
+                return true
+            }
         }
 
-        // Check if it's a pyrite tool (custom ItemsAdder item)
-        if (item.itemMeta.displayName()?.examinableName()?.lowercase()?.contains("pyrite") == true) {
-            return true
+        // Fallback: check if display name contains "gold" (for any gold-like custom items)
+        val displayName = item.itemMeta.displayName()
+        if (displayName != null) {
+            val plainText = net.kyori.adventure.text.serializer.plain.PlainTextComponentSerializer.plainText().serialize(displayName).lowercase()
+            if (plainText.contains("gold") || plainText.contains("pyrite")) {
+                return true
+            }
         }
 
         return false
