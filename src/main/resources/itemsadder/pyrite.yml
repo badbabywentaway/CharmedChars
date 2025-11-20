@@ -15,11 +15,12 @@ items:
     durability:
       max_custom_durability: 1
     recipes:
-      shapeless:
+      pyrite_ingot_recipe:
         enabled: true
+        shapeless: true
         ingredients:
-          - IRON_INGOT
-          - REDSTONE
+          I: IRON_INGOT
+          R: REDSTONE
         result:
           item: charmedchars:pyrite_ingot
           amount: 1
@@ -46,7 +47,7 @@ items:
         attackDamage: 4
         attackSpeed: -2.8
     recipes:
-      shaped:
+      pyrite_pickaxe_recipe:
         enabled: true
         pattern:
           - PPP
@@ -81,7 +82,7 @@ items:
         attackDamage: 9
         attackSpeed: -3.1
     recipes:
-      shaped:
+      pyrite_axe_recipe:
         enabled: true
         pattern:
           - "PP "
@@ -116,7 +117,7 @@ items:
         attackDamage: 4.5
         attackSpeed: -3.0
     recipes:
-      shaped:
+      pyrite_shovel_recipe:
         enabled: true
         pattern:
           - " P "
@@ -151,7 +152,7 @@ items:
         attackDamage: 1
         attackSpeed: -2.0
     recipes:
-      shaped:
+      pyrite_hoe_recipe:
         enabled: true
         pattern:
           - "PP "
