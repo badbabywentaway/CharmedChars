@@ -43,14 +43,9 @@ items:
       tool:
         tier: IRON
     attribute_modifiers:
-      GENERIC_ATTACK_DAMAGE:
-        amount: 4
-        operation: ADD_NUMBER
-        slot: HAND
-      GENERIC_ATTACK_SPEED:
-        amount: -2.8
-        operation: ADD_NUMBER
-        slot: HAND
+      mainhand:
+        attackDamage: 4
+        attackSpeed: -2.8
     recipes:
       shaped:
         enabled: true
@@ -84,14 +79,9 @@ items:
       tool:
         tier: IRON
     attribute_modifiers:
-      GENERIC_ATTACK_DAMAGE:
-        amount: 9
-        operation: ADD_NUMBER
-        slot: HAND
-      GENERIC_ATTACK_SPEED:
-        amount: -3.1
-        operation: ADD_NUMBER
-        slot: HAND
+      mainhand:
+        attackDamage: 9
+        attackSpeed: -3.1
     recipes:
       shaped:
         enabled: true
@@ -125,14 +115,9 @@ items:
       tool:
         tier: IRON
     attribute_modifiers:
-      GENERIC_ATTACK_DAMAGE:
-        amount: 4.5
-        operation: ADD_NUMBER
-        slot: HAND
-      GENERIC_ATTACK_SPEED:
-        amount: -3.0
-        operation: ADD_NUMBER
-        slot: HAND
+      mainhand:
+        attackDamage: 4.5
+        attackSpeed: -3.0
     recipes:
       shaped:
         enabled: true
@@ -166,14 +151,9 @@ items:
       tool:
         tier: IRON
     attribute_modifiers:
-      GENERIC_ATTACK_DAMAGE:
-        amount: 1
-        operation: ADD_NUMBER
-        slot: HAND
-      GENERIC_ATTACK_SPEED:
-        amount: -2.0
-        operation: ADD_NUMBER
-        slot: HAND
+      mainhand:
+        attackDamage: 1
+        attackSpeed: -2.0
     recipes:
       shaped:
         enabled: true
