@@ -1,5 +1,40 @@
 # CharmedChars Version History
 
+## Version 1.1.3 - Brass-Colored Pyrite Textures
+
+### Release Date
+2025-11-21
+
+### Overview
+Minor visual update improving the pyrite textures to better distinguish them from vanilla gold items.
+
+### Changes
+
+#### **Updated Pyrite Textures** 🎨
+Pyrite items now feature a brass-like metal color instead of bright gold.
+
+- **Color:** Warmer, coppery-golden brass tone (hue shifted to 88%)
+- **Saturation:** Slightly reduced (95%) for a more subdued appearance
+- **Visual Identity:** Better represents "fool's gold" (pyrite) vs real gold
+- **Affected Items:**
+  - pyrite_ingot.png - Brass-colored ingot
+  - pyrite_pickaxe.png - Warmer metal head
+  - pyrite_axe.png - Coppery-golden blade
+  - pyrite_shovel.png - Brass-colored spade
+  - pyrite_hoe.png - Warmer brass tone
+
+### Technical Details
+- Applied ImageMagick color transformation: `-modulate 100,95,88`
+- Textures auto-copied by `/iasetup` command
+- Resource pack regeneration required with `/iazip`
+
+### Upgrade Notes
+- **From v1.1.2:** Drop-in replacement, no config changes needed
+- **Resource Pack:** Regenerate with `/iazip` after update to see new textures
+- **Existing Items:** Already placed pyrite tools will show new textures automatically
+
+---
+
 ## Version 1.1.2 - Pyrite (Fool's Gold) System & Gameplay Improvements
 
 ### Release Date
