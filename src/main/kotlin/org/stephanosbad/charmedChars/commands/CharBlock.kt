@@ -51,7 +51,7 @@ class CharBlock : CommandExecutor, TabCompleter {
      * @param args Command arguments: [player] [color] [text]
      * @return true if the command was handled successfully
      */
-    override fun onCommand(sender: CommandSender, command: Command, label: kotlin.String, args: Array<out kotlin.String>): Boolean {
+    override fun onCommand(sender: CommandSender, _command: Command, _label: kotlin.String, args: Array<out kotlin.String>): Boolean {
         // Check permission
         if (!sender.hasPermission("charmedChars.blocks")) {
             sender.sendMessage(
@@ -190,9 +190,9 @@ class CharBlock : CommandExecutor, TabCompleter {
      * @return List of completion suggestions
      */
     override fun onTabComplete(
-        sender: CommandSender,
-        cmd: Command,
-        label: kotlin.String,
+        _sender: CommandSender,
+        _cmd: Command,
+        _label: kotlin.String,
         args: Array<out kotlin.String>
     ): List<kotlin.String?>? {
         var completions: MutableList<kotlin.String?> = ArrayList<kotlin.String?>()

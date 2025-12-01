@@ -46,9 +46,9 @@ class VersionCommand(private val plugin: CharmedChars) : CommandExecutor {
      */
     override fun onCommand(
         sender: CommandSender,
-        command: Command,
-        label: String,
-        args: Array<out String>
+        _command: Command,
+        _label: String,
+        _args: Array<out String>
     ): Boolean {
         val version = plugin.description.version
         val apiVersion = plugin.description.apiVersion

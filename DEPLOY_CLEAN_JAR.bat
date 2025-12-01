@@ -1,6 +1,6 @@
 @echo off
 echo ===================================================
-echo    CharmedChars v1.1.3 - Clean Deployment Script
+echo    CharmedChars v1.1.4 - Clean Deployment Script
 echo ===================================================
 echo.
 
@@ -55,8 +55,8 @@ if exist "c:\Users\steve\Documents\Papermc\plugins\CharmedChars-*.jar" (
 
 REM Step 6: Copy new JAR
 echo.
-echo Step 6: Copying new JAR (v1.1.3)...
-copy "build\libs\CharmedChars-1.1.3.jar" "c:\Users\steve\Documents\Papermc\plugins\" /Y
+echo Step 6: Copying new JAR (v1.1.4)...
+copy "build\libs\CharmedChars-1.1.4.jar" "c:\Users\steve\Documents\Papermc\plugins\" /Y
 if %ERRORLEVEL% EQU 0 (
     echo [OK] JAR copied successfully
 ) else (
@@ -67,7 +67,7 @@ if %ERRORLEVEL% EQU 0 (
 
 echo.
 echo ===================================================
-echo [SUCCESS] CharmedChars v1.1.3 deployed successfully!
+echo [SUCCESS] CharmedChars v1.1.4 deployed successfully!
 echo ===================================================
 echo.
 echo Next steps:
@@ -95,6 +95,6 @@ echo      /structurecode (while in fortress/bastion)
 echo      Break number sequences with gold/pyrite tools
 echo.
 echo ===================================================
-echo Version: 1.1.3 (Pyrite System + Word Length Rules)
+echo Version: 1.1.4 (Code Cleanup & Refactoring)
 echo ===================================================
 pause
