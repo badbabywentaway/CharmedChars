@@ -60,7 +60,7 @@ class StructureDatabaseCommand(private val plugin: CharmedChars) : CommandExecut
      * @param args Command arguments
      * @return true if the command was handled successfully
      */
-    override fun onCommand(sender: CommandSender, command: Command, label: String, args: Array<out String>): Boolean {
+    override fun onCommand(sender: CommandSender, _command: Command, _label: String, args: Array<out String>): Boolean {
         // Check permission
         if (!sender.hasPermission("charmedchars.blocks")) {
             sender.sendMessage(
@@ -584,8 +584,8 @@ class StructureDatabaseCommand(private val plugin: CharmedChars) : CommandExecut
      */
     override fun onTabComplete(
         sender: CommandSender,
-        command: Command,
-        alias: String,
+        _command: Command,
+        _alias: String,
         args: Array<out String>
     ): List<String>? {
         if (!sender.hasPermission("charmedchars.blocks")) {

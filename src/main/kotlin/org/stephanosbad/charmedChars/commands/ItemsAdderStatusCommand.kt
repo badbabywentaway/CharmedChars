@@ -44,7 +44,7 @@ class ItemsAdderStatusCommand : CommandExecutor {
      * @param args Command arguments (unused)
      * @return true if the command was handled successfully
      */
-    override fun onCommand(sender: CommandSender, command: Command, label: String, args: Array<out String>): Boolean {
+    override fun onCommand(sender: CommandSender, _command: Command, _label: String, _args: Array<out String>): Boolean {
         sender.sendMessage(
             Component.text("=== ItemsAdder Integration Status ===")
                 .color(NamedTextColor.GOLD)

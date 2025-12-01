@@ -549,41 +549,6 @@ class ItemManager @JvmOverloads constructor(localPlugin: CharmedChars? = null) :
     }
 
     /**
-     * Determines which lateral direction has letter blocks
-     *
-     * Checks all four cardinal directions (±X, ±Z) to find which one contains
-     * letter blocks adjacent to the test block.
-     *
-     * @param player The player (used for protection checks)
-     * @param testBlock The block to check around
-     * @return A LateralDirection indicating which direction has letters, or (0,0) if none/multiple
-     */
-    private fun checkLateralBlocks(player: Player?, testBlock: Block): LateralDirection {
-        val retValue = LateralDirection(0, 0)
-        val world = testBlock.world
-        val x = testBlock.x
-        val y = testBlock.y
-        val z = testBlock.z
-
-        val xUp = testForLetter(player, world.getBlockAt(x + 1, y, z)).first != '\u0000'
-        val xDown = testForLetter(player, world.getBlockAt(x - 1, y, z)).first != '\u0000'
-        val zUp = testForLetter(player, world.getBlockAt(x, y, z + 1)).first != '\u0000'
-        val zDown = testForLetter(player, world.getBlockAt(x, y, z - 1)).first != '\u0000'
-
-        if (xUp && !xDown && !zUp && !zDown) {
-            retValue.xOffset = 1
-        } else if (!xUp && xDown && !zUp && !zDown) {
-            retValue.xOffset = -1
-        } else if (!xUp && !xDown && zUp && !zDown) {
-            retValue.zOffset = 1
-        } else if (!xUp && !xDown && !zUp && zDown) {
-            retValue.zOffset = -1
-        }
-
-        return retValue
-    }
-
-    /**
      * Tests if a block is a letter block and returns its character and score
      *
      * Uses ItemsAdder API to identify custom letter blocks. Returns null character ('\u0000')
@@ -613,21 +578,6 @@ class ItemManager @JvmOverloads constructor(localPlugin: CharmedChars? = null) :
         }
         return SimpleTuple('\u0000', 0.0)
     }
-
-    /**
-     * Gets the custom model data number from a note block's drops
-     *
-     * This is a legacy method for compatibility with older note block-based implementations.
-     *
-     * @param testBlock The note block to check
-     * @return The custom model data value, or null if not found
-     */
-    fun getNoteblockNumber(testBlock: Block) : Int?
-    {
-        return testBlock.drops.firstOrNull()?.itemMeta?.customModelData
-
-    }
-
     /**
      * Identifies which letter a custom block represents
      *
@@ -823,6 +773,4 @@ class ItemManager @JvmOverloads constructor(localPlugin: CharmedChars? = null) :
             }
         }
     }
-
-    companion object
 }

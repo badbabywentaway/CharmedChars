@@ -42,11 +42,4 @@ data class StructureData(
     val discoveredBy: UUID,
     val discoveredAt: Long,
     val rewardsDispensed: Boolean = false
-) {
-    /**
-     * Returns a unique key for this structure based on its location
-     */
-    fun getLocationKey(): String {
-        return "$worldName:$chunkX:$chunkZ:${structureType.name}"
-    }
-}
+)

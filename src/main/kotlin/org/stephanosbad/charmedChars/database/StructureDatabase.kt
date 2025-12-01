@@ -274,28 +274,6 @@ class StructureDatabase(private val plugin: CharmedChars) {
     }
 
     /**
-     * Deletes a structure by its database ID
-     *
-     * @param structureId The database ID to delete
-     * @return true if the structure was deleted, false if not found
-     */
-    fun deleteStructureById(structureId: Int): Boolean {
-        return transaction(database) {
-            val structure = StructureTable.select {
-                StructureTable.id eq structureId
-            }.firstOrNull()
-
-            if (structure != null) {
-                exec("DELETE FROM ${StructureTable.tableName} WHERE ${StructureTable.id.name} = $structureId")
-                usedNumbers.remove(structure[StructureTable.assignedNumber])
-                true
-            } else {
-                false
-            }
-        }
-    }
-
-    /**
      * Deletes all structures in a specific world
      *
      * @param worldName Name of the world
