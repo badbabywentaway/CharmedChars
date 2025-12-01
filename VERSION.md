@@ -1,5 +1,62 @@
 # CharmedChars Version History
 
+## Version 1.1.4 - Code Cleanup & Refactoring
+
+### Release Date
+2025-12-01
+
+### Overview
+Internal code cleanup release removing dead code and improving code clarity. No functional changes or new features.
+
+### Changes
+
+#### **Dead Code Removal** 🧹
+Removed unused functions, imports, and empty structures to improve maintainability.
+
+**Removed Functions (6 total):**
+- `ItemManager.getNoteblockNumber()` - Legacy note block method (replaced by getCustomVariation)
+- `ItemManager.checkLateralBlocks()` - Refactored inline into letterBlockBreak method
+- `StructureDatabase.deleteStructureById()` - Unused public API (deleteStructureByNumber used instead)
+- `StructureData.getLocationKey()` - Unused utility function
+- `StructureType.fromString()` - Kotlin stdlib valueOf() used instead
+- `ItemManager` empty companion object - Leftover from refactoring
+
+**Removed Imports:**
+- `BlockColor.kt` - Unused `kotlin.random.Random` import
+
+#### **Code Clarity Improvements** 📝
+Renamed 23 unused interface parameters with underscore prefix for clarity.
+
+**Affected Commands:**
+- CharBlock, ReloadCommand, VersionCommand
+- ItemsAdderStatusCommand, SetupItemsAdderCommand
+- StructureCodeCommand, StructureDatabaseCommand
+
+**Example:**
+```kotlin
+// Before:
+override fun onCommand(sender: CommandSender, command: Command, label: String, args: Array<out String>)
+
+// After:
+override fun onCommand(sender: CommandSender, _command: Command, _label: String, _args: Array<out String>)
+```
+
+### Impact
+- **Lines Removed:** 113 lines
+- **Lines Added:** 18 lines
+- **Net Reduction:** 95 lines of code
+- **Files Modified:** 12 files
+- **Tests:** All 131 tests passing ✅
+- **Build:** Successful ✅
+
+### Upgrade Notes
+- **From v1.1.3:** Drop-in replacement, no changes needed
+- **Compatibility:** 100% backward compatible
+- **No Database Changes:** All player data preserved
+- **No Config Changes:** All settings remain the same
+
+---
+
 ## Version 1.1.3 - Brass-Colored Pyrite Textures
 
 ### Release Date
