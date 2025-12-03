@@ -369,7 +369,237 @@ Pyrite tools work **exactly like gold** for:
 
 ---
 
-## 9. Frequently Asked Questions
+## 9. Nether Structure Number Guessing Game
+
+**Available in:** Nether Fortresses and Bastion Remnants
+
+Each Nether fortress and bastion remnant has a secret **3-digit number** (100-999). Find it by breaking number block sequences, and win valuable rewards!
+
+### How It Works
+
+#### Structure Assignment
+
+- Every fortress and bastion gets a **unique random 3-digit code** when first discovered
+- The code is stored in a database and persists across server restarts
+- Each structure can only be won **once** (one-time rewards)
+- You'll see a discovery message the first time you enter a structure
+
+#### Discovery Notifications
+
+When you first enter a Nether structure, you'll see:
+```
+New Structure Discovered: FORTRESS
+Try to guess its secret 3-digit number!
+```
+
+or
+
+```
+New Structure Discovered: BASTION
+Try to guess its secret 3-digit number!
+```
+
+### How to Play
+
+#### Step 1: Collect Number Blocks
+
+- Mine **Warped Stems** or **Crimson Stems** with gold/pyrite tools
+- Number blocks (0-9) drop the same way as letter blocks
+- Same drop chances: 6% base, up to 20% with Looting III
+
+#### Step 2: Form a 3-Digit Sequence
+
+- Place **exactly 3 number blocks** in a straight line (horizontal only)
+- Must be in a **cardinal direction** (North, South, East, or West)
+- Blocks must be **adjacent** (touching)
+- Must be on the **same Y level** (same height)
+
+**Example Valid Sequences:**
+```
+[4] [2] [0]  ✓ Horizontal (East-West or North-South)
+```
+
+**Invalid:**
+```
+[4]
+[2]
+[0]  ✗ Vertical not allowed
+
+[4]   [2]   [0]  ✗ Gaps not allowed
+```
+
+#### Step 3: Break the Sequence
+
+- **Must be inside** a fortress or bastion
+- Break **any block** in the 3-digit sequence with a **gold or pyrite tool**
+- The game reads the sequence in **hundreds-tens-ones** order
+- Direction matters: [4][2][0] could be read as 420 or 024 depending on orientation
+
+### Outcomes
+
+#### Correct Guess - Jackpot!
+
+You guessed the structure's secret number!
+
+**Rewards (Default):**
+- **Fortress:** 12 Blaze Rods
+- **Bastion:** 16 Ender Pearls
+
+**What happens:**
+- Blocks disappear
+- Rewards drop at your location
+- Success message appears
+- Structure is marked as completed (can't win again)
+
+#### Wrong Guess - Too High
+
+Your guess is **higher** than the secret number.
+
+**What happens:**
+- **EXPLOSION!** (same power as a bed explosion in the Nether)
+- Blocks are destroyed
+- You take damage (wear armor!)
+- No items recovered
+- Message: "Wrong! Your guess is too high"
+
+**Tip:** This is dangerous - be prepared!
+
+#### Wrong Guess - Too Low
+
+Your guess is **lower** than the secret number.
+
+**What happens:**
+- Blocks **drop as items** (recoverable!)
+- No explosion
+- No damage
+- Pick up your number blocks and try again
+- Message: "Wrong! Your guess is too low"
+
+**Tip:** This is the safer outcome - you get your blocks back!
+
+#### Outside Structure
+
+You broke a 3-digit sequence but you're **not in a fortress or bastion**.
+
+**What happens:**
+- Blocks drop as items (recoverable)
+- Warning message appears
+- No explosion, no rewards
+
+### Strategy Tips
+
+#### Finding the Number
+
+**Use Binary Search Strategy:**
+1. Start with **500** (middle of 100-999 range)
+2. If too high: Try **300** (middle of 100-500)
+3. If too low: Try **700** (middle of 500-999)
+4. Keep narrowing the range
+
+**Example Binary Search:**
+```
+Guess 500 → Too high
+Guess 300 → Too low
+Guess 400 → Too high
+Guess 350 → Too low
+Guess 375 → Too low
+Guess 387 → CORRECT!
+```
+
+This method finds any number in **~10 guesses or less**!
+
+#### Safety Tips
+
+- **Wear armor** when guessing (explosions hurt!)
+- **Don't stand on the blocks** when breaking them
+- **Bring extra number blocks** so you can keep guessing
+- **Bring fire resistance potions** for fortress explosions (lava nearby!)
+- **Save your progress**: Use `/structurecode` to check the number before leaving
+
+#### Farming Number Blocks
+
+- **Best source:** Warped and Crimson Stems in the Nether
+- **Use Looting III** on gold/pyrite axe for 20% drop rate
+- **Farm in bulk** before attempting guesses
+- **Organize inventory** by number for quick sequence building
+
+### Commands
+
+#### View Structure's Code
+
+```
+/structurecode
+```
+
+- Must be **inside** a fortress or bastion
+- Shows the structure's secret 3-digit number
+- Permission: `charmedchars.blocks`
+- Useful for checking your work or admin debugging
+
+**Example output:**
+```
+Structure Type: FORTRESS
+Secret Number: 387
+Origin: Chunk (-4, -38)
+```
+
+#### Admin Commands
+
+```
+/structuredb list [world]
+```
+- List all tracked structures and their numbers
+- Permission: `charmedchars.blocks`
+
+```
+/structuredb purge <all|world|fortress|bastion>
+```
+- Remove structure entries (resets the game)
+- Permission: `charmedchars.blocks`
+
+### Rewards Configuration
+
+Server admins can customize rewards in `config.yml`:
+
+**Default Fortress Rewards:**
+```yaml
+fortress-reward:
+  material: BLAZE_ROD
+  quantity: 12
+```
+
+**Default Bastion Rewards:**
+```yaml
+bastion-reward:
+  material: ENDER_PEARL
+  quantity: 16
+```
+
+Admins can change the material type and quantity to anything!
+
+### Frequently Asked Questions
+
+**Q: Can I win the same structure multiple times?**
+No - each structure awards prizes only once. After winning, further guesses won't give rewards.
+
+**Q: What if I leave and come back?**
+The structure's number stays the same. You can leave and return anytime.
+
+**Q: Can I see the number without guessing?**
+Yes - use `/structurecode` (requires permission). But that takes the fun out of it!
+
+**Q: Do sequences work vertically?**
+No - only horizontal sequences (North-South or East-West) are valid.
+
+**Q: What happens if the structure already has been won?**
+You'll see a message that the structure has already been completed, and no explosion occurs.
+
+**Q: Can I use this to farm blaze rods/ender pearls?**
+No - it's one-time per structure. But finding multiple structures in the Nether will let you win multiple times!
+
+---
+
+## 10. Frequently Asked Questions
 
 ### Q: My word didn't score. Why?
 
@@ -407,7 +637,7 @@ Pyrite tools work **exactly like gold** for:
 
 ---
 
-## 9. Troubleshooting
+## 11. Troubleshooting
 
 ### Letter blocks won't drop from logs
 
