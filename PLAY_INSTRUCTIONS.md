@@ -661,12 +661,13 @@ No - it's one-time per structure. But finding multiple structures in the Nether 
 
 ## Getting Started Checklist
 
-- [ ] Craft or obtain a gold axe
+- [ ] Craft or obtain a gold axe (or pyrite axe for better durability)
 - [ ] Add Looting enchantment (optional, but recommended)
 - [ ] Mine 20-30 logs to get your first letter blocks
-- [ ] Practice making simple 2-3 letter words
-- [ ] Try to make a word with all same color
-- [ ] Break the word and collect your rewards!
+- [ ] Practice making simple 3-letter words with all same color (e.g., "CAT", "DOG", "RUN")
+- [ ] Try making a 4+ letter word with multiple colors (e.g., "CATS", "DOGS", "RUNS")
+- [ ] Break any letter in the word with your gold/pyrite tool to score
+- [ ] Collect your rewards and aim for longer same-color words for bigger bonuses!
 
 ---
 
