@@ -44,7 +44,7 @@ class SetupItemsAdderCommand(private val plugin: CharmedChars) : CommandExecutor
      * @param args Command arguments: optional "force" flag to overwrite existing files
      * @return true if the command was handled successfully
      */
-    override fun onCommand(sender: CommandSender, command: Command, label: String, args: Array<out String>): Boolean {
+    override fun onCommand(sender: CommandSender, _command: Command, _label: String, args: Array<out String>): Boolean {
         // Check for force flag
         val force = args.isNotEmpty() && args[0].equals("force", ignoreCase = true)
 

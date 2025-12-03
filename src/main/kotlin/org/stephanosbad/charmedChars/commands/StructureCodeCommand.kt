@@ -55,7 +55,7 @@ class StructureCodeCommand(private val plugin: CharmedChars) : CommandExecutor {
      * @param args Command arguments (unused)
      * @return true if the command was handled successfully
      */
-    override fun onCommand(sender: CommandSender, command: Command, label: String, args: Array<out String>): Boolean {
+    override fun onCommand(sender: CommandSender, _command: Command, _label: String, _args: Array<out String>): Boolean {
         // Check if sender is a player
         if (sender !is Player) {
             sender.sendMessage(

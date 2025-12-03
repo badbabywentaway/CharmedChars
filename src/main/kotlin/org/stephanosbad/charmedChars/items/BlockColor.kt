@@ -17,8 +17,6 @@
  */
 package org.stephanosbad.charmedChars.items
 
-import kotlin.random.Random
-
 /**
  * Enum representing the three available block colors
  *

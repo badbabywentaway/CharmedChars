@@ -31,17 +31,5 @@ enum class StructureType(val displayName: String) {
     /**
      * Nether Fortress structures found in the Nether
      */
-    FORTRESS("Nether Fortress");
-
-    companion object {
-        /**
-         * Converts a string to a StructureType enum value
-         *
-         * @param value String representation of the structure type
-         * @return Corresponding StructureType or null if not found
-         */
-        fun fromString(value: String): StructureType? {
-            return entries.find { it.name.equals(value, ignoreCase = true) }
-        }
-    }
+    FORTRESS("Nether Fortress")
 }
