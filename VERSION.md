@@ -1,5 +1,83 @@
 # CharmedChars Version History
 
+## Version 1.1.5 - Bug Fix Release
+
+### Release Date
+2025-12-07
+
+### Overview
+Bug fix release addressing ItemsAdder setup failure and comprehensive documentation updates.
+
+### Changes
+
+#### **Bug Fixes** 🐛
+
+**Fixed: ItemsAdder Data folder creation failure**
+- **Problem**: `/iasetup` command would fail if ItemsAdder's `data` folder didn't exist
+- **Impact**: Users had to manually create the folder before running setup
+- **Fix**: Added automatic `data` folder creation in `ItemsAdderSetup.enableNamespace()`
+- **File**: `src/main/kotlin/org/stephanosbad/charmedChars/integration/ItemsAdderSetup.kt:290-293`
+- **Result**: Setup now works on first run without manual intervention
+
+**Technical Details:**
+```kotlin
+// Added before writing items_packs.yml:
+if (!itemsAdderDataFolder.exists()) {
+    itemsAdderDataFolder.mkdirs()
+}
+```
+
+#### **Documentation Updates** 📝
+
+**Comprehensive documentation review and updates to accurately reflect all gameplay features:**
+
+- **README.md**:
+  - Added pyrite tools to "How to Play" section
+  - Added minimum word lengths (3 same-color, 4 multi-color)
+  - Added Nether Challenge section
+  - Added missing commands (`/structurecode`, `/structuredb list`, `/structuredb purge`)
+  - Updated Technical section with accurate counts (128 items: 123 blocks + 5 pyrite items)
+  - Added SQLite database mention
+
+- **HANGAR_SHOWCASE.md**:
+  - Updated "Custom Blocks" to "Custom Blocks & Items"
+  - Added 5 pyrite items to technical details
+  - Clarified total: 128 custom items
+
+- **QUICK_SETUP.md**:
+  - Updated `/iasetup` description to mention pyrite.yml
+  - Corrected texture count: 128 files (123 blocks + 5 pyrite items)
+  - Added "Enables charmedchars namespace" step
+  - Updated `/iazip` description to mention item models
+
+- **PLAY_INSTRUCTIONS.md**:
+  - Added comprehensive "Nether Structure Number Guessing Game" section (232 lines)
+  - Covers gameplay mechanics, strategy tips, commands, rewards, FAQ
+  - Updated "Getting Started Checklist" with correct minimum word sizes
+
+### Impact
+- **Setup Process**: Now fully automated - no manual folder creation needed
+- **Documentation**: All files now accurately represent complete feature set
+- **Compatibility**: 100% backward compatible with v1.1.4
+- **No Database Changes**: All player data preserved
+- **No Config Changes**: All settings remain the same
+
+### Files Modified
+- `ItemsAdderSetup.kt` - Bug fix (4 lines added)
+- `VERSION.md` - This file
+- `README.md` - Complete feature documentation
+- `HANGAR_SHOWCASE.md` - Accurate item counts and features
+- `QUICK_SETUP.md` - Correct setup step descriptions
+- `PLAY_INSTRUCTIONS.md` - Added Nether game section, updated checklist
+
+### Upgrade Notes
+- **From v1.1.4**: Drop-in replacement, no changes needed
+- **Setup Improvement**: `/iasetup` now creates necessary folders automatically
+- **Documentation**: All gameplay features now properly documented
+- **No Breaking Changes**: Full backward compatibility
+
+---
+
 ## Version 1.1.4 - Code Cleanup & Refactoring
 
 ### Release Date

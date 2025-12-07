@@ -223,9 +223,10 @@ bastion-reward:
 
 ## Version Information
 
-**Current Version**: 1.1.4
+**Current Version**: 1.1.5
 
 **Latest Updates**:
+- **v1.1.5**: Bug fix - automatic Data folder creation, comprehensive documentation updates
 - **v1.1.4**: Code cleanup and refactoring (95 lines removed)
 - **v1.1.3**: Brass-colored pyrite textures
 - **v1.1.2**: Pyrite system, word length validation, tool validation for number sequences
