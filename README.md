@@ -57,19 +57,26 @@ See `QUICK_SETUP.md` for detailed installation instructions.
 ## How to Play
 
 ### Collecting Letter Blocks
-- Mine any wood logs with **gold tools**
+- Mine any wood logs with **gold or pyrite tools**
 - Drop chance: 6% (10%/16%/20% with Looting I/II/III)
 - Receive random colored letter blocks (Cyan, Magenta, Yellow)
+- Pyrite tools: Craft with Iron + Redstone for 250 durability (vs gold's 32)
 
 ### Forming Words
 - Place letter blocks in **straight lines** (horizontal or vertical)
-- Break any letter in the word with a gold tool
+- Break any letter in the word with a gold or pyrite tool
 - Word is validated against ~100,000+ English word dictionary
+- Minimum lengths: 3 letters (same-color) or 4 letters (multi-color)
 
 ### Scoring
 - Each letter has a frequency-based score
 - **Color bonus**: All same-color blocks = **3x multiplier**
 - Earn configurable rewards based on score
+
+### Nether Challenge
+- Each fortress/bastion has a secret 3-digit code (100-999)
+- Guess correctly for rewards (12 Blaze Rods or 16 Ender Pearls)
+- Wrong guesses: Explosion if too high, blocks drop if too low
 
 See `PLAY_INSTRUCTIONS.md` for complete gameplay guide.
 
@@ -78,19 +85,24 @@ See `PLAY_INSTRUCTIONS.md` for complete gameplay guide.
 ## Features
 
 ### Gameplay
-- Letter block collection from wood logs with gold tools
+- Letter block collection from wood logs with gold or pyrite tools
 - Word formation with straight-line placement rules
 - Dictionary validation (~100,000+ words)
+- Minimum word lengths (3 letters same-color, 4 letters multi-color)
 - Frequency-based scoring system
 - Color bonus multiplier (3x for same-color words)
 - Configurable item rewards
+- Pyrite (Fool's Gold) system - craftable iron-tier alternative to gold tools
+- Nether Structure Number Guessing Game - guess 3-digit codes in fortresses and bastions for rewards
 
 ### Technical
-- ItemsAdder integration for custom blocks
-- 123 custom blocks (26 letters × 3 colors + numbers + operators)
-- 512x512 custom textures
+- ItemsAdder integration for custom blocks and items
+- 123 custom blocks (26 letters × 3 colors + 10 numbers × 3 colors + 4 operators × 3 colors)
+- 5 pyrite items (ingot, pickaxe, axe, shovel, hoe)
+- Total: 128 custom items with 512x512 custom textures
 - Optional WorldGuard/GriefPrevention protection support
 - Configurable drop rates and Looting enchantment scaling
+- SQLite database for Nether structure tracking
 
 ### Administration
 - Auto-setup commands for ItemsAdder configuration
@@ -107,6 +119,9 @@ See `PLAY_INSTRUCTIONS.md` for complete gameplay guide.
 |---------|-------------|------------|
 | `/charblock <player> <color> <text>` | Give letter blocks to a player | `charmedchars.blocks` |
 | `/version` | Display plugin version | None |
+| `/structurecode` | View structure's secret number | `charmedchars.blocks` |
+| `/structuredb list [world]` | List all tracked structures | `charmedchars.blocks` |
+| `/structuredb purge <type>` | Reset structure entries | `charmedchars.blocks` |
 | `/iastatus` | Check ItemsAdder integration status | `charmedchars.admin` |
 | `/iasetup [force]` | Auto-setup ItemsAdder configuration | `charmedchars.admin` |
 | `/reload` | Reload plugin configuration | `charmedchars.admin` |

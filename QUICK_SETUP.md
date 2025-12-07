@@ -27,9 +27,11 @@ The blocks need to be registered with ItemsAdder before they can be used.
 ```
 
 This automatically:
-- Copies blocks.yml configuration to ItemsAdder
-- Copies all 123 texture files to ItemsAdder
+- Copies blocks.yml configuration to ItemsAdder (123 letter/number blocks)
+- Copies pyrite.yml configuration to ItemsAdder (5 pyrite items + recipes)
+- Copies all 128 texture files to ItemsAdder (123 blocks + 5 pyrite items)
 - Creates proper directory structure
+- Enables charmedchars namespace in items_packs.yml
 - Shows you exactly what was done
 
 ### 2. Enable Resource Pack Hosting
@@ -127,9 +129,9 @@ In-game or in console, run:
 
 This command:
 - Validates your configuration
-- Generates block models
+- Generates block models and item models
 - Creates the resource pack
-- Registers all 123 CharmedChars blocks
+- Registers all 128 CharmedChars items (123 blocks + 5 pyrite items)
 
 **Watch for errors!** If `/iazip` shows errors, check:
 - Configuration syntax in `blocks.yml`

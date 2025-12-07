@@ -200,9 +200,10 @@ bastion-reward:
 
 ## Technical Details
 
-### Custom Blocks
-- **123 total blocks**: 26 letters × 3 colors + 10 numbers × 3 colors + 4 operators × 3 colors
-- **ItemsAdder integration** for custom block rendering
+### Custom Blocks & Items
+- **123 custom blocks**: 26 letters × 3 colors + 10 numbers × 3 colors + 4 operators × 3 colors
+- **5 pyrite items**: Ingot, Pickaxe, Axe, Shovel, Hoe (craftable iron-tier tools)
+- **Total**: 128 custom items with ItemsAdder integration
 - **512x512 custom textures** by Gaia Temperini
 - **Auto-setup commands** for easy ItemsAdder configuration
 
