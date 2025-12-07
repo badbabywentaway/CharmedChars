@@ -287,6 +287,11 @@ class ItemsAdderSetup(private val plugin: CharmedChars) {
      */
     private fun enableNamespace(): Boolean {
         try {
+            // Ensure the data folder exists
+            if (!itemsAdderDataFolder.exists()) {
+                itemsAdderDataFolder.mkdirs()
+            }
+
             val itemsPacksFile = File(itemsAdderDataFolder, "items_packs.yml")
 
             val content = if (itemsPacksFile.exists()) {
