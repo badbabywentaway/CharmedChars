@@ -1,35 +1,215 @@
 # CharmedChars Version History
 
-## Version 1.2.0
+## Version 1.2.0 - Oraxen Compatibility
 
 ### Release Date
 2025-12-14
 
 ### Overview
-[To be documented - version bump to 1.2.0]
+Major feature release adding full support for Oraxen as a free, open-source alternative to ItemsAdder. Introduces a custom item provider abstraction layer that allows server owners to choose between ItemsAdder (proprietary/paid) or Oraxen (open-source/free) for custom items.
 
 ### Changes
 
 #### **New Features** ⭐
-- [To be documented]
 
-#### **Bug Fixes** 🐛
-- [To be documented]
+**Oraxen Support - Free Alternative to ItemsAdder**
+- **Custom Item Provider Abstraction Layer**: Complete abstraction separating core plugin logic from custom item provider implementation
+- **Dual Provider Support**: Works with either ItemsAdder OR Oraxen (not both, not neither)
+- **Automatic Provider Detection**: Plugin automatically detects which custom item provider is installed at runtime
+- **Safety Checks**: Refuses to load if both providers are installed or neither is installed, with clear error messages
+- **File**: `src/main/kotlin/org/stephanosbad/charmedChars/integration/CustomItemProvider.kt`
+
+**New Command: /oraxensetup**
+- **Automatic Oraxen Configuration**: One-command setup for Oraxen integration
+- **Generates 128 Items**: Automatically creates all 123 letter/number blocks + 5 pyrite items
+- **Block Model JSON Generation**: Generates proper Oraxen block model JSONs for all items
+- **Texture Copying**: Automatically copies all 128 texture files to Oraxen's pack folder
+- **Recipe Generation**: Creates all pyrite crafting recipes in Oraxen format
+- **Force Flag**: `/oraxensetup force` overwrites existing configurations
+- **File**: `src/main/kotlin/org/stephanosbad/charmedChars/integration/OraxenSetup.kt`
+
+**Abstraction Layer Architecture**
+- **CustomItemProvider Interface**: Unified interface for all custom item operations
+  - `getCustomItem()` - Retrieve custom item by namespaced ID
+  - `getNamespacedId()` - Get custom item ID from ItemStack
+  - `getProviderName()` - Get provider name ("ItemsAdder" or "Oraxen")
+- **CustomItemProviderManager**: Singleton managing provider lifecycle
+  - Auto-detects installed provider during plugin initialization
+  - Validates only one provider is present
+  - Provides global access to provider instance
+- **ItemsAdderProvider**: Implementation for ItemsAdder API
+- **OraxenProvider**: Implementation for Oraxen API
+
+**Technical Implementation Details**
+
+Block Model Generation (Oraxen):
+```kotlin
+// Oraxen requires explicit block model JSONs
+// CharmedChars auto-generates these during /oraxensetup
+{
+  "parent": "block/cube_all",
+  "textures": {
+    "all": "charmedchars:block/cyan/a"
+  }
+}
+```
+
+Provider Detection Logic:
+```kotlin
+// Checks for both providers at startup
+val hasItemsAdder = Bukkit.getPluginManager().getPlugin("ItemsAdder") != null
+val hasOraxen = Bukkit.getPluginManager().getPlugin("Oraxen") != null
+
+// Validates exactly one provider
+if (hasItemsAdder && hasOraxen) {
+    error("Both ItemsAdder and Oraxen detected - install only ONE")
+}
+if (!hasItemsAdder && !hasOraxen) {
+    error("No custom item provider found - install ItemsAdder OR Oraxen")
+}
+```
 
 #### **Documentation Updates** 📝
-- [To be documented]
+
+**Comprehensive Documentation Overhaul**
+- **ORAXEN_SETUP.md**: New complete setup guide for Oraxen users
+  - Step-by-step installation instructions
+  - Command reference and troubleshooting
+  - Configuration examples
+  - Comparison with ItemsAdder workflow
+
+- **HANGAR_SHOWCASE.md**: Updated showcase documentation
+  - Dual provider setup instructions
+  - Clear choice between ItemsAdder (paid) and Oraxen (free)
+  - Updated commands table with /oraxensetup
+  - Abstraction layer technical details
+  - Updated version history with v1.2.0 features
+
+- **README.md**: Updated main documentation
+  - Provider selection guidance
+  - Installation steps for both providers
+  - Updated technical details section
+
+- **Test Documentation**: Updated test comments
+  - WordValidationTest: Updated to reflect custom item provider abstraction
+  - SequenceDetectionTest: Updated block identification documentation
+
+**New Documentation Files**:
+- `ORAXEN_SETUP.md` - Complete Oraxen setup guide
+- Integration test suite documentation
 
 ### Impact
-- **Compatibility**: [To be documented]
-- **Database Changes**: [To be documented]
-- **Config Changes**: [To be documented]
+
+**Compatibility**
+- **100% Backward Compatible**: Existing ItemsAdder servers work without changes
+- **No Breaking Changes**: All existing commands, features, and APIs unchanged
+- **No Database Changes**: Structure database format unchanged
+- **No Config Changes**: config.yml format unchanged
+
+**Server Owner Benefits**
+- **Cost Savings**: Oraxen is free and open-source (vs ItemsAdder ~$15-20)
+- **Choice**: Server owners can choose based on their needs and budget
+- **Migration Path**: Can switch between providers by changing plugin + running setup command
+- **Same Features**: All CharmedChars features work identically with both providers
+
+**Technical Quality**
+- **Clean Abstraction**: Provider-specific code isolated in dedicated classes
+- **Easy Maintenance**: Future provider support can be added without core changes
+- **Comprehensive Tests**: New integration test suite for both providers
+- **Robust Error Handling**: Clear error messages for misconfiguration
 
 ### Files Modified
+
+**Core Integration Layer**:
+- `src/main/kotlin/org/stephanosbad/charmedChars/integration/CustomItemProvider.kt` - NEW: Provider interface
+- `src/main/kotlin/org/stephanosbad/charmedChars/integration/CustomItemProviderManager.kt` - NEW: Provider manager
+- `src/main/kotlin/org/stephanosbad/charmedChars/integration/ItemsAdderProvider.kt` - NEW: ItemsAdder implementation
+- `src/main/kotlin/org/stephanosbad/charmedChars/integration/OraxenProvider.kt` - NEW: Oraxen implementation
+- `src/main/kotlin/org/stephanosbad/charmedChars/integration/OraxenSetup.kt` - NEW: Oraxen setup command
+- `src/main/kotlin/org/stephanosbad/charmedChars/commands/OraxenSetupCommand.kt` - NEW: Command handler
+
+**Plugin Initialization**:
+- `src/main/kotlin/org/stephanosbad/charmedChars/CharmedChars.kt` - Provider detection and initialization
+
+**Documentation**:
+- `ORAXEN_SETUP.md` - NEW: Oraxen setup guide
+- `HANGAR_SHOWCASE.md` - Updated with dual provider support
+- `README.md` - Updated installation instructions
+- `VERSION.md` - This file (added v1.2.0 release notes)
 - `gradle.properties` - Version bump to 1.2.0
-- [Additional files to be documented]
+- `BUILD.md` - Updated JAR filename references
+- `TROUBLESHOOTING.md` - Updated JAR filename references
+- `DEPLOY_CLEAN_JAR.bat` - Updated deployment script
+- `verify_jar.bat` - Updated JAR filename
+- `verify_jar_correct.bat` - Updated JAR filename
+- `cleanup_uppercase.bat` - Updated JAR filename
+
+**Test Suite**:
+- `src/test/kotlin/org/stephanosbad/charmedChars/integration/CustomItemProviderTest.kt` - NEW: Provider interface tests
+- `src/test/kotlin/org/stephanosbad/charmedChars/integration/CustomItemProviderManagerTest.kt` - NEW: Manager tests
+- `src/test/kotlin/org/stephanosbad/charmedChars/integration/OraxenSetupTest.kt` - NEW: Oraxen setup tests
+- `src/test/kotlin/org/stephanosbad/charmedChars/items/WordValidationTest.kt` - Updated comments
+- `src/test/kotlin/org/stephanosbad/charmedChars/listeners/SequenceDetectionTest.kt` - Updated comments
 
 ### Upgrade Notes
-- **From v1.1.5**: [To be documented]
+
+**From v1.1.5 (ItemsAdder Users)**:
+1. **No Changes Required**: Drop-in replacement
+2. Download CharmedChars-1.2.0.jar
+3. Replace old JAR in `plugins/` folder
+4. Restart server
+5. Plugin will auto-detect ItemsAdder and work normally
+6. All existing data, configs, and resource packs unchanged
+
+**From v1.1.5 (Switching to Oraxen)**:
+1. Remove ItemsAdder from `plugins/` folder
+2. Install Oraxen plugin
+3. Install CharmedChars-1.2.0.jar
+4. Start server
+5. Run `/oraxensetup` to configure Oraxen
+6. Run `/oraxen reload all` to load items
+7. Restart server for full effect
+8. Players will receive new resource pack
+
+**New Installations**:
+1. Choose **ONE** custom item provider:
+   - **ItemsAdder** (proprietary, ~$15-20): Purchase from SpigotMC
+   - **Oraxen** (free, open-source): Download from SpigotMC or GitHub
+2. Install chosen provider + CharmedChars
+3. Run setup command:
+   - ItemsAdder: `/iasetup` then `/iazip`
+   - Oraxen: `/oraxensetup` then `/oraxen reload all`
+4. Restart server
+
+**Important Notes**:
+- **Do NOT install both** ItemsAdder and Oraxen - plugin will refuse to load
+- **Must install one** - plugin requires a custom item provider
+- **Resource pack regeneration**: Switching providers requires new resource pack generation
+- **No data loss**: Structure database and player data preserved during provider switch
+
+### Known Issues
+
+None currently reported.
+
+### Development Notes
+
+**Architecture Design**:
+- Provider abstraction pattern separates concerns cleanly
+- Each provider implementation encapsulates provider-specific API calls
+- Manager pattern provides global access point while controlling lifecycle
+- Interface-based design allows easy addition of future providers
+
+**Testing Strategy**:
+- Integration tests mock provider behavior
+- Test both ItemsAdder and Oraxen code paths
+- Verify provider detection logic
+- Validate configuration generation
+
+**AI-Assisted Development**:
+- Oraxen compatibility feature developed with assistance from Claude (Anthropic)
+- Custom item provider abstraction architecture designed with AI guidance
+- All AI contributions include Co-Authored-By attribution in git commits
+- Comprehensive documentation generated with AI assistance
 
 ---
 
