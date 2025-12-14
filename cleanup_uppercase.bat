@@ -67,7 +67,7 @@ echo 3. Rebuild plugin:
 echo    gradlew.bat clean build
 echo.
 echo 4. Copy JAR to server:
-echo    copy build\libs\CharmedChars-1.0.0.jar "c:\Users\steve\Documents\Papermc\plugins\"
+echo    copy build\libs\CharmedChars-1.2.0.jar "c:\Users\steve\Documents\Papermc\plugins\"
 echo.
 echo 5. Start server
 echo.

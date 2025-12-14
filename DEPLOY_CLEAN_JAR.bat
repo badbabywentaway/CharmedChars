@@ -1,6 +1,6 @@
 @echo off
 echo ===================================================
-echo    CharmedChars v1.1.5 - Clean Deployment Script
+echo    CharmedChars v1.2.0 - Clean Deployment Script
 echo ===================================================
 echo    Deploys to: ItemsAdder Server + Oraxen Test Server
 echo ===================================================
@@ -59,8 +59,8 @@ if exist "c:\Users\steve\Documents\Papermc\plugins\CharmedChars-*.jar" (
 )
 
 REM Step 6A: Copy new JAR (ItemsAdder server)
-echo Step 6A: Copying new JAR to ItemsAdder server (v1.1.5)...
-copy "build\libs\CharmedChars-1.1.5.jar" "c:\Users\steve\Documents\Papermc\plugins\" /Y
+echo Step 6A: Copying new JAR to ItemsAdder server (v1.2.0)...
+copy "build\libs\CharmedChars-1.2.0.jar" "c:\Users\steve\Documents\Papermc\plugins\" /Y
 if %ERRORLEVEL% EQU 0 (
     echo [OK] JAR copied to ItemsAdder server
 ) else (
@@ -122,8 +122,8 @@ if exist "c:\Users\steve\Documents\OraxenPapermc\plugins\CharmedChars-*.jar" (
 )
 
 REM Step 6B: Copy new JAR (Oraxen server)
-echo Step 6B: Copying new JAR to Oraxen server (v1.1.5)...
-copy "build\libs\CharmedChars-1.1.5.jar" "c:\Users\steve\Documents\OraxenPapermc\plugins\" /Y
+echo Step 6B: Copying new JAR to Oraxen server (v1.2.0)...
+copy "build\libs\CharmedChars-1.2.0.jar" "c:\Users\steve\Documents\OraxenPapermc\plugins\" /Y
 if %ERRORLEVEL% EQU 0 (
     echo [OK] JAR copied to Oraxen server
 ) else (
@@ -134,7 +134,7 @@ if %ERRORLEVEL% EQU 0 (
 
 echo.
 echo ===================================================
-echo [SUCCESS] CharmedChars v1.1.5 deployed successfully!
+echo [SUCCESS] CharmedChars v1.2.0 deployed successfully!
 echo ===================================================
 echo   Deployed to BOTH servers:
 echo   - ItemsAdder Server: c:\Users\steve\Documents\Papermc
@@ -171,13 +171,9 @@ echo   - Break number sequences with gold/pyrite tools
 echo   - Guess 3-digit codes for rewards
 echo.
 echo ===================================================
-echo Version: 1.1.5 (Oraxen Compatibility + Auto-Setup)
+echo Version: 1.2.0
 echo ===================================================
-echo NEW in 1.1.5:
-echo   - Full Oraxen support (alternative to ItemsAdder)
-echo   - /oraxensetup command (auto-generates configs)
-echo   - Abstraction layer for both providers
-echo   - Fixed plugin load timing
-echo   - Block model JSON generation for Oraxen
+echo NEW in 1.2.0:
+echo   - [Changes to be documented]
 echo ===================================================
 pause

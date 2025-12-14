@@ -223,7 +223,7 @@ bastion-reward:
 
 ## Version Information
 
-**Current Version**: 1.1.5
+**Current Version**: 1.2.0
 
 **Latest Updates**:
 - **v1.1.5**: Bug fix - automatic Data folder creation, comprehensive documentation updates

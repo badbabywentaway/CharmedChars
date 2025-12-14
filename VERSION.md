@@ -1,5 +1,38 @@
 # CharmedChars Version History
 
+## Version 1.2.0
+
+### Release Date
+2025-12-14
+
+### Overview
+[To be documented - version bump to 1.2.0]
+
+### Changes
+
+#### **New Features** ⭐
+- [To be documented]
+
+#### **Bug Fixes** 🐛
+- [To be documented]
+
+#### **Documentation Updates** 📝
+- [To be documented]
+
+### Impact
+- **Compatibility**: [To be documented]
+- **Database Changes**: [To be documented]
+- **Config Changes**: [To be documented]
+
+### Files Modified
+- `gradle.properties` - Version bump to 1.2.0
+- [Additional files to be documented]
+
+### Upgrade Notes
+- **From v1.1.5**: [To be documented]
+
+---
+
 ## Version 1.1.5 - Bug Fix Release
 
 ### Release Date

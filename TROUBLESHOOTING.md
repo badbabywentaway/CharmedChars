@@ -41,12 +41,12 @@
 gradlew.bat clean build
 ```
 
-**Expected output**: `CharmedChars-1.0.0.jar` in `build/libs/`
+**Expected output**: `CharmedChars-1.2.0.jar` in `build/libs/`
 
 ### Step 2: Deploy to Server
 Copy the new JAR to your server's plugins folder:
 ```bash
-cp build/libs/CharmedChars-1.0.0.jar /path/to/server/plugins/
+cp build/libs/CharmedChars-1.2.0.jar /path/to/server/plugins/
 ```
 
 ### Step 3: Restart Server

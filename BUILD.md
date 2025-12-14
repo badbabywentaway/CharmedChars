@@ -73,7 +73,7 @@ gradlew.bat shadowJar --no-daemon
 
 The built plugin JAR will be located at:
 ```
-build/libs/CharmedChars-1.0.0.jar
+build/libs/CharmedChars-1.2.0.jar
 ```
 
 ## Build Configuration
@@ -94,12 +94,12 @@ After building, copy the JAR to your PaperMC server:
 
 ### Linux / macOS / WSL
 ```bash
-cp build/libs/CharmedChars-1.0.0.jar /path/to/server/plugins/
+cp build/libs/CharmedChars-1.2.0.jar /path/to/server/plugins/
 ```
 
 ### Windows
 ```cmd
-copy build\libs\CharmedChars-1.0.0.jar C:\path\to\server\plugins\
+copy build\libs\CharmedChars-1.2.0.jar C:\path\to\server\plugins\
 ```
 
 Then restart your server.
