@@ -1,11 +1,20 @@
 @echo off
 echo ===================================================
-echo    CharmedChars v1.1.4 - Clean Deployment Script
+echo    CharmedChars v1.1.5 - Clean Deployment Script
+echo ===================================================
+echo    Deploys to: ItemsAdder Server + Oraxen Test Server
 echo ===================================================
 echo.
 
-REM Step 1: Delete old CharmedChars plugin data
-echo Step 1: Cleaning CharmedChars plugin data...
+REM ===================================================
+REM ITEMSADDER SERVER DEPLOYMENT
+REM ===================================================
+echo.
+echo [ITEMSADDER SERVER] Cleaning and deploying...
+echo.
+
+REM Step 1A: Delete old CharmedChars plugin data (ItemsAdder server)
+echo Step 1A: Cleaning CharmedChars plugin data (ItemsAdder)...
 if exist "c:\Users\steve\Documents\Papermc\plugins\CharmedChars\extracted_pack" (
     rmdir /s /q "c:\Users\steve\Documents\Papermc\plugins\CharmedChars\extracted_pack"
     echo [OK] Old extracted_pack deleted
@@ -13,9 +22,8 @@ if exist "c:\Users\steve\Documents\Papermc\plugins\CharmedChars\extracted_pack" 
     echo [INFO] No extracted_pack folder found
 )
 
-REM Step 2: Delete old resource pack ZIP
-echo.
-echo Step 2: Deleting old resource pack ZIP...
+REM Step 2A: Delete old resource pack ZIP (ItemsAdder server)
+echo Step 2A: Deleting old resource pack ZIP (ItemsAdder)...
 if exist "c:\Users\steve\Documents\Papermc\plugins\CharmedChars\CharmedChars-ResourcePack.zip" (
     del "c:\Users\steve\Documents\Papermc\plugins\CharmedChars\CharmedChars-ResourcePack.zip"
     echo [OK] Old resource pack ZIP deleted
@@ -23,9 +31,8 @@ if exist "c:\Users\steve\Documents\Papermc\plugins\CharmedChars\CharmedChars-Res
     echo [INFO] No resource pack ZIP found
 )
 
-REM Step 3: Delete old resourcepack folder
-echo.
-echo Step 3: Deleting old resourcepack folder...
+REM Step 3A: Delete old resourcepack folder (ItemsAdder server)
+echo Step 3A: Deleting old resourcepack folder (ItemsAdder)...
 if exist "c:\Users\steve\Documents\Papermc\plugins\CharmedChars\resourcepack" (
     rmdir /s /q "c:\Users\steve\Documents\Papermc\plugins\CharmedChars\resourcepack"
     echo [OK] Old resourcepack folder deleted
@@ -33,9 +40,8 @@ if exist "c:\Users\steve\Documents\Papermc\plugins\CharmedChars\resourcepack" (
     echo [INFO] No resourcepack folder found
 )
 
-REM Step 4: Clean ItemsAdder cache for pyrite items
-echo.
-echo Step 4: Cleaning ItemsAdder cache...
+REM Step 4A: Clean ItemsAdder cache
+echo Step 4A: Cleaning ItemsAdder cache...
 if exist "c:\Users\steve\Documents\Papermc\plugins\ItemsAdder\data\items_packs\charmedchars" (
     rmdir /s /q "c:\Users\steve\Documents\Papermc\plugins\ItemsAdder\data\items_packs\charmedchars"
     echo [OK] ItemsAdder charmedchars pack cache deleted
@@ -43,9 +49,8 @@ if exist "c:\Users\steve\Documents\Papermc\plugins\ItemsAdder\data\items_packs\c
     echo [INFO] No ItemsAdder cache found for charmedchars
 )
 
-REM Step 5: Delete old JAR file
-echo.
-echo Step 5: Deleting old JAR...
+REM Step 5A: Delete old JAR file (ItemsAdder server)
+echo Step 5A: Deleting old JAR (ItemsAdder)...
 if exist "c:\Users\steve\Documents\Papermc\plugins\CharmedChars-*.jar" (
     del "c:\Users\steve\Documents\Papermc\plugins\CharmedChars-*.jar"
     echo [OK] Old JAR deleted
@@ -53,48 +58,126 @@ if exist "c:\Users\steve\Documents\Papermc\plugins\CharmedChars-*.jar" (
     echo [INFO] No old JAR found
 )
 
-REM Step 6: Copy new JAR
-echo.
-echo Step 6: Copying new JAR (v1.1.4)...
-copy "build\libs\CharmedChars-1.1.4.jar" "c:\Users\steve\Documents\Papermc\plugins\" /Y
+REM Step 6A: Copy new JAR (ItemsAdder server)
+echo Step 6A: Copying new JAR to ItemsAdder server (v1.1.5)...
+copy "build\libs\CharmedChars-1.1.5.jar" "c:\Users\steve\Documents\Papermc\plugins\" /Y
 if %ERRORLEVEL% EQU 0 (
-    echo [OK] JAR copied successfully
+    echo [OK] JAR copied to ItemsAdder server
 ) else (
-    echo [ERROR] Failed to copy JAR
+    echo [ERROR] Failed to copy JAR to ItemsAdder server
+    pause
+    exit /b 1
+)
+
+REM ===================================================
+REM ORAXEN SERVER DEPLOYMENT
+REM ===================================================
+echo.
+echo [ORAXEN SERVER] Cleaning and deploying...
+echo.
+
+REM Step 1B: Delete old CharmedChars plugin data (Oraxen server)
+echo Step 1B: Cleaning CharmedChars plugin data (Oraxen)...
+if exist "c:\Users\steve\Documents\OraxenPapermc\plugins\CharmedChars\extracted_pack" (
+    rmdir /s /q "c:\Users\steve\Documents\OraxenPapermc\plugins\CharmedChars\extracted_pack"
+    echo [OK] Old extracted_pack deleted
+) else (
+    echo [INFO] No extracted_pack folder found
+)
+
+REM Step 2B: Delete old resource pack ZIP (Oraxen server)
+echo Step 2B: Deleting old resource pack ZIP (Oraxen)...
+if exist "c:\Users\steve\Documents\OraxenPapermc\plugins\CharmedChars\CharmedChars-ResourcePack.zip" (
+    del "c:\Users\steve\Documents\OraxenPapermc\plugins\CharmedChars\CharmedChars-ResourcePack.zip"
+    echo [OK] Old resource pack ZIP deleted
+) else (
+    echo [INFO] No resource pack ZIP found
+)
+
+REM Step 3B: Delete old resourcepack folder (Oraxen server)
+echo Step 3B: Deleting old resourcepack folder (Oraxen)...
+if exist "c:\Users\steve\Documents\OraxenPapermc\plugins\CharmedChars\resourcepack" (
+    rmdir /s /q "c:\Users\steve\Documents\OraxenPapermc\plugins\CharmedChars\resourcepack"
+    echo [OK] Old resourcepack folder deleted
+) else (
+    echo [INFO] No resourcepack folder found
+)
+
+REM Step 4B: Clean Oraxen generated configs (if they exist)
+echo Step 4B: Cleaning Oraxen generated configs (optional)...
+if exist "c:\Users\steve\Documents\OraxenPapermc\plugins\Oraxen\items\charmedchars_blocks.yml" (
+    del "c:\Users\steve\Documents\OraxenPapermc\plugins\Oraxen\items\charmedchars_blocks.yml"
+    echo [OK] Old Oraxen charmedchars config deleted
+) else (
+    echo [INFO] No Oraxen config found
+)
+
+REM Step 5B: Delete old JAR file (Oraxen server)
+echo Step 5B: Deleting old JAR (Oraxen)...
+if exist "c:\Users\steve\Documents\OraxenPapermc\plugins\CharmedChars-*.jar" (
+    del "c:\Users\steve\Documents\OraxenPapermc\plugins\CharmedChars-*.jar"
+    echo [OK] Old JAR deleted
+) else (
+    echo [INFO] No old JAR found
+)
+
+REM Step 6B: Copy new JAR (Oraxen server)
+echo Step 6B: Copying new JAR to Oraxen server (v1.1.5)...
+copy "build\libs\CharmedChars-1.1.5.jar" "c:\Users\steve\Documents\OraxenPapermc\plugins\" /Y
+if %ERRORLEVEL% EQU 0 (
+    echo [OK] JAR copied to Oraxen server
+) else (
+    echo [ERROR] Failed to copy JAR to Oraxen server
     pause
     exit /b 1
 )
 
 echo.
 echo ===================================================
-echo [SUCCESS] CharmedChars v1.1.4 deployed successfully!
+echo [SUCCESS] CharmedChars v1.1.5 deployed successfully!
+echo ===================================================
+echo   Deployed to BOTH servers:
+echo   - ItemsAdder Server: c:\Users\steve\Documents\Papermc
+echo   - Oraxen Server:     c:\Users\steve\Documents\OraxenPapermc
 echo ===================================================
 echo.
-echo Next steps:
-echo   1. Restart your Minecraft server
+echo Next steps - ITEMSADDER SERVER:
+echo   1. Restart the ItemsAdder server
+echo   2. Run: /iasetup (if not already done)
+echo   3. Run: /iazip (regenerate resource pack)
+echo   4. Restart again for full effect
+echo   5. Test: /charblock YourName cyan hello
 echo.
-echo   2. After server starts, run ItemsAdder commands:
-echo      /iareload  (or restart again for full effect)
-echo      /iazip     (regenerate resource pack)
+echo Next steps - ORAXEN SERVER:
+echo   1. Restart the Oraxen server
+echo   2. Run: /oraxensetup (auto-generates 128 items + recipes)
+echo   3. Run: /oraxen reload all
+echo   4. Restart again for full effect
+echo   5. Test: /charblock YourName cyan hello
 echo.
-echo   3. Verify in server logs:
-echo      - ItemsAdder loaded charmedchars namespace
-echo      - Resource pack generated successfully
+echo Testing letter blocks:
+echo   - Mine logs with gold/pyrite tools for letter drops
+echo   - Place blocks in straight lines to form words
+echo   - Break with gold/pyrite tools to score
 echo.
-echo   4. Test letter blocks:
-echo      /iagive YourName charmedchars:cyan_a
-echo      Mine logs with gold/pyrite tools for letter drops
+echo Testing pyrite system:
+echo   - Craft: Iron Ingot + Redstone = Pyrite Ingot
+echo   - Craft pyrite tools (250 durability vs gold's 32)
+echo   - Works exactly like gold for CharmedChars gameplay
 echo.
-echo   5. Test NEW pyrite system:
-echo      /iagive YourName charmedchars:pyrite_ingot
-echo      /iagive YourName charmedchars:pyrite_pickaxe
-echo      Craft: Iron Ingot + Redstone = Pyrite Ingot
-echo.
-echo   6. Test Nether structure features:
-echo      /structurecode (while in fortress/bastion)
-echo      Break number sequences with gold/pyrite tools
+echo Testing Nether features:
+echo   - /structurecode (while in fortress/bastion)
+echo   - Break number sequences with gold/pyrite tools
+echo   - Guess 3-digit codes for rewards
 echo.
 echo ===================================================
-echo Version: 1.1.4 (Code Cleanup & Refactoring)
+echo Version: 1.1.5 (Oraxen Compatibility + Auto-Setup)
+echo ===================================================
+echo NEW in 1.1.5:
+echo   - Full Oraxen support (alternative to ItemsAdder)
+echo   - /oraxensetup command (auto-generates configs)
+echo   - Abstraction layer for both providers
+echo   - Fixed plugin load timing
+echo   - Block model JSON generation for Oraxen
 echo ===================================================
 pause

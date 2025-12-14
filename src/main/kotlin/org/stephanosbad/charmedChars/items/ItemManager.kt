@@ -17,8 +17,6 @@
  */
 package org.stephanosbad.charmedChars.items
 
-import dev.lone.itemsadder.api.CustomBlock
-import dev.lone.itemsadder.api.CustomStack
 import org.bukkit.Bukkit
 import org.bukkit.Location
 import org.bukkit.Material
@@ -216,7 +214,7 @@ class ItemManager @JvmOverloads constructor(localPlugin: CharmedChars? = null) :
      *
      * Valid tools are either:
      * - Gold tools (vanilla Minecraft)
-     * - Pyrite tools (custom ItemsAdder tools)
+     * - Pyrite tools (custom tools from ItemsAdder or Oraxen)
      *
      * @param item The ItemStack to check
      * @return true if the tool is valid for letter drops and word scoring
@@ -231,11 +229,11 @@ class ItemManager @JvmOverloads constructor(localPlugin: CharmedChars? = null) :
             return true
         }
 
-        // Check if it's a pyrite tool using ItemsAdder API
-        val customStack = CustomStack.byItemStack(item)
-        if (customStack != null) {
-            val namespacedId = customStack.namespacedID.lowercase()
-            if (namespacedId.contains("pyrite")) {
+        // Check if it's a pyrite tool using the custom item provider
+        val provider = plugin.customItemProviderManager.getProvider()
+        if (provider != null) {
+            val customItem = provider.getCustomItem(item)
+            if (customItem != null && customItem.namespacedId.lowercase().contains("pyrite")) {
                 return true
             }
         }
@@ -491,15 +489,15 @@ class ItemManager @JvmOverloads constructor(localPlugin: CharmedChars? = null) :
         if (isInDictionary) {
             e.player.sendMessage("Hit: $score")
 
-            // Remove all blocks in the word using ItemsAdder API
+            // Remove all blocks in the word using the custom item provider
+            val provider = plugin.customItemProviderManager.getProvider()
             for (locationOfBlock in blockArray) {
                 val block = locationOfBlock.world.getBlockAt(locationOfBlock)
-                // Use ItemsAdder API to properly remove custom blocks
-                val customBlock = CustomBlock.byAlreadyPlaced(block)
-                if (customBlock != null) {
-                    customBlock.remove()
+                // Use the provider to properly remove custom blocks
+                if (provider != null) {
+                    provider.removeCustomBlock(block)
                 } else {
-                    // Fallback to vanilla removal if not a custom block
+                    // Fallback to vanilla removal if provider not available
                     block.type = Material.AIR
                 }
             }
@@ -581,7 +579,7 @@ class ItemManager @JvmOverloads constructor(localPlugin: CharmedChars? = null) :
     /**
      * Identifies which letter a custom block represents
      *
-     * Parses the ItemsAdder namespaced ID (e.g., "charmedchars:cyan_a") to extract
+     * Parses the namespaced ID (e.g., "charmedchars:cyan_a") to extract
      * the letter component and match it to a LetterBlock enum value.
      *
      * @param block The block to check
@@ -590,16 +588,19 @@ class ItemManager @JvmOverloads constructor(localPlugin: CharmedChars? = null) :
     fun getCustomVariation(block: Block?): LetterBlock? {
         if (block == null) return null
 
-        val customBlock = CustomBlock.byAlreadyPlaced(block) ?: return null
-        val namespacedId = customBlock.namespacedID
+        val provider = plugin.customItemProviderManager.getProvider() ?: return null
+        val customBlock = provider.getCustomBlock(block) ?: return null
+        val namespacedId = customBlock.namespacedId
 
-        // Parse the ItemsAdder ID (e.g., "charmedchars:cyan_a")
-        if (!namespacedId.startsWith("charmedchars:")) return null
-
-        val parts = namespacedId.substring("charmedchars:".length).split("_")
+        // Parse the namespaced ID (e.g., "charmedchars:cyan_a" or "oraxen:cyan_a")
+        val parts = namespacedId.split(":")
         if (parts.size != 2) return null
 
-        val letter = parts[1].uppercase()
+        val blockName = parts[1]  // e.g., "cyan_a"
+        val nameParts = blockName.split("_")
+        if (nameParts.size != 2) return null
+
+        val letter = nameParts[1].uppercase()
 
         // Find the matching LetterBlock
         return LetterBlock.entries.firstOrNull { it.name == letter }
@@ -608,7 +609,7 @@ class ItemManager @JvmOverloads constructor(localPlugin: CharmedChars? = null) :
     /**
      * Identifies the color of a custom block
      *
-     * Parses the ItemsAdder namespaced ID (e.g., "charmedchars:cyan_a") to extract
+     * Parses the namespaced ID (e.g., "charmedchars:cyan_a") to extract
      * the color component and match it to a BlockColor enum value.
      *
      * @param block The block to check
@@ -617,16 +618,19 @@ class ItemManager @JvmOverloads constructor(localPlugin: CharmedChars? = null) :
     fun getBlockColor(block: Block?): BlockColor? {
         if (block == null) return null
 
-        val customBlock = CustomBlock.byAlreadyPlaced(block) ?: return null
-        val namespacedId = customBlock.namespacedID
+        val provider = plugin.customItemProviderManager.getProvider() ?: return null
+        val customBlock = provider.getCustomBlock(block) ?: return null
+        val namespacedId = customBlock.namespacedId
 
-        // Parse the ItemsAdder ID (e.g., "charmedchars:cyan_a")
-        if (!namespacedId.startsWith("charmedchars:")) return null
+        // Parse the namespaced ID (e.g., "charmedchars:cyan_a" or "oraxen:cyan_a")
+        val parts = namespacedId.split(":")
+        if (parts.size != 2) return null
 
-        val parts = namespacedId.substring("charmedchars:".length).split("_")
-        if (parts.isEmpty()) return null
+        val blockName = parts[1]  // e.g., "cyan_a"
+        val nameParts = blockName.split("_")
+        if (nameParts.isEmpty()) return null
 
-        val colorName = parts[0].uppercase()
+        val colorName = nameParts[0].uppercase()
 
         // Find the matching BlockColor
         return BlockColor.entries.firstOrNull { it.name == colorName }
