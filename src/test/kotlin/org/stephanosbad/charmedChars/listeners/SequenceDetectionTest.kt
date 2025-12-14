@@ -28,8 +28,8 @@ import org.junit.jupiter.params.provider.CsvSource
  * Tests the findThreeDigitSequence() method that searches for valid number
  * block sequences in the game. This is critical for the number guessing game.
  *
- * NOTE: Due to ItemsAdder API complexity, these tests focus on the geometric
- * logic patterns rather than full integration testing with mocked blocks.
+ * NOTE: Due to custom item provider API complexity, these tests focus on the
+ * geometric logic patterns rather than full integration testing with mocked blocks.
  */
 class SequenceDetectionTest {
 
@@ -219,18 +219,18 @@ class SequenceDetectionTest {
         assertEquals(999, maxNumber, "[9][9][9] forms 999")
     }
 
-    // ==================== ItemsAdder Block Identification Tests ====================
+    // ==================== Custom Block Identification Tests ====================
 
     @Test
     fun `getNumberFromBlock expects NoteBlock blockdata`() {
-        // ItemsAdder uses NoteBlock for custom blocks
+        // Custom item providers (ItemsAdder/Oraxen) use NoteBlock for custom blocks
         // Non-NoteBlock returns null immediately
 
         assertTrue(true, "Document: Only NoteBlock blockdata is checked")
     }
 
     @Test
-    fun `getNumberFromBlock parses ItemsAdder namespacedID`() {
+    fun `getNumberFromBlock parses custom item provider namespacedID`() {
         // Expected format: "charmedchars:cyan_5"
         // Parts: ["cyan", "5"]
         // Returns: 5
