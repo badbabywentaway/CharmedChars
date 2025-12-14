@@ -17,8 +17,9 @@
  */
 package org.stephanosbad.charmedChars.items
 
-import dev.lone.itemsadder.api.CustomStack
+import org.bukkit.Bukkit
 import org.bukkit.inventory.ItemStack
+import org.stephanosbad.charmedChars.CharmedChars
 import java.util.*
 
 /**
@@ -87,10 +88,16 @@ enum class LetterBlock(
      */
     private val _itemStacks: MutableMap<BlockColor, ItemStack?> by lazy {
         mutableMapOf<BlockColor, ItemStack?>().apply {
+            val plugin = Bukkit.getPluginManager().getPlugin("CharmedChars") as? CharmedChars
+            val provider = plugin?.customItemProviderManager?.getProvider()
+
+            if (provider == null) {
+                System.err.println("WARNING: CustomItemProvider not available when initializing LetterBlock")
+            }
+
             for (color in BlockColor.entries) {
                 val itemId = "charmedchars:${color.directoryName}_${this@LetterBlock.character.lowercase()}"
-                val customStack = CustomStack.getInstance(itemId)
-                this[color] = customStack?.itemStack
+                this[color] = provider?.getItemStack(itemId)
             }
         }
     }

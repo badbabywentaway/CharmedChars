@@ -17,9 +17,9 @@
  */
 package org.stephanosbad.charmedChars.items
 
-
-import dev.lone.itemsadder.api.CustomStack
+import org.bukkit.Bukkit
 import org.bukkit.inventory.ItemStack
+import org.stephanosbad.charmedChars.CharmedChars
 
 /**
  * Enum of operator/symbol blocks (+, -, *, /)
@@ -41,13 +41,20 @@ enum class NonAlphaNumBlocks(val charVal: Char, blockName: String) {
      */
     private val _itemStacks: MutableMap<BlockColor, ItemStack?> by lazy {
         mutableMapOf<BlockColor, ItemStack?>().apply {
+            val plugin = Bukkit.getPluginManager().getPlugin("CharmedChars") as? CharmedChars
+            val provider = plugin?.customItemProviderManager?.getProvider()
+
+            if (provider == null) {
+                System.err.println("WARNING: CustomItemProvider not available when initializing NonAlphaNumBlocks")
+            }
+
             for (color in BlockColor.entries) {
                 val itemId = "charmedchars:${color.directoryName}_${this@NonAlphaNumBlocks.nonAlphaNumBlockName}"
-                val customStack = CustomStack.getInstance(itemId)
-                if (customStack == null) {
-                    System.err.println("WARNING: ItemsAdder CustomStack.getInstance returned null for $itemId")
+                val itemStack = provider?.getItemStack(itemId)
+                if (itemStack == null) {
+                    System.err.println("WARNING: CustomItemProvider returned null for $itemId")
                 }
-                this[color] = customStack?.itemStack
+                this[color] = itemStack
             }
         }
     }

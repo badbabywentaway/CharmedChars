@@ -2,9 +2,8 @@ name: CharmedChars
 version: ${version}
 main: org.stephanosbad.charmedChars.CharmedChars
 api-version: '1.21'
-load: STARTUP
-depend: [ItemsAdder]
-softdepend: [ProtocolLib, WorldGuard, GriefPrevention]
+load: POSTWORLD
+softdepend: [ItemsAdder, Oraxen, ProtocolLib, WorldGuard, GriefPrevention]
 authors: [ StephanosBad ]
 description: Open source word-forming puzzle game plugin for Minecraft (LGPL v3)
 commands:
@@ -29,6 +28,11 @@ commands:
     usage: /iasetup [force]
     permission: charmedchars.admin
     aliases: [setupitemsadder, iaconfig]
+  oraxensetup:
+    description: Auto-setup Oraxen configuration (generate configs & copy textures)
+    usage: /oraxensetup [force]
+    permission: charmedchars.admin
+    aliases: [setuporaxen, oxsetup]
   version:
     description: Display plugin version and recent changes
     usage: /version

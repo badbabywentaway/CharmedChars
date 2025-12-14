@@ -20,6 +20,7 @@ repositories {
     maven("https://jitpack.io") { name = "jitpack" }
     maven("https://maven.enginehub.org/repo/")
     maven("https://repo.dmulloy2.net/repository/public/") { name = "protocollib-repo" }
+    maven("https://repo.oraxen.com/releases") { name = "oraxen-repo" }
 }
 
 dependencies {
@@ -27,6 +28,7 @@ dependencies {
     compileOnly("com.sk89q.worldguard:worldguard-bukkit:${property("worldGuardVersion")}")
     compileOnly("com.comphenix.protocol:ProtocolLib:5.3.0")
     compileOnly("com.github.LoneDev6:API-ItemsAdder:3.6.3-beta-14")
+    compileOnly("io.th0rgal:oraxen:1.181.0")
     compileOnly("com.github.GriefPrevention:GriefPrevention:${property("griefPreventionVersion")}")
     implementation("org.jetbrains.kotlin:kotlin-stdlib:${property("kotlinVersion")}")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:${property("coroutinesVersion")}")

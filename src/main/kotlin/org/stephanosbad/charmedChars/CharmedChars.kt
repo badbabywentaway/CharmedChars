@@ -33,10 +33,12 @@ import org.bukkit.Bukkit
 import org.stephanosbad.charmedChars.commands.ItemsAdderStatusCommand
 import org.stephanosbad.charmedChars.commands.ReloadCommand
 import org.stephanosbad.charmedChars.commands.SetupItemsAdderCommand
+import org.stephanosbad.charmedChars.commands.SetupOraxenCommand
 import org.stephanosbad.charmedChars.commands.StructureCodeCommand
 import org.stephanosbad.charmedChars.commands.StructureDatabaseCommand
 import org.stephanosbad.charmedChars.commands.VersionCommand
 import org.stephanosbad.charmedChars.integration.ItemsAdderSetup
+import org.stephanosbad.charmedChars.integration.CustomItemProviderManager
 import org.stephanosbad.charmedChars.utility.ConfigManager
 import org.stephanosbad.charmedChars.database.StructureDatabase
 import org.stephanosbad.charmedChars.listeners.StructureListener
@@ -79,6 +81,12 @@ class CharmedChars : JavaPlugin(), CoroutineScope {
         private set
 
     /**
+     * Custom item provider manager (ItemsAdder or Oraxen)
+     */
+    lateinit var customItemProviderManager: CustomItemProviderManager
+        private set
+
+    /**
      * Called when the plugin is enabled
      *
      * Initializes configuration, registers commands and event listeners,
@@ -88,6 +96,22 @@ class CharmedChars : JavaPlugin(), CoroutineScope {
 
         // Plugin startup logic
         println("Minecraft Letter/Number Block Plugin Starting")
+
+        // Initialize custom item provider (must be first!)
+        customItemProviderManager = CustomItemProviderManager(this)
+        val providerResult = customItemProviderManager.initialize()
+
+        if (!providerResult.success) {
+            logger.severe("========================================")
+            logger.severe("FATAL: Failed to initialize custom item provider!")
+            providerResult.messages.forEach { logger.severe(it) }
+            logger.severe("Plugin will be disabled.")
+            logger.severe("========================================")
+            server.pluginManager.disablePlugin(this)
+            return
+        }
+
+        logger.info("Custom item provider initialized: ${customItemProviderManager.getProviderName()}")
 
         configDataHandler = ConfigDataHandler(this)
         try {
@@ -113,6 +137,7 @@ class CharmedChars : JavaPlugin(), CoroutineScope {
         getCommand("reload")?.setExecutor(ReloadCommand(this))
         getCommand("iastatus")?.setExecutor(ItemsAdderStatusCommand())
         getCommand("iasetup")?.setExecutor(SetupItemsAdderCommand(this))
+        getCommand("oraxensetup")?.setExecutor(SetupOraxenCommand(this))
         getCommand("version")?.setExecutor(VersionCommand(this))
         getCommand("structurecode")?.setExecutor(StructureCodeCommand(this))
         val structureDbCommand = StructureDatabaseCommand(this)
@@ -129,14 +154,14 @@ class CharmedChars : JavaPlugin(), CoroutineScope {
         logger.info("CharmedChars v${description.version} has been enabled!")
 
         server.consoleSender.sendMessage(
-            Component.text("CharmedChars loaded successfully with ItemsAdder integration!")
+            Component.text("CharmedChars loaded successfully with ${customItemProviderManager.getProviderName()} integration!")
                 .color(NamedTextColor.GREEN)
         )
 
-        // Check ItemsAdder setup status
+        // Check provider setup status
         launch {
-            delay(2000) // Wait for ItemsAdder to fully load
-            checkItemsAdderSetup()
+            delay(2000) // Wait for provider to fully load
+            checkProviderSetup()
         }
 
         if (getCommand(CharBlock.CommandName) != null) {
@@ -197,46 +222,74 @@ class CharmedChars : JavaPlugin(), CoroutineScope {
     }
 
     /**
-     * Checks if ItemsAdder is properly set up and notifies administrators
+     * Checks if the custom item provider is properly set up and notifies administrators
      *
-     * Verifies that ItemsAdder plugin is installed and configured with CharmedChars
+     * Verifies that the active provider (ItemsAdder or Oraxen) is configured with CharmedChars
      * custom blocks. If not configured, sends warnings to the console and notifies
      * online operators with setup instructions.
      */
-    private fun checkItemsAdderSetup() {
-        val setup = ItemsAdderSetup(this)
+    private fun checkProviderSetup() {
+        val providerName = customItemProviderManager.getProviderName()
 
-        if (!setup.isItemsAdderAvailable()) {
-            logger.warning("========================================")
-            logger.warning("ItemsAdder plugin not found!")
-            logger.warning("CharmedChars requires ItemsAdder to function.")
-            logger.warning("Please install ItemsAdder from SpigotMC.")
-            logger.warning("========================================")
-            return
-        }
+        when (providerName) {
+            "ItemsAdder" -> {
+                val setup = ItemsAdderSetup(this)
 
-        if (!setup.isAlreadySetup()) {
-            logger.warning("========================================")
-            logger.warning("ItemsAdder is installed but not configured!")
-            logger.warning("")
-            logger.warning("Run one of these commands to setup:")
-            logger.warning("  /iasetup     - Auto-copy configs & textures")
-            logger.warning("  OR manually copy files (see docs)")
-            logger.warning("")
-            logger.warning("Then run /iazip and restart the server.")
-            logger.warning("========================================")
+                if (!setup.isAlreadySetup()) {
+                    logger.warning("========================================")
+                    logger.warning("ItemsAdder is installed but not configured!")
+                    logger.warning("")
+                    logger.warning("Run one of these commands to setup:")
+                    logger.warning("  /iasetup     - Auto-copy configs & textures")
+                    logger.warning("  OR manually copy files (see docs)")
+                    logger.warning("")
+                    logger.warning("Then run /iazip and restart the server.")
+                    logger.warning("========================================")
 
-            // Notify online ops
-            server.scheduler.runTask(this, Runnable {
-                server.onlinePlayers.filter { it.isOp }.forEach { player ->
-                    player.sendMessage(
-                        Component.text("⚠ CharmedChars needs setup! Run /iasetup to auto-configure ItemsAdder")
-                            .color(NamedTextColor.GOLD)
-                    )
+                    // Notify online ops
+                    server.scheduler.runTask(this, Runnable {
+                        server.onlinePlayers.filter { it.isOp }.forEach { player ->
+                            player.sendMessage(
+                                Component.text("⚠ CharmedChars needs setup! Run /iasetup to auto-configure ItemsAdder")
+                                    .color(NamedTextColor.GOLD)
+                            )
+                        }
+                    })
+                } else {
+                    logger.info("ItemsAdder configuration found. Ready to use!")
                 }
-            })
-        } else {
-            logger.info("ItemsAdder configuration found. Ready to use!")
+            }
+
+            "Oraxen" -> {
+                val setup = org.stephanosbad.charmedChars.integration.OraxenSetup(this)
+
+                if (!setup.isAlreadySetup()) {
+                    logger.warning("========================================")
+                    logger.warning("Oraxen is installed but not configured!")
+                    logger.warning("")
+                    logger.warning("Run this command to setup:")
+                    logger.warning("  /oraxensetup - Auto-generate configs & copy textures")
+                    logger.warning("")
+                    logger.warning("Then run /oraxen reload all and restart the server.")
+                    logger.warning("========================================")
+
+                    // Notify online ops
+                    server.scheduler.runTask(this, Runnable {
+                        server.onlinePlayers.filter { it.isOp }.forEach { player ->
+                            player.sendMessage(
+                                Component.text("⚠ CharmedChars needs setup! Run /oraxensetup to auto-configure Oraxen")
+                                    .color(NamedTextColor.GOLD)
+                            )
+                        }
+                    })
+                } else {
+                    logger.info("Oraxen configuration found. Ready to use!")
+                }
+            }
+
+            else -> {
+                logger.warning("Unknown provider: $providerName")
+            }
         }
     }
 
