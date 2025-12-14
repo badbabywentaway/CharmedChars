@@ -7,18 +7,24 @@ A word-forming puzzle game for Minecraft where players collect letter blocks fro
 ### CharmedChars License
 CharmedChars is **open source** software licensed under **GNU LGPL v3**.
 
-### Required Dependency - ItemsAdder
-**CRITICAL NOTICE**: CharmedChars requires **ItemsAdder**, which is a **proprietary/commercial plugin**.
+### Required Custom Item Plugin - ItemsAdder OR Oraxen
+**CRITICAL NOTICE**: CharmedChars requires **either ItemsAdder OR Oraxen** (not both).
 
-- **ItemsAdder is NOT included** with CharmedChars
-- **ItemsAdder is NOT open source** - it is a paid premium plugin
-- You **MUST purchase/download ItemsAdder separately** from:
-  - [SpigotMC](https://www.spigotmc.org/resources/itemsadder.73355/)
-  - Or other official sources
-- You **MUST comply** with ItemsAdder's own license terms
-- ItemsAdder is a **runtime dependency only** - CharmedChars interfaces with its public API but does not bundle or redistribute any ItemsAdder code
+#### ItemsAdder (Recommended)
+- **Proprietary/commercial plugin** - purchase separately
+- **NOT included** with CharmedChars
+- **NOT open source** - paid premium plugin
+- Available from: [SpigotMC](https://www.spigotmc.org/resources/itemsadder.73355/)
+- **Auto-setup available** with `/iasetup` command
+- You **MUST comply** with ItemsAdder's license terms
 
-**Without ItemsAdder, this plugin will not function.**
+#### Oraxen (Alternative)
+- Open-source custom items plugin
+- Available from: [SpigotMC](https://www.spigotmc.org/resources/oraxen.72448/) or [GitHub](https://github.com/oraxen/oraxen)
+- **Auto-setup available** with `/oraxensetup` command (see `ORAXEN_SETUP.md`)
+- Free alternative to ItemsAdder
+
+**Important**: Install **exactly ONE** of these plugins. CharmedChars will automatically detect which one you have and refuse to load if both are installed or neither is installed.
 
 ---
 
@@ -31,8 +37,11 @@ CharmedChars is **open source** software licensed under **GNU LGPL v3**.
 - Paper or Paper-based server (Purpur, Pufferfish, etc.)
 - Java 21+
 
-**Required Plugin:**
-- ItemsAdder 3.6.3-beta-14 or higher (**proprietary - purchase separately**)
+**Required Plugin (choose ONE):**
+- ItemsAdder 3.6.3-beta-14+ (**proprietary - purchase separately**) - Recommended
+- Oraxen 1.181.0+ (open-source, free) - Free alternative
+
+Both plugins now have auto-setup commands!
 
 **Optional Plugins:**
 - WorldGuard 7.0.14+ (for region protection)
@@ -41,8 +50,9 @@ CharmedChars is **open source** software licensed under **GNU LGPL v3**.
 
 ### Installation
 
+#### With ItemsAdder (Recommended)
 1. **Purchase and install ItemsAdder** (required proprietary dependency)
-2. Download CharmedChars-1.1.5.jar
+2. Download CharmedChars jar
 3. Place both plugins in `plugins/` folder
 4. Start server to generate configs
 5. Run `/iasetup` to auto-configure ItemsAdder
@@ -50,7 +60,17 @@ CharmedChars is **open source** software licensed under **GNU LGPL v3**.
 7. Restart server
 8. Players automatically receive resource pack on join
 
-See `QUICK_SETUP.md` for detailed installation instructions.
+#### With Oraxen (Alternative)
+1. **Install Oraxen** (free open-source alternative)
+2. Download CharmedChars jar
+3. Place both plugins in `plugins/` folder
+4. Start server to generate configs
+5. Run `/oraxensetup` to auto-configure Oraxen
+6. Run `/oraxen reload all` to load items
+7. Restart server (recommended)
+8. Players automatically receive resource pack on join
+
+See `QUICK_SETUP.md` (ItemsAdder) or `ORAXEN_SETUP.md` (Oraxen) for detailed instructions.
 
 ---
 
@@ -96,7 +116,7 @@ See `PLAY_INSTRUCTIONS.md` for complete gameplay guide.
 - Nether Structure Number Guessing Game - guess 3-digit codes in fortresses and bastions for rewards
 
 ### Technical
-- ItemsAdder integration for custom blocks and items
+- ItemsAdder or Oraxen integration for custom blocks and items (plugin auto-detects which is installed)
 - 123 custom blocks (26 letters × 3 colors + 10 numbers × 3 colors + 4 operators × 3 colors)
 - 5 pyrite items (ingot, pickaxe, axe, shovel, hoe)
 - Total: 128 custom items with 512x512 custom textures
@@ -180,7 +200,7 @@ cd CharmedChars
 ./gradlew buildWithVersion
 ```
 
-Output: `build/libs/CharmedChars-1.1.5.jar`
+Output: `build/libs/CharmedChars-1.2.0.jar`
 
 **Note**: You still need to obtain ItemsAdder separately - it cannot be built from source as it is proprietary.
 
@@ -188,7 +208,7 @@ Output: `build/libs/CharmedChars-1.1.5.jar`
 
 ## Version
 
-Current Version: **1.1.5**
+Current Version: **1.2.0**
 
 Run `/version` in-game or `./gradlew version` to display version information.
 

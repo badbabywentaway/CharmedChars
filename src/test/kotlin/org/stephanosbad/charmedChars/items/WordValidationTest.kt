@@ -121,7 +121,7 @@ class WordValidationTest {
 
     @Test
     fun `pyrite tools are identified by namespacedID`() {
-        // ItemsAdder pyrite tools have namespacedID format: "charmedchars:pyrite_*"
+        // Custom item provider (ItemsAdder/Oraxen) pyrite tools have namespacedID format: "charmedchars:pyrite_*"
         val pyriteNamespacedIds = listOf(
             "charmedchars:pyrite_ingot",
             "charmedchars:pyrite_pickaxe",
@@ -157,12 +157,12 @@ class WordValidationTest {
     fun `tool validation checks three sources`() {
         // ItemManager.isValidTool() checks in order:
         // 1. Material type contains "gold" (vanilla gold tools)
-        // 2. CustomStack namespacedID contains "pyrite" (ItemsAdder pyrite tools)
+        // 2. CustomItemProvider namespacedID contains "pyrite" (ItemsAdder/Oraxen pyrite tools)
         // 3. Display name contains "gold" or "pyrite" (fallback for custom items)
 
         val validationSteps = listOf(
             "Check material type for 'gold'",
-            "Check CustomStack namespacedID for 'pyrite'",
+            "Check custom item provider namespacedID for 'pyrite'",
             "Check display name for 'gold' or 'pyrite'"
         )
 

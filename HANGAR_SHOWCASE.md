@@ -23,7 +23,7 @@ Perfect for:
 - **Three vibrant colors**: Cyan, Magenta, Yellow
 - **Drop rates**: 6% base, up to 20% with Looting III enchantment
 - **Frequency-based distribution**: Common letters (E, A, R) drop more often than rare ones (Q, X, Z)
-- **Custom 512x512 textures** with ItemsAdder integration
+- **Custom 512x512 textures** with ItemsAdder or Oraxen integration
 
 ### Word Formation & Scoring
 - Place blocks in **straight lines** (horizontal or vertical)
@@ -98,14 +98,16 @@ Word: "QUARTZ" (all magenta)
 - **Minecraft**: 1.21.10+
 - **Server**: Paper or Paper-based (Purpur, Pufferfish, etc.)
 - **Java**: 21+
-- **ItemsAdder**: 3.6.3-beta-14+ (**required dependency** - sold separately)
+- **Custom Item Plugin** (choose ONE):
+  - **ItemsAdder** 3.6.3-beta-14+ (proprietary - sold separately) - **Recommended**
+  - **Oraxen** 1.181.0+ (open-source, free) - Free alternative
 
 ### Optional Dependencies
 - WorldGuard 7.0.14+ (region protection)
 - GriefPrevention 16.15.0+ (claim protection)
 - ProtocolLib 5.3.0+ (advanced features)
 
-### Setup Steps
+### Setup Steps (ItemsAdder)
 1. Purchase and install **ItemsAdder** (proprietary plugin - not included)
 2. Download CharmedChars JAR from [GitHub Releases](https://github.com/badbabywentaway/CharmedChars/releases)
 3. Place both plugins in `plugins/` folder
@@ -115,7 +117,19 @@ Word: "QUARTZ" (all magenta)
 7. Restart server completely
 8. Players automatically receive resource pack on join
 
-**Detailed guide**: [QUICK_SETUP.md](https://github.com/badbabywentaway/CharmedChars/blob/master/QUICK_SETUP.md)
+### Setup Steps (Oraxen - Free Alternative)
+1. Install **Oraxen** (free open-source plugin)
+2. Download CharmedChars JAR from [GitHub Releases](https://github.com/badbabywentaway/CharmedChars/releases)
+3. Place both plugins in `plugins/` folder
+4. Start server to generate configs
+5. Run `/oraxensetup` to auto-configure Oraxen
+6. Run `/oraxen reload all` to load items
+7. Restart server (recommended)
+8. Players automatically receive resource pack on join
+
+**Detailed guides**:
+- [QUICK_SETUP.md](https://github.com/badbabywentaway/CharmedChars/blob/master/QUICK_SETUP.md) (ItemsAdder)
+- [ORAXEN_SETUP.md](https://github.com/badbabywentaway/CharmedChars/blob/master/ORAXEN_SETUP.md) (Oraxen)
 
 ---
 
@@ -128,8 +142,9 @@ Word: "QUARTZ" (all magenta)
 | `/structurecode` | View structure's secret number | `charmedchars.blocks` |
 | `/structuredb list [world]` | List all tracked structures | `charmedchars.blocks` |
 | `/structuredb purge <type>` | Reset structure entries | `charmedchars.blocks` |
-| `/iastatus` | Check ItemsAdder integration | `charmedchars.admin` |
-| `/iasetup [force]` | Auto-setup ItemsAdder config | `charmedchars.admin` |
+| `/iastatus` | Check ItemsAdder integration status | `charmedchars.admin` |
+| `/iasetup [force]` | Auto-setup ItemsAdder configuration | `charmedchars.admin` |
+| `/oraxensetup [force]` | Auto-setup Oraxen configuration | `charmedchars.admin` |
 | `/reload` | Reload plugin configuration | `charmedchars.admin` |
 
 ---
@@ -188,7 +203,8 @@ bastion-reward:
   - Tips for maximizing rewards
 
 ### For Server Admins
-- **[Quick Setup Guide](https://github.com/badbabywentaway/CharmedChars/blob/master/QUICK_SETUP.md)** - Installation walkthrough
+- **[Quick Setup Guide - ItemsAdder](https://github.com/badbabywentaway/CharmedChars/blob/master/QUICK_SETUP.md)** - ItemsAdder installation
+- **[Oraxen Setup Guide](https://github.com/badbabywentaway/CharmedChars/blob/master/ORAXEN_SETUP.md)** - Oraxen installation (free alternative)
 - **[Reward Configuration](https://github.com/badbabywentaway/CharmedChars/blob/master/REWARD_CONFIG.md)** - Customizing rewards
 - **[Troubleshooting](https://github.com/badbabywentaway/CharmedChars/blob/master/TROUBLESHOOTING.md)** - Common issues
 
@@ -203,9 +219,10 @@ bastion-reward:
 ### Custom Blocks & Items
 - **123 custom blocks**: 26 letters × 3 colors + 10 numbers × 3 colors + 4 operators × 3 colors
 - **5 pyrite items**: Ingot, Pickaxe, Axe, Shovel, Hoe (craftable iron-tier tools)
-- **Total**: 128 custom items with ItemsAdder integration
+- **Total**: 128 custom items with ItemsAdder or Oraxen integration
 - **512x512 custom textures** by Gaia Temperini
-- **Auto-setup commands** for easy ItemsAdder configuration
+- **Auto-setup commands** for both ItemsAdder (`/iasetup`) and Oraxen (`/oraxensetup`)
+- **Abstraction layer** supports multiple custom item providers
 
 ### Database System
 - **SQLite database** with Exposed ORM
@@ -223,9 +240,15 @@ bastion-reward:
 
 ## Version Information
 
-**Current Version**: 1.1.5
+**Current Version**: 1.2.0
 
 **Latest Updates**:
+- **v1.2.0**: Oraxen compatibility - Full support for Oraxen as free alternative to ItemsAdder
+  - Custom item provider abstraction layer
+  - `/oraxensetup` command for automatic configuration
+  - Automatic block model JSON generation for Oraxen
+  - Plugin auto-detects which provider is installed
+  - Refuses to load if both or neither are installed
 - **v1.1.5**: Bug fix - automatic Data folder creation, comprehensive documentation updates
 - **v1.1.4**: Code cleanup and refactoring (95 lines removed)
 - **v1.1.3**: Brass-colored pyrite textures
@@ -245,16 +268,26 @@ bastion-reward:
 - **Source Code**: Open source on GitHub
 - **Commercial Use**: Permitted under LGPL v3 terms
 
-### Required Dependency - ItemsAdder
-**CRITICAL NOTICE**: CharmedChars requires **ItemsAdder**, which is a **proprietary/commercial plugin**.
+### Required Dependency - Custom Item Plugin (Choose ONE)
 
-- ItemsAdder is **NOT included** with CharmedChars
-- ItemsAdder is **NOT open source** - it is a paid premium plugin
-- You **MUST purchase ItemsAdder separately** from [SpigotMC](https://www.spigotmc.org/resources/itemsadder.73355/)
+**CRITICAL NOTICE**: CharmedChars requires **either ItemsAdder OR Oraxen** (not both, not neither).
+
+#### ItemsAdder (Recommended)
+- **Proprietary/commercial plugin** - purchase separately
+- **NOT included** with CharmedChars
+- **NOT open source** - paid premium plugin
+- Available from [SpigotMC](https://www.spigotmc.org/resources/itemsadder.73355/)
 - CharmedChars only uses ItemsAdder's public API (compileOnly dependency)
-- No ItemsAdder code is bundled or redistributed
+- Auto-setup with `/iasetup` command
 
-**Without ItemsAdder, this plugin will not function.**
+#### Oraxen (Free Alternative)
+- **Open-source, free plugin**
+- Available from [SpigotMC](https://www.spigotmc.org/resources/oraxen.72448/) or [GitHub](https://github.com/oraxen/oraxen)
+- Free alternative to ItemsAdder
+- CharmedChars only uses Oraxen's public API (compileOnly dependency)
+- Auto-setup with `/oraxensetup` command
+
+**Important**: Install **exactly ONE** of these plugins. CharmedChars will automatically detect which one you have and refuse to load if both are installed or neither is installed.
 
 ---
 
@@ -264,7 +297,8 @@ bastion-reward:
 
 **Built With**:
 - Kotlin 2.2.21 & Paper API 1.21.10
-- ItemsAdder API 3.6.3-beta-14
+- ItemsAdder API 3.6.3-beta-14 (optional - one of two providers)
+- Oraxen API 1.181.0 (optional - one of two providers)
 - Exposed ORM (SQLite)
 
 **Artwork**:
@@ -273,7 +307,7 @@ bastion-reward:
 
 **Development**:
 - AI-assisted development by Claude (Anthropic)
-- Features include: Nether number game, pyrite system, reward formulas, comprehensive documentation
+- Features include: Nether number game, pyrite system, reward formulas, Oraxen compatibility, custom item provider abstraction, comprehensive documentation
 - All AI contributions include Co-Authored-By attribution in git commits
 
 ---
@@ -283,7 +317,8 @@ bastion-reward:
 - **GitHub Repository**: https://github.com/badbabywentaway/CharmedChars
 - **Download (Releases)**: https://github.com/badbabywentaway/CharmedChars/releases
 - **How to Play**: https://github.com/badbabywentaway/CharmedChars/blob/master/PLAY_INSTRUCTIONS.md
-- **Setup Guide**: https://github.com/badbabywentaway/CharmedChars/blob/master/QUICK_SETUP.md
+- **Setup Guide (ItemsAdder)**: https://github.com/badbabywentaway/CharmedChars/blob/master/QUICK_SETUP.md
+- **Setup Guide (Oraxen)**: https://github.com/badbabywentaway/CharmedChars/blob/master/ORAXEN_SETUP.md
 - **Issue Tracker**: https://github.com/badbabywentaway/CharmedChars/issues
 
 ---

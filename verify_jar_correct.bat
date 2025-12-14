@@ -4,14 +4,14 @@ setlocal enabledelayedexpansion
 echo === VERIFY JAR CONTENTS (CASE-SENSITIVE) ===
 echo.
 
-if not exist "build\libs\CharmedChars-1.0.0.jar" (
-    echo ERROR: JAR file not found at build\libs\CharmedChars-1.0.0.jar
+if not exist "build\libs\CharmedChars-1.2.0.jar" (
+    echo ERROR: JAR file not found at build\libs\CharmedChars-1.2.0.jar
     pause
     exit /b 1
 )
 
 echo Step 1: Copying JAR to ZIP...
-copy "build\libs\CharmedChars-1.0.0.jar" "CharmedChars-temp.zip" >nul
+copy "build\libs\CharmedChars-1.2.0.jar" "CharmedChars-temp.zip" >nul
 echo [OK] JAR copied
 
 echo.
@@ -40,7 +40,7 @@ if %JAR_STATUS% EQU 0 (
     echo.
     echo Ready to deploy:
     echo   1. rmdir /s /q "c:\Users\steve\Documents\Papermc\plugins\CharmedChars\extracted_pack"
-    echo   2. copy build\libs\CharmedChars-1.0.0.jar "c:\Users\steve\Documents\Papermc\plugins\"
+    echo   2. copy build\libs\CharmedChars-1.2.0.jar "c:\Users\steve\Documents\Papermc\plugins\"
     echo   3. Restart server and test
 ) else (
     echo [FAILED] JAR contains UPPERCASE files!
