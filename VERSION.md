@@ -6,13 +6,14 @@
 2025-12-14
 
 ### Overview
-Major feature release adding full support for Oraxen as a free, open-source alternative to ItemsAdder. Introduces a custom item provider abstraction layer that allows server owners to choose between ItemsAdder (proprietary/paid) or Oraxen (open-source/free) for custom items.
+Major feature release adding full support for Oraxen as an alternative to ItemsAdder. Introduces a custom item provider abstraction layer that allows server owners to choose between two premium custom item providers: ItemsAdder or Oraxen (both require purchase, though Oraxen has public source code).
 
 ### Changes
 
 #### **New Features** ⭐
 
-**Oraxen Support - Free Alternative to ItemsAdder**
+**Oraxen Support - Alternative to ItemsAdder**
+- **IMPORTANT**: Both ItemsAdder and Oraxen are premium plugins requiring purchase for server use
 - **Custom Item Provider Abstraction Layer**: Complete abstraction separating core plugin logic from custom item provider implementation
 - **Dual Provider Support**: Works with either ItemsAdder OR Oraxen (not both, not neither)
 - **Automatic Provider Detection**: Plugin automatically detects which custom item provider is installed at runtime
@@ -80,7 +81,7 @@ if (!hasItemsAdder && !hasOraxen) {
 
 - **HANGAR_SHOWCASE.md**: Updated showcase documentation
   - Dual provider setup instructions
-  - Clear choice between ItemsAdder (paid) and Oraxen (free)
+  - Clear choice between two premium providers (ItemsAdder and Oraxen)
   - Updated commands table with /oraxensetup
   - Abstraction layer technical details
   - Updated version history with v1.2.0 features
@@ -107,10 +108,11 @@ if (!hasItemsAdder && !hasOraxen) {
 - **No Config Changes**: config.yml format unchanged
 
 **Server Owner Benefits**
-- **Cost Savings**: Oraxen is free and open-source (vs ItemsAdder ~$15-20)
-- **Choice**: Server owners can choose based on their needs and budget
+- **Choice**: Server owners can choose between two premium custom item providers
+- **Flexibility**: Both providers are premium but offer different features and pricing
 - **Migration Path**: Can switch between providers by changing plugin + running setup command
 - **Same Features**: All CharmedChars features work identically with both providers
+- **Public Source**: Oraxen has public source code (though still requires purchase for use)
 
 **Technical Quality**
 - **Clean Abstraction**: Provider-specific code isolated in dedicated classes
@@ -173,8 +175,9 @@ if (!hasItemsAdder && !hasOraxen) {
 
 **New Installations**:
 1. Choose **ONE** custom item provider:
-   - **ItemsAdder** (proprietary, ~$15-20): Purchase from SpigotMC
-   - **Oraxen** (free, open-source): Download from SpigotMC or GitHub
+   - **ItemsAdder** (premium plugin): Purchase from SpigotMC
+   - **Oraxen** (premium plugin with public source): Purchase from SpigotMC
+   - **IMPORTANT**: Both are premium plugins requiring purchase for server use
 2. Install chosen provider + CharmedChars
 3. Run setup command:
    - ItemsAdder: `/iasetup` then `/iazip`

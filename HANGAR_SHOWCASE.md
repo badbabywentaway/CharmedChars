@@ -99,8 +99,8 @@ Word: "QUARTZ" (all magenta)
 - **Server**: Paper or Paper-based (Purpur, Pufferfish, etc.)
 - **Java**: 21+
 - **Custom Item Plugin** (choose ONE):
-  - **ItemsAdder** 3.6.3-beta-14+ (proprietary - sold separately) - **Recommended**
-  - **Oraxen** 1.181.0+ (open-source, free) - Free alternative
+  - **ItemsAdder** 3.6.3-beta-14+ (premium - sold separately) - **Recommended**
+  - **Oraxen** 1.181.0+ (premium with public source - sold separately) - Alternative option
 
 ### Optional Dependencies
 - WorldGuard 7.0.14+ (region protection)
@@ -117,8 +117,8 @@ Word: "QUARTZ" (all magenta)
 7. Restart server completely
 8. Players automatically receive resource pack on join
 
-### Setup Steps (Oraxen - Free Alternative)
-1. Install **Oraxen** (free open-source plugin)
+### Setup Steps (Oraxen - Alternative Option)
+1. Purchase and install **Oraxen** (premium plugin with public source code)
 2. Download CharmedChars JAR from [GitHub Releases](https://github.com/badbabywentaway/CharmedChars/releases)
 3. Place both plugins in `plugins/` folder
 4. Start server to generate configs
@@ -204,7 +204,7 @@ bastion-reward:
 
 ### For Server Admins
 - **[Quick Setup Guide - ItemsAdder](https://github.com/badbabywentaway/CharmedChars/blob/master/QUICK_SETUP.md)** - ItemsAdder installation
-- **[Oraxen Setup Guide](https://github.com/badbabywentaway/CharmedChars/blob/master/ORAXEN_SETUP.md)** - Oraxen installation (free alternative)
+- **[Oraxen Setup Guide](https://github.com/badbabywentaway/CharmedChars/blob/master/ORAXEN_SETUP.md)** - Oraxen installation (alternative option)
 - **[Reward Configuration](https://github.com/badbabywentaway/CharmedChars/blob/master/REWARD_CONFIG.md)** - Customizing rewards
 - **[Troubleshooting](https://github.com/badbabywentaway/CharmedChars/blob/master/TROUBLESHOOTING.md)** - Common issues
 
@@ -243,7 +243,8 @@ bastion-reward:
 **Current Version**: 1.2.0
 
 **Latest Updates**:
-- **v1.2.0**: Oraxen compatibility - Full support for Oraxen as free alternative to ItemsAdder
+- **v1.2.0**: Oraxen compatibility - Full support for Oraxen as alternative to ItemsAdder
+  - **IMPORTANT**: Both ItemsAdder and Oraxen are premium plugins requiring purchase
   - Custom item provider abstraction layer
   - `/oraxensetup` command for automatic configuration
   - Automatic block model JSON generation for Oraxen
@@ -273,17 +274,17 @@ bastion-reward:
 **CRITICAL NOTICE**: CharmedChars requires **either ItemsAdder OR Oraxen** (not both, not neither).
 
 #### ItemsAdder (Recommended)
-- **Proprietary/commercial plugin** - purchase separately
+- **Premium plugin** - purchase required for server use
 - **NOT included** with CharmedChars
-- **NOT open source** - paid premium plugin
 - Available from [SpigotMC](https://www.spigotmc.org/resources/itemsadder.73355/)
 - CharmedChars only uses ItemsAdder's public API (compileOnly dependency)
 - Auto-setup with `/iasetup` command
 
-#### Oraxen (Free Alternative)
-- **Open-source, free plugin**
-- Available from [SpigotMC](https://www.spigotmc.org/resources/oraxen.72448/) or [GitHub](https://github.com/oraxen/oraxen)
-- Free alternative to ItemsAdder
+#### Oraxen (Alternative Option)
+- **Premium plugin with public source code** - purchase required for server use
+- **NOT included** with CharmedChars
+- Available from [SpigotMC](https://www.spigotmc.org/resources/oraxen.72448/)
+- Source code available on [GitHub](https://github.com/oraxen/oraxen) but license requires purchase
 - CharmedChars only uses Oraxen's public API (compileOnly dependency)
 - Auto-setup with `/oraxensetup` command
 
@@ -297,9 +298,11 @@ bastion-reward:
 
 **Built With**:
 - Kotlin 2.2.21 & Paper API 1.21.10
-- ItemsAdder API 3.6.3-beta-14 (optional - one of two providers)
-- Oraxen API 1.181.0 (optional - one of two providers)
+- ItemsAdder API 3.6.3-beta-14 (optional - one of two premium providers)
+- Oraxen API 1.181.0 (optional - one of two premium providers)
 - Exposed ORM (SQLite)
+
+**IMPORTANT**: Both ItemsAdder and Oraxen are premium plugins sold separately and require purchase for server use.
 
 **Artwork**:
 - Block textures by Gaia Temperini
