@@ -34,6 +34,7 @@ import org.stephanosbad.charmedChars.commands.ItemsAdderStatusCommand
 import org.stephanosbad.charmedChars.commands.ReloadCommand
 import org.stephanosbad.charmedChars.commands.SetupItemsAdderCommand
 import org.stephanosbad.charmedChars.commands.SetupOraxenCommand
+import org.stephanosbad.charmedChars.commands.SetupNexoCommand
 import org.stephanosbad.charmedChars.commands.StructureCodeCommand
 import org.stephanosbad.charmedChars.commands.StructureDatabaseCommand
 import org.stephanosbad.charmedChars.commands.VersionCommand
@@ -138,6 +139,7 @@ class CharmedChars : JavaPlugin(), CoroutineScope {
         getCommand("iastatus")?.setExecutor(ItemsAdderStatusCommand())
         getCommand("iasetup")?.setExecutor(SetupItemsAdderCommand(this))
         getCommand("oraxensetup")?.setExecutor(SetupOraxenCommand(this))
+        getCommand("nexosetup")?.setExecutor(SetupNexoCommand(this))
         getCommand("version")?.setExecutor(VersionCommand(this))
         getCommand("structurecode")?.setExecutor(StructureCodeCommand(this))
         val structureDbCommand = StructureDatabaseCommand(this)

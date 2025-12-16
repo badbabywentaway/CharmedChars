@@ -21,6 +21,7 @@ repositories {
     maven("https://maven.enginehub.org/repo/")
     maven("https://repo.dmulloy2.net/repository/public/") { name = "protocollib-repo" }
     maven("https://repo.oraxen.com/releases") { name = "oraxen-repo" }
+    maven("https://repo.nexomc.com/releases") { name = "nexo-repo" }
 }
 
 dependencies {
@@ -29,6 +30,7 @@ dependencies {
     compileOnly("com.comphenix.protocol:ProtocolLib:5.3.0")
     compileOnly("com.github.LoneDev6:API-ItemsAdder:3.6.3-beta-14")
     compileOnly("io.th0rgal:oraxen:1.181.0")
+    compileOnly("com.nexomc:nexo:0.1.0") // Note: Version needs to be verified - using placeholder
     compileOnly("com.github.GriefPrevention:GriefPrevention:${property("griefPreventionVersion")}")
     implementation("org.jetbrains.kotlin:kotlin-stdlib:${property("kotlinVersion")}")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:${property("coroutinesVersion")}")

@@ -23,7 +23,7 @@ Perfect for:
 - **Three vibrant colors**: Cyan, Magenta, Yellow
 - **Drop rates**: 6% base, up to 20% with Looting III enchantment
 - **Frequency-based distribution**: Common letters (E, A, R) drop more often than rare ones (Q, X, Z)
-- **Custom 512x512 textures** with ItemsAdder or Oraxen integration
+- **Custom 512x512 textures** with ItemsAdder, Oraxen, or Nexo integration
 
 ### Word Formation & Scoring
 - Place blocks in **straight lines** (horizontal or vertical)
@@ -101,6 +101,7 @@ Word: "QUARTZ" (all magenta)
 - **Custom Item Plugin** (choose ONE):
   - **ItemsAdder** 3.6.3-beta-14+ (premium - sold separately) - **Recommended**
   - **Oraxen** 1.181.0+ (premium with public source - sold separately) - Alternative option
+  - **Nexo** 0.1.0+ (premium - sold separately) - Alternative option (**UNTESTED** - requires license)
 
 ### Optional Dependencies
 - WorldGuard 7.0.14+ (region protection)
@@ -127,9 +128,22 @@ Word: "QUARTZ" (all magenta)
 7. Restart server (recommended)
 8. Players automatically receive resource pack on join
 
+### Setup Steps (Nexo - Alternative Option - UNTESTED)
+1. Purchase and install **Nexo** (premium plugin - requires license)
+2. Download CharmedChars JAR from [GitHub Releases](https://github.com/badbabywentaway/CharmedChars/releases)
+3. Place both plugins in `plugins/` folder
+4. Start server to generate configs
+5. Run `/nexosetup` to auto-configure Nexo
+6. Run `/nexo reload all` to load items
+7. Restart server (recommended)
+8. Players automatically receive resource pack on join
+
+**⚠️ NOTE**: Nexo integration is untested as it requires a premium license. Please report any issues on GitHub!
+
 **Detailed guides**:
 - [QUICK_SETUP.md](https://github.com/badbabywentaway/CharmedChars/blob/master/QUICK_SETUP.md) (ItemsAdder)
 - [ORAXEN_SETUP.md](https://github.com/badbabywentaway/CharmedChars/blob/master/ORAXEN_SETUP.md) (Oraxen)
+- [NEXO_SETUP.md](https://github.com/badbabywentaway/CharmedChars/blob/master/NEXO_SETUP.md) (Nexo - UNTESTED)
 
 ---
 
@@ -145,6 +159,7 @@ Word: "QUARTZ" (all magenta)
 | `/iastatus` | Check ItemsAdder integration status | `charmedchars.admin` |
 | `/iasetup [force]` | Auto-setup ItemsAdder configuration | `charmedchars.admin` |
 | `/oraxensetup [force]` | Auto-setup Oraxen configuration | `charmedchars.admin` |
+| `/nexosetup [force]` | Auto-setup Nexo configuration (UNTESTED) | `charmedchars.admin` |
 | `/reload` | Reload plugin configuration | `charmedchars.admin` |
 
 ---
@@ -205,6 +220,7 @@ bastion-reward:
 ### For Server Admins
 - **[Quick Setup Guide - ItemsAdder](https://github.com/badbabywentaway/CharmedChars/blob/master/QUICK_SETUP.md)** - ItemsAdder installation
 - **[Oraxen Setup Guide](https://github.com/badbabywentaway/CharmedChars/blob/master/ORAXEN_SETUP.md)** - Oraxen installation (alternative option)
+- **[Nexo Setup Guide](https://github.com/badbabywentaway/CharmedChars/blob/master/NEXO_SETUP.md)** - Nexo installation (alternative option - UNTESTED)
 - **[Reward Configuration](https://github.com/badbabywentaway/CharmedChars/blob/master/REWARD_CONFIG.md)** - Customizing rewards
 - **[Troubleshooting](https://github.com/badbabywentaway/CharmedChars/blob/master/TROUBLESHOOTING.md)** - Common issues
 
@@ -219,10 +235,10 @@ bastion-reward:
 ### Custom Blocks & Items
 - **123 custom blocks**: 26 letters × 3 colors + 10 numbers × 3 colors + 4 operators × 3 colors
 - **5 pyrite items**: Ingot, Pickaxe, Axe, Shovel, Hoe (craftable iron-tier tools)
-- **Total**: 128 custom items with ItemsAdder or Oraxen integration
+- **Total**: 128 custom items with ItemsAdder, Oraxen, or Nexo integration
 - **512x512 custom textures** by Gaia Temperini
-- **Auto-setup commands** for both ItemsAdder (`/iasetup`) and Oraxen (`/oraxensetup`)
-- **Abstraction layer** supports multiple custom item providers
+- **Auto-setup commands** for ItemsAdder (`/iasetup`), Oraxen (`/oraxensetup`), and Nexo (`/nexosetup`)
+- **Abstraction layer** supports multiple custom item providers (exactly one required)
 
 ### Database System
 - **SQLite database** with Exposed ORM
@@ -271,7 +287,7 @@ bastion-reward:
 
 ### Required Dependency - Custom Item Plugin (Choose ONE)
 
-**CRITICAL NOTICE**: CharmedChars requires **either ItemsAdder OR Oraxen** (not both, not neither).
+**CRITICAL NOTICE**: CharmedChars requires **exactly ONE** of: ItemsAdder, Oraxen, or Nexo (not multiple, not none).
 
 #### ItemsAdder (Recommended)
 - **Premium plugin** - purchase required for server use
@@ -288,7 +304,15 @@ bastion-reward:
 - CharmedChars only uses Oraxen's public API (compileOnly dependency)
 - Auto-setup with `/oraxensetup` command
 
-**Important**: Install **exactly ONE** of these plugins. CharmedChars will automatically detect which one you have and refuse to load if both are installed or neither is installed.
+#### Nexo (Alternative Option - UNTESTED)
+- **Premium plugin** - purchase required for server use
+- **NOT included** with CharmedChars
+- Available from [Polymart](https://polymart.org/resource/nexo.6901)
+- CharmedChars only uses Nexo's public API (compileOnly dependency)
+- Auto-setup with `/nexosetup` command
+- **⚠️ IMPORTANT**: This integration is untested as it requires a premium license. Please report any issues on GitHub!
+
+**Important**: Install **exactly ONE** of these plugins. CharmedChars will automatically detect which one you have and refuse to load if multiple are installed or none are installed.
 
 ---
 
@@ -298,11 +322,12 @@ bastion-reward:
 
 **Built With**:
 - Kotlin 2.2.21 & Paper API 1.21.10
-- ItemsAdder API 3.6.3-beta-14 (optional - one of two premium providers)
-- Oraxen API 1.181.0 (optional - one of two premium providers)
+- ItemsAdder API 3.6.3-beta-14 (optional - one of three premium providers)
+- Oraxen API 1.181.0 (optional - one of three premium providers)
+- Nexo API 0.1.0 (optional - one of three premium providers - UNTESTED)
 - Exposed ORM (SQLite)
 
-**IMPORTANT**: Both ItemsAdder and Oraxen are premium plugins sold separately and require purchase for server use.
+**IMPORTANT**: ItemsAdder, Oraxen, and Nexo are all premium plugins sold separately and require purchase for server use.
 
 **Artwork**:
 - Block textures by Gaia Temperini
@@ -310,7 +335,7 @@ bastion-reward:
 
 **Development**:
 - AI-assisted development by Claude (Anthropic)
-- Features include: Nether number game, pyrite system, reward formulas, Oraxen compatibility, custom item provider abstraction, comprehensive documentation
+- Features include: Nether number game, pyrite system, reward formulas, Oraxen compatibility, Nexo compatibility, custom item provider abstraction, comprehensive documentation
 - All AI contributions include Co-Authored-By attribution in git commits
 
 ---
@@ -322,6 +347,7 @@ bastion-reward:
 - **How to Play**: https://github.com/badbabywentaway/CharmedChars/blob/master/PLAY_INSTRUCTIONS.md
 - **Setup Guide (ItemsAdder)**: https://github.com/badbabywentaway/CharmedChars/blob/master/QUICK_SETUP.md
 - **Setup Guide (Oraxen)**: https://github.com/badbabywentaway/CharmedChars/blob/master/ORAXEN_SETUP.md
+- **Setup Guide (Nexo - UNTESTED)**: https://github.com/badbabywentaway/CharmedChars/blob/master/NEXO_SETUP.md
 - **Issue Tracker**: https://github.com/badbabywentaway/CharmedChars/issues
 
 ---

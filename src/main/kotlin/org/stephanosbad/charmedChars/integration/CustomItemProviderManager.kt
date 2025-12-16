@@ -24,8 +24,8 @@ import org.stephanosbad.charmedChars.CharmedChars
 /**
  * Manager for custom item providers
  *
- * Handles detection and initialization of either ItemsAdder or Oraxen.
- * Enforces that exactly one provider is present (not both, not neither).
+ * Handles detection and initialization of ItemsAdder, Oraxen, or Nexo.
+ * Enforces that exactly one provider is present.
  */
 class CustomItemProviderManager(private val plugin: CharmedChars) {
 
@@ -44,7 +44,7 @@ class CustomItemProviderManager(private val plugin: CharmedChars) {
      * Initializes the custom item provider
      *
      * Checks which custom item plugins are available and initializes the appropriate provider.
-     * Enforces that exactly one provider (ItemsAdder or Oraxen) is present.
+     * Enforces that exactly one provider (ItemsAdder, Oraxen, or Nexo) is present.
      *
      * @return InitResult containing success status, provider instance, and messages
      */
@@ -57,30 +57,41 @@ class CustomItemProviderManager(private val plugin: CharmedChars) {
 
         val itemsAdderAvailable = isPluginAvailable("ItemsAdder")
         val oraxenAvailable = isPluginAvailable("Oraxen")
+        val nexoAvailable = isPluginAvailable("Nexo")
+
+        // Count how many providers are available
+        val providersCount = listOf(itemsAdderAvailable, oraxenAvailable, nexoAvailable).count { it }
 
         // Check that exactly one provider is present
         when {
-            itemsAdderAvailable && oraxenAvailable -> {
-                messages.add("ERROR: Both ItemsAdder and Oraxen are installed!")
+            providersCount > 1 -> {
+                val installedProviders = mutableListOf<String>()
+                if (itemsAdderAvailable) installedProviders.add("ItemsAdder")
+                if (oraxenAvailable) installedProviders.add("Oraxen")
+                if (nexoAvailable) installedProviders.add("Nexo")
+
+                messages.add("ERROR: Multiple custom item plugins detected: ${installedProviders.joinToString(", ")}")
                 messages.add("CharmedChars requires exactly ONE custom item plugin.")
-                messages.add("Please remove either ItemsAdder or Oraxen and restart the server.")
+                messages.add("Please keep only one and restart the server.")
                 plugin.logger.severe("========================================")
-                plugin.logger.severe("FATAL: Both ItemsAdder and Oraxen detected!")
-                plugin.logger.severe("CharmedChars cannot run with both plugins.")
-                plugin.logger.severe("Please remove one and restart the server.")
+                plugin.logger.severe("FATAL: Multiple custom item plugins detected!")
+                plugin.logger.severe("Found: ${installedProviders.joinToString(", ")}")
+                plugin.logger.severe("CharmedChars cannot run with multiple providers.")
+                plugin.logger.severe("Please remove all but one and restart the server.")
                 plugin.logger.severe("========================================")
                 return InitResult(false, null, messages)
             }
 
-            !itemsAdderAvailable && !oraxenAvailable -> {
-                messages.add("ERROR: Neither ItemsAdder nor Oraxen is installed!")
+            providersCount == 0 -> {
+                messages.add("ERROR: No custom item plugin is installed!")
                 messages.add("CharmedChars requires ONE of the following:")
                 messages.add("  - ItemsAdder (https://www.spigotmc.org/resources/73355/)")
                 messages.add("  - Oraxen (https://www.spigotmc.org/resources/72448/)")
+                messages.add("  - Nexo (https://polymart.org/resource/nexo.6901)")
                 messages.add("Please install one and restart the server.")
                 plugin.logger.severe("========================================")
                 plugin.logger.severe("FATAL: No custom item plugin detected!")
-                plugin.logger.severe("CharmedChars requires either ItemsAdder or Oraxen.")
+                plugin.logger.severe("CharmedChars requires ItemsAdder, Oraxen, or Nexo.")
                 plugin.logger.severe("========================================")
                 return InitResult(false, null, messages)
             }
@@ -112,6 +123,23 @@ class CustomItemProviderManager(private val plugin: CharmedChars) {
                 } catch (e: Exception) {
                     messages.add("ERROR: Failed to initialize Oraxen provider: ${e.message}")
                     plugin.logger.severe("Failed to initialize Oraxen provider: ${e.message}")
+                    e.printStackTrace()
+                    return InitResult(false, null, messages)
+                }
+            }
+
+            nexoAvailable -> {
+                try {
+                    provider = NexoProvider()
+                    messages.add("Using Nexo as custom item provider")
+                    plugin.logger.info("========================================")
+                    plugin.logger.info("Custom Item Provider: Nexo")
+                    plugin.logger.info("⚠ NOTE: Nexo integration is untested - please report issues!")
+                    plugin.logger.info("========================================")
+                    return InitResult(true, provider, messages)
+                } catch (e: Exception) {
+                    messages.add("ERROR: Failed to initialize Nexo provider: ${e.message}")
+                    plugin.logger.severe("Failed to initialize Nexo provider: ${e.message}")
                     e.printStackTrace()
                     return InitResult(false, null, messages)
                 }
@@ -163,7 +191,7 @@ class CustomItemProviderManager(private val plugin: CharmedChars) {
     /**
      * Gets the name of the active provider
      *
-     * @return Provider name (e.g., "ItemsAdder", "Oraxen"), or "None" if not initialized
+     * @return Provider name (e.g., "ItemsAdder", "Oraxen", "Nexo"), or "None" if not initialized
      */
     fun getProviderName(): String {
         return provider?.getProviderName() ?: "None"

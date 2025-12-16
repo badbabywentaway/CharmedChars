@@ -26,83 +26,104 @@ import org.junit.jupiter.params.provider.CsvSource
  * Unit tests for CustomItemProviderManager logic
  *
  * Tests the provider detection and initialization logic concepts:
- * - Mutual exclusivity pattern (cannot have both ItemsAdder and Oraxen)
- * - Provider selection requirements
+ * - Mutual exclusivity pattern (cannot have multiple providers)
+ * - Provider selection requirements (exactly one of: ItemsAdder, Oraxen, or Nexo)
  * - Configuration validation patterns
  *
  * NOTE: These tests focus on the logical patterns and validation rules
  * rather than full integration testing with actual provider implementations,
- * since ItemsAdder and Oraxen APIs are not available in test environment.
+ * since provider APIs are not available in test environment.
  */
 class CustomItemProviderManagerTest {
 
     // ==================== Provider Mutual Exclusivity Tests ====================
 
     @Test
-    fun `exactly one provider should be active using XOR logic`() {
-        // The manager enforces mutual exclusivity using XOR
-        // Valid states: (ItemsAdder=true, Oraxen=false) or (ItemsAdder=false, Oraxen=true)
-        // Invalid states: (both=true) or (both=false)
+    fun `exactly one provider should be active using count logic`() {
+        // The manager enforces mutual exclusivity by counting active providers
+        // Valid states: exactly 1 provider is true
+        // Invalid states: 0 providers or 2+ providers
 
         val validConfigurations = listOf(
-            Pair(true, false),   // Only ItemsAdder
-            Pair(false, true)    // Only Oraxen
+            Triple(true, false, false),   // Only ItemsAdder
+            Triple(false, true, false),   // Only Oraxen
+            Triple(false, false, true)    // Only Nexo
         )
 
         val invalidConfigurations = listOf(
-            Pair(true, true),    // Both installed
-            Pair(false, false)   // Neither installed
+            Triple(true, true, false),    // ItemsAdder + Oraxen
+            Triple(true, false, true),    // ItemsAdder + Nexo
+            Triple(false, true, true),    // Oraxen + Nexo
+            Triple(true, true, true),     // All three
+            Triple(false, false, false)   // None
         )
 
-        for ((itemsAdder, oraxen) in validConfigurations) {
-            val exclusivityCheck = (itemsAdder xor oraxen)
-            assertTrue(exclusivityCheck,
-                "ItemsAdder=$itemsAdder, Oraxen=$oraxen should be valid (XOR=true)")
+        for ((itemsAdder, oraxen, nexo) in validConfigurations) {
+            val count = listOf(itemsAdder, oraxen, nexo).count { it }
+            assertEquals(1, count,
+                "ItemsAdder=$itemsAdder, Oraxen=$oraxen, Nexo=$nexo should have exactly 1 provider")
         }
 
-        for ((itemsAdder, oraxen) in invalidConfigurations) {
-            val exclusivityCheck = (itemsAdder xor oraxen)
-            assertFalse(exclusivityCheck,
-                "ItemsAdder=$itemsAdder, Oraxen=$oraxen should be invalid (XOR=false)")
+        for ((itemsAdder, oraxen, nexo) in invalidConfigurations) {
+            val count = listOf(itemsAdder, oraxen, nexo).count { it }
+            assertNotEquals(1, count,
+                "ItemsAdder=$itemsAdder, Oraxen=$oraxen, Nexo=$nexo should not have exactly 1 provider")
         }
     }
 
     @ParameterizedTest
     @CsvSource(
-        "true, false, true",   // ItemsAdder only: valid
-        "false, true, true",   // Oraxen only: valid
-        "true, true, false",   // Both: invalid
-        "false, false, false"  // Neither: invalid
+        "true, false, false, true",   // ItemsAdder only: valid
+        "false, true, false, true",   // Oraxen only: valid
+        "false, false, true, true",   // Nexo only: valid
+        "true, true, false, false",   // ItemsAdder + Oraxen: invalid
+        "true, false, true, false",   // ItemsAdder + Nexo: invalid
+        "false, true, true, false",   // Oraxen + Nexo: invalid
+        "true, true, true, false",    // All three: invalid
+        "false, false, false, false"  // None: invalid
     )
     fun `provider configuration validation`(
         itemsAdderInstalled: Boolean,
         oraxenInstalled: Boolean,
+        nexoInstalled: Boolean,
         expectedValid: Boolean
     ) {
-        val isValid = (itemsAdderInstalled xor oraxenInstalled)
+        val count = listOf(itemsAdderInstalled, oraxenInstalled, nexoInstalled).count { it }
+        val isValid = (count == 1)
         assertEquals(expectedValid, isValid,
-            "ItemsAdder=$itemsAdderInstalled, Oraxen=$oraxenInstalled should be ${if (expectedValid) "valid" else "invalid"}")
+            "ItemsAdder=$itemsAdderInstalled, Oraxen=$oraxenInstalled, Nexo=$nexoInstalled should be ${if (expectedValid) "valid" else "invalid"}")
     }
 
     @Test
-    fun `XOR ensures mutual exclusivity`() {
-        // XOR truth table:
-        // false XOR false = false (neither installed - invalid)
-        // false XOR true = true (Oraxen only - valid)
-        // true XOR false = true (ItemsAdder only - valid)
-        // true XOR true = false (both installed - invalid)
+    fun `count logic ensures mutual exclusivity`() {
+        // Count logic: exactly 1 provider should be active
+        // count == 0: none installed - invalid
+        // count == 1: exactly one installed - valid
+        // count == 2: two installed - invalid
+        // count == 3: all installed - invalid
 
-        assertFalse(false xor false, "Neither installed should be invalid")
-        assertTrue(false xor true, "Oraxen only should be valid")
-        assertTrue(true xor false, "ItemsAdder only should be valid")
-        assertFalse(true xor true, "Both installed should be invalid")
+        val noneInstalled = listOf(false, false, false).count { it }
+        val oneInstalled = listOf(true, false, false).count { it }
+        val twoInstalled = listOf(true, true, false).count { it }
+        val allInstalled = listOf(true, true, true).count { it }
+
+        assertEquals(0, noneInstalled, "None installed should count to 0")
+        assertEquals(1, oneInstalled, "One installed should count to 1")
+        assertEquals(2, twoInstalled, "Two installed should count to 2")
+        assertEquals(3, allInstalled, "All installed should count to 3")
+
+        // Only count == 1 is valid
+        assertFalse(noneInstalled == 1, "Count 0 should be invalid")
+        assertTrue(oneInstalled == 1, "Count 1 should be valid")
+        assertFalse(twoInstalled == 1, "Count 2 should be invalid")
+        assertFalse(allInstalled == 1, "Count 3 should be invalid")
     }
 
     // ==================== Provider Name Tests ====================
 
     @Test
     fun `provider names are well-defined strings`() {
-        val validProviderNames = listOf("ItemsAdder", "Oraxen", "Unknown")
+        val validProviderNames = listOf("ItemsAdder", "Oraxen", "Nexo", "None")
 
         for (name in validProviderNames) {
             assertFalse(name.isBlank(), "Provider name should not be blank: $name")
@@ -112,13 +133,14 @@ class CustomItemProviderManagerTest {
     }
 
     @Test
-    fun `unknown provider indicates uninitialized state`() {
-        val uninitializedProviderName = "Unknown"
+    fun `none provider indicates uninitialized state`() {
+        val uninitializedProviderName = "None"
 
-        assertEquals("Unknown", uninitializedProviderName,
-            "Uninitialized state should return 'Unknown'")
+        assertEquals("None", uninitializedProviderName,
+            "Uninitialized state should return 'None'")
         assertNotEquals("ItemsAdder", uninitializedProviderName)
         assertNotEquals("Oraxen", uninitializedProviderName)
+        assertNotEquals("Nexo", uninitializedProviderName)
     }
 
     // ==================== Error Message Requirements Tests ====================
@@ -139,99 +161,130 @@ class CustomItemProviderManagerTest {
     @Test
     fun `error state validation pattern`() {
         // Error states:
-        // 1. Both ItemsAdder and Oraxen installed
-        // 2. Neither ItemsAdder nor Oraxen installed
+        // 1. Multiple providers installed (any combination of 2 or 3)
+        // 2. No providers installed
+
+        data class ErrorState(val itemsAdder: Boolean, val oraxen: Boolean, val nexo: Boolean, val description: String)
 
         val errorStates = listOf(
-            Triple(true, true, "both installed"),
-            Triple(false, false, "neither installed")
+            ErrorState(true, true, false, "ItemsAdder + Oraxen"),
+            ErrorState(true, false, true, "ItemsAdder + Nexo"),
+            ErrorState(false, true, true, "Oraxen + Nexo"),
+            ErrorState(true, true, true, "all three"),
+            ErrorState(false, false, false, "none installed")
         )
 
-        for ((itemsAdder, oraxen, description) in errorStates) {
-            val isError = !(itemsAdder xor oraxen)
-            assertTrue(isError, "Should be error state: $description")
+        for (state in errorStates) {
+            val count = listOf(state.itemsAdder, state.oraxen, state.nexo).count { it }
+            val isError = (count != 1)
+            assertTrue(isError, "Should be error state: ${state.description}")
         }
     }
 
     // ==================== Provider Selection Logic Tests ====================
 
     @Test
-    fun `ItemsAdder takes precedence when only it is installed`() {
-        // Logical flow:
-        // if (itemsAdderAvailable && !oraxenAvailable) -> use ItemsAdder
+    fun `ItemsAdder is selected when only it is installed`() {
+        // Logical flow: count == 1 and itemsAdderAvailable == true
 
         val itemsAdderAvailable = true
         val oraxenAvailable = false
+        val nexoAvailable = false
 
-        val shouldUseItemsAdder = itemsAdderAvailable && !oraxenAvailable
+        val count = listOf(itemsAdderAvailable, oraxenAvailable, nexoAvailable).count { it }
+        val shouldUseItemsAdder = (count == 1) && itemsAdderAvailable
         assertTrue(shouldUseItemsAdder,
             "Should select ItemsAdder when only it is available")
     }
 
     @Test
     fun `Oraxen is selected when only it is installed`() {
-        // Logical flow:
-        // if (!itemsAdderAvailable && oraxenAvailable) -> use Oraxen
+        // Logical flow: count == 1 and oraxenAvailable == true
 
         val itemsAdderAvailable = false
         val oraxenAvailable = true
+        val nexoAvailable = false
 
-        val shouldUseOraxen = !itemsAdderAvailable && oraxenAvailable
+        val count = listOf(itemsAdderAvailable, oraxenAvailable, nexoAvailable).count { it }
+        val shouldUseOraxen = (count == 1) && oraxenAvailable
         assertTrue(shouldUseOraxen,
             "Should select Oraxen when only it is available")
     }
 
+    @Test
+    fun `Nexo is selected when only it is installed`() {
+        // Logical flow: count == 1 and nexoAvailable == true
+
+        val itemsAdderAvailable = false
+        val oraxenAvailable = false
+        val nexoAvailable = true
+
+        val count = listOf(itemsAdderAvailable, oraxenAvailable, nexoAvailable).count { it }
+        val shouldUseNexo = (count == 1) && nexoAvailable
+        assertTrue(shouldUseNexo,
+            "Should select Nexo when only it is available")
+    }
+
     @ParameterizedTest
     @CsvSource(
-        "true, false, ItemsAdder",
-        "false, true, Oraxen"
+        "true, false, false, ItemsAdder",
+        "false, true, false, Oraxen",
+        "false, false, true, Nexo"
     )
     fun `correct provider is selected based on availability`(
         itemsAdderAvailable: Boolean,
         oraxenAvailable: Boolean,
+        nexoAvailable: Boolean,
         expectedProvider: String
     ) {
         val selectedProvider = when {
-            itemsAdderAvailable && !oraxenAvailable -> "ItemsAdder"
-            !itemsAdderAvailable && oraxenAvailable -> "Oraxen"
-            else -> "Unknown"
+            itemsAdderAvailable && !oraxenAvailable && !nexoAvailable -> "ItemsAdder"
+            !itemsAdderAvailable && oraxenAvailable && !nexoAvailable -> "Oraxen"
+            !itemsAdderAvailable && !oraxenAvailable && nexoAvailable -> "Nexo"
+            else -> "None"
         }
 
         assertEquals(expectedProvider, selectedProvider,
-            "Should select $expectedProvider when ItemsAdder=$itemsAdderAvailable, Oraxen=$oraxenAvailable")
+            "Should select $expectedProvider when ItemsAdder=$itemsAdderAvailable, Oraxen=$oraxenAvailable, Nexo=$nexoAvailable")
     }
 
     // ==================== Initialization Success Criteria Tests ====================
 
     @Test
     fun `initialization succeeds only with exactly one provider`() {
-        // Success criteria: XOR of availability flags
+        // Success criteria: count == 1
 
         val successCases = listOf(
-            Pair(true, false),   // ItemsAdder only
-            Pair(false, true)    // Oraxen only
+            Triple(true, false, false),   // ItemsAdder only
+            Triple(false, true, false),   // Oraxen only
+            Triple(false, false, true)    // Nexo only
         )
 
-        for ((itemsAdder, oraxen) in successCases) {
-            val shouldSucceed = (itemsAdder xor oraxen)
+        for ((itemsAdder, oraxen, nexo) in successCases) {
+            val count = listOf(itemsAdder, oraxen, nexo).count { it }
+            val shouldSucceed = (count == 1)
             assertTrue(shouldSucceed,
-                "Should succeed with ItemsAdder=$itemsAdder, Oraxen=$oraxen")
+                "Should succeed with ItemsAdder=$itemsAdder, Oraxen=$oraxen, Nexo=$nexo")
         }
     }
 
     @Test
     fun `initialization fails without valid provider configuration`() {
-        // Failure criteria: NOT(XOR) of availability flags
+        // Failure criteria: count != 1
 
         val failureCases = listOf(
-            Pair(true, true),    // Both
-            Pair(false, false)   // Neither
+            Triple(true, true, false),    // ItemsAdder + Oraxen
+            Triple(true, false, true),    // ItemsAdder + Nexo
+            Triple(false, true, true),    // Oraxen + Nexo
+            Triple(true, true, true),     // All three
+            Triple(false, false, false)   // None
         )
 
-        for ((itemsAdder, oraxen) in failureCases) {
-            val shouldFail = !(itemsAdder xor oraxen)
+        for ((itemsAdder, oraxen, nexo) in failureCases) {
+            val count = listOf(itemsAdder, oraxen, nexo).count { it }
+            val shouldFail = (count != 1)
             assertTrue(shouldFail,
-                "Should fail with ItemsAdder=$itemsAdder, Oraxen=$oraxen")
+                "Should fail with ItemsAdder=$itemsAdder, Oraxen=$oraxen, Nexo=$nexo")
         }
     }
 
