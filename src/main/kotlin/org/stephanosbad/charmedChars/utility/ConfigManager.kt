@@ -82,6 +82,22 @@ class ConfigManager(private val plugin: CharmedChars) {
         get() = config.getDouble("letter-blocks.looting-multipliers.3", 3.33)
 
     /**
+     * Minimum word length for same-color words
+     *
+     * Default: 3 letters
+     */
+    val minWordLengthSameColor: Int
+        get() = config.getInt("letter-blocks.min-word-length.same-color", 3)
+
+    /**
+     * Minimum word length for multi-color words
+     *
+     * Default: 4 letters
+     */
+    val minWordLengthMultiColor: Int
+        get() = config.getInt("letter-blocks.min-word-length.multi-color", 4)
+
+    /**
      * Whether to integrate with WorldGuard for protection checks
      *
      * If true and WorldGuard is installed, letter blocks will respect WorldGuard regions.

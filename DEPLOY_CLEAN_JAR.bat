@@ -40,6 +40,15 @@ if exist "c:\Users\steve\Documents\Papermc\plugins\CharmedChars\resourcepack" (
     echo [INFO] No resourcepack folder found
 )
 
+REM Step 3A-1: Delete old config.yml (ItemsAdder server)
+echo Step 3A-1: Deleting old config.yml (ItemsAdder)...
+if exist "c:\Users\steve\Documents\Papermc\plugins\CharmedChars\config.yml" (
+    del "c:\Users\steve\Documents\Papermc\plugins\CharmedChars\config.yml"
+    echo [OK] Old config.yml deleted - will be regenerated with new defaults
+) else (
+    echo [INFO] No config.yml found
+)
+
 REM Step 4A: Clean ItemsAdder cache
 echo Step 4A: Cleaning ItemsAdder cache...
 if exist "c:\Users\steve\Documents\Papermc\plugins\ItemsAdder\data\items_packs\charmedchars" (
@@ -101,6 +110,15 @@ if exist "c:\Users\steve\Documents\OraxenPapermc\plugins\CharmedChars\resourcepa
     echo [OK] Old resourcepack folder deleted
 ) else (
     echo [INFO] No resourcepack folder found
+)
+
+REM Step 3B-1: Delete old config.yml (Oraxen server)
+echo Step 3B-1: Deleting old config.yml (Oraxen)...
+if exist "c:\Users\steve\Documents\OraxenPapermc\plugins\CharmedChars\config.yml" (
+    del "c:\Users\steve\Documents\OraxenPapermc\plugins\CharmedChars\config.yml"
+    echo [OK] Old config.yml deleted - will be regenerated with new defaults
+) else (
+    echo [INFO] No config.yml found
 )
 
 REM Step 4B: Clean Oraxen generated configs (if they exist)

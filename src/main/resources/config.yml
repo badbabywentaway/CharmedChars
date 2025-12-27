@@ -16,6 +16,40 @@ letter-blocks:
   nether-drops-numbers: true
   nether-drops-operators: true
 
+  # Minimum word length requirements
+  min-word-length:
+    # Minimum length for same-color words
+    same-color: 3
+    # Minimum length for multi-color words
+    multi-color: 4
+
+  # Word Game Rewards
+  # Rewards given when players successfully score words with letter blocks
+  # Formula: netAmount = (score - minimumThreshold) × multiplier + minimumRewardCount
+  # Then capped at maximumRewardCap and rounded to integer
+  Drop:
+    # Tier 1: Iron Ingots (easier to get)
+    - materialName: "IRON_INGOT"
+      # Always get at least 1 ingot
+      minimumRewardCount: 1.0
+      # Conversion rate: 0.01 ingots per point over threshold
+      multiplier: 0.01
+      # Score needed for bonus calculation
+      minimumThreshold: 100.0
+      # Maximum ingots that can drop
+      maximumRewardCap: 20.0
+
+    # Tier 2: Gold Nuggets (higher scores)
+    - materialName: "GOLD_NUGGET"
+      # No base reward below threshold
+      minimumRewardCount: 0.0
+      # Conversion rate: 0.01 nuggets per point over threshold
+      multiplier: 0.01
+      # Need 200+ score to get any nuggets
+      minimumThreshold: 200.0
+      # Maximum nuggets that can drop
+      maximumRewardCap: 50.0
+
 # Word Scoring Configuration
 scoring:
   # Base score multiplier
@@ -23,9 +57,6 @@ scoring:
 
   # Bonus multiplier for same-color words
   same-color-multiplier: 3
-
-  # Minimum word length to score
-  min-word-length: 2
 
 # Protection Integration (Optional Plugins)
 # These plugins are OPTIONAL soft dependencies - the plugin works without them
@@ -84,3 +115,24 @@ number-score-rewards:
         minimumThreshold: 0.0
         # Maximum 5 ancient debris
         maximumRewardCap: 5.0
+
+# Exclude Zone Configuration (Example)
+# Define areas where letter blocks won't work
+# This is an example spawn protection zone from (-10, 0, -10) to (10, 0, 10)
+exclude:
+  from:
+    ==: org.bukkit.Location
+    world: world
+    x: -10.0
+    y: 0.0
+    z: -10.0
+    pitch: 0.0
+    yaw: 0.0
+  to:
+    ==: org.bukkit.Location
+    world: world
+    x: 10.0
+    y: 0.0
+    z: 10.0
+    pitch: 0.0
+    yaw: 0.0

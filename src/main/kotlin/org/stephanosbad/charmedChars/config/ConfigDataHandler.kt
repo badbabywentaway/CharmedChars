@@ -131,7 +131,7 @@ class ConfigDataHandler(private val plugin: CharmedChars) {
         dropReward1.put("minimumThreshold", 200.0)
         dropReward1.put("maximumRewardCap", 50.0)
         val dropsConfiguration = listOf<MutableMap<String?, Any?>?>(dropReward, dropReward1)
-        configuration!!.set("Drop", dropsConfiguration)
+        configuration!!.set("letter-blocks.Drop", dropsConfiguration)
         configuration!!.save(file!!)
     }
 

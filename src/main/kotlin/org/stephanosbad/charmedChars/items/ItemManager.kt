@@ -473,10 +473,12 @@ class ItemManager @JvmOverloads constructor(localPlugin: CharmedChars? = null) :
         val wordLowercase = outString.toString().lowercase()
         val wordLength = wordLowercase.length
 
-        // Validate minimum word length
-        // Single color words: minimum 3 letters
-        // Multi-color words: minimum 4 letters
-        val minimumLength = if (isSameColor) 3 else 4
+        // Validate minimum word length from config
+        val minimumLength = if (isSameColor) {
+            plugin.configManager.minWordLengthSameColor
+        } else {
+            plugin.configManager.minWordLengthMultiColor
+        }
         if (wordLength < minimumLength) {
             val colorType = if (isSameColor) "single-color" else "multi-color"
             e.player.sendMessage("Miss: $colorType words must be at least $minimumLength letters long")
@@ -745,7 +747,7 @@ class ItemManager @JvmOverloads constructor(localPlugin: CharmedChars? = null) :
             when (t) {
                 RewardType.Drop -> {
                     val listOfDropConfigs =
-                        checkNotNull(configuration.getList("Drop"))
+                        checkNotNull(configuration.getList("letter-blocks.Drop"))
 
                     for (drop in listOfDropConfigs) {
                         try {
