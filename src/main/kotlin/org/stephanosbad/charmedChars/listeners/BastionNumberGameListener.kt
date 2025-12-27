@@ -173,19 +173,13 @@ class BastionNumberGameListener(
                 }
             }
 
-            // Get reward configuration
-            val rewardMaterialName = plugin.configManager.bastionRewardMaterial
-            val rewardAmount = plugin.configManager.bastionRewardAmount
+            // Get reward configuration and apply score-based rewards
+            val rewards = plugin.configManager.getBastionNumberScoreRewards()
+            val score = sequence.number.toDouble()
 
-            // Parse material and give reward
-            val rewardMaterial = Material.getMaterial(rewardMaterialName)
-            if (rewardMaterial != null) {
-                val rewardItem = ItemStack(rewardMaterial, rewardAmount)
-                player.inventory.addItem(rewardItem)
-            } else {
-                plugin.logger.warning("Invalid bastion reward material: $rewardMaterialName. Using ENDER_PEARL as fallback.")
-                val rewardItem = ItemStack(Material.ENDER_PEARL, rewardAmount)
-                player.inventory.addItem(rewardItem)
+            // Apply all configured rewards
+            for (reward in rewards) {
+                reward.applyReward(player, location, score)
             }
 
             // Mark rewards as dispensed
@@ -204,11 +198,6 @@ class BastionNumberGameListener(
             player.sendMessage(
                 Component.text("  You cracked the bastion code: ${sequence.number}!")
                     .color(NamedTextColor.DARK_PURPLE)
-            )
-            player.sendMessage(
-                Component.text("  Reward: $rewardAmount ${rewardMaterial?.name?.replace("_", " ") ?: rewardMaterialName}")
-                    .color(NamedTextColor.GREEN)
-                    .decorate(TextDecoration.BOLD)
             )
             player.sendMessage(
                 Component.text("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━")

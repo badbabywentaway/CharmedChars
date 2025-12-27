@@ -19,6 +19,8 @@ package org.stephanosbad.charmedChars.utility
 
 import org.bukkit.configuration.file.FileConfiguration
 import org.stephanosbad.charmedChars.CharmedChars
+import org.stephanosbad.charmedChars.database.StructureType
+import org.stephanosbad.charmedChars.rewards.DropReward
 
 /**
  * Configuration manager for accessing plugin settings
@@ -128,6 +130,30 @@ class ConfigManager(private val plugin: CharmedChars) {
      */
     val bastionRewardAmount: Int
         get() = config.getInt("structure-rewards.bastion.amount", 16)
+
+    /**
+     * Gets the number score rewards for fortress structures
+     *
+     * Returns a list of DropReward instances configured for fortress number games.
+     * These rewards use a score-based formula where the 3-digit number is the score.
+     *
+     * @return List of DropReward instances for fortresses
+     */
+    fun getFortressNumberScoreRewards(): List<DropReward> {
+        return plugin.configDataHandler?.loadNumberScoreRewards(StructureType.FORTRESS) ?: emptyList()
+    }
+
+    /**
+     * Gets the number score rewards for bastion remnant structures
+     *
+     * Returns a list of DropReward instances configured for bastion number games.
+     * These rewards use a score-based formula where the 3-digit number is the score.
+     *
+     * @return List of DropReward instances for bastions
+     */
+    fun getBastionNumberScoreRewards(): List<DropReward> {
+        return plugin.configDataHandler?.loadNumberScoreRewards(StructureType.BASTION_REMNANT) ?: emptyList()
+    }
 
     /**
      * Reloads the configuration from disk

@@ -3,14 +3,14 @@
 
 # Letter Block Drop Configuration
 letter-blocks:
-  # Base drop chance when breaking logs with gold tools (6%)
-  drop-chance: 0.06
+  # Base drop chance when breaking logs with gold tools (12.5%)
+  drop-chance: 0.125
 
-  # Drop chance multiplier with Looting enchantment
+  # Drop chance multiplier with Fortune enchantment
   looting-multipliers:
-    1: 1.67  # Looting I: 10%
-    2: 2.67  # Looting II: 16%
-    3: 3.33  # Looting III: 20%
+    1: 2.0  # Fortune I: 25%
+    2: 3.0  # Fortune II: 37.5%
+    3: 4.0  # Fortune III: 50%
 
   # Additional drops for nether wood (warped/crimson stems)
   nether-drops-numbers: true
@@ -39,19 +39,48 @@ protection:
   # If GriefPrevention is not installed, this setting has no effect
   griefprevention-integration: true
 
-# Structure Number Guessing Game Rewards
-# Rewards for correctly guessing the 3-digit number assigned to structures
-structure-rewards:
-  # Nether Fortress rewards
+# Number Score Rewards for Structures
+# Score-based rewards for solving number puzzles in bastions and fortresses
+# The 3-digit number (0-999) is used as the score for calculating rewards
+number-score-rewards:
+  # Nether Fortress number game rewards
   fortress:
-    # Material to give as reward (Minecraft material name)
-    material: BLAZE_ROD
-    # Amount of items to give
-    amount: 12
+    Drop:
+      - materialName: "BLAZE_ROD"
+        # Base reward always given
+        minimumRewardCount: 24.0
+        # Points-to-items conversion rate
+        multiplier: 0.02
+        # Score needed for bonus calculation
+        minimumThreshold: 100.0
+        # Maximum items that can drop
+        maximumRewardCap: 30.0
 
-  # Bastion Remnant rewards
+  # Bastion Remnant number game rewards
   bastion:
-    # Material to give as reward (Minecraft material name)
-    material: ENDER_PEARL
-    # Amount of items to give
-    amount: 16
+    Drop:
+      - materialName: "ENDER_PEARL"
+        # Base reward always given
+        minimumRewardCount: 16.0
+        # Points-to-items conversion rate
+        multiplier: 0.025
+        # Score needed for bonus calculation
+        minimumThreshold: 100.0
+        # Maximum items that can drop
+        maximumRewardCap: 40.0
+
+      - materialName: "NETHERITE_UPGRADE_SMITHING_TEMPLATE"
+        # Always give exactly 1 template
+        minimumRewardCount: 1.0
+        multiplier: 0.0
+        minimumThreshold: 0.0
+        maximumRewardCap: 1.0
+
+      - materialName: "ANCIENT_DEBRIS"
+        # Minimum 1, scales up to 5 based on score
+        minimumRewardCount: 1.0
+        # Scales with score (higher numbers = more debris)
+        multiplier: 0.004
+        minimumThreshold: 0.0
+        # Maximum 5 ancient debris
+        maximumRewardCap: 5.0

@@ -195,19 +195,13 @@ class FortressNumberGameListener(
                 }
             }
 
-            // Get reward configuration
-            val rewardMaterialName = plugin.configManager.fortressRewardMaterial
-            val rewardAmount = plugin.configManager.fortressRewardAmount
+            // Get reward configuration and apply score-based rewards
+            val rewards = plugin.configManager.getFortressNumberScoreRewards()
+            val score = sequence.number.toDouble()
 
-            // Parse material and give reward
-            val rewardMaterial = Material.getMaterial(rewardMaterialName)
-            if (rewardMaterial != null) {
-                val rewardItem = ItemStack(rewardMaterial, rewardAmount)
-                player.inventory.addItem(rewardItem)
-            } else {
-                plugin.logger.warning("Invalid fortress reward material: $rewardMaterialName. Using BLAZE_ROD as fallback.")
-                val rewardItem = ItemStack(Material.BLAZE_ROD, rewardAmount)
-                player.inventory.addItem(rewardItem)
+            // Apply all configured rewards
+            for (reward in rewards) {
+                reward.applyReward(player, location, score)
             }
 
             // Mark rewards as dispensed
@@ -226,11 +220,6 @@ class FortressNumberGameListener(
             player.sendMessage(
                 Component.text("  You cracked the fortress code: ${sequence.number}!")
                     .color(NamedTextColor.YELLOW)
-            )
-            player.sendMessage(
-                Component.text("  Reward: $rewardAmount ${rewardMaterial?.name?.replace("_", " ") ?: rewardMaterialName}")
-                    .color(NamedTextColor.GREEN)
-                    .decorate(TextDecoration.BOLD)
             )
             player.sendMessage(
                 Component.text("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━")

@@ -22,6 +22,8 @@ import org.bukkit.Location
 import org.bukkit.Material
 import org.bukkit.configuration.file.YamlConfiguration
 import org.stephanosbad.charmedChars.CharmedChars
+import org.stephanosbad.charmedChars.database.StructureType
+import org.stephanosbad.charmedChars.rewards.DropReward
 import org.stephanosbad.charmedChars.utility.LocationPair
 import java.io.File
 import java.io.IOException
@@ -146,6 +148,59 @@ class ConfigDataHandler(private val plugin: CharmedChars) {
             Location(plugin.server.getWorld("world"), -10.0, 0.0, -10.0),
             Location(plugin.server.getWorld("world"), 10.0, 0.0, 10.0)
         )
+    }
+
+    /**
+     * Loads number score rewards for a specific structure type
+     *
+     * Parses the number-score-rewards configuration section for the given structure type
+     * and creates DropReward instances with the configured parameters.
+     *
+     * @param structureType The structure type (FORTRESS or BASTION_REMNANT)
+     * @return List of DropReward instances for the structure
+     */
+    fun loadNumberScoreRewards(structureType: StructureType): List<DropReward> {
+        val rewards = mutableListOf<DropReward>()
+
+        if (configuration == null) {
+            return rewards
+        }
+
+        val structureKey = when (structureType) {
+            StructureType.FORTRESS -> "fortress"
+            StructureType.BASTION_REMNANT -> "bastion"
+        }
+
+        val path = "number-score-rewards.$structureKey.Drop"
+        val dropList = configuration!!.getList(path) ?: return rewards
+
+        for (drop in dropList) {
+            try {
+                if (drop !is MutableMap<*, *>) {
+                    continue
+                }
+                val dropParams = drop as MutableMap<*, *>
+                val materialName = dropParams["materialName"] as? String ?: continue
+                val minimumRewardCount = dropParams["minimumRewardCount"] as? Double ?: 0.0
+                val multiplier = dropParams["multiplier"] as? Double ?: 0.0
+                val minimumThreshold = dropParams["minimumThreshold"] as? Double ?: 0.0
+                val maximumRewardCap = dropParams["maximumRewardCap"] as? Double ?: 0.0
+
+                rewards.add(
+                    DropReward(
+                        materialName,
+                        minimumRewardCount,
+                        multiplier,
+                        minimumThreshold,
+                        maximumRewardCap
+                    )
+                )
+            } catch (e: Exception) {
+                plugin.logger.warning("Error loading number score reward for $structureType: ${e.message}")
+            }
+        }
+
+        return rewards
     }
 
     companion object {
