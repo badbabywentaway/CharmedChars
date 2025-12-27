@@ -56,8 +56,9 @@ class ConfigDataHandler(private val plugin: CharmedChars) {
     /**
      * Loads configuration from config.yml
      *
-     * Creates a default configuration file if it doesn't exist, then loads it.
-     * The default file includes example reward configurations and zone definitions.
+     * Ensures the default configuration file exists by calling saveDefaultConfig(),
+     * then loads it. This uses the full default config from resources instead of
+     * creating a minimal config programmatically.
      *
      * @throws IOException if file operations fail
      */
@@ -67,11 +68,13 @@ class ConfigDataHandler(private val plugin: CharmedChars) {
             file = File(plugin.dataFolder, CONFIG_FILE_NAME)
         }
 
+        // Use Bukkit's saveDefaultConfig to copy the full default config from resources
+        // This only creates the file if it doesn't exist
         if (!file!!.exists()) {
-            createBlank()
+            plugin.saveDefaultConfig()
         }
-        configuration = YamlConfiguration.loadConfiguration(file!!)
 
+        configuration = YamlConfiguration.loadConfiguration(file!!)
     }
 
     /**
