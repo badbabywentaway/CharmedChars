@@ -85,7 +85,7 @@ See `QUICK_SETUP.md` (ItemsAdder) or `ORAXEN_SETUP.md` (Oraxen) for detailed ins
 ### Forming Words
 - Place letter blocks in **straight lines** (horizontal or vertical)
 - Break any letter in the word with a gold or pyrite tool
-- Word is validated against ~100,000+ English word dictionary
+- Word is validated against ~173,500 English word dictionary (ENABLE word list)
 - Minimum lengths: 3 letters (same-color) or 4 letters (multi-color)
 
 ### Scoring
@@ -107,7 +107,7 @@ See `PLAY_INSTRUCTIONS.md` for complete gameplay guide.
 ### Gameplay
 - Letter block collection from wood logs with gold or pyrite tools
 - Word formation with straight-line placement rules
-- Dictionary validation (~100,000+ words)
+- Dictionary validation (~173,500 words - ENABLE word list, public domain)
 - Minimum word lengths (3 letters same-color, 4 letters multi-color)
 - Frequency-based scoring system
 - Color bonus multiplier (3x for same-color words)

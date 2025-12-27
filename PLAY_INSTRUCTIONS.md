@@ -95,7 +95,7 @@ Invalid (diagonal):
 - **Minimum length:**
   - **Single-color words:** 3 letters minimum (e.g., "CAT" all cyan)
   - **Multi-color words:** 4 letters minimum (e.g., "CATS" cyan+magenta)
-- Must be in the built-in English dictionary (~100,000+ words)
+- Must be in the built-in English dictionary (~173,500 words from ENABLE word list)
 - Must be a straight line (not diagonal)
 
 ### If Your Word is Valid

@@ -28,7 +28,7 @@ Perfect for:
 ### Word Formation & Scoring
 - Place blocks in **straight lines** (horizontal or vertical)
 - Break any letter with a gold/pyrite tool to score
-- **Dictionary validation**: ~100,000+ English words
+- **Dictionary validation**: ~173,500 English words (ENABLE word list, public domain)
 - **Smart length requirements**:
   - Same-color words: 3 letters minimum
   - Multi-color words: 4 letters minimum

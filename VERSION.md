@@ -810,7 +810,7 @@ Note: Protection plugins are completely optional. If not installed, the plugin f
 ### Gameplay
 - **Letter Block Collection**: Mine wood logs with gold tools to get random letter blocks
 - **Word Formation**: Place blocks in straight lines to form words
-- **Dictionary Validation**: ~100,000+ English words from Oxford Dictionary
+- **Dictionary Validation**: ~173,500 English words from ENABLE word list (public domain)
 - **Scoring System**: Frequency-based scoring with color bonuses (3x multiplier for same-color words)
 - **Configurable Rewards**: Drop items based on word scores with customizable thresholds
 
