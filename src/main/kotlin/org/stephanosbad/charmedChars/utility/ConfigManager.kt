@@ -52,34 +52,34 @@ class ConfigManager(private val plugin: CharmedChars) {
     /**
      * Base chance (0.0 to 1.0) for letter blocks to drop when mining logs with gold tools
      *
-     * Default: 0.06 (6% chance)
+     * Default: 0.125 (12.5% chance)
      */
     val letterBlockDropChance: Double
-        get() = config.getDouble("letter-blocks.drop-chance", 0.06)
+        get() = config.getDouble("letter-blocks.drop-chance", 0.125)
 
     /**
-     * Drop chance multiplier for Looting I enchantment
+     * Drop chance multiplier for Fortune I enchantment
      *
-     * Default: 1.67 (approximately 10% total with base 6%)
+     * Default: 2.0 (25% total with base 12.5%)
      */
     val lootingMultiplier1: Double
-        get() = config.getDouble("letter-blocks.looting-multipliers.1", 1.67)
+        get() = config.getDouble("letter-blocks.fortune-multipliers.1", 2.0)
 
     /**
-     * Drop chance multiplier for Looting II enchantment
+     * Drop chance multiplier for Fortune II enchantment
      *
-     * Default: 2.67 (approximately 16% total with base 6%)
+     * Default: 3.0 (37.5% total with base 12.5%)
      */
     val lootingMultiplier2: Double
-        get() = config.getDouble("letter-blocks.looting-multipliers.2", 2.67)
+        get() = config.getDouble("letter-blocks.fortune-multipliers.2", 3.0)
 
     /**
-     * Drop chance multiplier for Looting III enchantment
+     * Drop chance multiplier for Fortune III enchantment
      *
-     * Default: 3.33 (approximately 20% total with base 6%)
+     * Default: 4.0 (50% total with base 12.5%)
      */
     val lootingMultiplier3: Double
-        get() = config.getDouble("letter-blocks.looting-multipliers.3", 3.33)
+        get() = config.getDouble("letter-blocks.fortune-multipliers.3", 4.0)
 
     /**
      * Minimum word length for same-color words
