@@ -131,12 +131,21 @@ if exist "c:\Users\steve\Documents\OraxenPapermc\plugins\Oraxen\items\charmedcha
 )
 
 REM Step 4B-1: Clean old Oraxen textures (CRITICAL for texture resolution updates)
-echo Step 4B-1: Cleaning old Oraxen textures...
+echo Step 4B-1: Cleaning old Oraxen textures (assets/charmedchars)...
 if exist "c:\Users\steve\Documents\OraxenPapermc\plugins\Oraxen\pack\assets\charmedchars" (
     rmdir /s /q "c:\Users\steve\Documents\OraxenPapermc\plugins\Oraxen\pack\assets\charmedchars"
-    echo [OK] Old Oraxen charmedchars textures deleted
+    echo [OK] Old Oraxen assets/charmedchars textures deleted
 ) else (
-    echo [INFO] No old Oraxen textures found
+    echo [INFO] No old Oraxen assets textures found
+)
+
+REM Step 4B-1.1: Clean old Oraxen textures (textures/charmedchars) - LEGACY LOCATION
+echo Step 4B-1.1: Cleaning old Oraxen textures (textures/charmedchars)...
+if exist "c:\Users\steve\Documents\OraxenPapermc\plugins\Oraxen\pack\textures\charmedchars" (
+    rmdir /s /q "c:\Users\steve\Documents\OraxenPapermc\plugins\Oraxen\pack\textures\charmedchars"
+    echo [OK] Old Oraxen textures/charmedchars deleted (legacy 512x512 location)
+) else (
+    echo [INFO] No old Oraxen legacy textures found
 )
 
 REM Step 4B-2: Clean old Oraxen recipes
