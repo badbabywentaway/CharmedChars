@@ -504,6 +504,16 @@ class ItemManager @JvmOverloads constructor(localPlugin: CharmedChars? = null) :
                 }
             }
 
+            // Force client-side block updates for all nearby players
+            // This fixes invisible block issue with Oraxen NoteBlock mechanics
+            val updateRadius = 64.0 // Update blocks for players within 64 blocks
+            for (locationOfBlock in blockArray) {
+                val block = locationOfBlock.world.getBlockAt(locationOfBlock)
+                for (nearbyPlayer in locationOfBlock.world.getNearbyPlayers(locationOfBlock, updateRadius)) {
+                    nearbyPlayer.sendBlockChange(locationOfBlock, block.blockData)
+                }
+            }
+
             // Cancel the event to prevent the broken block from dropping as an item
             e.isCancelled = true
 
