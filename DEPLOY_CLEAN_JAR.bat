@@ -130,6 +130,24 @@ if exist "c:\Users\steve\Documents\OraxenPapermc\plugins\Oraxen\items\charmedcha
     echo [INFO] No Oraxen config found
 )
 
+REM Step 4B-1: Clean old Oraxen textures (CRITICAL for texture resolution updates)
+echo Step 4B-1: Cleaning old Oraxen textures...
+if exist "c:\Users\steve\Documents\OraxenPapermc\plugins\Oraxen\pack\assets\charmedchars" (
+    rmdir /s /q "c:\Users\steve\Documents\OraxenPapermc\plugins\Oraxen\pack\assets\charmedchars"
+    echo [OK] Old Oraxen charmedchars textures deleted
+) else (
+    echo [INFO] No old Oraxen textures found
+)
+
+REM Step 4B-2: Clean old Oraxen recipes
+echo Step 4B-2: Cleaning old Oraxen recipes...
+if exist "c:\Users\steve\Documents\OraxenPapermc\plugins\Oraxen\recipes\charmedchars_recipes.yml" (
+    del "c:\Users\steve\Documents\OraxenPapermc\plugins\Oraxen\recipes\charmedchars_recipes.yml"
+    echo [OK] Old Oraxen charmedchars recipes deleted
+) else (
+    echo [INFO] No old Oraxen recipes found
+)
+
 REM Step 5B: Delete old JAR file (Oraxen server)
 echo Step 5B: Deleting old JAR (Oraxen)...
 if exist "c:\Users\steve\Documents\OraxenPapermc\plugins\CharmedChars-*.jar" (
