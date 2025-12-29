@@ -243,40 +243,40 @@ class OraxenSetup(private val plugin: CharmedChars) {
                 val colorDir = File(oraxenTexturesFolder, "block/$color")
                 colorDir.mkdirs()
 
-                // Copy letter textures (a-z)
+                // Copy letter textures (a-z) - using 256x256 downscaled versions for Oraxen
                 for (letter in 'a'..'z') {
                     if (copyResourceToFile(
-                            "pack/assets/minecraft/textures/block/$color/$letter.png",
+                            "pack-oraxen/assets/minecraft/textures/block/$color/$letter.png",
                             File(colorDir, "$letter.png")
                         )) {
                         textureCount++
                     }
                 }
 
-                // Copy number textures (0-9)
+                // Copy number textures (0-9) - using 256x256 downscaled versions for Oraxen
                 for (number in 0..9) {
                     if (copyResourceToFile(
-                            "pack/assets/minecraft/textures/block/$color/$number.png",
+                            "pack-oraxen/assets/minecraft/textures/block/$color/$number.png",
                             File(colorDir, "$number.png")
                         )) {
                         textureCount++
                     }
                 }
 
-                // Copy operator textures
+                // Copy operator textures - using 256x256 downscaled versions for Oraxen
                 val operators = listOf("plus", "minus", "multiply", "division")
                 for (op in operators) {
                     if (copyResourceToFile(
-                            "pack/assets/minecraft/textures/block/$color/$op.png",
+                            "pack-oraxen/assets/minecraft/textures/block/$color/$op.png",
                             File(colorDir, "$op.png")
                         )) {
                         textureCount++
                     }
                 }
 
-                // Copy logo block
+                // Copy logo block - using 256x256 downscaled versions for Oraxen
                 if (copyResourceToFile(
-                        "pack/assets/minecraft/textures/block/$color/logo_block.png",
+                        "pack-oraxen/assets/minecraft/textures/block/$color/logo_block.png",
                         File(colorDir, "logo_block.png")
                     )) {
                     textureCount++
@@ -285,7 +285,7 @@ class OraxenSetup(private val plugin: CharmedChars) {
 
             messages.add("  ✓ Copied $textureCount block texture files")
 
-            // Copy pyrite item textures
+            // Copy pyrite item textures (16x16, copied as-is)
             messages.add("Copying pyrite item textures...")
             var pyriteTextureCount = 0
             val pyriteItemTexturesDir = File(oraxenTexturesFolder, "item/pyrite")
@@ -294,7 +294,7 @@ class OraxenSetup(private val plugin: CharmedChars) {
             val pyriteItems = listOf("ingot", "pickaxe", "axe", "shovel", "hoe")
             for (item in pyriteItems) {
                 if (copyResourceToFile(
-                        "pack/assets/minecraft/textures/item/pyrite/$item.png",
+                        "pack-oraxen/assets/minecraft/textures/item/pyrite/$item.png",
                         File(pyriteItemTexturesDir, "$item.png")
                     )) {
                     pyriteTextureCount++

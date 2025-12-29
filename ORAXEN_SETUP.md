@@ -2,8 +2,16 @@
 
 CharmedChars now supports both **ItemsAdder** and **Oraxen** as custom item providers!
 
+## ⚠️ Oraxen 1.203+ Compatibility Note
+
+**Oraxen 1.203 and newer** have a maximum texture resolution limit of **256x256**.
+
+CharmedChars now automatically uses **256x256 downscaled textures** for Oraxen compatibility (downscaled from the original 512x512 textures used by ItemsAdder). This ensures compatibility with all Oraxen versions while maintaining visual quality.
+
 ## Requirements
 
+- **Oraxen 1.181.0+** (tested with 1.203)
+- **Minecraft 1.21.10+** (tested with 1.21.11)
 - Install **either** ItemsAdder **OR** Oraxen (not both!)
 - CharmedChars will automatically detect which one you have installed
 - If both are installed, the plugin will refuse to load
