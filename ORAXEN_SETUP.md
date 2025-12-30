@@ -8,6 +8,34 @@ CharmedChars now supports both **ItemsAdder** and **Oraxen** as custom item prov
 
 CharmedChars now automatically uses **256x256 downscaled textures** for Oraxen compatibility (downscaled from the original 512x512 textures used by ItemsAdder). This ensures compatibility with all Oraxen versions while maintaining visual quality.
 
+## ⚠️ Important: Block Breaking Behavior Difference
+
+**Oraxen vs ItemsAdder have different block breaking behaviors:**
+
+### ItemsAdder Behavior:
+- Blocks broken with **non-whitelisted tools** show a **purple warning message** and are prevented from breaking
+- Only tools in the `break_tools_whitelist` can break blocks
+- Provides clear visual feedback to players
+
+### Oraxen Behavior:
+- Blocks broken with **non-whitelisted tools** will **break and disappear** without dropping items
+- No warning message is shown to the player
+- Only tools in the `minimal_type` list will cause the block to drop as an item
+- This is **by design** - Oraxen maintainers rejected adding break prevention ([GitHub Issue #36](https://github.com/oraxen/Oraxen/issues/36))
+
+**What this means for gameplay:**
+- Players using the wrong tool (e.g., bare hands, shovels, hoes) will lose the block permanently
+- Only pickaxes and axes (as configured in `minimal_type`) will successfully mine and drop letter blocks
+- This matches vanilla Minecraft behavior for certain blocks (e.g., grass blocks without silk touch)
+
+**Current `minimal_type` Configuration:**
+The auto-generated Oraxen configuration allows these 14 tool types to break blocks and get drops:
+- All pickaxes: wooden, stone, copper, iron, golden, diamond, netherite
+- All axes: wooden, stone, copper, iron, golden, diamond, netherite
+- Pyrite pickaxe and pyrite axe (recognized via their GOLDEN_PICKAXE and GOLDEN_AXE base materials)
+
+> **Note:** Copper tools were added in Minecraft Java Edition 1.21.9 ("The Copper Age" update, September 2025)
+
 ## Requirements
 
 - **Oraxen 1.181.0+** (tested with 1.203)

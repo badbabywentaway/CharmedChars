@@ -257,9 +257,14 @@ class ItemManager @JvmOverloads constructor(localPlugin: CharmedChars? = null) :
      * 1. Breaking logs with gold/pyrite tools (without Silk Touch) - drops letter blocks
      * 2. Breaking letter blocks - validates words and awards scores
      *
+     * Uses LOWEST priority to run before all other handlers (including Oraxen's HIGHEST).
+     * This ensures we can detect letter blocks and process word scoring before Oraxen
+     * removes the blocks. When we cancel the event, Oraxen's handler (ignoreCancelled=true)
+     * will not run, preventing double-processing.
+     *
      * @param e The block break event from Bukkit/Spigot
      */
-    @EventHandler
+    @EventHandler(priority = org.bukkit.event.EventPriority.LOWEST, ignoreCancelled = false)
     fun onBreakWoodOrLetter(e: BlockBreakEvent) {
         val player = e.player
         val hand = player.inventory.itemInMainHand
@@ -294,6 +299,41 @@ class ItemManager @JvmOverloads constructor(localPlugin: CharmedChars? = null) :
                 letterBlockBreak(e)
             }
         }
+    }
+
+    /**
+     * Handles left-clicking letter blocks for word scoring
+     *
+     * PlayerInteractEvent fires immediately when a player left-clicks a block,
+     * making it more reliable than BlockDamageEvent for Oraxen custom blocks.
+     * This is the primary scoring trigger for the plugin.
+     *
+     * @param e The player interact event
+     */
+    @EventHandler(priority = org.bukkit.event.EventPriority.LOWEST, ignoreCancelled = false)
+    fun onInteractLetterBlock(e: org.bukkit.event.player.PlayerInteractEvent) {
+        // Only care about left-clicking blocks
+        if (e.action != org.bukkit.event.block.Action.LEFT_CLICK_BLOCK) {
+            return
+        }
+
+        val block = e.clickedBlock ?: return
+        val player = e.player
+        val hand = player.inventory.itemInMainHand
+
+        // Check if this is a letter block
+        val letterCheck = testForLetter(player, block)
+        if (letterCheck.first == '\u0000') {
+            return
+        }
+
+        // Only process word scoring if using valid tool
+        if (!isValidTool(hand)) {
+            return
+        }
+
+        // Process word scoring on interaction
+        processWordScoring(player, block)
     }
 
     /**
@@ -363,51 +403,70 @@ class ItemManager @JvmOverloads constructor(localPlugin: CharmedChars? = null) :
     /**
      * Handles breaking letter blocks to form and validate words
      *
-     * This is the core word validation logic:
+     * Legacy handler for BlockBreakEvent. Word scoring is now primarily handled
+     * by BlockDamageEvent (onDamageLetterBlock) for more reliable detection.
+     * This handler still prevents letter blocks from being broken without valid tools.
+     *
+     * @param e The block break event
+     */
+    fun letterBlockBreak(e: BlockBreakEvent) {
+        val brokenBlock = e.getBlock()
+
+        // Check if this is a letter block
+        var c: SimpleTuple<Char, Double> = testForLetter(e.player, brokenBlock)
+        if (c.first == '\u0000') {
+            // Not a letter block, let it break normally
+            return
+        }
+
+        // It IS a letter block - check protection
+        if (protectedSpot(e.player, brokenBlock.location, brokenBlock)) {
+            e.player.sendMessage("Protected block: " + brokenBlock.location)
+            e.isCancelled = true
+            return
+        }
+
+        // Scoring was already handled by PlayerInteractEvent
+        // Allow the break to proceed (blocks already removed by processWordScoring if valid word)
+    }
+
+    /**
+     * Core word detection and scoring logic
+     *
+     * This is the main word validation logic used by both BlockDamageEvent and BlockBreakEvent:
      * 1. Detects the direction of adjacent letter blocks (X or Z axis)
      * 2. Scans in that direction to build the complete word
      * 3. Calculates score based on letter frequencies
      * 4. Applies 3x multiplier if all letters are the same color
      * 5. Validates against the dictionary
-     * 6. Removes all blocks and awards score if valid, or cancels event if invalid
+     * 6. Removes all blocks and awards score if valid, or sends "Miss" if invalid
      *
-     * @param e The block break event
+     * @param player The player attempting to score
+     * @param startBlock The block that was hit/broken to trigger scoring
      */
-    fun letterBlockBreak(e: BlockBreakEvent) {
-        val hand = e.player.inventory.itemInMainHand
-
-        if (protectedSpot(e.player, e.getBlock().location, e.getBlock())) {
-            e.player.sendMessage("Protected block: " + e.getBlock().location)
-            return
-        }
-
-        // Must be gold or pyrite tool in hand
-        if (!isValidTool(hand)) {
-            return
-        }
-
-        val brokenBlock = e.getBlock()
-        var c: SimpleTuple<Char, Double> = testForLetter(e.player, brokenBlock)
-        if (c.first == '\u0000') {
+    private fun processWordScoring(player: Player, startBlock: Block) {
+        // Check protection
+        if (protectedSpot(player, startBlock.location, startBlock)) {
+            player.sendMessage("Protected block: " + startBlock.location)
             return
         }
 
         // Determine the axis by checking adjacent blocks
-        val world = brokenBlock.world
-        val x = brokenBlock.x
-        val y = brokenBlock.y
-        val z = brokenBlock.z
+        val world = startBlock.world
+        val x = startBlock.x
+        val y = startBlock.y
+        val z = startBlock.z
 
-        val hasXAdjacent = testForLetter(e.player, world.getBlockAt(x + 1, y, z)).first != '\u0000' ||
-                          testForLetter(e.player, world.getBlockAt(x - 1, y, z)).first != '\u0000'
-        val hasZAdjacent = testForLetter(e.player, world.getBlockAt(x, y, z + 1)).first != '\u0000' ||
-                          testForLetter(e.player, world.getBlockAt(x, y, z - 1)).first != '\u0000'
+        val hasXAdjacent = testForLetter(player, world.getBlockAt(x + 1, y, z)).first != '\u0000' ||
+                          testForLetter(player, world.getBlockAt(x - 1, y, z)).first != '\u0000'
+        val hasZAdjacent = testForLetter(player, world.getBlockAt(x, y, z + 1)).first != '\u0000' ||
+                          testForLetter(player, world.getBlockAt(x, y, z - 1)).first != '\u0000'
 
         // Check all 4 directions to find which one has letter blocks
-        val hasXPlus = testForLetter(e.player, world.getBlockAt(x + 1, y, z)).first != '\u0000'
-        val hasXMinus = testForLetter(e.player, world.getBlockAt(x - 1, y, z)).first != '\u0000'
-        val hasZPlus = testForLetter(e.player, world.getBlockAt(x, y, z + 1)).first != '\u0000'
-        val hasZMinus = testForLetter(e.player, world.getBlockAt(x, y, z - 1)).first != '\u0000'
+        val hasXPlus = testForLetter(player, world.getBlockAt(x + 1, y, z)).first != '\u0000'
+        val hasXMinus = testForLetter(player, world.getBlockAt(x - 1, y, z)).first != '\u0000'
+        val hasZPlus = testForLetter(player, world.getBlockAt(x, y, z + 1)).first != '\u0000'
+        val hasZMinus = testForLetter(player, world.getBlockAt(x, y, z - 1)).first != '\u0000'
 
         // Determine scan direction - pick one of the 4 cardinal directions that has letters
         val lateralDirection: LateralDirection
@@ -428,19 +487,19 @@ class ItemManager @JvmOverloads constructor(localPlugin: CharmedChars? = null) :
             lateralDirection = LateralDirection(1, 0)
         } else {
             // Multiple directions have letters (invalid pattern)
-            e.player.sendMessage("Miss")
+            player.sendMessage("Miss")
             return
         }
 
-        // Build word starting from the broken block (treat it as first letter)
-        var testBlock = brokenBlock
+        // Build word starting from the hit block (treat it as first letter)
+        var testBlock = startBlock
         var score = 0.0
         val outString = StringBuilder()
-        val blockArray: MutableList<Location> = ArrayList<Location>(mutableListOf<Location?>())
+        val blockArray: MutableList<Location> = ArrayList<Location>()
         var isSameColor = true
         var colorTest: BlockColor? = null
 
-        c = testForLetter(e.player, testBlock)
+        var c = testForLetter(player, testBlock)
         while (c.first != '\u0000') {
             val letterScore = c.second + 10
             score += letterScore
@@ -461,16 +520,18 @@ class ItemManager @JvmOverloads constructor(localPlugin: CharmedChars? = null) :
             }
 
             testBlock = offsetBlock(testBlock, lateralDirection)
-            c = testForLetter(e.player, testBlock)
+            c = testForLetter(player, testBlock)
         }
+
+        val word = outString.toString()
 
         if(isSameColor && colorTest != null)
         {
             score *= 3
-            e.player.sendMessage("Triple Score! All Blocks Are ${colorTest.name}!")
+            player.sendMessage("Triple Score! All Blocks Are ${colorTest.name}!")
         }
 
-        val wordLowercase = outString.toString().lowercase()
+        val wordLowercase = word.lowercase()
         val wordLength = wordLowercase.length
 
         // Validate minimum word length from config
@@ -481,15 +542,14 @@ class ItemManager @JvmOverloads constructor(localPlugin: CharmedChars? = null) :
         }
         if (wordLength < minimumLength) {
             val colorType = if (isSameColor) "single-color" else "multi-color"
-            e.player.sendMessage("Miss: $colorType words must be at least $minimumLength letters long")
-            e.isCancelled = true
+            player.sendMessage("Miss: $colorType words must be at least $minimumLength letters long")
             return
         }
 
         val isInDictionary = WordDict.singleton!!.words.contains(wordLowercase)
 
         if (isInDictionary) {
-            e.player.sendMessage("Hit: $score")
+            player.sendMessage("Hit: $score")
 
             // Remove all blocks in the word using the custom item provider
             val provider = plugin.customItemProviderManager.getProvider()
@@ -504,14 +564,9 @@ class ItemManager @JvmOverloads constructor(localPlugin: CharmedChars? = null) :
                 }
             }
 
-            // Cancel the event to prevent the broken block from dropping as an item
-            e.isCancelled = true
-
-            applyScore(e.player, score)
+            applyScore(player, score)
         } else {
-            e.player.sendMessage("Miss")
-            // Cancel the event so the block doesn't break on a miss
-            e.isCancelled = true
+            player.sendMessage("Miss")
         }
     }
 
@@ -562,9 +617,11 @@ class ItemManager @JvmOverloads constructor(localPlugin: CharmedChars? = null) :
         if (protectedSpot(player, testBlock.location, testBlock)) {
             return SimpleTuple('\u0000', 0.0)
         }
+
         if (testBlock.state.blockData !is NoteBlock) {
             return SimpleTuple('\u0000', 0.0)
         }
+
         val match: AtomicReference<SimpleTuple<Char, Double>> = AtomicReference(SimpleTuple('\u0000', 0.0))
         val variation = getCustomVariation(testBlock)
         if (Arrays.stream(LetterBlock.entries.toTypedArray()).anyMatch { v ->

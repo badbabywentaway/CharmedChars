@@ -83,6 +83,23 @@ After deployment:
 - [ ] Blocks can be placed
 - [ ] Word scoring works
 
+### Tool Testing (Important - Different Behavior on Oraxen vs ItemsAdder)
+
+**Test with various tools:**
+- [ ] Pickaxes (wood, stone, copper, iron, gold, diamond, netherite) - should break and drop items
+- [ ] Axes (wood, stone, copper, iron, gold, diamond, netherite) - should break and drop items
+- [ ] Pyrite pickaxe/axe - should break, drop items, AND trigger word scoring
+- [ ] Bare hands - **ItemsAdder**: purple warning, no break | **Oraxen**: breaks, no drop (block lost)
+- [ ] Shovels/hoes - **ItemsAdder**: purple warning, no break | **Oraxen**: breaks, no drop (block lost)
+
+> **Note:** Copper tools require Minecraft 1.21.9+ ("The Copper Age" update)
+
+**Expected Behavior Difference:**
+- **ItemsAdder**: Non-whitelisted tools show purple warning and prevent breaking
+- **Oraxen**: Non-whitelisted tools allow breaking but block disappears without dropping (by design)
+
+See `ORAXEN_SETUP.md` for full explanation of this behavioral difference.
+
 ## Common Issues
 
 **"Invalid texture" errors still appear:**

@@ -74,6 +74,38 @@ See `QUICK_SETUP.md` (ItemsAdder) or `ORAXEN_SETUP.md` (Oraxen) for detailed ins
 
 ---
 
+## ItemsAdder vs Oraxen: Key Differences
+
+Both custom item providers work with CharmedChars, but they have different behaviors:
+
+| Feature | ItemsAdder | Oraxen |
+|---------|------------|--------|
+| **License** | Proprietary (paid) | Open-source (free) |
+| **Texture Resolution** | 512x512 | 256x256 (1.203+) |
+| **Block Breaking Without Correct Tool** | **Shows purple warning, prevents breaking** | **Block disappears without dropping** |
+| **Player Feedback** | Clear visual warning message | No warning (silent loss) |
+| **Tool Whitelist** | `break_tools_whitelist` with wildcards (`_AXE`, `_PICKAXE`) | `minimal_type` with explicit material list |
+| **Auto-Setup Command** | `/iasetup` | `/oraxensetup` |
+
+**Important Note on Block Breaking:**
+- **ItemsAdder**: Players cannot accidentally lose blocks - non-whitelisted tools show a purple warning and prevent breaking
+- **Oraxen**: Players CAN lose blocks permanently if using wrong tools (bare hands, shovels, hoes) - blocks break and disappear without dropping items
+- This difference is **by design** - Oraxen maintainers intentionally do not prevent breaking ([GitHub Issue #36](https://github.com/oraxen/Oraxen/issues/36))
+
+**Current Tool Configuration:**
+Both providers allow these tools to break blocks and receive drops:
+- All pickaxes (wooden, stone, copper, iron, golden, diamond, netherite)
+- All axes (wooden, stone, copper, iron, golden, diamond, netherite)
+- Pyrite pickaxe and pyrite axe (custom items)
+
+> **Note:** Copper tools require Minecraft 1.21.9+ ("The Copper Age" update)
+
+**Recommendation:**
+- Choose **ItemsAdder** if you want protected blocks with clear player feedback (requires purchase)
+- Choose **Oraxen** if you prefer free/open-source and accept vanilla-like block loss behavior
+
+---
+
 ## How to Play
 
 ### Collecting Letter Blocks

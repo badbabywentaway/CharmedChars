@@ -2,7 +2,11 @@
 
 Welcome to CharmedChars! This is a word-forming puzzle game in Minecraft where you collect letter blocks, arrange them into words, and score points for rewards.
 
-> **Note**: CharmedChars requires ItemsAdder (a proprietary plugin, purchased separately). See `README.md` or `QUICK_SETUP.md` for installation details.
+> **Note**: CharmedChars requires **either ItemsAdder OR Oraxen** (choose one):
+> - **ItemsAdder** (proprietary, paid) - Recommended for protected block breaking
+> - **Oraxen** (open-source, free) - Free alternative with vanilla-like behavior
+>
+> See `README.md`, `QUICK_SETUP.md` (ItemsAdder), or `ORAXEN_SETUP.md` (Oraxen) for installation details.
 
 ## Quick Start
 
@@ -40,6 +44,23 @@ When a letter block drops, you'll receive:
 - One random letter block (A-Z)
 - Random color: Cyan, Magenta, or Yellow
 - Letters are weighted by frequency (E, A, R, I, O are more common than X, Z, Q, J)
+
+### ⚠️ Important: Breaking Placed Letter Blocks
+
+**Be careful which tools you use to break placed letter blocks!**
+
+**Tools That Work (break and drop the block):**
+- All pickaxes (wooden, stone, copper, iron, golden, diamond, netherite)
+- All axes (wooden, stone, copper, iron, golden, diamond, netherite)
+- Pyrite pickaxe and pyrite axe
+
+> **Note:** Copper tools require Minecraft 1.21.9+ ("The Copper Age" update)
+
+**Tools That DON'T Work:**
+- **ItemsAdder servers**: Bare hands, shovels, hoes → Shows purple warning, prevents breaking
+- **Oraxen servers**: Bare hands, shovels, hoes → **Block breaks and disappears permanently** (no warning!)
+
+> **Oraxen Warning**: On Oraxen servers, if you break a letter block with bare hands, a shovel, or a hoe, the block will be **permanently lost** without any warning message. Always use pickaxes or axes to safely mine letter blocks!
 
 ---
 
