@@ -27,6 +27,7 @@ import org.bukkit.entity.Player
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
 import org.bukkit.event.block.BlockBreakEvent
+import org.bukkit.event.block.BlockDamageEvent
 import org.bukkit.inventory.ItemStack
 import org.stephanosbad.charmedChars.CharmedChars
 import org.stephanosbad.charmedChars.rewards.DropReward
@@ -333,6 +334,36 @@ class ItemManager @JvmOverloads constructor(localPlugin: CharmedChars? = null) :
         }
 
         // Process word scoring on interaction
+        processWordScoring(player, block)
+    }
+
+    /**
+     * Handles block damage events for letter blocks (Nexo compatibility)
+     *
+     * BlockDamageEvent fires when a player starts breaking a block (left-click and hold).
+     * This is more reliable than PlayerInteractEvent when noteblock updates are disabled.
+     * Works better with Nexo when Paper's block-updates.disable-noteblock-updates is enabled.
+     *
+     * @param e The block damage event
+     */
+    @EventHandler(priority = org.bukkit.event.EventPriority.LOWEST, ignoreCancelled = false)
+    fun onDamageLetterBlock(e: org.bukkit.event.block.BlockDamageEvent) {
+        val block = e.block
+        val player = e.player
+        val hand = player.inventory.itemInMainHand
+
+        // Check if this is a letter block
+        val letterCheck = testForLetter(player, block)
+        if (letterCheck.first == '\u0000') {
+            return
+        }
+
+        // Only process word scoring if using valid tool
+        if (!isValidTool(hand)) {
+            return
+        }
+
+        // Process word scoring on damage
         processWordScoring(player, block)
     }
 

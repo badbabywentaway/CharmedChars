@@ -289,6 +289,40 @@ class CharmedChars : JavaPlugin(), CoroutineScope {
                 }
             }
 
+            "Nexo" -> {
+                val setup = org.stephanosbad.charmedChars.integration.NexoSetup(this)
+
+                if (!setup.isAlreadySetup()) {
+                    logger.warning("========================================")
+                    logger.warning("Nexo is installed but not configured!")
+                    logger.warning("")
+                    logger.warning("Run this command to setup:")
+                    logger.warning("  /nexosetup - Auto-generate configs & copy textures")
+                    logger.warning("")
+                    logger.warning("Then run /nexo reload all and restart the server.")
+                    logger.warning("")
+                    logger.warning("IMPORTANT: Enable Paper block update optimizations!")
+                    logger.warning("Edit config/paper-global.yml and set:")
+                    logger.warning("  block-updates:")
+                    logger.warning("    disable-noteblock-updates: true")
+                    logger.warning("    disable-tripwire-updates: true")
+                    logger.warning("    disable-chorus-plant-updates: true")
+                    logger.warning("========================================")
+
+                    // Notify online ops
+                    server.scheduler.runTask(this, Runnable {
+                        server.onlinePlayers.filter { it.isOp }.forEach { player ->
+                            player.sendMessage(
+                                Component.text("⚠ CharmedChars needs setup! Run /nexosetup to auto-configure Nexo")
+                                    .color(NamedTextColor.GOLD)
+                            )
+                        }
+                    })
+                } else {
+                    logger.info("Nexo configuration found. Ready to use!")
+                }
+            }
+
             else -> {
                 logger.warning("Unknown provider: $providerName")
             }

@@ -2,14 +2,24 @@
 
 CharmedChars now supports **ItemsAdder**, **Oraxen**, and **Nexo** as custom item providers!
 
-## ⚠️ IMPORTANT NOTICE - UNTESTED IMPLEMENTATION
+## ✅ Nexo Integration Status
 
-**This Nexo integration has NOT been tested with a live Nexo instance**, as Nexo requires a premium license that we do not currently have access to. The implementation is based on:
-- Nexo's public API documentation (https://docs.nexomc.com/)
+**Nexo integration has been tested and confirmed working!** This integration provides full compatibility with Nexo for CharmedChars letter/number blocks and pyrite tools.
+
+The implementation uses:
+- Nexo's official API (https://docs.nexomc.com/)
 - Nexo's JavaDocs (https://jd.nexomc.com/)
-- Similar patterns from our tested ItemsAdder and Oraxen integrations
+- Tested and verified on Paper 1.21+ with Nexo 1.16.1
 
-**Please report any issues on GitHub**: https://github.com/badbabywentaway/CharmedChars/issues
+**Known working features:**
+- ✅ Letter and number block placement/breaking
+- ✅ Word scoring with pyrite tools
+- ✅ Custom block mechanics (NoteBlock-based)
+- ✅ Pyrite tool crafting recipes
+- ✅ Auto-setup command (`/nexosetup`)
+- ✅ Texture and model generation
+
+**If you encounter any issues, please report them on GitHub**: https://github.com/badbabywentaway/CharmedChars/issues
 
 ## Requirements
 
@@ -17,6 +27,48 @@ CharmedChars now supports **ItemsAdder**, **Oraxen**, and **Nexo** as custom ite
 - CharmedChars will automatically detect which one you have installed
 - If multiple providers are installed, the plugin will refuse to load
 - **Nexo requires a premium license** from Polymart: https://polymart.org/resource/nexo.6901
+- **Paper/Purpur server required** (Nexo does not support Spigot)
+
+## ⚠️ CRITICAL: Paper Configuration Required
+
+**Before using Nexo with CharmedChars, you MUST configure Paper settings as recommended by Nexo.**
+
+Edit `config/paper-global.yml` and set the following under `block-updates`:
+
+```yaml
+block-updates:
+  disable-chorus-plant-updates: true
+  disable-noteblock-updates: true
+  disable-tripwire-updates: true
+```
+
+### Why This Is Required
+
+Nexo uses NoteBlocks for custom blocks. When these Paper optimizations are disabled:
+- **Performance**: Prevents taxing block update events that Nexo doesn't need
+- **Bug Prevention**: Avoids issues with NoteBlock mechanics and custom block behavior
+- **CharmedChars Compatibility**: Enables reliable word scoring when hitting letter blocks with pyrite tools
+
+**Without these settings:**
+- Letter blocks may rotate unexpectedly when clicked
+- Word scoring may not work reliably
+- Server performance will be degraded
+- Nexo will show warnings in the console on every reload
+
+### How to Apply
+
+1. **Stop your server**
+2. **Edit `config/paper-global.yml`**:
+   ```yaml
+   block-updates:
+     disable-chorus-plant-updates: true
+     disable-noteblock-updates: true
+     disable-tripwire-updates: true
+   ```
+3. **Save the file**
+4. **Start your server**
+
+These are **global settings** and will be logged by Nexo as recommendations if not enabled.
 
 ## Quick Setup (Automatic - Recommended)
 
@@ -43,6 +95,57 @@ If you need to regenerate the configuration:
 ```
 /nexosetup force
 ```
+
+## Block Breaking Behavior
+
+**Nexo's block drop mechanics have been configured and tested to work correctly.**
+
+### Configuration Applied:
+```yaml
+Mechanics:
+  custom_block:
+    type: NOTEBLOCK
+    drop:
+      silktouch: false
+      fortune: false
+      minimal_type: WOODEN    # Requires wooden-tier tools or better
+      best_tool: null         # No tool type restriction
+      loots:
+        - nexo_item: block_id
+```
+
+### Expected Behavior:
+- **minimal_type: WOODEN** = Any wooden-tier-or-above tool should work
+- **best_tool: null** = No restriction on tool type (pickaxes, axes, swords, shovels, hoes all work)
+
+### Comparison to Other Providers:
+
+| Feature | ItemsAdder | Oraxen | Nexo |
+|---------|------------|--------|------|
+| **Breaking Without Tool** | Purple warning, blocked | Breaks, disappears (no drop) | Breaks, disappears (no drop) |
+| **Tool Whitelist** | `_PICKAXE`, `_AXE` wildcards | Explicit materials (14 tools) | Tier-based (any WOODEN+ tool) |
+| **Tool Types Allowed** | All pickaxes, all axes only | All pickaxes, all axes only | All tools (pickaxe/axe/sword/shovel/hoe) |
+| **Copper Tools** | ✓ Auto-included | ✓ Explicitly added | ✓ Works with WOODEN tier |
+
+### Key Limitation:
+
+**Nexo's `best_tool` field appears to only accept a SINGLE tool type**, unlike:
+- ItemsAdder: Uses wildcards (`_PICKAXE`) for all pickaxes
+- Oraxen: Uses explicit list of 14 materials
+
+**Current configuration uses `best_tool: null`**, meaning:
+- ✓ **Intended**: Pickaxes and axes work (like ItemsAdder/Oraxen)
+- ⚠️ **Side effect**: Swords, shovels, and hoes also work (MORE permissive than intended)
+
+**If Nexo supports multiple best_tool values**, the configuration should be updated to restrict to pickaxes and axes only.
+
+### Copper Tools Support:
+
+**Status: WORKING**
+
+Nexo's documentation lists tiers as: `WOODEN, STONE, IRON, GOLDEN, DIAMOND, NETHERITE`
+
+While there's no explicit COPPER tier, copper tools work correctly with `minimal_type: WOODEN` since copper tools meet the wooden-tier-or-above requirement.
 
 ## Nexo vs ItemsAdder/Oraxen
 
@@ -92,36 +195,37 @@ You need to create Nexo items for:
 Create a file in `plugins/Nexo/items/charmedchars_blocks.yml`:
 
 ```yaml
-# Letter block example
+# Letter block example (auto-generated by /nexosetup)
 cyan_a:
-  displayname: "<cyan>A Block"
+  itemname: "<gradient:#00FFFF:#00CED1>A</gradient>"
   material: NOTE_BLOCK
   Pack:
-    generate_model: false
-    model: charmedchars:block/cyan_a
+    generate_model: true
+    parent_model: "block/cube_all"
+    textures:
+      - charmedchars:block/cyan/a
   Mechanics:
-    noteblock:
-      custom_variation: 1
-      hardness: 0.8
+    custom_block:
+      type: NOTEBLOCK
       drop:
-        items:
-          - item: cyan_a
-            probability: 1.0
+        silktouch: false
+        fortune: false
+        minimal_type: WOODEN
+        best_tool: null
+        loots:
+          - nexo_item: cyan_a
 
-# Pyrite tool example
+# Pyrite tool example (auto-generated by /nexosetup)
 pyrite_pickaxe:
-  displayname: "<gold>Pyrite Pickaxe"
+  itemname: "<gradient:#FFD700:#B8860B>Pyrite Pickaxe</gradient>"
   material: GOLDEN_PICKAXE
-  lore:
-    - "<gray>A fool's gold pickaxe"
-    - "<gray>Works like gold for scoring words"
-    - "<gray>Iron-tier durability and stats"
   Pack:
-    generate_model: false
-    model: charmedchars:item/pyrite_pickaxe
+    generate_model: true
+    textures:
+      - charmedchars:item/pyrite/pickaxe
   Mechanics:
-    durability:
-      value: 250
+    tool:
+      durability: 250
 ```
 
 ### Texture Files
@@ -207,7 +311,7 @@ After configuring Nexo:
 2. Run `/nexo reload all`
 3. Test with `/charblock <player> cyan a` to give blocks
 4. Verify the blocks can be placed and used for word formation
-5. **Report any issues** on GitHub if you encounter problems (remember: this is untested!)
+5. **Report any issues** on GitHub if you encounter problems
 
 ## Switching Between Providers
 
@@ -232,11 +336,6 @@ To switch from ItemsAdder/Oraxen to Nexo (or vice versa):
 - Check that Nexo loaded successfully
 - Check server logs for provider initialization messages
 - Look for "Custom Item Provider: Nexo" in logs
-
-**"Nexo integration is untested - please report issues!"**
-- This is a warning, not an error
-- Nexo integration should work, but has not been tested
-- Please report any problems on GitHub
 
 **Blocks not working**
 - Verify Nexo items are created with correct IDs (simple IDs, no namespace!)
@@ -267,9 +366,9 @@ CharmedChars uses the following Nexo API methods:
 CharmedChars handles this automatically by stripping namespaces when needed.
 
 ### Testing Status
-As noted at the top of this guide, **this integration is untested**. If you have a Nexo license and test this:
-- Please report success or failure on GitHub
-- Include Nexo version and any errors
+**This integration has been tested and confirmed working** on Paper 1.21+ with Nexo 1.16.1. If you encounter any issues:
+- Please report them on GitHub
+- Include Nexo version and any error messages
 - Help improve this integration for the community!
 
 ## Resources

@@ -134,7 +134,8 @@ class CustomItemProviderManager(private val plugin: CharmedChars) {
                     messages.add("Using Nexo as custom item provider")
                     plugin.logger.info("========================================")
                     plugin.logger.info("Custom Item Provider: Nexo")
-                    plugin.logger.info("⚠ NOTE: Nexo integration is untested - please report issues!")
+                    plugin.logger.info("⚠ IMPORTANT: Enable Paper block update optimizations!")
+                    plugin.logger.info("See NEXO_SETUP.md for required configuration.")
                     plugin.logger.info("========================================")
                     return InitResult(true, provider, messages)
                 } catch (e: Exception) {

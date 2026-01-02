@@ -2,7 +2,7 @@
 echo ===================================================
 echo    CharmedChars v1.2.0 - Clean Deployment Script
 echo ===================================================
-echo    Deploys to: ItemsAdder Server + Oraxen Test Server
+echo    Deploys to: ItemsAdder + Oraxen + Nexo Test Servers
 echo ===================================================
 echo.
 
@@ -177,13 +177,149 @@ if %ERRORLEVEL% EQU 0 (
     exit /b 1
 )
 
+REM ===================================================
+REM NEXO SERVER DEPLOYMENT
+REM ===================================================
+echo.
+echo [NEXO SERVER] Cleaning and deploying...
+echo.
+
+REM Step 1C: Delete old CharmedChars plugin data (Nexo server)
+echo Step 1C: Cleaning CharmedChars plugin data (Nexo)...
+if exist "c:\Users\steve\Documents\NexoPapermc\plugins\CharmedChars\extracted_pack" (
+    rmdir /s /q "c:\Users\steve\Documents\NexoPapermc\plugins\CharmedChars\extracted_pack"
+    echo [OK] Old extracted_pack deleted
+) else (
+    echo [INFO] No extracted_pack folder found
+)
+
+REM Step 2C: Delete old resource pack ZIP (Nexo server)
+echo Step 2C: Deleting old resource pack ZIP (Nexo)...
+if exist "c:\Users\steve\Documents\NexoPapermc\plugins\CharmedChars\CharmedChars-ResourcePack.zip" (
+    del "c:\Users\steve\Documents\NexoPapermc\plugins\CharmedChars\CharmedChars-ResourcePack.zip"
+    echo [OK] Old resource pack ZIP deleted
+) else (
+    echo [INFO] No resource pack ZIP found
+)
+
+REM Step 3C: Delete old resourcepack folder (Nexo server)
+echo Step 3C: Deleting old resourcepack folder (Nexo)...
+if exist "c:\Users\steve\Documents\NexoPapermc\plugins\CharmedChars\resourcepack" (
+    rmdir /s /q "c:\Users\steve\Documents\NexoPapermc\plugins\CharmedChars\resourcepack"
+    echo [OK] Old resourcepack folder deleted
+) else (
+    echo [INFO] No resourcepack folder found
+)
+
+REM Step 3C-1: Delete old config.yml (Nexo server)
+echo Step 3C-1: Deleting old config.yml (Nexo)...
+if exist "c:\Users\steve\Documents\NexoPapermc\plugins\CharmedChars\config.yml" (
+    del "c:\Users\steve\Documents\NexoPapermc\plugins\CharmedChars\config.yml"
+    echo [OK] Old config.yml deleted - will be regenerated with new defaults
+) else (
+    echo [INFO] No config.yml found
+)
+
+REM Step 3C-2: CRITICAL - Force delete ALL Nexo pack assets
+echo Step 3C-2: Force cleaning ALL Nexo pack assets (CRITICAL)...
+if exist "c:\Users\steve\Documents\NexoPapermc\plugins\Nexo\pack" (
+    rmdir /s /q "c:\Users\steve\Documents\NexoPapermc\plugins\Nexo\pack"
+    echo [OK] Nexo pack folder completely deleted - will be regenerated
+) else (
+    echo [INFO] No Nexo pack folder found
+)
+
+REM Step 3C-3: CRITICAL - Force delete ALL Nexo items configs
+echo Step 3C-3: Force cleaning ALL Nexo items configs (CRITICAL)...
+if exist "c:\Users\steve\Documents\NexoPapermc\plugins\Nexo\items" (
+    rmdir /s /q "c:\Users\steve\Documents\NexoPapermc\plugins\Nexo\items"
+    echo [OK] Nexo items folder completely deleted - will be regenerated
+) else (
+    echo [INFO] No Nexo items folder found
+)
+
+REM Step 3C-4: CRITICAL - Force delete ALL Nexo recipes
+echo Step 3C-4: Force cleaning ALL Nexo recipes (CRITICAL)...
+if exist "c:\Users\steve\Documents\NexoPapermc\plugins\Nexo\recipes" (
+    rmdir /s /q "c:\Users\steve\Documents\NexoPapermc\plugins\Nexo\recipes"
+    echo [OK] Nexo recipes folder completely deleted - will be regenerated
+) else (
+    echo [INFO] No Nexo recipes folder found
+)
+
+REM Step 4C: Clean Nexo cache (if exists)
+echo Step 4C: Cleaning Nexo cache (optional)...
+if exist "c:\Users\steve\Documents\NexoPapermc\plugins\Nexo\OraxenInv" (
+    rmdir /s /q "c:\Users\steve\Documents\NexoPapermc\plugins\Nexo\OraxenInv"
+    echo [OK] Nexo inventory cache deleted
+) else (
+    echo [INFO] No Nexo cache found
+)
+
+REM Step 4C-0: Clean Nexo generated configs
+echo Step 4C-0: Cleaning Nexo generated configs (optional)...
+if exist "c:\Users\steve\Documents\NexoPapermc\plugins\Nexo\items\charmedchars_blocks.yml" (
+    del "c:\Users\steve\Documents\NexoPapermc\plugins\Nexo\items\charmedchars_blocks.yml"
+    echo [OK] Old Nexo charmedchars config deleted
+) else (
+    echo [INFO] No Nexo config found
+)
+
+REM Step 4C-1: Clean old Nexo textures
+echo Step 4C-1: Cleaning old Nexo textures (assets/charmedchars)...
+if exist "c:\Users\steve\Documents\NexoPapermc\plugins\Nexo\pack\assets\charmedchars" (
+    rmdir /s /q "c:\Users\steve\Documents\NexoPapermc\plugins\Nexo\pack\assets\charmedchars"
+    echo [OK] Old Nexo assets/charmedchars textures deleted
+) else (
+    echo [INFO] No old Nexo assets textures found
+)
+
+REM Step 4C-2: Clean old Nexo recipes
+echo Step 4C-2: Cleaning old Nexo recipes...
+if exist "c:\Users\steve\Documents\NexoPapermc\plugins\Nexo\recipes\charmedchars_recipes.yml" (
+    del "c:\Users\steve\Documents\NexoPapermc\plugins\Nexo\recipes\charmedchars_recipes.yml"
+    echo [OK] Old Nexo charmedchars recipes deleted
+) else (
+    echo [INFO] No old Nexo recipes found
+)
+
+REM Step 4C-3: Clean old Nexo block models
+echo Step 4C-3: Cleaning old Nexo block models...
+if exist "c:\Users\steve\Documents\NexoPapermc\plugins\Nexo\pack\assets\charmedchars\models" (
+    rmdir /s /q "c:\Users\steve\Documents\NexoPapermc\plugins\Nexo\pack\assets\charmedchars\models"
+    echo [OK] Old Nexo block models deleted
+) else (
+    echo [INFO] No old Nexo models found
+)
+
+REM Step 5C: Delete old JAR file (Nexo server)
+echo Step 5C: Deleting old JAR (Nexo)...
+if exist "c:\Users\steve\Documents\NexoPapermc\plugins\CharmedChars-*.jar" (
+    del "c:\Users\steve\Documents\NexoPapermc\plugins\CharmedChars-*.jar"
+    echo [OK] Old JAR deleted
+) else (
+    echo [INFO] No old JAR found
+)
+
+REM Step 6C: Copy new JAR (Nexo server)
+echo Step 6C: Copying new JAR to Nexo server (v1.2.0)...
+copy "build\libs\CharmedChars-1.2.0.jar" "c:\Users\steve\Documents\NexoPapermc\plugins\" /Y
+if %ERRORLEVEL% EQU 0 (
+    echo [OK] JAR copied to Nexo server
+) else (
+    echo [ERROR] Failed to copy JAR to Nexo server
+    pause
+    exit /b 1
+)
+
 echo.
 echo ===================================================
 echo [SUCCESS] CharmedChars v1.2.0 deployed successfully!
 echo ===================================================
-echo   Deployed to BOTH servers:
+echo   Deployed to ALL THREE servers:
 echo   - ItemsAdder Server: c:\Users\steve\Documents\Papermc
 echo   - Oraxen Server:     c:\Users\steve\Documents\OraxenPapermc
+echo   - Nexo Server:       c:\Users\steve\Documents\NexoPapermc
 echo ===================================================
 echo.
 echo Next steps - ITEMSADDER SERVER:
@@ -197,6 +333,13 @@ echo Next steps - ORAXEN SERVER:
 echo   1. Restart the Oraxen server
 echo   2. Run: /oraxensetup (auto-generates 128 items + recipes)
 echo   3. Run: /oraxen reload all
+echo   4. Restart again for full effect
+echo   5. Test: /charblock YourName cyan hello
+echo.
+echo Next steps - NEXO SERVER:
+echo   1. Restart the Nexo server
+echo   2. Run: /nexosetup (auto-generates 128 items + recipes)
+echo   3. Run: /nexo reload all
 echo   4. Restart again for full effect
 echo   5. Test: /charblock YourName cyan hello
 echo.

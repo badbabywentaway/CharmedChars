@@ -31,8 +31,8 @@ import org.stephanosbad.charmedChars.integration.NexoSetup
  * Automatically configures Nexo with CharmedChars custom items and recipes.
  * Creates all necessary configuration files and copies textures to Nexo directories.
  *
- * **IMPORTANT NOTE**: This implementation has not been tested with a live Nexo
- * instance as it requires a premium license. Please report any issues on GitHub!
+ * **IMPORTANT**: Nexo integration requires Paper block update optimizations to be enabled.
+ * See NEXO_SETUP.md for required paper-global.yml configuration.
  *
  * Usage:
  * - /nexosetup - Auto-setup Nexo configuration
@@ -79,20 +79,32 @@ class SetupNexoCommand(private val plugin: CharmedChars) : CommandExecutor {
         )
         sender.sendMessage(Component.text(""))
         sender.sendMessage(
-            Component.text("⚠ WARNING: UNTESTED IMPLEMENTATION")
-                .color(NamedTextColor.RED)
+            Component.text("⚠ IMPORTANT: Paper Configuration Required")
+                .color(NamedTextColor.GOLD)
         )
         sender.sendMessage(
-            Component.text("This feature has not been tested with live Nexo")
+            Component.text("Nexo requires Paper block update optimizations!")
                 .color(NamedTextColor.YELLOW)
         )
         sender.sendMessage(
-            Component.text("as it requires a premium license.")
-                .color(NamedTextColor.YELLOW)
+            Component.text("Edit config/paper-global.yml and set:")
+                .color(NamedTextColor.GRAY)
         )
         sender.sendMessage(
-            Component.text("Please report any issues on GitHub!")
-                .color(NamedTextColor.YELLOW)
+            Component.text("  block-updates:")
+                .color(NamedTextColor.GRAY)
+        )
+        sender.sendMessage(
+            Component.text("    disable-noteblock-updates: true")
+                .color(NamedTextColor.GRAY)
+        )
+        sender.sendMessage(
+            Component.text("    disable-tripwire-updates: true")
+                .color(NamedTextColor.GRAY)
+        )
+        sender.sendMessage(
+            Component.text("    disable-chorus-plant-updates: true")
+                .color(NamedTextColor.GRAY)
         )
         sender.sendMessage(Component.text(""))
 

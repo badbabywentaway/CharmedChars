@@ -167,10 +167,14 @@ class NexoSetup(private val plugin: CharmedChars) {
         nexoModelsFolder.mkdirs()
         recipesFolder.mkdirs()
 
-        // Create color-specific texture folders
+        // Create block texture folders (for letter/number/operator blocks)
+        val blockTexturesFolder = File(nexoTexturesFolder, "block")
         listOf("cyan", "magenta", "yellow").forEach { color ->
-            File(nexoTexturesFolder, color).mkdirs()
+            File(blockTexturesFolder, color).mkdirs()
         }
+
+        // Create item texture folder (for pyrite items)
+        File(nexoTexturesFolder, "item/pyrite").mkdirs()
     }
 
     /**
@@ -192,10 +196,17 @@ class NexoSetup(private val plugin: CharmedChars) {
                 config.appendLine("  itemname: \"<gradient:${getGradientColors(color)}>${letter.name}</gradient>\"")
                 config.appendLine("  material: NOTE_BLOCK")
                 config.appendLine("  Pack:")
-                config.appendLine("    generate_model: true")
-                config.appendLine("    parent_model: \"block/cube_all\"")
-                config.appendLine("    textures:")
-                config.appendLine("      - charmedchars:block/$color/${letter.name.lowercase()}")
+                config.appendLine("    model: charmedchars:block/$color/${letter.name.lowercase()}")
+                config.appendLine("  Mechanics:")
+                config.appendLine("    custom_block:")
+                config.appendLine("      type: NOTEBLOCK")
+                config.appendLine("      drop:")
+                config.appendLine("        silktouch: false")
+                config.appendLine("        fortune: false")
+                config.appendLine("        minimal_type: WOODEN")
+                config.appendLine("        best_tool: null")
+                config.appendLine("        loots:")
+                config.appendLine("          - nexo_item: $itemId")
                 config.appendLine()
             }
         }
@@ -203,15 +214,22 @@ class NexoSetup(private val plugin: CharmedChars) {
         // Generate number blocks (10 numbers × 3 colors = 30 items)
         listOf("cyan", "magenta", "yellow").forEach { color ->
             NumericBlock.entries.forEach { number ->
-                val itemId = "${color}_${number.name.lowercase()}"
+                val itemId = "${color}_${number.c}"
                 config.appendLine("$itemId:")
                 config.appendLine("  itemname: \"<gradient:${getGradientColors(color)}>${number.c}</gradient>\"")
                 config.appendLine("  material: NOTE_BLOCK")
                 config.appendLine("  Pack:")
-                config.appendLine("    generate_model: true")
-                config.appendLine("    parent_model: \"block/cube_all\"")
-                config.appendLine("    textures:")
-                config.appendLine("      - charmedchars:block/$color/${number.name.lowercase()}")
+                config.appendLine("    model: charmedchars:block/$color/${number.c}")
+                config.appendLine("  Mechanics:")
+                config.appendLine("    custom_block:")
+                config.appendLine("      type: NOTEBLOCK")
+                config.appendLine("      drop:")
+                config.appendLine("        silktouch: false")
+                config.appendLine("        fortune: false")
+                config.appendLine("        minimal_type: WOODEN")
+                config.appendLine("        best_tool: null")
+                config.appendLine("        loots:")
+                config.appendLine("          - nexo_item: $itemId")
                 config.appendLine()
             }
         }
@@ -224,10 +242,17 @@ class NexoSetup(private val plugin: CharmedChars) {
                 config.appendLine("  itemname: \"<gradient:${getGradientColors(color)}>${operator.charVal}</gradient>\"")
                 config.appendLine("  material: NOTE_BLOCK")
                 config.appendLine("  Pack:")
-                config.appendLine("    generate_model: true")
-                config.appendLine("    parent_model: \"block/cube_all\"")
-                config.appendLine("    textures:")
-                config.appendLine("      - charmedchars:block/$color/${operator.name.lowercase()}")
+                config.appendLine("    model: charmedchars:block/$color/${operator.name.lowercase()}")
+                config.appendLine("  Mechanics:")
+                config.appendLine("    custom_block:")
+                config.appendLine("      type: NOTEBLOCK")
+                config.appendLine("      drop:")
+                config.appendLine("        silktouch: false")
+                config.appendLine("        fortune: false")
+                config.appendLine("        minimal_type: WOODEN")
+                config.appendLine("        best_tool: null")
+                config.appendLine("        loots:")
+                config.appendLine("          - nexo_item: $itemId")
                 config.appendLine()
             }
         }
@@ -249,7 +274,7 @@ class NexoSetup(private val plugin: CharmedChars) {
             config.appendLine("    generate_model: true")
             config.appendLine("    parent_model: \"item/handheld\"")
             config.appendLine("    textures:")
-            config.appendLine("      - charmedchars:item/$id")
+            config.appendLine("      layer0: charmedchars:item/pyrite/$id")
 
             // Add tool properties for pyrite tools
             if (id != "pyrite_ingot") {
@@ -299,23 +324,37 @@ class NexoSetup(private val plugin: CharmedChars) {
     private fun copyTextures() {
         var copiedCount = 0
 
-        // Copy letter textures
+        plugin.logger.info("=== NEXO TEXTURE COPY DEBUG ===")
+        plugin.logger.info("Nexo textures folder: ${nexoTexturesFolder.absolutePath}")
+
+        // Copy letter textures to block subfolder
         listOf("cyan", "magenta", "yellow").forEach { color ->
             LetterBlock.entries.forEach { letter ->
-                val resourcePath = "pack/assets/minecraft/textures/$color/${letter.name.lowercase()}.png"
-                val destFile = File(nexoTexturesFolder, "$color/${letter.name.lowercase()}.png")
+                val resourcePath = "pack/assets/minecraft/textures/block/$color/${letter.name.lowercase()}.png"
+                val destFile = File(nexoTexturesFolder, "block/$color/${letter.name.lowercase()}.png")
+
+                // Only log first file for debugging
+                if (letter.name.lowercase() == "a" && color == "cyan") {
+                    plugin.logger.info("  [CYAN_A DEBUG]")
+                    plugin.logger.info("    Source: $resourcePath")
+                    plugin.logger.info("    Dest:   ${destFile.absolutePath}")
+                }
 
                 if (copyResource(resourcePath, destFile)) {
                     copiedCount++
+                    if (letter.name.lowercase() == "a" && color == "cyan") {
+                        plugin.logger.info("    File exists after copy: ${destFile.exists()}")
+                        plugin.logger.info("    File size: ${destFile.length()} bytes")
+                    }
                 }
             }
         }
 
-        // Copy number textures
+        // Copy number textures to block subfolder
         listOf("cyan", "magenta", "yellow").forEach { color ->
             NumericBlock.entries.forEach { number ->
-                val resourcePath = "pack/assets/minecraft/textures/$color/${number.name.lowercase()}.png"
-                val destFile = File(nexoTexturesFolder, "$color/${number.name.lowercase()}.png")
+                val resourcePath = "pack/assets/minecraft/textures/block/$color/${number.c}.png"
+                val destFile = File(nexoTexturesFolder, "block/$color/${number.c}.png")
 
                 if (copyResource(resourcePath, destFile)) {
                     copiedCount++
@@ -323,11 +362,11 @@ class NexoSetup(private val plugin: CharmedChars) {
             }
         }
 
-        // Copy operator textures
+        // Copy operator textures to block subfolder
         listOf("cyan", "magenta", "yellow").forEach { color ->
             NonAlphaNumBlocks.entries.forEach { operator ->
-                val resourcePath = "pack/assets/minecraft/textures/$color/${operator.name.lowercase()}.png"
-                val destFile = File(nexoTexturesFolder, "$color/${operator.name.lowercase()}.png")
+                val resourcePath = "pack/assets/minecraft/textures/block/$color/${operator.name.lowercase()}.png"
+                val destFile = File(nexoTexturesFolder, "block/$color/${operator.name.lowercase()}.png")
 
                 if (copyResource(resourcePath, destFile)) {
                     copiedCount++
@@ -335,12 +374,10 @@ class NexoSetup(private val plugin: CharmedChars) {
             }
         }
 
-        // Copy pyrite item textures
-        listOf("pyrite_ingot", "pyrite_pickaxe", "pyrite_axe", "pyrite_shovel", "pyrite_hoe").forEach { item ->
-            val resourcePath = "pack/assets/minecraft/textures/item/$item.png"
-            val destFolder = File(nexoTexturesFolder.parentFile, "item")
-            destFolder.mkdirs()
-            val destFile = File(destFolder, "$item.png")
+        // Copy pyrite item textures to item/pyrite subfolder
+        listOf("ingot", "pickaxe", "axe", "shovel", "hoe").forEach { item ->
+            val resourcePath = "pack/assets/minecraft/textures/item/pyrite/$item.png"
+            val destFile = File(nexoTexturesFolder, "item/pyrite/pyrite_$item.png")
 
             if (copyResource(resourcePath, destFile)) {
                 copiedCount++
@@ -359,6 +396,12 @@ class NexoSetup(private val plugin: CharmedChars) {
 
         listOf("cyan", "magenta", "yellow").forEach { color ->
             val colorFolder = File(nexoModelsFolder, color)
+
+            // Delete old model files before generating new ones
+            if (colorFolder.exists()) {
+                colorFolder.listFiles()?.forEach { it.delete() }
+            }
+
             colorFolder.mkdirs()
 
             // Letter blocks
@@ -382,12 +425,12 @@ class NexoSetup(private val plugin: CharmedChars) {
                 {
                   "parent": "block/cube_all",
                   "textures": {
-                    "all": "charmedchars:block/$color/${number.name.lowercase()}"
+                    "all": "charmedchars:block/$color/${number.c}"
                   }
                 }
                 """.trimIndent()
 
-                File(colorFolder, "${number.name.lowercase()}.json").writeText(model)
+                File(colorFolder, "${number.c}.json").writeText(model)
                 modelCount++
             }
 
@@ -437,13 +480,7 @@ class NexoSetup(private val plugin: CharmedChars) {
         val shapelessRecipes = StringBuilder()
         val shapelessFile = File(shapelessFolder, "charmedchars.yml")
 
-        if (shapelessFile.exists()) {
-            shapelessRecipes.append(shapelessFile.readText())
-            if (!shapelessRecipes.endsWith("\n")) {
-                shapelessRecipes.appendLine()
-            }
-        }
-
+        // Don't append to existing file - overwrite it
         shapelessRecipes.appendLine("# CharmedChars Shapeless Recipes")
         shapelessRecipes.appendLine("# Auto-generated by CharmedChars plugin")
         shapelessRecipes.appendLine()
@@ -455,8 +492,10 @@ class NexoSetup(private val plugin: CharmedChars) {
         shapelessRecipes.appendLine("    amount: 1")
         shapelessRecipes.appendLine("  ingredients:")
         shapelessRecipes.appendLine("    A:")
+        shapelessRecipes.appendLine("      amount: 1")
         shapelessRecipes.appendLine("      minecraft_type: IRON_INGOT")
         shapelessRecipes.appendLine("    B:")
+        shapelessRecipes.appendLine("      amount: 1")
         shapelessRecipes.appendLine("      minecraft_type: REDSTONE")
         shapelessRecipes.appendLine()
 
@@ -474,13 +513,7 @@ class NexoSetup(private val plugin: CharmedChars) {
         val shapedRecipes = StringBuilder()
         val shapedFile = File(shapedFolder, "charmedchars.yml")
 
-        if (shapedFile.exists()) {
-            shapedRecipes.append(shapedFile.readText())
-            if (!shapedRecipes.endsWith("\n")) {
-                shapedRecipes.appendLine()
-            }
-        }
-
+        // Don't append to existing file - overwrite it
         shapedRecipes.appendLine("# CharmedChars Shaped Recipes")
         shapedRecipes.appendLine("# Auto-generated by CharmedChars plugin")
         shapedRecipes.appendLine()
@@ -489,60 +522,72 @@ class NexoSetup(private val plugin: CharmedChars) {
         shapedRecipes.appendLine("pyrite_pickaxe:")
         shapedRecipes.appendLine("  result:")
         shapedRecipes.appendLine("    nexo_item: pyrite_pickaxe")
+        shapedRecipes.appendLine("    amount: 1")
         shapedRecipes.appendLine("  ingredients:")
         shapedRecipes.appendLine("    P:")
+        shapedRecipes.appendLine("      amount: 3")
         shapedRecipes.appendLine("      nexo_item: pyrite_ingot")
         shapedRecipes.appendLine("    S:")
+        shapedRecipes.appendLine("      amount: 2")
         shapedRecipes.appendLine("      minecraft_type: STICK")
         shapedRecipes.appendLine("  shape:")
         shapedRecipes.appendLine("    - PPP")
-        shapedRecipes.appendLine("    - _S_")
-        shapedRecipes.appendLine("    - _S_")
+        shapedRecipes.appendLine("    - ' S '")
+        shapedRecipes.appendLine("    - ' S '")
         shapedRecipes.appendLine()
 
         // Pyrite axe
         shapedRecipes.appendLine("pyrite_axe:")
         shapedRecipes.appendLine("  result:")
         shapedRecipes.appendLine("    nexo_item: pyrite_axe")
+        shapedRecipes.appendLine("    amount: 1")
         shapedRecipes.appendLine("  ingredients:")
         shapedRecipes.appendLine("    P:")
+        shapedRecipes.appendLine("      amount: 3")
         shapedRecipes.appendLine("      nexo_item: pyrite_ingot")
         shapedRecipes.appendLine("    S:")
+        shapedRecipes.appendLine("      amount: 2")
         shapedRecipes.appendLine("      minecraft_type: STICK")
         shapedRecipes.appendLine("  shape:")
-        shapedRecipes.appendLine("    - PP_")
-        shapedRecipes.appendLine("    - PS_")
-        shapedRecipes.appendLine("    - _S_")
+        shapedRecipes.appendLine("    - 'PP '")
+        shapedRecipes.appendLine("    - 'PS '")
+        shapedRecipes.appendLine("    - ' S '")
         shapedRecipes.appendLine()
 
         // Pyrite shovel
         shapedRecipes.appendLine("pyrite_shovel:")
         shapedRecipes.appendLine("  result:")
         shapedRecipes.appendLine("    nexo_item: pyrite_shovel")
+        shapedRecipes.appendLine("    amount: 1")
         shapedRecipes.appendLine("  ingredients:")
         shapedRecipes.appendLine("    P:")
+        shapedRecipes.appendLine("      amount: 1")
         shapedRecipes.appendLine("      nexo_item: pyrite_ingot")
         shapedRecipes.appendLine("    S:")
+        shapedRecipes.appendLine("      amount: 2")
         shapedRecipes.appendLine("      minecraft_type: STICK")
         shapedRecipes.appendLine("  shape:")
-        shapedRecipes.appendLine("    - _P_")
-        shapedRecipes.appendLine("    - _S_")
-        shapedRecipes.appendLine("    - _S_")
+        shapedRecipes.appendLine("    - ' P '")
+        shapedRecipes.appendLine("    - ' S '")
+        shapedRecipes.appendLine("    - ' S '")
         shapedRecipes.appendLine()
 
         // Pyrite hoe
         shapedRecipes.appendLine("pyrite_hoe:")
         shapedRecipes.appendLine("  result:")
         shapedRecipes.appendLine("    nexo_item: pyrite_hoe")
+        shapedRecipes.appendLine("    amount: 1")
         shapedRecipes.appendLine("  ingredients:")
         shapedRecipes.appendLine("    P:")
+        shapedRecipes.appendLine("      amount: 2")
         shapedRecipes.appendLine("      nexo_item: pyrite_ingot")
         shapedRecipes.appendLine("    S:")
+        shapedRecipes.appendLine("      amount: 2")
         shapedRecipes.appendLine("      minecraft_type: STICK")
         shapedRecipes.appendLine("  shape:")
-        shapedRecipes.appendLine("    - PP_")
-        shapedRecipes.appendLine("    - _S_")
-        shapedRecipes.appendLine("    - _S_")
+        shapedRecipes.appendLine("    - 'PP '")
+        shapedRecipes.appendLine("    - ' S '")
+        shapedRecipes.appendLine("    - ' S '")
         shapedRecipes.appendLine()
 
         shapedFile.writeText(shapedRecipes.toString())
@@ -591,8 +636,9 @@ If you need to regenerate this configuration:
 
 ---
 Generated by CharmedChars v${plugin.description.version}
-**IMPORTANT**: This is an untested implementation as CharmedChars developers
-do not have a Nexo license. Please report any issues on GitHub!
+**IMPORTANT**: Nexo integration requires Paper block update optimizations to be enabled.
+See NEXO_SETUP.md in the CharmedChars GitHub repository for configuration instructions.
+Report any issues on GitHub!
         """.trimIndent()
 
         File(nexoFolder, "CharmedChars_README.txt").writeText(readme)
