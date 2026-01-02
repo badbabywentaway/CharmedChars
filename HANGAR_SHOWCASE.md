@@ -256,9 +256,16 @@ bastion-reward:
 
 ## Version Information
 
-**Current Version**: 1.2.0
+**Current Version**: 1.3.0
 
 **Latest Updates**:
+- **v1.3.0**: Nexo Integration & Fortune Enchantment - Complete three-provider support plus gameplay improvements
+  - **NEW**: Full Nexo integration as third custom item provider option
+  - **NEW**: Fortune enchantment now correctly boosts letter block drop rates
+  - Copper tool support for Oraxen (Minecraft 1.21.9+)
+  - Universal 256x256 textures for all providers
+  - Fixed Oraxen invisible block issue
+  - Enhanced config generation system
 - **v1.2.0**: Oraxen compatibility - Full support for Oraxen as alternative to ItemsAdder
   - **IMPORTANT**: Both ItemsAdder and Oraxen are premium plugins requiring purchase
   - Custom item provider abstraction layer

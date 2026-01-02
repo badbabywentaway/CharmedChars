@@ -1,5 +1,146 @@
 # CharmedChars Version History
 
+## Version 1.3.0 - Nexo Integration & Fortune Enchantment Support
+
+### Release Date
+2026-01-01
+
+### Overview
+Major feature release adding full Nexo integration as a third custom item provider option, Fortune enchantment support for drop rate bonuses, copper tool compatibility for Oraxen, and universal 256x256 texture support for all providers.
+
+### Changes
+
+#### **New Features** ⭐
+
+**Nexo Support - Third Custom Item Provider Option**
+- **Full Nexo Integration**: Complete support for Nexo as an alternative to ItemsAdder or Oraxen
+- **Paper Configuration Requirements**: Automatically generates Paper-compatible configuration files
+- **Auto-Setup Command**: `/nexosetup` automatically configures all 128 custom items
+- **Block Model Generation**: Generates proper Nexo block model configurations
+- **Texture Management**: Automatically copies all 128 texture files to Nexo's resource pack folder
+- **Recipe Generation**: Creates all pyrite crafting recipes in Nexo format
+- **Force Flag**: `/nexosetup force` overwrites existing configurations
+- **File**: `src/main/kotlin/org/stephanosbad/charmedChars/integration/NexoSetup.kt`
+- **Command**: `src/main/kotlin/org/stephanosbad/charmedChars/commands/SetupNexoCommand.kt`
+- **Provider**: `src/main/kotlin/org/stephanosbad/charmedChars/integration/NexoProvider.kt`
+
+**Fortune Enchantment Support** 🎯
+- **Critical Fix**: Fortune enchantment now correctly increases letter block drop rates
+- **Drop Rate Scaling**: Fortune I/II/III now properly applies multipliers to drop chances
+- **Compatibility**: Works alongside existing Looting enchantment bonuses
+- **File**: `src/main/kotlin/org/stephanosbad/charmedChars/items/ItemManager.kt`
+
+**Copper Tool Support for Oraxen** 🔧
+- **Minecraft 1.21.9+ Support**: Added copper tools to Oraxen break whitelist
+- **Tool Types**: All copper pickaxes and axes now work with letter blocks
+- **Documentation**: Updated README and setup guides with copper tool information
+- **Provider Behavior Differences**: Comprehensive documentation of ItemsAdder vs Oraxen vs Nexo behavior
+
+**Universal 256x256 Texture System** 🎨
+- **Cross-Provider Compatibility**: All textures downscaled to 256x256 for universal support
+- **Oraxen 1.203+ Compatibility**: Meets Oraxen's texture resolution requirements
+- **Consistent Experience**: Same visual quality across all three providers
+- **Python Script**: `downscale_textures_for_oraxen.py` for automated texture conversion
+- **Dual Texture Sets**: Maintains both 512x512 (ItemsAdder/Nexo) and 256x256 (Oraxen) versions
+
+#### **Bug Fixes** 🐛
+
+**Fixed Fortune Enchantment Detection**
+- **Problem**: Fortune enchantment on tools was not being detected, so drop rates weren't increased
+- **Impact**: Players using Fortune tools received standard drop rates instead of boosted rates
+- **Fix**: Added proper Fortune enchantment detection in drop calculation logic
+- **File**: `src/main/kotlin/org/stephanosbad/charmedChars/items/ItemManager.kt`
+- **Result**: Fortune I/II/III now correctly apply their respective multipliers
+
+**Fixed Oraxen Invisible Block Issue**
+- **Problem**: Breaking Oraxen letter blocks could sometimes result in invisible blocks
+- **Impact**: Players experienced visual glitches after breaking blocks
+- **Fix**: Improved block break event handling for Oraxen provider
+- **Note**: This commit was later reverted and fixed with a different approach
+
+**Fixed Config Generation**
+- **Problem**: Plugin wasn't generating complete default config on first run
+- **Impact**: New installations had incomplete configuration files
+- **Fix**: ConfigManager now properly copies full default config from resources
+- **File**: `src/main/kotlin/org/stephanosbad/charmedChars/utility/ConfigManager.kt`
+- **Result**: First-time setup now generates complete config.yml with all default values
+
+#### **Documentation Updates** 📝
+
+**Comprehensive Multi-Provider Documentation**
+- **NEXO_SETUP.md**: NEW - Complete Nexo setup guide with installation instructions
+- **README.md**: Updated with Nexo references and copper tool information
+- **HANGAR_SHOWCASE.md**: Updated with three-provider support details
+- **ORAXEN_SETUP.md**: Added copper tool support information
+- **PLAY_INSTRUCTIONS.md**: Updated with Fortune enchantment information
+
+**New Documentation Files**:
+- `NEXO_SETUP.md` - Complete Nexo setup guide
+- `DEPLOY_AND_TEST.md` - Development deployment workflow
+
+### Impact
+
+**Compatibility**
+- **100% Backward Compatible**: Existing ItemsAdder and Oraxen servers work without changes
+- **No Breaking Changes**: All existing commands, features, and APIs unchanged
+- **No Database Changes**: Structure database format unchanged
+- **No Config Changes**: Existing config.yml files remain valid
+
+**Server Owner Benefits**
+- **Three Provider Options**: Choose between ItemsAdder, Oraxen, or Nexo
+- **Fortune Enchantment**: Players can now use Fortune tools for better drop rates
+- **Copper Tools**: Minecraft 1.21.9+ servers can use new copper tools (Oraxen)
+- **Consistent Textures**: All providers now use compatible texture resolutions
+
+### Files Modified
+
+**Core Integration Layer**:
+- `NexoProvider.kt` - NEW: Nexo implementation
+- `NexoSetup.kt` - NEW: Nexo setup command
+- `SetupNexoCommand.kt` - NEW: Command handler
+- `CustomItemProviderManager.kt` - Updated for Nexo
+- `OraxenSetup.kt` - Copper tool support
+
+**Gameplay Systems**:
+- `ItemManager.kt` - Fortune enchantment support
+- `BastionNumberGameListener.kt` - Enhanced validation
+- `FortressNumberGameListener.kt` - Enhanced validation
+
+**Configuration**:
+- `ConfigManager.kt` - Improved config generation
+- `ConfigDataHandler.kt` - Enhanced data handling
+- `config.yml` - Updated default configuration
+
+**Documentation**:
+- `NEXO_SETUP.md` - NEW: Nexo setup guide
+- `DEPLOY_AND_TEST.md` - NEW: Development workflow
+- `VERSION.md` - This file
+
+### Upgrade Notes
+
+**From v1.2.0**:
+1. Download CharmedChars-1.3.0.jar
+2. Replace old JAR in `plugins/` folder
+3. Restart server
+4. Fortune enchantment will now work on tools
+
+**Switching to Nexo**:
+1. Remove existing provider plugin
+2. Install Nexo plugin
+3. Install CharmedChars-1.3.0.jar
+4. Run `/nexosetup`
+5. Run `/nexo reload`
+6. Restart server
+
+### Development Notes
+
+**AI-Assisted Development**:
+- Nexo integration developed with assistance from Claude (Anthropic)
+- Fortune enchantment fix implemented with AI guidance
+- All AI contributions include Co-Authored-By attribution in git commits
+
+---
+
 ## Version 1.2.0 - Oraxen Compatibility
 
 ### Release Date
