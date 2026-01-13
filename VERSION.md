@@ -1,5 +1,118 @@
 # CharmedChars Version History
 
+## Version 1.3.2 - Oraxen Compatibility & Behavior Consistency
+
+### Release Date
+2026-01-13
+
+### Overview
+Compatibility release adding Oraxen support for number scoring and ensuring consistent block behavior across all three providers. Number blocks now work identically to letter blocks, with proper tool checking and item dropping in all dimensions.
+
+### Changes
+
+#### **Critical Fixes** 🐛
+
+**Fixed Number Scoring on Oraxen (PlayerInteractEvent Support)**
+- **Problem**: Number scoring only used BlockDamageEvent, but Oraxen works better with PlayerInteractEvent for custom NoteBlocks
+- **Impact**: Number blocks didn't score on Oraxen servers while letter blocks worked fine
+- **Root Cause**: Letter spelling used BOTH PlayerInteractEvent and BlockDamageEvent, but number scoring only used BlockDamageEvent
+- **Fix**: Added PlayerInteractEvent handler to both number game listeners matching letter system
+- **Changes**:
+  - Added `onInteractNumberBlock()` method handling LEFT_CLICK_BLOCK (primary, Oraxen-compatible)
+  - Kept `onNumberBlockDamage()` method for Nexo compatibility (Paper block updates disabled)
+  - Extracted shared logic into `processNumberSequenceScoring()` method
+- **Files**: `FortressNumberGameListener.kt`, `BastionNumberGameListener.kt`
+- **Result**: Number scoring now works on all three providers (ItemsAdder, Oraxen, Nexo)
+
+**Number Blocks Drop in Overworld/End**
+- **Problem**: Number blocks only functioned in the Nether, causing confusion in other dimensions
+- **Impact**: Players hitting 3-digit sequences in Overworld/End would see no feedback
+- **Fix**: Added dimension check AFTER sequence detection to drop blocks as items with feedback message
+- **Behavior**:
+  - Overworld/End: "Number blocks can only be used in the Nether! Blocks dropped."
+  - Nether (outside fortress/bastion): "Number sequence detected, but you're not in a fortress or bastion! Blocks dropped."
+  - Nether (in fortress/bastion): Normal game mechanics (rewards/explosion/feedback)
+- **Files**: `FortressNumberGameListener.kt:130-156`
+- **Result**: Number blocks now recoverable like letter blocks when used outside intended location
+
+**Consistent Block Breaking Behavior Across Providers**
+- **Problem**: Number blocks always cancelled BlockBreakEvent, making them unbreakable with non-gold tools
+- **Impact**: Players couldn't break misplaced number blocks with correct tools (pickaxe/axe) like they could with letter blocks
+- **Fix**: Removed `event.isCancelled = true` to match letter block behavior
+- **Behavior by Provider**:
+  - **ItemsAdder**: Purple warning, prevents breaking with wrong tools (protected)
+  - **Oraxen**: Block breaks according to tool whitelist (drops if correct tool, vanishes if wrong)
+  - **Nexo**: Block breaks according to tool whitelist (drops if correct tool, vanishes if wrong)
+- **Files**: `FortressNumberGameListener.kt:333-350`, `BastionNumberGameListener.kt:290-307`
+- **Result**: Number blocks behave identically to letter blocks across all providers
+
+#### **Code Quality** 📝
+
+**Event Handler Architecture Matches Letter System**
+- Both number listeners now use dual event handlers like letter spelling
+- Shared scoring logic in `processNumberSequenceScoring()` method
+- Consistent debug logging across all event handlers
+- Provider abstraction layer used consistently
+
+**Comprehensive Debug Logging**
+- Added event fire detection logs to diagnose provider-specific issues
+- Logs show which event triggered (PlayerInteractEvent vs BlockDamageEvent)
+- Tool and block type logged at event entry points
+- Sequence detection progress logged
+
+### Impact
+
+**Compatibility**
+- **100% Backward Compatible**: Existing servers work without changes
+- **No Database Changes**: Structure database format unchanged
+- **No Config Changes**: Existing config.yml files remain valid
+- **No Breaking Changes**: All commands and features unchanged
+
+**Gameplay Improvements**
+- Number scoring now works on Oraxen servers (previously broken)
+- Number blocks recoverable in Overworld/End (no permanent loss)
+- Consistent breaking behavior with correct tools (pickaxe/axe)
+- Identical user experience between letter and number systems
+
+### Files Modified
+
+**Number Game Listeners**:
+- `FortressNumberGameListener.kt` - PlayerInteractEvent support, dimension handling, break behavior
+- `BastionNumberGameListener.kt` - PlayerInteractEvent support, dimension handling, break behavior
+
+**Version & Deployment**:
+- `gradle.properties` - Version bump to 1.3.2
+- `DEPLOY_CLEAN_JAR.bat` - Updated version and release notes
+- `README.md` - Updated version reference
+- `VERSION.md` - This file
+
+### Upgrade Notes
+
+**From v1.3.1**:
+1. Download CharmedChars-1.3.2.jar
+2. Replace old JAR in `plugins/` folder
+3. Restart server
+4. Number scoring will now work on Oraxen
+5. Number blocks can be broken with correct tools
+
+**Oraxen Users**:
+- Critical fix - number scoring now works identically to letter spelling
+- Use PlayerInteractEvent (left-click) for immediate scoring
+- Blocks drop as items in Overworld/End for recovery
+
+**All Providers**:
+- Number blocks can now be broken with correct tools per provider config
+- Matches letter block behavior exactly
+
+### Development Notes
+
+**AI-Assisted Development**:
+- All compatibility fixes developed with assistance from Claude (Anthropic)
+- Event handler architecture improvements guided by AI analysis
+- All AI contributions include Co-Authored-By attribution in git commits
+
+---
+
 ## Version 1.3.1 - Critical Number Scoring Fix
 
 ### Release Date

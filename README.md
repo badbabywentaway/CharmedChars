@@ -266,7 +266,7 @@ cd CharmedChars
 ./gradlew buildWithVersion
 ```
 
-Output: `build/libs/CharmedChars-1.3.1.jar`
+Output: `build/libs/CharmedChars-1.3.2.jar`
 
 **Note**: You still need to obtain ItemsAdder separately - it cannot be built from source as it is proprietary.
 
@@ -274,7 +274,7 @@ Output: `build/libs/CharmedChars-1.3.1.jar`
 
 ## Version
 
-Current Version: **1.3.1**
+Current Version: **1.3.2**
 
 Run `/version` in-game or `./gradlew version` to display version information.
 

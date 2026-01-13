@@ -28,8 +28,10 @@ import org.bukkit.block.data.type.NoteBlock
 import org.bukkit.event.EventHandler
 import org.bukkit.event.EventPriority
 import org.bukkit.event.Listener
+import org.bukkit.event.block.Action
 import org.bukkit.event.block.BlockBreakEvent
 import org.bukkit.event.block.BlockDamageEvent
+import org.bukkit.event.player.PlayerInteractEvent
 import org.bukkit.inventory.ItemStack
 import org.stephanosbad.charmedChars.CharmedChars
 import org.stephanosbad.charmedChars.database.StructureDatabase
@@ -52,22 +54,56 @@ class FortressNumberGameListener(
 ) : Listener {
 
     /**
-     * Handles block damage (hits) to execute number sequence scoring
+     * Handles left-clicking number blocks for sequence scoring (Oraxen compatibility)
      *
-     * When a player hits a number block with a valid tool in a fortress,
-     * this executes the full scoring logic including rewards, explosions, or feedback.
-     * This matches the letter spelling system where scoring happens on hit, not break.
+     * PlayerInteractEvent fires immediately when a player left-clicks a block,
+     * making it more reliable than BlockDamageEvent for Oraxen custom blocks.
+     * This matches the letter spelling system's primary scoring trigger.
+     */
+    @EventHandler(priority = EventPriority.LOWEST, ignoreCancelled = false)
+    fun onInteractNumberBlock(event: PlayerInteractEvent) {
+        // Only care about left-clicking blocks
+        if (event.action != Action.LEFT_CLICK_BLOCK) {
+            return
+        }
+
+        val block = event.clickedBlock ?: return
+        plugin.logger.info("[DEBUG] PlayerInteractEvent (LEFT_CLICK) fired! Block: ${block.type.name}, Tool: ${event.player.inventory.itemInMainHand.type.name}")
+
+        processNumberSequenceScoring(event.player, block)
+    }
+
+    /**
+     * Handles block damage (hits) to execute number sequence scoring (Nexo compatibility)
+     *
+     * BlockDamageEvent fires when a player starts breaking a block (left-click and hold).
+     * This is more reliable than PlayerInteractEvent when noteblock updates are disabled.
+     * Works better with Nexo when Paper's block-updates.disable-noteblock-updates is enabled.
      */
     @EventHandler(priority = EventPriority.LOWEST, ignoreCancelled = false)
     fun onNumberBlockDamage(event: BlockDamageEvent) {
-        val player = event.player
-        val block = event.block
-        val location = block.location
+        plugin.logger.info("[DEBUG] BlockDamageEvent fired! Block: ${event.block.type.name}, Tool: ${event.player.inventory.itemInMainHand.type.name}, Cancelled: ${event.isCancelled}")
 
-        // Check if player is in the Nether
-        if (!location.world.environment.name.equals("NETHER", ignoreCase = true)) {
-            return
-        }
+        processNumberSequenceScoring(event.player, event.block)
+    }
+
+    /**
+     * Core number sequence detection and scoring logic
+     *
+     * This is the main scoring logic used by both PlayerInteractEvent and BlockDamageEvent:
+     * 1. Checks if player is in the Nether
+     * 2. Validates the player is using a gold or pyrite tool
+     * 3. Checks if the hit block is a number block
+     * 4. Scans for a 3-digit sequence in all four cardinal directions
+     * 5. Determines structure type (fortress or bastion)
+     * 6. Compares sequence against structure's secret number
+     * 7. Awards rewards, triggers explosions, or provides feedback
+     *
+     * @param player The player who hit the block
+     * @param block The block that was hit
+     */
+    private fun processNumberSequenceScoring(player: org.bukkit.entity.Player, block: Block) {
+        val location = block.location
 
         // Check if player is using a gold or pyrite tool
         val hand = player.inventory.itemInMainHand
@@ -96,7 +132,37 @@ class FortressNumberGameListener(
         }
         plugin.logger.info("[DEBUG] Found sequence: ${sequence.number}")
 
-        // Check structure types
+        // Check if player is in the Nether - if not, just drop blocks
+        if (!location.world.environment.name.equals("NETHER", ignoreCase = true)) {
+            plugin.logger.info("[DEBUG] Not in Nether (world: ${location.world.environment.name}), dropping blocks as items")
+
+            // Drop all blocks as items
+            val provider = plugin.customItemProviderManager.getProvider()
+            for (block in sequence.blocks) {
+                if (provider != null) {
+                    val customBlockInfo = provider.getCustomBlock(block)
+                    if (customBlockInfo != null) {
+                        val itemStack = provider.getItemStack(customBlockInfo.namespacedId)
+                        if (itemStack != null) {
+                            location.world.dropItemNaturally(block.location, itemStack)
+                        }
+                        provider.removeCustomBlock(block)
+                    } else {
+                        block.type = Material.AIR
+                    }
+                } else {
+                    block.type = Material.AIR
+                }
+            }
+
+            player.sendMessage(
+                Component.text("Number blocks can only be used in the Nether! Blocks dropped.")
+                    .color(NamedTextColor.YELLOW)
+            )
+            return
+        }
+
+        // Now we know we're in the Nether - check structure types
         val chunk = location.chunk
         val registry = Registry.STRUCTURE
         val fortress = registry.get(NamespacedKey.minecraft("fortress"))
@@ -303,23 +369,29 @@ class FortressNumberGameListener(
     }
 
     /**
-     * Prevents number blocks from being broken
+     * Handles number block breaking
      *
-     * Number blocks should only be removed by the scoring system when hit with a valid tool.
-     * This handler prevents them from being broken normally to avoid item duplication or
-     * breaking them without valid tools.
+     * Number blocks are primarily scored via PlayerInteractEvent/BlockDamageEvent.
+     * This handler does NOT cancel the break event, allowing ItemsAdder/Oraxen/Nexo
+     * to handle tool checking and dropping for non-gold/non-pyrite tools.
+     *
+     * If scoring already removed the blocks, this will harmlessly try to break AIR.
+     * If using wrong tool, provider handles dropping based on tool whitelist.
      */
     @EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)
     fun onNumberBlockBreak(event: BlockBreakEvent) {
+        plugin.logger.info("[DEBUG] BlockBreakEvent fired! Block: ${event.block.type.name}, Tool: ${event.player.inventory.itemInMainHand.type.name}")
+
         val block = event.block
 
         // Check if this is a number block
         val digit = getNumberFromBlock(block)
 
-        // If it's a number block, cancel the break event
-        // Scoring is handled by onNumberBlockDamage
         if (digit != null) {
-            event.isCancelled = true
+            plugin.logger.info("[DEBUG] Number block detected in BlockBreakEvent (digit: $digit) - allowing break to proceed so provider can handle tool checking")
+            // Scoring was already handled by PlayerInteractEvent/BlockDamageEvent
+            // Allow the break to proceed (blocks already removed by processNumberSequenceScoring if valid sequence)
+            // If not valid tool or no sequence, let ItemsAdder/Oraxen/Nexo handle breaking/dropping
         }
     }
 
