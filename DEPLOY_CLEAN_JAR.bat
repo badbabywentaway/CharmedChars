@@ -1,6 +1,6 @@
 @echo off
 echo ===================================================
-echo    CharmedChars v1.2.0 - Clean Deployment Script
+echo    CharmedChars v1.3.1 - Clean Deployment Script
 echo ===================================================
 echo    Deploys to: ItemsAdder + Oraxen + Nexo Test Servers
 echo ===================================================
@@ -68,8 +68,8 @@ if exist "c:\Users\steve\Documents\Papermc\plugins\CharmedChars-*.jar" (
 )
 
 REM Step 6A: Copy new JAR (ItemsAdder server)
-echo Step 6A: Copying new JAR to ItemsAdder server (v1.2.0)...
-copy "build\libs\CharmedChars-1.2.0.jar" "c:\Users\steve\Documents\Papermc\plugins\" /Y
+echo Step 6A: Copying new JAR to ItemsAdder server (v1.3.1)...
+copy "build\libs\CharmedChars-1.3.1.jar" "c:\Users\steve\Documents\Papermc\plugins\" /Y
 if %ERRORLEVEL% EQU 0 (
     echo [OK] JAR copied to ItemsAdder server
 ) else (
@@ -167,8 +167,8 @@ if exist "c:\Users\steve\Documents\OraxenPapermc\plugins\CharmedChars-*.jar" (
 )
 
 REM Step 6B: Copy new JAR (Oraxen server)
-echo Step 6B: Copying new JAR to Oraxen server (v1.2.0)...
-copy "build\libs\CharmedChars-1.2.0.jar" "c:\Users\steve\Documents\OraxenPapermc\plugins\" /Y
+echo Step 6B: Copying new JAR to Oraxen server (v1.3.1)...
+copy "build\libs\CharmedChars-1.3.1.jar" "c:\Users\steve\Documents\OraxenPapermc\plugins\" /Y
 if %ERRORLEVEL% EQU 0 (
     echo [OK] JAR copied to Oraxen server
 ) else (
@@ -302,8 +302,8 @@ if exist "c:\Users\steve\Documents\NexoPapermc\plugins\CharmedChars-*.jar" (
 )
 
 REM Step 6C: Copy new JAR (Nexo server)
-echo Step 6C: Copying new JAR to Nexo server (v1.2.0)...
-copy "build\libs\CharmedChars-1.2.0.jar" "c:\Users\steve\Documents\NexoPapermc\plugins\" /Y
+echo Step 6C: Copying new JAR to Nexo server (v1.3.1)...
+copy "build\libs\CharmedChars-1.3.1.jar" "c:\Users\steve\Documents\NexoPapermc\plugins\" /Y
 if %ERRORLEVEL% EQU 0 (
     echo [OK] JAR copied to Nexo server
 ) else (
@@ -314,7 +314,7 @@ if %ERRORLEVEL% EQU 0 (
 
 echo.
 echo ===================================================
-echo [SUCCESS] CharmedChars v1.2.0 deployed successfully!
+echo [SUCCESS] CharmedChars v1.3.1 deployed successfully!
 echo ===================================================
 echo   Deployed to ALL THREE servers:
 echo   - ItemsAdder Server: c:\Users\steve\Documents\Papermc
@@ -359,9 +359,28 @@ echo   - Break number sequences with gold/pyrite tools
 echo   - Guess 3-digit codes for rewards
 echo.
 echo ===================================================
-echo Version: 1.2.0
+echo Version: 1.3.1
 echo ===================================================
-echo NEW in 1.2.0:
-echo   - [Changes to be documented]
+echo NEW in 1.3.1:
+echo   - CRITICAL: Number scoring now happens on HIT (like letters)
+echo   - Fixed hardcoded namespace bug in number recognition
+echo   - Number blocks now work with all providers (ItemsAdder/Oraxen/Nexo)
+echo   - Scoring immediately executes on hit, not break
+echo   - Prevents item duplication from breaking number blocks
+echo   - Consistent behavior between letter and number systems
+echo.
+echo Previous 1.3.0 features:
+echo   - Full Nexo support with /nexosetup command
+echo   - Fortune enchantment support on all tools
+echo   - Copper tool support (Oraxen only)
+echo   - Provider abstraction layer improvements
+echo.
+echo IMPORTANT - Nexo users:
+echo   Must enable Paper block update optimizations!
+echo   Edit config/paper-global.yml:
+echo     block-updates:
+echo       disable-noteblock-updates: true
+echo       disable-tripwire-updates: true
+echo       disable-chorus-plant-updates: true
 echo ===================================================
 pause

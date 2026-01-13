@@ -17,7 +17,6 @@
  */
 package org.stephanosbad.charmedChars.listeners
 
-import dev.lone.itemsadder.api.CustomBlock
 import net.kyori.adventure.text.Component
 import net.kyori.adventure.text.format.NamedTextColor
 import net.kyori.adventure.text.format.TextDecoration
@@ -30,6 +29,7 @@ import org.bukkit.event.EventHandler
 import org.bukkit.event.EventPriority
 import org.bukkit.event.Listener
 import org.bukkit.event.block.BlockBreakEvent
+import org.bukkit.event.block.BlockDamageEvent
 import org.bukkit.inventory.ItemStack
 import org.stephanosbad.charmedChars.CharmedChars
 import org.stephanosbad.charmedChars.database.StructureDatabase
@@ -52,22 +52,17 @@ class FortressNumberGameListener(
 ) : Listener {
 
     /**
-     * Handles block breaking to detect number sequences in fortresses
+     * Handles block damage (hits) to execute number sequence scoring
      *
-     * This method checks if:
-     * 1. The broken block is a number block
-     * 2. The player is in a Nether Fortress
-     * 3. There are 2 more number blocks adjacent (forming a 3-digit sequence)
-     * 4. The sequence matches the fortress's assigned number
-     * 5. Rewards haven't been dispensed yet
-     *
-     * If all conditions are met, gives 12 blaze rods and marks rewards as dispensed.
+     * When a player hits a number block with a valid tool in a fortress,
+     * this executes the full scoring logic including rewards, explosions, or feedback.
+     * This matches the letter spelling system where scoring happens on hit, not break.
      */
-    @EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)
-    fun onNumberBlockBreak(event: BlockBreakEvent) {
+    @EventHandler(priority = EventPriority.LOWEST, ignoreCancelled = false)
+    fun onNumberBlockDamage(event: BlockDamageEvent) {
         val player = event.player
-        val brokenBlock = event.block
-        val location = brokenBlock.location
+        val block = event.block
+        val location = block.location
 
         // Check if player is in the Nether
         if (!location.world.environment.name.equals("NETHER", ignoreCase = true)) {
@@ -77,19 +72,29 @@ class FortressNumberGameListener(
         // Check if player is using a gold or pyrite tool
         val hand = player.inventory.itemInMainHand
         if (!isValidTool(hand)) {
+            plugin.logger.info("[DEBUG] Not valid tool: ${hand.type.name}")
             return
         }
 
-        // Check if the broken block is a number block
-        val firstDigit = getNumberFromBlock(brokenBlock) ?: return
+        // Check if the hit block is a number block
+        plugin.logger.info("[DEBUG] Checking block: ${block.type.name} at ${block.location}")
+        val firstDigit = getNumberFromBlock(block)
+        if (firstDigit == null) {
+            plugin.logger.info("[DEBUG] Not a number block or getNumberFromBlock returned null")
+            return
+        }
+        plugin.logger.info("[DEBUG] Found number block: $firstDigit")
 
         // Check for 3-digit sequence first (before checking structure)
-        val sequence = findThreeDigitSequence(brokenBlock, firstDigit)
+        plugin.logger.info("[DEBUG] Looking for 3-digit sequence starting with $firstDigit")
+        val sequence = findThreeDigitSequence(block, firstDigit)
 
         // If no sequence found, let the event proceed normally
         if (sequence == null) {
+            plugin.logger.info("[DEBUG] No 3-digit sequence found - need 3 adjacent number blocks in a straight line")
             return
         }
+        plugin.logger.info("[DEBUG] Found sequence: ${sequence.number}")
 
         // Check structure types
         val chunk = location.chunk
@@ -105,17 +110,20 @@ class FortressNumberGameListener(
         if (fortress == null || chunk.getStructures(fortress).isEmpty()) {
             // Player has a 3-digit sequence but NOT in a fortress (and not in bastion)
             // Drop the blocks as items instead of removing them
-            event.isCancelled = true
-
+            val provider = plugin.customItemProviderManager.getProvider()
             for (block in sequence.blocks) {
-                val customBlock = CustomBlock.byAlreadyPlaced(block)
-                if (customBlock != null) {
-                    // Drop the custom block as an item
-                    val itemStack = customBlock.itemStack
-                    if (itemStack != null) {
-                        location.world.dropItemNaturally(block.location, itemStack)
+                if (provider != null) {
+                    val customBlockInfo = provider.getCustomBlock(block)
+                    if (customBlockInfo != null) {
+                        // Drop the custom block as an item
+                        val itemStack = provider.getItemStack(customBlockInfo.namespacedId)
+                        if (itemStack != null) {
+                            location.world.dropItemNaturally(block.location, itemStack)
+                        }
+                        provider.removeCustomBlock(block)
+                    } else {
+                        block.type = Material.AIR
                     }
-                    customBlock.remove()
                 } else {
                     block.type = Material.AIR
                 }
@@ -153,17 +161,20 @@ class FortressNumberGameListener(
 
         // Check if rewards were already dispensed
         if (fortressData.rewardsDispensed) {
-            event.isCancelled = true
-
             // Drop all blocks as items
+            val provider = plugin.customItemProviderManager.getProvider()
             for (block in sequence.blocks) {
-                val customBlock = CustomBlock.byAlreadyPlaced(block)
-                if (customBlock != null) {
-                    val itemStack = customBlock.itemStack
-                    if (itemStack != null) {
-                        location.world.dropItemNaturally(block.location, itemStack)
+                if (provider != null) {
+                    val customBlockInfo = provider.getCustomBlock(block)
+                    if (customBlockInfo != null) {
+                        val itemStack = provider.getItemStack(customBlockInfo.namespacedId)
+                        if (itemStack != null) {
+                            location.world.dropItemNaturally(block.location, itemStack)
+                        }
+                        provider.removeCustomBlock(block)
+                    } else {
+                        block.type = Material.AIR
                     }
-                    customBlock.remove()
                 } else {
                     block.type = Material.AIR
                 }
@@ -183,13 +194,13 @@ class FortressNumberGameListener(
         // Compare with fortress number (sequence already found above)
         if (sequence.number == fortressData.assignedNumber) {
             // SUCCESS! Give rewards
-            event.isCancelled = true // Cancel the break event
-
             // Remove all three blocks
+            val provider = plugin.customItemProviderManager.getProvider()
             for (block in sequence.blocks) {
-                val customBlock = CustomBlock.byAlreadyPlaced(block)
-                if (customBlock != null) {
-                    customBlock.remove()
+                if (provider != null) {
+                    if (!provider.removeCustomBlock(block)) {
+                        block.type = Material.AIR
+                    }
                 } else {
                     block.type = Material.AIR
                 }
@@ -229,20 +240,20 @@ class FortressNumberGameListener(
             plugin.logger.info("Player ${player.name} solved fortress #${fortressData.assignedNumber} (${sequence.number})")
         } else if (sequence.number > fortressData.assignedNumber) {
             // Guessed too high - EXPLODE! (like sleeping in Nether)
-            event.isCancelled = true
-
             // Remove blocks before explosion
+            val provider = plugin.customItemProviderManager.getProvider()
             for (block in sequence.blocks) {
-                val customBlock = CustomBlock.byAlreadyPlaced(block)
-                if (customBlock != null) {
-                    customBlock.remove()
+                if (provider != null) {
+                    if (!provider.removeCustomBlock(block)) {
+                        block.type = Material.AIR
+                    }
                 } else {
                     block.type = Material.AIR
                 }
             }
 
             // Create bed-like explosion (power 5.0, sets fire, breaks blocks)
-            val explosionLocation = brokenBlock.location.add(0.5, 0.5, 0.5)
+            val explosionLocation = block.location.add(0.5, 0.5, 0.5)
             location.world.createExplosion(
                 explosionLocation,
                 5.0f,      // Power (same as bed explosion)
@@ -259,17 +270,20 @@ class FortressNumberGameListener(
             plugin.logger.info("Player ${player.name} guessed too high for fortress #${fortressData.assignedNumber} (guessed ${sequence.number}) - EXPLOSION!")
         } else {
             // Guessed too low - drop blocks as items
-            event.isCancelled = true
-
+            val provider = plugin.customItemProviderManager.getProvider()
             for (block in sequence.blocks) {
-                val customBlock = CustomBlock.byAlreadyPlaced(block)
-                if (customBlock != null) {
-                    // Drop the custom block as an item
-                    val itemStack = customBlock.itemStack
-                    if (itemStack != null) {
-                        location.world.dropItemNaturally(block.location, itemStack)
+                if (provider != null) {
+                    val customBlockInfo = provider.getCustomBlock(block)
+                    if (customBlockInfo != null) {
+                        // Drop the custom block as an item
+                        val itemStack = provider.getItemStack(customBlockInfo.namespacedId)
+                        if (itemStack != null) {
+                            location.world.dropItemNaturally(block.location, itemStack)
+                        }
+                        provider.removeCustomBlock(block)
+                    } else {
+                        block.type = Material.AIR
                     }
-                    customBlock.remove()
                 } else {
                     block.type = Material.AIR
                 }
@@ -285,6 +299,27 @@ class FortressNumberGameListener(
             )
 
             plugin.logger.info("Player ${player.name} guessed too low for fortress #${fortressData.assignedNumber} (guessed ${sequence.number})")
+        }
+    }
+
+    /**
+     * Prevents number blocks from being broken
+     *
+     * Number blocks should only be removed by the scoring system when hit with a valid tool.
+     * This handler prevents them from being broken normally to avoid item duplication or
+     * breaking them without valid tools.
+     */
+    @EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)
+    fun onNumberBlockBreak(event: BlockBreakEvent) {
+        val block = event.block
+
+        // Check if this is a number block
+        val digit = getNumberFromBlock(block)
+
+        // If it's a number block, cancel the break event
+        // Scoring is handled by onNumberBlockDamage
+        if (digit != null) {
+            event.isCancelled = true
         }
     }
 
@@ -343,29 +378,53 @@ class FortressNumberGameListener(
     /**
      * Extracts the digit value from a number block
      *
-     * Uses ItemsAdder API to identify numeric custom blocks and parse their digit.
+     * Uses the custom item provider to identify numeric custom blocks and parse their digit.
+     * Works with any namespace (charmedchars, oraxen, nexo, itemsadder).
      *
      * @param block The block to check
      * @return The digit (0-9) if it's a number block, null otherwise
      */
     private fun getNumberFromBlock(block: Block): Int? {
         if (block.state.blockData !is NoteBlock) {
+            plugin.logger.info("[DEBUG] Block is not a NoteBlock: ${block.state.blockData.javaClass.simpleName}")
             return null
         }
 
-        val customBlock = CustomBlock.byAlreadyPlaced(block) ?: return null
-        val namespacedId = customBlock.namespacedID
+        val provider = plugin.customItemProviderManager.getProvider()
+        if (provider == null) {
+            plugin.logger.info("[DEBUG] No custom item provider available")
+            return null
+        }
+        plugin.logger.info("[DEBUG] Using provider: ${provider.getProviderName()}")
 
-        // Parse the ItemsAdder ID (e.g., "charmedchars:cyan_5")
-        if (!namespacedId.startsWith("charmedchars:")) return null
+        val customBlockInfo = provider.getCustomBlock(block)
+        if (customBlockInfo == null) {
+            plugin.logger.info("[DEBUG] Provider returned null for block")
+            return null
+        }
+        val namespacedId = customBlockInfo.namespacedId
+        plugin.logger.info("[DEBUG] Got namespacedId: $namespacedId")
 
-        val parts = namespacedId.substring("charmedchars:".length).split("_")
-        if (parts.size != 2) return null
+        // Parse the namespaced ID (e.g., "charmedchars:cyan_5" or "oraxen:cyan_5")
+        val parts = namespacedId.split(":")
+        if (parts.size != 2) {
+            plugin.logger.info("[DEBUG] Invalid namespace format: $namespacedId")
+            return null
+        }
 
-        val character = parts[1]
+        val blockName = parts[1]  // e.g., "cyan_5"
+        val nameParts = blockName.split("_")
+        if (nameParts.size != 2) {
+            plugin.logger.info("[DEBUG] Invalid block name format: $blockName")
+            return null
+        }
+
+        val character = nameParts[1]  // e.g., "5"
 
         // Check if it's a digit
-        return character.toIntOrNull()
+        val digit = character.toIntOrNull()
+        plugin.logger.info("[DEBUG] Parsed digit: $digit from character: $character")
+        return digit
     }
 
     /**
@@ -373,7 +432,7 @@ class FortressNumberGameListener(
      *
      * Valid tools include:
      * - Vanilla gold tools
-     * - Pyrite tools (custom ItemsAdder tools)
+     * - Pyrite tools (custom tools from any provider)
      *
      * @param item The item to check
      * @return true if the item is a valid gold or pyrite tool
@@ -388,12 +447,15 @@ class FortressNumberGameListener(
             return true
         }
 
-        // Check if it's a pyrite tool using ItemsAdder API
-        val customStack = dev.lone.itemsadder.api.CustomStack.byItemStack(item)
-        if (customStack != null) {
-            val namespacedId = customStack.namespacedID.lowercase()
-            if (namespacedId.contains("pyrite")) {
-                return true
+        // Check if it's a pyrite tool using the custom item provider
+        val provider = plugin.customItemProviderManager.getProvider()
+        if (provider != null) {
+            val customItem = provider.getCustomItem(item)
+            if (customItem != null) {
+                val namespacedId = customItem.namespacedId.lowercase()
+                if (namespacedId.contains("pyrite")) {
+                    return true
+                }
             }
         }
 

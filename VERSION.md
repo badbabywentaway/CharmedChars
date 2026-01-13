@@ -1,5 +1,105 @@
 # CharmedChars Version History
 
+## Version 1.3.1 - Critical Number Scoring Fix
+
+### Release Date
+2026-01-12
+
+### Overview
+Critical bug fix release resolving number game scoring issues with Nexo provider. Changes number scoring to execute on hit (BlockDamageEvent) instead of break, matching the letter spelling system. Fixes hardcoded namespace bug that prevented number recognition with non-charmedchars namespaces.
+
+### Changes
+
+#### **Bug Fixes** 🐛
+
+**Fixed NoClassDefFoundError with Nexo Provider**
+- **Problem**: Number game listeners directly called ItemsAdder API even when Nexo was installed
+- **Impact**: Game crashed when hitting/breaking number blocks with Nexo: `java.lang.NoClassDefFoundError: dev/lone/itemsadder/api/CustomStack`
+- **Fix**: Updated both listeners to use `CustomItemProviderManager` abstraction layer
+- **Files**: `FortressNumberGameListener.kt`, `BastionNumberGameListener.kt`
+- **Result**: Number games now work correctly with all three providers (ItemsAdder, Oraxen, Nexo)
+
+**Fixed Hardcoded Namespace Bug in Number Recognition**
+- **Problem**: Number block recognition hardcoded "charmedchars:" namespace check
+- **Impact**: Number blocks wouldn't work with Oraxen (uses "oraxen:" namespace) or ItemsAdder (might use "itemsadder:")
+- **Fix**: Changed to namespace-agnostic parsing like letter block system
+- **Before**: `if (!namespacedId.startsWith("charmedchars:")) return null`
+- **After**: `val parts = namespacedId.split(":")` (works with any namespace)
+- **Files**: `FortressNumberGameListener.kt:456-475`, `BastionNumberGameListener.kt:320-345`
+- **Result**: Number blocks now work identically to letter blocks across all providers
+
+**CRITICAL: Number Scoring Now Happens on Hit (Not Break)**
+- **Problem**: Number scoring used BlockBreakEvent (break) while letter scoring used BlockDamageEvent (hit)
+- **Impact**: Scoring didn't trigger on hit, inconsistent behavior between systems
+- **Fix**: Moved ALL scoring logic from BlockBreakEvent to BlockDamageEvent in both listeners
+- **Changes**:
+  - `BlockDamageEvent` (on hit): Now executes full scoring logic (rewards, explosions, feedback)
+  - `BlockBreakEvent` (on break): Now only prevents breaking to avoid item duplication
+- **Files**: `FortressNumberGameListener.kt`, `BastionNumberGameListener.kt`
+- **Result**: Number scoring now works identically to letter spelling - immediate execution on hit
+
+**Prevents Item Duplication from Breaking Number Blocks**
+- **Problem**: Players could break number blocks to get items instead of scoring
+- **Fix**: BlockBreakEvent now cancels if block is a number block
+- **Result**: Number blocks can only be removed via proper scoring with valid tools
+
+#### **Code Quality** 📝
+
+**Consistent Behavior Between Letter and Number Systems**
+- Both systems now use BlockDamageEvent for scoring
+- Both systems use BlockBreakEvent to prevent normal breaking
+- Both systems use provider abstraction layer consistently
+- Namespace-agnostic block recognition in both systems
+
+### Impact
+
+**Compatibility**
+- **100% Backward Compatible**: Existing servers work without changes
+- **No Database Changes**: Structure database format unchanged
+- **No Config Changes**: Existing config.yml files remain valid
+- **No Breaking Changes**: All commands and features unchanged
+
+**Gameplay Improvements**
+- Number scoring now responds immediately on hit (like letters)
+- Consistent experience between letter spelling and number guessing
+- Works correctly with all three providers (ItemsAdder, Oraxen, Nexo)
+- No more crashes with Nexo provider
+
+### Files Modified
+
+**Number Game Listeners**:
+- `FortressNumberGameListener.kt` - Provider abstraction, namespace fix, scoring on hit
+- `BastionNumberGameListener.kt` - Provider abstraction, namespace fix, scoring on hit
+
+**Version & Deployment**:
+- `gradle.properties` - Version bump to 1.3.1
+- `DEPLOY_CLEAN_JAR.bat` - Updated version and release notes
+- `README.md` - Added Nexo to all documentation, updated version
+- `VERSION.md` - This file
+
+### Upgrade Notes
+
+**From v1.3.0**:
+1. Download CharmedChars-1.3.1.jar
+2. Replace old JAR in `plugins/` folder
+3. Restart server
+4. Number scoring will now work on hit (not break)
+5. All three providers now fully supported
+
+**Nexo Users**:
+- Critical fix - this version resolves all Nexo compatibility issues
+- Number games now work correctly without crashes
+- No manual configuration changes needed
+
+### Development Notes
+
+**AI-Assisted Development**:
+- All bug fixes developed with assistance from Claude (Anthropic)
+- Provider abstraction consistency improvements guided by AI
+- All AI contributions include Co-Authored-By attribution in git commits
+
+---
+
 ## Version 1.3.0 - Nexo Integration & Fortune Enchantment Support
 
 ### Release Date

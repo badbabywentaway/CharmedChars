@@ -7,10 +7,10 @@ A word-forming puzzle game for Minecraft where players collect letter blocks fro
 ### CharmedChars License
 CharmedChars is **open source** software licensed under **GNU LGPL v3**.
 
-### Required Custom Item Plugin - ItemsAdder OR Oraxen
-**CRITICAL NOTICE**: CharmedChars requires **either ItemsAdder OR Oraxen** (not both).
+### Required Custom Item Plugin - ItemsAdder, Oraxen, OR Nexo
+**CRITICAL NOTICE**: CharmedChars requires **exactly ONE** of: ItemsAdder, Oraxen, or Nexo.
 
-#### ItemsAdder (Recommended)
+#### ItemsAdder
 - **Proprietary/commercial plugin** - purchase separately
 - **NOT included** with CharmedChars
 - **NOT open source** - paid premium plugin
@@ -18,13 +18,20 @@ CharmedChars is **open source** software licensed under **GNU LGPL v3**.
 - **Auto-setup available** with `/iasetup` command
 - You **MUST comply** with ItemsAdder's license terms
 
-#### Oraxen (Alternative)
+#### Oraxen
 - Open-source custom items plugin
 - Available from: [SpigotMC](https://www.spigotmc.org/resources/oraxen.72448/) or [GitHub](https://github.com/oraxen/oraxen)
 - **Auto-setup available** with `/oraxensetup` command (see `ORAXEN_SETUP.md`)
 - Free alternative to ItemsAdder
 
-**Important**: Install **exactly ONE** of these plugins. CharmedChars will automatically detect which one you have and refuse to load if both are installed or neither is installed.
+#### Nexo
+- Open-source custom items plugin (fork of Oraxen)
+- Available from: [Polymart](https://polymart.org/resource/nexo.6901)
+- **Auto-setup available** with `/nexosetup` command (see `NEXO_SETUP.md`)
+- Free alternative to ItemsAdder with additional features
+- **Requires Paper block update optimizations** (see `NEXO_SETUP.md`)
+
+**Important**: Install **exactly ONE** of these plugins. CharmedChars will automatically detect which one you have and refuse to load if multiple are installed or none are installed.
 
 ---
 
@@ -38,10 +45,11 @@ CharmedChars is **open source** software licensed under **GNU LGPL v3**.
 - Java 21+
 
 **Required Plugin (choose ONE):**
-- ItemsAdder 3.6.3-beta-14+ (**proprietary - purchase separately**) - Recommended
-- Oraxen 1.181.0+ (open-source, free) - Free alternative
+- ItemsAdder 3.6.3-beta-14+ (**proprietary - purchase separately**)
+- Oraxen 1.181.0+ (open-source, free)
+- Nexo (latest) (open-source, free)
 
-Both plugins now have auto-setup commands!
+All three plugins now have auto-setup commands!
 
 **Optional Plugins:**
 - WorldGuard 7.0.14+ (for region protection)
@@ -50,7 +58,7 @@ Both plugins now have auto-setup commands!
 
 ### Installation
 
-#### With ItemsAdder (Recommended)
+#### With ItemsAdder
 1. **Purchase and install ItemsAdder** (required proprietary dependency)
 2. Download CharmedChars jar
 3. Place both plugins in `plugins/` folder
@@ -60,8 +68,8 @@ Both plugins now have auto-setup commands!
 7. Restart server
 8. Players automatically receive resource pack on join
 
-#### With Oraxen (Alternative)
-1. **Install Oraxen** (free open-source alternative)
+#### With Oraxen
+1. **Install Oraxen** (free open-source)
 2. Download CharmedChars jar
 3. Place both plugins in `plugins/` folder
 4. Start server to generate configs
@@ -70,39 +78,63 @@ Both plugins now have auto-setup commands!
 7. Restart server (recommended)
 8. Players automatically receive resource pack on join
 
-See `QUICK_SETUP.md` (ItemsAdder) or `ORAXEN_SETUP.md` (Oraxen) for detailed instructions.
+#### With Nexo
+1. **Install Nexo** (free open-source)
+2. **Enable Paper block optimizations** (see `NEXO_SETUP.md`)
+3. Download CharmedChars jar
+4. Place both plugins in `plugins/` folder
+5. Start server to generate configs
+6. Run `/nexosetup` to auto-configure Nexo
+7. Run `/nexo reload all` to load items
+8. Restart server (recommended)
+9. Players automatically receive resource pack on join
+
+See `QUICK_SETUP.md` (ItemsAdder), `ORAXEN_SETUP.md` (Oraxen), or `NEXO_SETUP.md` (Nexo) for detailed instructions.
 
 ---
 
-## ItemsAdder vs Oraxen: Key Differences
+## Custom Item Provider Comparison
 
-Both custom item providers work with CharmedChars, but they have different behaviors:
+CharmedChars supports three custom item providers with different behaviors:
 
-| Feature | ItemsAdder | Oraxen |
-|---------|------------|--------|
-| **License** | Proprietary (paid) | Open-source (free) |
-| **Texture Resolution** | 512x512 | 256x256 (1.203+) |
-| **Block Breaking Without Correct Tool** | **Shows purple warning, prevents breaking** | **Block disappears without dropping** |
-| **Player Feedback** | Clear visual warning message | No warning (silent loss) |
-| **Tool Whitelist** | `break_tools_whitelist` with wildcards (`_AXE`, `_PICKAXE`) | `minimal_type` with explicit material list |
-| **Auto-Setup Command** | `/iasetup` | `/oraxensetup` |
+| Feature | ItemsAdder | Oraxen | Nexo |
+|---------|------------|--------|------|
+| **License** | Proprietary (paid) | Open-source (free) | Open-source (free) |
+| **Texture Resolution** | 512x512 | 256x256 (1.203+) | 256x256+ |
+| **Block Breaking Without Correct Tool** | **Shows purple warning, prevents breaking** | **Block disappears without dropping** | **Block disappears without dropping** |
+| **Player Feedback** | Clear visual warning message | No warning (silent loss) | No warning (silent loss) |
+| **Tool Whitelist** | `break_tools_whitelist` with wildcards (`_AXE`, `_PICKAXE`) | `minimal_type` with explicit material list | `minimal_type` with explicit material list |
+| **Auto-Setup Command** | `/iasetup` | `/oraxensetup` | `/nexosetup` |
+| **Special Requirements** | None | None | **Requires Paper block optimizations** |
 
 **Important Note on Block Breaking:**
 - **ItemsAdder**: Players cannot accidentally lose blocks - non-whitelisted tools show a purple warning and prevent breaking
-- **Oraxen**: Players CAN lose blocks permanently if using wrong tools (bare hands, shovels, hoes) - blocks break and disappear without dropping items
-- This difference is **by design** - Oraxen maintainers intentionally do not prevent breaking ([GitHub Issue #36](https://github.com/oraxen/Oraxen/issues/36))
+- **Oraxen/Nexo**: Players CAN lose blocks permanently if using wrong tools (bare hands, shovels, hoes) - blocks break and disappear without dropping items
+- This difference is **by design** - Oraxen/Nexo maintainers intentionally do not prevent breaking ([Oraxen GitHub Issue #36](https://github.com/oraxen/Oraxen/issues/36))
 
 **Current Tool Configuration:**
-Both providers allow these tools to break blocks and receive drops:
+All providers allow these tools to break blocks and receive drops:
 - All pickaxes (wooden, stone, copper, iron, golden, diamond, netherite)
 - All axes (wooden, stone, copper, iron, golden, diamond, netherite)
 - Pyrite pickaxe and pyrite axe (custom items)
 
 > **Note:** Copper tools require Minecraft 1.21.9+ ("The Copper Age" update)
 
+**Nexo Special Requirement:**
+Nexo requires Paper server configuration for optimal performance:
+```yaml
+# config/paper-global.yml
+block-updates:
+  disable-noteblock-updates: true
+  disable-tripwire-updates: true
+  disable-chorus-plant-updates: true
+```
+See `NEXO_SETUP.md` for complete setup instructions.
+
 **Recommendation:**
 - Choose **ItemsAdder** if you want protected blocks with clear player feedback (requires purchase)
-- Choose **Oraxen** if you prefer free/open-source and accept vanilla-like block loss behavior
+- Choose **Oraxen** or **Nexo** if you prefer free/open-source and accept vanilla-like block loss behavior
+- Choose **Nexo** over Oraxen if you want the latest features and active development
 
 ---
 
@@ -176,6 +208,8 @@ See `PLAY_INSTRUCTIONS.md` for complete gameplay guide.
 | `/structuredb purge <type>` | Reset structure entries | `charmedchars.blocks` |
 | `/iastatus` | Check ItemsAdder integration status | `charmedchars.admin` |
 | `/iasetup [force]` | Auto-setup ItemsAdder configuration | `charmedchars.admin` |
+| `/oraxensetup` | Auto-setup Oraxen configuration | `charmedchars.admin` |
+| `/nexosetup` | Auto-setup Nexo configuration | `charmedchars.admin` |
 | `/reload` | Reload plugin configuration | `charmedchars.admin` |
 
 ---
@@ -232,7 +266,7 @@ cd CharmedChars
 ./gradlew buildWithVersion
 ```
 
-Output: `build/libs/CharmedChars-1.3.0.jar`
+Output: `build/libs/CharmedChars-1.3.1.jar`
 
 **Note**: You still need to obtain ItemsAdder separately - it cannot be built from source as it is proprietary.
 
@@ -240,7 +274,7 @@ Output: `build/libs/CharmedChars-1.3.0.jar`
 
 ## Version
 
-Current Version: **1.3.0**
+Current Version: **1.3.1**
 
 Run `/version` in-game or `./gradlew version` to display version information.
 

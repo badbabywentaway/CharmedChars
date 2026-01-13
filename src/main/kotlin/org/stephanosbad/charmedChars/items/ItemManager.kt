@@ -144,6 +144,14 @@ class ItemManager @JvmOverloads constructor(localPlugin: CharmedChars? = null) :
     var griefPrevention: Any? = null
 
     /**
+     * Flag to track if WorldGuard API compatibility warning has been shown
+     *
+     * Prevents log spam when WorldGuard API reflection fails repeatedly.
+     * Only the first failure will be logged.
+     */
+    private var worldGuardWarningShown = false
+
+    /**
      * List of configured rewards for valid words
      *
      * Populated from config.yml. Currently supports drop-based rewards
@@ -772,8 +780,13 @@ class ItemManager @JvmOverloads constructor(localPlugin: CharmedChars? = null) :
                     return true
                 }
             } catch (e: Exception) {
-                // If WorldGuard check fails, log and continue
-                plugin.logger.warning("WorldGuard protection check failed: ${e.message}")
+                // If WorldGuard check fails, log once and continue
+                if (!worldGuardWarningShown) {
+                    plugin.logger.warning("WorldGuard protection check failed: ${e.message}")
+                    plugin.logger.warning("This may indicate a WorldGuard API version mismatch. Protection checks will be skipped.")
+                    plugin.logger.warning("To disable this integration, set 'worldguard-integration: false' in config.yml")
+                    worldGuardWarningShown = true
+                }
             }
         }
 
