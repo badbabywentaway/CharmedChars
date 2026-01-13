@@ -67,8 +67,6 @@ class BastionNumberGameListener(
         }
 
         val block = event.clickedBlock ?: return
-        plugin.logger.info("[DEBUG] PlayerInteractEvent (LEFT_CLICK) fired! Block: ${block.type.name}, Tool: ${event.player.inventory.itemInMainHand.type.name}")
-
         processNumberSequenceScoring(event.player, block)
     }
 
@@ -81,8 +79,6 @@ class BastionNumberGameListener(
      */
     @EventHandler(priority = EventPriority.LOWEST, ignoreCancelled = false)
     fun onNumberBlockDamage(event: BlockDamageEvent) {
-        plugin.logger.info("[DEBUG] BlockDamageEvent fired! Block: ${event.block.type.name}, Tool: ${event.player.inventory.itemInMainHand.type.name}, Cancelled: ${event.isCancelled}")
-
         processNumberSequenceScoring(event.player, event.block)
     }
 
@@ -321,15 +317,12 @@ class BastionNumberGameListener(
      */
     @EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)
     fun onNumberBlockBreak(event: BlockBreakEvent) {
-        plugin.logger.info("[DEBUG] BlockBreakEvent fired! Block: ${event.block.type.name}, Tool: ${event.player.inventory.itemInMainHand.type.name}")
-
         val block = event.block
 
         // Check if this is a number block
         val digit = getNumberFromBlock(block)
 
         if (digit != null) {
-            plugin.logger.info("[DEBUG] Number block detected in BlockBreakEvent (digit: $digit) - allowing break to proceed so provider can handle tool checking")
             // Scoring was already handled by PlayerInteractEvent/BlockDamageEvent
             // Allow the break to proceed (blocks already removed by processNumberSequenceScoring if valid sequence)
             // If not valid tool or no sequence, let ItemsAdder/Oraxen/Nexo handle breaking/dropping

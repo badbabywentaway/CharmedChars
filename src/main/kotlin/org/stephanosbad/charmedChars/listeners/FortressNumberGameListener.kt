@@ -68,8 +68,6 @@ class FortressNumberGameListener(
         }
 
         val block = event.clickedBlock ?: return
-        plugin.logger.info("[DEBUG] PlayerInteractEvent (LEFT_CLICK) fired! Block: ${block.type.name}, Tool: ${event.player.inventory.itemInMainHand.type.name}")
-
         processNumberSequenceScoring(event.player, block)
     }
 
@@ -82,8 +80,6 @@ class FortressNumberGameListener(
      */
     @EventHandler(priority = EventPriority.LOWEST, ignoreCancelled = false)
     fun onNumberBlockDamage(event: BlockDamageEvent) {
-        plugin.logger.info("[DEBUG] BlockDamageEvent fired! Block: ${event.block.type.name}, Tool: ${event.player.inventory.itemInMainHand.type.name}, Cancelled: ${event.isCancelled}")
-
         processNumberSequenceScoring(event.player, event.block)
     }
 
@@ -108,33 +104,22 @@ class FortressNumberGameListener(
         // Check if player is using a gold or pyrite tool
         val hand = player.inventory.itemInMainHand
         if (!isValidTool(hand)) {
-            plugin.logger.info("[DEBUG] Not valid tool: ${hand.type.name}")
             return
         }
 
         // Check if the hit block is a number block
-        plugin.logger.info("[DEBUG] Checking block: ${block.type.name} at ${block.location}")
-        val firstDigit = getNumberFromBlock(block)
-        if (firstDigit == null) {
-            plugin.logger.info("[DEBUG] Not a number block or getNumberFromBlock returned null")
-            return
-        }
-        plugin.logger.info("[DEBUG] Found number block: $firstDigit")
+        val firstDigit = getNumberFromBlock(block) ?: return
 
         // Check for 3-digit sequence first (before checking structure)
-        plugin.logger.info("[DEBUG] Looking for 3-digit sequence starting with $firstDigit")
         val sequence = findThreeDigitSequence(block, firstDigit)
 
         // If no sequence found, let the event proceed normally
         if (sequence == null) {
-            plugin.logger.info("[DEBUG] No 3-digit sequence found - need 3 adjacent number blocks in a straight line")
             return
         }
-        plugin.logger.info("[DEBUG] Found sequence: ${sequence.number}")
 
         // Check if player is in the Nether - if not, just drop blocks
         if (!location.world.environment.name.equals("NETHER", ignoreCase = true)) {
-            plugin.logger.info("[DEBUG] Not in Nether (world: ${location.world.environment.name}), dropping blocks as items")
 
             // Drop all blocks as items
             val provider = plugin.customItemProviderManager.getProvider()
@@ -380,15 +365,12 @@ class FortressNumberGameListener(
      */
     @EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)
     fun onNumberBlockBreak(event: BlockBreakEvent) {
-        plugin.logger.info("[DEBUG] BlockBreakEvent fired! Block: ${event.block.type.name}, Tool: ${event.player.inventory.itemInMainHand.type.name}")
-
         val block = event.block
 
         // Check if this is a number block
         val digit = getNumberFromBlock(block)
 
         if (digit != null) {
-            plugin.logger.info("[DEBUG] Number block detected in BlockBreakEvent (digit: $digit) - allowing break to proceed so provider can handle tool checking")
             // Scoring was already handled by PlayerInteractEvent/BlockDamageEvent
             // Allow the break to proceed (blocks already removed by processNumberSequenceScoring if valid sequence)
             // If not valid tool or no sequence, let ItemsAdder/Oraxen/Nexo handle breaking/dropping
@@ -458,45 +440,25 @@ class FortressNumberGameListener(
      */
     private fun getNumberFromBlock(block: Block): Int? {
         if (block.state.blockData !is NoteBlock) {
-            plugin.logger.info("[DEBUG] Block is not a NoteBlock: ${block.state.blockData.javaClass.simpleName}")
             return null
         }
 
-        val provider = plugin.customItemProviderManager.getProvider()
-        if (provider == null) {
-            plugin.logger.info("[DEBUG] No custom item provider available")
-            return null
-        }
-        plugin.logger.info("[DEBUG] Using provider: ${provider.getProviderName()}")
-
-        val customBlockInfo = provider.getCustomBlock(block)
-        if (customBlockInfo == null) {
-            plugin.logger.info("[DEBUG] Provider returned null for block")
-            return null
-        }
+        val provider = plugin.customItemProviderManager.getProvider() ?: return null
+        val customBlockInfo = provider.getCustomBlock(block) ?: return null
         val namespacedId = customBlockInfo.namespacedId
-        plugin.logger.info("[DEBUG] Got namespacedId: $namespacedId")
 
         // Parse the namespaced ID (e.g., "charmedchars:cyan_5" or "oraxen:cyan_5")
         val parts = namespacedId.split(":")
-        if (parts.size != 2) {
-            plugin.logger.info("[DEBUG] Invalid namespace format: $namespacedId")
-            return null
-        }
+        if (parts.size != 2) return null
 
         val blockName = parts[1]  // e.g., "cyan_5"
         val nameParts = blockName.split("_")
-        if (nameParts.size != 2) {
-            plugin.logger.info("[DEBUG] Invalid block name format: $blockName")
-            return null
-        }
+        if (nameParts.size != 2) return null
 
         val character = nameParts[1]  // e.g., "5"
 
         // Check if it's a digit
-        val digit = character.toIntOrNull()
-        plugin.logger.info("[DEBUG] Parsed digit: $digit from character: $character")
-        return digit
+        return character.toIntOrNull()
     }
 
     /**
