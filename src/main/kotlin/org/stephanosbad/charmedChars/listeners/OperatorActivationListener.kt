@@ -77,24 +77,20 @@ class OperatorActivationListener(
     }
 
     /**
-     * Reset activation when player leaves Nether
+     * Reset activation when player enters Nether
      */
     @EventHandler(priority = EventPriority.MONITOR)
     fun onPlayerMove(event: PlayerMoveEvent) {
         val from = event.from
         val to = event.to ?: return
 
-        // Check if player left Nether
-        if (from.world.environment == World.Environment.NETHER &&
-            to.world.environment != World.Environment.NETHER) {
+        // Check if player entered Nether
+        if (from.world.environment != World.Environment.NETHER &&
+            to.world.environment == World.Environment.NETHER) {
 
             val uuid = event.player.uniqueId.toString()
-            if (playerGlassingBedsActive.remove(uuid) != null) {
-                event.player.sendMessage(
-                    Component.text("Your glassing beds activation was reset.")
-                        .color(NamedTextColor.YELLOW)
-                )
-            }
+            // Reset activation for this new Nether visit
+            playerGlassingBedsActive.remove(uuid)
         }
     }
 
@@ -107,13 +103,12 @@ class OperatorActivationListener(
     }
 
     /**
-     * Reset activation if player respawns outside Nether
+     * Reset activation on respawn (player died, starts new Nether session)
      */
     @EventHandler
     fun onPlayerRespawn(event: PlayerRespawnEvent) {
-        if (event.respawnLocation.world.environment != World.Environment.NETHER) {
-            playerGlassingBedsActive.remove(event.player.uniqueId.toString())
-        }
+        // Always reset on death/respawn - new session
+        playerGlassingBedsActive.remove(event.player.uniqueId.toString())
     }
 
     /**

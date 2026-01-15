@@ -26,10 +26,14 @@ class GlassingBedsListener(
     private val plugin: CharmedChars
 ) : Listener {
 
+    // Track which player triggered each bed explosion (for activation check)
+    // Key: "world:x:y:z", Value: Player UUID
+    private val bedTriggers = mutableMapOf<String, String>()
+
     /**
-     * Check if player has activation before allowing bed use in Nether
+     * Track which player is triggering a bed explosion
      */
-    @EventHandler(priority = EventPriority.NORMAL, ignoreCancelled = true)
+    @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
     fun onBedInteract(event: PlayerInteractEvent) {
         // Only check right-click on blocks
         if (event.action != Action.RIGHT_CLICK_BLOCK) return
@@ -42,25 +46,10 @@ class GlassingBedsListener(
         // Check if in Nether (where beds explode)
         if (clickedBlock.world.environment != World.Environment.NETHER) return
 
-        // Check if glassing beds feature is enabled
-        if (!plugin.configManager.glassingBedsEnabled) return
-
-        // Check if player has activated glassing beds
-        if (!OperatorActivationListener.isPlayerActivated(event.player)) {
-            event.isCancelled = true
-            event.player.sendMessage(
-                Component.text("You must activate glassing beds first!")
-                    .color(NamedTextColor.RED)
-            )
-            event.player.sendMessage(
-                Component.text("Hint: Place 4 different operator blocks (+−×÷) of the same color in a line,")
-                    .color(NamedTextColor.GRAY)
-            )
-            event.player.sendMessage(
-                Component.text("then hit them with a gold/pyrite tool in the Nether!")
-                    .color(NamedTextColor.GRAY)
-            )
-        }
+        // Track this player as the trigger for this bed location
+        val location = clickedBlock.location
+        val locationKey = "${location.world.name}:${location.blockX}:${location.blockY}:${location.blockZ}"
+        bedTriggers[locationKey] = event.player.uniqueId.toString()
     }
 
     @EventHandler(priority = EventPriority.NORMAL, ignoreCancelled = true)
@@ -85,8 +74,37 @@ class GlassingBedsListener(
             return
         }
 
-        // Get explosion center and max Y-level
+        // Get explosion center
         val explosionCenter = event.block.location
+        val locationKey = "${explosionCenter.world.name}:${explosionCenter.blockX}:${explosionCenter.blockY}:${explosionCenter.blockZ}"
+
+        // Find the player who triggered this bed explosion
+        val playerUuid = bedTriggers.remove(locationKey)
+        val player = if (playerUuid != null) {
+            plugin.server.getPlayer(java.util.UUID.fromString(playerUuid))
+        } else {
+            null
+        }
+
+        // Check if player has activation (if we know who triggered it)
+        if (player != null && !OperatorActivationListener.isPlayerActivated(player)) {
+            // Player hasn't activated glassing beds - explosion happens but no lava conversion
+            player.sendMessage(
+                Component.text("Glassing beds not activated for this Nether visit!")
+                    .color(NamedTextColor.RED)
+            )
+            player.sendMessage(
+                Component.text("Hint: Hit 4 different operator blocks (+−×÷) of the same color")
+                    .color(NamedTextColor.GRAY)
+            )
+            player.sendMessage(
+                Component.text("with a gold/pyrite tool to activate!")
+                    .color(NamedTextColor.GRAY)
+            )
+            return
+        }
+
+        // Player has activation or no player tracking - convert lava
         val maxY = plugin.configManager.glassingBedsMaxY
 
         // Scan 5-block cubic radius and convert lava to glass
