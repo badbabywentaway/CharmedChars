@@ -13,6 +13,7 @@ import org.bukkit.event.EventPriority
 import org.bukkit.event.Listener
 import org.bukkit.event.block.Action
 import org.bukkit.event.block.BlockDamageEvent
+import org.bukkit.event.player.PlayerChangedWorldEvent
 import org.bukkit.event.player.PlayerInteractEvent
 import org.bukkit.event.player.PlayerMoveEvent
 import org.bukkit.event.player.PlayerQuitEvent
@@ -77,7 +78,21 @@ class OperatorActivationListener(
     }
 
     /**
-     * Reset activation when player enters Nether
+     * Reset activation when player enters Nether via portal or world change
+     * This is the primary handler - more reliable than PlayerMoveEvent for portals
+     */
+    @EventHandler(priority = EventPriority.MONITOR)
+    fun onWorldChange(event: PlayerChangedWorldEvent) {
+        // Check if player entered Nether
+        if (event.player.world.environment == World.Environment.NETHER) {
+            val uuid = event.player.uniqueId.toString()
+            // Reset activation for this new Nether visit
+            playerGlassingBedsActive.remove(uuid)
+        }
+    }
+
+    /**
+     * Reset activation when player enters Nether (fallback for non-portal entry)
      */
     @EventHandler(priority = EventPriority.MONITOR)
     fun onPlayerMove(event: PlayerMoveEvent) {
