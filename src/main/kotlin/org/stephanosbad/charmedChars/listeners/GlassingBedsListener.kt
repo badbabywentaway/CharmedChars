@@ -12,7 +12,9 @@ import org.stephanosbad.charmedChars.CharmedChars
  * Listener for the Glassing Beds feature
  *
  * When a bed explodes in the Nether or End, this listener converts
- * all lava blocks within a 5-block radius to glass blocks.
+ * lava blocks within a 5-block radius to glass blocks, but only if the
+ * lava is at or below the configured max Y-level (default: 28).
+ * This prevents using beds to glass lava ocean surfaces for easy travel.
  *
  * @property plugin Reference to the main plugin instance
  */
@@ -42,8 +44,9 @@ class GlassingBedsListener(
             return
         }
 
-        // Get explosion center
+        // Get explosion center and max Y-level
         val explosionCenter = event.block.location
+        val maxY = plugin.configManager.glassingBedsMaxY
 
         // Scan 5-block cubic radius and convert lava to glass
         var convertedBlocks = 0
@@ -51,7 +54,8 @@ class GlassingBedsListener(
             for (y in -5..5) {
                 for (z in -5..5) {
                     val block = explosionCenter.block.getRelative(x, y, z)
-                    if (block.type == Material.LAVA) {
+                    // Only convert lava at or below the configured max Y-level
+                    if (block.type == Material.LAVA && block.y <= maxY) {
                         block.type = Material.GLASS
                         convertedBlocks++
                     }
