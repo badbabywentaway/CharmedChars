@@ -1,11 +1,15 @@
 package org.stephanosbad.charmedChars.listeners
 
+import net.kyori.adventure.text.Component
+import net.kyori.adventure.text.format.NamedTextColor
 import org.bukkit.Material
 import org.bukkit.World
 import org.bukkit.event.EventHandler
 import org.bukkit.event.EventPriority
 import org.bukkit.event.Listener
+import org.bukkit.event.block.Action
 import org.bukkit.event.block.BlockExplodeEvent
+import org.bukkit.event.player.PlayerInteractEvent
 import org.stephanosbad.charmedChars.CharmedChars
 
 /**
@@ -21,6 +25,43 @@ import org.stephanosbad.charmedChars.CharmedChars
 class GlassingBedsListener(
     private val plugin: CharmedChars
 ) : Listener {
+
+    /**
+     * Check if player has activation before allowing bed use in Nether
+     */
+    @EventHandler(priority = EventPriority.NORMAL, ignoreCancelled = true)
+    fun onBedInteract(event: PlayerInteractEvent) {
+        // Only check right-click on blocks
+        if (event.action != Action.RIGHT_CLICK_BLOCK) return
+
+        val clickedBlock = event.clickedBlock ?: return
+
+        // Check if it's a bed
+        if (!clickedBlock.type.name.endsWith("_BED")) return
+
+        // Check if in Nether (where beds explode)
+        if (clickedBlock.world.environment != World.Environment.NETHER) return
+
+        // Check if glassing beds feature is enabled
+        if (!plugin.configManager.glassingBedsEnabled) return
+
+        // Check if player has activated glassing beds
+        if (!OperatorActivationListener.isPlayerActivated(event.player)) {
+            event.isCancelled = true
+            event.player.sendMessage(
+                Component.text("You must activate glassing beds first!")
+                    .color(NamedTextColor.RED)
+            )
+            event.player.sendMessage(
+                Component.text("Hint: Place 4 different operator blocks (+−×÷) of the same color in a line,")
+                    .color(NamedTextColor.GRAY)
+            )
+            event.player.sendMessage(
+                Component.text("then hit them with a gold/pyrite tool in the Nether!")
+                    .color(NamedTextColor.GRAY)
+            )
+        }
+    }
 
     @EventHandler(priority = EventPriority.NORMAL, ignoreCancelled = true)
     fun onBlockExplode(event: BlockExplodeEvent) {
