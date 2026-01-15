@@ -38,6 +38,7 @@ import org.stephanosbad.charmedChars.commands.SetupNexoCommand
 import org.stephanosbad.charmedChars.commands.StructureCodeCommand
 import org.stephanosbad.charmedChars.commands.StructureDatabaseCommand
 import org.stephanosbad.charmedChars.commands.VersionCommand
+import org.stephanosbad.charmedChars.commands.GlassingBedsCommand
 import org.stephanosbad.charmedChars.integration.ItemsAdderSetup
 import org.stephanosbad.charmedChars.integration.CustomItemProviderManager
 import org.stephanosbad.charmedChars.utility.ConfigManager
@@ -45,6 +46,7 @@ import org.stephanosbad.charmedChars.database.StructureDatabase
 import org.stephanosbad.charmedChars.listeners.StructureListener
 import org.stephanosbad.charmedChars.listeners.FortressNumberGameListener
 import org.stephanosbad.charmedChars.listeners.BastionNumberGameListener
+import org.stephanosbad.charmedChars.listeners.GlassingBedsListener
 import java.io.IOException
 import kotlin.coroutines.CoroutineContext
 
@@ -145,6 +147,7 @@ class CharmedChars : JavaPlugin(), CoroutineScope {
         val structureDbCommand = StructureDatabaseCommand(this)
         getCommand("structuredb")?.setExecutor(structureDbCommand)
         getCommand("structuredb")?.tabCompleter = structureDbCommand
+        getCommand("glassingbeds")?.setExecutor(GlassingBedsCommand(this))
 
         // Async startup operations
         launch {
@@ -176,6 +179,7 @@ class CharmedChars : JavaPlugin(), CoroutineScope {
         Bukkit.getPluginManager().registerEvents(StructureListener(this, structureDatabase), this)
         Bukkit.getPluginManager().registerEvents(FortressNumberGameListener(this, structureDatabase), this)
         Bukkit.getPluginManager().registerEvents(BastionNumberGameListener(this, structureDatabase), this)
+        Bukkit.getPluginManager().registerEvents(GlassingBedsListener(this), this)
 
 
     }

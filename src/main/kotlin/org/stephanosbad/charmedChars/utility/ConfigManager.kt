@@ -116,6 +116,16 @@ class ConfigManager(private val plugin: CharmedChars) {
         get() = config.getBoolean("protection.griefprevention-integration", true)
 
     /**
+     * Whether the glassing beds feature is enabled
+     *
+     * When enabled, bed explosions in the Nether or End will convert
+     * lava blocks within a 5-block radius to glass blocks.
+     * Default: false
+     */
+    val glassingBedsEnabled: Boolean
+        get() = config.getBoolean("glassing-beds.enabled", false)
+
+    /**
      * Material name for fortress number game reward
      *
      * Default: BLAZE_ROD
