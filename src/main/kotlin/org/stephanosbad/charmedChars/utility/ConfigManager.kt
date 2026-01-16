@@ -116,6 +116,26 @@ class ConfigManager(private val plugin: CharmedChars) {
         get() = config.getBoolean("protection.griefprevention-integration", true)
 
     /**
+     * Whether the glassing beds feature is enabled
+     *
+     * When enabled, bed explosions in the Nether or End will convert
+     * lava blocks within a 5-block radius to glass blocks.
+     * Default: false
+     */
+    val glassingBedsEnabled: Boolean
+        get() = config.getBoolean("glassing-beds.enabled", false)
+
+    /**
+     * Maximum Y-level for glassing beds lava conversion
+     *
+     * Only lava blocks at or below this Y-level will be converted to glass.
+     * This prevents using beds to glass lava ocean surfaces (Y=31) for easy travel.
+     * Default: 28
+     */
+    val glassingBedsMaxY: Int
+        get() = config.getInt("glassing-beds.max-y", 28)
+
+    /**
      * Material name for fortress number game reward
      *
      * Default: BLAZE_ROD

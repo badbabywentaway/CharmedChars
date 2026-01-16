@@ -136,3 +136,17 @@ exclude:
     z: 10.0
     pitch: 0.0
     yaw: 0.0
+
+# Glassing Beds Feature
+# When a bed explodes in the Nether or End, convert nearby lava to glass
+glassing-beds:
+  # Enable/disable the glassing beds feature
+  # When enabled, lava blocks within 5 blocks of bed explosions turn to glass
+  # Only works in Nether and End dimensions (where beds naturally explode)
+  enabled: false
+
+  # Maximum Y-level for lava-to-glass conversion
+  # Only lava blocks at or below this Y-level will be converted to glass
+  # This prevents using beds to glass lava ocean surfaces (Y=31) for easy travel
+  # Recommended: 28 (allows underground lava but not ocean surface)
+  max-y: 28

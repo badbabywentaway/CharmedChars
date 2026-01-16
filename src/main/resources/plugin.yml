@@ -52,6 +52,11 @@ commands:
     usage: /structuredb <list|player|lookup|stats|remove|purge> [args]
     permission: charmedchars.blocks
     aliases: [sdb, structuredatabase]
+  glassingbeds:
+    description: Manage the Glassing Beds feature (convert lava to glass on bed explosions)
+    usage: /glassingbeds <enable|disable|status>
+    permission: charmedchars.admin
+    aliases: [gbeds, bedglass]
 
 permissions:
   charmedChars.blocks:
