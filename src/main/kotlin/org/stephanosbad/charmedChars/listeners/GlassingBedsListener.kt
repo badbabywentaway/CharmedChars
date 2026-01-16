@@ -46,10 +46,28 @@ class GlassingBedsListener(
         // Check if in Nether (where beds explode)
         if (clickedBlock.world.environment != World.Environment.NETHER) return
 
-        // Track this player as the trigger for this bed location
+        val playerUuid = event.player.uniqueId.toString()
+
+        // Track this player for the clicked block
         val location = clickedBlock.location
         val locationKey = "${location.world.name}:${location.blockX}:${location.blockY}:${location.blockZ}"
-        bedTriggers[locationKey] = event.player.uniqueId.toString()
+        bedTriggers[locationKey] = playerUuid
+
+        // Beds are two blocks - track all adjacent blocks in case the other half explodes
+        // Check all 6 cardinal directions for the other bed block
+        val adjacentOffsets = listOf(
+            Pair(1, 0), Pair(-1, 0),   // X axis
+            Pair(0, 1), Pair(0, -1)    // Z axis (Y axis not needed for horizontal beds)
+        )
+
+        for ((xOffset, zOffset) in adjacentOffsets) {
+            val adjacentBlock = clickedBlock.getRelative(xOffset, 0, zOffset)
+            if (adjacentBlock.type.name.endsWith("_BED")) {
+                val adjacentKey = "${location.world.name}:${location.blockX + xOffset}:${location.blockY}:${location.blockZ + zOffset}"
+                bedTriggers[adjacentKey] = playerUuid
+                break  // Found the other half, no need to check more
+            }
+        }
     }
 
     @EventHandler(priority = EventPriority.NORMAL, ignoreCancelled = true)
@@ -86,8 +104,13 @@ class GlassingBedsListener(
             null
         }
 
-        // Check if player has activation (if we know who triggered it)
-        if (player != null && !OperatorActivationListener.isPlayerActivated(player)) {
+        // If we can't identify the player, don't convert lava (safety measure)
+        if (player == null) {
+            return
+        }
+
+        // Check if player has activation
+        if (!OperatorActivationListener.isPlayerActivated(player)) {
             // Player hasn't activated glassing beds - explosion happens but no lava conversion
             player.sendMessage(
                 Component.text("Glassing beds not activated for this Nether visit!")

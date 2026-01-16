@@ -83,11 +83,13 @@ class OperatorActivationListener(
      */
     @EventHandler(priority = EventPriority.MONITOR)
     fun onWorldChange(event: PlayerChangedWorldEvent) {
+        val player = event.player
+        val toEnv = player.world.environment
+
         // Check if player entered Nether
-        if (event.player.world.environment == World.Environment.NETHER) {
-            val uuid = event.player.uniqueId.toString()
+        if (toEnv == World.Environment.NETHER) {
             // Reset activation for this new Nether visit
-            playerGlassingBedsActive.remove(uuid)
+            playerGlassingBedsActive.remove(player.uniqueId.toString())
         }
     }
 

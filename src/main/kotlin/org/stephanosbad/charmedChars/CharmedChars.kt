@@ -148,7 +148,9 @@ class CharmedChars : JavaPlugin(), CoroutineScope {
         val structureDbCommand = StructureDatabaseCommand(this)
         getCommand("structuredb")?.setExecutor(structureDbCommand)
         getCommand("structuredb")?.tabCompleter = structureDbCommand
-        getCommand("glassingbeds")?.setExecutor(GlassingBedsCommand(this))
+        val glassingBedsCommand = GlassingBedsCommand(this)
+        getCommand("glassingbeds")?.setExecutor(glassingBedsCommand)
+        getCommand("glassingbeds")?.tabCompleter = glassingBedsCommand
 
         // Async startup operations
         launch {

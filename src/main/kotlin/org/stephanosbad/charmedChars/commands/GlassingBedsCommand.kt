@@ -6,6 +6,7 @@ import net.kyori.adventure.text.format.TextDecoration
 import org.bukkit.command.Command
 import org.bukkit.command.CommandExecutor
 import org.bukkit.command.CommandSender
+import org.bukkit.command.TabCompleter
 import org.stephanosbad.charmedChars.CharmedChars
 
 /**
@@ -16,7 +17,7 @@ import org.stephanosbad.charmedChars.CharmedChars
  *
  * @property plugin Reference to the main plugin instance
  */
-class GlassingBedsCommand(private val plugin: CharmedChars) : CommandExecutor {
+class GlassingBedsCommand(private val plugin: CharmedChars) : CommandExecutor, TabCompleter {
 
     override fun onCommand(
         sender: CommandSender,
@@ -188,5 +189,26 @@ class GlassingBedsCommand(private val plugin: CharmedChars) : CommandExecutor {
                     .color(NamedTextColor.GRAY)
             )
         }
+    }
+
+    override fun onTabComplete(
+        sender: CommandSender,
+        command: Command,
+        alias: String,
+        args: Array<out String>
+    ): List<String>? {
+        // Only provide tab completion for operators with permission
+        if (!sender.hasPermission("charmedchars.admin")) {
+            return emptyList()
+        }
+
+        // First argument: suggest subcommands
+        if (args.size == 1) {
+            val subcommands = listOf("enable", "disable", "status")
+            return subcommands.filter { it.startsWith(args[0].lowercase()) }
+        }
+
+        // No suggestions for additional arguments
+        return emptyList()
     }
 }
