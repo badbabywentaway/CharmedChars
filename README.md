@@ -266,7 +266,7 @@ cd CharmedChars
 ./gradlew buildWithVersion
 ```
 
-Output: `build/libs/CharmedChars-1.3.2.jar`
+Output: `build/libs/CharmedChars-1.4.0.jar`
 
 **Note**: You still need to obtain ItemsAdder separately - it cannot be built from source as it is proprietary.
 
@@ -274,7 +274,15 @@ Output: `build/libs/CharmedChars-1.3.2.jar`
 
 ## Version
 
-Current Version: **1.3.2**
+Current Version: **1.4.0**
+
+**Latest Updates (v1.4.0 - Glassing Beds)**:
+- **NEW**: Glassing Beds feature - bed explosions in Nether/End convert nearby lava to glass
+- **NEW**: Operator activation system - hit 4 different operator blocks (+−×÷) to activate
+- **NEW**: `/glassingbeds enable/disable/status` command with tab completion
+- Y-level restriction (max Y=28) prevents lava ocean surface abuse
+- Activation resets on Nether entry via portal/teleport/death
+- Feature disabled by default for server choice
 
 Run `/version` in-game or `./gradlew version` to display version information.
 

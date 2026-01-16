@@ -50,6 +50,16 @@ Perfect for:
 - **Wrong guess (too low)**: Blocks drop safely - try again!
 - Use **binary search strategy** to find any number in ~10 guesses
 
+### Glassing Beds (v1.4.0) 🛏️🔥
+- **NEW**: Optional feature converts lava to glass when beds explode in Nether/End
+- **Activation System**: Hit 4 different operator blocks (+−×÷) with gold/pyrite tool each Nether visit
+- **Requirements**: All same color, any order, must be in Nether dimension
+- **Y-Level Restriction**: Only converts lava at Y≤28 (prevents ocean surface abuse)
+- **5-Block Radius**: Converts lava in 11x11x11 cube around explosion
+- **Session Reset**: Activation resets when entering Nether (portal/teleport/death)
+- **Feature Control**: Disabled by default, enable with `/glassingbeds enable`
+- **Strategic Gameplay**: Adds resource cost (operator blocks) for lava removal
+
 ### Configurable Reward System
 - Earn items based on word scores
 - **Multiple reward tiers** with customizable formulas
@@ -88,6 +98,18 @@ Word: "QUARTZ" (all magenta)
 4. Guess 500 → "Too high!"
 5. Guess 250 → "Too low!"
 6. Guess 375 → "CORRECT! +16 Ender Pearls"
+```
+
+### Example 4: Glassing Beds (v1.4.0)
+```
+1. Admin runs /glassingbeds enable
+2. Player enters Nether via portal
+3. Place 4 operators: cyan + cyan − cyan × cyan ÷
+4. Hit sequence with gold pickaxe
+5. Message: "✦ Glassing Beds ACTIVATED! ✦"
+6. Place bed near lava lake
+7. Right-click bed → explosion converts lava to glass
+8. Exit and re-enter Nether → activation resets
 ```
 
 ---
@@ -156,6 +178,7 @@ Word: "QUARTZ" (all magenta)
 | `/structurecode` | View structure's secret number | `charmedchars.blocks` |
 | `/structuredb list [world]` | List all tracked structures | `charmedchars.blocks` |
 | `/structuredb purge <type>` | Reset structure entries | `charmedchars.blocks` |
+| `/glassingbeds <enable\|disable\|status>` | Control Glassing Beds feature (v1.4.0) | `charmedchars.admin` |
 | `/iastatus` | Check ItemsAdder integration status | `charmedchars.admin` |
 | `/iasetup [force]` | Auto-setup ItemsAdder configuration | `charmedchars.admin` |
 | `/oraxensetup [force]` | Auto-setup Oraxen configuration | `charmedchars.admin` |

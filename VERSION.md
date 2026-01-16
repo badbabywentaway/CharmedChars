@@ -1,5 +1,214 @@
 # CharmedChars Version History
 
+## Version 1.4.0 - Glassing Beds Feature
+
+### Release Date
+2026-01-16
+
+### Overview
+Major feature release introducing the Glassing Beds system - a unique Nether mechanic where bed explosions convert nearby lava to glass, gated behind an operator sequence activation requirement. Adds strategic resource gathering and dimension control to enhance Nether gameplay.
+
+### Changes
+
+#### **New Features** ⭐
+
+**Glassing Beds System**
+- **Bed Explosion Mechanic**: Bed explosions in Nether or End convert lava blocks to glass within 5-block cubic radius
+- **Feature Control**: Disabled by default, enabled per-server via `/glassingbeds enable` command
+- **Admin Command**: `/glassingbeds enable/disable/status` with tab completion for operators
+- **Lava Conversion**: Replaces both source and flowing lava blocks with glass blocks
+- **Y-Level Restriction**: Only converts lava at or below Y=28 (configurable) to prevent lava ocean surface abuse
+- **Radius**: 5-block cubic radius from explosion center (11x11x11 cube total)
+- **Dimension Check**: Only works in Nether and End dimensions where beds naturally explode
+
+**Operator Activation System** 🎯
+- **Activation Requirement**: Players must activate glassing beds each time they enter the Nether
+- **Sequence Detection**: Hit a line of 4 operator blocks (+, -, ×, ÷) with gold/pyrite tool
+- **Validation Rules**:
+  - Exactly 4 operators in a straight line (horizontal only)
+  - All 4 must be different operators
+  - All 4 must be the same color (cyan, magenta, or yellow)
+  - Any order accepted ("+−×÷" or "÷×−+" both work)
+  - Must be in Nether dimension
+  - Requires gold or pyrite tool to activate
+- **Block Consumption**: Successfully activated sequences consume all 4 operator blocks
+- **Failure Behavior**: Invalid sequences break blocks naturally (drop as items if eligible per provider rules)
+- **Visual Feedback**:
+  - Success: Green bordered message "✦ Glassing Beds ACTIVATED! ✦"
+  - Failure: Red error messages explaining validation failure reason
+- **Session Reset**: Activation resets when player enters Nether (via portal, teleport, or respawn)
+- **Per-Player Tracking**: Each player has independent activation status
+
+**Bed Player Tracking** 🛏️
+- **Two-Block Structure Handling**: Tracks both halves of bed structure when clicked
+- **Reliable Identification**: Successfully identifies which player triggered bed explosion
+- **Safety Fallback**: Prevents lava conversion if player cannot be identified
+- **Location Key System**: Uses world name and block coordinates for tracking
+- **Cleanup**: Automatically cleans up tracking data on player disconnect
+
+**Event Detection Architecture** 🔧
+- **Dual Event Handlers**: Uses both PlayerInteractEvent and BlockDamageEvent for maximum compatibility
+- **PlayerInteractEvent** (LOWEST priority):
+  - Primary detection method for Oraxen compatibility
+  - Fires immediately on LEFT_CLICK_BLOCK action
+  - Used for operator sequence detection
+- **BlockDamageEvent** (LOWEST priority):
+  - Fallback for Nexo compatibility when Paper block updates disabled
+  - Same logic as PlayerInteractEvent handler
+- **Oraxen/Nexo Compatible**: Works with all three custom item providers (ItemsAdder, Oraxen, Nexo)
+
+#### **Configuration** 📝
+
+**New Config Section** (config.yml):
+```yaml
+# Glassing Beds Feature
+glassing-beds:
+  # Enable/disable the glassing beds feature
+  enabled: false
+
+  # Maximum Y-level for lava-to-glass conversion
+  # Only lava blocks at or below this Y-level will be converted to glass
+  # Recommended: 28 (allows underground lava but not ocean surface at Y=31)
+  max-y: 28
+```
+
+**ConfigManager Accessors**:
+- `glassingBedsEnabled: Boolean` - Feature toggle (default: false)
+- `glassingBedsMaxY: Int` - Y-level cap (default: 28)
+
+#### **Commands** 💬
+
+**New Command**: `/glassingbeds <subcommand>`
+- **Subcommands**:
+  - `enable` - Enable lava-to-glass conversion on bed explosions
+  - `disable` - Disable the glassing beds feature
+  - `status` - Check if feature is enabled or disabled
+- **Permission**: `charmedchars.admin` (operators only)
+- **Aliases**: None
+- **Tab Completion**: Suggests subcommands for operators with permission
+- **Feedback**: Colored bordered messages with clear status updates
+- **Config Persistence**: Changes saved to config.yml automatically
+
+#### **Technical Implementation** 🔧
+
+**File Structure**:
+- `GlassingBedsListener.kt` (156 lines) - Main feature logic
+  - Bed interaction tracking
+  - Player identification
+  - Activation checking
+  - Lava conversion
+- `OperatorActivationListener.kt` (355 lines) - Activation system
+  - Operator sequence detection
+  - Direction scanning (4 cardinal directions)
+  - Sequence validation
+  - Block consumption
+  - Session reset handling
+- `GlassingBedsCommand.kt` (214 lines) - Admin command
+  - Enable/disable/status subcommands
+  - Tab completion
+  - Config modification
+
+**Sequence Detection Algorithm**:
+1. Player hits operator block with gold/pyrite tool
+2. Scan 4 cardinal directions (±X, ±Z) for adjacent operator blocks
+3. If adjacent found, scan bidirectionally along that axis
+4. Collect all operator blocks and their colors in line
+5. Validate: exactly 4, all different, same color, in Nether
+6. Success: Remove blocks, set activation flag, send message
+7. Failure: Send error message, blocks break naturally
+
+**Session Reset Logic**:
+- **PlayerChangedWorldEvent** (MONITOR priority) - Primary reset mechanism
+  - Fires reliably for portal travel between dimensions
+  - Checks if player entered Nether (any environment change TO Nether)
+  - Removes player activation status immediately
+- **PlayerMoveEvent** (MONITOR priority) - Fallback for non-portal entry
+  - Detects dimension change from non-Nether to Nether
+  - Handles teleport, command-based entry
+- **PlayerQuitEvent** - Memory leak prevention
+  - Cleans up activation state on disconnect
+- **PlayerRespawnEvent** - Death handling
+  - Always resets activation on death (new session)
+
+### Impact
+
+**Compatibility**
+- **100% Backward Compatible**: Existing servers work without changes
+- **No Database Changes**: Structure database format unchanged
+- **Feature Opt-In**: Disabled by default, no gameplay changes unless enabled
+- **No Breaking Changes**: All existing commands and features unchanged
+
+**Gameplay Impact**
+- **New Nether Strategy**: Bed-based lava removal becomes viable with activation cost
+- **Resource Sink**: Requires operator blocks to activate each Nether visit
+- **Risk/Reward**: Bed explosions still dangerous, activation adds strategic layer
+- **Dimension Control**: Only works in dimensions where beds naturally explode
+
+**Server Owner Benefits**
+- **Optional Feature**: Can be left disabled for vanilla-like gameplay
+- **Configurable Y-Level**: Adjust max-y to control lava ocean abuse
+- **Admin Control**: Enable/disable via command without restart
+- **Clear Permissions**: charmedchars.admin for full control
+
+### Files Modified
+
+**Core Listeners**:
+- `GlassingBedsListener.kt` - NEW: Bed explosion and lava conversion
+- `OperatorActivationListener.kt` - NEW: Activation sequence system
+
+**Commands**:
+- `GlassingBedsCommand.kt` - NEW: Admin control command
+
+**Configuration**:
+- `ConfigManager.kt` - Added glassingBedsEnabled and glassingBedsMaxY accessors
+- `config.yml` - Added glassing-beds configuration section
+
+**Plugin Registration**:
+- `CharmedChars.kt` - Registered both listeners and command with tab completion
+- `plugin.yml` - Added glassingbeds command definition with permission
+
+### Upgrade Notes
+
+**From v1.3.2**:
+1. Download CharmedChars-1.4.0.jar
+2. Replace old JAR in `plugins/` folder
+3. Restart server
+4. Feature is disabled by default - no gameplay changes
+5. Run `/glassingbeds enable` to activate feature
+6. Configure max-y in config.yml if desired
+
+**For Server Admins**:
+- Feature is opt-in - no automatic changes to gameplay
+- Test activation system with operator blocks first
+- Consider Y-level restriction for your world height
+- Educate players about activation requirement
+
+**For Players**:
+- Feature requires server admin to enable first
+- Must activate by hitting 4 different operator blocks each Nether visit
+- Activation resets when leaving and re-entering Nether
+- Works with gold or pyrite tools
+
+### Known Issues
+
+None currently reported.
+
+### Development Notes
+
+**AI-Assisted Development**:
+- Glassing Beds feature developed with assistance from Claude (Anthropic)
+- Operator activation system designed with AI guidance
+- Bed tracking logic and event priority fixes implemented with AI
+- All AI contributions include Co-Authored-By attribution in git commits
+
+**Testing**:
+- Tested on Oraxen server with full portal cycle
+- Verified bed tracking with two-block structure
+- Confirmed activation reset on dimension change
+- Validated Y-level restriction behavior
+
+---
+
 ## Version 1.3.2 - Oraxen Compatibility & Behavior Consistency
 
 ### Release Date
