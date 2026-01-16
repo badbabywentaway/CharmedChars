@@ -16,6 +16,8 @@ Welcome to CharmedChars! This is a word-forming puzzle game in Minecraft where y
 4. **Earn rewards** based on your word's score!
 
 > **New in v1.1.2:** Pyrite tools work just like gold but with iron-tier durability! Craft pyrite ingots from iron + redstone.
+>
+> **New in v1.4.0:** Glassing Beds feature - Convert lava to glass with bed explosions in the Nether! Requires activation with operator blocks. See Section 10 for details.
 
 ---
 
@@ -620,7 +622,242 @@ No - it's one-time per structure. But finding multiple structures in the Nether 
 
 ---
 
-## 10. Frequently Asked Questions
+## 10. Glassing Beds Feature (v1.4.0)
+
+**New in v1.4.0!** An optional feature that lets you convert lava to glass using bed explosions in the Nether and End.
+
+> **Note:** This feature is **disabled by default**. Server admins must enable it with `/glassingbeds enable`.
+
+### What is Glassing Beds?
+
+When enabled, beds that explode in the Nether or End will convert nearby lava blocks into glass blocks. This provides a unique way to clear lava lakes and create safe paths through dangerous terrain.
+
+**Key Features:**
+- 🛏️ Bed explosions convert lava to glass (5-block radius)
+- 🔒 Requires activation each time you enter the Nether
+- 📏 Y-level restriction prevents ocean surface abuse (Y≤28)
+- ⚙️ Server-controlled feature (disabled by default)
+
+### How to Use Glassing Beds
+
+#### Step 1: Server Must Enable Feature
+
+Your server admin must first enable the feature:
+```
+/glassingbeds enable
+```
+
+If not enabled, beds will explode normally without converting lava.
+
+#### Step 2: Activate in the Nether
+
+**Every time you enter the Nether**, you must activate glassing beds by hitting a special sequence:
+
+1. **Place 4 operator blocks** in a straight line:
+   - Must be all 4 different operators: +, -, ×, ÷
+   - Must be all the same color (cyan, magenta, or yellow)
+   - Any order works: "+−×÷" or "÷×−+" both valid
+   - Must be horizontal (not diagonal or vertical with Y changes)
+
+2. **Hit the sequence** with a gold or pyrite tool (pickaxe or axe)
+
+3. **Success message appears:**
+   ```
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   ✦ Glassing Beds ACTIVATED! ✦
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   You can now use beds to convert lava to glass!
+   ```
+
+4. **Blocks are consumed** - The 4 operator blocks disappear
+
+#### Step 3: Use Beds to Convert Lava
+
+Once activated:
+1. Find a lava lake or lava source
+2. Place a bed near the lava
+3. Right-click the bed to explode it
+4. **BOOM!** Lava within 5 blocks converts to glass
+
+**Important:**
+- Only converts lava at Y≤28 (underground lava)
+- Does NOT convert lava ocean surface (Y=31)
+- Bed explosion is still dangerous - wear armor!
+
+### Activation Rules
+
+#### Valid Activation
+✅ **All these work:**
+```
+cyan + cyan − cyan × cyan ÷  (order doesn't matter)
+magenta ÷ magenta × magenta − magenta +
+yellow − yellow + yellow ÷ yellow ×
+```
+
+#### Invalid Activation
+❌ **These DON'T work:**
+
+**Mixed colors:**
+```
+cyan + magenta − cyan × cyan ÷
+→ "Mixed colors! All operators must be the same color."
+```
+
+**Duplicate operators:**
+```
+cyan + cyan + cyan × cyan ÷
+→ "All 4 operators must be different!"
+```
+
+**Wrong count:**
+```
+cyan + cyan − cyan ×  (only 3 operators)
+→ "Need exactly 4 operator blocks (+−×÷)"
+```
+
+**Wrong dimension:**
+```
+Try to activate in Overworld
+→ "Operator activation only works in the Nether!"
+```
+
+### Session Reset System
+
+Your glassing beds activation **resets** when you:
+- ❌ Exit the Nether through a portal
+- ❌ Teleport out of the Nether
+- ❌ Die and respawn outside the Nether
+- ❌ Use `/kill` or similar commands
+
+**This means:**
+1. Activate glassing beds in the Nether
+2. Use beds to convert lava successfully
+3. Leave Nether and return
+4. **Activation is gone** - must re-activate!
+
+**Why?** This prevents permanent activation and makes operator blocks a valuable resource.
+
+### Examples
+
+#### Example 1: Basic Usage
+```
+1. Admin enabled feature: /glassingbeds enable
+2. Enter Nether via portal
+3. Mine Warped Stems for operator blocks
+4. Collect: cyan+ cyan− cyan× cyan÷
+5. Place in a line: [+][−][×][÷]
+6. Hit with gold pickaxe
+7. Message: "✦ Glassing Beds ACTIVATED! ✦"
+8. Place bed near lava lake
+9. Right-click bed → BOOM! Lava becomes glass
+```
+
+#### Example 2: Underground Lava
+```
+Y-Level: 20 (underground)
+Place bed near lava
+Explosion converts lava to glass ✅
+Safe path created!
+```
+
+#### Example 3: Lava Ocean Surface (Prevented)
+```
+Y-Level: 31 (lava ocean surface)
+Place bed near lava
+Explosion happens
+Lava does NOT convert ❌
+Message: (Y-level too high)
+```
+
+#### Example 4: Forgot to Activate
+```
+1. Enter Nether
+2. Place bed near lava without activating
+3. Right-click bed → explosion
+4. Lava doesn't convert
+5. Message: "Glassing beds not activated for this Nether visit!"
+6. Hint: "Hit 4 different operator blocks (+−×÷) of the same color"
+```
+
+### Strategy Tips
+
+#### Operator Block Farming
+- **Source:** Warped and Crimson Stems (Nether wood)
+- **Drop rate:** Same as letters/numbers (6% base, 20% with Looting III)
+- **Farm in bulk:** You'll need 4 operators each Nether visit
+- **Stock colors:** Keep sets of same-color operators ready
+
+#### Cost-Benefit Analysis
+- **Cost:** 4 operator blocks per Nether session
+- **Benefit:** Convert unlimited lava during that session
+- **Worth it?** Depends on how much lava you need to clear
+
+#### Safe Usage
+- **Wear armor:** Bed explosions deal massive damage
+- **Don't stand on bed:** Move away after placing
+- **Fire resistance:** Recommended near lava
+- **Blast protection:** Helps reduce explosion damage
+
+### Configuration (Admins)
+
+#### Enable/Disable Feature
+```bash
+/glassingbeds enable   # Turn on feature
+/glassingbeds disable  # Turn off feature
+/glassingbeds status   # Check if enabled
+```
+
+#### Config File Settings
+Located in `config.yml`:
+```yaml
+glassing-beds:
+  # Enable/disable the feature
+  enabled: false
+
+  # Maximum Y-level for lava conversion
+  # Only lava at or below this Y will convert
+  max-y: 28
+```
+
+**Customization:**
+- `enabled`: Set to `true` to enable by default
+- `max-y`: Adjust Y-level restriction (default: 28)
+  - Lower = more restrictive
+  - Higher = less restrictive
+  - 28 = allows underground lava but not ocean (Y=31)
+
+### Frequently Asked Questions
+
+**Q: Does the feature work without activation?**
+No - you must activate by hitting the operator sequence each Nether visit.
+
+**Q: Can I stay activated by staying in the Nether?**
+Yes! As long as you don't leave, your activation persists.
+
+**Q: What if I die in the Nether?**
+If you respawn outside the Nether, activation resets. If you respawn in the Nether (bed respawn), it stays active.
+
+**Q: Do I need to activate in the End?**
+No - activation only works in the Nether, but once activated, it works in both Nether and End.
+
+**Q: Can I activate with other tools?**
+No - only gold or pyrite tools work for activation.
+
+**Q: What if my server has the feature disabled?**
+Beds will explode normally without converting lava. Ask your admin to enable it!
+
+**Q: Can I reuse the same operators?**
+No - successful activation consumes all 4 operator blocks. You'll need to get more.
+
+**Q: Does it work on flowing lava?**
+Yes - both source blocks and flowing lava convert to glass.
+
+**Q: What's the radius?**
+5 blocks in all directions (11×11×11 cube total).
+
+---
+
+## 11. Frequently Asked Questions
 
 ### Q: My word didn't score. Why?
 
@@ -658,7 +895,7 @@ No - it's one-time per structure. But finding multiple structures in the Nether 
 
 ---
 
-## 11. Troubleshooting
+## 12. Troubleshooting
 
 ### Letter blocks won't drop from logs
 
@@ -682,6 +919,7 @@ No - it's one-time per structure. But finding multiple structures in the Nether 
 
 ## Getting Started Checklist
 
+**Basic Gameplay:**
 - [ ] Craft or obtain a gold axe (or pyrite axe for better durability)
 - [ ] Add Looting enchantment (optional, but recommended)
 - [ ] Mine 20-30 logs to get your first letter blocks
@@ -689,6 +927,10 @@ No - it's one-time per structure. But finding multiple structures in the Nether 
 - [ ] Try making a 4+ letter word with multiple colors (e.g., "CATS", "DOGS", "RUNS")
 - [ ] Break any letter in the word with your gold/pyrite tool to score
 - [ ] Collect your rewards and aim for longer same-color words for bigger bonuses!
+
+**Advanced Features (Optional):**
+- [ ] Try the Nether number guessing game in fortresses/bastions (see Section 9)
+- [ ] If enabled by admin: Activate Glassing Beds and convert lava in the Nether (see Section 10)
 
 ---
 
