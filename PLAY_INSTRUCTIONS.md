@@ -821,6 +821,35 @@ Message: (Y-level too high)
 - **Fire resistance:** Recommended near lava
 - **Blast protection:** Helps reduce explosion damage
 
+#### ⚠️ Important Safety Limitations
+
+**Overlapping Explosions:**
+- Multiple bed explosions in the same area can break previously-created glass
+- The explosion destroys blocks before converting lava
+- If glass from explosion #1 is in the radius of explosion #2, it will be destroyed
+- Plan your bed placements carefully to avoid overlap
+
+**Lava Flow Behavior:**
+- **Not all lava flows are guaranteed to stop!**
+- Glass conversion happens within 5 blocks of explosion center
+- Lava sources outside this radius continue flowing
+- Large lava lakes may have hidden sources that keep flowing
+- Broken glass from overlapping explosions can allow lava to flow again
+
+**Underground Lava Discovery:**
+- **Use the same caution as if you didn't have glassing beds!**
+- Digging into unknown areas can still release catastrophic lava flows
+- Glassing beds converts existing lava, but doesn't prevent new flows
+- Always mine carefully around suspected lava lakes
+- Have fire resistance potions and escape routes ready
+
+**Ancient Debris Mining:**
+- Consider doing debris mining in a **different, safer area**
+- Don't rely on glassing beds as your only lava safety measure
+- Overlapping explosions can create new lava flow paths
+- Y-level 15 debris mining is dangerous even with glassing beds
+- Use traditional safety methods: fire resistance, careful digging, escape routes
+
 ### Configuration (Admins)
 
 #### Enable/Disable Feature
@@ -889,6 +918,12 @@ Yes! Use a WHITE bed to create regular clear glass instead of stained glass.
 
 **Q: Can I mix colors in one lava lake?**
 Yes! Use different colored beds in different spots to create multicolored glass patterns.
+
+**Q: Why does lava keep flowing even after I use glassing beds?**
+Glassing beds only converts lava within 5 blocks of the explosion. If there are lava sources outside this radius, they'll continue flowing. Additionally, overlapping explosions can break previously-created glass, allowing new lava flows. Use the same caution for underground lava discovery as you would without glassing beds!
+
+**Q: Is it safe to do ancient debris mining with glassing beds?**
+Glassing beds helps, but it's NOT a complete safety solution. Overlapping explosions can destroy glass and create new lava flow paths. Consider doing debris mining in a different, safer area. Always use fire resistance potions, careful digging techniques, and have escape routes ready.
 
 ---
 
