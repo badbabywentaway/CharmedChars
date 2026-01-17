@@ -150,3 +150,11 @@ glassing-beds:
   # This prevents using beds to glass lava ocean surfaces (Y=31) for easy travel
   # Recommended: 28 (allows underground lava but not ocean surface)
   max-y: 28
+
+  # Colored Glass Feature (v1.4.1)
+  # The color of glass created matches the bed color used:
+  # - WHITE beds → Clear glass (unstained)
+  # - RED beds → Red stained glass
+  # - BLUE beds → Blue stained glass
+  # - (All 16 bed colors supported)
+  # This allows players to "paint" their lava lakes with colored glass!

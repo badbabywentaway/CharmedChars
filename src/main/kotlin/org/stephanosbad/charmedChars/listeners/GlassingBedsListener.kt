@@ -127,8 +127,20 @@ class GlassingBedsListener(
             return
         }
 
-        // Player has activation or no player tracking - convert lava
+        // Player has activation - convert lava to glass
         val maxY = plugin.configManager.glassingBedsMaxY
+
+        // Determine glass type based on bed color
+        // WHITE beds create clear glass, other colors create matching stained glass
+        val bedType = explodedBlock.type
+        val glassType = if (bedType == Material.WHITE_BED) {
+            Material.GLASS  // White beds create clear glass
+        } else {
+            // Extract color from bed type name (e.g., "RED_BED" → "RED")
+            val bedColor = bedType.name.removeSuffix("_BED")
+            // Map to stained glass (e.g., "RED" → "RED_STAINED_GLASS")
+            Material.getMaterial("${bedColor}_STAINED_GLASS") ?: Material.GLASS
+        }
 
         // Scan 5-block cubic radius and convert lava to glass
         var convertedBlocks = 0
@@ -138,7 +150,7 @@ class GlassingBedsListener(
                     val block = explosionCenter.block.getRelative(x, y, z)
                     // Only convert lava at or below the configured max Y-level
                     if (block.type == Material.LAVA && block.y <= maxY) {
-                        block.type = Material.GLASS
+                        block.type = glassType  // Use colored glass based on bed
                         convertedBlocks++
                     }
                 }
@@ -148,7 +160,7 @@ class GlassingBedsListener(
         // Log if any lava was converted
         if (convertedBlocks > 0) {
             plugin.logger.info(
-                "Glassing Beds: Converted $convertedBlocks lava blocks to glass " +
+                "Glassing Beds: Converted $convertedBlocks lava blocks to ${glassType.name.lowercase().replace('_', ' ')} " +
                 "at ${explosionCenter.blockX}, ${explosionCenter.blockY}, ${explosionCenter.blockZ}"
             )
         }

@@ -675,7 +675,7 @@ If not enabled, beds will explode normally without converting lava.
 
 Once activated:
 1. Find a lava lake or lava source
-2. Place a bed near the lava
+2. Place a bed near the lava (choose your favorite color!)
 3. Right-click the bed to explode it
 4. **BOOM!** Lava within 5 blocks converts to glass
 
@@ -683,6 +683,16 @@ Once activated:
 - Only converts lava at Y≤28 (underground lava)
 - Does NOT convert lava ocean surface (Y=31)
 - Bed explosion is still dangerous - wear armor!
+
+**Colored Glass Feature (v1.4.1):**
+The glass color matches your bed color!
+- 🤍 **White beds** → Clear glass (unstained)
+- 🔴 **Red beds** → Red stained glass
+- 🔵 **Blue beds** → Blue stained glass
+- 🟡 **Yellow beds** → Yellow stained glass
+- ...and all 16 Minecraft bed colors!
+
+This lets you "paint" lava lakes with colored glass for decorative builds!
 
 ### Activation Rules
 
@@ -769,7 +779,20 @@ Lava does NOT convert ❌
 Message: (Y-level too high)
 ```
 
-#### Example 4: Forgot to Activate
+#### Example 4: Colored Glass (v1.4.1)
+```
+1. Activate glassing beds
+2. Place RED bed near lava
+3. Right-click → explosion
+4. Lava converts to RED STAINED GLASS ✅
+5. Place BLUE bed near different lava
+6. Right-click → explosion
+7. Lava converts to BLUE STAINED GLASS ✅
+8. Use WHITE bed for clear glass
+9. Result: Decorative multicolored glass paths!
+```
+
+#### Example 5: Forgot to Activate
 ```
 1. Enter Nether
 2. Place bed near lava without activating
@@ -854,6 +877,18 @@ Yes - both source blocks and flowing lava convert to glass.
 
 **Q: What's the radius?**
 5 blocks in all directions (11×11×11 cube total).
+
+**Q: What colors of glass can I create? (v1.4.1)**
+All 16 Minecraft bed colors are supported:
+- WHITE → Clear glass (unstained)
+- RED, ORANGE, YELLOW, LIME, GREEN, CYAN, LIGHT_BLUE, BLUE → Matching stained glass
+- PURPLE, MAGENTA, PINK, BROWN, BLACK, GRAY, LIGHT_GRAY → Matching stained glass
+
+**Q: Can I get clear glass instead of colored?**
+Yes! Use a WHITE bed to create regular clear glass instead of stained glass.
+
+**Q: Can I mix colors in one lava lake?**
+Yes! Use different colored beds in different spots to create multicolored glass patterns.
 
 ---
 
