@@ -1,5 +1,139 @@
 # CharmedChars Version History
 
+## Version 1.4.1 - Colored Glass & Safety Enhancements
+
+### Release Date
+2026-01-19
+
+### Overview
+Enhancement release adding colored glass support to the Glassing Beds feature and comprehensive safety documentation. The glass color now matches the bed color used for the explosion, allowing decorative builds with colored glass "paintings" in lava lakes.
+
+### Changes
+
+#### **New Features** ⭐
+
+**Colored Glass Creation**
+- **Bed Color Mapping**: Glass color matches the bed color used for explosion
+  - WHITE beds → Clear glass (Material.GLASS, unstained)
+  - RED beds → Red stained glass (Material.RED_STAINED_GLASS)
+  - BLUE beds → Blue stained glass (Material.BLUE_STAINED_GLASS)
+  - All 16 Minecraft bed colors supported
+- **String Parsing Logic**: Extracts color from bed Material name (e.g., "RED_BED" → "RED")
+- **Material Mapping**: Constructs stained glass material name (e.g., "RED" → "RED_STAINED_GLASS")
+- **Fallback Safety**: Falls back to clear glass if Material.getMaterial() returns null
+- **Decorative Builds**: Allows "painting" lava lakes with multicolored glass patterns
+
+#### **Documentation Enhancements** 📚
+
+**Safety Warnings Added (PLAY_INSTRUCTIONS.md)**
+- **Overlapping Explosions**:
+  - Warning that multiple bed explosions can destroy previously-created glass
+  - Explosions destroy blocks before converting lava
+  - Plan bed placements carefully to avoid overlap
+- **Lava Flow Limitations**:
+  - Not all lava flows guaranteed to stop
+  - Only converts lava within 5-block radius
+  - Hidden sources outside radius continue flowing
+  - Broken glass from overlapping explosions allows new flows
+- **Underground Lava Discovery**:
+  - Use same caution as without glassing beds
+  - Feature converts existing lava but doesn't prevent new flows
+  - Always mine carefully around suspected lava lakes
+  - Maintain fire resistance potions and escape routes
+- **Ancient Debris Mining**:
+  - Consider mining in different, safer areas
+  - Don't rely on glassing beds as only safety measure
+  - Use traditional safety methods (fire resistance, careful digging, escape routes)
+
+**New FAQ Entries**
+- "Why does lava keep flowing even after I use glassing beds?"
+- "Is it safe to do ancient debris mining with glassing beds?"
+- "What colors of glass can I create?"
+- "Can I get clear glass instead of colored?"
+- "Can I mix colors in one lava lake?"
+
+**Example Updates**
+- Added Example 4: Colored Glass demonstration in PLAY_INSTRUCTIONS.md
+- Shows creating RED, BLUE, and clear glass in same lava lake
+
+**Configuration Documentation**
+- Updated config.yml with colored glass feature comment
+- Explains white → clear, other colors → matching stained glass
+
+#### **Code Changes** 🔧
+
+**Modified: GlassingBedsListener.kt**
+- Lines 133-143: Added bed color detection and glass type determination
+  ```kotlin
+  val bedType = explodedBlock.type
+  val glassType = if (bedType == Material.WHITE_BED) {
+      Material.GLASS  // White beds create clear glass
+  } else {
+      val bedColor = bedType.name.removeSuffix("_BED")
+      Material.getMaterial("${bedColor}_STAINED_GLASS") ?: Material.GLASS
+  }
+  ```
+- Line 153: Changed `block.type = Material.GLASS` to `block.type = glassType`
+- Lines 162-165: Updated logging to show glass type created
+
+### Technical Details
+
+**Compatibility**
+- ✅ 100% Backward Compatible - No breaking changes
+- ✅ Works with ItemsAdder, Oraxen, and Nexo
+- ✅ No configuration changes required (feature automatic)
+- ✅ No database changes
+
+**Material System**
+- Uses Minecraft's Material enum for all bed and glass types
+- Supports all 16 bed colors: WHITE, ORANGE, MAGENTA, LIGHT_BLUE, YELLOW, LIME, PINK, GRAY, LIGHT_GRAY, CYAN, PURPLE, BLUE, BROWN, GREEN, RED, BLACK
+- 1:1 mapping to stained glass materials
+
+**Performance**
+- No performance impact - single Material lookup per explosion
+- String manipulation is trivial (suffix removal + concatenation)
+- Glass type determined once per explosion, applied to all converted blocks
+
+### Upgrade Instructions
+
+**From v1.4.0:**
+1. Stop server
+2. Replace CharmedChars-1.4.0.jar with CharmedChars-1.4.1.jar
+3. Start server
+4. **No configuration changes needed** - colored glass works automatically
+5. Feature is automatic - all players can use it immediately
+
+**From v1.3.2 or earlier:**
+1. Follow standard upgrade to v1.4.0 first (see v1.4.0 changelog)
+2. Then upgrade to v1.4.1 as above
+
+### Testing
+
+**Verified Scenarios:**
+- ✅ WHITE beds create clear glass
+- ✅ RED beds create red stained glass
+- ✅ BLUE beds create blue stained glass
+- ✅ All 16 bed colors map correctly
+- ✅ Fallback to clear glass if Material.getMaterial() fails
+- ✅ Logging shows correct glass type name
+- ✅ Mixed colors work in same lava lake
+
+### Known Issues
+
+None currently reported.
+
+### Credits
+
+**Development**: StephanosBad
+**AI-Assisted Development**: Claude Sonnet 4.5 (Anthropic)
+- Colored glass feature design and implementation
+- Safety documentation enhancements
+- FAQ additions and example updates
+
+All AI contributions include Co-Authored-By attribution in git commits.
+
+---
+
 ## Version 1.4.0 - Glassing Beds Feature
 
 ### Release Date
