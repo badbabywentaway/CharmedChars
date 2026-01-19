@@ -274,15 +274,21 @@ Output: `build/libs/CharmedChars-1.4.0.jar`
 
 ## Version
 
-Current Version: **1.4.0**
+Current Version: **1.4.1**
 
-**Latest Updates (v1.4.0 - Glassing Beds)**:
-- **NEW**: Glassing Beds feature - bed explosions in Nether/End convert nearby lava to glass
-- **NEW**: Operator activation system - hit 4 different operator blocks (+−×÷) to activate
-- **NEW**: `/glassingbeds enable/disable/status` command with tab completion
+**Latest Updates (v1.4.1 - Colored Glass)**:
+- **NEW**: Colored glass feature - glass color matches bed color (16 colors supported)
+- White beds → Clear glass, other colors → Matching stained glass
+- Create decorative colored glass patterns in lava lakes
+- Comprehensive safety warnings for overlapping explosions
+- New FAQ entries about lava flow limitations and debris mining safety
+- 100% backward compatible with v1.4.0
+
+**Previous Major Release (v1.4.0 - Glassing Beds)**:
+- Glassing Beds feature - bed explosions in Nether/End convert nearby lava to glass
+- Operator activation system - hit 4 different operator blocks (+−×÷) to activate
+- `/glassingbeds enable/disable/status` command with tab completion
 - Y-level restriction (max Y=28) prevents lava ocean surface abuse
-- Activation resets on Nether entry via portal/teleport/death
-- Feature disabled by default for server choice
 
 Run `/version` in-game or `./gradlew version` to display version information.
 

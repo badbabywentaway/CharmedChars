@@ -52,6 +52,11 @@ Perfect for:
 
 ### Glassing Beds (v1.4.0) 🛏️🔥
 - **NEW**: Optional feature converts lava to glass when beds explode in Nether/End
+- **Colored Glass (v1.4.1)**: Glass color matches bed color! 🎨
+  - White beds → Clear glass
+  - Red/Blue/Yellow/etc beds → Matching stained glass
+  - All 16 Minecraft bed colors supported
+  - Create decorative colored glass patterns in lava lakes
 - **Activation System**: Hit 4 different operator blocks (+−×÷) with gold/pyrite tool each Nether visit
 - **Requirements**: All same color, any order, must be in Nether dimension
 - **Y-Level Restriction**: Only converts lava at Y≤28 (prevents ocean surface abuse)
@@ -59,6 +64,7 @@ Perfect for:
 - **Session Reset**: Activation resets when entering Nether (portal/teleport/death)
 - **Feature Control**: Disabled by default, enable with `/glassingbeds enable`
 - **Strategic Gameplay**: Adds resource cost (operator blocks) for lava removal
+- **Safety Warnings**: Not all lava flows guaranteed to stop; overlapping explosions can break glass
 
 ### Configurable Reward System
 - Earn items based on word scores
@@ -100,16 +106,17 @@ Word: "QUARTZ" (all magenta)
 6. Guess 375 → "CORRECT! +16 Ender Pearls"
 ```
 
-### Example 4: Glassing Beds (v1.4.0)
+### Example 4: Colored Glass (v1.4.1)
 ```
 1. Admin runs /glassingbeds enable
 2. Player enters Nether via portal
 3. Place 4 operators: cyan + cyan − cyan × cyan ÷
 4. Hit sequence with gold pickaxe
 5. Message: "✦ Glassing Beds ACTIVATED! ✦"
-6. Place bed near lava lake
-7. Right-click bed → explosion converts lava to glass
-8. Exit and re-enter Nether → activation resets
+6. Place RED bed near lava → explosion creates RED stained glass
+7. Place BLUE bed nearby → explosion creates BLUE stained glass
+8. Place WHITE bed → explosion creates clear glass
+9. Result: Decorative multicolored glass path through Nether!
 ```
 
 ---
@@ -279,29 +286,31 @@ bastion-reward:
 
 ## Version Information
 
-**Current Version**: 1.3.0
+**Current Version**: 1.4.1
 
 **Latest Updates**:
+- **v1.4.1**: Colored Glass & Safety Enhancements - Glass color matches bed color
+  - **NEW**: Colored glass feature - bed color determines glass color (16 colors)
+  - White beds → Clear glass, other colors → Matching stained glass
+  - Create decorative colored glass patterns in lava lakes
+  - Comprehensive safety warnings for overlapping explosions
+  - New FAQ entries about lava flow limitations and debris mining safety
+  - 100% backward compatible with v1.4.0
+- **v1.4.0**: Glassing Beds Feature - Major feature release with Nether lava management
+  - **NEW**: Glassing Beds system - bed explosions convert lava to glass
+  - **NEW**: Operator Activation - hit 4 operator blocks (+−×÷) to activate each Nether visit
+  - Y-level restriction (Y≤28) prevents lava ocean surface abuse
+  - 5-block cubic radius conversion (11x11x11 cube)
+  - Session-based activation resets on dimension change
+  - Admin command: `/glassingbeds enable/disable/status`
+  - Optional feature - disabled by default
 - **v1.3.0**: Nexo Integration & Fortune Enchantment - Complete three-provider support plus gameplay improvements
-  - **NEW**: Full Nexo integration as third custom item provider option
-  - **NEW**: Fortune enchantment now correctly boosts letter block drop rates
+  - Full Nexo integration as third custom item provider option
+  - Fortune enchantment now correctly boosts letter block drop rates
   - Copper tool support for Oraxen (Minecraft 1.21.9+)
   - Universal 256x256 textures for all providers
-  - Fixed Oraxen invisible block issue
-  - Enhanced config generation system
 - **v1.2.0**: Oraxen compatibility - Full support for Oraxen as alternative to ItemsAdder
-  - **IMPORTANT**: Both ItemsAdder and Oraxen are premium plugins requiring purchase
-  - Custom item provider abstraction layer
-  - `/oraxensetup` command for automatic configuration
-  - Automatic block model JSON generation for Oraxen
-  - Plugin auto-detects which provider is installed
-  - Refuses to load if both or neither are installed
-- **v1.1.5**: Bug fix - automatic Data folder creation, comprehensive documentation updates
-- **v1.1.4**: Code cleanup and refactoring (95 lines removed)
-- **v1.1.3**: Brass-colored pyrite textures
-- **v1.1.2**: Pyrite system, word length validation, tool validation for number sequences
-- **v1.1.1**: Critical coordinate bug fixes, comprehensive test coverage
-- **v1.1.0**: Multi-chunk structure fixes, listener conflict resolution
+- **v1.1.x**: Pyrite system, bug fixes, and enhancements
 - **v1.0.0**: Initial release with word scoring and Nether number game
 
 **[Full Changelog](https://github.com/badbabywentaway/CharmedChars/blob/master/VERSION.md)**
