@@ -40,21 +40,21 @@ CharmedChars is **open source** software licensed under **GNU LGPL v3**.
 ### Requirements
 
 **Server Software:**
-- Minecraft 1.21.10+
+- Minecraft 1.21.11+
 - Paper or Paper-based server (Purpur, Pufferfish, etc.)
 - Java 21+
 
 **Required Plugin (choose ONE):**
 - ItemsAdder 3.6.3-beta-14+ (**proprietary - purchase separately**)
-- Oraxen 1.181.0+ (open-source, free)
-- Nexo (latest) (open-source, free)
+- Oraxen 1.212.0+ (open-source, free)
+- Nexo 1.0.0+ (open-source, free)
 
 All three plugins now have auto-setup commands!
 
 **Optional Plugins:**
 - WorldGuard 7.0.14+ (for region protection)
 - GriefPrevention 16.15.0+ (for claim protection)
-- ProtocolLib 5.3.0+ (for advanced features)
+- ProtocolLib 5.4.0+ (for advanced features)
 
 ### Installation
 
