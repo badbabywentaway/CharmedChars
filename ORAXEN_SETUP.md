@@ -38,8 +38,8 @@ The auto-generated Oraxen configuration allows these 14 tool types to break bloc
 
 ## Requirements
 
-- **Oraxen 1.181.0+** (tested with 1.203)
-- **Minecraft 1.21.10+** (tested with 1.21.11)
+- **Oraxen 1.212.0+** (tested with 1.212.0)
+- **Minecraft 1.21.11+** (tested with 1.21.11)
 - Install **either** ItemsAdder **OR** Oraxen (not both!)
 - CharmedChars will automatically detect which one you have installed
 - If both are installed, the plugin will refuse to load

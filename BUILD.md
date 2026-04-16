@@ -107,7 +107,7 @@ Then restart your server.
 ## Dependencies
 
 The plugin requires:
-- PaperMC 1.21.4 or higher
+- PaperMC 1.21.11 or higher
 - Java 21 or higher (recommended for Paper 1.21+)
 
 ## Development Build

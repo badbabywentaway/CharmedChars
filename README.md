@@ -30,6 +30,7 @@ CharmedChars is **open source** software licensed under **GNU LGPL v3**.
 - **Auto-setup available** with `/nexosetup` command (see `NEXO_SETUP.md`)
 - Free alternative to ItemsAdder with additional features
 - **Requires Paper block update optimizations** (see `NEXO_SETUP.md`)
+- ⚠️ **Integration Status**: Untested - API integration complete, compiles successfully, but not verified at runtime (no premium license available). Community testing welcome!
 
 **Important**: Install **exactly ONE** of these plugins. CharmedChars will automatically detect which one you have and refuse to load if multiple are installed or none are installed.
 
@@ -99,10 +100,11 @@ CharmedChars supports three custom item providers with different behaviors:
 
 | Feature | ItemsAdder | Oraxen | Nexo |
 |---------|------------|--------|------|
+| **Testing Status** | ✅ Fully tested | ✅ Fully tested | ⚠️ Untested (compiles, not verified) |
 | **License** | Proprietary (paid) | Open-source (free) | Open-source (free) |
 | **Texture Resolution** | 512x512 | 256x256 (1.203+) | 256x256+ |
-| **Block Breaking Without Correct Tool** | **Shows purple warning, prevents breaking** | **Block disappears without dropping** | **Block disappears without dropping** |
-| **Player Feedback** | Clear visual warning message | No warning (silent loss) | No warning (silent loss) |
+| **Block Breaking Without Correct Tool** | **Shows purple warning, prevents breaking** | **Block disappears without dropping** | **Block disappears without dropping** (expected) |
+| **Player Feedback** | Clear visual warning message | No warning (silent loss) | No warning (silent loss) (expected) |
 | **Tool Whitelist** | `break_tools_whitelist` with wildcards (`_AXE`, `_PICKAXE`) | `minimal_type` with explicit material list | `minimal_type` with explicit material list |
 | **Auto-Setup Command** | `/iasetup` | `/oraxensetup` | `/nexosetup` |
 | **Special Requirements** | None | None | **Requires Paper block optimizations** |
