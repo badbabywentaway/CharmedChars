@@ -41,6 +41,10 @@ Maintenance release updating core dependencies to support Minecraft 1.21.11 and 
 - Line 33: compileOnly("com.nexomc:nexo:1.0.0")
 - Line 90: minecraftVersion("1.21.11")
 - Line 136: println("  Minecraft: 1.21.11")
+- Added `kotlin { jvmToolchain(21) }` to explicitly target Java 21 bytecode
+
+**Modified: gradle/wrapper/gradle-wrapper.properties**
+- Gradle wrapper upgraded: 8.8 → 8.14.4 (required for Java 23/24 daemon support)
 
 #### **Documentation Updates** 📚
 
