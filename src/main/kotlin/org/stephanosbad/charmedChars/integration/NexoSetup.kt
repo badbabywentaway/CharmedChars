@@ -257,6 +257,27 @@ class NexoSetup(private val plugin: CharmedChars) {
             }
         }
 
+        // Generate logo blocks (3 colors = 3 items)
+        listOf("cyan", "magenta", "yellow").forEach { color ->
+            val itemId = "${color}_logo"
+            config.appendLine("$itemId:")
+            config.appendLine("  itemname: \"<gradient:${getGradientColors(color)}>Logo</gradient>\"")
+            config.appendLine("  material: NOTE_BLOCK")
+            config.appendLine("  Pack:")
+            config.appendLine("    model: charmedchars:block/$color/logo_block")
+            config.appendLine("  Mechanics:")
+            config.appendLine("    custom_block:")
+            config.appendLine("      type: NOTEBLOCK")
+            config.appendLine("      drop:")
+            config.appendLine("        silktouch: false")
+            config.appendLine("        fortune: false")
+            config.appendLine("        minimal_type: WOODEN")
+            config.appendLine("        best_tool: null")
+            config.appendLine("        loots:")
+            config.appendLine("          - nexo_item: $itemId")
+            config.appendLine()
+        }
+
         // Generate pyrite items (5 items)
         val pyriteItems = listOf(
             "pyrite_ingot" to "Pyrite Ingot",
@@ -374,6 +395,15 @@ class NexoSetup(private val plugin: CharmedChars) {
             }
         }
 
+        // Copy logo block textures to block subfolder
+        listOf("cyan", "magenta", "yellow").forEach { color ->
+            val resourcePath = "pack/assets/minecraft/textures/block/$color/logo_block.png"
+            val destFile = File(nexoTexturesFolder, "block/$color/logo_block.png")
+            if (copyResource(resourcePath, destFile)) {
+                copiedCount++
+            }
+        }
+
         // Copy pyrite item textures to item/pyrite subfolder
         listOf("ingot", "pickaxe", "axe", "shovel", "hoe").forEach { item ->
             val resourcePath = "pack/assets/minecraft/textures/item/pyrite/$item.png"
@@ -448,6 +478,19 @@ class NexoSetup(private val plugin: CharmedChars) {
                 File(colorFolder, "${operator.name.lowercase()}.json").writeText(model)
                 modelCount++
             }
+
+            // Logo block
+            val logoModel = """
+            {
+              "parent": "block/cube_all",
+              "textures": {
+                "all": "charmedchars:block/$color/logo_block"
+              }
+            }
+            """.trimIndent()
+
+            File(colorFolder, "logo_block.json").writeText(logoModel)
+            modelCount++
         }
 
         plugin.logger.info("Generated $modelCount block model JSON files")
