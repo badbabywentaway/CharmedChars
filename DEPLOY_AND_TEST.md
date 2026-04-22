@@ -92,7 +92,7 @@ After deployment:
 - [ ] Bare hands - **ItemsAdder**: purple warning, no break | **Oraxen**: breaks, no drop (block lost)
 - [ ] Shovels/hoes - **ItemsAdder**: purple warning, no break | **Oraxen**: breaks, no drop (block lost)
 
-> **Note:** Copper tools require Minecraft 1.21.9+ ("The Copper Age" update)
+> **Note:** Copper tools were added in Minecraft Java Edition 1.21.9 ("The Copper Age" update, September 2025)
 
 **Expected Behavior Difference:**
 - **ItemsAdder**: Non-whitelisted tools show purple warning and prevent breaking

@@ -28,9 +28,9 @@
 - **Files**: All PNG files in textures/
 
 ### 6. Dependencies (Updated ✅)
-- Minecraft: 1.21.4 → 1.21.10
-- Paper API: 1.21.4 → 1.21.10
-- Kotlin: 2.2.0 → 2.2.21
+- Minecraft: 1.21.4 → 1.21.11
+- Paper API: 1.21.4 → 1.21.11
+- Kotlin: 2.2.0 → 2.3.20
 
 ## Required Steps to Apply Fixes
 

@@ -124,18 +124,18 @@ Word: "QUARTZ" (all magenta)
 ## Installation
 
 ### Requirements
-- **Minecraft**: 1.21.10+
+- **Minecraft**: 1.21.11+
 - **Server**: Paper or Paper-based (Purpur, Pufferfish, etc.)
 - **Java**: 21+
 - **Custom Item Plugin** (choose ONE):
   - **ItemsAdder** 3.6.3-beta-14+ (premium - sold separately) - **Recommended**
-  - **Oraxen** 1.181.0+ (premium with public source - sold separately) - Alternative option
-  - **Nexo** 0.1.0+ (premium - sold separately) - Alternative option (**UNTESTED** - requires license)
+  - **Oraxen** 1.212.0+ (premium with public source - sold separately) - Alternative option
+  - **Nexo** 1.0.0+ (premium - sold separately) - Alternative option (**UNTESTED** - requires license)
 
 ### Optional Dependencies
 - WorldGuard 7.0.14+ (region protection)
 - GriefPrevention 16.15.0+ (claim protection)
-- ProtocolLib 5.3.0+ (advanced features)
+- ProtocolLib 5.4.0+ (advanced features)
 
 ### Setup Steps (ItemsAdder)
 1. Purchase and install **ItemsAdder** (proprietary plugin - not included)
@@ -286,9 +286,17 @@ bastion-reward:
 
 ## Version Information
 
-**Current Version**: 1.4.1
+**Current Version**: 1.4.2
 
 **Latest Updates**:
+- **v1.4.2**: Dependency Updates for Minecraft 1.21.11 - Maintenance release with updated dependencies
+  - **UPDATED**: Minecraft 1.21.10 → 1.21.11, PaperMC Build #130
+  - **UPDATED**: Kotlin 2.2.21 → 2.3.20, Coroutines 1.9.0 → 1.10.2
+  - **UPDATED**: ProtocolLib 5.3.0 → 5.4.0 (new Maven coordinates)
+  - **UPDATED**: Oraxen 1.181.0 → 1.212.0, Nexo 0.1.0 → 1.0.0
+  - **KEPT**: ItemsAdder 3.6.3-beta-14 (4.0.16 has stability issues)
+  - **KEPT**: Exposed ORM 0.48.0 (1.0 migration deferred)
+  - 100% backward compatible - no config/database changes
 - **v1.4.1**: Colored Glass & Safety Enhancements - Glass color matches bed color
   - **NEW**: Colored glass feature - bed color determines glass color (16 colors)
   - White beds → Clear glass, other colors → Matching stained glass
@@ -360,11 +368,12 @@ bastion-reward:
 **Author**: StephanosBad
 
 **Built With**:
-- Kotlin 2.2.21 & Paper API 1.21.10
-- ItemsAdder API 3.6.3-beta-14 (optional - one of three premium providers)
-- Oraxen API 1.181.0 (optional - one of three premium providers)
-- Nexo API 0.1.0 (optional - one of three premium providers - UNTESTED)
-- Exposed ORM (SQLite)
+- Kotlin 2.3.20 & Paper API 1.21.11
+- ItemsAdder API 3.6.3-beta-14 (optional - one of three custom item providers - fully tested)
+- Oraxen API 1.212.0 (optional - one of three custom item providers - fully tested)
+- Nexo API 1.0.0 (optional - one of three custom item providers - untested at runtime)
+- Exposed ORM 0.48.0 (SQLite)
+- ProtocolLib 5.4.0 (optional)
 
 **IMPORTANT**: ItemsAdder, Oraxen, and Nexo are all premium plugins sold separately and require purchase for server use.
 

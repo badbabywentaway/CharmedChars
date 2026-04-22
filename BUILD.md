@@ -107,8 +107,9 @@ Then restart your server.
 ## Dependencies
 
 The plugin requires:
-- PaperMC 1.21.4 or higher
-- Java 21 or higher (recommended for Paper 1.21+)
+- PaperMC 1.21.11 or higher
+- Java 21 or higher (required for Paper 1.21+; build toolchain targets Java 21 bytecode)
+- Gradle 8.14.4 (bundled via wrapper; requires Java 23 or 24 as the daemon JVM)
 
 ## Development Build
 

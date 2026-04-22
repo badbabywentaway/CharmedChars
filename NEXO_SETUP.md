@@ -2,24 +2,30 @@
 
 CharmedChars now supports **ItemsAdder**, **Oraxen**, and **Nexo** as custom item providers!
 
-## ✅ Nexo Integration Status
+## ⚠️ Nexo Integration Status
 
-**Nexo integration has been tested and confirmed working!** This integration provides full compatibility with Nexo for CharmedChars letter/number blocks and pyrite tools.
+**Nexo integration is UNTESTED but fully implemented.** The API integration compiles successfully and follows the same patterns as the tested ItemsAdder and Oraxen integrations.
+
+**Why untested?**
+- Nexo requires a premium license for runtime testing
+- No license available for verification
+- Implementation based on Nexo's official API documentation
 
 The implementation uses:
 - Nexo's official API (https://docs.nexomc.com/)
 - Nexo's JavaDocs (https://jd.nexomc.com/)
-- Tested and verified on Paper 1.21+ with Nexo 1.16.1
+- Same patterns as verified ItemsAdder and Oraxen integrations
+- Successfully compiles against Nexo 1.0.0
 
-**Known working features:**
-- ✅ Letter and number block placement/breaking
-- ✅ Word scoring with pyrite tools
-- ✅ Custom block mechanics (NoteBlock-based)
-- ✅ Pyrite tool crafting recipes
-- ✅ Auto-setup command (`/nexosetup`)
-- ✅ Texture and model generation
+**Expected working features** (based on API documentation):
+- 📝 Letter and number block placement/breaking (untested)
+- 📝 Word scoring with pyrite tools (untested)
+- 📝 Custom block mechanics (NoteBlock-based) (untested)
+- 📝 Pyrite tool crafting recipes (untested)
+- 📝 Auto-setup command (`/nexosetup`) (untested)
+- 📝 Texture and model generation (untested)
 
-**If you encounter any issues, please report them on GitHub**: https://github.com/badbabywentaway/CharmedChars/issues
+**Community testing needed!** If you have a Nexo license and can test this integration, please report results on GitHub: https://github.com/badbabywentaway/CharmedChars/issues
 
 ## Requirements
 

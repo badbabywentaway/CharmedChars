@@ -1,9 +1,13 @@
 
 plugins {
-    kotlin("jvm") version "2.2.21"
+    kotlin("jvm") version "2.3.20"
     id("com.gradleup.shadow") version "8.3.5"
     id("xyz.jpenilla.run-paper") version "2.3.1"
     jacoco
+}
+
+kotlin {
+    jvmToolchain(21)
 }
 
 jacoco {
@@ -27,10 +31,10 @@ repositories {
 dependencies {
     compileOnly("io.papermc.paper:paper-api:${property("paperVersion")}")
     compileOnly("com.sk89q.worldguard:worldguard-bukkit:${property("worldGuardVersion")}")
-    compileOnly("com.comphenix.protocol:ProtocolLib:5.3.0")
+    compileOnly("net.dmulloy2:ProtocolLib:5.4.0")
     compileOnly("com.github.LoneDev6:API-ItemsAdder:3.6.3-beta-14")
-    compileOnly("io.th0rgal:oraxen:1.181.0")
-    compileOnly("com.nexomc:nexo:0.1.0") // Note: Version needs to be verified - using placeholder
+    compileOnly("io.th0rgal:oraxen:1.212.0")
+    compileOnly("com.nexomc:nexo:1.0.0") // Note: Untested - no premium license available for verification
     compileOnly("com.github.GriefPrevention:GriefPrevention:${property("griefPreventionVersion")}")
     implementation("org.jetbrains.kotlin:kotlin-stdlib:${property("kotlinVersion")}")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:${property("coroutinesVersion")}")
@@ -87,7 +91,7 @@ dependencies {
     }
 
     tasks.build { dependsOn(tasks.shadowJar) }
-    tasks.runServer { minecraftVersion("1.21.10") }
+    tasks.runServer { minecraftVersion("1.21.11") }
 
     tasks.test {
         useJUnitPlatform()
@@ -133,7 +137,7 @@ dependencies {
             println("  Version: ${project.version}")
             println("  Group: ${project.group}")
             println("  Name: ${project.name}")
-            println("  Minecraft: 1.21.10")
+            println("  Minecraft: 1.21.11")
             println("  Kotlin: ${property("kotlinVersion")}")
             println("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━")
             println("  See VERSION.md for full changelog")
