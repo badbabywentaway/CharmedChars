@@ -49,6 +49,7 @@ import org.stephanosbad.charmedChars.listeners.BastionNumberGameListener
 import org.stephanosbad.charmedChars.listeners.GlassingBedsListener
 import org.stephanosbad.charmedChars.listeners.OperatorActivationListener
 import org.stephanosbad.charmedChars.listeners.EnderDragonKillListener
+import org.stephanosbad.charmedChars.listeners.LogoBlockListener
 import java.io.IOException
 import kotlin.coroutines.CoroutineContext
 
@@ -186,6 +187,7 @@ class CharmedChars : JavaPlugin(), CoroutineScope {
         Bukkit.getPluginManager().registerEvents(GlassingBedsListener(this), this)
         Bukkit.getPluginManager().registerEvents(OperatorActivationListener(this), this)
         Bukkit.getPluginManager().registerEvents(EnderDragonKillListener(this), this)
+        Bukkit.getPluginManager().registerEvents(LogoBlockListener(this), this)
 
 
     }
