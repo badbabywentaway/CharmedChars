@@ -6,6 +6,10 @@ plugins {
     jacoco
 }
 
+kotlin {
+    jvmToolchain(21)
+}
+
 jacoco {
     toolVersion = "0.8.12"
 }
