@@ -8,13 +8,19 @@
 
 ## What is CharmedChars?
 
-CharmedChars is a unique word-puzzle plugin that adds a whole new dimension to Minecraft gameplay. Mine logs with gold or pyrite tools to collect colorful letter blocks, arrange them into words, and earn valuable rewards based on your vocabulary skills and strategic color matching.
+CharmedChars is a multi-layered puzzle adventure that weaves custom block gameplay through every dimension of Minecraft.
+
+**In the Overworld**, mine logs with gold or pyrite tools to collect colorful letter blocks. Arrange them into words and score rewards based on your vocabulary skills and color matching strategy.
+
+**In the Nether**, collect number blocks from warped and crimson stems. Each Fortress and Bastion holds a secret 3-digit code — use binary search to crack it and claim a jackpot of blaze rods or ender pearls.
+
+**In The End**, the Ender Dragon drops a randomly-colored logo block above the exit portal on death. Place it in The End and strike it with a gold or pyrite tool to transform it into a matching colored shulker box filled with ghast tears — your ultimate reward for completing the adventure.
 
 Perfect for:
-- **Educational servers** teaching spelling and vocabulary
-- **Survival servers** adding unique progression mechanics
-- **Adventure maps** with puzzle elements
-- **Players** who love word games and Scrabble-style scoring
+- **Educational servers** teaching spelling, vocabulary, and number strategy
+- **Survival servers** adding unique progression mechanics across all three dimensions
+- **Adventure maps** with puzzle elements and a satisfying finale
+- **Players** who love word games, Scrabble-style scoring, and number puzzles
 
 ---
 
