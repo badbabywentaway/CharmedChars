@@ -14,7 +14,8 @@ This release also fixes a critical build issue where the shadow JAR was being si
 ## New Features
 
 ### Ender Dragon Logo Block Drop
-- On Ender Dragon death, a logo block in a random color (cyan, magenta, or yellow) drops naturally 2 blocks above the exit portal bedrock post (X=0.5, Z=0.5, Y = highest block at 0,0 + 2)
+- On Ender Dragon death, a logo block in a random color (cyan, magenta, or yellow) drops 2 blocks above the outer bedrock arm of the exit portal fountain (X=3.5, Z=0.5, Y = highest block at 3,0 + 2)
+- Drop is on the outer bedrock arm rather than the centre — exit portal blocks span ±2 from centre and teleport item entities to world spawn; X=3 is solid bedrock, clear of the portal hole
 - Drop is world-sourced from `event.entity.world` — works in any End dimension, not hardcoded
 - No killing blow required — fires for any dragon death including `/kill`
 - Color selected via `BlockColor.getRand()` from the three logo colors
@@ -63,6 +64,23 @@ Multiple entries are supported. Invalid material names are silently skipped. If 
 - When a player hit a logo block with Oraxen, both `PlayerInteractEvent` and `BlockDamageEvent` fired for the same click
 - The processing guard released the block key before the 2-tick deferred transformation completed, allowing `BlockDamageEvent` to start a second transformation mid-replacement — causing a block-break animation and invisible shulker
 - Fix: the processing key is now held in `processingBlocks` until the full 2-tick chain completes, then released in a `finally` block
+
+---
+
+## Post-Release Fixes
+
+### Logo Block Drop Location Fix
+- Drop was at X=0 (exit portal centre) — item entities touching exit portal blocks are sent to world spawn, not the player
+- Fix: drop moved to X=3, Z=0 (outer bedrock arm of the fountain), one block outside the portal hole
+
+### Nexo Resource Pack Size Fix
+- Adding logo block textures pushed the Nexo resource pack over the server upload size limit
+- Fix: `NexoSetup` now sources block textures from `pack-oraxen/` (256×256) instead of `pack/` (512×512)
+- After updating the JAR: run `/nexosetup force` then `/nexo reload` on the Nexo server
+
+### Build Toolchain Upgrade (JDK 25)
+- Gradle 8.14.4 does not support JDK 25; upgrading JDK caused the build to fail with `IllegalArgumentException` in Kotlin's `JavaVersion.parse`
+- Upgraded to Gradle 9.4.1 and Shadow 9.4.1 (no server or runtime impact)
 
 ---
 
