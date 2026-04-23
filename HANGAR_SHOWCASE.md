@@ -1,6 +1,8 @@
 # CharmedChars - Word Puzzle Adventure for Minecraft
 
-**Transform your Minecraft world into a word-forming puzzle game!** Collect magical letter blocks from logs, spell words for rewards, and conquer the Nether's number guessing challenge.
+> **🕊️ Fully playable in Peaceful Mode** — every feature, from letter block collection to the Ender Dragon finale, works without hostile mobs.
+
+**Transform your Minecraft world into a word-forming puzzle game!** Collect magical letter blocks from logs, spell words for rewards, conquer the Nether's number guessing challenge, and claim a legendary logo block from the Ender Dragon.
 
 ---
 
@@ -49,6 +51,13 @@ Perfect for:
 - **Wrong guess (too high)**: Bed-like explosion - dangerous!
 - **Wrong guess (too low)**: Blocks drop safely - try again!
 - Use **binary search strategy** to find any number in ~10 guesses
+
+### Ender Dragon Logo Block (v1.5.0) 🐉
+- When the Ender Dragon dies, a **random-color logo block** drops naturally above the exit portal bedrock post (X=0, Z=0 in The End), 2 blocks above the post top
+- Drop is **world-based** — no killing blow required, works even with `/kill`
+- **Three colors**: Cyan, Magenta, Yellow — chosen randomly each kill
+- **Place it in The End** and hit it with a gold or pyrite tool to transform it into a matching **colored shulker box** filled with configurable loot (default: 4 Ghast Tears)
+- Loot contents fully configurable via `logo-block.shulker-contents` in `config.yml`
 
 ### Glassing Beds (v1.4.0) 🛏️🔥
 - **NEW**: Optional feature converts lava to glass when beds explode in Nether/End
@@ -130,7 +139,7 @@ Word: "QUARTZ" (all magenta)
 - **Custom Item Plugin** (choose ONE):
   - **ItemsAdder** 3.6.3-beta-14+ (premium - sold separately) - **Recommended**
   - **Oraxen** 1.212.0+ (premium with public source - sold separately) - Alternative option
-  - **Nexo** 1.0.0+ (premium - sold separately) - Alternative option (**UNTESTED** - requires license)
+  - **Nexo** 1.0.0+ (premium - sold separately) - Alternative option
 
 ### Optional Dependencies
 - WorldGuard 7.0.14+ (region protection)
@@ -157,7 +166,7 @@ Word: "QUARTZ" (all magenta)
 7. Restart server (recommended)
 8. Players automatically receive resource pack on join
 
-### Setup Steps (Nexo - Alternative Option - UNTESTED)
+### Setup Steps (Nexo - Alternative Option)
 1. Purchase and install **Nexo** (premium plugin - requires license)
 2. Download CharmedChars JAR from [GitHub Releases](https://github.com/badbabywentaway/CharmedChars/releases)
 3. Place both plugins in `plugins/` folder
@@ -167,12 +176,10 @@ Word: "QUARTZ" (all magenta)
 7. Restart server (recommended)
 8. Players automatically receive resource pack on join
 
-**⚠️ NOTE**: Nexo integration is untested as it requires a premium license. Please report any issues on GitHub!
-
 **Detailed guides**:
 - [QUICK_SETUP.md](https://github.com/badbabywentaway/CharmedChars/blob/master/QUICK_SETUP.md) (ItemsAdder)
 - [ORAXEN_SETUP.md](https://github.com/badbabywentaway/CharmedChars/blob/master/ORAXEN_SETUP.md) (Oraxen)
-- [NEXO_SETUP.md](https://github.com/badbabywentaway/CharmedChars/blob/master/NEXO_SETUP.md) (Nexo - UNTESTED)
+- [NEXO_SETUP.md](https://github.com/badbabywentaway/CharmedChars/blob/master/NEXO_SETUP.md) (Nexo)
 
 ---
 
@@ -263,9 +270,9 @@ bastion-reward:
 ## Technical Details
 
 ### Custom Blocks & Items
-- **123 custom blocks**: 26 letters × 3 colors + 10 numbers × 3 colors + 4 operators × 3 colors
+- **126 custom blocks**: 26 letters × 3 colors + 10 numbers × 3 colors + 4 operators × 3 colors + 3 logo blocks (cyan/magenta/yellow)
 - **5 pyrite items**: Ingot, Pickaxe, Axe, Shovel, Hoe (craftable iron-tier tools)
-- **Total**: 128 custom items with ItemsAdder, Oraxen, or Nexo integration
+- **Total**: 131 custom items with ItemsAdder, Oraxen, or Nexo integration
 - **512x512 custom textures** by Gaia Temperini
 - **Auto-setup commands** for ItemsAdder (`/iasetup`), Oraxen (`/oraxensetup`), and Nexo (`/nexosetup`)
 - **Abstraction layer** supports multiple custom item providers (exactly one required)
@@ -286,9 +293,15 @@ bastion-reward:
 
 ## Version Information
 
-**Current Version**: 1.4.2
+**Current Version**: 1.5.0
 
 **Latest Updates**:
+- **v1.5.0**: Ender Dragon Logo Block — Dragon finale and The End reward system
+  - **NEW**: Ender Dragon death drops a random-color logo block above the exit portal post
+  - **NEW**: Logo block placed in The End + gold/pyrite tool → colored shulker box with configurable loot
+  - **NEW**: Logo block definitions added for all three providers (ItemsAdder, Oraxen, Nexo)
+  - **FIXED**: Nexo integration fully tested and confirmed working at runtime
+  - **FIXED**: Shadow JAR build — coroutines and other dependencies now correctly bundled
 - **v1.4.2**: Dependency Updates for Minecraft 1.21.11 - Maintenance release with updated dependencies
   - **UPDATED**: Minecraft 1.21.10 → 1.21.11, PaperMC Build #130
   - **UPDATED**: Kotlin 2.2.21 → 2.3.20, Coroutines 1.9.0 → 1.10.2
@@ -351,13 +364,12 @@ bastion-reward:
 - CharmedChars only uses Oraxen's public API (compileOnly dependency)
 - Auto-setup with `/oraxensetup` command
 
-#### Nexo (Alternative Option - UNTESTED)
+#### Nexo (Alternative Option)
 - **Premium plugin** - purchase required for server use
 - **NOT included** with CharmedChars
 - Available from [Polymart](https://polymart.org/resource/nexo.6901)
 - CharmedChars only uses Nexo's public API (compileOnly dependency)
 - Auto-setup with `/nexosetup` command
-- **⚠️ IMPORTANT**: This integration is untested as it requires a premium license. Please report any issues on GitHub!
 
 **Important**: Install **exactly ONE** of these plugins. CharmedChars will automatically detect which one you have and refuse to load if multiple are installed or none are installed.
 
@@ -371,7 +383,7 @@ bastion-reward:
 - Kotlin 2.3.20 & Paper API 1.21.11
 - ItemsAdder API 3.6.3-beta-14 (optional - one of three custom item providers - fully tested)
 - Oraxen API 1.212.0 (optional - one of three custom item providers - fully tested)
-- Nexo API 1.0.0 (optional - one of three custom item providers - untested at runtime)
+- Nexo API 1.0.0 (optional - one of three custom item providers - fully tested)
 - Exposed ORM 0.48.0 (SQLite)
 - ProtocolLib 5.4.0 (optional)
 
