@@ -22,18 +22,22 @@ import org.bukkit.entity.EnderDragon
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
 import org.bukkit.event.entity.EntityDeathEvent
-import org.bukkit.util.Vector
 import org.stephanosbad.charmedChars.CharmedChars
 import org.stephanosbad.charmedChars.items.BlockColor
 
 /**
- * Drops a randomly-colored logo block onto the central bedrock pillar of the exit
- * portal fountain (X=0, Z=0 in The End) when the Ender Dragon dies.
+ * Drops a randomly-colored logo block onto the end stone ground at X=5, Z=0 when
+ * the Ender Dragon dies.
  *
- * The item is spawned with dropItem (not dropItemNaturally) so it has zero horizontal
- * velocity — it cannot drift sideways onto the surrounding exit portal blocks, which
- * teleport any item entity that touches them to world spawn. A small upward velocity
- * gives the item a visible bounce before it settles on the solid central pillar.
+ * The drop is placed on the flat end stone just outside the exit portal fountain
+ * structure to avoid two hazards:
+ *  1. Exit portal blocks (span ±2 from centre) teleport any touching item entity
+ *     to world spawn.
+ *  2. The dragon egg (present after the first kill) has a non-full collision box —
+ *     items placed on or near it can slide off onto the surrounding portal blocks.
+ *
+ * At X=5 the item lands on solid end stone clear of both hazards. dropItemNaturally's
+ * scatter (~1 block max) cannot reach the portal from this distance.
  *
  * @property plugin Reference to the main plugin instance
  */
@@ -62,14 +66,11 @@ class EnderDragonKillListener(
             return
         }
 
-        // Spawn directly above the central bedrock pillar at (0, 0) with a pure
-        // upward velocity. dropItem (not dropItemNaturally) gives zero horizontal
-        // velocity, so the item cannot drift onto the surrounding exit portal blocks.
-        // The central pillar is solid bedrock — not a portal block — and the item
-        // settles on top of it (or on the dragon egg after the first kill).
-        val postTopY = world.getHighestBlockYAt(0, 0)
-        val dropLocation = Location(world, 0.5, (postTopY + 1).toDouble(), 0.5)
-        val droppedItem = world.dropItem(dropLocation, logoItem)
-        droppedItem.velocity = Vector(0.0, 0.3, 0.0)
+        // Drop on end stone at X=5, Z=0 — outside the fountain structure and
+        // well beyond the exit portal blocks (±2 from centre) and the dragon egg
+        // (non-full hitbox, items can slide off onto portal blocks).
+        val groundY = world.getHighestBlockYAt(5, 0)
+        val dropLocation = Location(world, 5.5, (groundY + 2).toDouble(), 0.5)
+        world.dropItemNaturally(dropLocation, logoItem)
     }
 }

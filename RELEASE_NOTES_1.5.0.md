@@ -15,7 +15,7 @@ This release also fixes a critical build issue where the shadow JAR was being si
 
 ### Ender Dragon Logo Block Drop
 - On Ender Dragon death, a logo block in a random color (cyan, magenta, or yellow) spawns above the central bedrock pillar (X=0.5, Z=0.5, Y = highest block at 0,0 + 1) with a pure upward velocity and no horizontal scatter
-- Spawned via `dropItem` not `dropItemNaturally` — the item has zero horizontal velocity so it cannot drift onto the surrounding exit portal blocks, which teleport item entities to world spawn
+- Dropped at X=5.5, Z=0.5 on the flat end stone outside the fountain — clear of the exit portal blocks (±2 from centre) and the dragon egg's non-full hitbox (items slide off it onto portal blocks)
 - Drop is world-sourced from `event.entity.world` — works in any End dimension, not hardcoded
 - No killing blow required — fires for any dragon death including `/kill`
 - Color selected via `BlockColor.getRand()` from the three logo colors
@@ -70,8 +70,8 @@ Multiple entries are supported. Invalid material names are silently skipped. If 
 ## Post-Release Fixes
 
 ### Logo Block Drop Location Fix
-- `dropItemNaturally` adds random horizontal scatter; the item could land on the exit portal blocks surrounding the central pillar, teleporting it to world spawn instead of leaving it for the player
-- Fix: switched to `dropItem` (zero horizontal velocity) with an upward `Vector(0, 0.3, 0)` at X=0.5, Z=0.5 — the item bounces visibly and settles on the solid central bedrock pillar, which is not a portal block
+- The exit portal blocks teleport item entities to world spawn. After the first dragon kill the dragon egg is present — its non-full hitbox causes items to slide off onto the surrounding portal blocks even when spawned directly above the pillar
+- Fix: drop moved to the flat end stone at X=5, Z=0 — outside the fountain structure entirely, beyond the range of `dropItemNaturally`'s scatter
 
 ### Nexo Resource Pack Size Fix
 - Adding logo block textures pushed the Nexo resource pack over the server upload size limit

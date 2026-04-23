@@ -16,7 +16,7 @@ Feature release introducing the Ender Dragon finale: a randomly-colored logo blo
 - Fires on `EntityDeathEvent` for `EnderDragon` entity type
 - Random color selected via `BlockColor.getRand()` (cyan, magenta, or yellow)
 - Item ID constructed as `charmedchars:${color.directoryName}_logo`
-- Spawned via `dropItem` at `Location(world, 0.5, (getHighestBlockYAt(0,0) + 1).toDouble(), 0.5)` with `velocity = Vector(0, 0.3, 0)` — zero horizontal velocity prevents drift onto the surrounding exit portal blocks
+- Dropped at `Location(world, 5.5, (getHighestBlockYAt(5,0) + 2).toDouble(), 0.5)` — on flat end stone outside the fountain, clear of portal blocks and the dragon egg's non-full hitbox
 - World sourced from `event.entity.world` — works in any End dimension
 - No killing blow required — fires for any dragon death
 
@@ -88,8 +88,8 @@ Feature release introducing the Ender Dragon finale: a randomly-colored logo blo
 ### Post-Release Fixes
 
 **Logo Block Drop Location** (`EnderDragonKillListener.kt`)
-- `dropItemNaturally` adds random horizontal scatter that could carry the item onto the surrounding exit portal blocks, teleporting it to world spawn
-- Fix: switched to `dropItem` (zero horizontal velocity) with `velocity = Vector(0, 0.3, 0)` at X=0.5, Z=0.5 — item bounces straight up and settles on the solid central bedrock pillar
+- Portal blocks teleport item entities to world spawn; dragon egg (first kill) has a non-full hitbox that causes items to slide off onto surrounding portal blocks
+- Fix: drop moved to end stone at X=5, Z=0 — outside the fountain structure and beyond the reach of `dropItemNaturally`'s scatter (~1 block max)
 
 **Nexo Resource Pack Size** (`NexoSetup.kt`)
 - `copyTextures()` sourced block textures from `pack/` (512×512 PNGs), causing the Nexo resource pack to exceed the server upload size limit after the three logo block textures were added
