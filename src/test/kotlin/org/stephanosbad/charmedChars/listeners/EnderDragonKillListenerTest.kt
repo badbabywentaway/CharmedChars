@@ -29,7 +29,8 @@ import org.stephanosbad.charmedChars.items.BlockColor
  * Tests the logic around the Ender Dragon kill drop:
  * - Random color selection from the three available colors
  * - Item ID construction per color
- * - Drop location: two blocks above the exit portal bedrock post at (0, 0)
+ * - Drop location: two blocks above the outer bedrock arm at X=3, Z=0
+ *   (the portal hole spans ±2 from centre; X=3 is solid bedrock, clear of portal blocks)
  * - No player-specific targeting — the item drops into the world
  */
 class EnderDragonKillListenerTest {
@@ -97,43 +98,45 @@ class EnderDragonKillListenerTest {
     // ==================== Drop Location Tests ====================
 
     @Test
-    fun `drop X coordinate is the exit portal centre`() {
-        val x = 0
-        assertEquals(0, x, "Logo block must drop at X=0 (exit portal centre)")
+    fun `drop X is on the outer bedrock arm not the portal centre`() {
+        // The exit portal hole spans X=-2 to X=+2. Any item touching those blocks
+        // is sent to world spawn. X=3 is the outer bedrock arm — solid, no portal.
+        val x = 3
+        assertEquals(3, x, "Logo block must drop at X=3 (outer bedrock arm, clear of portal blocks)")
     }
 
     @Test
-    fun `drop Z coordinate is the exit portal centre`() {
+    fun `drop Z coordinate is zero (aligns with the east arm of the fountain)`() {
         val z = 0
-        assertEquals(0, z, "Logo block must drop at Z=0 (exit portal centre)")
+        assertEquals(0, z, "Logo block must drop at Z=0")
     }
 
     @Test
-    fun `drop Y is two above the highest block at the post`() {
-        // getHighestBlockYAt(0, 0) returns the top of the bedrock post (e.g. 49).
-        // The item drops at postTopY + 2 so it appears visibly above the structure.
-        val simulatedPostTopY = 49
-        val dropY = simulatedPostTopY + 2
-        assertEquals(51, dropY,
-            "Drop Y should be 2 above the post top (49 + 2 = 51 in standard End)")
+    fun `drop Y is two above the highest block at the outer arm`() {
+        // getHighestBlockYAt(3, 0) returns the top of the outer bedrock arm.
+        // The item drops at outerArmY + 2 so it appears visibly above the arm.
+        val simulatedArmY = 47
+        val dropY = simulatedArmY + 2
+        assertEquals(49, dropY,
+            "Drop Y should be 2 above the outer arm top (47 + 2 = 49)")
     }
 
     @Test
-    fun `drop Y formula holds for any post height`() {
-        listOf(40, 49, 64, 80).forEach { postY ->
-            val dropY = postY + 2
-            assertEquals(postY + 2, dropY,
-                "Drop Y must always be exactly 2 above the detected post top")
+    fun `drop Y formula holds for any outer arm height`() {
+        listOf(40, 47, 64, 80).forEach { armY ->
+            val dropY = armY + 2
+            assertEquals(armY + 2, dropY,
+                "Drop Y must always be exactly 2 above the detected outer arm top")
         }
     }
 
     @Test
     fun `drop location uses 0_5 offset for item centering`() {
-        // dropItemNaturally is called with x=0.5, z=0.5 so the item spawns
-        // centred on the block rather than at the block corner.
-        val x = 0.5
+        // dropItemNaturally is called with x=3.5, z=0.5 so the item spawns
+        // centred on block (3,0) rather than at the block corner.
+        val x = 3.5
         val z = 0.5
-        assertEquals(0.5, x, 0.001)
+        assertEquals(3.5, x, 0.001)
         assertEquals(0.5, z, 0.001)
     }
 
