@@ -67,7 +67,7 @@ dependencies {
     }
 
     tasks.jar {
-        archiveClassifier.set("plain")
+        enabled = false
     }
 
     tasks.shadowJar {
