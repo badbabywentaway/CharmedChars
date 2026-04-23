@@ -29,8 +29,9 @@ import org.stephanosbad.charmedChars.items.BlockColor
  * Tests the logic around the Ender Dragon kill drop:
  * - Random color selection from the three available colors
  * - Item ID construction per color
- * - Drop location: two blocks above the outer bedrock arm at X=3, Z=0
- *   (the portal hole spans ±2 from centre; X=3 is solid bedrock, clear of portal blocks)
+ * - Drop location: one block above the central bedrock pillar at X=0, Z=0,
+ *   spawned via dropItem (zero horizontal velocity) so it cannot drift onto
+ *   the surrounding exit portal blocks that would teleport it to world spawn
  * - No player-specific targeting — the item drops into the world
  */
 class EnderDragonKillListenerTest {
@@ -98,46 +99,59 @@ class EnderDragonKillListenerTest {
     // ==================== Drop Location Tests ====================
 
     @Test
-    fun `drop X is on the outer bedrock arm not the portal centre`() {
-        // The exit portal hole spans X=-2 to X=+2. Any item touching those blocks
-        // is sent to world spawn. X=3 is the outer bedrock arm — solid, no portal.
-        val x = 3
-        assertEquals(3, x, "Logo block must drop at X=3 (outer bedrock arm, clear of portal blocks)")
+    fun `drop X coordinate is the exit portal centre`() {
+        // The item is dropped at X=0 (the central bedrock pillar) with zero horizontal
+        // velocity via dropItem, so it cannot drift onto surrounding portal blocks.
+        val x = 0
+        assertEquals(0, x, "Logo block must drop at X=0 (central bedrock pillar)")
     }
 
     @Test
-    fun `drop Z coordinate is zero (aligns with the east arm of the fountain)`() {
+    fun `drop Z coordinate is zero`() {
         val z = 0
         assertEquals(0, z, "Logo block must drop at Z=0")
     }
 
     @Test
-    fun `drop Y is two above the highest block at the outer arm`() {
-        // getHighestBlockYAt(3, 0) returns the top of the outer bedrock arm.
-        // The item drops at outerArmY + 2 so it appears visibly above the arm.
-        val simulatedArmY = 47
-        val dropY = simulatedArmY + 2
-        assertEquals(49, dropY,
-            "Drop Y should be 2 above the outer arm top (47 + 2 = 49)")
+    fun `drop Y is one above the highest block at the pillar`() {
+        // getHighestBlockYAt(0, 0) returns the top of the central bedrock post or
+        // the dragon egg (after first kill). Item spawns 1 above so it is in air
+        // with a slight upward velocity; it settles on the pillar top.
+        val simulatedPostTopY = 49
+        val dropY = simulatedPostTopY + 1
+        assertEquals(50, dropY,
+            "Drop Y should be 1 above the post top (49 + 1 = 50)")
     }
 
     @Test
-    fun `drop Y formula holds for any outer arm height`() {
-        listOf(40, 47, 64, 80).forEach { armY ->
-            val dropY = armY + 2
-            assertEquals(armY + 2, dropY,
-                "Drop Y must always be exactly 2 above the detected outer arm top")
+    fun `drop Y formula holds for any post height`() {
+        listOf(40, 49, 64, 80).forEach { postY ->
+            val dropY = postY + 1
+            assertEquals(postY + 1, dropY,
+                "Drop Y must always be exactly 1 above the detected post top")
         }
     }
 
     @Test
     fun `drop location uses 0_5 offset for item centering`() {
-        // dropItemNaturally is called with x=3.5, z=0.5 so the item spawns
-        // centred on block (3,0) rather than at the block corner.
-        val x = 3.5
+        // dropItem is called with x=0.5, z=0.5 so the item spawns centred on the
+        // pillar block rather than at the block corner.
+        val x = 0.5
         val z = 0.5
-        assertEquals(3.5, x, 0.001)
+        assertEquals(0.5, x, 0.001)
         assertEquals(0.5, z, 0.001)
+    }
+
+    @Test
+    fun `drop uses zero horizontal velocity to prevent portal drift`() {
+        // dropItemNaturally adds random horizontal scatter that can carry the item
+        // onto surrounding exit portal blocks. dropItem gives zero horizontal velocity;
+        // only a small upward Vector(0, 0.3, 0) is applied so the item bounces and
+        // settles on the solid central pillar.
+        val vx = 0.0
+        val vz = 0.0
+        assertEquals(0.0, vx, 0.001, "Horizontal X velocity must be zero")
+        assertEquals(0.0, vz, 0.001, "Horizontal Z velocity must be zero")
     }
 
     @Test

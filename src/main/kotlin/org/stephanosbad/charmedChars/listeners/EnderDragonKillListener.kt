@@ -22,20 +22,18 @@ import org.bukkit.entity.EnderDragon
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
 import org.bukkit.event.entity.EntityDeathEvent
+import org.bukkit.util.Vector
 import org.stephanosbad.charmedChars.CharmedChars
 import org.stephanosbad.charmedChars.items.BlockColor
 
 /**
- * Drops a randomly-colored logo block onto the outer bedrock arm of the exit portal
- * fountain (X=3, Z=0 in The End) when the Ender Dragon dies.
+ * Drops a randomly-colored logo block onto the central bedrock pillar of the exit
+ * portal fountain (X=0, Z=0 in The End) when the Ender Dragon dies.
  *
- * The drop is deliberately placed on the outer arm rather than the centre because
- * any item entity that touches an exit portal block is teleported to world spawn.
- * The portal hole spans ±2 blocks from centre (X/Z); the outer bedrock arms at ±3
- * are solid and clear of all portal blocks.
- *
- * Drop Y is determined at runtime from the highest block at (3, 0) so it works
- * regardless of world height differences between server configurations.
+ * The item is spawned with dropItem (not dropItemNaturally) so it has zero horizontal
+ * velocity — it cannot drift sideways onto the surrounding exit portal blocks, which
+ * teleport any item entity that touches them to world spawn. A small upward velocity
+ * gives the item a visible bounce before it settles on the solid central pillar.
  *
  * @property plugin Reference to the main plugin instance
  */
@@ -64,14 +62,14 @@ class EnderDragonKillListener(
             return
         }
 
-        // Drop onto the outer bedrock arm of the fountain (X=3, Z=0) rather than
-        // the centre (X=0, Z=0). The exit portal blocks span ±2 from centre; any
-        // item entity that touches them is teleported to world spawn. The outer arm
-        // at X=3 is solid bedrock and sits just beyond the portal hole, so the item
-        // is guaranteed never to land on a portal block regardless of dropItemNaturally's
-        // random scatter velocity.
-        val outerArmY = world.getHighestBlockYAt(3, 0)
-        val dropLocation = Location(world, 3.5, (outerArmY + 2).toDouble(), 0.5)
-        world.dropItemNaturally(dropLocation, logoItem)
+        // Spawn directly above the central bedrock pillar at (0, 0) with a pure
+        // upward velocity. dropItem (not dropItemNaturally) gives zero horizontal
+        // velocity, so the item cannot drift onto the surrounding exit portal blocks.
+        // The central pillar is solid bedrock — not a portal block — and the item
+        // settles on top of it (or on the dragon egg after the first kill).
+        val postTopY = world.getHighestBlockYAt(0, 0)
+        val dropLocation = Location(world, 0.5, (postTopY + 1).toDouble(), 0.5)
+        val droppedItem = world.dropItem(dropLocation, logoItem)
+        droppedItem.velocity = Vector(0.0, 0.3, 0.0)
     }
 }
