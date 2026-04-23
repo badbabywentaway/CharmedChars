@@ -17,8 +17,7 @@
  */
 package org.stephanosbad.charmedChars.listeners
 
-import net.kyori.adventure.text.Component
-import net.kyori.adventure.text.format.NamedTextColor
+import org.bukkit.Location
 import org.bukkit.entity.EnderDragon
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
@@ -27,7 +26,11 @@ import org.stephanosbad.charmedChars.CharmedChars
 import org.stephanosbad.charmedChars.items.BlockColor
 
 /**
- * Drops a randomly-colored logo block to the player who lands the killing blow on the Ender Dragon.
+ * Drops a randomly-colored logo block two blocks above the exit portal bedrock post
+ * (X=0, Z=0 in The End) when the Ender Dragon dies.
+ *
+ * The drop Y is determined at runtime from the highest solid block at (0, 0) so the
+ * position remains correct regardless of world height changes between versions.
  *
  * @property plugin Reference to the main plugin instance
  */
@@ -39,7 +42,7 @@ class EnderDragonKillListener(
     fun onEnderDragonDeath(event: EntityDeathEvent) {
         if (event.entity !is EnderDragon) return
 
-        val killer = event.entity.killer ?: return
+        val world = event.entity.world
 
         val color = BlockColor.getRand()
         val itemId = "charmedchars:${color.directoryName}_logo"
@@ -56,14 +59,10 @@ class EnderDragonKillListener(
             return
         }
 
-        killer.inventory.addItem(logoItem).values.forEach { overflow ->
-            // Drop any overflow at the player's feet if inventory is full
-            killer.world.dropItemNaturally(killer.location, overflow)
-        }
-
-        killer.sendMessage(
-            Component.text("✦ The Ender Dragon drops a ${color.name.lowercase()} logo block! ✦")
-                .color(NamedTextColor.GOLD)
-        )
+        // Find the top of the bedrock post at the exit portal centre (0, 0) and drop
+        // two blocks above it so the item lands visibly on top of the structure.
+        val postTopY = world.getHighestBlockYAt(0, 0)
+        val dropLocation = Location(world, 0.5, (postTopY + 2).toDouble(), 0.5)
+        world.dropItemNaturally(dropLocation, logoItem)
     }
 }
