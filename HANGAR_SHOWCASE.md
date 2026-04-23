@@ -14,7 +14,7 @@ CharmedChars is a multi-layered puzzle adventure that weaves custom block gamepl
 
 **In the Nether**, collect number blocks from warped and crimson stems. Each Fortress and Bastion holds a secret 3-digit code — use binary search to crack it and claim a jackpot of blaze rods or ender pearls.
 
-**In The End**, the Ender Dragon drops a randomly-colored logo block above the exit portal on death. Place it in The End and strike it with a gold or pyrite tool to transform it into a matching colored shulker box filled with ghast tears — your ultimate reward for completing the adventure.
+**In The End**, the Ender Dragon drops a randomly-colored logo block above the exit portal on death. Place it in The End and strike it with a gold or pyrite tool to transform it into a matching colored shulker box filled with ghast tears — your ultimate reward for completing the adventure. The logo on the block is that of **Gaia Temperini**, the artist who created the original marble-style block textures used throughout CharmedChars.
 
 Perfect for:
 - **Educational servers** teaching spelling, vocabulary, and number strategy
