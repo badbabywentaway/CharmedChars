@@ -345,28 +345,13 @@ class NexoSetup(private val plugin: CharmedChars) {
     private fun copyTextures() {
         var copiedCount = 0
 
-        plugin.logger.info("=== NEXO TEXTURE COPY DEBUG ===")
-        plugin.logger.info("Nexo textures folder: ${nexoTexturesFolder.absolutePath}")
-
-        // Copy letter textures to block subfolder
+        // Copy letter textures to block subfolder (use 256×256 from pack-oraxen to stay within Nexo pack size limits)
         listOf("cyan", "magenta", "yellow").forEach { color ->
             LetterBlock.entries.forEach { letter ->
-                val resourcePath = "pack/assets/minecraft/textures/block/$color/${letter.name.lowercase()}.png"
+                val resourcePath = "pack-oraxen/assets/minecraft/textures/block/$color/${letter.name.lowercase()}.png"
                 val destFile = File(nexoTexturesFolder, "block/$color/${letter.name.lowercase()}.png")
-
-                // Only log first file for debugging
-                if (letter.name.lowercase() == "a" && color == "cyan") {
-                    plugin.logger.info("  [CYAN_A DEBUG]")
-                    plugin.logger.info("    Source: $resourcePath")
-                    plugin.logger.info("    Dest:   ${destFile.absolutePath}")
-                }
-
                 if (copyResource(resourcePath, destFile)) {
                     copiedCount++
-                    if (letter.name.lowercase() == "a" && color == "cyan") {
-                        plugin.logger.info("    File exists after copy: ${destFile.exists()}")
-                        plugin.logger.info("    File size: ${destFile.length()} bytes")
-                    }
                 }
             }
         }
@@ -374,7 +359,7 @@ class NexoSetup(private val plugin: CharmedChars) {
         // Copy number textures to block subfolder
         listOf("cyan", "magenta", "yellow").forEach { color ->
             NumericBlock.entries.forEach { number ->
-                val resourcePath = "pack/assets/minecraft/textures/block/$color/${number.c}.png"
+                val resourcePath = "pack-oraxen/assets/minecraft/textures/block/$color/${number.c}.png"
                 val destFile = File(nexoTexturesFolder, "block/$color/${number.c}.png")
 
                 if (copyResource(resourcePath, destFile)) {
@@ -386,7 +371,7 @@ class NexoSetup(private val plugin: CharmedChars) {
         // Copy operator textures to block subfolder
         listOf("cyan", "magenta", "yellow").forEach { color ->
             NonAlphaNumBlocks.entries.forEach { operator ->
-                val resourcePath = "pack/assets/minecraft/textures/block/$color/${operator.name.lowercase()}.png"
+                val resourcePath = "pack-oraxen/assets/minecraft/textures/block/$color/${operator.name.lowercase()}.png"
                 val destFile = File(nexoTexturesFolder, "block/$color/${operator.name.lowercase()}.png")
 
                 if (copyResource(resourcePath, destFile)) {
@@ -397,7 +382,7 @@ class NexoSetup(private val plugin: CharmedChars) {
 
         // Copy logo block textures to block subfolder
         listOf("cyan", "magenta", "yellow").forEach { color ->
-            val resourcePath = "pack/assets/minecraft/textures/block/$color/logo_block.png"
+            val resourcePath = "pack-oraxen/assets/minecraft/textures/block/$color/logo_block.png"
             val destFile = File(nexoTexturesFolder, "block/$color/logo_block.png")
             if (copyResource(resourcePath, destFile)) {
                 copiedCount++
