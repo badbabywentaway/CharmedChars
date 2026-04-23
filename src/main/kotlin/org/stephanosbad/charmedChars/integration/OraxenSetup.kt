@@ -233,6 +233,18 @@ class OraxenSetup(private val plugin: CharmedChars) {
                     }
                 }
             }
+
+            // Generate logo block models
+            for (color in colors) {
+                val texturePath = "charmedchars:block/$color/logo_block"
+                if (generateBlockModel("${color}_logo", texturePath, blockModelsDir)) {
+                    modelCount++
+                }
+                if (generateItemModel("${color}_logo", "minecraft:block/${color}_logo", itemModelsDir)) {
+                    modelCount++
+                }
+            }
+
             messages.add("  ✓ Generated $modelCount model files (blocks + items)")
 
             // Copy textures

@@ -66,6 +66,10 @@ dependencies {
         }
     }
 
+    tasks.jar {
+        archiveClassifier.set("plain")
+    }
+
     tasks.shadowJar {
         archiveBaseName.set("CharmedChars")
         archiveClassifier.set("")

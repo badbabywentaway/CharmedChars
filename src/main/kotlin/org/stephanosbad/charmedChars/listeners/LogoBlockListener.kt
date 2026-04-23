@@ -60,16 +60,15 @@ class LogoBlockListener(
         val key = blockKey(block)
         if (!processingBlocks.add(key)) return
 
-        try {
-            event.isCancelled = true
-            transformToShulkerBox(block, color)
-            event.player.sendMessage(
-                Component.text("The logo block transforms into a shulker box!")
-                    .color(NamedTextColor.GOLD)
-            )
-        } finally {
-            processingBlocks.remove(key)
-        }
+        // Key is intentionally NOT removed here — transformToShulkerBox removes it after
+        // the 2-tick deferred work completes so that BlockDamageEvent (fired for the same
+        // click by Oraxen) cannot start a second transformation mid-replacement.
+        event.isCancelled = true
+        transformToShulkerBox(block, color, key)
+        event.player.sendMessage(
+            Component.text("The logo block transforms into a shulker box!")
+                .color(NamedTextColor.GOLD)
+        )
     }
 
     // BlockDamageEvent for Nexo compatibility (noteblock updates disabled)
@@ -84,19 +83,15 @@ class LogoBlockListener(
         val key = blockKey(block)
         if (!processingBlocks.add(key)) return
 
-        try {
-            event.isCancelled = true
-            transformToShulkerBox(block, color)
-            event.player.sendMessage(
-                Component.text("The logo block transforms into a shulker box!")
-                    .color(NamedTextColor.GOLD)
-            )
-        } finally {
-            processingBlocks.remove(key)
-        }
+        event.isCancelled = true
+        transformToShulkerBox(block, color, key)
+        event.player.sendMessage(
+            Component.text("The logo block transforms into a shulker box!")
+                .color(NamedTextColor.GOLD)
+        )
     }
 
-    private fun transformToShulkerBox(block: org.bukkit.block.Block, color: String) {
+    private fun transformToShulkerBox(block: org.bukkit.block.Block, color: String, processingKey: String) {
         val shulkerMaterial = shulkerMaterialFor(color)
 
         val provider = plugin.customItemProviderManager.getProvider()
@@ -106,13 +101,24 @@ class LogoBlockListener(
             block.type = Material.AIR
         }
 
-        block.type = shulkerMaterial
-
-        val shulkerState = block.state as? ShulkerBox ?: return
-        plugin.configManager.logoBlockShulkerContents().forEach { (material, quantity) ->
-            shulkerState.inventory.addItem(ItemStack(material, quantity))
+        // Tick+1: let the custom item provider finish its own block removal, then place the shulker.
+        // Tick+2: populate the inventory once the tile entity is fully initialized, then release
+        //         the processing guard so future interactions on this location are accepted.
+        // Note: do NOT call shulkerState.update() after adding items — it writes the empty snapshot
+        //       back over the live tile entity inventory, wiping the contents.
+        plugin.server.scheduler.runTask(plugin) { _ ->
+            block.type = shulkerMaterial
+            plugin.server.scheduler.runTask(plugin) { _ ->
+                try {
+                    val shulkerState = block.state as? ShulkerBox ?: return@runTask
+                    plugin.configManager.logoBlockShulkerContents().forEach { (material, quantity) ->
+                        shulkerState.inventory.addItem(ItemStack(material, quantity))
+                    }
+                } finally {
+                    processingBlocks.remove(processingKey)
+                }
+            }
         }
-        shulkerState.update()
     }
 
     /**
@@ -121,7 +127,6 @@ class LogoBlockListener(
     private fun getLogoBlockColor(block: org.bukkit.block.Block): String? {
         val provider = plugin.customItemProviderManager.getProvider() ?: return null
         val customBlock = provider.getCustomBlock(block) ?: return null
-        // Namespaced ID format: "charmedchars:cyan_logo"
         val itemName = customBlock.namespacedId.substringAfter(":")
         if (!itemName.endsWith("_logo")) return null
         return itemName.removeSuffix("_logo")
