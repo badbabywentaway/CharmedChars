@@ -137,6 +137,14 @@ exclude:
     pitch: 0.0
     yaw: 0.0
 
+# Logo Block Feature
+# When a placed logo block in The End is hit with a gold/pyrite tool, it transforms
+# into a colored shulker box (color matches the logo block) prefilled with these items.
+logo-block:
+  shulker-contents:
+    - materialName: "GHAST_TEAR"
+      quantity: 4
+
 # Glassing Beds Feature
 # When a bed explodes in the Nether or End, convert nearby lava to glass
 glassing-beds:

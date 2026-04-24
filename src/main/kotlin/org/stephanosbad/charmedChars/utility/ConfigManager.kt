@@ -116,6 +116,30 @@ class ConfigManager(private val plugin: CharmedChars) {
         get() = config.getBoolean("protection.griefprevention-integration", true)
 
     /**
+     * Returns the list of items to prefill into the logo block shulker box.
+     *
+     * Reads from `logo-block.shulker-contents` in config.yml.
+     * Each entry must have `materialName` (String) and `quantity` (Int).
+     * Defaults to 4 ghast tears if the config section is absent or invalid.
+     *
+     * @return List of (Material, quantity) pairs
+     */
+    fun logoBlockShulkerContents(): List<Pair<org.bukkit.Material, Int>> {
+        val list = config.getList("logo-block.shulker-contents")
+        if (list.isNullOrEmpty()) {
+            return listOf(org.bukkit.Material.GHAST_TEAR to 4)
+        }
+        return list.mapNotNull { entry ->
+            val map = entry as? Map<*, *> ?: return@mapNotNull null
+            val materialName = map["materialName"] as? String ?: return@mapNotNull null
+            val quantity = (map["quantity"] as? Int) ?: 1
+            val material = runCatching { org.bukkit.Material.valueOf(materialName) }.getOrNull()
+                ?: return@mapNotNull null
+            material to quantity
+        }.ifEmpty { listOf(org.bukkit.Material.GHAST_TEAR to 4) }
+    }
+
+    /**
      * Whether the glassing beds feature is enabled
      *
      * When enabled, bed explosions in the Nether or End will convert

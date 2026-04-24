@@ -1,7 +1,7 @@
 
 plugins {
     kotlin("jvm") version "2.3.20"
-    id("com.gradleup.shadow") version "8.3.5"
+    id("com.gradleup.shadow") version "9.4.1"
     id("xyz.jpenilla.run-paper") version "2.3.1"
     jacoco
 }
@@ -64,6 +64,10 @@ dependencies {
         filesMatching("plugin.yml") {
             expand(props)
         }
+    }
+
+    tasks.jar {
+        enabled = false
     }
 
     tasks.shadowJar {

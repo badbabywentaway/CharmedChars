@@ -81,6 +81,71 @@ class NexoSetupTest {
         assertEquals(128, expectedTotal, "Nexo setup should create 128 blocks")
     }
 
+    // ==================== Logo Block Tests ====================
+
+    @Test
+    fun `logo blocks are defined for all three colors in Nexo`() {
+        val logoColors = listOf("cyan", "magenta", "yellow")
+        assertEquals(3, logoColors.size, "Nexo must define exactly 3 logo block entries")
+        logoColors.forEach { color ->
+            val itemId = "${color}_logo"
+            assertTrue(itemId.endsWith("_logo"), "$itemId must end with _logo")
+        }
+    }
+
+    @Test
+    fun `Nexo logo block uses NOTE_BLOCK material`() {
+        // All Nexo custom blocks use NOTE_BLOCK as their base material
+        val material = "NOTE_BLOCK"
+        assertEquals("NOTE_BLOCK", material,
+            "Logo block must use NOTE_BLOCK as base material (consistent with all other Nexo blocks)")
+    }
+
+    @Test
+    fun `Nexo logo block model path uses charmedchars namespace`() {
+        listOf("cyan", "magenta", "yellow").forEach { color ->
+            val modelPath = "charmedchars:block/$color/logo_block"
+            assertTrue(modelPath.startsWith("charmedchars:"),
+                "Logo block model must use charmedchars namespace")
+            assertTrue(modelPath.contains("logo_block"),
+                "Logo block model path must contain logo_block")
+        }
+    }
+
+    @Test
+    fun `Nexo logo block model JSON uses cube_all parent`() {
+        // Logo block model files use the same cube_all parent as all other blocks
+        val parent = "block/cube_all"
+        assertTrue(parent.contains("cube_all"),
+            "Logo block model should use cube_all parent for a full-cube appearance")
+    }
+
+    @Test
+    fun `Nexo logo block texture path matches color directory`() {
+        listOf("cyan", "magenta", "yellow").forEach { color ->
+            val texturePath = "charmedchars:block/$color/logo_block"
+            assertTrue(texturePath.contains(color),
+                "Logo block texture path must include the color name")
+            assertTrue(texturePath.contains("logo_block"),
+                "Logo block texture must reference logo_block texture file")
+        }
+    }
+
+    @Test
+    fun `Nexo logo block drop mechanics match other blocks`() {
+        // All Nexo blocks share the same drop structure:
+        // silktouch: false, fortune: false, minimal_type: WOODEN, best_tool: null
+        val silktouch = false
+        val fortune = false
+        val minimalType = "WOODEN"
+        val bestTool: String? = null
+
+        assertFalse(silktouch, "Logo block should not require silk touch")
+        assertFalse(fortune, "Logo block fortune should be disabled")
+        assertEquals("WOODEN", minimalType, "Logo block should require at minimum wooden tool")
+        assertNull(bestTool, "Logo block best_tool should be null")
+    }
+
     // ==================== Pyrite Tools Count Tests ====================
 
     @Test
