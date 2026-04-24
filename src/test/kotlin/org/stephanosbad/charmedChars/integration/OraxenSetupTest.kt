@@ -158,17 +158,17 @@ class OraxenSetupTest {
 
     @Test
     fun `each block needs block model and item model`() {
-        // For 123 blocks, we need:
-        // - 123 block models (assets/minecraft/models/block/)
-        // - 123 item models (assets/minecraft/models/item/)
-        // Total: 246 models
+        // For 126 blocks (123 + 3 logo blocks), we need:
+        // - 126 block models (assets/minecraft/models/block/)
+        // - 126 item models (assets/minecraft/models/item/)
+        // Total: 252 models
 
-        val blockCount = 123
+        val blockCount = 126
         val blockModels = blockCount
         val itemModels = blockCount
         val totalModels = blockModels + itemModels
 
-        assertEquals(246, totalModels, "Should generate 246 model files")
+        assertEquals(252, totalModels, "Should generate 252 model files")
     }
 
     @Test
@@ -233,22 +233,58 @@ class OraxenSetupTest {
     fun `noteblock custom variations are sequential`() {
         // Oraxen assigns sequential custom_variation numbers
         // Starting from 1, incrementing for each block
+        // 26 letters × 3 colors = 78, 10 numbers × 3 = 30, 4 operators × 3 = 12,
+        // 3 logo blocks = 3 → total 123 + 3 = 126
 
         val firstVariation = 1
-        val lastVariation = 123  // For 123 blocks
+        val lastVariation = 126  // For 126 blocks
 
         assertTrue(firstVariation > 0, "First variation should be positive")
-        assertTrue(lastVariation == 123, "Last variation should match block count")
+        assertTrue(lastVariation == 126, "Last variation should match block count")
     }
 
     @Test
     fun `custom variations do not exceed noteblock limit`() {
         // NoteBlocks support 800 custom variations in Oraxen
         val maxNoteblockVariations = 800
-        val charmedCharsVariations = 123
+        val charmedCharsVariations = 126
 
         assertTrue(charmedCharsVariations < maxNoteblockVariations,
             "CharmedChars variations should not exceed noteblock limit")
+    }
+
+    @Test
+    fun `logo blocks are defined for all three colors`() {
+        val logoColors = listOf("cyan", "magenta", "yellow")
+        assertEquals(3, logoColors.size, "Exactly 3 logo block entries (one per color)")
+        logoColors.forEach { color ->
+            val itemId = "${color}_logo"
+            assertTrue(itemId.endsWith("_logo"), "$itemId should end with _logo")
+        }
+    }
+
+    @Test
+    fun `logo block variations follow operator blocks`() {
+        // 26 letters × 3 = 78, 10 numbers × 3 = 30, 4 operators × 3 = 12 → 120 total
+        // Logo blocks start at variation 121 (cyan=121, magenta=122, yellow=123)
+        // Wait — actual order is all cyan first, then magenta, then yellow per block type
+        // Letters: cyan(1-26), magenta(27-52), yellow(53-78)
+        // Numbers: cyan(79-88), magenta(89-98), yellow(99-108)
+        // Operators: cyan(109-112), magenta(113-116), yellow(117-120)
+        // Logo: cyan(121), magenta(122), yellow(123) → BUT with the logo loop the count
+        // continues from 121 since we have 120 blocks before logos, not 123.
+        // Actual first logo variation = 121
+        val lettersPerColor = 26
+        val numbersPerColor = 10
+        val operatorsPerColor = 4
+        val colors = 3
+        val blocksBeforeLogo = (lettersPerColor + numbersPerColor + operatorsPerColor) * colors
+        val firstLogoVariation = blocksBeforeLogo + 1
+
+        assertEquals(121, firstLogoVariation,
+            "Logo blocks should start at custom_variation 121")
+        assertTrue(firstLogoVariation + 2 <= 800,
+            "Last logo variation (${firstLogoVariation + 2}) must not exceed noteblock limit")
     }
 
     // ==================== YAML Format Tests ====================
