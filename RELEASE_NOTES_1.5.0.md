@@ -14,8 +14,8 @@ This release also fixes a critical build issue where the shadow JAR was being si
 ## New Features
 
 ### Ender Dragon Logo Block Drop
-- On Ender Dragon death, a logo block in a random color (cyan, magenta, or yellow) spawns above the central bedrock pillar (X=0.5, Z=0.5, Y = highest block at 0,0 + 1) with a pure upward velocity and no horizontal scatter
-- Dropped at X=5.5, Z=0.5 on the flat end stone outside the fountain — clear of the exit portal blocks (±2 from centre) and the dragon egg's non-full hitbox (items slide off it onto portal blocks)
+- On Ender Dragon death, a logo block in a random color (cyan, magenta, or yellow) drops on the flat end stone just outside the fountain (X=5.5, Z=0.5, Y = ground + 2)
+- Positioned outside the fountain to avoid two hazards: exit portal blocks (±2 from centre) teleport item entities to world spawn; the dragon egg (first kill) has a non-full hitbox that lets items slide off onto those portal blocks
 - Drop is world-sourced from `event.entity.world` — works in any End dimension, not hardcoded
 - No killing blow required — fires for any dragon death including `/kill`
 - Color selected via `BlockColor.getRand()` from the three logo colors
@@ -48,8 +48,8 @@ Multiple entries are supported. Invalid material names are silently skipped. If 
 ## Fixes
 
 ### Shadow JAR Build Fix
-- The `jar` task and `shadowJar` task were both outputting `CharmedChars-X.X.X.jar`, with `jar` running last and overwriting the fat JAR with the thin JAR
-- Fix: `jar` task now outputs `CharmedChars-X.X.X-plain.jar`; the deployable JAR is always the shadow (fat) JAR
+- The `jar` task and `shadowJar` task were both outputting `CharmedChars-X.X.X.jar`, with `jar` running last and overwriting the fat JAR with the thin JAR (no bundled dependencies)
+- Fix: `tasks.jar { enabled = false }` — thin JAR is suppressed entirely; `build/libs/` contains only the deployable shadow JAR
 - Previously caused `NoClassDefFoundError: kotlinx/coroutines/CoroutineScope` at server startup
 
 ### Shulker Inventory Population Fix

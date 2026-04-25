@@ -59,7 +59,7 @@ Perfect for:
 - Use **binary search strategy** to find any number in ~10 guesses
 
 ### Ender Dragon Logo Block (v1.5.0) 🐉
-- When the Ender Dragon dies, a **random-color logo block** drops naturally above the exit portal bedrock post (X=0, Z=0 in The End), 2 blocks above the post top
+- When the Ender Dragon dies, a **random-color logo block** drops on the end stone just outside the exit portal fountain — safe from the portal's item teleport and the dragon egg's non-full hitbox
 - Drop is **world-based** — no killing blow required, works even with `/kill`
 - **Three colors**: Cyan, Magenta, Yellow — chosen randomly each kill
 - **Place it in The End** and hit it with a gold or pyrite tool to transform it into a matching **colored shulker box** filled with configurable loot (default: 4 Ghast Tears)
@@ -202,7 +202,7 @@ Word: "QUARTZ" (all magenta)
 | `/iastatus` | Check ItemsAdder integration status | `charmedchars.admin` |
 | `/iasetup [force]` | Auto-setup ItemsAdder configuration | `charmedchars.admin` |
 | `/oraxensetup [force]` | Auto-setup Oraxen configuration | `charmedchars.admin` |
-| `/nexosetup [force]` | Auto-setup Nexo configuration (UNTESTED) | `charmedchars.admin` |
+| `/nexosetup [force]` | Auto-setup Nexo configuration | `charmedchars.admin` |
 | `/reload` | Reload plugin configuration | `charmedchars.admin` |
 
 ---
@@ -263,7 +263,7 @@ bastion-reward:
 ### For Server Admins
 - **[Quick Setup Guide - ItemsAdder](https://github.com/badbabywentaway/CharmedChars/blob/master/QUICK_SETUP.md)** - ItemsAdder installation
 - **[Oraxen Setup Guide](https://github.com/badbabywentaway/CharmedChars/blob/master/ORAXEN_SETUP.md)** - Oraxen installation (alternative option)
-- **[Nexo Setup Guide](https://github.com/badbabywentaway/CharmedChars/blob/master/NEXO_SETUP.md)** - Nexo installation (alternative option - UNTESTED)
+- **[Nexo Setup Guide](https://github.com/badbabywentaway/CharmedChars/blob/master/NEXO_SETUP.md)** - Nexo installation (alternative option)
 - **[Reward Configuration](https://github.com/badbabywentaway/CharmedChars/blob/master/REWARD_CONFIG.md)** - Customizing rewards
 - **[Troubleshooting](https://github.com/badbabywentaway/CharmedChars/blob/master/TROUBLESHOOTING.md)** - Common issues
 
@@ -303,7 +303,7 @@ bastion-reward:
 
 **Latest Updates**:
 - **v1.5.0**: Ender Dragon Logo Block — Dragon finale and The End reward system
-  - **NEW**: Ender Dragon death drops a random-color logo block above the exit portal post
+  - **NEW**: Ender Dragon death drops a random-color logo block on the end stone beside the exit portal fountain
   - **NEW**: Logo block placed in The End + gold/pyrite tool → colored shulker box with configurable loot
   - **NEW**: Logo block definitions added for all three providers (ItemsAdder, Oraxen, Nexo)
   - **FIXED**: Nexo integration fully tested and confirmed working at runtime
@@ -413,7 +413,7 @@ bastion-reward:
 - **How to Play**: https://github.com/badbabywentaway/CharmedChars/blob/master/PLAY_INSTRUCTIONS.md
 - **Setup Guide (ItemsAdder)**: https://github.com/badbabywentaway/CharmedChars/blob/master/QUICK_SETUP.md
 - **Setup Guide (Oraxen)**: https://github.com/badbabywentaway/CharmedChars/blob/master/ORAXEN_SETUP.md
-- **Setup Guide (Nexo - UNTESTED)**: https://github.com/badbabywentaway/CharmedChars/blob/master/NEXO_SETUP.md
+- **Setup Guide (Nexo)**: https://github.com/badbabywentaway/CharmedChars/blob/master/NEXO_SETUP.md
 - **Issue Tracker**: https://github.com/badbabywentaway/CharmedChars/issues
 
 ---

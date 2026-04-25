@@ -41,8 +41,8 @@ Feature release introducing the Ender Dragon finale: a randomly-colored logo blo
 #### **Bug Fixes** 🐛
 
 **Shadow JAR Build Fix** (`build.gradle.kts`)
-- `jar` task was outputting `CharmedChars-X.X.X.jar`, overwriting the shadow fat JAR
-- Fix: `tasks.jar { archiveClassifier.set("plain") }` — thin JAR now named `CharmedChars-X.X.X-plain.jar`
+- `jar` task was outputting `CharmedChars-X.X.X.jar`, overwriting the shadow fat JAR (no bundled dependencies)
+- Fix: `tasks.jar { enabled = false }` — thin JAR suppressed entirely; `build/libs/` contains only the deployable shadow JAR
 - Previously caused `NoClassDefFoundError: kotlinx/coroutines/CoroutineScope` at server startup
 
 **Shulker Inventory Wipe Fix** (`LogoBlockListener.kt`)
