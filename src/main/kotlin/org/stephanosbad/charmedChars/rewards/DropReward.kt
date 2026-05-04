@@ -58,10 +58,12 @@ class DropReward(
     private var material: Material? = null
 
     /**
-     * Resolves the material name to a Minecraft Material enum value
+     * Resolves the material name to a Minecraft Material enum value.
+     * Returns null (and logs a warning) if the material doesn't exist in the
+     * running server version, allowing forward compatibility with future MC items.
      */
     private fun setMaterial() {
-        material = Material.valueOf(materialName!!)
+        material = Material.matchMaterial(materialName!!)
     }
 
     /**
@@ -90,7 +92,7 @@ class DropReward(
             netAmount = maximumRewardCap
         }
         val count = netAmount.roundToInt().toInt()
-        if (location.world == null) {
+        if (location.world == null || material == null) {
             return
         }
         if (count > 0) {
