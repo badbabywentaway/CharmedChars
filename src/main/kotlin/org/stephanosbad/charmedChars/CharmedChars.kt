@@ -35,12 +35,16 @@ import org.stephanosbad.charmedChars.commands.ReloadCommand
 import org.stephanosbad.charmedChars.commands.SetupItemsAdderCommand
 import org.stephanosbad.charmedChars.commands.SetupOraxenCommand
 import org.stephanosbad.charmedChars.commands.SetupNexoCommand
+import org.stephanosbad.charmedChars.commands.SetupNativeCommand
 import org.stephanosbad.charmedChars.commands.StructureCodeCommand
 import org.stephanosbad.charmedChars.commands.StructureDatabaseCommand
 import org.stephanosbad.charmedChars.commands.VersionCommand
 import org.stephanosbad.charmedChars.commands.GlassingBedsCommand
 import org.stephanosbad.charmedChars.integration.ItemsAdderSetup
 import org.stephanosbad.charmedChars.integration.CustomItemProviderManager
+import org.stephanosbad.charmedChars.integration.NativeItemManagerSetup
+import org.stephanosbad.charmedChars.integration.NativeItemProvider
+import org.stephanosbad.charmedChars.listeners.NativePlacementListener
 import org.stephanosbad.charmedChars.utility.ConfigManager
 import org.stephanosbad.charmedChars.database.StructureDatabase
 import org.stephanosbad.charmedChars.listeners.StructureListener
@@ -119,6 +123,12 @@ class CharmedChars : JavaPlugin(), CoroutineScope {
 
         logger.info("Custom item provider initialized: ${customItemProviderManager.getProviderName()}")
 
+        // Native provider registers items synchronously so lazy item maps resolve correctly
+        val nativeProvider = customItemProviderManager.getProvider() as? NativeItemProvider
+        if (nativeProvider != null) {
+            NativeItemManagerSetup(this, nativeProvider).setup()
+        }
+
         configDataHandler = ConfigDataHandler(this)
         try {
             configDataHandler!!.loadConfig()
@@ -145,6 +155,7 @@ class CharmedChars : JavaPlugin(), CoroutineScope {
         getCommand("iasetup")?.setExecutor(SetupItemsAdderCommand(this))
         getCommand("oraxensetup")?.setExecutor(SetupOraxenCommand(this))
         getCommand("nexosetup")?.setExecutor(SetupNexoCommand(this))
+        getCommand("nativesetup")?.setExecutor(SetupNativeCommand(this))
         getCommand("version")?.setExecutor(VersionCommand(this))
         getCommand("structurecode")?.setExecutor(StructureCodeCommand(this))
         val structureDbCommand = StructureDatabaseCommand(this)
@@ -180,6 +191,9 @@ class CharmedChars : JavaPlugin(), CoroutineScope {
         }
 
         // Register event listeners
+        if (nativeProvider != null) {
+            Bukkit.getPluginManager().registerEvents(NativePlacementListener(nativeProvider), this)
+        }
         Bukkit.getPluginManager().registerEvents(ItemManager(this), this)
         Bukkit.getPluginManager().registerEvents(StructureListener(this, structureDatabase), this)
         Bukkit.getPluginManager().registerEvents(FortressNumberGameListener(this, structureDatabase), this)
@@ -333,6 +347,10 @@ class CharmedChars : JavaPlugin(), CoroutineScope {
                 } else {
                     logger.info("Nexo configuration found. Ready to use!")
                 }
+            }
+
+            "NativeItems" -> {
+                logger.info("NativeItemManager is active — no external plugin required.")
             }
 
             else -> {

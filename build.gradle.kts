@@ -26,6 +26,7 @@ repositories {
     maven("https://repo.dmulloy2.net/repository/public/") { name = "protocollib-repo" }
     maven("https://repo.oraxen.com/releases") { name = "oraxen-repo" }
     maven("https://repo.nexomc.com/releases") { name = "nexo-repo" }
+    maven("https://repo.codemc.io/repository/maven-public/") { name = "codemc-repo" }
 }
 
 dependencies {
@@ -36,6 +37,7 @@ dependencies {
     compileOnly("io.th0rgal:oraxen:1.212.0")
     compileOnly("com.nexomc:nexo:1.0.0") // Note: Untested - no premium license available for verification
     compileOnly("com.github.GriefPrevention:GriefPrevention:${property("griefPreventionVersion")}")
+    implementation("de.tr7zw:item-nbt-api:${property("nbtApiVersion")}")
     implementation("org.jetbrains.kotlin:kotlin-stdlib:${property("kotlinVersion")}")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:${property("coroutinesVersion")}")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-jdk8:${property("coroutinesVersion")}")
@@ -81,6 +83,8 @@ dependencies {
         // Relocate Kotlin and coroutines to avoid conflicts with other plugins
         relocate("kotlin", "org.stephanosbad.charmedchars.kotlin")
         relocate("kotlinx.coroutines", "org.stephanosbad.charmedchars.kotlinx.coroutines")
+
+        relocate("de.tr7zw.changeme.nbtapi", "org.stephanosbad.charmedchars.nbtapi")
 
         // NOTE: Do NOT relocate Exposed or SQLite!
         // - SQLite JDBC contains native libraries (.so/.dll/.dylib) that break when relocated

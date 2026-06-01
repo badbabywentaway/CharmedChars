@@ -83,17 +83,21 @@ class CustomItemProviderManager(private val plugin: CharmedChars) {
             }
 
             providersCount == 0 -> {
-                messages.add("ERROR: No custom item plugin is installed!")
-                messages.add("CharmedChars requires ONE of the following:")
-                messages.add("  - ItemsAdder (https://www.spigotmc.org/resources/73355/)")
-                messages.add("  - Oraxen (https://www.spigotmc.org/resources/72448/)")
-                messages.add("  - Nexo (https://polymart.org/resource/nexo.6901)")
-                messages.add("Please install one and restart the server.")
-                plugin.logger.severe("========================================")
-                plugin.logger.severe("FATAL: No custom item plugin detected!")
-                plugin.logger.severe("CharmedChars requires ItemsAdder, Oraxen, or Nexo.")
-                plugin.logger.severe("========================================")
-                return InitResult(false, null, messages)
+                try {
+                    provider = NativeItemProvider()
+                    messages.add("No external item plugin detected — using built-in NativeItemManager")
+                    plugin.logger.info("========================================")
+                    plugin.logger.info("Custom Item Provider: NativeItems (built-in fallback)")
+                    plugin.logger.info("ItemsAdder, Oraxen, and Nexo are not installed.")
+                    plugin.logger.info("Items will use vanilla PAPER with custom model data.")
+                    plugin.logger.info("========================================")
+                    return InitResult(true, provider, messages)
+                } catch (e: Exception) {
+                    messages.add("ERROR: Failed to initialize native item provider: ${e.message}")
+                    plugin.logger.severe("Failed to initialize native item provider: ${e.message}")
+                    e.printStackTrace()
+                    return InitResult(false, null, messages)
+                }
             }
 
             itemsAdderAvailable -> {

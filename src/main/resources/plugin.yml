@@ -38,6 +38,11 @@ commands:
     usage: /nexosetup [force]
     permission: charmedchars.admin
     aliases: [setupnexo, nxsetup]
+  nativesetup:
+    description: Generate native resource pack (used when no ItemsAdder/Oraxen/Nexo is installed)
+    usage: /nativesetup [force]
+    permission: charmedchars.admin
+    aliases: [setupnative, nativepack]
   version:
     description: Display plugin version and recent changes
     usage: /version
