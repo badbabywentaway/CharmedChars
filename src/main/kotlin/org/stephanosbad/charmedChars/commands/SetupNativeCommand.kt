@@ -68,12 +68,23 @@ class SetupNativeCommand(private val plugin: CharmedChars) : CommandExecutor {
 
         for (message in result.messages) {
             val color = when {
-                message.startsWith("  Done") || message.contains("Complete") -> NamedTextColor.GREEN
+                message.startsWith("  Done") || message.contains("Ready") -> NamedTextColor.GREEN
                 message.startsWith("ERROR") -> NamedTextColor.RED
-                message.startsWith("NEXT STEPS") || message.contains("===") -> NamedTextColor.GOLD
+                message.contains("===") -> NamedTextColor.GOLD
                 else -> NamedTextColor.GRAY
             }
             sender.sendMessage(Component.text(message).color(color))
+        }
+
+        if (result.success && !result.alreadySetup) {
+            val zipFile = result.zipFile
+            val hash = result.packHash
+            if (zipFile != null && hash != null) {
+                nativeProvider.packHash = hash
+                plugin.startNativePackHosting(nativeProvider, zipFile)
+                sender.sendMessage(Component.text("Pack server started. Players will receive the pack on join.").color(NamedTextColor.GREEN))
+                sender.sendMessage(Component.text("URL: ${nativeProvider.packUrl}").color(NamedTextColor.AQUA))
+            }
         }
 
         return true

@@ -145,6 +145,16 @@ logo-block:
     - materialName: "GHAST_TEAR"
       quantity: 4
 
+# Native Item Manager (active when no ItemsAdder/Oraxen/Nexo is installed)
+native-items:
+  # Port for the built-in HTTP server that serves the resource pack to clients
+  http-port: 8080
+  # Public hostname or IP that clients use to download the pack.
+  # Leave blank to auto-detect from server.properties (server-ip) or local address.
+  hostname: ""
+  # Whether players must accept the resource pack before joining
+  pack-required: false
+
 # Glassing Beds Feature
 # When a bed explodes in the Nether or End, convert nearby lava to glass
 glassing-beds:

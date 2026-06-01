@@ -146,6 +146,15 @@ class ConfigManager(private val plugin: CharmedChars) {
      * lava blocks within a 5-block radius to glass blocks.
      * Default: false
      */
+    val nativeItemsHttpPort: Int
+        get() = config.getInt("native-items.http-port", 8080)
+
+    val nativeItemsHostname: String
+        get() = config.getString("native-items.hostname", "") ?: ""
+
+    val nativeItemsPackRequired: Boolean
+        get() = config.getBoolean("native-items.pack-required", false)
+
     val glassingBedsEnabled: Boolean
         get() = config.getBoolean("glassing-beds.enabled", false)
 

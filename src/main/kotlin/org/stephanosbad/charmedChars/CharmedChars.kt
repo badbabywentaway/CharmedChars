@@ -44,7 +44,9 @@ import org.stephanosbad.charmedChars.integration.ItemsAdderSetup
 import org.stephanosbad.charmedChars.integration.CustomItemProviderManager
 import org.stephanosbad.charmedChars.integration.NativeItemManagerSetup
 import org.stephanosbad.charmedChars.integration.NativeItemProvider
+import org.stephanosbad.charmedChars.integration.NativePackServer
 import org.stephanosbad.charmedChars.listeners.NativePlacementListener
+import org.stephanosbad.charmedChars.listeners.NativePackListener
 import org.stephanosbad.charmedChars.utility.ConfigManager
 import org.stephanosbad.charmedChars.database.StructureDatabase
 import org.stephanosbad.charmedChars.listeners.StructureListener
@@ -96,6 +98,8 @@ class CharmedChars : JavaPlugin(), CoroutineScope {
     lateinit var customItemProviderManager: CustomItemProviderManager
         private set
 
+    private var nativePackServer: NativePackServer? = null
+
     /**
      * Called when the plugin is enabled
      *
@@ -126,7 +130,15 @@ class CharmedChars : JavaPlugin(), CoroutineScope {
         // Native provider registers items synchronously so lazy item maps resolve correctly
         val nativeProvider = customItemProviderManager.getProvider() as? NativeItemProvider
         if (nativeProvider != null) {
-            NativeItemManagerSetup(this, nativeProvider).setup()
+            val nativeSetup = NativeItemManagerSetup(this, nativeProvider)
+            nativeSetup.setup()
+            // If a zip from a previous /nativesetup already exists, start hosting immediately
+            val existingZip = nativeSetup.getZipFile()
+            if (existingZip.exists()) {
+                val hash = nativeSetup.computePackHash(existingZip)
+                nativeProvider.packHash = hash
+                startNativePackHosting(nativeProvider, existingZip)
+            }
         }
 
         configDataHandler = ConfigDataHandler(this)
@@ -193,6 +205,7 @@ class CharmedChars : JavaPlugin(), CoroutineScope {
         // Register event listeners
         if (nativeProvider != null) {
             Bukkit.getPluginManager().registerEvents(NativePlacementListener(nativeProvider), this)
+            Bukkit.getPluginManager().registerEvents(NativePackListener(this, nativeProvider), this)
         }
         Bukkit.getPluginManager().registerEvents(ItemManager(this), this)
         Bukkit.getPluginManager().registerEvents(StructureListener(this, structureDatabase), this)
@@ -212,6 +225,10 @@ class CharmedChars : JavaPlugin(), CoroutineScope {
      * Cancels all running coroutines and performs cleanup operations.
      */
     override fun onDisable() {
+        // Stop native pack HTTP server if running
+        nativePackServer?.stop()
+        nativePackServer = null
+
         // Close database connection
         if (::structureDatabase.isInitialized) {
             structureDatabase.close()
@@ -256,6 +273,35 @@ class CharmedChars : JavaPlugin(), CoroutineScope {
      * custom blocks. If not configured, sends warnings to the console and notifies
      * online operators with setup instructions.
      */
+    fun startNativePackHosting(provider: NativeItemProvider, zipFile: java.io.File) {
+        val hostname = resolveNativeHostname()
+        val port = configManager.nativeItemsHttpPort
+        val url = "http://$hostname:$port/${zipFile.name}"
+
+        provider.packUrl = url
+        provider.packHash = provider.packHash  // hash already set by caller
+
+        if (nativePackServer == null) {
+            nativePackServer = NativePackServer(this)
+        }
+        nativePackServer!!.start(zipFile, port)
+
+        logger.info("Native pack URL: $url")
+        logger.info("Players will receive the pack on join.")
+    }
+
+    private fun resolveNativeHostname(): String {
+        val configured = configManager.nativeItemsHostname
+        if (configured.isNotEmpty()) return configured
+        val serverIp = server.ip
+        if (serverIp.isNotEmpty()) return serverIp
+        return try {
+            java.net.InetAddress.getLocalHost().hostAddress
+        } catch (e: Exception) {
+            "localhost"
+        }
+    }
+
     private fun checkProviderSetup() {
         val providerName = customItemProviderManager.getProviderName()
 

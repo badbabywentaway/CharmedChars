@@ -2,7 +2,7 @@
 echo ===================================================
 echo    CharmedChars v1.5.0 - Deploy to Test Beds
 echo ===================================================
-echo    Deploys to: ItemsAdder + Oraxen + Nexo servers
+echo    Deploys to: ItemsAdder + Oraxen + Nexo + Native
 echo ===================================================
 echo.
 
@@ -164,18 +164,52 @@ if %ERRORLEVEL% EQU 0 (
     exit /b 1
 )
 
+REM ===================================================
+REM NATIVE SERVER
+REM ===================================================
+echo [NATIVE] Cleaning and deploying...
+
+echo   Removing old CharmedChars JARs...
+if exist "c:\Users\steve\Documents\NativePapermc\plugins\CharmedChars-*.jar" (
+    del /q "c:\Users\steve\Documents\NativePapermc\plugins\CharmedChars-*.jar"
+    echo   [OK] Old JARs removed
+) else (
+    echo   [INFO] No old JARs found
+)
+
+echo   Removing old plugin data...
+if exist "c:\Users\steve\Documents\NativePapermc\plugins\CharmedChars\native-pack" (
+    rmdir /s /q "c:\Users\steve\Documents\NativePapermc\plugins\CharmedChars\native-pack"
+)
+if exist "c:\Users\steve\Documents\NativePapermc\plugins\CharmedChars\config.yml" (
+    del /q "c:\Users\steve\Documents\NativePapermc\plugins\CharmedChars\config.yml"
+)
+echo   [OK] Plugin data cleaned
+
+echo   Copying new JAR...
+copy "%JAR%" "c:\Users\steve\Documents\NativePapermc\plugins\" /Y >nul
+if %ERRORLEVEL% EQU 0 (
+    echo   [OK] CharmedChars-1.5.0.jar deployed to Native server
+) else (
+    echo   [ERROR] Failed to copy JAR to Native server
+    pause
+    exit /b 1
+)
+
 echo.
 echo ===================================================
-echo [SUCCESS] CharmedChars v1.5.0 deployed to all three servers
+echo [SUCCESS] CharmedChars v1.5.0 deployed to all four servers
 echo ===================================================
 echo   ItemsAdder: c:\Users\steve\Documents\Papermc\plugins
 echo   Oraxen:     c:\Users\steve\Documents\OraxenPapermc\plugins
 echo   Nexo:       c:\Users\steve\Documents\NexoPapermc\plugins
+echo   Native:     c:\Users\steve\Documents\NativePapermc\plugins
 echo ===================================================
 echo.
 echo Next steps per server:
 echo   ItemsAdder: restart -> /iazip -> restart -> test
 echo   Oraxen:     restart -> /oraxensetup -> /oraxen reload all -> test
 echo   Nexo:       restart -> /nexosetup -> /nexo reload all -> test
+echo   Native:     restart -> /nativesetup -> test
 echo.
 pause

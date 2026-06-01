@@ -26,6 +26,7 @@ import org.bukkit.Location
 import org.bukkit.Material
 import org.bukkit.block.Block
 import org.bukkit.inventory.ItemStack
+import java.util.UUID
 import java.util.concurrent.ConcurrentHashMap
 
 /**
@@ -45,6 +46,13 @@ class NativeItemProvider : CustomItemProvider {
 
     private val itemRegistry = mutableMapOf<String, ItemStack>()
     private val placedBlocks = ConcurrentHashMap<Location, CustomBlockInfo>()
+
+    var packUrl: String? = null
+        internal set
+    var packHash: ByteArray? = null
+        internal set
+    val packUuid: UUID?
+        get() = packHash?.let { UUID.nameUUIDFromBytes(it) }
 
     fun registerItem(namespacedId: String, customModelData: Int, displayName: Component) {
         val base = ItemStack(Material.PAPER).apply {

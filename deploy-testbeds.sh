@@ -4,7 +4,7 @@ set -euo pipefail
 echo "==================================================="
 echo "   CharmedChars v1.5.0 - Deploy to Test Beds"
 echo "==================================================="
-echo "   Deploys to: ItemsAdder + Oraxen + Nexo servers"
+echo "   Deploys to: ItemsAdder + Oraxen + Nexo + Native"
 echo "==================================================="
 echo
 
@@ -101,16 +101,38 @@ cp "$JAR" "$NX/"
 echo "  [OK] CharmedChars-1.5.0.jar deployed to Nexo server"
 echo
 
+# ---------------------------------------------------
+# NATIVE SERVER
+# ---------------------------------------------------
+echo "[NATIVE] Cleaning and deploying..."
+NA="$DOCS/NativePapermc/plugins"
+
+echo "  Removing old CharmedChars JARs..."
+rm -f "$NA"/CharmedChars-*.jar
+echo "  [OK] Old JARs removed"
+
+echo "  Removing old plugin data..."
+remove_if_exists "$NA/CharmedChars/native-pack"
+remove_if_exists "$NA/CharmedChars/config.yml"
+echo "  [OK] Plugin data cleaned"
+
+echo "  Copying new JAR..."
+cp "$JAR" "$NA/"
+echo "  [OK] CharmedChars-1.5.0.jar deployed to Native server"
+echo
+
 echo "==================================================="
-echo "[SUCCESS] CharmedChars v1.5.0 deployed to all three servers"
+echo "[SUCCESS] CharmedChars v1.5.0 deployed to all four servers"
 echo "==================================================="
 echo "  ItemsAdder: $DOCS/Papermc/plugins"
 echo "  Oraxen:     $DOCS/OraxenPapermc/plugins"
 echo "  Nexo:       $DOCS/NexoPapermc/plugins"
+echo "  Native:     $DOCS/NativePapermc/plugins"
 echo "==================================================="
 echo
 echo "Next steps per server:"
 echo "  ItemsAdder: restart -> /iazip -> restart -> test"
 echo "  Oraxen:     restart -> /oraxensetup -> /oraxen reload all -> test"
 echo "  Nexo:       restart -> /nexosetup -> /nexo reload all -> test"
+echo "  Native:     restart -> /nativesetup -> test"
 echo

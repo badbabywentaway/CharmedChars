@@ -26,6 +26,9 @@ import org.stephanosbad.charmedChars.items.NonAlphaNumBlocks
 import org.stephanosbad.charmedChars.items.NumericBlock
 import java.io.File
 import java.io.FileOutputStream
+import java.security.MessageDigest
+import java.util.zip.ZipEntry
+import java.util.zip.ZipOutputStream
 
 /**
  * Registers all CharmedChars items into NativeItemProvider on startup and
@@ -99,18 +102,21 @@ class NativeItemManagerSetup(
             val textureCount = copyTextures()
             messages.add("  Done ($textureCount files)")
 
+            messages.add("Zipping pack...")
+            val zipFile = zipPack()
+            messages.add("  Done (${zipFile.name})")
+
+            messages.add("Computing SHA-1 hash...")
+            val hash = computePackHash(zipFile)
+            messages.add("  Done")
+
             messages.add("")
-            messages.add("=== Setup Complete! ===")
-            messages.add("Pack generated at: ${packRoot.absolutePath}")
-            messages.add("")
-            messages.add("NEXT STEPS:")
-            messages.add("1. Zip the native-pack folder")
-            messages.add("2. Add it as a server resource pack (server.properties)")
-            messages.add("   OR place it in the client's resourcepacks folder")
-            messages.add("3. Reload/restart the server")
+            messages.add("=== Pack Ready! ===")
+            messages.add("Zip: ${zipFile.absolutePath}")
+            messages.add("Run /nativesetup again if you need to regenerate.")
             messages.add("")
 
-            SetupResult(success = true, alreadySetup = false, messages = messages)
+            SetupResult(success = true, alreadySetup = false, messages = messages, zipFile = zipFile, packHash = hash)
         } catch (e: Exception) {
             messages.add("ERROR: ${e.message}")
             plugin.logger.severe("Failed to generate native resource pack: ${e.message}")
@@ -265,9 +271,38 @@ class NativeItemManagerSetup(
         }
     }
 
+    fun getZipFile(): File = File(plugin.dataFolder, "CharmedChars-native-pack.zip")
+
+    private fun zipPack(): File {
+        val zipFile = getZipFile()
+        if (zipFile.exists()) zipFile.delete()
+        ZipOutputStream(FileOutputStream(zipFile)).use { zos ->
+            packRoot.walkTopDown().filter { it.isFile }.forEach { file ->
+                zos.putNextEntry(ZipEntry(file.relativeTo(packRoot).invariantSeparatorsPath))
+                file.inputStream().use { it.copyTo(zos) }
+                zos.closeEntry()
+            }
+        }
+        return zipFile
+    }
+
+    fun computePackHash(zipFile: File): ByteArray {
+        val digest = MessageDigest.getInstance("SHA-1")
+        zipFile.inputStream().use { input ->
+            val buffer = ByteArray(8192)
+            var read: Int
+            while (input.read(buffer).also { read = it } != -1) {
+                digest.update(buffer, 0, read)
+            }
+        }
+        return digest.digest()
+    }
+
     data class SetupResult(
         val success: Boolean,
         val alreadySetup: Boolean,
-        val messages: List<String>
+        val messages: List<String>,
+        val zipFile: File? = null,
+        val packHash: ByteArray? = null
     )
 }
