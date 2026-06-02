@@ -127,18 +127,11 @@ class CharmedChars : JavaPlugin(), CoroutineScope {
 
         logger.info("Custom item provider initialized: ${customItemProviderManager.getProviderName()}")
 
-        // Native provider registers items synchronously so lazy item maps resolve correctly
+        // Native provider registers items synchronously so lazy item maps resolve correctly.
+        // Pack hosting is deferred until after configManager is initialized (it needs the port/hostname).
         val nativeProvider = customItemProviderManager.getProvider() as? NativeItemProvider
         if (nativeProvider != null) {
-            val nativeSetup = NativeItemManagerSetup(this, nativeProvider)
-            nativeSetup.setup()
-            // If a zip from a previous /nativesetup already exists, start hosting immediately
-            val existingZip = nativeSetup.getZipFile()
-            if (existingZip.exists()) {
-                val hash = nativeSetup.computePackHash(existingZip)
-                nativeProvider.packHash = hash
-                startNativePackHosting(nativeProvider, existingZip)
-            }
+            NativeItemManagerSetup(this, nativeProvider).setup()
         }
 
         configDataHandler = ConfigDataHandler(this)
@@ -156,6 +149,16 @@ class CharmedChars : JavaPlugin(), CoroutineScope {
         // Initialize config manager
         configManager = ConfigManager(this)
         configManager.loadConfig()
+
+        // Start native pack HTTP server now that configManager is ready
+        if (nativeProvider != null) {
+            val nativeSetup = NativeItemManagerSetup(this, nativeProvider)
+            val existingZip = nativeSetup.getZipFile()
+            if (existingZip.exists()) {
+                nativeProvider.packHash = nativeSetup.computePackHash(existingZip)
+                startNativePackHosting(nativeProvider, existingZip)
+            }
+        }
 
         // Initialize structure database
         structureDatabase = StructureDatabase(this)
