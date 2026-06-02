@@ -315,12 +315,25 @@ class NativeItemManagerSetup(
     }
 
     private fun registerPyriteItems() {
+        val ironVariants = mapOf(
+            Material.GOLDEN_PICKAXE to Material.IRON_PICKAXE,
+            Material.GOLDEN_AXE     to Material.IRON_AXE,
+            Material.GOLDEN_SHOVEL  to Material.IRON_SHOVEL,
+            Material.GOLDEN_HOE     to Material.IRON_HOE
+        )
         for (def in buildPyriteItems()) {
             val item = ItemStack(def.baseMaterial)
             item.editMeta { it.displayName(Component.text(def.displayName).color(NamedTextColor.GOLD)) }
             item.setData(DataComponentTypes.CUSTOM_MODEL_DATA,
                 CustomModelData.customModelData().addFloat(def.cmd.toFloat()).build())
             def.maxDamage?.let { item.setData(DataComponentTypes.MAX_DAMAGE, it) }
+            // Copy iron mining rules from the vanilla iron equivalent so mining speed
+            // matches iron-tier (6.0) rather than the gold base's speed (12.0)
+            ironVariants[def.baseMaterial]?.let { ironMat ->
+                ItemStack(ironMat).getData(DataComponentTypes.TOOL)?.let { tool ->
+                    item.setData(DataComponentTypes.TOOL, tool)
+                }
+            }
             if (def.attackDamage != null && def.attackSpeed != null) {
                 val shortId = def.namespacedId.substringAfter(':')
                 val attrs = ItemAttributeModifiers.itemAttributes()
