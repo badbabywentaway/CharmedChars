@@ -167,6 +167,10 @@ class NativeItemManagerSetup(
             val pyriteTextureCount = copyPyriteTextures()
             messages.add("  Done ($pyriteTextureCount files)")
 
+            messages.add("Generating MC 1.21.4+ item definitions...")
+            val itemDefCount = writeItemDefinitions()
+            messages.add("  Done ($itemDefCount files)")
+
             messages.add("Zipping pack...")
             val zipFile = zipPack()
             messages.add("  Done (${zipFile.name})")
@@ -236,6 +240,7 @@ class NativeItemManagerSetup(
     private fun createDirectories() {
         val colors = listOf("cyan", "magenta", "yellow")
         File(packRoot, "assets/minecraft/blockstates").mkdirs()
+        File(packRoot, "assets/minecraft/items").mkdirs()
         File(packRoot, "assets/minecraft/models/item").mkdirs()
         for (color in colors) {
             File(packRoot, "assets/charmedchars/models/item/$color").mkdirs()
@@ -509,6 +514,66 @@ class NativeItemManagerSetup(
             )
             count++
         }
+        return count
+    }
+
+    // Writes assets/minecraft/items/ files using the MC 1.21.4+ range_dispatch format.
+    // paper.json covers all 120 block items; one file per gold base material covers pyrite.
+    // These take precedence over the legacy models/item/ overrides on 1.21.4+ clients.
+    private fun writeItemDefinitions(): Int {
+        val itemsDir = File(packRoot, "assets/minecraft/items")
+        var count = 0
+
+        // paper.json — all 120 block items
+        val blockItems = buildItemList()
+        val blockEntries = blockItems.joinToString(",\n      ") { (id, cmd) ->
+            val bare = id.removePrefix("charmedchars:")
+            val color = bare.substringBefore('_')
+            val suffix = bare.substringAfter('_')
+            """{"threshold": ${cmd}.0, "model": {"type": "minecraft:model", "model": "charmedchars:item/$color/$suffix"}}"""
+        }
+        File(itemsDir, "paper.json").writeText(
+            """{
+  "model": {
+    "type": "minecraft:range_dispatch",
+    "property": "minecraft:custom_model_data",
+    "index": 0,
+    "entries": [
+      $blockEntries
+    ],
+    "fallback": {"type": "minecraft:model", "model": "minecraft:item/paper"}
+  }
+}"""
+        )
+        count++
+
+        // One file per gold base material for pyrite items
+        val pyriteFiles = mapOf(
+            "charmedchars:pyrite_ingot"   to ("gold_ingot"     to "minecraft:item/gold_ingot"),
+            "charmedchars:pyrite_pickaxe" to ("golden_pickaxe" to "minecraft:item/golden_pickaxe"),
+            "charmedchars:pyrite_axe"     to ("golden_axe"     to "minecraft:item/golden_axe"),
+            "charmedchars:pyrite_shovel"  to ("golden_shovel"  to "minecraft:item/golden_shovel"),
+            "charmedchars:pyrite_hoe"     to ("golden_hoe"     to "minecraft:item/golden_hoe")
+        )
+        for (def in buildPyriteItems()) {
+            val (fileName, fallbackModel) = pyriteFiles[def.namespacedId] ?: continue
+            val shortName = def.namespacedId.substringAfter(':').substringAfter("pyrite_")
+            File(itemsDir, "$fileName.json").writeText(
+                """{
+  "model": {
+    "type": "minecraft:range_dispatch",
+    "property": "minecraft:custom_model_data",
+    "index": 0,
+    "entries": [
+      {"threshold": ${def.cmd}.0, "model": {"type": "minecraft:model", "model": "charmedchars:item/pyrite/$shortName"}}
+    ],
+    "fallback": {"type": "minecraft:model", "model": "$fallbackModel"}
+  }
+}"""
+            )
+            count++
+        }
+
         return count
     }
 

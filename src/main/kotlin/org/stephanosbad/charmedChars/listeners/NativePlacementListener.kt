@@ -26,6 +26,7 @@ import org.bukkit.event.EventPriority
 import org.bukkit.event.Listener
 import org.bukkit.event.block.Action
 import org.bukkit.event.block.BlockBreakEvent
+import org.bukkit.event.block.NotePlayEvent
 import org.bukkit.event.player.PlayerInteractEvent
 import org.bukkit.inventory.EquipmentSlot
 import org.stephanosbad.charmedChars.integration.NativeItemProvider
@@ -93,6 +94,13 @@ class NativePlacementListener(private val provider: NativeItemProvider) : Listen
 
         if (event.player.gameMode != GameMode.CREATIVE) {
             item.amount -= 1
+        }
+    }
+
+    @EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)
+    fun onNotePlay(event: NotePlayEvent) {
+        if (provider.getCustomBlock(event.block) != null) {
+            event.isCancelled = true
         }
     }
 
