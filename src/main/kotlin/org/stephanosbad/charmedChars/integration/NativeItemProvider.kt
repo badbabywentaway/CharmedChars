@@ -22,6 +22,7 @@ import de.tr7zw.changeme.nbtapi.iface.ReadWriteItemNBT
 import io.papermc.paper.datacomponent.DataComponentTypes
 import io.papermc.paper.datacomponent.item.CustomModelData
 import net.kyori.adventure.text.Component
+import org.bukkit.Instrument
 import org.bukkit.Location
 import org.bukkit.Material
 import org.bukkit.block.Block
@@ -46,6 +47,13 @@ class NativeItemProvider : CustomItemProvider {
 
     private val itemRegistry = mutableMapOf<String, ItemStack>()
     private val placedBlocks = ConcurrentHashMap<Location, CustomBlockInfo>()
+    private val blockStates = mutableMapOf<String, Pair<Instrument, Int>>()
+
+    fun registerBlockState(namespacedId: String, instrument: Instrument, note: Int) {
+        blockStates[namespacedId] = instrument to note
+    }
+
+    fun getPlacementState(namespacedId: String): Pair<Instrument, Int>? = blockStates[namespacedId]
 
     var packUrl: String? = null
         internal set

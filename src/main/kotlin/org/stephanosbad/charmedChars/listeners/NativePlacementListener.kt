@@ -19,6 +19,8 @@ package org.stephanosbad.charmedChars.listeners
 
 import org.bukkit.GameMode
 import org.bukkit.Material
+import org.bukkit.Note
+import org.bukkit.block.data.type.NoteBlock as NoteBlockData
 import org.bukkit.event.EventHandler
 import org.bukkit.event.EventPriority
 import org.bukkit.event.Listener
@@ -33,8 +35,16 @@ import org.stephanosbad.charmedChars.integration.NativeItemProvider
  *
  * Letter/number/operator block items are PAPER (not directly placeable), so
  * right-click is intercepted to place a NOTE_BLOCK as the in-world carrier.
- * NOTE_BLOCK is required because ItemManager.testForLetter() checks for it.
- * The location→namespacedId mapping is maintained in NativeItemProvider.
+ * The note block's instrument+note state is set to the value registered in
+ * NativeItemProvider so the resource pack can map each state to the correct
+ * per-letter cube_all texture.
+ *
+ * Right-clicking an existing registered note block is cancelled to prevent
+ * players changing the note (which would break the texture mapping).
+ *
+ * NOTE: For stable instrument state, add to paper-global.yml:
+ *   block-updates:
+ *     disable-noteblock-updates: true
  *
  * Only registered when the NativeItems provider is active.
  */
@@ -45,20 +55,40 @@ class NativePlacementListener(private val provider: NativeItemProvider) : Listen
         if (event.action != Action.RIGHT_CLICK_BLOCK) return
         if (event.hand != EquipmentSlot.HAND) return  // prevent double-fire from off-hand
 
+        val clickedBlock = event.clickedBlock ?: return
+
+        // Prevent players tuning a registered letter block (changes note → breaks texture)
+        if (clickedBlock.type == Material.NOTE_BLOCK && provider.getCustomBlock(clickedBlock) != null) {
+            event.isCancelled = true
+            return
+        }
+
         val item = event.item?.takeIf { !it.type.isAir } ?: return
         val itemInfo = provider.getCustomItem(item) ?: return
 
         // Pyrite items are tools, not placeable blocks
         if (itemInfo.namespacedId.contains("pyrite")) return
 
-        val clickedBlock = event.clickedBlock ?: return
         val targetBlock = clickedBlock.getRelative(event.blockFace)
-
         if (!targetBlock.type.isAir) return
 
         event.isCancelled = true
 
         targetBlock.type = Material.NOTE_BLOCK
+
+        // Set the instrument+note state that the resource pack maps to this letter's texture.
+        // The state must be applied after setting the type, and re-applied because Minecraft
+        // may override the instrument on placement based on the block below.
+        val state = provider.getPlacementState(itemInfo.namespacedId)
+        if (state != null) {
+            val noteData = targetBlock.blockData as NoteBlockData
+            noteData.instrument = state.first
+            @Suppress("DEPRECATION")
+            noteData.note = Note(state.second)
+            noteData.isPowered = false
+            targetBlock.blockData = noteData
+        }
+
         provider.registerPlacedBlock(targetBlock.location, itemInfo.namespacedId)
 
         if (event.player.gameMode != GameMode.CREATIVE) {

@@ -23,6 +23,7 @@ import io.papermc.paper.datacomponent.item.ItemAttributeModifiers
 import net.kyori.adventure.text.Component
 import net.kyori.adventure.text.format.NamedTextColor
 import org.bukkit.Bukkit
+import org.bukkit.Instrument
 import org.bukkit.Material
 import org.bukkit.NamespacedKey
 import org.bukkit.attribute.Attribute
@@ -54,8 +55,10 @@ import java.util.zip.ZipOutputStream
  * Pyrite items start at 1120:
  *   ingot (1120), pickaxe (1121), axe (1122), shovel (1123), hoe (1124).
  *
- * Both registerAllItems() and the resource pack JSON share buildItemList() so
- * the predicate values in paper.json always match the in-memory registry.
+ * Note block states for placed letter/number/operator blocks use 5 instruments
+ * × 25 notes, powered=false (120 states for 120 items). The note_block.json
+ * blockstates override maps those 120 states to per-letter cube_all models.
+ * Requires Paper's disable-noteblock-updates: true for stable instrument state.
  */
 class NativeItemManagerSetup(
     private val plugin: CharmedChars,
@@ -74,6 +77,23 @@ class NativeItemManagerSetup(
         val maxDamage: Int? = null,
         val attackDamage: Double? = null,
         val attackSpeed: Double? = null
+    )
+
+    // 5 instruments cover 5×25=125 states — enough for 120 block items.
+    // Explicit pairs so the MC blockstate name stays in sync with the Bukkit enum.
+    private val BLOCK_INSTRUMENTS = listOf(
+        Instrument.PIANO          to "harp",
+        Instrument.BASS_DRUM      to "basedrum",
+        Instrument.SNARE_DRUM     to "snare",
+        Instrument.STICKS         to "hat",
+        Instrument.BASS_GUITAR    to "bass"
+    )
+
+    // All 16 MC instrument names in enum ordinal order, for the full blockstates JSON.
+    private val ALL_MC_INSTRUMENTS = listOf(
+        "harp", "basedrum", "snare", "hat", "bass",
+        "flute", "bell", "guitar", "chime", "xylophone",
+        "iron_xylophone", "cow_bell", "didgeridoo", "bit", "banjo", "pling"
     )
 
     fun isAlreadySetup(): Boolean = provider.registeredItemCount() > 0
@@ -131,6 +151,10 @@ class NativeItemManagerSetup(
             val textureCount = copyTextures()
             messages.add("  Done ($textureCount files)")
 
+            messages.add("Generating note_block state overrides...")
+            val stateCount = writeNoteBlockStates()
+            messages.add("  Done ($stateCount custom states)")
+
             messages.add("Generating pyrite item overrides...")
             val pyriteOverrideCount = writePyriteOverrides()
             messages.add("  Done ($pyriteOverrideCount overrides)")
@@ -154,7 +178,9 @@ class NativeItemManagerSetup(
             messages.add("")
             messages.add("=== Pack Ready! ===")
             messages.add("Zip: ${zipFile.absolutePath}")
-            messages.add("Run /nativesetup again if you need to regenerate.")
+            messages.add("NOTE: Set 'disable-noteblock-updates: true' in paper-global.yml")
+            messages.add("  for stable letter block textures.")
+            messages.add("Run /nativesetup force if you need to regenerate.")
             messages.add("")
 
             SetupResult(success = true, alreadySetup = false, messages = messages, zipFile = zipFile, packHash = hash)
@@ -187,7 +213,8 @@ class NativeItemManagerSetup(
     }
 
     private fun registerAllItems() {
-        for ((namespacedId, cmd) in buildItemList()) {
+        for ((idx, pair) in buildItemList().withIndex()) {
+            val (namespacedId, cmd) = pair
             val (colorName, itemSuffix) = namespacedId.removePrefix("charmedchars:").split("_", limit = 2)
             val color = BlockColor.entries.first { it.directoryName == colorName }
             val textColor = when (color) {
@@ -197,11 +224,18 @@ class NativeItemManagerSetup(
             }
             val label = "${colorName.replaceFirstChar { it.uppercase() }} $itemSuffix"
             provider.registerItem(namespacedId, cmd, Component.text(label).color(textColor))
+
+            // Assign a unique note block state for the placed-block texture override.
+            // States are allocated sequentially: 5 instruments × 25 notes, powered=false.
+            val instrument = BLOCK_INSTRUMENTS[idx / 25].first
+            val note = idx % 25
+            provider.registerBlockState(namespacedId, instrument, note)
         }
     }
 
     private fun createDirectories() {
         val colors = listOf("cyan", "magenta", "yellow")
+        File(packRoot, "assets/minecraft/blockstates").mkdirs()
         File(packRoot, "assets/minecraft/models/item").mkdirs()
         for (color in colors) {
             File(packRoot, "assets/charmedchars/models/item/$color").mkdirs()
@@ -226,7 +260,7 @@ class NativeItemManagerSetup(
     private fun writePaperOverrides(): Int {
         val items = buildItemList()
         val overrides = items.joinToString(",\n    ") { (id, cmd) ->
-            val modelPath = id.replace("charmedchars:", "charmedchars:item/").replace("_", "/", ignoreCase = false).let {
+            val modelPath = run {
                 // id format: charmedchars:cyan_a  → model path: charmedchars:item/cyan/a
                 val bare = id.removePrefix("charmedchars:")         // "cyan_a"
                 val underscore = bare.indexOf('_')
@@ -298,6 +332,48 @@ class NativeItemManagerSetup(
             if (copyResource(src, dest)) count++
         }
         return count
+    }
+
+    /**
+     * Writes assets/minecraft/blockstates/note_block.json.
+     *
+     * All 800 note block states are listed. The 120 states reserved for CharmedChars
+     * items (5 instruments × 25 notes, powered=false) point to the per-letter cube_all
+     * models already generated by writeBlockModels(). All other states fall back to
+     * the vanilla note_block model.
+     */
+    private fun writeNoteBlockStates(): Int {
+        // Build the assignment map: "instrumentMcName,note" → model path
+        val assignments = mutableMapOf<String, String>()
+        for ((idx, pair) in buildItemList().withIndex()) {
+            val (namespacedId, _) = pair
+            val mcName = BLOCK_INSTRUMENTS[idx / 25].second
+            val note = idx % 25
+            val bare = namespacedId.removePrefix("charmedchars:")
+            val color = bare.substringBefore('_')
+            val suffix = bare.substringAfter('_')
+            assignments["$mcName,$note"] = "charmedchars:block/$color/$suffix"
+        }
+
+        val sb = StringBuilder()
+        sb.append("{\n  \"variants\": {\n")
+        var first = true
+        for (inst in ALL_MC_INSTRUMENTS) {
+            for (note in 0..24) {
+                for (powered in listOf(false, true)) {
+                    if (!first) sb.append(",\n")
+                    first = false
+                    // Only powered=false states carry custom models
+                    val model = if (!powered) assignments["$inst,$note"] ?: "minecraft:block/note_block"
+                                else "minecraft:block/note_block"
+                    sb.append("""    "instrument=${inst},note=${note},powered=${powered}": {"model": "${model}"}""")
+                }
+            }
+        }
+        sb.append("\n  }\n}")
+
+        File(packRoot, "assets/minecraft/blockstates/note_block.json").writeText(sb.toString())
+        return assignments.size
     }
 
     // ── Pyrite items ──────────────────────────────────────────────────────────
