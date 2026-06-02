@@ -69,6 +69,11 @@ class NativeItemProvider : CustomItemProvider {
 
     fun registeredItemCount(): Int = itemRegistry.size
 
+    fun registerItemStack(namespacedId: String, item: ItemStack) {
+        NBT.modify(item) { nbt: ReadWriteItemNBT -> nbt.setString(NBT_KEY, namespacedId) }
+        itemRegistry[namespacedId] = item
+    }
+
     override fun getItemStack(namespacedId: String): ItemStack? =
         itemRegistry[namespacedId]?.clone()
 

@@ -17,8 +17,21 @@
  */
 package org.stephanosbad.charmedChars.integration
 
+import io.papermc.paper.datacomponent.DataComponentTypes
+import io.papermc.paper.datacomponent.item.CustomModelData
+import io.papermc.paper.datacomponent.item.ItemAttributeModifiers
 import net.kyori.adventure.text.Component
 import net.kyori.adventure.text.format.NamedTextColor
+import org.bukkit.Bukkit
+import org.bukkit.Material
+import org.bukkit.NamespacedKey
+import org.bukkit.attribute.Attribute
+import org.bukkit.attribute.AttributeModifier
+import org.bukkit.inventory.EquipmentSlotGroup
+import org.bukkit.inventory.ItemStack
+import org.bukkit.inventory.RecipeChoice
+import org.bukkit.inventory.ShapedRecipe
+import org.bukkit.inventory.ShapelessRecipe
 import org.stephanosbad.charmedChars.CharmedChars
 import org.stephanosbad.charmedChars.items.BlockColor
 import org.stephanosbad.charmedChars.items.LetterBlock
@@ -38,6 +51,9 @@ import java.util.zip.ZipOutputStream
  *   CYAN letters (1000-1025), digits (1026-1035), operators (1036-1039),
  *   MAGENTA (1040-1079), YELLOW (1080-1119).
  *
+ * Pyrite items start at 1120:
+ *   ingot (1120), pickaxe (1121), axe (1122), shovel (1123), hoe (1124).
+ *
  * Both registerAllItems() and the resource pack JSON share buildItemList() so
  * the predicate values in paper.json always match the in-memory registry.
  */
@@ -49,6 +65,17 @@ class NativeItemManagerSetup(
     private val packRoot = File(plugin.dataFolder, "native-pack")
     private val packMeta = File(packRoot, "pack.mcmeta")
 
+    private data class PyriteItemDef(
+        val namespacedId: String,
+        val cmd: Int,
+        val baseMaterial: Material,
+        val displayName: String,
+        val isHandheld: Boolean,
+        val maxDamage: Int? = null,
+        val attackDamage: Double? = null,
+        val attackSpeed: Double? = null
+    )
+
     fun isAlreadySetup(): Boolean = provider.registeredItemCount() > 0
 
     fun isPackGenerated(): Boolean = packMeta.exists()
@@ -56,6 +83,8 @@ class NativeItemManagerSetup(
     fun setup() {
         if (isAlreadySetup()) return
         registerAllItems()
+        registerPyriteItems()
+        registerPyriteRecipes()
         plugin.logger.info("NativeItemManager: registered ${provider.registeredItemCount()} items")
     }
 
@@ -98,9 +127,21 @@ class NativeItemManagerSetup(
             val blockModelCount = writeBlockModels()
             messages.add("  Done ($blockModelCount files)")
 
-            messages.add("Copying textures...")
+            messages.add("Copying block textures...")
             val textureCount = copyTextures()
             messages.add("  Done ($textureCount files)")
+
+            messages.add("Generating pyrite item overrides...")
+            val pyriteOverrideCount = writePyriteOverrides()
+            messages.add("  Done ($pyriteOverrideCount overrides)")
+
+            messages.add("Generating pyrite item models...")
+            val pyriteModelCount = writePyriteItemModels()
+            messages.add("  Done ($pyriteModelCount files)")
+
+            messages.add("Copying pyrite textures...")
+            val pyriteTextureCount = copyPyriteTextures()
+            messages.add("  Done ($pyriteTextureCount files)")
 
             messages.add("Zipping pack...")
             val zipFile = zipPack()
@@ -125,7 +166,7 @@ class NativeItemManagerSetup(
         }
     }
 
-    // ── Private helpers ───────────────────────────────────────────────────────
+    // ── Block items ───────────────────────────────────────────────────────────
 
     /**
      * Single source of truth for namespacedId → CMD mappings.
@@ -167,6 +208,8 @@ class NativeItemManagerSetup(
             File(packRoot, "assets/charmedchars/models/block/$color").mkdirs()
             File(packRoot, "assets/charmedchars/textures/block/$color").mkdirs()
         }
+        File(packRoot, "assets/charmedchars/models/item/pyrite").mkdirs()
+        File(packRoot, "assets/charmedchars/textures/item/pyrite").mkdirs()
     }
 
     private fun writeMcMeta() {
@@ -256,6 +299,142 @@ class NativeItemManagerSetup(
         }
         return count
     }
+
+    // ── Pyrite items ──────────────────────────────────────────────────────────
+
+    // CMDs 1000–1119 are block items (3 colors × 40 items). Pyrite starts at 1120.
+    private fun buildPyriteItems(): List<PyriteItemDef> {
+        var cmd = 1120
+        return listOf(
+            PyriteItemDef("charmedchars:pyrite_ingot",   cmd++, Material.GOLD_INGOT,     "Pyrite Ingot",   false),
+            PyriteItemDef("charmedchars:pyrite_pickaxe", cmd++, Material.GOLDEN_PICKAXE, "Pyrite Pickaxe", true,  250, 4.0, -2.8),
+            PyriteItemDef("charmedchars:pyrite_axe",     cmd++, Material.GOLDEN_AXE,     "Pyrite Axe",     true,  250, 9.0, -3.1),
+            PyriteItemDef("charmedchars:pyrite_shovel",  cmd++, Material.GOLDEN_SHOVEL,  "Pyrite Shovel",  true,  250, 4.5, -3.0),
+            PyriteItemDef("charmedchars:pyrite_hoe",     cmd++, Material.GOLDEN_HOE,     "Pyrite Hoe",     true,  250, 1.0, -2.0)
+        )
+    }
+
+    private fun registerPyriteItems() {
+        for (def in buildPyriteItems()) {
+            val item = ItemStack(def.baseMaterial)
+            item.editMeta { it.displayName(Component.text(def.displayName).color(NamedTextColor.GOLD)) }
+            item.setData(DataComponentTypes.CUSTOM_MODEL_DATA,
+                CustomModelData.customModelData().addFloat(def.cmd.toFloat()).build())
+            def.maxDamage?.let { item.setData(DataComponentTypes.MAX_DAMAGE, it) }
+            if (def.attackDamage != null && def.attackSpeed != null) {
+                val shortId = def.namespacedId.substringAfter(':')
+                val attrs = ItemAttributeModifiers.itemAttributes()
+                    .addModifier(
+                        Attribute.ATTACK_DAMAGE,
+                        AttributeModifier(
+                            NamespacedKey("charmedchars", "${shortId}_attack_damage"),
+                            def.attackDamage, AttributeModifier.Operation.ADD_NUMBER,
+                            EquipmentSlotGroup.MAINHAND
+                        )
+                    )
+                    .addModifier(
+                        Attribute.ATTACK_SPEED,
+                        AttributeModifier(
+                            NamespacedKey("charmedchars", "${shortId}_attack_speed"),
+                            def.attackSpeed, AttributeModifier.Operation.ADD_NUMBER,
+                            EquipmentSlotGroup.MAINHAND
+                        )
+                    )
+                    .build()
+                item.setData(DataComponentTypes.ATTRIBUTE_MODIFIERS, attrs)
+            }
+            provider.registerItemStack(def.namespacedId, item)
+        }
+    }
+
+    private fun registerPyriteRecipes() {
+        val ingot = provider.getItemStack("charmedchars:pyrite_ingot") ?: return
+
+        val ingotRecipe = ShapelessRecipe(NamespacedKey("charmedchars", "pyrite_ingot"), ingot.clone())
+        ingotRecipe.addIngredient(Material.IRON_INGOT)
+        ingotRecipe.addIngredient(Material.REDSTONE)
+        Bukkit.addRecipe(ingotRecipe)
+
+        val ingotChoice = RecipeChoice.ExactChoice(ingot)
+
+        fun addTool(id: String, vararg rows: String) {
+            val result = provider.getItemStack(id) ?: return
+            val recipe = ShapedRecipe(NamespacedKey("charmedchars", id.substringAfter(':')), result.clone())
+            recipe.shape(*rows)
+            recipe.setIngredient('P', ingotChoice)
+            recipe.setIngredient('S', Material.STICK)
+            Bukkit.addRecipe(recipe)
+        }
+
+        addTool("charmedchars:pyrite_pickaxe", "PPP", " S ", " S ")
+        addTool("charmedchars:pyrite_axe",     "PP ", "PS ", " S ")
+        addTool("charmedchars:pyrite_shovel",  " P ", " S ", " S ")
+        addTool("charmedchars:pyrite_hoe",     "PP ", " S ", " S ")
+    }
+
+    private fun writePyriteOverrides(): Int {
+        var count = 0
+        val materialParents = mapOf(
+            Material.GOLD_INGOT     to ("minecraft:item/generated" to "minecraft:item/gold_ingot"),
+            Material.GOLDEN_PICKAXE to ("minecraft:item/handheld"  to "minecraft:item/golden_pickaxe"),
+            Material.GOLDEN_AXE     to ("minecraft:item/handheld"  to "minecraft:item/golden_axe"),
+            Material.GOLDEN_SHOVEL  to ("minecraft:item/handheld"  to "minecraft:item/golden_shovel"),
+            Material.GOLDEN_HOE     to ("minecraft:item/handheld"  to "minecraft:item/golden_hoe")
+        )
+        for (def in buildPyriteItems()) {
+            val (parent, texture) = materialParents[def.baseMaterial] ?: continue
+            val shortName = def.namespacedId.substringAfter(':').substringAfter("pyrite_")
+            val materialFileName = def.baseMaterial.name.lowercase()
+            File(packRoot, "assets/minecraft/models/item/$materialFileName.json").writeText(
+                """
+{
+  "parent": "$parent",
+  "textures": {
+    "layer0": "$texture"
+  },
+  "overrides": [
+    {"predicate": {"custom_model_data": ${def.cmd}}, "model": "charmedchars:item/pyrite/$shortName"}
+  ]
+}
+                """.trimIndent()
+            )
+            count++
+        }
+        return count
+    }
+
+    private fun writePyriteItemModels(): Int {
+        var count = 0
+        for (def in buildPyriteItems()) {
+            val shortName = def.namespacedId.substringAfter(':').substringAfter("pyrite_")
+            val parent = if (def.isHandheld) "minecraft:item/handheld" else "minecraft:item/generated"
+            File(packRoot, "assets/charmedchars/models/item/pyrite/$shortName.json").writeText(
+                """
+{
+  "parent": "$parent",
+  "textures": {
+    "layer0": "charmedchars:item/pyrite/$shortName"
+  }
+}
+                """.trimIndent()
+            )
+            count++
+        }
+        return count
+    }
+
+    private fun copyPyriteTextures(): Int {
+        var count = 0
+        for (def in buildPyriteItems()) {
+            val shortName = def.namespacedId.substringAfter(':').substringAfter("pyrite_")
+            val src = "pack-oraxen/assets/minecraft/textures/item/pyrite/$shortName.png"
+            val dest = File(packRoot, "assets/charmedchars/textures/item/pyrite/$shortName.png")
+            if (copyResource(src, dest)) count++
+        }
+        return count
+    }
+
+    // ── Common helpers ────────────────────────────────────────────────────────
 
     private fun copyResource(resourcePath: String, dest: File): Boolean {
         val stream = plugin.getResource(resourcePath) ?: run {
