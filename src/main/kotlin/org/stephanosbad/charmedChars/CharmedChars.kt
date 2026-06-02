@@ -207,7 +207,7 @@ class CharmedChars : JavaPlugin(), CoroutineScope {
 
         // Register event listeners
         if (nativeProvider != null) {
-            Bukkit.getPluginManager().registerEvents(NativePlacementListener(nativeProvider), this)
+            Bukkit.getPluginManager().registerEvents(NativePlacementListener(this, nativeProvider), this)
             Bukkit.getPluginManager().registerEvents(NativePackListener(this, nativeProvider), this)
         }
         Bukkit.getPluginManager().registerEvents(ItemManager(this), this)

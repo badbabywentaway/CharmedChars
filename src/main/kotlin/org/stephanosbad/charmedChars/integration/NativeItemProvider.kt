@@ -22,11 +22,13 @@ import de.tr7zw.changeme.nbtapi.iface.ReadWriteItemNBT
 import io.papermc.paper.datacomponent.DataComponentTypes
 import io.papermc.paper.datacomponent.item.CustomModelData
 import net.kyori.adventure.text.Component
+import org.bukkit.Bukkit
 import org.bukkit.Instrument
 import org.bukkit.Location
 import org.bukkit.Material
 import org.bukkit.block.Block
 import org.bukkit.inventory.ItemStack
+import java.io.File
 import java.util.UUID
 import java.util.concurrent.ConcurrentHashMap
 
@@ -110,10 +112,52 @@ class NativeItemProvider : CustomItemProvider {
         val parts = namespacedId.split(":", limit = 2)
         if (parts.size == 2) {
             placedBlocks[location] = CustomBlockInfo(namespacedId, parts[0], parts[1])
+            savePlacedBlocks()
         }
     }
 
     fun unregisterPlacedBlock(location: Location) {
         placedBlocks.remove(location)
+        savePlacedBlocks()
+    }
+
+    // Persistence: survives server restarts so scoring and sound muting still work.
+
+    private var persistenceFile: File? = null
+
+    fun loadPlacedBlocks(file: File) {
+        persistenceFile = file
+        if (!file.exists()) return
+        var loaded = 0
+        file.forEachLine { line ->
+            val parts = line.trim().split(" ")
+            if (parts.size == 5) {
+                val world = Bukkit.getWorld(parts[0]) ?: return@forEachLine
+                val x = parts[1].toDoubleOrNull() ?: return@forEachLine
+                val y = parts[2].toDoubleOrNull() ?: return@forEachLine
+                val z = parts[3].toDoubleOrNull() ?: return@forEachLine
+                val namespacedId = parts[4]
+                val nsParts = namespacedId.split(":", limit = 2)
+                if (nsParts.size == 2) {
+                    placedBlocks[Location(world, x, y, z)] = CustomBlockInfo(namespacedId, nsParts[0], nsParts[1])
+                    loaded++
+                }
+            }
+        }
+        if (loaded > 0) Bukkit.getLogger().info("NativeItems: restored $loaded placed blocks from disk")
+    }
+
+    private fun savePlacedBlocks() {
+        val file = persistenceFile ?: return
+        try {
+            val sb = StringBuilder()
+            for ((loc, info) in placedBlocks) {
+                val world = loc.world ?: continue
+                sb.appendLine("${world.name} ${loc.blockX} ${loc.blockY} ${loc.blockZ} ${info.namespacedId}")
+            }
+            file.writeText(sb.toString())
+        } catch (e: Exception) {
+            Bukkit.getLogger().warning("NativeItems: failed to save placed blocks: ${e.message}")
+        }
     }
 }

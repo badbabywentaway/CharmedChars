@@ -105,6 +105,7 @@ class NativeItemManagerSetup(
         registerAllItems()
         registerPyriteItems()
         registerPyriteRecipes()
+        provider.loadPlacedBlocks(File(plugin.dataFolder, "placed-blocks.txt"))
         plugin.logger.info("NativeItemManager: registered ${provider.registeredItemCount()} items")
     }
 

@@ -18,8 +18,10 @@
 package org.stephanosbad.charmedChars.listeners
 
 import org.bukkit.GameMode
+import org.bukkit.Instrument
 import org.bukkit.Material
 import org.bukkit.Note
+import org.bukkit.block.Block
 import org.bukkit.block.data.type.NoteBlock as NoteBlockData
 import org.bukkit.event.EventHandler
 import org.bukkit.event.EventPriority
@@ -29,6 +31,7 @@ import org.bukkit.event.block.BlockBreakEvent
 import org.bukkit.event.block.NotePlayEvent
 import org.bukkit.event.player.PlayerInteractEvent
 import org.bukkit.inventory.EquipmentSlot
+import org.stephanosbad.charmedChars.CharmedChars
 import org.stephanosbad.charmedChars.integration.NativeItemProvider
 
 /**
@@ -49,20 +52,24 @@ import org.stephanosbad.charmedChars.integration.NativeItemProvider
  *
  * Only registered when the NativeItems provider is active.
  */
-class NativePlacementListener(private val provider: NativeItemProvider) : Listener {
+class NativePlacementListener(
+    private val plugin: CharmedChars,
+    private val provider: NativeItemProvider
+) : Listener {
 
     @EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)
     fun onInteract(event: PlayerInteractEvent) {
         if (event.action != Action.RIGHT_CLICK_BLOCK) return
-        if (event.hand != EquipmentSlot.HAND) return  // prevent double-fire from off-hand
 
         val clickedBlock = event.clickedBlock ?: return
 
-        // Prevent players tuning a registered letter block (changes note → breaks texture)
+        // Prevent activating a registered letter block on EITHER hand (note would play otherwise)
         if (clickedBlock.type == Material.NOTE_BLOCK && provider.getCustomBlock(clickedBlock) != null) {
             event.isCancelled = true
             return
         }
+
+        if (event.hand != EquipmentSlot.HAND) return  // placement is main-hand only
 
         val item = event.item?.takeIf { !it.type.isAir } ?: return
         val itemInfo = provider.getCustomItem(item) ?: return
@@ -77,17 +84,18 @@ class NativePlacementListener(private val provider: NativeItemProvider) : Listen
 
         targetBlock.type = Material.NOTE_BLOCK
 
-        // Set the instrument+note state that the resource pack maps to this letter's texture.
-        // The state must be applied after setting the type, and re-applied because Minecraft
-        // may override the instrument on placement based on the block below.
         val state = provider.getPlacementState(itemInfo.namespacedId)
         if (state != null) {
-            val noteData = targetBlock.blockData as NoteBlockData
-            noteData.instrument = state.first
-            @Suppress("DEPRECATION")
-            noteData.note = Note(state.second)
-            noteData.isPowered = false
-            targetBlock.blockData = noteData
+            applyNoteBlockState(targetBlock, state)
+            // Minecraft resets the note block instrument via block-physics updates based on the
+            // block below. Re-apply one tick later to survive that update.
+            val loc = targetBlock.location
+            plugin.server.scheduler.runTaskLater(plugin, Runnable {
+                val block = loc.block
+                if (block.type == Material.NOTE_BLOCK) {
+                    applyNoteBlockState(block, state)
+                }
+            }, 1L)
         }
 
         provider.registerPlacedBlock(targetBlock.location, itemInfo.namespacedId)
@@ -95,6 +103,15 @@ class NativePlacementListener(private val provider: NativeItemProvider) : Listen
         if (event.player.gameMode != GameMode.CREATIVE) {
             item.amount -= 1
         }
+    }
+
+    private fun applyNoteBlockState(block: Block, state: Pair<Instrument, Int>) {
+        val noteData = block.blockData as? NoteBlockData ?: return
+        noteData.instrument = state.first
+        @Suppress("DEPRECATION")
+        noteData.note = Note(state.second)
+        noteData.isPowered = false
+        block.blockData = noteData
     }
 
     @EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)
