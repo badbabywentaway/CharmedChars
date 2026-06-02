@@ -19,15 +19,18 @@ package org.stephanosbad.charmedChars.listeners
 
 import org.bukkit.GameMode
 import org.bukkit.Instrument
+import org.bukkit.Location
 import org.bukkit.Material
 import org.bukkit.Note
 import org.bukkit.block.Block
+import org.bukkit.block.BlockFace
 import org.bukkit.block.data.type.NoteBlock as NoteBlockData
 import org.bukkit.event.EventHandler
 import org.bukkit.event.EventPriority
 import org.bukkit.event.Listener
 import org.bukkit.event.block.Action
 import org.bukkit.event.block.BlockBreakEvent
+import org.bukkit.event.block.BlockPhysicsEvent
 import org.bukkit.event.block.NotePlayEvent
 import org.bukkit.event.player.PlayerInteractEvent
 import org.bukkit.inventory.EquipmentSlot
@@ -56,6 +59,10 @@ class NativePlacementListener(
     private val plugin: CharmedChars,
     private val provider: NativeItemProvider
 ) : Listener {
+
+    // Locations of registered blocks that already have a pending physics-check task scheduled.
+    // Prevents scheduling duplicate tasks when physics events fire in rapid succession.
+    private val pendingPhysicsChecks = mutableSetOf<Location>()
 
     @EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)
     fun onInteract(event: PlayerInteractEvent) {
@@ -93,6 +100,17 @@ class NativePlacementListener(
             plugin.server.scheduler.runTaskLater(plugin, Runnable {
                 val block = loc.block
                 if (block.type == Material.NOTE_BLOCK) {
+                    // [DIAG] Log if state drifted in the 1 tick since placement
+                    val nd = block.blockData as? NoteBlockData
+                    if (nd != null) {
+                        @Suppress("DEPRECATION")
+                        val actualNote = nd.note.id.toInt()
+                        if (nd.instrument != state.first || actualNote != state.second) {
+                            plugin.logger.info("[NativeDiag] 1t drift on ${itemInfo.namespacedId} at ${block.x},${block.y},${block.z}: " +
+                                "actual=${nd.instrument}/$actualNote expected=${state.first}/${state.second} " +
+                                "blockBelow=${block.getRelative(BlockFace.DOWN).type} powered=${nd.isPowered}")
+                        }
+                    }
                     applyNoteBlockState(block, state)
                 }
             }, 1L)
@@ -116,9 +134,42 @@ class NativePlacementListener(
 
     @EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)
     fun onNotePlay(event: NotePlayEvent) {
-        if (provider.getCustomBlock(event.block) != null) {
-            event.isCancelled = true
-        }
+        val info = provider.getCustomBlock(event.block) ?: return
+        // [DIAG] Log when a note fires on a registered block (right-click cancellation missed it)
+        val nd = event.block.blockData as? NoteBlockData
+        @Suppress("DEPRECATION")
+        val noteId = nd?.note?.id?.toInt() ?: -1
+        plugin.logger.info("[NativeDiag] Note play suppressed on ${info.namespacedId} at " +
+            "${event.block.x},${event.block.y},${event.block.z}: " +
+            "instrument=${nd?.instrument} note=$noteId powered=${nd?.isPowered}")
+        event.isCancelled = true
+    }
+
+    // [DIAG] Detect note block state drift caused by Minecraft block-physics updates.
+    // After any physics event on a registered block, check 1 tick later whether the
+    // instrument+note state was silently changed by the engine.
+    @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = false)
+    fun onBlockPhysics(event: BlockPhysicsEvent) {
+        val block = event.block
+        if (block.type != Material.NOTE_BLOCK) return
+        val info = provider.getCustomBlock(block) ?: return
+        val loc = block.location
+        if (!pendingPhysicsChecks.add(loc)) return  // task already queued for this location
+        plugin.server.scheduler.runTaskLater(plugin, Runnable {
+            pendingPhysicsChecks.remove(loc)
+            val b = loc.block
+            if (b.type != Material.NOTE_BLOCK) return@Runnable
+            val blockInfo = provider.getCustomBlock(b) ?: return@Runnable
+            val expected = provider.getPlacementState(blockInfo.namespacedId) ?: return@Runnable
+            val nd = b.blockData as? NoteBlockData ?: return@Runnable
+            @Suppress("DEPRECATION")
+            val noteId = nd.note.id.toInt()
+            if (nd.instrument != expected.first || noteId != expected.second) {
+                plugin.logger.info("[NativeDiag] Physics drift on ${blockInfo.namespacedId} at ${b.x},${b.y},${b.z}: " +
+                    "actual=${nd.instrument}/$noteId expected=${expected.first}/${expected.second} " +
+                    "blockBelow=${b.getRelative(BlockFace.DOWN).type} powered=${nd.isPowered}")
+            }
+        }, 1L)
     }
 
     @EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)
