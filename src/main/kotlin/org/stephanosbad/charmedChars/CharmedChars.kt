@@ -400,6 +400,49 @@ class CharmedChars : JavaPlugin(), CoroutineScope {
 
             "NativeItems" -> {
                 logger.info("NativeItemManager is active — no external plugin required.")
+
+                // NativeItems uses note blocks as in-world block carriers. Minecraft normally
+                // resets the instrument state (which drives the texture) whenever the block
+                // beneath a note block changes. disable-noteblock-updates suppresses that and
+                // is REQUIRED for stable letter-block textures in this mode.
+                val paperConfig = java.io.File("config/paper-global.yml")
+                val noteBlockUpdatesDisabled = if (paperConfig.exists()) {
+                    org.bukkit.configuration.file.YamlConfiguration
+                        .loadConfiguration(paperConfig)
+                        .getBoolean("block-updates.disable-noteblock-updates", false)
+                } else false
+
+                if (!noteBlockUpdatesDisabled) {
+                    logger.warning("========================================")
+                    logger.warning("ACTION REQUIRED: paper-global.yml setting missing!")
+                    logger.warning("")
+                    logger.warning("CharmedChars NativeItems mode uses note blocks as")
+                    logger.warning("in-world block carriers. Minecraft resets a note")
+                    logger.warning("block's instrument state (which selects the texture)")
+                    logger.warning("whenever the block beneath it changes. Without the")
+                    logger.warning("setting below, letter-block textures will change")
+                    logger.warning("intermittently based on whatever is placed below them.")
+                    logger.warning("")
+                    logger.warning("Edit config/paper-global.yml and set:")
+                    logger.warning("  block-updates:")
+                    logger.warning("    disable-noteblock-updates: true")
+                    logger.warning("")
+                    logger.warning("Then restart the server.")
+                    logger.warning("========================================")
+
+                    server.scheduler.runTask(this, Runnable {
+                        server.onlinePlayers.filter { it.isOp }.forEach { player ->
+                            player.sendMessage(
+                                Component.text(
+                                    "⚠ CharmedChars NativeItems: set disable-noteblock-updates: true " +
+                                    "in config/paper-global.yml and restart"
+                                ).color(NamedTextColor.GOLD)
+                            )
+                        }
+                    })
+                } else {
+                    logger.info("disable-noteblock-updates: true confirmed — NativeItems textures will be stable.")
+                }
             }
 
             else -> {
