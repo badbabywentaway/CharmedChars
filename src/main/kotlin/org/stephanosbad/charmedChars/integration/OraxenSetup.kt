@@ -106,7 +106,7 @@ class OraxenSetup(private val plugin: CharmedChars) {
      */
     private fun hasCharmedCharsRecipes(): Boolean {
         return shapelessRecipesFile.exists() &&
-               shapelessRecipesFile.readText().contains("pyrite_ingot:")
+               shapelessRecipesFile.readText().contains("charmedchars_pyrite_ingot:")
     }
 
     /**
@@ -672,8 +672,8 @@ class OraxenSetup(private val plugin: CharmedChars) {
             if (shapelessRecipesFile.exists()) {
                 val content = shapelessRecipesFile.readText()
                 val updated = content
-                    .replace(Regex("pyrite_ingot_sulfur:.*?(?=\\n\\w+:|$)", RegexOption.DOT_MATCHES_ALL), "")
-                    .replace(Regex("pyrite_ingot:.*?(?=\\n\\w+:|$)", RegexOption.DOT_MATCHES_ALL), "")
+                    .replace(Regex("charmedchars_pyrite_ingot_sulfur:.*?(?=\\n\\w+:|$)", RegexOption.DOT_MATCHES_ALL), "")
+                    .replace(Regex("charmedchars_pyrite_ingot:.*?(?=\\n\\w+:|$)", RegexOption.DOT_MATCHES_ALL), "")
                     .trim()
                 shapelessRecipesFile.writeText(updated)
             }
@@ -681,10 +681,10 @@ class OraxenSetup(private val plugin: CharmedChars) {
             // Remove from shaped.yml
             if (shapedRecipesFile.exists()) {
                 var content = shapedRecipesFile.readText()
-                content = content.replace(Regex("pyrite_pickaxe:.*?(?=\\n\\w+:|$)", RegexOption.DOT_MATCHES_ALL), "")
-                content = content.replace(Regex("pyrite_axe:.*?(?=\\n\\w+:|$)", RegexOption.DOT_MATCHES_ALL), "")
-                content = content.replace(Regex("pyrite_shovel:.*?(?=\\n\\w+:|$)", RegexOption.DOT_MATCHES_ALL), "")
-                content = content.replace(Regex("pyrite_hoe:.*?(?=\\n\\w+:|$)", RegexOption.DOT_MATCHES_ALL), "")
+                content = content.replace(Regex("charmedchars_pyrite_pickaxe:.*?(?=\\n\\w+:|$)", RegexOption.DOT_MATCHES_ALL), "")
+                content = content.replace(Regex("charmedchars_pyrite_axe:.*?(?=\\n\\w+:|$)", RegexOption.DOT_MATCHES_ALL), "")
+                content = content.replace(Regex("charmedchars_pyrite_shovel:.*?(?=\\n\\w+:|$)", RegexOption.DOT_MATCHES_ALL), "")
+                content = content.replace(Regex("charmedchars_pyrite_hoe:.*?(?=\\n\\w+:|$)", RegexOption.DOT_MATCHES_ALL), "")
                 shapedRecipesFile.writeText(content.trim())
             }
         } catch (e: Exception) {
@@ -703,7 +703,7 @@ class OraxenSetup(private val plugin: CharmedChars) {
             val shapeless = StringBuilder()
             shapeless.appendLine("")
             shapeless.appendLine("# CharmedChars - Pyrite Ingot Recipe")
-            shapeless.appendLine("pyrite_ingot:")
+            shapeless.appendLine("charmedchars_pyrite_ingot:")
             shapeless.appendLine("  result:")
             shapeless.appendLine("    oraxen_item: pyrite_ingot")
             shapeless.appendLine("  ingredients:")
@@ -717,7 +717,7 @@ class OraxenSetup(private val plugin: CharmedChars) {
             if (Material.matchMaterial("POTENT_SULFUR") != null) {
                 shapeless.appendLine("")
                 shapeless.appendLine("# CharmedChars - Pyrite Ingot (Potent Sulfur alt)")
-                shapeless.appendLine("pyrite_ingot_sulfur:")
+                shapeless.appendLine("charmedchars_pyrite_ingot_sulfur:")
                 shapeless.appendLine("  result:")
                 shapeless.appendLine("    oraxen_item: pyrite_ingot")
                 shapeless.appendLine("  ingredients:")
@@ -737,7 +737,7 @@ class OraxenSetup(private val plugin: CharmedChars) {
 
             shaped.appendLine("")
             shaped.appendLine("# CharmedChars - Pyrite Tool Recipes")
-            shaped.appendLine("pyrite_pickaxe:")
+            shaped.appendLine("charmedchars_pyrite_pickaxe:")
             shaped.appendLine("  shape:")
             shaped.appendLine("    - PPP")
             shaped.appendLine("    - _S_")
@@ -751,7 +751,7 @@ class OraxenSetup(private val plugin: CharmedChars) {
             shaped.appendLine("      minecraft_type: STICK")
             shaped.appendLine("")
 
-            shaped.appendLine("pyrite_axe:")
+            shaped.appendLine("charmedchars_pyrite_axe:")
             shaped.appendLine("  shape:")
             shaped.appendLine("    - PP_")
             shaped.appendLine("    - PS_")
@@ -765,7 +765,7 @@ class OraxenSetup(private val plugin: CharmedChars) {
             shaped.appendLine("      minecraft_type: STICK")
             shaped.appendLine("")
 
-            shaped.appendLine("pyrite_shovel:")
+            shaped.appendLine("charmedchars_pyrite_shovel:")
             shaped.appendLine("  shape:")
             shaped.appendLine("    - _P_")
             shaped.appendLine("    - _S_")
@@ -779,7 +779,7 @@ class OraxenSetup(private val plugin: CharmedChars) {
             shaped.appendLine("      minecraft_type: STICK")
             shaped.appendLine("")
 
-            shaped.appendLine("pyrite_hoe:")
+            shaped.appendLine("charmedchars_pyrite_hoe:")
             shaped.appendLine("  shape:")
             shaped.appendLine("    - PP_")
             shaped.appendLine("    - _S_")
