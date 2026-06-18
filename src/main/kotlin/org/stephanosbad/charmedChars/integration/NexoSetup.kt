@@ -17,6 +17,7 @@
  */
 package org.stephanosbad.charmedChars.integration
 
+import org.bukkit.Material
 import org.stephanosbad.charmedChars.CharmedChars
 import org.stephanosbad.charmedChars.items.LetterBlock
 import org.stephanosbad.charmedChars.items.NonAlphaNumBlocks
@@ -526,6 +527,21 @@ class NexoSetup(private val plugin: CharmedChars) {
         shapelessRecipes.appendLine("      amount: 1")
         shapelessRecipes.appendLine("      minecraft_type: REDSTONE")
         shapelessRecipes.appendLine()
+
+        if (Material.matchMaterial("POTENT_SULFUR") != null) {
+            shapelessRecipes.appendLine("pyrite_ingot_sulfur:")
+            shapelessRecipes.appendLine("  result:")
+            shapelessRecipes.appendLine("    nexo_item: pyrite_ingot")
+            shapelessRecipes.appendLine("    amount: 1")
+            shapelessRecipes.appendLine("  ingredients:")
+            shapelessRecipes.appendLine("    A:")
+            shapelessRecipes.appendLine("      amount: 1")
+            shapelessRecipes.appendLine("      minecraft_type: IRON_INGOT")
+            shapelessRecipes.appendLine("    B:")
+            shapelessRecipes.appendLine("      amount: 1")
+            shapelessRecipes.appendLine("      minecraft_type: POTENT_SULFUR")
+            shapelessRecipes.appendLine()
+        }
 
         shapelessFile.writeText(shapelessRecipes.toString())
     }

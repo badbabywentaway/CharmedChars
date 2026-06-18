@@ -205,7 +205,7 @@ class NativeItemManagerSetup(
      */
     private fun buildItemList(): List<Pair<String, Int>> {
         val list = mutableListOf<Pair<String, Int>>()
-        var cmd = 1000
+        var cmd = plugin.configManager.nativeCmdBase
         for (color in BlockColor.entries) {
             for (letter in LetterBlock.entries)
                 list += "charmedchars:${color.directoryName}_${letter.character.lowercaseChar()}" to cmd++
@@ -384,9 +384,9 @@ class NativeItemManagerSetup(
 
     // ── Pyrite items ──────────────────────────────────────────────────────────
 
-    // CMDs 1000–1119 are block items (3 colors × 40 items). Pyrite starts at 1120.
+    // Block items occupy cmd-base through cmd-base+119 (3 colors × 40 items). Pyrite follows immediately.
     private fun buildPyriteItems(): List<PyriteItemDef> {
-        var cmd = 1120
+        var cmd = plugin.configManager.nativeCmdBase + 120
         return listOf(
             PyriteItemDef("charmedchars:pyrite_ingot",   cmd++, Material.GOLD_INGOT,     "Pyrite Ingot",   false),
             PyriteItemDef("charmedchars:pyrite_pickaxe", cmd++, Material.GOLDEN_PICKAXE, "Pyrite Pickaxe", true,  250, 4.0, -2.8),
@@ -449,6 +449,14 @@ class NativeItemManagerSetup(
         ingotRecipe.addIngredient(Material.IRON_INGOT)
         ingotRecipe.addIngredient(Material.REDSTONE)
         Bukkit.addRecipe(ingotRecipe)
+
+        val potentSulfur = Material.matchMaterial("POTENT_SULFUR")
+        if (potentSulfur != null) {
+            val sulfurIngotRecipe = ShapelessRecipe(NamespacedKey("charmedchars", "pyrite_ingot_sulfur"), ingot.clone())
+            sulfurIngotRecipe.addIngredient(Material.IRON_INGOT)
+            sulfurIngotRecipe.addIngredient(potentSulfur)
+            Bukkit.addRecipe(sulfurIngotRecipe)
+        }
 
         val ingotChoice = RecipeChoice.ExactChoice(ingot)
 

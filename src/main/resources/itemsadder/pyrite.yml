@@ -13,6 +13,16 @@ recipes:
         item: charmedchars:pyrite_ingot
         amount: 1
 
+    pyrite_ingot_sulfur_recipe:
+      enabled: true
+      shapeless: true
+      ingredients:
+        I: IRON_INGOT
+        S: POTENT_SULFUR
+      result:
+        item: charmedchars:pyrite_ingot
+        amount: 1
+
     pyrite_pickaxe_recipe:
       enabled: true
       pattern:

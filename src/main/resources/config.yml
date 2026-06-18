@@ -154,6 +154,12 @@ native-items:
   hostname: ""
   # Whether players must accept the resource pack before joining
   pack-required: false
+  # Starting Custom Model Data value for CharmedChars items.
+  # CharmedChars claims cmd-base through cmd-base+124 (120 block items + 5 pyrite items).
+  # Change this if another plugin occupies the same CMD range on the same base materials.
+  # After changing, run /nativesetup force to regenerate the resource pack.
+  # WARNING: Changing this on a live server with placed blocks will break existing placements.
+  cmd-base: 1000
 
 # Glassing Beds Feature
 # When a bed explodes in the Nether or End, convert nearby lava to glass

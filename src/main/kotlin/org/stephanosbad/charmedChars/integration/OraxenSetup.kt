@@ -18,6 +18,7 @@
 package org.stephanosbad.charmedChars.integration
 
 import org.bukkit.Bukkit
+import org.bukkit.Material
 import org.stephanosbad.charmedChars.CharmedChars
 import java.io.File
 import java.io.FileOutputStream
@@ -670,7 +671,10 @@ class OraxenSetup(private val plugin: CharmedChars) {
             // Remove from shapeless.yml
             if (shapelessRecipesFile.exists()) {
                 val content = shapelessRecipesFile.readText()
-                val updated = content.replace(Regex("pyrite_ingot:.*?(?=\\n\\w+:|$)", RegexOption.DOT_MATCHES_ALL), "").trim()
+                val updated = content
+                    .replace(Regex("pyrite_ingot_sulfur:.*?(?=\\n\\w+:|$)", RegexOption.DOT_MATCHES_ALL), "")
+                    .replace(Regex("pyrite_ingot:.*?(?=\\n\\w+:|$)", RegexOption.DOT_MATCHES_ALL), "")
+                    .trim()
                 shapelessRecipesFile.writeText(updated)
             }
 
@@ -709,6 +713,21 @@ class OraxenSetup(private val plugin: CharmedChars) {
             shapeless.appendLine("    B:")
             shapeless.appendLine("      amount: 1")
             shapeless.appendLine("      minecraft_type: REDSTONE")
+
+            if (Material.matchMaterial("POTENT_SULFUR") != null) {
+                shapeless.appendLine("")
+                shapeless.appendLine("# CharmedChars - Pyrite Ingot (Potent Sulfur alt)")
+                shapeless.appendLine("pyrite_ingot_sulfur:")
+                shapeless.appendLine("  result:")
+                shapeless.appendLine("    oraxen_item: pyrite_ingot")
+                shapeless.appendLine("  ingredients:")
+                shapeless.appendLine("    A:")
+                shapeless.appendLine("      amount: 1")
+                shapeless.appendLine("      minecraft_type: IRON_INGOT")
+                shapeless.appendLine("    B:")
+                shapeless.appendLine("      amount: 1")
+                shapeless.appendLine("      minecraft_type: POTENT_SULFUR")
+            }
 
             // Append to shapeless.yml
             shapelessRecipesFile.appendText(shapeless.toString())

@@ -8,6 +8,9 @@ plugins {
 
 kotlin {
     jvmToolchain(21)
+    compilerOptions {
+        freeCompilerArgs.add("-Xskip-prerelease-check")
+    }
 }
 
 jacoco {
@@ -27,15 +30,18 @@ repositories {
     maven("https://repo.oraxen.com/releases") { name = "oraxen-repo" }
     maven("https://repo.nexomc.com/releases") { name = "nexo-repo" }
     maven("https://repo.codemc.io/repository/maven-public/") { name = "codemc-repo" }
+    maven("https://maven.devs.beer/") { name = "itemsadder-repo" }
 }
 
 dependencies {
     compileOnly("io.papermc.paper:paper-api:${property("paperVersion")}")
     compileOnly("com.sk89q.worldguard:worldguard-bukkit:${property("worldGuardVersion")}")
     compileOnly("net.dmulloy2:ProtocolLib:5.4.0")
-    compileOnly("com.github.LoneDev6:API-ItemsAdder:3.6.3-beta-14")
-    compileOnly("io.th0rgal:oraxen:1.212.0")
-    compileOnly("com.nexomc:nexo:1.0.0") // Note: Untested - no premium license available for verification
+    compileOnly("dev.lone:api-itemsadder:4.0.2-beta-release-11")
+    compileOnly("io.th0rgal:oraxen:1.216.0")
+    compileOnly("com.nexomc:nexo:1.24.0") { // Note: Untested - no premium license available for verification
+        exclude(group = "com.google.code.gson", module = "gson")
+    }
     compileOnly("com.github.GriefPrevention:GriefPrevention:${property("griefPreventionVersion")}")
     implementation("de.tr7zw:item-nbt-api:${property("nbtApiVersion")}")
     implementation("org.jetbrains.kotlin:kotlin-stdlib:${property("kotlinVersion")}")

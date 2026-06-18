@@ -149,6 +149,9 @@ class ConfigManager(private val plugin: CharmedChars) {
     val nativeItemsHttpPort: Int
         get() = config.getInt("native-items.http-port", 8080)
 
+    val nativeCmdBase: Int
+        get() = config.getInt("native-items.cmd-base", 1000)
+
     val nativeItemsHostname: String
         get() = config.getString("native-items.hostname", "") ?: ""
 
