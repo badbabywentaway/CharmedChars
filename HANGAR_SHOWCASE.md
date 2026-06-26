@@ -59,7 +59,7 @@ Perfect for:
 - Use **binary search strategy** to find any number in ~10 guesses
 
 ### Ender Dragon Logo Block (v1.5.0) 🐉
-- When the Ender Dragon dies, a **random-color logo block** drops on the end stone just outside the exit portal fountain — safe from the portal's item teleport and the dragon egg's non-full hitbox
+- When the Ender Dragon dies, a **random-color logo block** (bearing the signature of **Gaia Temperini**, artist of the marble-style block font textures) drops on the end stone just outside the exit portal fountain — safe from the portal's item teleport and the dragon egg's non-full hitbox
 - Drop is **world-based** — no killing blow required, works even with `/kill`
 - **Three colors**: Cyan, Magenta, Yellow — chosen randomly each kill
 - **Place it in The End** and hit it with a gold or pyrite tool to transform it into a matching **colored shulker box** filled with configurable loot (default: 4 Ghast Tears)
@@ -276,7 +276,7 @@ bastion-reward:
 ## Technical Details
 
 ### Custom Blocks & Items
-- **126 custom blocks**: 26 letters × 3 colors + 10 numbers × 3 colors + 4 operators × 3 colors + 3 logo blocks (cyan/magenta/yellow)
+- **126 custom blocks**: 26 letters × 3 colors + 10 numbers × 3 colors + 4 operators × 3 colors + 3 logo blocks (cyan/magenta/yellow) — the logo blocks display the signature of **Gaia Temperini**, artist of the marble-style block font textures
 - **5 pyrite items**: Ingot, Pickaxe, Axe, Shovel, Hoe (craftable iron-tier tools)
 - **Total**: 131 custom items with ItemsAdder, Oraxen, or Nexo integration
 - **512x512 custom textures** by Gaia Temperini

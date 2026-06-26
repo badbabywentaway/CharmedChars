@@ -6,7 +6,7 @@
 2026-04-23
 
 ### Overview
-Feature release introducing the Ender Dragon finale: a randomly-colored logo block drops above the exit portal on dragon death, and placing the block in The End then hitting it with a gold or pyrite tool transforms it into a matching colored shulker box pre-filled with configurable loot. All three custom item providers are fully supported and tested. Fixes a critical build issue where the shadow JAR was being overwritten by the thin JAR, and several Oraxen-specific visual glitches.
+Feature release introducing the Ender Dragon finale: a randomly-colored logo block (bearing the signature of Gaia Temperini, artist of the marble-style block font textures) drops above the exit portal on dragon death, and placing the block in The End then hitting it with a gold or pyrite tool transforms it into a matching colored shulker box pre-filled with configurable loot. All three custom item providers are fully supported and tested. Fixes a critical build issue where the shadow JAR was being overwritten by the thin JAR, and several Oraxen-specific visual glitches.
 
 ### Changes
 

@@ -46,9 +46,9 @@ CharmedChars is **open source** software licensed under **GNU LGPL v3**.
 - Java 21+
 
 **Required Plugin (choose ONE):**
-- ItemsAdder 3.6.3-beta-14+ (**proprietary - purchase separately**)
-- Oraxen 1.212.0+ (open-source, free)
-- Nexo 1.0.0+ (open-source, free)
+- ItemsAdder 4.0.2-beta-release-11+ (**proprietary - purchase separately**)
+- Oraxen 1.216.0+ (open-source, free)
+- Nexo 1.24.0+ (open-source, free)
 
 All three plugins now have auto-setup commands!
 
@@ -180,12 +180,14 @@ See `PLAY_INSTRUCTIONS.md` for complete gameplay guide.
 - Configurable item rewards
 - Pyrite (Fool's Gold) system - craftable iron-tier alternative to gold tools
 - Nether Structure Number Guessing Game - guess 3-digit codes in fortresses and bastions for rewards
+- Ender Dragon finale - dragon death drops a logo block bearing **Gaia Temperini's** artist signature (the creator of CharmedChars's marble-style block textures); place it in The End and strike with a gold/pyrite tool to transform it into a colored shulker box
 
 ### Technical
 - ItemsAdder or Oraxen integration for custom blocks and items (plugin auto-detects which is installed)
-- 123 custom blocks (26 letters × 3 colors + 10 numbers × 3 colors + 4 operators × 3 colors)
+- 126 custom blocks (26 letters × 3 colors + 10 numbers × 3 colors + 4 operators × 3 colors + 3 logo blocks)
 - 5 pyrite items (ingot, pickaxe, axe, shovel, hoe)
-- Total: 128 custom items with 512x512 custom textures
+- 3 logo blocks (cyan/magenta/yellow) bearing the signature of **Gaia Temperini**, artist of the marble-style block font textures
+- Total: 131 custom items with 512x512 custom textures
 - Optional WorldGuard/GriefPrevention protection support
 - Configurable drop rates and Looting enchantment scaling
 - SQLite database for Nether structure tracking
@@ -276,21 +278,22 @@ Output: `build/libs/CharmedChars-1.4.0.jar`
 
 ## Version
 
-Current Version: **1.4.1**
+Current Version: **2.0.0**
 
-**Latest Updates (v1.4.1 - Colored Glass)**:
-- **NEW**: Colored glass feature - glass color matches bed color (16 colors supported)
-- White beds → Clear glass, other colors → Matching stained glass
-- Create decorative colored glass patterns in lava lakes
-- Comprehensive safety warnings for overlapping explosions
-- New FAQ entries about lava flow limitations and debris mining safety
-- 100% backward compatible with v1.4.0
+**Latest Updates (v2.0.0 - MC 26.2 Compatibility)**:
+- **Verified** on Minecraft 26.2 with Oraxen, Nexo, and Native mode
+- **NEW**: Potent Sulfur alt recipe for Pyrite Ingot (MC 26.2+) across all four modes
+- **NEW**: Configurable CMD base offset (`native-items.cmd-base`) for native mode — shift the CMD range to avoid conflicts with other plugins
+- **NEW**: Oraxen recipe keys namespaced with `charmedchars_` prefix to prevent conflicts with other Oraxen plugins
+- Updated item manager APIs: ItemsAdder 4.0.2-beta-release-11 (new maven.devs.beer repo), Oraxen 1.216.0, Nexo 1.24.0
+- Logo block now clearly attributed to artist **Gaia Temperini** (marble-style block font textures) in all documentation
+- Fixed Oraxen cyan block display names (`<cyan>` → `<aqua>` MiniMessage tag)
+- ⚠️ ItemsAdder 26.2 compatibility pending upstream update
 
-**Previous Major Release (v1.4.0 - Glassing Beds)**:
-- Glassing Beds feature - bed explosions in Nether/End convert nearby lava to glass
-- Operator activation system - hit 4 different operator blocks (+−×÷) to activate
-- `/glassingbeds enable/disable/status` command with tab completion
-- Y-level restriction (max Y=28) prevents lava ocean surface abuse
+**Previous Release (v1.5.0 - Ender Dragon Logo Block)**:
+- Ender Dragon death drops a random-color logo block bearing Gaia Temperini's artist signature
+- Logo block placed in The End + gold/pyrite tool → colored shulker box with configurable loot
+- Full ItemsAdder, Oraxen, and Nexo support
 
 Run `/version` in-game or `./gradlew version` to display version information.
 

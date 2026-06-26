@@ -2,13 +2,13 @@
 set -euo pipefail
 
 echo "==================================================="
-echo "   CharmedChars v1.5.1 - Deploy to Test Beds"
+echo "   CharmedChars v2.0.0 - Deploy to Test Beds"
 echo "==================================================="
 echo "   Deploys to: ItemsAdder + Oraxen + Nexo + Native"
 echo "==================================================="
 echo
 
-JAR="build/libs/CharmedChars-1.5.1.jar"
+JAR="build/libs/CharmedChars-2.0.0.jar"
 DOCS="/c/Users/steve/Documents"
 
 if [ ! -f "$JAR" ]; then
@@ -46,7 +46,7 @@ echo "  [OK] Plugin data cleaned"
 
 echo "  Copying new JAR..."
 cp "$JAR" "$IA/"
-echo "  [OK] CharmedChars-1.5.1.jar deployed to ItemsAdder server"
+echo "  [OK] CharmedChars-2.0.0.jar deployed to ItemsAdder server"
 echo
 
 # ---------------------------------------------------
@@ -72,7 +72,7 @@ echo "  [OK] Plugin data cleaned"
 
 echo "  Copying new JAR..."
 cp "$JAR" "$OR/"
-echo "  [OK] CharmedChars-1.5.1.jar deployed to Oraxen server"
+echo "  [OK] CharmedChars-2.0.0.jar deployed to Oraxen server"
 echo
 
 # ---------------------------------------------------
@@ -98,7 +98,7 @@ echo "  [OK] Plugin data cleaned"
 
 echo "  Copying new JAR..."
 cp "$JAR" "$NX/"
-echo "  [OK] CharmedChars-1.5.1.jar deployed to Nexo server"
+echo "  [OK] CharmedChars-2.0.0.jar deployed to Nexo server"
 echo
 
 # ---------------------------------------------------
@@ -118,11 +118,11 @@ echo "  [OK] Plugin data cleaned"
 
 echo "  Copying new JAR..."
 cp "$JAR" "$NA/"
-echo "  [OK] CharmedChars-1.5.1.jar deployed to Native server"
+echo "  [OK] CharmedChars-2.0.0.jar deployed to Native server"
 echo
 
 echo "==================================================="
-echo "[SUCCESS] CharmedChars v1.5.1 deployed to all four servers"
+echo "[SUCCESS] CharmedChars v2.0.0 deployed to all four servers"
 echo "==================================================="
 echo "  ItemsAdder: $DOCS/Papermc/plugins"
 echo "  Oraxen:     $DOCS/OraxenPapermc/plugins"

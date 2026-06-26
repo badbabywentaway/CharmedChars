@@ -138,6 +138,8 @@ exclude:
     yaw: 0.0
 
 # Logo Block Feature
+# Logo blocks display the signature of Gaia Temperini, artist of the marble-style
+# block font textures used throughout CharmedChars.
 # When a placed logo block in The End is hit with a gold/pyrite tool, it transforms
 # into a colored shulker box (color matches the logo block) prefilled with these items.
 logo-block:

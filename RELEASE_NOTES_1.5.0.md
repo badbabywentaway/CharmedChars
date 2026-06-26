@@ -5,7 +5,7 @@
 
 ## Overview
 
-v1.5.0 introduces the Ender Dragon finale: a randomly-colored logo block drops above the exit portal when the dragon dies, and placing that block in The End then hitting it with a gold or pyrite tool transforms it into a matching colored shulker box pre-filled with configurable loot. All three custom item providers (ItemsAdder, Oraxen, Nexo) are fully supported and tested. Nexo is no longer marked as untested.
+v1.5.0 introduces the Ender Dragon finale: a randomly-colored logo block (bearing the signature of Gaia Temperini, artist of the marble-style block font textures) drops above the exit portal when the dragon dies, and placing that block in The End then hitting it with a gold or pyrite tool transforms it into a matching colored shulker box pre-filled with configurable loot. All three custom item providers (ItemsAdder, Oraxen, Nexo) are fully supported and tested. Nexo is no longer marked as untested.
 
 This release also fixes a critical build issue where the shadow JAR was being silently overwritten by the thin JAR, causing `NoClassDefFoundError` for Kotlin coroutines at server startup.
 

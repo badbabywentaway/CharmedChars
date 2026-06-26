@@ -365,7 +365,7 @@ class OraxenSetup(private val plugin: CharmedChars) {
 
             val colors = listOf("cyan", "magenta", "yellow")
             val colorDisplayNames = mapOf(
-                "cyan" to "<cyan>",
+                "cyan" to "<aqua>",
                 "magenta" to "<light_purple>",
                 "yellow" to "<yellow>"
             )
