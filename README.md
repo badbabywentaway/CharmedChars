@@ -30,7 +30,7 @@ CharmedChars is **open source** software licensed under **GNU LGPL v3**.
 - **Auto-setup available** with `/nexosetup` command (see `NEXO_SETUP.md`)
 - Free alternative to ItemsAdder with additional features
 - **Requires Paper block update optimizations** (see `NEXO_SETUP.md`)
-- ⚠️ **Integration Status**: Untested - API integration complete, compiles successfully, but not verified at runtime (no premium license available). Community testing welcome!
+- ✅ **Integration Status**: Fully tested and verified
 
 **Important**: Install **exactly ONE** of these plugins. CharmedChars will automatically detect which one you have and refuse to load if multiple are installed or none are installed.
 
@@ -100,7 +100,7 @@ CharmedChars supports three custom item providers with different behaviors:
 
 | Feature | ItemsAdder | Oraxen | Nexo |
 |---------|------------|--------|------|
-| **Testing Status** | ✅ Fully tested | ✅ Fully tested | ⚠️ Untested (compiles, not verified) |
+| **Testing Status** | ✅ Fully tested | ✅ Fully tested | ✅ Fully tested |
 | **License** | Proprietary (paid) | Open-source (free) | Open-source (free) |
 | **Texture Resolution** | 512x512 | 256x256 (1.203+) | 256x256+ |
 | **Block Breaking Without Correct Tool** | **Shows purple warning, prevents breaking** | **Block disappears without dropping** | **Block disappears without dropping** (expected) |
@@ -288,7 +288,7 @@ Current Version: **2.0.0**
 - Updated item manager APIs: ItemsAdder 4.0.2-beta-release-11 (new maven.devs.beer repo), Oraxen 1.216.0, Nexo 1.24.0
 - Logo block now clearly attributed to artist **Gaia Temperini** (marble-style block font textures) in all documentation
 - Fixed Oraxen cyan block display names (`<cyan>` → `<aqua>` MiniMessage tag)
-- ⚠️ ItemsAdder 26.2 compatibility pending upstream update
+- **Verified** on MC 26.2 with ItemsAdder (beta), Oraxen, Nexo, and Native mode — all four modes confirmed
 
 **Previous Release (v1.5.0 - Ender Dragon Logo Block)**:
 - Ender Dragon death drops a random-color logo block bearing Gaia Temperini's artist signature
