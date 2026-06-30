@@ -45,6 +45,7 @@ Perfect for:
 ### Pyrite (Fool's Gold) System
 - Craftable alternative to expensive gold tools
 - **Recipe**: Iron Ingot + Redstone = Pyrite Ingot
+- **Alt Recipe (MC 26.2+)**: Iron Ingot + Potent Sulfur = Pyrite Ingot
 - **250 durability** vs gold's measly 32 uses
 - **Iron-tier speed** - faster than gold!
 - **Identical CharmedChars functionality** - works everywhere gold does
@@ -139,13 +140,14 @@ Word: "QUARTZ" (all magenta)
 ## Installation
 
 ### Requirements
-- **Minecraft**: 1.21.11+
+- **Minecraft**: 26.2+ (also supports 1.21.11+)
 - **Server**: Paper or Paper-based (Purpur, Pufferfish, etc.)
 - **Java**: 21+
-- **Custom Item Plugin** (choose ONE):
-  - **ItemsAdder** 3.6.3-beta-14+ (premium - sold separately) - **Recommended**
-  - **Oraxen** 1.212.0+ (premium with public source - sold separately) - Alternative option
-  - **Nexo** 1.0.0+ (premium - sold separately) - Alternative option
+- **Custom Item Plugin** (choose ONE, or use Native mode with no extra plugin):
+  - **Native mode** — no extra plugin required; built-in resource pack server included
+  - **ItemsAdder** 4.0.2-beta-release-11+ (premium - sold separately)
+  - **Oraxen** 1.216.0+ (premium with public source - sold separately)
+  - **Nexo** 1.24.0+ (premium - sold separately)
 
 ### Optional Dependencies
 - WorldGuard 7.0.14+ (region protection)
@@ -299,9 +301,16 @@ bastion-reward:
 
 ## Version Information
 
-**Current Version**: 1.5.0
+**Current Version**: 2.0.0
 
 **Latest Updates**:
+- **v2.0.0**: MC 26.2 Compatibility — verified on all four modes
+  - **VERIFIED**: Native, Oraxen, Nexo, and ItemsAdder all confirmed on Minecraft 26.2
+  - **NEW**: Potent Sulfur alt recipe for Pyrite Ingot (MC 26.2+) — all four modes
+  - **NEW**: Configurable CMD base offset (`native-items.cmd-base`) to resolve conflicts with other native-mode plugins
+  - **FIXED**: Oraxen cyan block display names now render correctly (`<aqua>` MiniMessage tag)
+  - **FIXED**: Oraxen recipe keys namespaced with `charmedchars_` prefix to prevent conflicts with other Oraxen plugins
+  - **UPDATED**: ItemsAdder 4.0.2-beta-release-11 (new `maven.devs.beer` repo), Oraxen 1.216.0, Nexo 1.24.0
 - **v1.5.0**: Ender Dragon Logo Block — Dragon finale and The End reward system
   - **NEW**: Ender Dragon death drops a random-color logo block on the end stone beside the exit portal fountain
   - **NEW**: Logo block placed in The End + gold/pyrite tool → colored shulker box with configurable loot
@@ -387,9 +396,10 @@ bastion-reward:
 
 **Built With**:
 - Kotlin 2.3.20 & Paper API 1.21.11
-- ItemsAdder API 3.6.3-beta-14 (optional - one of three custom item providers - fully tested)
-- Oraxen API 1.212.0 (optional - one of three custom item providers - fully tested)
-- Nexo API 1.0.0 (optional - one of three custom item providers - fully tested)
+- ItemsAdder API 4.0.2-beta-release-11 (optional - one of four custom item providers - fully tested)
+- Oraxen API 1.216.0 (optional - one of four custom item providers - fully tested)
+- Nexo API 1.24.0 (optional - one of four custom item providers - fully tested)
+- Native mode (built-in, no extra plugin required)
 - Exposed ORM 0.48.0 (SQLite)
 - ProtocolLib 5.4.0 (optional)
 
