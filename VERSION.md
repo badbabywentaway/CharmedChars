@@ -1,5 +1,60 @@
 # CharmedChars Version History
 
+## Version 2.0.0 - MC 26.2 Compatibility
+
+### Release Date
+2026-06-30
+
+### Overview
+MC 26.2 compatibility release, verified across all four modes (Native, Oraxen, Nexo, ItemsAdder beta). Adds a Potent Sulfur alternate crafting path for Pyrite Ingot, a configurable CMD base offset for native mode, Oraxen recipe key namespacing, and fixes the Oraxen cyan display name bug. ItemsAdder API migrated to the new 4.x repository.
+
+### Changes
+
+#### **New Features** ⭐
+
+**Potent Sulfur Alt Recipe** (`NativeItemManagerSetup.kt`, `OraxenSetup.kt`, `NexoSetup.kt`, `itemsadder/pyrite.yml`)
+- Iron Ingot + Potent Sulfur → Pyrite Ingot (shapeless) across all four modes
+- Native: `Material.matchMaterial("POTENT_SULFUR")` guard — activates on MC 26.2+, silently skipped on older servers
+- Oraxen/Nexo: same material guard applied at setup-command time
+- ItemsAdder: static YAML entry; ItemsAdder skips unknown materials gracefully
+
+**Configurable Native CMD Base** (`NativeItemManagerSetup.kt`, `ConfigManager.kt`, `config.yml`)
+- New `native-items.cmd-base` config key (default: `1000`)
+- `buildItemList()` and `buildPyriteItems()` both read from config; pyrite CMD always follows at `cmd-base + 120`
+- Run `/nativesetup force` after changing to regenerate the resource pack
+
+#### **Bug Fixes** 🐛
+
+**Oraxen Cyan Display Names** (`OraxenSetup.kt`)
+- `<cyan>` replaced with `<aqua>` — `<cyan>` is not a valid MiniMessage tag and was rendered literally
+
+**Oraxen Recipe Namespace Conflicts** (`OraxenSetup.kt`)
+- All recipe keys prefixed with `charmedchars_` to prevent YAML key collisions in shared `shaped.yml`/`shapeless.yml`
+- `removeCharmedCharsRecipes()` and `hasCharmedCharsRecipes()` updated to match
+
+#### **Dependency Updates** 📦
+
+- ItemsAdder: `com.github.LoneDev6:API-ItemsAdder:3.6.3-beta-14` (JitPack) → `dev.lone:api-itemsadder:4.0.2-beta-release-11` (`maven.devs.beer`) — group ID and repository changed in 4.x
+- Oraxen: `1.212.0` → `1.216.0`
+- Nexo: `1.0.0` → `1.24.0`; excluded transitive gson (WorldGuard conflict); added `-Xskip-prerelease-check` (Nexo compiled against Kotlin pre-release)
+
+#### **Documentation**
+- Logo block attributed to **Gaia Temperini** (marble-style block font texture artist) across all docs
+- README version requirements and item counts updated
+- Nexo stale "untested" labels removed
+
+### Technical Details
+
+**Compatibility**
+- ✅ Minecraft 26.2 / PaperMC experimental
+- ✅ ItemsAdder 4.0.2-beta-release-11+ (verified, MC 26.2 beta)
+- ✅ Oraxen 1.216.0+ (verified, MC 26.2)
+- ✅ Nexo 1.24.0+ (verified, MC 26.2)
+- ✅ Native mode (verified, MC 26.2)
+- ✅ 100% backward compatible
+
+---
+
 ## Version 1.5.0 - Ender Dragon Logo Block
 
 ### Release Date
