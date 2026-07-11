@@ -21,10 +21,10 @@ import org.bukkit.block.Block
 import org.bukkit.inventory.ItemStack
 
 /**
- * Abstraction layer for custom item providers (ItemsAdder or Oraxen)
+ * Abstraction layer for custom item providers (ItemsAdder, Oraxen, Nexo, or Native)
  *
- * This interface allows CharmedChars to work with either ItemsAdder or Oraxen
- * by abstracting the common operations needed for custom items and blocks.
+ * This interface allows CharmedChars to work with ItemsAdder, Oraxen, Nexo, or the
+ * built-in Native provider by abstracting the common operations needed for custom items and blocks.
  */
 interface CustomItemProvider {
 
@@ -63,7 +63,7 @@ interface CustomItemProvider {
     /**
      * Gets the name of this provider implementation
      *
-     * @return Provider name (e.g., "ItemsAdder", "Oraxen")
+     * @return Provider name (e.g., "ItemsAdder", "Oraxen", "Nexo", "Native")
      */
     fun getProviderName(): String
 
@@ -74,29 +74,3 @@ interface CustomItemProvider {
      */
     fun isAvailable(): Boolean
 }
-
-/**
- * Information about a custom item
- *
- * @property namespacedId The full namespaced ID (e.g., "charmedchars:cyan_a")
- * @property namespace The namespace part (e.g., "charmedchars")
- * @property itemName The item name part (e.g., "cyan_a")
- */
-data class CustomItemInfo(
-    val namespacedId: String,
-    val namespace: String,
-    val itemName: String
-)
-
-/**
- * Information about a placed custom block
- *
- * @property namespacedId The full namespaced ID (e.g., "charmedchars:cyan_a")
- * @property namespace The namespace part (e.g., "charmedchars")
- * @property blockName The block name part (e.g., "cyan_a")
- */
-data class CustomBlockInfo(
-    val namespacedId: String,
-    val namespace: String,
-    val blockName: String
-)
