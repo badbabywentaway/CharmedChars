@@ -74,6 +74,14 @@ class ItemManager @JvmOverloads constructor(localPlugin: CharmedChars? = null) :
             put(Material.WARPED_STEM, Material.STRIPPED_WARPED_STEM)
             put(Material.CRIMSON_STEM, Material.STRIPPED_CRIMSON_STEM)
             put(Material.BAMBOO_BLOCK, Material.STRIPPED_BAMBOO_BLOCK)
+
+            // Poplar wood isn't in every running Paper build yet (e.g. 26.2 stable) -
+            // matchMaterial() resolves it only where the server actually has it.
+            Material.matchMaterial("POPLAR_LOG")?.let { poplarLog ->
+                Material.matchMaterial("STRIPPED_POPLAR_LOG")?.let { strippedPoplarLog ->
+                    put(poplarLog, strippedPoplarLog)
+                }
+            }
         }
     }
 
@@ -442,9 +450,12 @@ class ItemManager @JvmOverloads constructor(localPlugin: CharmedChars? = null) :
     /**
      * Handles breaking letter blocks to form and validate words
      *
-     * Legacy handler for BlockBreakEvent. Word scoring is now primarily handled
-     * by BlockDamageEvent (onDamageLetterBlock) for more reliable detection.
-     * This handler still prevents letter blocks from being broken without valid tools.
+     * Fallback handler for BlockBreakEvent. Word scoring is primarily handled by
+     * PlayerInteractEvent/BlockDamageEvent, which normally fire before the block is
+     * removed. Some custom item managers fire BlockBreakEvent first instead, so this
+     * also triggers scoring directly using the still-intact block reference - if the
+     * block was already scored (and removed) by an earlier event, testForLetter will
+     * no longer recognize it here and this becomes a no-op.
      *
      * @param e The block break event
      */
@@ -465,8 +476,11 @@ class ItemManager @JvmOverloads constructor(localPlugin: CharmedChars? = null) :
             return
         }
 
-        // Scoring was already handled by PlayerInteractEvent
-        // Allow the break to proceed (blocks already removed by processWordScoring if valid word)
+        if (!isValidTool(e.player.inventory.itemInMainHand)) {
+            return
+        }
+
+        processWordScoring(e.player, brokenBlock)
     }
 
     /**
