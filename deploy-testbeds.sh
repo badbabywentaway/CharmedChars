@@ -1,14 +1,16 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
+VERSION=$(grep -E '^version=' gradle.properties | cut -d'=' -f2)
+
 echo "==================================================="
-echo "   CharmedChars v2.0.0 - Deploy to Test Beds"
+echo "   CharmedChars v${VERSION} - Deploy to Test Beds"
 echo "==================================================="
 echo "   Deploys to: ItemsAdder + Oraxen + Nexo + Native"
 echo "==================================================="
 echo
 
-JAR="build/libs/CharmedChars-2.0.0.jar"
+JAR="build/libs/CharmedChars-${VERSION}.jar"
 DOCS="/c/Users/steve/Documents"
 
 if [ ! -f "$JAR" ]; then
@@ -46,7 +48,7 @@ echo "  [OK] Plugin data cleaned"
 
 echo "  Copying new JAR..."
 cp "$JAR" "$IA/"
-echo "  [OK] CharmedChars-2.0.0.jar deployed to ItemsAdder server"
+echo "  [OK] CharmedChars-${VERSION}.jar deployed to ItemsAdder server"
 echo
 
 # ---------------------------------------------------
@@ -72,7 +74,7 @@ echo "  [OK] Plugin data cleaned"
 
 echo "  Copying new JAR..."
 cp "$JAR" "$OR/"
-echo "  [OK] CharmedChars-2.0.0.jar deployed to Oraxen server"
+echo "  [OK] CharmedChars-${VERSION}.jar deployed to Oraxen server"
 echo
 
 # ---------------------------------------------------
@@ -98,7 +100,7 @@ echo "  [OK] Plugin data cleaned"
 
 echo "  Copying new JAR..."
 cp "$JAR" "$NX/"
-echo "  [OK] CharmedChars-2.0.0.jar deployed to Nexo server"
+echo "  [OK] CharmedChars-${VERSION}.jar deployed to Nexo server"
 echo
 
 # ---------------------------------------------------
@@ -118,11 +120,11 @@ echo "  [OK] Plugin data cleaned"
 
 echo "  Copying new JAR..."
 cp "$JAR" "$NA/"
-echo "  [OK] CharmedChars-2.0.0.jar deployed to Native server"
+echo "  [OK] CharmedChars-${VERSION}.jar deployed to Native server"
 echo
 
 echo "==================================================="
-echo "[SUCCESS] CharmedChars v2.0.0 deployed to all four servers"
+echo "[SUCCESS] CharmedChars v${VERSION} deployed to all four servers"
 echo "==================================================="
 echo "  ItemsAdder: $DOCS/Papermc/plugins"
 echo "  Oraxen:     $DOCS/OraxenPapermc/plugins"

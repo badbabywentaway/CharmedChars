@@ -1,12 +1,14 @@
 @echo off
+for /f "tokens=2 delims==" %%V in ('findstr /b "version=" gradle.properties') do set VERSION=%%V
+
 echo ===================================================
-echo    CharmedChars v2.0.0 - Deploy to Test Beds
+echo    CharmedChars v%VERSION% - Deploy to Test Beds
 echo ===================================================
 echo    Deploys to: ItemsAdder + Oraxen + Nexo + Native
 echo ===================================================
 echo.
 
-set JAR=build\libs\CharmedChars-2.0.0.jar
+set JAR=build\libs\CharmedChars-%VERSION%.jar
 
 if not exist "%JAR%" (
     echo [ERROR] Build artifact not found: %JAR%
@@ -49,7 +51,7 @@ echo   [OK] Plugin data cleaned
 echo   Copying new JAR...
 copy "%JAR%" "c:\Users\steve\Documents\Papermc\plugins\" /Y >nul
 if %ERRORLEVEL% EQU 0 (
-    echo   [OK] CharmedChars-2.0.0.jar deployed to ItemsAdder server
+    echo   [OK] CharmedChars-%VERSION%.jar deployed to ItemsAdder server
 ) else (
     echo   [ERROR] Failed to copy JAR to ItemsAdder server
     pause
@@ -105,7 +107,7 @@ echo   [OK] Plugin data cleaned
 echo   Copying new JAR...
 copy "%JAR%" "c:\Users\steve\Documents\OraxenPapermc\plugins\" /Y >nul
 if %ERRORLEVEL% EQU 0 (
-    echo   [OK] CharmedChars-2.0.0.jar deployed to Oraxen server
+    echo   [OK] CharmedChars-%VERSION%.jar deployed to Oraxen server
 ) else (
     echo   [ERROR] Failed to copy JAR to Oraxen server
     pause
@@ -157,7 +159,7 @@ echo   [OK] Plugin data cleaned
 echo   Copying new JAR...
 copy "%JAR%" "c:\Users\steve\Documents\NexoPapermc\plugins\" /Y >nul
 if %ERRORLEVEL% EQU 0 (
-    echo   [OK] CharmedChars-2.0.0.jar deployed to Nexo server
+    echo   [OK] CharmedChars-%VERSION%.jar deployed to Nexo server
 ) else (
     echo   [ERROR] Failed to copy JAR to Nexo server
     pause
@@ -189,7 +191,7 @@ echo   [OK] Plugin data cleaned
 echo   Copying new JAR...
 copy "%JAR%" "c:\Users\steve\Documents\NativePapermc\plugins\" /Y >nul
 if %ERRORLEVEL% EQU 0 (
-    echo   [OK] CharmedChars-2.0.0.jar deployed to Native server
+    echo   [OK] CharmedChars-%VERSION%.jar deployed to Native server
 ) else (
     echo   [ERROR] Failed to copy JAR to Native server
     pause
@@ -198,7 +200,7 @@ if %ERRORLEVEL% EQU 0 (
 
 echo.
 echo ===================================================
-echo [SUCCESS] CharmedChars v2.0.0 deployed to all four servers
+echo [SUCCESS] CharmedChars v%VERSION% deployed to all four servers
 echo ===================================================
 echo   ItemsAdder: c:\Users\steve\Documents\Papermc\plugins
 echo   Oraxen:     c:\Users\steve\Documents\OraxenPapermc\plugins
