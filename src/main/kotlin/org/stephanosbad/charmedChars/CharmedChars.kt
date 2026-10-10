@@ -127,8 +127,12 @@ class CharmedChars : JavaPlugin(), CoroutineScope {
 
         logger.info("Custom item provider initialized: ${customItemProviderManager.getProviderName()}")
 
+        // Initialize config manager first - NativeItemManagerSetup.setup() below needs it
+        configManager = ConfigManager(this)
+        configManager.loadConfig()
+
         // Native provider registers items synchronously so lazy item maps resolve correctly.
-        // Pack hosting is deferred until after configManager is initialized (it needs the port/hostname).
+        // Pack hosting is deferred until after this (it needs the port/hostname, set below).
         val nativeProvider = customItemProviderManager.getProvider() as? NativeItemProvider
         if (nativeProvider != null) {
             NativeItemManagerSetup(this, nativeProvider).setup()
@@ -145,10 +149,6 @@ class CharmedChars : JavaPlugin(), CoroutineScope {
         } catch (e: IOException) {
             e.printStackTrace()
         }
-
-        // Initialize config manager
-        configManager = ConfigManager(this)
-        configManager.loadConfig()
 
         // Start native pack HTTP server now that configManager is ready
         if (nativeProvider != null) {
