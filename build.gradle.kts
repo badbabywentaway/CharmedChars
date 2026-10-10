@@ -7,14 +7,14 @@ plugins {
 }
 
 kotlin {
-    jvmToolchain(21)
+    jvmToolchain(25)
     compilerOptions {
         freeCompilerArgs.add("-Xskip-prerelease-check")
     }
 }
 
 jacoco {
-    toolVersion = "0.8.12"
+    toolVersion = "0.8.15"
 }
 
 group = property("group")!!
@@ -30,16 +30,15 @@ repositories {
     maven("https://repo.oraxen.com/releases") { name = "oraxen-repo" }
     maven("https://repo.nexomc.com/releases") { name = "nexo-repo" }
     maven("https://repo.codemc.io/repository/maven-public/") { name = "codemc-repo" }
-    maven("https://maven.devs.beer/") { name = "itemsadder-repo" }
 }
 
 dependencies {
     compileOnly("io.papermc.paper:paper-api:${property("paperVersion")}")
     compileOnly("com.sk89q.worldguard:worldguard-bukkit:${property("worldGuardVersion")}")
     compileOnly("net.dmulloy2:ProtocolLib:5.4.0")
-    compileOnly("dev.lone:api-itemsadder:4.0.2-beta-release-11")
-    compileOnly("io.th0rgal:oraxen:1.216.0")
-    compileOnly("com.nexomc:nexo:1.24.0") { // Note: Untested - no premium license available for verification
+    compileOnly("beer.devs:itemsadder-api:${property("itemsAdderVersion")}")
+    compileOnly("io.th0rgal:oraxen:${property("oraxenVersion")}")
+    compileOnly("com.nexomc:nexo:${property("nexoVersion")}") { // Note: Untested - no premium license available for verification
         exclude(group = "com.google.code.gson", module = "gson")
     }
     compileOnly("com.github.GriefPrevention:GriefPrevention:${property("griefPreventionVersion")}")
@@ -105,7 +104,7 @@ dependencies {
     }
 
     tasks.build { dependsOn(tasks.shadowJar) }
-    tasks.runServer { minecraftVersion("1.21.11") }
+    tasks.runServer { minecraftVersion("26.3") }
 
     tasks.test {
         useJUnitPlatform()
@@ -151,7 +150,7 @@ dependencies {
             println("  Version: ${project.version}")
             println("  Group: ${project.group}")
             println("  Name: ${project.name}")
-            println("  Minecraft: 1.21.11")
+            println("  Minecraft: 26.3")
             println("  Kotlin: ${property("kotlinVersion")}")
             println("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━")
             println("  See VERSION.md for full changelog")
