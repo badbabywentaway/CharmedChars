@@ -1,5 +1,67 @@
 # CharmedChars Version History
 
+## Version 2.1.0 - MC 26.3 Compatibility
+
+### Release Date
+2026-10-10
+
+### Overview
+MC 26.3 compatibility release, verified across all four modes (Native, Oraxen beta, Nexo, ItemsAdder beta) with live in-game scoring tests. The headline fix resolves word scoring silently never triggering on item managers that fire `BlockBreakEvent` before `PlayerInteractEvent`/`BlockDamageEvent` — a reversed event order introduced by ItemsAdder's 4.1.0 nativepackets beta. Also fixes a Native-mode startup crash, adds Poplar wood letter-block drops, and updates Paper, WorldGuard, and NBT-API to versions that actually work on MC 26.3.
+
+### Changes
+
+#### **Bug Fixes** 🐛
+
+**Word Scoring Never Triggering on Reversed Event Order** (`ItemManager.kt`)
+- ItemsAdder's `4.1.0-beta-nativepackets` line (plus its `NativePackets` companion plugin) fires `BlockBreakEvent` *before* `PlayerInteractEvent`/`BlockDamageEvent` — the reverse of normal Minecraft event order
+- Scoring only ran from the interact/damage handlers; by the time they fired, the block was already gone, so `testForLetter` silently rejected it — no "Hit"/"Miss" message ever appeared, regardless of word validity
+- Fix: `letterBlockBreak` (the `BlockBreakEvent` handler) now also calls `processWordScoring` directly, using the still-intact block reference from the break event itself. Safe no-op on providers with normal event order, since the block's already removed by the time this runs
+- Confirmed live on ItemsAdder, Oraxen, Nexo, and Native
+
+**CharmedChars Crashing on Enable in Native Mode** (`CharmedChars.kt`)
+- `onEnable()` called `NativeItemManagerSetup.setup()` before `configManager` was initialized; `setup()` (via `buildItemList`) reads `plugin.configManager`, throwing `UninitializedPropertyAccessException` on every boot
+- Also hit whenever ItemsAdder/Oraxen/Nexo failed to enable and CharmedChars fell back to Native mode, taking CharmedChars down with it
+- Fix: `configManager` now initializes before the native setup() call
+
+#### **New Features** ⭐
+
+**Poplar Wood Letter Block Drops** (`ItemManager.kt`)
+- Poplar log → stripped Poplar log now registered in the gold/pyrite-tool drop table, same as other wood types
+- Resolved via `Material.matchMaterial("POPLAR_LOG")` rather than a direct enum reference, since Poplar isn't present in every running Paper build (e.g. 26.2 stable) — degrades gracefully to a no-op on servers without it
+
+#### **Dependency Updates** 📦
+
+| Library | Previous | New | Notes |
+|---------|----------|-----|-------|
+| Paper API | `1.21.11-R0.1-SNAPSHOT` | `26.3.build.169-beta` | |
+| JVM toolchain | `21` | `25` | Required by the Paper 26.3 beta API jar |
+| JaCoCo | `0.8.12` | `0.8.15` | 0.8.12 can't instrument JVM 25 bytecode |
+| WorldGuard | `7.0.14` | `7.0.19` | Resolves a Guava/Gson/Fastutil conflict against Paper 26.3's bundled libraries |
+| NBT-API | `2.15.7` | `2.16.1` | 2.15.7 has no MC 26.3 NMS mapping — Native mode hard-crashed on any item tag without this |
+| ItemsAdder API | `dev.lone:api-itemsadder:4.0.2-beta-release-11` (`maven.devs.beer`) | `beer.devs:itemsadder-api:4.0.18-beta-10` (Maven Central) | `maven.devs.beer` is dead; package names (`dev.lone.itemsadder.api.*`) unchanged |
+
+**Runtime-only, not compile dependencies** (Discord betas, not yet published to public release channels):
+- ItemsAdder `4.1.0-beta-nativepackets-3` — required for MC 26.3; stable `4.0.18` has no 26.3 NMS mapping and hard-crashes on load
+- Oraxen `1.220.0` — required for MC 26.3; `1.219.1` and earlier fail to enable on 26.3
+
+#### **Build/Deploy**
+- `deploy-testbeds.sh`/`.bat` now read the plugin version from `gradle.properties` instead of a hardcoded string
+- Removed `DEPLOY_CLEAN_JAR.bat` — dead script pinned to a non-existent `1.3.2` jar, fully superseded by `deploy-testbeds`
+- Fixed `StructureDatabaseTest` crashing under JDK 25 (`Logger.isLoggable` NPE against a bare MockK mock)
+
+### Technical Details
+
+**Compatibility**
+- ✅ Minecraft 26.3 / PaperMC (beta build)
+- ✅ Java 25+
+- ✅ ItemsAdder 4.1.0-beta-nativepackets-3+ (verified live, Discord beta)
+- ✅ Oraxen 1.220.0+ (verified live, Discord beta)
+- ✅ Nexo 1.29.1+ (verified live)
+- ✅ Native mode (verified live)
+- ✅ 100% backward compatible — no config or database changes required
+
+---
+
 ## Version 2.0.0 - MC 26.2 Compatibility
 
 ### Release Date

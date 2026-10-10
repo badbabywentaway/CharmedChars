@@ -41,19 +41,19 @@ CharmedChars is **open source** software licensed under **GNU LGPL v3**.
 ### Requirements
 
 **Server Software:**
-- Minecraft 1.21.11+
+- Minecraft 26.3+ (also supports 26.2, 1.21.11+)
 - Paper or Paper-based server (Purpur, Pufferfish, etc.)
-- Java 21+
+- Java 25+
 
 **Required Plugin (choose ONE):**
-- ItemsAdder 4.0.2-beta-release-11+ (**proprietary - purchase separately**)
-- Oraxen 1.216.0+ (open-source, free)
-- Nexo 1.24.0+ (open-source, free)
+- ItemsAdder 4.1.0-beta-nativepackets+ (**proprietary - purchase separately**; required for MC 26.3 — the 4.0.18 stable line doesn't support 26.3 yet, grab the beta from ItemsAdder's Discord)
+- Oraxen 1.220.0+ (open-source, free; 1.219.1 and earlier crash on MC 26.3 — grab the beta from Oraxen's Discord until it's published to their Maven repo)
+- Nexo 1.29.1+ (open-source, free)
 
 All three plugins now have auto-setup commands!
 
 **Optional Plugins:**
-- WorldGuard 7.0.14+ (for region protection)
+- WorldGuard 7.0.19+ (for region protection)
 - GriefPrevention 16.15.0+ (for claim protection)
 - ProtocolLib 5.4.0+ (for advanced features)
 
@@ -278,22 +278,22 @@ Output: `build/libs/CharmedChars-1.4.0.jar`
 
 ## Version
 
-Current Version: **2.0.0**
+Current Version: **2.1.0**
 
-**Latest Updates (v2.0.0 - MC 26.2 Compatibility)**:
-- **Verified** on Minecraft 26.2 with Oraxen, Nexo, and Native mode
-- **NEW**: Potent Sulfur alt recipe for Pyrite Ingot (MC 26.2+) across all four modes
-- **NEW**: Configurable CMD base offset (`native-items.cmd-base`) for native mode — shift the CMD range to avoid conflicts with other plugins
-- **NEW**: Oraxen recipe keys namespaced with `charmedchars_` prefix to prevent conflicts with other Oraxen plugins
-- Updated item manager APIs: ItemsAdder 4.0.2-beta-release-11 (new maven.devs.beer repo), Oraxen 1.216.0, Nexo 1.24.0
-- Logo block now clearly attributed to artist **Gaia Temperini** (marble-style block font textures) in all documentation
-- Fixed Oraxen cyan block display names (`<cyan>` → `<aqua>` MiniMessage tag)
-- **Verified** on MC 26.2 with ItemsAdder (beta), Oraxen, Nexo, and Native mode — all four modes confirmed
+**Latest Updates (v2.1.0 - MC 26.3 Compatibility)**:
+- **Verified** on Minecraft 26.3 with ItemsAdder (beta), Oraxen (beta), Nexo, and Native mode — all four modes confirmed with live scoring tests
+- **FIXED**: Word scoring could silently never trigger on item managers that fire `BlockBreakEvent` before `PlayerInteractEvent`/`BlockDamageEvent` (ItemsAdder's 4.1.0 nativepackets beta) — scoring now also triggers directly from the break event as a fallback
+- **FIXED**: CharmedChars crashed on startup in Native mode (`UninitializedPropertyAccessException`) — `configManager` now initializes before native item registration
+- **NEW**: Poplar wood (log → stripped log) now drops letter blocks, resolved forward-compatibly via `Material.matchMaterial()` so older servers without Poplar aren't affected
+- Updated dependencies for MC 26.3: Paper API, WorldGuard, NBT-API (2.15.7 → 2.16.1, required for Native mode to even boot on 26.3), JVM toolchain (21 → 25), JaCoCo (0.8.12 → 0.8.15)
+- ItemsAdder API migrated to Maven Central (`beer.devs:itemsadder-api`) — the old `maven.devs.beer` repo is dead
+- **Known gap**: ItemsAdder 4.1.0-nativepackets and Oraxen 1.220.0 are both Discord-distributed betas (not yet on their public Maven/release channels) — required for MC 26.3 until stable releases catch up
 
-**Previous Release (v1.5.0 - Ender Dragon Logo Block)**:
-- Ender Dragon death drops a random-color logo block bearing Gaia Temperini's artist signature
-- Logo block placed in The End + gold/pyrite tool → colored shulker box with configurable loot
-- Full ItemsAdder, Oraxen, and Nexo support
+**Previous Release (v2.0.0 - MC 26.2 Compatibility)**:
+- Verified on Minecraft 26.2 with Oraxen, Nexo, ItemsAdder (beta), and Native mode
+- Potent Sulfur alt recipe for Pyrite Ingot (MC 26.2+) across all four modes
+- Configurable CMD base offset (`native-items.cmd-base`) for native mode
+- Fixed Oraxen cyan block display names and recipe key namespace conflicts
 
 Run `/version` in-game or `./gradlew version` to display version information.
 
@@ -304,19 +304,23 @@ See `VERSION.md` for complete changelog and version history.
 ## Dependencies
 
 ### Build Dependencies
-- Kotlin 2.2.21
-- Gradle 8.x
-- Paper API 1.21.10
-- ItemsAdder API 3.6.3-beta-14 (compile-only)
-- WorldGuard 7.0.14 (compile-only, optional)
+- Kotlin 2.3.20
+- Gradle 9.4.1
+- Java toolchain 25
+- Paper API 26.3.build.169-beta
+- ItemsAdder API 4.0.18-beta-10 (compile-only, Maven Central `beer.devs:itemsadder-api`)
+- Oraxen API 1.219.1 (compile-only)
+- Nexo API 1.29.1 (compile-only)
+- WorldGuard 7.0.19 (compile-only, optional)
 - GriefPrevention 16.15.0 (bundled, optional)
-- ProtocolLib 5.3.0 (compile-only, optional)
+- ProtocolLib 5.4.0 (compile-only, optional)
+- NBT-API 2.16.1 (bundled, required for Native mode on MC 26.x)
 
 ### Runtime Dependencies
-- **ItemsAdder 3.6.3-beta-14+** (**REQUIRED** - proprietary plugin, obtain separately)
-- WorldGuard 7.0.14+ (optional soft dependency)
+- One of: **ItemsAdder**, **Oraxen**, **Nexo**, or Native mode (**REQUIRED** - choose exactly one)
+- WorldGuard 7.0.19+ (optional soft dependency)
 - GriefPrevention 16.15.0+ (optional soft dependency)
-- ProtocolLib 5.3.0+ (optional soft dependency)
+- ProtocolLib 5.4.0+ (optional soft dependency)
 
 ---
 

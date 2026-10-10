@@ -140,17 +140,17 @@ Word: "QUARTZ" (all magenta)
 ## Installation
 
 ### Requirements
-- **Minecraft**: 26.2+ (also supports 1.21.11+)
+- **Minecraft**: 26.3+ (also supports 26.2, 1.21.11+)
 - **Server**: Paper or Paper-based (Purpur, Pufferfish, etc.)
-- **Java**: 21+
+- **Java**: 25+
 - **Custom Item Plugin** (choose ONE, or use Native mode with no extra plugin):
   - **Native mode** — no extra plugin required; built-in resource pack server included
-  - **ItemsAdder** 4.0.2-beta-release-11+ (premium - sold separately)
-  - **Oraxen** 1.216.0+ (premium with public source - sold separately)
-  - **Nexo** 1.24.0+ (premium - sold separately)
+  - **ItemsAdder** 4.1.0-beta-nativepackets+ (premium - sold separately; MC 26.3 requires this Discord beta, stable 4.0.18 doesn't support 26.3 yet)
+  - **Oraxen** 1.220.0+ (premium with public source - sold separately; MC 26.3 requires this Discord beta, 1.219.1 and earlier crash on enable)
+  - **Nexo** 1.29.1+ (premium - sold separately)
 
 ### Optional Dependencies
-- WorldGuard 7.0.14+ (region protection)
+- WorldGuard 7.0.19+ (region protection)
 - GriefPrevention 16.15.0+ (claim protection)
 - ProtocolLib 5.4.0+ (advanced features)
 
@@ -301,9 +301,17 @@ bastion-reward:
 
 ## Version Information
 
-**Current Version**: 2.0.0
+**Current Version**: 2.1.0
 
 **Latest Updates**:
+- **v2.1.0**: MC 26.3 Compatibility — verified on all four modes with live scoring tests
+  - **VERIFIED**: Native, Oraxen (beta), Nexo, and ItemsAdder (beta) all confirmed on Minecraft 26.3
+  - **FIXED**: Word scoring could silently never trigger when the item manager fires `BlockBreakEvent` before `PlayerInteractEvent`/`BlockDamageEvent` (hit by ItemsAdder's 4.1.0 nativepackets beta) — scoring now also fires from the break event directly as a fallback
+  - **FIXED**: CharmedChars crashed on startup in Native mode — `configManager` now initializes before native item registration
+  - **NEW**: Poplar wood now drops letter blocks when mined, resolved forward-compatibly so older servers are unaffected
+  - **UPDATED**: Paper API, WorldGuard 7.0.19, NBT-API 2.16.1 (required for Native mode to boot on 26.x), JVM toolchain 25, JaCoCo 0.8.15
+  - **UPDATED**: ItemsAdder API migrated to Maven Central (`beer.devs:itemsadder-api`) — the old repo is dead
+  - **KNOWN GAP**: ItemsAdder 4.1.0-nativepackets and Oraxen 1.220.0 are Discord-distributed betas required for MC 26.3, not yet on public release channels
 - **v2.0.0**: MC 26.2 Compatibility — verified on all four modes
   - **VERIFIED**: Native, Oraxen, Nexo, and ItemsAdder all confirmed on Minecraft 26.2
   - **NEW**: Potent Sulfur alt recipe for Pyrite Ingot (MC 26.2+) — all four modes
@@ -395,10 +403,10 @@ bastion-reward:
 **Author**: StephanosBad
 
 **Built With**:
-- Kotlin 2.3.20 & Paper API 1.21.11
-- ItemsAdder API 4.0.2-beta-release-11 (optional - one of four custom item providers - fully tested)
-- Oraxen API 1.216.0 (optional - one of four custom item providers - fully tested)
-- Nexo API 1.24.0 (optional - one of four custom item providers - fully tested)
+- Kotlin 2.3.20 & Paper API 26.3.build.169-beta (Java 25 toolchain)
+- ItemsAdder API 4.0.18-beta-10 (optional - one of four custom item providers - fully tested)
+- Oraxen API 1.219.1 (optional - one of four custom item providers - fully tested)
+- Nexo API 1.29.1 (optional - one of four custom item providers - fully tested)
 - Native mode (built-in, no extra plugin required)
 - Exposed ORM 0.48.0 (SQLite)
 - ProtocolLib 5.4.0 (optional)

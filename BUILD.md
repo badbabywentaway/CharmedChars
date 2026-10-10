@@ -73,7 +73,7 @@ gradlew.bat shadowJar --no-daemon
 
 The built plugin JAR will be located at:
 ```
-build/libs/CharmedChars-1.2.0.jar
+build/libs/CharmedChars-2.1.0.jar
 ```
 
 ## Build Configuration
@@ -94,12 +94,12 @@ After building, copy the JAR to your PaperMC server:
 
 ### Linux / macOS / WSL
 ```bash
-cp build/libs/CharmedChars-1.2.0.jar /path/to/server/plugins/
+cp build/libs/CharmedChars-2.1.0.jar /path/to/server/plugins/
 ```
 
 ### Windows
 ```cmd
-copy build\libs\CharmedChars-1.2.0.jar C:\path\to\server\plugins\
+copy build\libs\CharmedChars-2.1.0.jar C:\path\to\server\plugins\
 ```
 
 Then restart your server.
@@ -107,9 +107,9 @@ Then restart your server.
 ## Dependencies
 
 The plugin requires:
-- PaperMC 1.21.11 or higher
-- Java 21 or higher (required for Paper 1.21+; build toolchain targets Java 21 bytecode)
-- Gradle 8.14.4 (bundled via wrapper; requires Java 23 or 24 as the daemon JVM)
+- PaperMC 26.3 or higher (also supports 26.2, 1.21.11)
+- Java 25 or higher (required for the Paper 26.3 API; build toolchain targets Java 25 bytecode)
+- Gradle 9.4.1 (bundled via wrapper)
 
 ## Development Build
 
