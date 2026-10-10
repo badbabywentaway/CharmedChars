@@ -52,7 +52,7 @@ class StructureDatabaseTest {
         // Mock the plugin
         plugin = mockk<CharmedChars>(relaxed = true)
         every { plugin.dataFolder } returns testDataFolder
-        every { plugin.logger } returns mockk(relaxed = true)
+        every { plugin.logger } returns java.util.logging.Logger.getLogger("StructureDatabaseTest")
     }
 
     @BeforeEach
