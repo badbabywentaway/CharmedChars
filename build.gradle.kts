@@ -37,12 +37,9 @@ dependencies {
     compileOnly("com.sk89q.worldguard:worldguard-bukkit:${property("worldGuardVersion")}")
     compileOnly("net.dmulloy2:ProtocolLib:5.4.0")
     compileOnly("beer.devs:itemsadder-api:${property("itemsAdderVersion")}")
-    compileOnly("io.th0rgal:oraxen:${property("oraxenVersion")}")
-    compileOnly("com.nexomc:nexo:${property("nexoVersion")}") { // Note: Untested - no premium license available for verification
-        exclude(group = "com.google.code.gson", module = "gson")
-    }
     compileOnly("com.github.GriefPrevention:GriefPrevention:${property("griefPreventionVersion")}")
-    implementation("de.tr7zw:item-nbt-api:${property("nbtApiVersion")}")
+    // Custom item provider abstraction (ItemsAdder/Oraxen/Nexo/Native); brings in item-nbt-api
+    implementation("com.github.badbabywentaway:Integrare:${property("integrareVersion")}")
     implementation("org.jetbrains.kotlin:kotlin-stdlib:${property("kotlinVersion")}")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:${property("coroutinesVersion")}")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-jdk8:${property("coroutinesVersion")}")

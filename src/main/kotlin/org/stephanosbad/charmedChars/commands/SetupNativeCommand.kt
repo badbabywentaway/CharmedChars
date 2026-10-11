@@ -24,7 +24,7 @@ import org.bukkit.command.CommandExecutor
 import org.bukkit.command.CommandSender
 import org.stephanosbad.charmedChars.CharmedChars
 import org.stephanosbad.charmedChars.integration.NativeItemManagerSetup
-import org.stephanosbad.charmedChars.integration.NativeItemProvider
+import org.stephanosbad.integrare.provider.NativeItemProvider
 
 /**
  * /nativesetup [force]

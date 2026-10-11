@@ -41,12 +41,12 @@ import org.stephanosbad.charmedChars.commands.StructureDatabaseCommand
 import org.stephanosbad.charmedChars.commands.VersionCommand
 import org.stephanosbad.charmedChars.commands.GlassingBedsCommand
 import org.stephanosbad.charmedChars.integration.ItemsAdderSetup
-import org.stephanosbad.charmedChars.integration.CustomItemProviderManager
 import org.stephanosbad.charmedChars.integration.NativeItemManagerSetup
-import org.stephanosbad.charmedChars.integration.NativeItemProvider
-import org.stephanosbad.charmedChars.integration.NativePackServer
-import org.stephanosbad.charmedChars.listeners.NativePlacementListener
-import org.stephanosbad.charmedChars.listeners.NativePackListener
+import org.stephanosbad.integrare.CustomItemProviderManager
+import org.stephanosbad.integrare.nativeitems.NativePackListener
+import org.stephanosbad.integrare.nativeitems.NativePackServer
+import org.stephanosbad.integrare.nativeitems.NativePlacementListener
+import org.stephanosbad.integrare.provider.NativeItemProvider
 import org.stephanosbad.charmedChars.utility.ConfigManager
 import org.stephanosbad.charmedChars.database.StructureDatabase
 import org.stephanosbad.charmedChars.listeners.StructureListener
@@ -112,7 +112,7 @@ class CharmedChars : JavaPlugin(), CoroutineScope {
         println("Minecraft Letter/Number Block Plugin Starting")
 
         // Initialize custom item provider (must be first!)
-        customItemProviderManager = CustomItemProviderManager(this)
+        customItemProviderManager = CustomItemProviderManager(this, NativeItemManagerSetup.NBT_KEY)
         val providerResult = customItemProviderManager.initialize()
 
         if (!providerResult.success) {
@@ -207,8 +207,13 @@ class CharmedChars : JavaPlugin(), CoroutineScope {
 
         // Register event listeners
         if (nativeProvider != null) {
-            Bukkit.getPluginManager().registerEvents(NativePlacementListener(this, nativeProvider), this)
-            Bukkit.getPluginManager().registerEvents(NativePackListener(this, nativeProvider), this)
+            // Pyrite items are tools, not placeable blocks
+            Bukkit.getPluginManager().registerEvents(
+                NativePlacementListener(this, nativeProvider) { !it.namespacedId.contains("pyrite") }, this
+            )
+            Bukkit.getPluginManager().registerEvents(
+                NativePackListener(nativeProvider) { configManager.nativeItemsPackRequired }, this
+            )
         }
         Bukkit.getPluginManager().registerEvents(ItemManager(this), this)
         Bukkit.getPluginManager().registerEvents(StructureListener(this, structureDatabase), this)
@@ -285,7 +290,7 @@ class CharmedChars : JavaPlugin(), CoroutineScope {
         provider.packHash = provider.packHash  // hash already set by caller
 
         if (nativePackServer == null) {
-            nativePackServer = NativePackServer(this)
+            nativePackServer = NativePackServer(logger)
         }
         nativePackServer!!.start(zipFile, port)
 

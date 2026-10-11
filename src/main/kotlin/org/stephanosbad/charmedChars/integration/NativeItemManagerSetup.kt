@@ -38,6 +38,7 @@ import org.stephanosbad.charmedChars.items.BlockColor
 import org.stephanosbad.charmedChars.items.LetterBlock
 import org.stephanosbad.charmedChars.items.NonAlphaNumBlocks
 import org.stephanosbad.charmedChars.items.NumericBlock
+import org.stephanosbad.integrare.provider.NativeItemProvider
 import java.io.File
 import java.io.FileOutputStream
 import java.security.MessageDigest
@@ -64,6 +65,11 @@ class NativeItemManagerSetup(
     private val plugin: CharmedChars,
     private val provider: NativeItemProvider
 ) {
+
+    companion object {
+        // Must never change: existing items in player inventories are tagged with it
+        const val NBT_KEY = "charmedchars_item_id"
+    }
 
     private val packRoot = File(plugin.dataFolder, "native-pack")
     private val packMeta = File(packRoot, "pack.mcmeta")
