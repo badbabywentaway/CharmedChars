@@ -157,7 +157,7 @@ native-items:
   # Whether players must accept the resource pack before joining
   pack-required: false
   # Starting Custom Model Data value for CharmedChars items.
-  # CharmedChars claims cmd-base through cmd-base+124 (120 block items + 5 pyrite items).
+  # CharmedChars claims cmd-base through cmd-base+127 (120 character blocks, 5 pyrite items, 3 logo blocks).
   # Change this if another plugin occupies the same CMD range on the same base materials.
   # After changing, run /nativesetup force to regenerate the resource pack.
   # WARNING: Changing this on a live server with placed blocks will break existing placements.
@@ -176,6 +176,14 @@ glassing-beds:
   # This prevents using beds to glass lava ocean surfaces (Y=31) for easy travel
   # Recommended: 28 (allows underground lava but not ocean surface)
   max-y: 28
+
+# Debugging
+debug:
+  # Log every click/damage/break/drop event on CharmedChars blocks, in the order
+  # the server fires them, with their cancelled state before and after plugins
+  # handle them. Used to diagnose differences between item providers. Verbose:
+  # leave off on live servers. Takes effect on /reload.
+  event-order: false
 
   # Colored Glass Feature (v1.4.1)
   # The color of glass created matches the bed color used:

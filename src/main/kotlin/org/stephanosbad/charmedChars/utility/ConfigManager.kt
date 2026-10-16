@@ -162,6 +162,14 @@ class ConfigManager(private val plugin: CharmedChars) {
         get() = config.getBoolean("glassing-beds.enabled", false)
 
     /**
+     * Whether to log the order of block events on CharmedChars blocks
+     *
+     * Default: false
+     */
+    val debugEventOrder: Boolean
+        get() = config.getBoolean("debug.event-order", false)
+
+    /**
      * Maximum Y-level for glassing beds lava conversion
      *
      * Only lava blocks at or below this Y-level will be converted to glass.
