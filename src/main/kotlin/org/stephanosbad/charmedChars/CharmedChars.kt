@@ -32,19 +32,17 @@ import org.bukkit.plugin.java.JavaPlugin
 import org.bukkit.Bukkit
 import org.stephanosbad.charmedChars.commands.ItemsAdderStatusCommand
 import org.stephanosbad.charmedChars.commands.ReloadCommand
-import org.stephanosbad.charmedChars.commands.SetupItemsAdderCommand
-import org.stephanosbad.charmedChars.commands.SetupOraxenCommand
-import org.stephanosbad.charmedChars.commands.SetupNexoCommand
-import org.stephanosbad.charmedChars.commands.SetupNativeCommand
+import org.stephanosbad.charmedChars.commands.ProviderSetupCommand
 import org.stephanosbad.charmedChars.commands.StructureCodeCommand
 import org.stephanosbad.charmedChars.commands.StructureDatabaseCommand
 import org.stephanosbad.charmedChars.commands.VersionCommand
 import org.stephanosbad.charmedChars.commands.GlassingBedsCommand
 import org.stephanosbad.charmedChars.integration.CharmedCharsCatalog
-import org.stephanosbad.charmedChars.integration.ItemsAdderSetup
 import org.stephanosbad.integrare.CustomItemProviderManager
+import org.stephanosbad.integrare.ProviderKind
 import org.stephanosbad.integrare.catalog.ItemCatalog
 import org.stephanosbad.integrare.setup.NativeSetup
+import org.stephanosbad.integrare.setup.ProviderSetup
 import org.stephanosbad.integrare.nativeitems.NativePackListener
 import org.stephanosbad.integrare.nativeitems.NativePackServer
 import org.stephanosbad.integrare.nativeitems.NativePlacementListener
@@ -185,10 +183,9 @@ class CharmedChars : JavaPlugin(), CoroutineScope {
         // Register commands
         getCommand("reload")?.setExecutor(ReloadCommand(this))
         getCommand("iastatus")?.setExecutor(ItemsAdderStatusCommand())
-        getCommand("iasetup")?.setExecutor(SetupItemsAdderCommand(this))
-        getCommand("oraxensetup")?.setExecutor(SetupOraxenCommand(this))
-        getCommand("nexosetup")?.setExecutor(SetupNexoCommand(this))
-        getCommand("nativesetup")?.setExecutor(SetupNativeCommand(this))
+        for (kind in ProviderKind.entries) {
+            getCommand(ProviderSetupCommand.commandFor(kind))?.setExecutor(ProviderSetupCommand(this, kind))
+        }
         getCommand("version")?.setExecutor(VersionCommand(this))
         getCommand("structurecode")?.setExecutor(StructureCodeCommand(this))
         val structureDbCommand = StructureDatabaseCommand(this)
@@ -327,149 +324,97 @@ class CharmedChars : JavaPlugin(), CoroutineScope {
         }
     }
 
+    /**
+     * Setup for the active custom item provider, installing [itemCatalog]
+     */
+    fun providerSetup(): ProviderSetup? =
+        customItemProviderManager.getProvider()?.let { ProviderSetup.forProvider(it, this, itemCatalog, ::nativeSetup) }
+
     private fun checkProviderSetup() {
+        val setup = providerSetup()
+        if (setup == null) {
+            logger.warning("Unknown provider: ${customItemProviderManager.getProviderName()}")
+            return
+        }
+        if (setup.kind == ProviderKind.NATIVE) {
+            checkNativeNoteBlockUpdates()
+            return
+        }
+
         val providerName = customItemProviderManager.getProviderName()
+        val command = ProviderSetupCommand.commandFor(setup.kind)
+        if (setup.isAlreadySetup()) {
+            logger.info("$providerName configuration found. Ready to use!")
+            return
+        }
 
-        when (providerName) {
-            "ItemsAdder" -> {
-                val setup = ItemsAdderSetup(this)
+        logger.warning("========================================")
+        logger.warning("$providerName is installed but not configured!")
+        logger.warning("")
+        logger.warning("Run /$command to generate configs & copy textures, then:")
+        setup.nextSteps.forEach { logger.warning("  - $it") }
+        if (setup.serverRequirements.isNotEmpty()) {
+            logger.warning("")
+            logger.warning("IMPORTANT: required server settings")
+            setup.serverRequirements.forEach { logger.warning("  $it") }
+        }
+        logger.warning("========================================")
 
-                if (!setup.isAlreadySetup()) {
-                    logger.warning("========================================")
-                    logger.warning("ItemsAdder is installed but not configured!")
-                    logger.warning("")
-                    logger.warning("Run one of these commands to setup:")
-                    logger.warning("  /iasetup     - Auto-copy configs & textures")
-                    logger.warning("  OR manually copy files (see docs)")
-                    logger.warning("")
-                    logger.warning("Then run /iazip and restart the server.")
-                    logger.warning("========================================")
+        // Notify online ops
+        server.scheduler.runTask(this, Runnable {
+            server.onlinePlayers.filter { it.isOp }.forEach { player ->
+                player.sendMessage(
+                    Component.text("⚠ CharmedChars needs setup! Run /$command to auto-configure $providerName")
+                        .color(NamedTextColor.GOLD)
+                )
+            }
+        })
+    }
 
-                    // Notify online ops
-                    server.scheduler.runTask(this, Runnable {
-                        server.onlinePlayers.filter { it.isOp }.forEach { player ->
-                            player.sendMessage(
-                                Component.text("⚠ CharmedChars needs setup! Run /iasetup to auto-configure ItemsAdder")
-                                    .color(NamedTextColor.GOLD)
-                            )
-                        }
-                    })
-                } else {
-                    logger.info("ItemsAdder configuration found. Ready to use!")
+    private fun checkNativeNoteBlockUpdates() {
+        logger.info("NativeItemManager is active — no external plugin required.")
+
+        // NativeItems uses note blocks as in-world block carriers. Minecraft normally
+        // resets the instrument state (which drives the texture) whenever the block
+        // beneath a note block changes. disable-noteblock-updates suppresses that and
+        // is REQUIRED for stable letter-block textures in this mode.
+        val paperConfig = java.io.File("config/paper-global.yml")
+        val noteBlockUpdatesDisabled = if (paperConfig.exists()) {
+            org.bukkit.configuration.file.YamlConfiguration
+                .loadConfiguration(paperConfig)
+                .getBoolean("block-updates.disable-noteblock-updates", false)
+        } else false
+
+        if (!noteBlockUpdatesDisabled) {
+            logger.warning("========================================")
+            logger.warning("ACTION REQUIRED: paper-global.yml setting missing!")
+            logger.warning("")
+            logger.warning("CharmedChars NativeItems mode uses note blocks as")
+            logger.warning("in-world block carriers. Minecraft resets a note")
+            logger.warning("block's instrument state (which selects the texture)")
+            logger.warning("whenever the block beneath it changes. Without the")
+            logger.warning("setting below, letter-block textures will change")
+            logger.warning("intermittently based on whatever is placed below them.")
+            logger.warning("")
+            logger.warning("Edit config/paper-global.yml and set:")
+            logger.warning("  block-updates:")
+            logger.warning("    disable-noteblock-updates: true")
+            logger.warning("")
+            logger.warning("Then restart the server.")
+            logger.warning("========================================")
+
+            server.scheduler.runTask(this, Runnable {
+                server.onlinePlayers.filter { it.isOp }.forEach { player ->
+                    player.sendMessage(
+                        Component.text(
+                            "⚠ CharmedChars NativeItems: set disable-noteblock-updates: true " +
+                            "in config/paper-global.yml and restart"
+                        ).color(NamedTextColor.GOLD)
+                    )
                 }
-            }
-
-            "Oraxen" -> {
-                val setup = org.stephanosbad.charmedChars.integration.OraxenSetup(this)
-
-                if (!setup.isAlreadySetup()) {
-                    logger.warning("========================================")
-                    logger.warning("Oraxen is installed but not configured!")
-                    logger.warning("")
-                    logger.warning("Run this command to setup:")
-                    logger.warning("  /oraxensetup - Auto-generate configs & copy textures")
-                    logger.warning("")
-                    logger.warning("Then run /oraxen reload all and restart the server.")
-                    logger.warning("========================================")
-
-                    // Notify online ops
-                    server.scheduler.runTask(this, Runnable {
-                        server.onlinePlayers.filter { it.isOp }.forEach { player ->
-                            player.sendMessage(
-                                Component.text("⚠ CharmedChars needs setup! Run /oraxensetup to auto-configure Oraxen")
-                                    .color(NamedTextColor.GOLD)
-                            )
-                        }
-                    })
-                } else {
-                    logger.info("Oraxen configuration found. Ready to use!")
-                }
-            }
-
-            "Nexo" -> {
-                val setup = org.stephanosbad.charmedChars.integration.NexoSetup(this)
-
-                if (!setup.isAlreadySetup()) {
-                    logger.warning("========================================")
-                    logger.warning("Nexo is installed but not configured!")
-                    logger.warning("")
-                    logger.warning("Run this command to setup:")
-                    logger.warning("  /nexosetup - Auto-generate configs & copy textures")
-                    logger.warning("")
-                    logger.warning("Then run /nexo reload all and restart the server.")
-                    logger.warning("")
-                    logger.warning("IMPORTANT: Enable Paper block update optimizations!")
-                    logger.warning("Edit config/paper-global.yml and set:")
-                    logger.warning("  block-updates:")
-                    logger.warning("    disable-noteblock-updates: true")
-                    logger.warning("    disable-tripwire-updates: true")
-                    logger.warning("    disable-chorus-plant-updates: true")
-                    logger.warning("========================================")
-
-                    // Notify online ops
-                    server.scheduler.runTask(this, Runnable {
-                        server.onlinePlayers.filter { it.isOp }.forEach { player ->
-                            player.sendMessage(
-                                Component.text("⚠ CharmedChars needs setup! Run /nexosetup to auto-configure Nexo")
-                                    .color(NamedTextColor.GOLD)
-                            )
-                        }
-                    })
-                } else {
-                    logger.info("Nexo configuration found. Ready to use!")
-                }
-            }
-
-            "NativeItems" -> {
-                logger.info("NativeItemManager is active — no external plugin required.")
-
-                // NativeItems uses note blocks as in-world block carriers. Minecraft normally
-                // resets the instrument state (which drives the texture) whenever the block
-                // beneath a note block changes. disable-noteblock-updates suppresses that and
-                // is REQUIRED for stable letter-block textures in this mode.
-                val paperConfig = java.io.File("config/paper-global.yml")
-                val noteBlockUpdatesDisabled = if (paperConfig.exists()) {
-                    org.bukkit.configuration.file.YamlConfiguration
-                        .loadConfiguration(paperConfig)
-                        .getBoolean("block-updates.disable-noteblock-updates", false)
-                } else false
-
-                if (!noteBlockUpdatesDisabled) {
-                    logger.warning("========================================")
-                    logger.warning("ACTION REQUIRED: paper-global.yml setting missing!")
-                    logger.warning("")
-                    logger.warning("CharmedChars NativeItems mode uses note blocks as")
-                    logger.warning("in-world block carriers. Minecraft resets a note")
-                    logger.warning("block's instrument state (which selects the texture)")
-                    logger.warning("whenever the block beneath it changes. Without the")
-                    logger.warning("setting below, letter-block textures will change")
-                    logger.warning("intermittently based on whatever is placed below them.")
-                    logger.warning("")
-                    logger.warning("Edit config/paper-global.yml and set:")
-                    logger.warning("  block-updates:")
-                    logger.warning("    disable-noteblock-updates: true")
-                    logger.warning("")
-                    logger.warning("Then restart the server.")
-                    logger.warning("========================================")
-
-                    server.scheduler.runTask(this, Runnable {
-                        server.onlinePlayers.filter { it.isOp }.forEach { player ->
-                            player.sendMessage(
-                                Component.text(
-                                    "⚠ CharmedChars NativeItems: set disable-noteblock-updates: true " +
-                                    "in config/paper-global.yml and restart"
-                                ).color(NamedTextColor.GOLD)
-                            )
-                        }
-                    })
-                } else {
-                    logger.info("disable-noteblock-updates: true confirmed — NativeItems textures will be stable.")
-                }
-            }
-
-            else -> {
-                logger.warning("Unknown provider: $providerName")
-            }
+            })
+        } else {
+            logger.info("disable-noteblock-updates: true confirmed — NativeItems textures will be stable.")
         }
     }
 

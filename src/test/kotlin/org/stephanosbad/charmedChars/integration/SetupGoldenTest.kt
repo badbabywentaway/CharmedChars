@@ -19,31 +19,30 @@ package org.stephanosbad.charmedChars.integration
 
 import io.mockk.every
 import io.mockk.mockk
-import io.mockk.mockkStatic
-import io.mockk.unmockkStatic
 import org.bukkit.Material
 import org.bukkit.plugin.Plugin
-import org.bukkit.plugin.PluginDescriptionFile
-import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.Assertions.fail
-import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.io.TempDir
-import org.stephanosbad.charmedChars.CharmedChars
-import org.stephanosbad.charmedChars.utility.ConfigManager
+import org.stephanosbad.integrare.catalog.ItemCatalog
 import org.stephanosbad.integrare.provider.NativeItemProvider
+import org.stephanosbad.integrare.setup.ItemsAdderSetup
 import org.stephanosbad.integrare.setup.NativeSetup
+import org.stephanosbad.integrare.setup.NexoSetup
+import org.stephanosbad.integrare.setup.OraxenSetup
+import org.stephanosbad.integrare.setup.SetupResult
 import java.io.File
 import java.security.MessageDigest
 import java.util.logging.Logger
 import java.util.zip.ZipFile
 
 /**
- * Golden-file snapshots of everything the four provider setups write to disk.
+ * Golden-file snapshots of everything the four provider setups write to disk
+ * for the CharmedChars catalog.
  *
- * Locks the current output (file layout, config/model content, texture bytes,
- * custom_variation / CMD / note block numbering, and result messages) so that
- * moving the setup code into Integrare can be checked for byte-for-byte parity.
+ * Locks the output (file layout, config/model content, texture bytes,
+ * custom_variation / CMD / note block numbering, and result messages) so any
+ * change to what servers receive shows up as a reviewable snapshot diff.
  *
  * Snapshots live in src/test/golden/. To regenerate after an intended change:
  *   ./gradlew test --tests '*SetupGoldenTest' -PupdateGolden
@@ -56,25 +55,21 @@ class SetupGoldenTest {
 
     private val pluginsDir get() = File(tmp, "plugins")
     private val charmedCharsDataFolder get() = File(pluginsDir, "CharmedChars")
+    private val logger = Logger.getLogger("SetupGoldenTest")
 
-    // Tests run against MockBukkit's 1.20 API, which has no POTENT_SULFUR. On MC 26.3 it
-    // exists, so the setups emit the sulfur ingot recipe; they only null-check the lookup.
-    @BeforeEach
-    fun stubMaterialLookup() {
-        mockkStatic(Material::class)
-        every { Material.matchMaterial("POTENT_SULFUR") } returns Material.STONE
+    // Tests run against MockBukkit's 1.20 API, which has no POTENT_SULFUR. On MC 26.3
+    // it exists, so resolve it like a 26.3 server would; setups only null-check it.
+    private val resolveMaterial: (String) -> Material? = { name ->
+        if (name == "POTENT_SULFUR") Material.STONE else Material.matchMaterial(name)
     }
 
-    @AfterEach
-    fun unstubMaterialLookup() {
-        unmockkStatic(Material::class)
-    }
+    private val catalog: ItemCatalog by lazy { CharmedCharsCatalog.create(jarResources()) }
 
     // ── Scenarios ─────────────────────────────────────────────────────────────
 
     @Test
     fun `ItemsAdder fresh install`() {
-        val result = ItemsAdderSetup(mockPlugin("ItemsAdder")).autoSetup()
+        val result = ItemsAdderSetup(catalog, File(pluginsDir, "ItemsAdder"), logger, "CharmedChars", resolveMaterial).install()
         verifySnapshot("itemsadder-fresh", File(pluginsDir, "ItemsAdder"), result.summary())
     }
 
@@ -83,13 +78,13 @@ class SetupGoldenTest {
         File(pluginsDir, "ItemsAdder/data/items_packs.yml").seed(
             "packs:\n  otherpack:\n    enabled: true\n"
         )
-        val result = ItemsAdderSetup(mockPlugin("ItemsAdder")).autoSetup()
+        val result = ItemsAdderSetup(catalog, File(pluginsDir, "ItemsAdder"), logger, "CharmedChars", resolveMaterial).install()
         verifySnapshot("itemsadder-existing-items-packs", File(pluginsDir, "ItemsAdder"), result.summary())
     }
 
     @Test
     fun `Oraxen fresh install`() {
-        val result = OraxenSetup(mockPlugin("Oraxen")).autoSetup()
+        val result = OraxenSetup(catalog, File(pluginsDir, "Oraxen"), logger, "CharmedChars", resolveMaterial).install()
         verifySnapshot("oraxen-fresh", File(pluginsDir, "Oraxen"), result.summary())
     }
 
@@ -101,26 +96,21 @@ class SetupGoldenTest {
         File(pluginsDir, "Oraxen/recipes/shapeless.yml").seed(
             "user_shapeless:\n  result:\n    minecraft_type: STONE\n"
         )
-        val result = OraxenSetup(mockPlugin("Oraxen")).autoSetup()
+        val result = OraxenSetup(catalog, File(pluginsDir, "Oraxen"), logger, "CharmedChars", resolveMaterial).install()
         verifySnapshot("oraxen-existing-recipes", File(pluginsDir, "Oraxen"), result.summary())
     }
 
     @Test
     fun `Nexo fresh install`() {
-        val result = NexoSetup(mockPlugin("Nexo")).setup()
-        val summary = when (result) {
-            is NexoSetup.SetupResult.Error -> "Error: ${result.message}"
-            else -> result::class.simpleName.toString()
-        }
-        verifySnapshot("nexo-fresh", File(pluginsDir, "Nexo"), listOf(summary))
+        val result = NexoSetup(catalog, File(pluginsDir, "Nexo"), logger, "CharmedChars", resolveMaterial).install()
+        verifySnapshot("nexo-fresh", File(pluginsDir, "Nexo"), result.summary())
     }
 
     @Test
     fun `Native pack generation`() {
-        val plugin = mockPlugin(null)
         val setup = NativeSetup(
-            CharmedCharsCatalog.create(plugin), NativeItemProvider(), charmedCharsDataFolder,
-            plugin.logger, cmdBase = 1000, "CharmedChars-native-pack.zip", "CharmedChars Native Item Pack"
+            catalog, NativeItemProvider(), charmedCharsDataFolder, logger,
+            cmdBase = 1000, "CharmedChars-native-pack.zip", "CharmedChars Native Item Pack", resolveMaterial
         )
         val result = setup.generatePack()
         verifySnapshot("native-fresh", charmedCharsDataFolder, result.messages + "success=${result.success}")
@@ -128,28 +118,9 @@ class SetupGoldenTest {
 
     // ── Plugin mock ───────────────────────────────────────────────────────────
 
-    /**
-     * Mocks only what the setup classes touch: the provider plugin's data folder,
-     * jar resources (served from the test classpath), logger, version and CMD base.
-     */
-    private fun mockPlugin(providerName: String?): CharmedChars {
-        val plugin = mockk<CharmedChars>(relaxed = true)
-        val providerPlugin = providerName?.let { name ->
-            mockk<Plugin> { every { dataFolder } returns File(pluginsDir, name) }
-        }
-        every { plugin.server.pluginManager.getPlugin(any()) } answers {
-            if (firstArg<String>() == providerName) providerPlugin else null
-        }
-        every { plugin.getResource(any()) } answers {
-            javaClass.classLoader.getResourceAsStream(firstArg<String>())
-        }
-        every { plugin.logger } returns Logger.getLogger("SetupGoldenTest")
-        every { plugin.dataFolder } returns charmedCharsDataFolder
-        every { plugin.description } returns PluginDescriptionFile("CharmedChars", "GOLDEN", "test.Main")
-        val configManager = mockk<ConfigManager> { every { nativeCmdBase } returns 1000 }
-        every { plugin.configManager } returns configManager
-        charmedCharsDataFolder.mkdirs()
-        return plugin
+    /** A plugin whose jar resources are served from the test classpath, for the catalog's textures. */
+    private fun jarResources(): Plugin = mockk<Plugin> {
+        every { getResource(any()) } answers { javaClass.classLoader.getResourceAsStream(firstArg<String>()) }
     }
 
     private fun File.seed(content: String) {
@@ -157,8 +128,7 @@ class SetupGoldenTest {
         writeText(content)
     }
 
-    private fun ItemsAdderSetup.SetupResult.summary() = messages + "success=$success alreadySetup=$alreadySetup"
-    private fun OraxenSetup.SetupResult.summary() = messages + "success=$success alreadySetup=$alreadySetup"
+    private fun SetupResult.summary() = messages + "success=$success alreadySetup=$alreadySetup"
 
     // ── Snapshot rendering ────────────────────────────────────────────────────
 
