@@ -46,6 +46,9 @@ if exist "c:\Users\steve\Documents\Papermc\plugins\CharmedChars\config.yml" (
 if exist "c:\Users\steve\Documents\Papermc\plugins\ItemsAdder\data\items_packs\charmedchars" (
     rmdir /s /q "c:\Users\steve\Documents\Papermc\plugins\ItemsAdder\data\items_packs\charmedchars"
 )
+if exist "c:\Users\steve\Documents\Papermc\plugins\ItemsAdder\contents\charmedchars" (
+    rmdir /s /q "c:\Users\steve\Documents\Papermc\plugins\ItemsAdder\contents\charmedchars"
+)
 echo   [OK] Plugin data cleaned
 
 echo   Copying new JAR...
@@ -209,9 +212,9 @@ echo   Native:     c:\Users\steve\Documents\NativePapermc\plugins
 echo ===================================================
 echo.
 echo Next steps per server:
-echo   ItemsAdder: restart -> /iazip -> restart -> test
-echo   Oraxen:     restart -> /oraxensetup -> /oraxen reload all -> test
-echo   Nexo:       restart -> /nexosetup -> /nexo reload all -> test
-echo   Native:     restart -> /nativesetup -> test
+echo   ItemsAdder: restart -^> /iasetup -^> /iazip -^> restart -^> test
+echo   Oraxen:     restart -^> /oraxensetup -^> /oraxen reload all -^> test
+echo   Nexo:       restart -^> /nexosetup -^> /nexo reload all -^> test
+echo   Native:     restart -^> /nativesetup -^> test
 echo.
 pause
