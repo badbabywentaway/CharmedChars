@@ -32,6 +32,7 @@ import org.junit.jupiter.api.io.TempDir
 import org.stephanosbad.charmedChars.CharmedChars
 import org.stephanosbad.charmedChars.utility.ConfigManager
 import org.stephanosbad.integrare.provider.NativeItemProvider
+import org.stephanosbad.integrare.setup.NativeSetup
 import java.io.File
 import java.security.MessageDigest
 import java.util.logging.Logger
@@ -116,7 +117,12 @@ class SetupGoldenTest {
 
     @Test
     fun `Native pack generation`() {
-        val result = NativeItemManagerSetup(mockPlugin(null), NativeItemProvider()).autoSetup()
+        val plugin = mockPlugin(null)
+        val setup = NativeSetup(
+            CharmedCharsCatalog.create(plugin), NativeItemProvider(), charmedCharsDataFolder,
+            plugin.logger, cmdBase = 1000, "CharmedChars-native-pack.zip", "CharmedChars Native Item Pack"
+        )
+        val result = setup.generatePack()
         verifySnapshot("native-fresh", charmedCharsDataFolder, result.messages + "success=${result.success}")
     }
 

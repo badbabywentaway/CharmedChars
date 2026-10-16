@@ -40,9 +40,11 @@ import org.stephanosbad.charmedChars.commands.StructureCodeCommand
 import org.stephanosbad.charmedChars.commands.StructureDatabaseCommand
 import org.stephanosbad.charmedChars.commands.VersionCommand
 import org.stephanosbad.charmedChars.commands.GlassingBedsCommand
+import org.stephanosbad.charmedChars.integration.CharmedCharsCatalog
 import org.stephanosbad.charmedChars.integration.ItemsAdderSetup
-import org.stephanosbad.charmedChars.integration.NativeItemManagerSetup
 import org.stephanosbad.integrare.CustomItemProviderManager
+import org.stephanosbad.integrare.catalog.ItemCatalog
+import org.stephanosbad.integrare.setup.NativeSetup
 import org.stephanosbad.integrare.nativeitems.NativePackListener
 import org.stephanosbad.integrare.nativeitems.NativePackServer
 import org.stephanosbad.integrare.nativeitems.NativePlacementListener
@@ -98,7 +100,22 @@ class CharmedChars : JavaPlugin(), CoroutineScope {
     lateinit var customItemProviderManager: CustomItemProviderManager
         private set
 
+    /**
+     * Every CharmedChars custom item and recipe, as installed into the active provider
+     */
+    lateinit var itemCatalog: ItemCatalog
+        private set
+
     private var nativePackServer: NativePackServer? = null
+
+    /**
+     * Native provider setup for [itemCatalog]
+     */
+    fun nativeSetup(provider: NativeItemProvider) = NativeSetup(
+        itemCatalog, provider, dataFolder, logger, configManager.nativeCmdBase,
+        zipFileName = "CharmedChars-native-pack.zip",
+        packDescription = "CharmedChars Native Item Pack"
+    )
 
     /**
      * Called when the plugin is enabled
@@ -112,7 +129,8 @@ class CharmedChars : JavaPlugin(), CoroutineScope {
         println("Minecraft Letter/Number Block Plugin Starting")
 
         // Initialize custom item provider (must be first!)
-        customItemProviderManager = CustomItemProviderManager(this, NativeItemManagerSetup.NBT_KEY)
+        itemCatalog = CharmedCharsCatalog.create(this)
+        customItemProviderManager = CustomItemProviderManager(this, CharmedCharsCatalog.NATIVE_NBT_KEY)
         val providerResult = customItemProviderManager.initialize()
 
         if (!providerResult.success) {
@@ -127,7 +145,7 @@ class CharmedChars : JavaPlugin(), CoroutineScope {
 
         logger.info("Custom item provider initialized: ${customItemProviderManager.getProviderName()}")
 
-        // Initialize config manager first - NativeItemManagerSetup.setup() below needs it
+        // Initialize config manager first - nativeSetup() below needs it
         configManager = ConfigManager(this)
         configManager.loadConfig()
 
@@ -135,7 +153,7 @@ class CharmedChars : JavaPlugin(), CoroutineScope {
         // Pack hosting is deferred until after this (it needs the port/hostname, set below).
         val nativeProvider = customItemProviderManager.getProvider() as? NativeItemProvider
         if (nativeProvider != null) {
-            NativeItemManagerSetup(this, nativeProvider).setup()
+            nativeSetup(nativeProvider).registerItems()
         }
 
         configDataHandler = ConfigDataHandler(this)
@@ -152,8 +170,8 @@ class CharmedChars : JavaPlugin(), CoroutineScope {
 
         // Start native pack HTTP server now that configManager is ready
         if (nativeProvider != null) {
-            val nativeSetup = NativeItemManagerSetup(this, nativeProvider)
-            val existingZip = nativeSetup.getZipFile()
+            val nativeSetup = nativeSetup(nativeProvider)
+            val existingZip = nativeSetup.zipFile
             if (existingZip.exists()) {
                 nativeProvider.packHash = nativeSetup.computePackHash(existingZip)
                 startNativePackHosting(nativeProvider, existingZip)
@@ -207,9 +225,8 @@ class CharmedChars : JavaPlugin(), CoroutineScope {
 
         // Register event listeners
         if (nativeProvider != null) {
-            // Pyrite items are tools, not placeable blocks
             Bukkit.getPluginManager().registerEvents(
-                NativePlacementListener(this, nativeProvider) { !it.namespacedId.contains("pyrite") }, this
+                NativePlacementListener(this, nativeProvider) { itemCatalog.isBlock(it.namespacedId) }, this
             )
             Bukkit.getPluginManager().registerEvents(
                 NativePackListener(nativeProvider) { configManager.nativeItemsPackRequired }, this

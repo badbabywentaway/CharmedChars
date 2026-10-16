@@ -23,7 +23,6 @@ import org.bukkit.command.Command
 import org.bukkit.command.CommandExecutor
 import org.bukkit.command.CommandSender
 import org.stephanosbad.charmedChars.CharmedChars
-import org.stephanosbad.charmedChars.integration.NativeItemManagerSetup
 import org.stephanosbad.integrare.provider.NativeItemProvider
 
 /**
@@ -64,9 +63,10 @@ class SetupNativeCommand(private val plugin: CharmedChars) : CommandExecutor {
 
         sender.sendMessage(Component.text("Generating native resource pack...").color(NamedTextColor.AQUA))
 
-        val result = NativeItemManagerSetup(plugin, nativeProvider).autoSetup(force)
+        val result = plugin.nativeSetup(nativeProvider).generatePack(force)
+        val messages = if (result.alreadySetup) result.messages + "To regenerate, run /nativesetup force" else result.messages
 
-        for (message in result.messages) {
+        for (message in messages) {
             val color = when {
                 message.startsWith("  Done") || message.contains("Ready") -> NamedTextColor.GREEN
                 message.startsWith("ERROR") -> NamedTextColor.RED

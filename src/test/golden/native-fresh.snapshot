@@ -1,22 +1,16 @@
 ##### RESULT MESSAGES #####
 Generating pack.mcmeta...
   Done
-Generating paper.json overrides...
-  Done (120 overrides)
-Generating item model JSON files...
-  Done (120 files)
-Generating block model JSON files...
-  Done (120 files)
-Copying block textures...
-  Done (120 files)
+Generating block models...
+  Done (123 files)
+Generating item models...
+  Done (128 files)
+Copying textures...
+  Done (128 files)
 Generating note_block state overrides...
-  Done (120 custom states)
-Generating pyrite item overrides...
-  Done (5 overrides)
-Generating pyrite item models...
-  Done (5 files)
-Copying pyrite textures...
-  Done (5 files)
+  Done (123 custom states)
+Generating custom model data overrides...
+  Done (6 files)
 Generating MC 1.21.4+ item definitions...
   Done (6 files)
 Zipping pack...
@@ -27,12 +21,11 @@ Computing SHA-1 hash...
 === Pack Ready! ===
 Zip: <TMP>/plugins/CharmedChars/CharmedChars-native-pack.zip
 NOTE: Set 'disable-noteblock-updates: true' in paper-global.yml
-  for stable letter block textures.
-Run /nativesetup force if you need to regenerate.
+  for stable block textures.
 
 success=true
 
-##### FILES (385) #####
+##### FILES (394) #####
 CharmedChars-native-pack.zip
 native-pack/assets/charmedchars/models/block/cyan/0.json
 native-pack/assets/charmedchars/models/block/cyan/1.json
@@ -57,6 +50,7 @@ native-pack/assets/charmedchars/models/block/cyan/i.json
 native-pack/assets/charmedchars/models/block/cyan/j.json
 native-pack/assets/charmedchars/models/block/cyan/k.json
 native-pack/assets/charmedchars/models/block/cyan/l.json
+native-pack/assets/charmedchars/models/block/cyan/logo_block.json
 native-pack/assets/charmedchars/models/block/cyan/m.json
 native-pack/assets/charmedchars/models/block/cyan/minus.json
 native-pack/assets/charmedchars/models/block/cyan/multiply.json
@@ -97,6 +91,7 @@ native-pack/assets/charmedchars/models/block/magenta/i.json
 native-pack/assets/charmedchars/models/block/magenta/j.json
 native-pack/assets/charmedchars/models/block/magenta/k.json
 native-pack/assets/charmedchars/models/block/magenta/l.json
+native-pack/assets/charmedchars/models/block/magenta/logo_block.json
 native-pack/assets/charmedchars/models/block/magenta/m.json
 native-pack/assets/charmedchars/models/block/magenta/minus.json
 native-pack/assets/charmedchars/models/block/magenta/multiply.json
@@ -137,6 +132,7 @@ native-pack/assets/charmedchars/models/block/yellow/i.json
 native-pack/assets/charmedchars/models/block/yellow/j.json
 native-pack/assets/charmedchars/models/block/yellow/k.json
 native-pack/assets/charmedchars/models/block/yellow/l.json
+native-pack/assets/charmedchars/models/block/yellow/logo_block.json
 native-pack/assets/charmedchars/models/block/yellow/m.json
 native-pack/assets/charmedchars/models/block/yellow/minus.json
 native-pack/assets/charmedchars/models/block/yellow/multiply.json
@@ -177,6 +173,7 @@ native-pack/assets/charmedchars/models/item/cyan/i.json
 native-pack/assets/charmedchars/models/item/cyan/j.json
 native-pack/assets/charmedchars/models/item/cyan/k.json
 native-pack/assets/charmedchars/models/item/cyan/l.json
+native-pack/assets/charmedchars/models/item/cyan/logo_block.json
 native-pack/assets/charmedchars/models/item/cyan/m.json
 native-pack/assets/charmedchars/models/item/cyan/minus.json
 native-pack/assets/charmedchars/models/item/cyan/multiply.json
@@ -217,6 +214,7 @@ native-pack/assets/charmedchars/models/item/magenta/i.json
 native-pack/assets/charmedchars/models/item/magenta/j.json
 native-pack/assets/charmedchars/models/item/magenta/k.json
 native-pack/assets/charmedchars/models/item/magenta/l.json
+native-pack/assets/charmedchars/models/item/magenta/logo_block.json
 native-pack/assets/charmedchars/models/item/magenta/m.json
 native-pack/assets/charmedchars/models/item/magenta/minus.json
 native-pack/assets/charmedchars/models/item/magenta/multiply.json
@@ -262,6 +260,7 @@ native-pack/assets/charmedchars/models/item/yellow/i.json
 native-pack/assets/charmedchars/models/item/yellow/j.json
 native-pack/assets/charmedchars/models/item/yellow/k.json
 native-pack/assets/charmedchars/models/item/yellow/l.json
+native-pack/assets/charmedchars/models/item/yellow/logo_block.json
 native-pack/assets/charmedchars/models/item/yellow/m.json
 native-pack/assets/charmedchars/models/item/yellow/minus.json
 native-pack/assets/charmedchars/models/item/yellow/multiply.json
@@ -302,6 +301,7 @@ native-pack/assets/charmedchars/textures/block/cyan/i.png
 native-pack/assets/charmedchars/textures/block/cyan/j.png
 native-pack/assets/charmedchars/textures/block/cyan/k.png
 native-pack/assets/charmedchars/textures/block/cyan/l.png
+native-pack/assets/charmedchars/textures/block/cyan/logo_block.png
 native-pack/assets/charmedchars/textures/block/cyan/m.png
 native-pack/assets/charmedchars/textures/block/cyan/minus.png
 native-pack/assets/charmedchars/textures/block/cyan/multiply.png
@@ -342,6 +342,7 @@ native-pack/assets/charmedchars/textures/block/magenta/i.png
 native-pack/assets/charmedchars/textures/block/magenta/j.png
 native-pack/assets/charmedchars/textures/block/magenta/k.png
 native-pack/assets/charmedchars/textures/block/magenta/l.png
+native-pack/assets/charmedchars/textures/block/magenta/logo_block.png
 native-pack/assets/charmedchars/textures/block/magenta/m.png
 native-pack/assets/charmedchars/textures/block/magenta/minus.png
 native-pack/assets/charmedchars/textures/block/magenta/multiply.png
@@ -382,6 +383,7 @@ native-pack/assets/charmedchars/textures/block/yellow/i.png
 native-pack/assets/charmedchars/textures/block/yellow/j.png
 native-pack/assets/charmedchars/textures/block/yellow/k.png
 native-pack/assets/charmedchars/textures/block/yellow/l.png
+native-pack/assets/charmedchars/textures/block/yellow/logo_block.png
 native-pack/assets/charmedchars/textures/block/yellow/m.png
 native-pack/assets/charmedchars/textures/block/yellow/minus.png
 native-pack/assets/charmedchars/textures/block/yellow/multiply.png
@@ -443,6 +445,7 @@ assets/charmedchars/models/block/cyan/i.json sha256 5951ef3091222069e16144d9af37
 assets/charmedchars/models/block/cyan/j.json sha256 b325549adf2b714b1ab0e462ea5698aefa65883d72cee4a930dba3523101191f
 assets/charmedchars/models/block/cyan/k.json sha256 8a76c92b922cf5c2eda5202a021f32f0b102d091832953a1bdfffa98364cefbe
 assets/charmedchars/models/block/cyan/l.json sha256 1666d57b2c58cfad65bc33b944fe825bc87c8f64e56cad9860b9ee116903932b
+assets/charmedchars/models/block/cyan/logo_block.json sha256 e223702ef6370ddcc907f5f523275ba470172340cb7d50713d8e19e0a1d55469
 assets/charmedchars/models/block/cyan/m.json sha256 1520c6085161915c309bc3f5179a61d04ce6f511fc666e989081daa58cc755aa
 assets/charmedchars/models/block/cyan/minus.json sha256 2efd59b752d6074230a20ee8229e476b50edfcb3c804df0b4a82bee6ee65b0c0
 assets/charmedchars/models/block/cyan/multiply.json sha256 2910b1cbe52dbad2cd6c29616e3e1a884122b025aca77f43013098d8a92408ce
@@ -483,6 +486,7 @@ assets/charmedchars/models/block/magenta/i.json sha256 769b4dba60ff7a2cb63181bff
 assets/charmedchars/models/block/magenta/j.json sha256 c15e9b796177a47fb9376a05687ca20a48b8b4b0b927be38f1f0602102685e68
 assets/charmedchars/models/block/magenta/k.json sha256 593995b6b532774be9f539e2f535a4158e95ea209ee9b3e0fd00d958915d619c
 assets/charmedchars/models/block/magenta/l.json sha256 1129fabab83792e37dd697d804c075b094557216d85aae35ba8b19d4f3e3e1b0
+assets/charmedchars/models/block/magenta/logo_block.json sha256 b1d93001b201151902657de492c0064f3aa04cb1c504b85c8f0bf2e4dbb6b5fc
 assets/charmedchars/models/block/magenta/m.json sha256 305b47e014e0aa59761663870122db04061ad3d69183ef057eb699f2ac0e5345
 assets/charmedchars/models/block/magenta/minus.json sha256 7f89a513098625165ebdfe687d4aacecefe78c36700aa3d0efabd0fa9f49b6d5
 assets/charmedchars/models/block/magenta/multiply.json sha256 d7ad89d40521b86f52f0be21b0e4afd816898988e16f5b101fe23961f289257a
@@ -523,6 +527,7 @@ assets/charmedchars/models/block/yellow/i.json sha256 f12aa36a7c9452748fbdbac6cf
 assets/charmedchars/models/block/yellow/j.json sha256 7f03b50393d69f8a0e016c938d1e76f4b723b5aad0271b800f80481875af74f8
 assets/charmedchars/models/block/yellow/k.json sha256 182316e966571506652c34f616d10b4f6db9cec0dda1c4749068aa9de0db195c
 assets/charmedchars/models/block/yellow/l.json sha256 8cea281c901de597369e5ff5491d4d46c3f56673340cb47395a453e69d6070cd
+assets/charmedchars/models/block/yellow/logo_block.json sha256 2daa3a02bd9457063744558f99b6b908eebbfb8ec8d06f92fabdba1107f10c45
 assets/charmedchars/models/block/yellow/m.json sha256 728dcf61d30b22454c5c164848826aff29a212fdf88a2307cfc18411ada79b18
 assets/charmedchars/models/block/yellow/minus.json sha256 9e3d1b6a3ddb19a9514c8f0df569b95f29f59fb3e39b987942d595271e6f42e7
 assets/charmedchars/models/block/yellow/multiply.json sha256 35b1dbbf3462c0f813cf6139441da8786800ef8ddb9773ae8f83cc31d112a0dd
@@ -563,6 +568,7 @@ assets/charmedchars/models/item/cyan/i.json sha256 a3bccadb63401430278fb4797171f
 assets/charmedchars/models/item/cyan/j.json sha256 fc5c326d083236c00b3e846300d194724f032755861184daf1da463b6c9b69db
 assets/charmedchars/models/item/cyan/k.json sha256 032b1410f2c15a7d369c7ef4c7c6c9ea7f9884c92ffcb215766df75e138edacd
 assets/charmedchars/models/item/cyan/l.json sha256 0a44f73d43a733ea110f4f5b113228cdc72a7d4fc3502961a6e588054ddd4137
+assets/charmedchars/models/item/cyan/logo_block.json sha256 e26864eb65de2bcfab88aa0ee556720355d58b9b71e86f405a25e8f474e225a3
 assets/charmedchars/models/item/cyan/m.json sha256 23bfac507169400573aaaf8e97961b134928a54c6de059530901f1590031005e
 assets/charmedchars/models/item/cyan/minus.json sha256 8af033a5650c9bd034ebac09a104773ce88b29364fb8e81c7a9dee4dbbda08fb
 assets/charmedchars/models/item/cyan/multiply.json sha256 fb22b8afdb45c7118b32b0ca93f9e7bb4552ba561b054a09833e5157b4a9ef30
@@ -603,6 +609,7 @@ assets/charmedchars/models/item/magenta/i.json sha256 845db6e7ada889d37bf918e978
 assets/charmedchars/models/item/magenta/j.json sha256 d8aa5969f87eee6182b830fa1a7b8c60a851b4678ba7c2ea2ada0a498101de90
 assets/charmedchars/models/item/magenta/k.json sha256 b91346bb8253923a516997b5d506eab0d659f5c113546deae056b5856d483146
 assets/charmedchars/models/item/magenta/l.json sha256 fc88cbd79612709a5b5fa218db1e2e527c5da98e0c3e8bde689a6bd720392ec7
+assets/charmedchars/models/item/magenta/logo_block.json sha256 bd6ac1b8bf352a669017581ce55ebc34c370b7dbde2ac54e535c92033d3da7d2
 assets/charmedchars/models/item/magenta/m.json sha256 54312f50bfea3d2ce9ee8213b04f746ea604fcc0861c98f04cecf6a54205fc36
 assets/charmedchars/models/item/magenta/minus.json sha256 888a0e016abceb181b33a0b5260c6ad8ae27ae3cd8b072489b9f33802976bacd
 assets/charmedchars/models/item/magenta/multiply.json sha256 c53e888d0cb8088c92670b74084b62c7c102f7603560bd1280ab349af0589fda
@@ -648,6 +655,7 @@ assets/charmedchars/models/item/yellow/i.json sha256 9154ba39ee30d5122b6c3527cfb
 assets/charmedchars/models/item/yellow/j.json sha256 b8f8ebd8cd39e69afeb354d1149b01a203f389beff744042935d8f710a249dd5
 assets/charmedchars/models/item/yellow/k.json sha256 acc2a863319059632cff90ff5faaf6ffeeb2cd1062d35a5ac8107325d56c0742
 assets/charmedchars/models/item/yellow/l.json sha256 ae07ef81433bad8a223737d06efb46cb2e95d4c9e0da8d2d59482c4d2eca57a2
+assets/charmedchars/models/item/yellow/logo_block.json sha256 869bd1e696a967ac8beea1f4bcbc380d8c4de4dc8236562aeb7c3d6cfe7686d5
 assets/charmedchars/models/item/yellow/m.json sha256 a39838045974180e503e2e984d2f0f73c35bdd18cbd6bffa7026fd8974bd123b
 assets/charmedchars/models/item/yellow/minus.json sha256 51562ada725deaa3dfec00dd3190e96e3a46f52c688cda99efcdc96da449a004
 assets/charmedchars/models/item/yellow/multiply.json sha256 1d7d9fa4f0477b9f42345ea4680cef6e1cce9cd6acb7257413b39aed49161670
@@ -688,6 +696,7 @@ assets/charmedchars/textures/block/cyan/i.png sha256 6d175a612dc4569ff81db5501be
 assets/charmedchars/textures/block/cyan/j.png sha256 8cfd7f4cafe9a621f532aeddaab1a1c0090c2be68cffc0735f782bc5830a7fc1
 assets/charmedchars/textures/block/cyan/k.png sha256 f6c4272cb5c113c91e39c6b5c75770586ae92115f735fa5fef82639895e20f12
 assets/charmedchars/textures/block/cyan/l.png sha256 c2c559cb924535fadf9b5acc3b8a9484430885dc7d36e34eb1ba1aafce83dd21
+assets/charmedchars/textures/block/cyan/logo_block.png sha256 dc06c4868fb4ac194f6536faf5788c5df06dc5abd9a2930277822412209397c6
 assets/charmedchars/textures/block/cyan/m.png sha256 a8c5f83f5b1599a53d7e18bf840b50f7a3a2cc4bd9d6bef55916f608e331b8a0
 assets/charmedchars/textures/block/cyan/minus.png sha256 d7b184f9e944938481c103eaeb1f2b9910b53670fc4480b1994ed1eb9edcab71
 assets/charmedchars/textures/block/cyan/multiply.png sha256 530b41ff3848acda00f4874ec6fda0bd925cb0886852aa4b0189366443974cbc
@@ -728,6 +737,7 @@ assets/charmedchars/textures/block/magenta/i.png sha256 c92fed6423be1996df82dc50
 assets/charmedchars/textures/block/magenta/j.png sha256 63bf97b1ca96844cd9086feb6b14f7f5cd12b11269f76a95cb72bfad9818b166
 assets/charmedchars/textures/block/magenta/k.png sha256 e82670e75f8d89a08319062bb1bf64a75d6d98d19b14ff340b4dd00265617b5a
 assets/charmedchars/textures/block/magenta/l.png sha256 29f5d66686101cf4acfdf9f40500442484bf562d4574af0a0881a5a5fe6acf13
+assets/charmedchars/textures/block/magenta/logo_block.png sha256 710c531d9ac0c9d2cf6411f5c1fb1784feba63ebac1f2fd63c7ee2ec09701742
 assets/charmedchars/textures/block/magenta/m.png sha256 7c5157eb626600cc5fed54a5785836fb6b79764b65a87a9334f486af3d6551b9
 assets/charmedchars/textures/block/magenta/minus.png sha256 ba05374ca456a82556ca409c871e7330b151ec43257fa9842d0543104da4c274
 assets/charmedchars/textures/block/magenta/multiply.png sha256 332de1be625bb26a4f28db5b0189ff7ce4549f3338e00976d1542cc4e1c24a6e
@@ -768,6 +778,7 @@ assets/charmedchars/textures/block/yellow/i.png sha256 c5039dabe18a753378358ed6f
 assets/charmedchars/textures/block/yellow/j.png sha256 ca7997f11438852e902d4b1f4cc9355f954c3a471eb7abffc8b3beaa6cbc5ac5
 assets/charmedchars/textures/block/yellow/k.png sha256 4bcb65fc1e86e151ae1c570e7a556b271faa90a53b5571cf354e80cf8e9da1f7
 assets/charmedchars/textures/block/yellow/l.png sha256 1dc5863e0982552147e53b64e065e3d6d29aec6561a3fdc106e9af37b8ad21e8
+assets/charmedchars/textures/block/yellow/logo_block.png sha256 b91ff216533012078c301fb24d0ad833697f311265f6d74ee542c491998db147
 assets/charmedchars/textures/block/yellow/m.png sha256 dd5c0a09a57d391e915daff1a3d963c1084daa33c412fe8fbe595ba9e31c6168
 assets/charmedchars/textures/block/yellow/minus.png sha256 2d4308580fba4b355d3251c7aa21fca8d86da9152372aa62e29d10fc12284570
 assets/charmedchars/textures/block/yellow/multiply.png sha256 b4e5f9e1272128c05ac068d8338f414cec117f17a1894ff6a5fd58472e211ff0
@@ -790,19 +801,19 @@ assets/charmedchars/textures/item/pyrite/hoe.png sha256 23a7d3643e925196033da54b
 assets/charmedchars/textures/item/pyrite/ingot.png sha256 f338f74f7f0268a0288f8169e796d8fd626560e727f86968a46cf64ab3178757
 assets/charmedchars/textures/item/pyrite/pickaxe.png sha256 0a39700299ee2c7f6651c33a0fcd3dbfc0d529226e0711b6cd725a8b9b1898f0
 assets/charmedchars/textures/item/pyrite/shovel.png sha256 08587c1f6289fffb6839d512e1b0812dd60cf2223bc05c07f82877f6541d45cb
-assets/minecraft/blockstates/note_block.json sha256 bba547b71f153ff393aa80b548a92f1205b4e8527667e58c12766477df1ef12b
+assets/minecraft/blockstates/note_block.json sha256 a7bcab5bee07c28ab19a3f47a6744754b8793073ec7752b559ad093f923d519b
 assets/minecraft/items/gold_ingot.json sha256 4e400df081260f60b4f24c994834dd01efb028ad7938bb1a1c01e3c46df51815
 assets/minecraft/items/golden_axe.json sha256 40c26b8876393d9ee44716294ab4b4be1eac9ae126e146e617fac0e0024ed591
 assets/minecraft/items/golden_hoe.json sha256 2349297a6a6c3e4bad48ec65277dd70aa9dd54dab9bfcc5c8ed778faea345761
 assets/minecraft/items/golden_pickaxe.json sha256 05a4c55bf4b28e6f5c1baf0457c06a137164ba962047741526288b24080022a6
 assets/minecraft/items/golden_shovel.json sha256 7ed20c782b7bfd02d57705af50e64867723888629694d2929cf4bd27e251e0ac
-assets/minecraft/items/paper.json sha256 08260a3df66c784af750b991cdf74554d8259c4e092c034d1e6a9548b220a8b9
+assets/minecraft/items/paper.json sha256 cbcec57a1e91ba5ea2789c421ea1b43a04ad851826f2e0e88829fcae9e620e9a
 assets/minecraft/models/item/gold_ingot.json sha256 5766ba6a811787856c87387e807874d6394d308628c8d8e3dd8bcffabbf3282e
 assets/minecraft/models/item/golden_axe.json sha256 0775e826df59ffa6f5bca9747f747c89528d3b3afabd7ff38a28b710eabc0e36
 assets/minecraft/models/item/golden_hoe.json sha256 13b589d35c12cda18899c23cec4a45f83dc40d12c28294719983d51da8443850
 assets/minecraft/models/item/golden_pickaxe.json sha256 fc309fa2e508571cb8f3ea390e959f771863683c1c188a273133bc5f66bee151
 assets/minecraft/models/item/golden_shovel.json sha256 04f791d60e949fbfe79c7fe7ae25952ddfca7c49d98a4bfeaa032ee5f2d1d6f8
-assets/minecraft/models/item/paper.json sha256 70716d0988fb5a51b04edbd18e481e65988ae79da6d747671e75b0f11012545d
+assets/minecraft/models/item/paper.json sha256 faf2ca53a7f54ce18579a5bb286760ce70458752d8e1a6e51cd95eb30e4fe350
 pack.mcmeta sha256 8bfc664fc5294bb1788634fb99bc1c656a2bd83435f436c8be7a035e857ca43a
 
 ===== native-pack/assets/charmedchars/models/block/cyan/0.json =====
@@ -1008,6 +1019,15 @@ pack.mcmeta sha256 8bfc664fc5294bb1788634fb99bc1c656a2bd83435f436c8be7a035e857ca
   "parent": "minecraft:block/cube_all",
   "textures": {
     "all": "charmedchars:block/cyan/l"
+  }
+}
+<no newline at end of file>
+
+===== native-pack/assets/charmedchars/models/block/cyan/logo_block.json =====
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "charmedchars:block/cyan/logo_block"
   }
 }
 <no newline at end of file>
@@ -1372,6 +1392,15 @@ pack.mcmeta sha256 8bfc664fc5294bb1788634fb99bc1c656a2bd83435f436c8be7a035e857ca
 }
 <no newline at end of file>
 
+===== native-pack/assets/charmedchars/models/block/magenta/logo_block.json =====
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "charmedchars:block/magenta/logo_block"
+  }
+}
+<no newline at end of file>
+
 ===== native-pack/assets/charmedchars/models/block/magenta/m.json =====
 {
   "parent": "minecraft:block/cube_all",
@@ -1732,6 +1761,15 @@ pack.mcmeta sha256 8bfc664fc5294bb1788634fb99bc1c656a2bd83435f436c8be7a035e857ca
 }
 <no newline at end of file>
 
+===== native-pack/assets/charmedchars/models/block/yellow/logo_block.json =====
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "charmedchars:block/yellow/logo_block"
+  }
+}
+<no newline at end of file>
+
 ===== native-pack/assets/charmedchars/models/block/yellow/m.json =====
 {
   "parent": "minecraft:block/cube_all",
@@ -1977,6 +2015,10 @@ pack.mcmeta sha256 8bfc664fc5294bb1788634fb99bc1c656a2bd83435f436c8be7a035e857ca
 {"parent": "charmedchars:block/cyan/l"}
 <no newline at end of file>
 
+===== native-pack/assets/charmedchars/models/item/cyan/logo_block.json =====
+{"parent": "charmedchars:block/cyan/logo_block"}
+<no newline at end of file>
+
 ===== native-pack/assets/charmedchars/models/item/cyan/m.json =====
 {"parent": "charmedchars:block/cyan/m"}
 <no newline at end of file>
@@ -2135,6 +2177,10 @@ pack.mcmeta sha256 8bfc664fc5294bb1788634fb99bc1c656a2bd83435f436c8be7a035e857ca
 
 ===== native-pack/assets/charmedchars/models/item/magenta/l.json =====
 {"parent": "charmedchars:block/magenta/l"}
+<no newline at end of file>
+
+===== native-pack/assets/charmedchars/models/item/magenta/logo_block.json =====
+{"parent": "charmedchars:block/magenta/logo_block"}
 <no newline at end of file>
 
 ===== native-pack/assets/charmedchars/models/item/magenta/m.json =====
@@ -2342,6 +2388,10 @@ pack.mcmeta sha256 8bfc664fc5294bb1788634fb99bc1c656a2bd83435f436c8be7a035e857ca
 {"parent": "charmedchars:block/yellow/l"}
 <no newline at end of file>
 
+===== native-pack/assets/charmedchars/models/item/yellow/logo_block.json =====
+{"parent": "charmedchars:block/yellow/logo_block"}
+<no newline at end of file>
+
 ===== native-pack/assets/charmedchars/models/item/yellow/m.json =====
 {"parent": "charmedchars:block/yellow/m"}
 <no newline at end of file>
@@ -2456,6 +2506,8 @@ pack.mcmeta sha256 8bfc664fc5294bb1788634fb99bc1c656a2bd83435f436c8be7a035e857ca
 
 ===== native-pack/assets/charmedchars/textures/block/cyan/l.png [sha256 c2c559cb924535fadf9b5acc3b8a9484430885dc7d36e34eb1ba1aafce83dd21] =====
 
+===== native-pack/assets/charmedchars/textures/block/cyan/logo_block.png [sha256 dc06c4868fb4ac194f6536faf5788c5df06dc5abd9a2930277822412209397c6] =====
+
 ===== native-pack/assets/charmedchars/textures/block/cyan/m.png [sha256 a8c5f83f5b1599a53d7e18bf840b50f7a3a2cc4bd9d6bef55916f608e331b8a0] =====
 
 ===== native-pack/assets/charmedchars/textures/block/cyan/minus.png [sha256 d7b184f9e944938481c103eaeb1f2b9910b53670fc4480b1994ed1eb9edcab71] =====
@@ -2536,6 +2588,8 @@ pack.mcmeta sha256 8bfc664fc5294bb1788634fb99bc1c656a2bd83435f436c8be7a035e857ca
 
 ===== native-pack/assets/charmedchars/textures/block/magenta/l.png [sha256 29f5d66686101cf4acfdf9f40500442484bf562d4574af0a0881a5a5fe6acf13] =====
 
+===== native-pack/assets/charmedchars/textures/block/magenta/logo_block.png [sha256 710c531d9ac0c9d2cf6411f5c1fb1784feba63ebac1f2fd63c7ee2ec09701742] =====
+
 ===== native-pack/assets/charmedchars/textures/block/magenta/m.png [sha256 7c5157eb626600cc5fed54a5785836fb6b79764b65a87a9334f486af3d6551b9] =====
 
 ===== native-pack/assets/charmedchars/textures/block/magenta/minus.png [sha256 ba05374ca456a82556ca409c871e7330b151ec43257fa9842d0543104da4c274] =====
@@ -2615,6 +2669,8 @@ pack.mcmeta sha256 8bfc664fc5294bb1788634fb99bc1c656a2bd83435f436c8be7a035e857ca
 ===== native-pack/assets/charmedchars/textures/block/yellow/k.png [sha256 4bcb65fc1e86e151ae1c570e7a556b271faa90a53b5571cf354e80cf8e9da1f7] =====
 
 ===== native-pack/assets/charmedchars/textures/block/yellow/l.png [sha256 1dc5863e0982552147e53b64e065e3d6d29aec6561a3fdc106e9af37b8ad21e8] =====
+
+===== native-pack/assets/charmedchars/textures/block/yellow/logo_block.png [sha256 b91ff216533012078c301fb24d0ad833697f311265f6d74ee542c491998db147] =====
 
 ===== native-pack/assets/charmedchars/textures/block/yellow/m.png [sha256 dd5c0a09a57d391e915daff1a3d963c1084daa33c412fe8fbe595ba9e31c6168] =====
 
@@ -2903,11 +2959,11 @@ pack.mcmeta sha256 8bfc664fc5294bb1788634fb99bc1c656a2bd83435f436c8be7a035e857ca
     "instrument=bass,note=18,powered=true": {"model": "minecraft:block/note_block"},
     "instrument=bass,note=19,powered=false": {"model": "charmedchars:block/yellow/division"},
     "instrument=bass,note=19,powered=true": {"model": "minecraft:block/note_block"},
-    "instrument=bass,note=20,powered=false": {"model": "minecraft:block/note_block"},
+    "instrument=bass,note=20,powered=false": {"model": "charmedchars:block/cyan/logo_block"},
     "instrument=bass,note=20,powered=true": {"model": "minecraft:block/note_block"},
-    "instrument=bass,note=21,powered=false": {"model": "minecraft:block/note_block"},
+    "instrument=bass,note=21,powered=false": {"model": "charmedchars:block/magenta/logo_block"},
     "instrument=bass,note=21,powered=true": {"model": "minecraft:block/note_block"},
-    "instrument=bass,note=22,powered=false": {"model": "minecraft:block/note_block"},
+    "instrument=bass,note=22,powered=false": {"model": "charmedchars:block/yellow/logo_block"},
     "instrument=bass,note=22,powered=true": {"model": "minecraft:block/note_block"},
     "instrument=bass,note=23,powered=false": {"model": "minecraft:block/note_block"},
     "instrument=bass,note=23,powered=true": {"model": "minecraft:block/note_block"},
@@ -3663,7 +3719,10 @@ pack.mcmeta sha256 8bfc664fc5294bb1788634fb99bc1c656a2bd83435f436c8be7a035e857ca
       {"threshold": 1116.0, "model": {"type": "minecraft:model", "model": "charmedchars:item/yellow/plus"}},
       {"threshold": 1117.0, "model": {"type": "minecraft:model", "model": "charmedchars:item/yellow/minus"}},
       {"threshold": 1118.0, "model": {"type": "minecraft:model", "model": "charmedchars:item/yellow/multiply"}},
-      {"threshold": 1119.0, "model": {"type": "minecraft:model", "model": "charmedchars:item/yellow/division"}}
+      {"threshold": 1119.0, "model": {"type": "minecraft:model", "model": "charmedchars:item/yellow/division"}},
+      {"threshold": 1125.0, "model": {"type": "minecraft:model", "model": "charmedchars:item/cyan/logo_block"}},
+      {"threshold": 1126.0, "model": {"type": "minecraft:model", "model": "charmedchars:item/magenta/logo_block"}},
+      {"threshold": 1127.0, "model": {"type": "minecraft:model", "model": "charmedchars:item/yellow/logo_block"}}
     ],
     "fallback": {"type": "minecraft:model", "model": "minecraft:item/paper"}
   }
@@ -3856,7 +3915,10 @@ pack.mcmeta sha256 8bfc664fc5294bb1788634fb99bc1c656a2bd83435f436c8be7a035e857ca
     {"predicate": {"custom_model_data": 1116}, "model": "charmedchars:item/yellow/plus"},
     {"predicate": {"custom_model_data": 1117}, "model": "charmedchars:item/yellow/minus"},
     {"predicate": {"custom_model_data": 1118}, "model": "charmedchars:item/yellow/multiply"},
-    {"predicate": {"custom_model_data": 1119}, "model": "charmedchars:item/yellow/division"}
+    {"predicate": {"custom_model_data": 1119}, "model": "charmedchars:item/yellow/division"},
+    {"predicate": {"custom_model_data": 1125}, "model": "charmedchars:item/cyan/logo_block"},
+    {"predicate": {"custom_model_data": 1126}, "model": "charmedchars:item/magenta/logo_block"},
+    {"predicate": {"custom_model_data": 1127}, "model": "charmedchars:item/yellow/logo_block"}
   ]
 }
 <no newline at end of file>
