@@ -65,7 +65,7 @@ class CharBlock : CommandExecutor, TabCompleter {
 
         if (args.size < 3) {
             sender.sendMessage(
-                Component.text("Usage: /charblock <player> <color> <text|$LOGO_TOKEN>")
+                Component.text("Usage: /charblock <player> <color> <text>")
                     .color(NamedTextColor.RED)
             )
             sender.sendMessage(
@@ -73,7 +73,7 @@ class CharBlock : CommandExecutor, TabCompleter {
                     .color(NamedTextColor.GRAY)
             )
             sender.sendMessage(
-                Component.text("$LOGO_TOKEN gives one logo block of that color")
+                Component.text("Use $LOGO_CHAR in the text for a logo block")
                     .color(NamedTextColor.GRAY)
             )
             return true
@@ -101,16 +101,17 @@ class CharBlock : CommandExecutor, TabCompleter {
             return true
         }
 
-        if (args[2].equals(LOGO_TOKEN, ignoreCase = true)) {
-            giveLogoBlock(sender, givePlayer, blockColor)
-            return true
-        }
-
         val characterString = args[2].lowercase()
         var blocksGiven = 0
+        var logoMissing = false
 
         for (c in characterString.toCharArray()) {
             var itemStack: ItemStack? = null
+
+            if (c == LOGO_CHAR) {
+                itemStack = logoItemStack(blockColor)
+                if (itemStack == null) logoMissing = true
+            }
 
             // Try non-alphanumeric blocks first
             for (test in NonAlphaNumBlocks.entries) {
@@ -119,7 +120,7 @@ class CharBlock : CommandExecutor, TabCompleter {
                 }
             }
 
-            if (itemStack == null) {
+            if (itemStack == null && c != LOGO_CHAR) {
                 // Try letter blocks (uppercase)
                 val isThere =
                     Arrays.stream(LetterBlock.entries.toTypedArray()).filter { it -> it.character == c.uppercaseChar() }.findFirst()
@@ -144,6 +145,13 @@ class CharBlock : CommandExecutor, TabCompleter {
                 }
                 blocksGiven++
             }
+        }
+
+        if (logoMissing) {
+            sender.sendMessage(
+                Component.text("No logo block available for '$LOGO_CHAR'; run this server's CharmedChars setup command.")
+                    .color(NamedTextColor.YELLOW)
+            )
         }
 
         if (blocksGiven > 0) {
@@ -192,41 +200,15 @@ class CharBlock : CommandExecutor, TabCompleter {
     }
 
     /**
-     * Gives one logo block of [color] to [player].
+     * The logo block of [color], or null if the provider doesn't have it.
      *
-     * Logo blocks have no character, so they are looked up by item id through
-     * the active custom item provider, as the Ender Dragon reward does.
+     * Logo blocks have no enum of their own, so they are looked up by item id
+     * through the active custom item provider, as the Ender Dragon reward does.
      */
-    private fun giveLogoBlock(sender: CommandSender, player: Player, color: BlockColor) {
-        val itemId = "${CharmedCharsCatalog.NAMESPACE}:${color.directoryName}_logo"
+    private fun logoItemStack(color: BlockColor): ItemStack? {
         val plugin = Bukkit.getPluginManager().getPlugin("CharmedChars") as? CharmedChars
-        val provider = plugin?.customItemProviderManager?.getProvider()
-        val itemStack = provider?.getItemStack(itemId)
-
-        if (itemStack == null) {
-            sender.sendMessage(
-                Component.text("Logo block '$itemId' is not available from ${provider?.getProviderName() ?: "any provider"}.")
-                    .color(NamedTextColor.RED)
-            )
-            sender.sendMessage(
-                Component.text("Run this server's CharmedChars setup command, then try again.")
-                    .color(NamedTextColor.YELLOW)
-            )
-            return
-        }
-
-        // Give directly to inventory, or drop if full
-        if (player.inventory.addItem(itemStack).isNotEmpty()) {
-            player.location.world?.dropItemNaturally(player.location, itemStack)
-        }
-        sender.sendMessage(
-            Component.text("Gave 1 ${color.name.lowercase()} logo block to ${player.name}")
-                .color(NamedTextColor.GREEN)
-        )
-        player.sendMessage(
-            Component.text("You received a ${color.name.lowercase()} logo block")
-                .color(NamedTextColor.GREEN)
-        )
+        return plugin?.customItemProviderManager?.getProvider()
+            ?.getItemStack("${CharmedCharsCatalog.NAMESPACE}:${color.directoryName}_logo")
     }
 
     /**
@@ -280,7 +262,7 @@ class CharBlock : CommandExecutor, TabCompleter {
             for (non in NonAlphaNumBlocks.entries) {
                 characterMatches.add(non.nonAlphaNumBlockName.lowercase().split("_")[0])
             }
-            characterMatches.add(LOGO_TOKEN)
+            characterMatches.add(LOGO_CHAR.toString())
             completions = characterMatches
         }
 
@@ -299,9 +281,8 @@ class CharBlock : CommandExecutor, TabCompleter {
         var CommandName: kotlin.String = "charblock"
 
         /**
-         * Text argument that gives a logo block instead of spelling characters;
-         * the colon keeps "logo" itself spellable in letter blocks
+         * Character that gives a logo block, which has no character of its own
          */
-        const val LOGO_TOKEN = ":logo"
+        const val LOGO_CHAR = '@'
     }
 }
