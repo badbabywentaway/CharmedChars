@@ -26,7 +26,9 @@ import org.bukkit.enchantments.Enchantment
 import org.bukkit.event.EventHandler
 import org.bukkit.event.EventPriority
 import org.bukkit.event.Listener
+import org.bukkit.entity.Player
 import org.bukkit.event.block.Action
+import org.bukkit.event.block.BlockBreakEvent
 import org.bukkit.event.block.BlockDamageEvent
 import org.bukkit.event.player.PlayerInteractEvent
 import org.bukkit.inventory.ItemStack
@@ -52,43 +54,45 @@ class LogoBlockListener(
     fun onInteractLogoBlock(event: PlayerInteractEvent) {
         if (event.action != Action.LEFT_CLICK_BLOCK) return
         val block = event.clickedBlock ?: return
-        val color = getLogoBlockColor(block) ?: return
-
-        if (block.world.environment != World.Environment.THE_END) return
-        if (!isValidTool(event.player.inventory.itemInMainHand)) return
-
-        val key = blockKey(block)
-        if (!processingBlocks.add(key)) return
-
-        // Key is intentionally NOT removed here — transformToShulkerBox removes it after
-        // the 2-tick deferred work completes so that BlockDamageEvent (fired for the same
-        // click by Oraxen) cannot start a second transformation mid-replacement.
-        event.isCancelled = true
-        transformToShulkerBox(block, color, key)
-        event.player.sendMessage(
-            Component.text("The logo block transforms into a shulker box!")
-                .color(NamedTextColor.GOLD)
-        )
+        if (tryTransform(block, event.player)) event.isCancelled = true
     }
 
     // BlockDamageEvent for Nexo compatibility (noteblock updates disabled)
     @EventHandler(priority = EventPriority.LOWEST, ignoreCancelled = false)
     fun onDamageLogoBlock(event: BlockDamageEvent) {
-        val block = event.block
-        val color = getLogoBlockColor(block) ?: return
+        if (tryTransform(event.block, event.player)) event.isCancelled = true
+    }
 
-        if (block.world.environment != World.Environment.THE_END) return
-        if (!isValidTool(event.player.inventory.itemInMainHand)) return
+    // Some providers (ItemsAdder's NativePackets line) fire BlockBreakEvent before the
+    // interact/damage events, by which time the logo block has already been broken
+    // and dropped. Cancelling the break here keeps the block for the transformation.
+    @EventHandler(priority = EventPriority.LOWEST, ignoreCancelled = false)
+    fun onBreakLogoBlock(event: BlockBreakEvent) {
+        if (tryTransform(event.block, event.player)) event.isCancelled = true
+    }
+
+    /**
+     * Starts transforming [block] if it is a logo block in The End hit with a valid
+     * tool, and returns true so the caller cancels its event.
+     */
+    private fun tryTransform(block: org.bukkit.block.Block, player: Player): Boolean {
+        val color = getLogoBlockColor(block) ?: return false
+
+        if (block.world.environment != World.Environment.THE_END) return false
+        if (!isValidTool(player.inventory.itemInMainHand)) return false
 
         val key = blockKey(block)
-        if (!processingBlocks.add(key)) return
+        if (!processingBlocks.add(key)) return false
 
-        event.isCancelled = true
+        // Key is intentionally NOT removed here — transformToShulkerBox removes it after
+        // the 2-tick deferred work completes so that a second event fired for the same
+        // click cannot start another transformation mid-replacement.
         transformToShulkerBox(block, color, key)
-        event.player.sendMessage(
+        player.sendMessage(
             Component.text("The logo block transforms into a shulker box!")
                 .color(NamedTextColor.GOLD)
         )
+        return true
     }
 
     private fun transformToShulkerBox(block: org.bukkit.block.Block, color: String, processingKey: String) {
