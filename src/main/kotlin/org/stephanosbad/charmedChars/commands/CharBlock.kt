@@ -27,6 +27,8 @@ import org.bukkit.command.TabCompleter
 import org.bukkit.entity.Player
 import org.bukkit.inventory.ItemStack
 import org.bukkit.util.StringUtil
+import org.stephanosbad.charmedChars.CharmedChars
+import org.stephanosbad.charmedChars.integration.CharmedCharsCatalog
 import org.stephanosbad.charmedChars.items.BlockColor
 import org.stephanosbad.charmedChars.items.LetterBlock
 import org.stephanosbad.charmedChars.items.NonAlphaNumBlocks
@@ -63,11 +65,15 @@ class CharBlock : CommandExecutor, TabCompleter {
 
         if (args.size < 3) {
             sender.sendMessage(
-                Component.text("Usage: /charblock <player> <color> <text>")
+                Component.text("Usage: /charblock <player> <color> <text|$LOGO_TOKEN>")
                     .color(NamedTextColor.RED)
             )
             sender.sendMessage(
                 Component.text("Colors: cyan, magenta, yellow")
+                    .color(NamedTextColor.GRAY)
+            )
+            sender.sendMessage(
+                Component.text("$LOGO_TOKEN gives one logo block of that color")
                     .color(NamedTextColor.GRAY)
             )
             return true
@@ -92,6 +98,11 @@ class CharBlock : CommandExecutor, TabCompleter {
                 Component.text("Invalid color '$colorName'. Use: cyan, magenta, or yellow")
                     .color(NamedTextColor.RED)
             )
+            return true
+        }
+
+        if (args[2].equals(LOGO_TOKEN, ignoreCase = true)) {
+            giveLogoBlock(sender, givePlayer, blockColor)
             return true
         }
 
@@ -181,6 +192,44 @@ class CharBlock : CommandExecutor, TabCompleter {
     }
 
     /**
+     * Gives one logo block of [color] to [player].
+     *
+     * Logo blocks have no character, so they are looked up by item id through
+     * the active custom item provider, as the Ender Dragon reward does.
+     */
+    private fun giveLogoBlock(sender: CommandSender, player: Player, color: BlockColor) {
+        val itemId = "${CharmedCharsCatalog.NAMESPACE}:${color.directoryName}_logo"
+        val plugin = Bukkit.getPluginManager().getPlugin("CharmedChars") as? CharmedChars
+        val provider = plugin?.customItemProviderManager?.getProvider()
+        val itemStack = provider?.getItemStack(itemId)
+
+        if (itemStack == null) {
+            sender.sendMessage(
+                Component.text("Logo block '$itemId' is not available from ${provider?.getProviderName() ?: "any provider"}.")
+                    .color(NamedTextColor.RED)
+            )
+            sender.sendMessage(
+                Component.text("Run this server's CharmedChars setup command, then try again.")
+                    .color(NamedTextColor.YELLOW)
+            )
+            return
+        }
+
+        // Give directly to inventory, or drop if full
+        if (player.inventory.addItem(itemStack).isNotEmpty()) {
+            player.location.world?.dropItemNaturally(player.location, itemStack)
+        }
+        sender.sendMessage(
+            Component.text("Gave 1 ${color.name.lowercase()} logo block to ${player.name}")
+                .color(NamedTextColor.GREEN)
+        )
+        player.sendMessage(
+            Component.text("You received a ${color.name.lowercase()} logo block")
+                .color(NamedTextColor.GREEN)
+        )
+    }
+
+    /**
      * Provides tab completion for the /charblock command
      *
      * @param sender The command sender
@@ -231,6 +280,7 @@ class CharBlock : CommandExecutor, TabCompleter {
             for (non in NonAlphaNumBlocks.entries) {
                 characterMatches.add(non.nonAlphaNumBlockName.lowercase().split("_")[0])
             }
+            characterMatches.add(LOGO_TOKEN)
             completions = characterMatches
         }
 
@@ -247,5 +297,11 @@ class CharBlock : CommandExecutor, TabCompleter {
          * The command name used to register this command executor
          */
         var CommandName: kotlin.String = "charblock"
+
+        /**
+         * Text argument that gives a logo block instead of spelling characters;
+         * the colon keeps "logo" itself spellable in letter blocks
+         */
+        const val LOGO_TOKEN = ":logo"
     }
 }

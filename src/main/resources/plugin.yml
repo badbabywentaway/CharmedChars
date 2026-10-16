@@ -11,8 +11,8 @@ commands:
     usage: /charmedChars <player> <string>
     description: Give a string of letter or number blocks to a player.
   charblock:
-    usage: /charblock <player> <color> <text>
-    description: Give custom character blocks to a player.
+    usage: /charblock <player> <color> <text|:logo>
+    description: Give custom character blocks (or a logo block, with :logo) to a player.
     permission: charmedChars.blocks
   reload:
     description: Reload the plugin configuration
