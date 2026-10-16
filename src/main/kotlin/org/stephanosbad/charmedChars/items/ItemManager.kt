@@ -480,7 +480,11 @@ class ItemManager @JvmOverloads constructor(localPlugin: CharmedChars? = null) :
             return
         }
 
-        processWordScoring(e.player, brokenBlock)
+        // A scored word's blocks, this one included, have already been removed;
+        // cancel the break so the provider doesn't also drop this block as an item
+        if (processWordScoring(e.player, brokenBlock)) {
+            e.isCancelled = true
+        }
     }
 
     /**
@@ -496,12 +500,13 @@ class ItemManager @JvmOverloads constructor(localPlugin: CharmedChars? = null) :
      *
      * @param player The player attempting to score
      * @param startBlock The block that was hit/broken to trigger scoring
+     * @return true if a word was scored and its blocks removed
      */
-    private fun processWordScoring(player: Player, startBlock: Block) {
+    private fun processWordScoring(player: Player, startBlock: Block): Boolean {
         // Check protection
         if (protectedSpot(player, startBlock.location, startBlock)) {
             player.sendMessage("Protected block: " + startBlock.location)
-            return
+            return false
         }
 
         // Determine the axis by checking adjacent blocks
@@ -541,7 +546,7 @@ class ItemManager @JvmOverloads constructor(localPlugin: CharmedChars? = null) :
         } else {
             // Multiple directions have letters (invalid pattern)
             player.sendMessage("Miss")
-            return
+            return false
         }
 
         // Build word starting from the hit block (treat it as first letter)
@@ -596,7 +601,7 @@ class ItemManager @JvmOverloads constructor(localPlugin: CharmedChars? = null) :
         if (wordLength < minimumLength) {
             val colorType = if (isSameColor) "single-color" else "multi-color"
             player.sendMessage("Miss: $colorType words must be at least $minimumLength letters long")
-            return
+            return false
         }
 
         val isInDictionary = WordDict.singleton!!.words.contains(wordLowercase)
@@ -618,9 +623,10 @@ class ItemManager @JvmOverloads constructor(localPlugin: CharmedChars? = null) :
             }
 
             applyScore(player, score)
-        } else {
-            player.sendMessage("Miss")
+            return true
         }
+        player.sendMessage("Miss")
+        return false
     }
 
     /**
