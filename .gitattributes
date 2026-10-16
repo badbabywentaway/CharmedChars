@@ -1,0 +1,2 @@
+# Golden snapshots are compared byte-for-byte; keep LF regardless of core.autocrlf
+src/test/golden/** -text

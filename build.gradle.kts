@@ -105,6 +105,11 @@ dependencies {
 
     tasks.test {
         useJUnitPlatform()
+        // MockK's bundled ByteBuddy predates Java 25 class files; without this, mocks of final classes silently don't intercept
+        systemProperty("net.bytebuddy.experimental", "true")
+        // -PupdateGolden rewrites the setup snapshots in src/test/golden instead of comparing
+        systemProperty("golden.update", providers.gradleProperty("updateGolden").isPresent.toString())
+        inputs.dir("src/test/golden").withPathSensitivity(PathSensitivity.RELATIVE)
         finalizedBy(tasks.jacocoTestReport)
     }
 

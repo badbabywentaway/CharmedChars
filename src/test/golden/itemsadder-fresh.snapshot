@@ -1,0 +1,3249 @@
+##### RESULT MESSAGES #####
+Creating directory structure...
+Enabling charmedchars namespace...
+  ✓ items_packs.yml updated
+Copying blocks.yml configuration...
+  ✓ blocks.yml copied successfully
+Copying pyrite.yml configuration...
+  ✓ pyrite.yml copied successfully
+Copying texture files...
+  ✓ Copied 123 texture files
+Copying pyrite item textures...
+  ✓ Copied 5 pyrite texture files
+Creating README...
+  ✓ README.txt created
+
+=== Setup Complete! ===
+Files copied to: <TMP>/plugins/ItemsAdder/contents/charmedchars
+
+NEXT STEPS:
+1. Run /iazip to generate the resource pack
+2. Restart the server
+3. Test with /iastatus to verify blocks loaded
+
+success=true alreadySetup=false
+
+##### FILES (132) #####
+contents/charmedchars/README.txt
+contents/charmedchars/configs/blocks.yml
+contents/charmedchars/configs/pyrite.yml
+contents/charmedchars/resourcepack/assets/charmedchars/textures/block/cyan/0.png
+contents/charmedchars/resourcepack/assets/charmedchars/textures/block/cyan/1.png
+contents/charmedchars/resourcepack/assets/charmedchars/textures/block/cyan/2.png
+contents/charmedchars/resourcepack/assets/charmedchars/textures/block/cyan/3.png
+contents/charmedchars/resourcepack/assets/charmedchars/textures/block/cyan/4.png
+contents/charmedchars/resourcepack/assets/charmedchars/textures/block/cyan/5.png
+contents/charmedchars/resourcepack/assets/charmedchars/textures/block/cyan/6.png
+contents/charmedchars/resourcepack/assets/charmedchars/textures/block/cyan/7.png
+contents/charmedchars/resourcepack/assets/charmedchars/textures/block/cyan/8.png
+contents/charmedchars/resourcepack/assets/charmedchars/textures/block/cyan/9.png
+contents/charmedchars/resourcepack/assets/charmedchars/textures/block/cyan/a.png
+contents/charmedchars/resourcepack/assets/charmedchars/textures/block/cyan/b.png
+contents/charmedchars/resourcepack/assets/charmedchars/textures/block/cyan/c.png
+contents/charmedchars/resourcepack/assets/charmedchars/textures/block/cyan/d.png
+contents/charmedchars/resourcepack/assets/charmedchars/textures/block/cyan/division.png
+contents/charmedchars/resourcepack/assets/charmedchars/textures/block/cyan/e.png
+contents/charmedchars/resourcepack/assets/charmedchars/textures/block/cyan/f.png
+contents/charmedchars/resourcepack/assets/charmedchars/textures/block/cyan/g.png
+contents/charmedchars/resourcepack/assets/charmedchars/textures/block/cyan/h.png
+contents/charmedchars/resourcepack/assets/charmedchars/textures/block/cyan/i.png
+contents/charmedchars/resourcepack/assets/charmedchars/textures/block/cyan/j.png
+contents/charmedchars/resourcepack/assets/charmedchars/textures/block/cyan/k.png
+contents/charmedchars/resourcepack/assets/charmedchars/textures/block/cyan/l.png
+contents/charmedchars/resourcepack/assets/charmedchars/textures/block/cyan/logo_block.png
+contents/charmedchars/resourcepack/assets/charmedchars/textures/block/cyan/m.png
+contents/charmedchars/resourcepack/assets/charmedchars/textures/block/cyan/minus.png
+contents/charmedchars/resourcepack/assets/charmedchars/textures/block/cyan/multiply.png
+contents/charmedchars/resourcepack/assets/charmedchars/textures/block/cyan/n.png
+contents/charmedchars/resourcepack/assets/charmedchars/textures/block/cyan/o.png
+contents/charmedchars/resourcepack/assets/charmedchars/textures/block/cyan/p.png
+contents/charmedchars/resourcepack/assets/charmedchars/textures/block/cyan/plus.png
+contents/charmedchars/resourcepack/assets/charmedchars/textures/block/cyan/q.png
+contents/charmedchars/resourcepack/assets/charmedchars/textures/block/cyan/r.png
+contents/charmedchars/resourcepack/assets/charmedchars/textures/block/cyan/s.png
+contents/charmedchars/resourcepack/assets/charmedchars/textures/block/cyan/t.png
+contents/charmedchars/resourcepack/assets/charmedchars/textures/block/cyan/u.png
+contents/charmedchars/resourcepack/assets/charmedchars/textures/block/cyan/v.png
+contents/charmedchars/resourcepack/assets/charmedchars/textures/block/cyan/w.png
+contents/charmedchars/resourcepack/assets/charmedchars/textures/block/cyan/x.png
+contents/charmedchars/resourcepack/assets/charmedchars/textures/block/cyan/y.png
+contents/charmedchars/resourcepack/assets/charmedchars/textures/block/cyan/z.png
+contents/charmedchars/resourcepack/assets/charmedchars/textures/block/magenta/0.png
+contents/charmedchars/resourcepack/assets/charmedchars/textures/block/magenta/1.png
+contents/charmedchars/resourcepack/assets/charmedchars/textures/block/magenta/2.png
+contents/charmedchars/resourcepack/assets/charmedchars/textures/block/magenta/3.png
+contents/charmedchars/resourcepack/assets/charmedchars/textures/block/magenta/4.png
+contents/charmedchars/resourcepack/assets/charmedchars/textures/block/magenta/5.png
+contents/charmedchars/resourcepack/assets/charmedchars/textures/block/magenta/6.png
+contents/charmedchars/resourcepack/assets/charmedchars/textures/block/magenta/7.png
+contents/charmedchars/resourcepack/assets/charmedchars/textures/block/magenta/8.png
+contents/charmedchars/resourcepack/assets/charmedchars/textures/block/magenta/9.png
+contents/charmedchars/resourcepack/assets/charmedchars/textures/block/magenta/a.png
+contents/charmedchars/resourcepack/assets/charmedchars/textures/block/magenta/b.png
+contents/charmedchars/resourcepack/assets/charmedchars/textures/block/magenta/c.png
+contents/charmedchars/resourcepack/assets/charmedchars/textures/block/magenta/d.png
+contents/charmedchars/resourcepack/assets/charmedchars/textures/block/magenta/division.png
+contents/charmedchars/resourcepack/assets/charmedchars/textures/block/magenta/e.png
+contents/charmedchars/resourcepack/assets/charmedchars/textures/block/magenta/f.png
+contents/charmedchars/resourcepack/assets/charmedchars/textures/block/magenta/g.png
+contents/charmedchars/resourcepack/assets/charmedchars/textures/block/magenta/h.png
+contents/charmedchars/resourcepack/assets/charmedchars/textures/block/magenta/i.png
+contents/charmedchars/resourcepack/assets/charmedchars/textures/block/magenta/j.png
+contents/charmedchars/resourcepack/assets/charmedchars/textures/block/magenta/k.png
+contents/charmedchars/resourcepack/assets/charmedchars/textures/block/magenta/l.png
+contents/charmedchars/resourcepack/assets/charmedchars/textures/block/magenta/logo_block.png
+contents/charmedchars/resourcepack/assets/charmedchars/textures/block/magenta/m.png
+contents/charmedchars/resourcepack/assets/charmedchars/textures/block/magenta/minus.png
+contents/charmedchars/resourcepack/assets/charmedchars/textures/block/magenta/multiply.png
+contents/charmedchars/resourcepack/assets/charmedchars/textures/block/magenta/n.png
+contents/charmedchars/resourcepack/assets/charmedchars/textures/block/magenta/o.png
+contents/charmedchars/resourcepack/assets/charmedchars/textures/block/magenta/p.png
+contents/charmedchars/resourcepack/assets/charmedchars/textures/block/magenta/plus.png
+contents/charmedchars/resourcepack/assets/charmedchars/textures/block/magenta/q.png
+contents/charmedchars/resourcepack/assets/charmedchars/textures/block/magenta/r.png
+contents/charmedchars/resourcepack/assets/charmedchars/textures/block/magenta/s.png
+contents/charmedchars/resourcepack/assets/charmedchars/textures/block/magenta/t.png
+contents/charmedchars/resourcepack/assets/charmedchars/textures/block/magenta/u.png
+contents/charmedchars/resourcepack/assets/charmedchars/textures/block/magenta/v.png
+contents/charmedchars/resourcepack/assets/charmedchars/textures/block/magenta/w.png
+contents/charmedchars/resourcepack/assets/charmedchars/textures/block/magenta/x.png
+contents/charmedchars/resourcepack/assets/charmedchars/textures/block/magenta/y.png
+contents/charmedchars/resourcepack/assets/charmedchars/textures/block/magenta/z.png
+contents/charmedchars/resourcepack/assets/charmedchars/textures/block/yellow/0.png
+contents/charmedchars/resourcepack/assets/charmedchars/textures/block/yellow/1.png
+contents/charmedchars/resourcepack/assets/charmedchars/textures/block/yellow/2.png
+contents/charmedchars/resourcepack/assets/charmedchars/textures/block/yellow/3.png
+contents/charmedchars/resourcepack/assets/charmedchars/textures/block/yellow/4.png
+contents/charmedchars/resourcepack/assets/charmedchars/textures/block/yellow/5.png
+contents/charmedchars/resourcepack/assets/charmedchars/textures/block/yellow/6.png
+contents/charmedchars/resourcepack/assets/charmedchars/textures/block/yellow/7.png
+contents/charmedchars/resourcepack/assets/charmedchars/textures/block/yellow/8.png
+contents/charmedchars/resourcepack/assets/charmedchars/textures/block/yellow/9.png
+contents/charmedchars/resourcepack/assets/charmedchars/textures/block/yellow/a.png
+contents/charmedchars/resourcepack/assets/charmedchars/textures/block/yellow/b.png
+contents/charmedchars/resourcepack/assets/charmedchars/textures/block/yellow/c.png
+contents/charmedchars/resourcepack/assets/charmedchars/textures/block/yellow/d.png
+contents/charmedchars/resourcepack/assets/charmedchars/textures/block/yellow/division.png
+contents/charmedchars/resourcepack/assets/charmedchars/textures/block/yellow/e.png
+contents/charmedchars/resourcepack/assets/charmedchars/textures/block/yellow/f.png
+contents/charmedchars/resourcepack/assets/charmedchars/textures/block/yellow/g.png
+contents/charmedchars/resourcepack/assets/charmedchars/textures/block/yellow/h.png
+contents/charmedchars/resourcepack/assets/charmedchars/textures/block/yellow/i.png
+contents/charmedchars/resourcepack/assets/charmedchars/textures/block/yellow/j.png
+contents/charmedchars/resourcepack/assets/charmedchars/textures/block/yellow/k.png
+contents/charmedchars/resourcepack/assets/charmedchars/textures/block/yellow/l.png
+contents/charmedchars/resourcepack/assets/charmedchars/textures/block/yellow/logo_block.png
+contents/charmedchars/resourcepack/assets/charmedchars/textures/block/yellow/m.png
+contents/charmedchars/resourcepack/assets/charmedchars/textures/block/yellow/minus.png
+contents/charmedchars/resourcepack/assets/charmedchars/textures/block/yellow/multiply.png
+contents/charmedchars/resourcepack/assets/charmedchars/textures/block/yellow/n.png
+contents/charmedchars/resourcepack/assets/charmedchars/textures/block/yellow/o.png
+contents/charmedchars/resourcepack/assets/charmedchars/textures/block/yellow/p.png
+contents/charmedchars/resourcepack/assets/charmedchars/textures/block/yellow/plus.png
+contents/charmedchars/resourcepack/assets/charmedchars/textures/block/yellow/q.png
+contents/charmedchars/resourcepack/assets/charmedchars/textures/block/yellow/r.png
+contents/charmedchars/resourcepack/assets/charmedchars/textures/block/yellow/s.png
+contents/charmedchars/resourcepack/assets/charmedchars/textures/block/yellow/t.png
+contents/charmedchars/resourcepack/assets/charmedchars/textures/block/yellow/u.png
+contents/charmedchars/resourcepack/assets/charmedchars/textures/block/yellow/v.png
+contents/charmedchars/resourcepack/assets/charmedchars/textures/block/yellow/w.png
+contents/charmedchars/resourcepack/assets/charmedchars/textures/block/yellow/x.png
+contents/charmedchars/resourcepack/assets/charmedchars/textures/block/yellow/y.png
+contents/charmedchars/resourcepack/assets/charmedchars/textures/block/yellow/z.png
+contents/charmedchars/resourcepack/assets/charmedchars/textures/item/pyrite/axe.png
+contents/charmedchars/resourcepack/assets/charmedchars/textures/item/pyrite/hoe.png
+contents/charmedchars/resourcepack/assets/charmedchars/textures/item/pyrite/ingot.png
+contents/charmedchars/resourcepack/assets/charmedchars/textures/item/pyrite/pickaxe.png
+contents/charmedchars/resourcepack/assets/charmedchars/textures/item/pyrite/shovel.png
+data/items_packs.yml
+
+===== contents/charmedchars/README.txt =====
+CharmedChars - ItemsAdder Integration
+======================================
+
+This folder contains CharmedChars custom blocks for ItemsAdder.
+
+AUTO-GENERATED by CharmedChars plugin.
+
+Contents:
+---------
+- configs/blocks.yml       - Block definitions (123 blocks total)
+- resourcepack/...         - Block textures (cyan, magenta, yellow)
+
+Setup:
+------
+1. This configuration was automatically copied by CharmedChars
+2. Run /iazip to generate the resource pack
+3. Restart your server
+4. Run /iastatus to verify blocks are loaded
+
+Blocks Included:
+----------------
+- 78 Letter blocks (A-Z × 3 colors)
+- 30 Number blocks (0-9 × 3 colors)
+- 12 Operator blocks (+, -, ×, ÷ × 3 colors)
+- 3 Logo blocks (1 × 3 colors)
+
+Total: 123 blocks
+
+Block ID Format:
+----------------
+charmedchars:<color>_<character>
+
+Examples:
+- charmedchars:cyan_a
+- charmedchars:magenta_5
+- charmedchars:yellow_plus
+
+Commands:
+---------
+/iaget charmedchars:cyan_a     - Get a block
+/charblock <player> cyan hello - Give blocks to player
+/iastatus                      - Check setup status
+
+For more information, see the CharmedChars documentation.
+<no newline at end of file>
+
+===== contents/charmedchars/configs/blocks.yml =====
+info:
+  namespace: charmedchars
+
+items:
+  # ==================== CYAN LETTER BLOCKS ====================
+  cyan_a:
+    display_name: "Cyan A Block"
+    permission: charmedchars.block
+    resource:
+      material: PAPER
+      generate: true
+      textures:
+        - block/cyan/a
+    specific_properties:
+      block:
+        placed_model:
+          type: REAL_NOTE
+          break_particles_material: NOTE_BLOCK
+        break_tools_whitelist:
+          - _AXE
+          - _PICKAXE
+          - charmedchars:pyrite_axe
+          - charmedchars:pyrite_pickaxe
+        hardness: 0.8
+        light_level: 0
+
+  cyan_b:
+    display_name: "Cyan B Block"
+    permission: charmedchars.block
+    resource:
+      material: PAPER
+      generate: true
+      textures:
+        - block/cyan/b
+    specific_properties:
+      block:
+        placed_model:
+          type: REAL_NOTE
+          break_particles_material: NOTE_BLOCK
+        break_tools_whitelist:
+          - _AXE
+          - _PICKAXE
+          - charmedchars:pyrite_axe
+          - charmedchars:pyrite_pickaxe
+        hardness: 0.8
+        light_level: 0
+
+  cyan_c:
+    display_name: "Cyan C Block"
+    permission: charmedchars.block
+    resource:
+      material: PAPER
+      generate: true
+      textures:
+        - block/cyan/c
+    specific_properties:
+      block:
+        placed_model:
+          type: REAL_NOTE
+          break_particles_material: NOTE_BLOCK
+        break_tools_whitelist:
+          - _AXE
+          - _PICKAXE
+          - charmedchars:pyrite_axe
+          - charmedchars:pyrite_pickaxe
+        hardness: 0.8
+        light_level: 0
+
+  cyan_d:
+    display_name: "Cyan D Block"
+    permission: charmedchars.block
+    resource:
+      material: PAPER
+      generate: true
+      textures:
+        - block/cyan/d
+    specific_properties:
+      block:
+        placed_model:
+          type: REAL_NOTE
+          break_particles_material: NOTE_BLOCK
+        break_tools_whitelist:
+          - _AXE
+          - _PICKAXE
+          - charmedchars:pyrite_axe
+          - charmedchars:pyrite_pickaxe
+        hardness: 0.8
+        light_level: 0
+
+  cyan_e:
+    display_name: "Cyan E Block"
+    permission: charmedchars.block
+    resource:
+      material: PAPER
+      generate: true
+      textures:
+        - block/cyan/e
+    specific_properties:
+      block:
+        placed_model:
+          type: REAL_NOTE
+          break_particles_material: NOTE_BLOCK
+        break_tools_whitelist:
+          - _AXE
+          - _PICKAXE
+          - charmedchars:pyrite_axe
+          - charmedchars:pyrite_pickaxe
+        hardness: 0.8
+        light_level: 0
+
+  cyan_f:
+    display_name: "Cyan F Block"
+    permission: charmedchars.block
+    resource:
+      material: PAPER
+      generate: true
+      textures:
+        - block/cyan/f
+    specific_properties:
+      block:
+        placed_model:
+          type: REAL_NOTE
+          break_particles_material: NOTE_BLOCK
+        break_tools_whitelist:
+          - _AXE
+          - _PICKAXE
+          - charmedchars:pyrite_axe
+          - charmedchars:pyrite_pickaxe
+        hardness: 0.8
+        light_level: 0
+
+  cyan_g:
+    display_name: "Cyan G Block"
+    permission: charmedchars.block
+    resource:
+      material: PAPER
+      generate: true
+      textures:
+        - block/cyan/g
+    specific_properties:
+      block:
+        placed_model:
+          type: REAL_NOTE
+          break_particles_material: NOTE_BLOCK
+        break_tools_whitelist:
+          - _AXE
+          - _PICKAXE
+          - charmedchars:pyrite_axe
+          - charmedchars:pyrite_pickaxe
+        hardness: 0.8
+        light_level: 0
+
+  cyan_h:
+    display_name: "Cyan H Block"
+    permission: charmedchars.block
+    resource:
+      material: PAPER
+      generate: true
+      textures:
+        - block/cyan/h
+    specific_properties:
+      block:
+        placed_model:
+          type: REAL_NOTE
+          break_particles_material: NOTE_BLOCK
+        break_tools_whitelist:
+          - _AXE
+          - _PICKAXE
+          - charmedchars:pyrite_axe
+          - charmedchars:pyrite_pickaxe
+        hardness: 0.8
+        light_level: 0
+
+  cyan_i:
+    display_name: "Cyan I Block"
+    permission: charmedchars.block
+    resource:
+      material: PAPER
+      generate: true
+      textures:
+        - block/cyan/i
+    specific_properties:
+      block:
+        placed_model:
+          type: REAL_NOTE
+          break_particles_material: NOTE_BLOCK
+        break_tools_whitelist:
+          - _AXE
+          - _PICKAXE
+          - charmedchars:pyrite_axe
+          - charmedchars:pyrite_pickaxe
+        hardness: 0.8
+        light_level: 0
+
+  cyan_j:
+    display_name: "Cyan J Block"
+    permission: charmedchars.block
+    resource:
+      material: PAPER
+      generate: true
+      textures:
+        - block/cyan/j
+    specific_properties:
+      block:
+        placed_model:
+          type: REAL_NOTE
+          break_particles_material: NOTE_BLOCK
+        break_tools_whitelist:
+          - _AXE
+          - _PICKAXE
+          - charmedchars:pyrite_axe
+          - charmedchars:pyrite_pickaxe
+        hardness: 0.8
+        light_level: 0
+
+  cyan_k:
+    display_name: "Cyan K Block"
+    permission: charmedchars.block
+    resource:
+      material: PAPER
+      generate: true
+      textures:
+        - block/cyan/k
+    specific_properties:
+      block:
+        placed_model:
+          type: REAL_NOTE
+          break_particles_material: NOTE_BLOCK
+        break_tools_whitelist:
+          - _AXE
+          - _PICKAXE
+          - charmedchars:pyrite_axe
+          - charmedchars:pyrite_pickaxe
+        hardness: 0.8
+        light_level: 0
+
+  cyan_l:
+    display_name: "Cyan L Block"
+    permission: charmedchars.block
+    resource:
+      material: PAPER
+      generate: true
+      textures:
+        - block/cyan/l
+    specific_properties:
+      block:
+        placed_model:
+          type: REAL_NOTE
+          break_particles_material: NOTE_BLOCK
+        break_tools_whitelist:
+          - _AXE
+          - _PICKAXE
+          - charmedchars:pyrite_axe
+          - charmedchars:pyrite_pickaxe
+        hardness: 0.8
+        light_level: 0
+
+  cyan_m:
+    display_name: "Cyan M Block"
+    permission: charmedchars.block
+    resource:
+      material: PAPER
+      generate: true
+      textures:
+        - block/cyan/m
+    specific_properties:
+      block:
+        placed_model:
+          type: REAL_NOTE
+          break_particles_material: NOTE_BLOCK
+        break_tools_whitelist:
+          - _AXE
+          - _PICKAXE
+          - charmedchars:pyrite_axe
+          - charmedchars:pyrite_pickaxe
+        hardness: 0.8
+        light_level: 0
+
+  cyan_n:
+    display_name: "Cyan N Block"
+    permission: charmedchars.block
+    resource:
+      material: PAPER
+      generate: true
+      textures:
+        - block/cyan/n
+    specific_properties:
+      block:
+        placed_model:
+          type: REAL_NOTE
+          break_particles_material: NOTE_BLOCK
+        break_tools_whitelist:
+          - _AXE
+          - _PICKAXE
+          - charmedchars:pyrite_axe
+          - charmedchars:pyrite_pickaxe
+        hardness: 0.8
+        light_level: 0
+
+  cyan_o:
+    display_name: "Cyan O Block"
+    permission: charmedchars.block
+    resource:
+      material: PAPER
+      generate: true
+      textures:
+        - block/cyan/o
+    specific_properties:
+      block:
+        placed_model:
+          type: REAL_NOTE
+          break_particles_material: NOTE_BLOCK
+        break_tools_whitelist:
+          - _AXE
+          - _PICKAXE
+          - charmedchars:pyrite_axe
+          - charmedchars:pyrite_pickaxe
+        hardness: 0.8
+        light_level: 0
+
+  cyan_p:
+    display_name: "Cyan P Block"
+    permission: charmedchars.block
+    resource:
+      material: PAPER
+      generate: true
+      textures:
+        - block/cyan/p
+    specific_properties:
+      block:
+        placed_model:
+          type: REAL_NOTE
+          break_particles_material: NOTE_BLOCK
+        break_tools_whitelist:
+          - _AXE
+          - _PICKAXE
+          - charmedchars:pyrite_axe
+          - charmedchars:pyrite_pickaxe
+        hardness: 0.8
+        light_level: 0
+
+  cyan_q:
+    display_name: "Cyan Q Block"
+    permission: charmedchars.block
+    resource:
+      material: PAPER
+      generate: true
+      textures:
+        - block/cyan/q
+    specific_properties:
+      block:
+        placed_model:
+          type: REAL_NOTE
+          break_particles_material: NOTE_BLOCK
+        break_tools_whitelist:
+          - _AXE
+          - _PICKAXE
+          - charmedchars:pyrite_axe
+          - charmedchars:pyrite_pickaxe
+        hardness: 0.8
+        light_level: 0
+
+  cyan_r:
+    display_name: "Cyan R Block"
+    permission: charmedchars.block
+    resource:
+      material: PAPER
+      generate: true
+      textures:
+        - block/cyan/r
+    specific_properties:
+      block:
+        placed_model:
+          type: REAL_NOTE
+          break_particles_material: NOTE_BLOCK
+        break_tools_whitelist:
+          - _AXE
+          - _PICKAXE
+          - charmedchars:pyrite_axe
+          - charmedchars:pyrite_pickaxe
+        hardness: 0.8
+        light_level: 0
+
+  cyan_s:
+    display_name: "Cyan S Block"
+    permission: charmedchars.block
+    resource:
+      material: PAPER
+      generate: true
+      textures:
+        - block/cyan/s
+    specific_properties:
+      block:
+        placed_model:
+          type: REAL_NOTE
+          break_particles_material: NOTE_BLOCK
+        break_tools_whitelist:
+          - _AXE
+          - _PICKAXE
+          - charmedchars:pyrite_axe
+          - charmedchars:pyrite_pickaxe
+        hardness: 0.8
+        light_level: 0
+
+  cyan_t:
+    display_name: "Cyan T Block"
+    permission: charmedchars.block
+    resource:
+      material: PAPER
+      generate: true
+      textures:
+        - block/cyan/t
+    specific_properties:
+      block:
+        placed_model:
+          type: REAL_NOTE
+          break_particles_material: NOTE_BLOCK
+        break_tools_whitelist:
+          - _AXE
+          - _PICKAXE
+          - charmedchars:pyrite_axe
+          - charmedchars:pyrite_pickaxe
+        hardness: 0.8
+        light_level: 0
+
+  cyan_u:
+    display_name: "Cyan U Block"
+    permission: charmedchars.block
+    resource:
+      material: PAPER
+      generate: true
+      textures:
+        - block/cyan/u
+    specific_properties:
+      block:
+        placed_model:
+          type: REAL_NOTE
+          break_particles_material: NOTE_BLOCK
+        break_tools_whitelist:
+          - _AXE
+          - _PICKAXE
+          - charmedchars:pyrite_axe
+          - charmedchars:pyrite_pickaxe
+        hardness: 0.8
+        light_level: 0
+
+  cyan_v:
+    display_name: "Cyan V Block"
+    permission: charmedchars.block
+    resource:
+      material: PAPER
+      generate: true
+      textures:
+        - block/cyan/v
+    specific_properties:
+      block:
+        placed_model:
+          type: REAL_NOTE
+          break_particles_material: NOTE_BLOCK
+        break_tools_whitelist:
+          - _AXE
+          - _PICKAXE
+          - charmedchars:pyrite_axe
+          - charmedchars:pyrite_pickaxe
+        hardness: 0.8
+        light_level: 0
+
+  cyan_w:
+    display_name: "Cyan W Block"
+    permission: charmedchars.block
+    resource:
+      material: PAPER
+      generate: true
+      textures:
+        - block/cyan/w
+    specific_properties:
+      block:
+        placed_model:
+          type: REAL_NOTE
+          break_particles_material: NOTE_BLOCK
+        break_tools_whitelist:
+          - _AXE
+          - _PICKAXE
+          - charmedchars:pyrite_axe
+          - charmedchars:pyrite_pickaxe
+        hardness: 0.8
+        light_level: 0
+
+  cyan_x:
+    display_name: "Cyan X Block"
+    permission: charmedchars.block
+    resource:
+      material: PAPER
+      generate: true
+      textures:
+        - block/cyan/x
+    specific_properties:
+      block:
+        placed_model:
+          type: REAL_NOTE
+          break_particles_material: NOTE_BLOCK
+        break_tools_whitelist:
+          - _AXE
+          - _PICKAXE
+          - charmedchars:pyrite_axe
+          - charmedchars:pyrite_pickaxe
+        hardness: 0.8
+        light_level: 0
+
+  cyan_y:
+    display_name: "Cyan Y Block"
+    permission: charmedchars.block
+    resource:
+      material: PAPER
+      generate: true
+      textures:
+        - block/cyan/y
+    specific_properties:
+      block:
+        placed_model:
+          type: REAL_NOTE
+          break_particles_material: NOTE_BLOCK
+        break_tools_whitelist:
+          - _AXE
+          - _PICKAXE
+          - charmedchars:pyrite_axe
+          - charmedchars:pyrite_pickaxe
+        hardness: 0.8
+        light_level: 0
+
+  cyan_z:
+    display_name: "Cyan Z Block"
+    permission: charmedchars.block
+    resource:
+      material: PAPER
+      generate: true
+      textures:
+        - block/cyan/z
+    specific_properties:
+      block:
+        placed_model:
+          type: REAL_NOTE
+          break_particles_material: NOTE_BLOCK
+        break_tools_whitelist:
+          - _AXE
+          - _PICKAXE
+          - charmedchars:pyrite_axe
+          - charmedchars:pyrite_pickaxe
+        hardness: 0.8
+        light_level: 0
+
+  # ==================== MAGENTA LETTER BLOCKS ====================
+  magenta_a:
+    display_name: "Magenta A Block"
+    permission: charmedchars.block
+    resource:
+      material: PAPER
+      generate: true
+      textures:
+        - block/magenta/a
+    specific_properties:
+      block:
+        placed_model:
+          type: REAL_NOTE
+          break_particles_material: NOTE_BLOCK
+        break_tools_whitelist:
+          - _AXE
+          - _PICKAXE
+          - charmedchars:pyrite_axe
+          - charmedchars:pyrite_pickaxe
+        hardness: 0.8
+        light_level: 0
+
+  magenta_b:
+    display_name: "Magenta B Block"
+    permission: charmedchars.block
+    resource:
+      material: PAPER
+      generate: true
+      textures:
+        - block/magenta/b
+    specific_properties:
+      block:
+        placed_model:
+          type: REAL_NOTE
+          break_particles_material: NOTE_BLOCK
+        break_tools_whitelist:
+          - _AXE
+          - _PICKAXE
+          - charmedchars:pyrite_axe
+          - charmedchars:pyrite_pickaxe
+        hardness: 0.8
+        light_level: 0
+
+  magenta_c:
+    display_name: "Magenta C Block"
+    permission: charmedchars.block
+    resource:
+      material: PAPER
+      generate: true
+      textures:
+        - block/magenta/c
+    specific_properties:
+      block:
+        placed_model:
+          type: REAL_NOTE
+          break_particles_material: NOTE_BLOCK
+        break_tools_whitelist:
+          - _AXE
+          - _PICKAXE
+          - charmedchars:pyrite_axe
+          - charmedchars:pyrite_pickaxe
+        hardness: 0.8
+        light_level: 0
+
+  magenta_d:
+    display_name: "Magenta D Block"
+    permission: charmedchars.block
+    resource:
+      material: PAPER
+      generate: true
+      textures:
+        - block/magenta/d
+    specific_properties:
+      block:
+        placed_model:
+          type: REAL_NOTE
+          break_particles_material: NOTE_BLOCK
+        break_tools_whitelist:
+          - _AXE
+          - _PICKAXE
+          - charmedchars:pyrite_axe
+          - charmedchars:pyrite_pickaxe
+        hardness: 0.8
+        light_level: 0
+
+  magenta_e:
+    display_name: "Magenta E Block"
+    permission: charmedchars.block
+    resource:
+      material: PAPER
+      generate: true
+      textures:
+        - block/magenta/e
+    specific_properties:
+      block:
+        placed_model:
+          type: REAL_NOTE
+          break_particles_material: NOTE_BLOCK
+        break_tools_whitelist:
+          - _AXE
+          - _PICKAXE
+          - charmedchars:pyrite_axe
+          - charmedchars:pyrite_pickaxe
+        hardness: 0.8
+        light_level: 0
+
+  magenta_f:
+    display_name: "Magenta F Block"
+    permission: charmedchars.block
+    resource:
+      material: PAPER
+      generate: true
+      textures:
+        - block/magenta/f
+    specific_properties:
+      block:
+        placed_model:
+          type: REAL_NOTE
+          break_particles_material: NOTE_BLOCK
+        break_tools_whitelist:
+          - _AXE
+          - _PICKAXE
+          - charmedchars:pyrite_axe
+          - charmedchars:pyrite_pickaxe
+        hardness: 0.8
+        light_level: 0
+
+  magenta_g:
+    display_name: "Magenta G Block"
+    permission: charmedchars.block
+    resource:
+      material: PAPER
+      generate: true
+      textures:
+        - block/magenta/g
+    specific_properties:
+      block:
+        placed_model:
+          type: REAL_NOTE
+          break_particles_material: NOTE_BLOCK
+        break_tools_whitelist:
+          - _AXE
+          - _PICKAXE
+          - charmedchars:pyrite_axe
+          - charmedchars:pyrite_pickaxe
+        hardness: 0.8
+        light_level: 0
+
+  magenta_h:
+    display_name: "Magenta H Block"
+    permission: charmedchars.block
+    resource:
+      material: PAPER
+      generate: true
+      textures:
+        - block/magenta/h
+    specific_properties:
+      block:
+        placed_model:
+          type: REAL_NOTE
+          break_particles_material: NOTE_BLOCK
+        break_tools_whitelist:
+          - _AXE
+          - _PICKAXE
+          - charmedchars:pyrite_axe
+          - charmedchars:pyrite_pickaxe
+        hardness: 0.8
+        light_level: 0
+
+  magenta_i:
+    display_name: "Magenta I Block"
+    permission: charmedchars.block
+    resource:
+      material: PAPER
+      generate: true
+      textures:
+        - block/magenta/i
+    specific_properties:
+      block:
+        placed_model:
+          type: REAL_NOTE
+          break_particles_material: NOTE_BLOCK
+        break_tools_whitelist:
+          - _AXE
+          - _PICKAXE
+          - charmedchars:pyrite_axe
+          - charmedchars:pyrite_pickaxe
+        hardness: 0.8
+        light_level: 0
+
+  magenta_j:
+    display_name: "Magenta J Block"
+    permission: charmedchars.block
+    resource:
+      material: PAPER
+      generate: true
+      textures:
+        - block/magenta/j
+    specific_properties:
+      block:
+        placed_model:
+          type: REAL_NOTE
+          break_particles_material: NOTE_BLOCK
+        break_tools_whitelist:
+          - _AXE
+          - _PICKAXE
+          - charmedchars:pyrite_axe
+          - charmedchars:pyrite_pickaxe
+        hardness: 0.8
+        light_level: 0
+
+  magenta_k:
+    display_name: "Magenta K Block"
+    permission: charmedchars.block
+    resource:
+      material: PAPER
+      generate: true
+      textures:
+        - block/magenta/k
+    specific_properties:
+      block:
+        placed_model:
+          type: REAL_NOTE
+          break_particles_material: NOTE_BLOCK
+        break_tools_whitelist:
+          - _AXE
+          - _PICKAXE
+          - charmedchars:pyrite_axe
+          - charmedchars:pyrite_pickaxe
+        hardness: 0.8
+        light_level: 0
+
+  magenta_l:
+    display_name: "Magenta L Block"
+    permission: charmedchars.block
+    resource:
+      material: PAPER
+      generate: true
+      textures:
+        - block/magenta/l
+    specific_properties:
+      block:
+        placed_model:
+          type: REAL_NOTE
+          break_particles_material: NOTE_BLOCK
+        break_tools_whitelist:
+          - _AXE
+          - _PICKAXE
+          - charmedchars:pyrite_axe
+          - charmedchars:pyrite_pickaxe
+        hardness: 0.8
+        light_level: 0
+
+  magenta_m:
+    display_name: "Magenta M Block"
+    permission: charmedchars.block
+    resource:
+      material: PAPER
+      generate: true
+      textures:
+        - block/magenta/m
+    specific_properties:
+      block:
+        placed_model:
+          type: REAL_NOTE
+          break_particles_material: NOTE_BLOCK
+        break_tools_whitelist:
+          - _AXE
+          - _PICKAXE
+          - charmedchars:pyrite_axe
+          - charmedchars:pyrite_pickaxe
+        hardness: 0.8
+        light_level: 0
+
+  magenta_n:
+    display_name: "Magenta N Block"
+    permission: charmedchars.block
+    resource:
+      material: PAPER
+      generate: true
+      textures:
+        - block/magenta/n
+    specific_properties:
+      block:
+        placed_model:
+          type: REAL_NOTE
+          break_particles_material: NOTE_BLOCK
+        break_tools_whitelist:
+          - _AXE
+          - _PICKAXE
+          - charmedchars:pyrite_axe
+          - charmedchars:pyrite_pickaxe
+        hardness: 0.8
+        light_level: 0
+
+  magenta_o:
+    display_name: "Magenta O Block"
+    permission: charmedchars.block
+    resource:
+      material: PAPER
+      generate: true
+      textures:
+        - block/magenta/o
+    specific_properties:
+      block:
+        placed_model:
+          type: REAL_NOTE
+          break_particles_material: NOTE_BLOCK
+        break_tools_whitelist:
+          - _AXE
+          - _PICKAXE
+          - charmedchars:pyrite_axe
+          - charmedchars:pyrite_pickaxe
+        hardness: 0.8
+        light_level: 0
+
+  magenta_p:
+    display_name: "Magenta P Block"
+    permission: charmedchars.block
+    resource:
+      material: PAPER
+      generate: true
+      textures:
+        - block/magenta/p
+    specific_properties:
+      block:
+        placed_model:
+          type: REAL_NOTE
+          break_particles_material: NOTE_BLOCK
+        break_tools_whitelist:
+          - _AXE
+          - _PICKAXE
+          - charmedchars:pyrite_axe
+          - charmedchars:pyrite_pickaxe
+        hardness: 0.8
+        light_level: 0
+
+  magenta_q:
+    display_name: "Magenta Q Block"
+    permission: charmedchars.block
+    resource:
+      material: PAPER
+      generate: true
+      textures:
+        - block/magenta/q
+    specific_properties:
+      block:
+        placed_model:
+          type: REAL_NOTE
+          break_particles_material: NOTE_BLOCK
+        break_tools_whitelist:
+          - _AXE
+          - _PICKAXE
+          - charmedchars:pyrite_axe
+          - charmedchars:pyrite_pickaxe
+        hardness: 0.8
+        light_level: 0
+
+  magenta_r:
+    display_name: "Magenta R Block"
+    permission: charmedchars.block
+    resource:
+      material: PAPER
+      generate: true
+      textures:
+        - block/magenta/r
+    specific_properties:
+      block:
+        placed_model:
+          type: REAL_NOTE
+          break_particles_material: NOTE_BLOCK
+        break_tools_whitelist:
+          - _AXE
+          - _PICKAXE
+          - charmedchars:pyrite_axe
+          - charmedchars:pyrite_pickaxe
+        hardness: 0.8
+        light_level: 0
+
+  magenta_s:
+    display_name: "Magenta S Block"
+    permission: charmedchars.block
+    resource:
+      material: PAPER
+      generate: true
+      textures:
+        - block/magenta/s
+    specific_properties:
+      block:
+        placed_model:
+          type: REAL_NOTE
+          break_particles_material: NOTE_BLOCK
+        break_tools_whitelist:
+          - _AXE
+          - _PICKAXE
+          - charmedchars:pyrite_axe
+          - charmedchars:pyrite_pickaxe
+        hardness: 0.8
+        light_level: 0
+
+  magenta_t:
+    display_name: "Magenta T Block"
+    permission: charmedchars.block
+    resource:
+      material: PAPER
+      generate: true
+      textures:
+        - block/magenta/t
+    specific_properties:
+      block:
+        placed_model:
+          type: REAL_NOTE
+          break_particles_material: NOTE_BLOCK
+        break_tools_whitelist:
+          - _AXE
+          - _PICKAXE
+          - charmedchars:pyrite_axe
+          - charmedchars:pyrite_pickaxe
+        hardness: 0.8
+        light_level: 0
+
+  magenta_u:
+    display_name: "Magenta U Block"
+    permission: charmedchars.block
+    resource:
+      material: PAPER
+      generate: true
+      textures:
+        - block/magenta/u
+    specific_properties:
+      block:
+        placed_model:
+          type: REAL_NOTE
+          break_particles_material: NOTE_BLOCK
+        break_tools_whitelist:
+          - _AXE
+          - _PICKAXE
+          - charmedchars:pyrite_axe
+          - charmedchars:pyrite_pickaxe
+        hardness: 0.8
+        light_level: 0
+
+  magenta_v:
+    display_name: "Magenta V Block"
+    permission: charmedchars.block
+    resource:
+      material: PAPER
+      generate: true
+      textures:
+        - block/magenta/v
+    specific_properties:
+      block:
+        placed_model:
+          type: REAL_NOTE
+          break_particles_material: NOTE_BLOCK
+        break_tools_whitelist:
+          - _AXE
+          - _PICKAXE
+          - charmedchars:pyrite_axe
+          - charmedchars:pyrite_pickaxe
+        hardness: 0.8
+        light_level: 0
+
+  magenta_w:
+    display_name: "Magenta W Block"
+    permission: charmedchars.block
+    resource:
+      material: PAPER
+      generate: true
+      textures:
+        - block/magenta/w
+    specific_properties:
+      block:
+        placed_model:
+          type: REAL_NOTE
+          break_particles_material: NOTE_BLOCK
+        break_tools_whitelist:
+          - _AXE
+          - _PICKAXE
+          - charmedchars:pyrite_axe
+          - charmedchars:pyrite_pickaxe
+        hardness: 0.8
+        light_level: 0
+
+  magenta_x:
+    display_name: "Magenta X Block"
+    permission: charmedchars.block
+    resource:
+      material: PAPER
+      generate: true
+      textures:
+        - block/magenta/x
+    specific_properties:
+      block:
+        placed_model:
+          type: REAL_NOTE
+          break_particles_material: NOTE_BLOCK
+        break_tools_whitelist:
+          - _AXE
+          - _PICKAXE
+          - charmedchars:pyrite_axe
+          - charmedchars:pyrite_pickaxe
+        hardness: 0.8
+        light_level: 0
+
+  magenta_y:
+    display_name: "Magenta Y Block"
+    permission: charmedchars.block
+    resource:
+      material: PAPER
+      generate: true
+      textures:
+        - block/magenta/y
+    specific_properties:
+      block:
+        placed_model:
+          type: REAL_NOTE
+          break_particles_material: NOTE_BLOCK
+        break_tools_whitelist:
+          - _AXE
+          - _PICKAXE
+          - charmedchars:pyrite_axe
+          - charmedchars:pyrite_pickaxe
+        hardness: 0.8
+        light_level: 0
+
+  magenta_z:
+    display_name: "Magenta Z Block"
+    permission: charmedchars.block
+    resource:
+      material: PAPER
+      generate: true
+      textures:
+        - block/magenta/z
+    specific_properties:
+      block:
+        placed_model:
+          type: REAL_NOTE
+          break_particles_material: NOTE_BLOCK
+        break_tools_whitelist:
+          - _AXE
+          - _PICKAXE
+          - charmedchars:pyrite_axe
+          - charmedchars:pyrite_pickaxe
+        hardness: 0.8
+        light_level: 0
+
+  # ==================== YELLOW LETTER BLOCKS ====================
+  yellow_a:
+    display_name: "Yellow A Block"
+    permission: charmedchars.block
+    resource:
+      material: PAPER
+      generate: true
+      textures:
+        - block/yellow/a
+    specific_properties:
+      block:
+        placed_model:
+          type: REAL_NOTE
+          break_particles_material: NOTE_BLOCK
+        break_tools_whitelist:
+          - _AXE
+          - _PICKAXE
+          - charmedchars:pyrite_axe
+          - charmedchars:pyrite_pickaxe
+        hardness: 0.8
+        light_level: 0
+
+  yellow_b:
+    display_name: "Yellow B Block"
+    permission: charmedchars.block
+    resource:
+      material: PAPER
+      generate: true
+      textures:
+        - block/yellow/b
+    specific_properties:
+      block:
+        placed_model:
+          type: REAL_NOTE
+          break_particles_material: NOTE_BLOCK
+        break_tools_whitelist:
+          - _AXE
+          - _PICKAXE
+          - charmedchars:pyrite_axe
+          - charmedchars:pyrite_pickaxe
+        hardness: 0.8
+        light_level: 0
+
+  yellow_c:
+    display_name: "Yellow C Block"
+    permission: charmedchars.block
+    resource:
+      material: PAPER
+      generate: true
+      textures:
+        - block/yellow/c
+    specific_properties:
+      block:
+        placed_model:
+          type: REAL_NOTE
+          break_particles_material: NOTE_BLOCK
+        break_tools_whitelist:
+          - _AXE
+          - _PICKAXE
+          - charmedchars:pyrite_axe
+          - charmedchars:pyrite_pickaxe
+        hardness: 0.8
+        light_level: 0
+
+  yellow_d:
+    display_name: "Yellow D Block"
+    permission: charmedchars.block
+    resource:
+      material: PAPER
+      generate: true
+      textures:
+        - block/yellow/d
+    specific_properties:
+      block:
+        placed_model:
+          type: REAL_NOTE
+          break_particles_material: NOTE_BLOCK
+        break_tools_whitelist:
+          - _AXE
+          - _PICKAXE
+          - charmedchars:pyrite_axe
+          - charmedchars:pyrite_pickaxe
+        hardness: 0.8
+        light_level: 0
+
+  yellow_e:
+    display_name: "Yellow E Block"
+    permission: charmedchars.block
+    resource:
+      material: PAPER
+      generate: true
+      textures:
+        - block/yellow/e
+    specific_properties:
+      block:
+        placed_model:
+          type: REAL_NOTE
+          break_particles_material: NOTE_BLOCK
+        break_tools_whitelist:
+          - _AXE
+          - _PICKAXE
+          - charmedchars:pyrite_axe
+          - charmedchars:pyrite_pickaxe
+        hardness: 0.8
+        light_level: 0
+
+  yellow_f:
+    display_name: "Yellow F Block"
+    permission: charmedchars.block
+    resource:
+      material: PAPER
+      generate: true
+      textures:
+        - block/yellow/f
+    specific_properties:
+      block:
+        placed_model:
+          type: REAL_NOTE
+          break_particles_material: NOTE_BLOCK
+        break_tools_whitelist:
+          - _AXE
+          - _PICKAXE
+          - charmedchars:pyrite_axe
+          - charmedchars:pyrite_pickaxe
+        hardness: 0.8
+        light_level: 0
+
+  yellow_g:
+    display_name: "Yellow G Block"
+    permission: charmedchars.block
+    resource:
+      material: PAPER
+      generate: true
+      textures:
+        - block/yellow/g
+    specific_properties:
+      block:
+        placed_model:
+          type: REAL_NOTE
+          break_particles_material: NOTE_BLOCK
+        break_tools_whitelist:
+          - _AXE
+          - _PICKAXE
+          - charmedchars:pyrite_axe
+          - charmedchars:pyrite_pickaxe
+        hardness: 0.8
+        light_level: 0
+
+  yellow_h:
+    display_name: "Yellow H Block"
+    permission: charmedchars.block
+    resource:
+      material: PAPER
+      generate: true
+      textures:
+        - block/yellow/h
+    specific_properties:
+      block:
+        placed_model:
+          type: REAL_NOTE
+          break_particles_material: NOTE_BLOCK
+        break_tools_whitelist:
+          - _AXE
+          - _PICKAXE
+          - charmedchars:pyrite_axe
+          - charmedchars:pyrite_pickaxe
+        hardness: 0.8
+        light_level: 0
+
+  yellow_i:
+    display_name: "Yellow I Block"
+    permission: charmedchars.block
+    resource:
+      material: PAPER
+      generate: true
+      textures:
+        - block/yellow/i
+    specific_properties:
+      block:
+        placed_model:
+          type: REAL_NOTE
+          break_particles_material: NOTE_BLOCK
+        break_tools_whitelist:
+          - _AXE
+          - _PICKAXE
+          - charmedchars:pyrite_axe
+          - charmedchars:pyrite_pickaxe
+        hardness: 0.8
+        light_level: 0
+
+  yellow_j:
+    display_name: "Yellow J Block"
+    permission: charmedchars.block
+    resource:
+      material: PAPER
+      generate: true
+      textures:
+        - block/yellow/j
+    specific_properties:
+      block:
+        placed_model:
+          type: REAL_NOTE
+          break_particles_material: NOTE_BLOCK
+        break_tools_whitelist:
+          - _AXE
+          - _PICKAXE
+          - charmedchars:pyrite_axe
+          - charmedchars:pyrite_pickaxe
+        hardness: 0.8
+        light_level: 0
+
+  yellow_k:
+    display_name: "Yellow K Block"
+    permission: charmedchars.block
+    resource:
+      material: PAPER
+      generate: true
+      textures:
+        - block/yellow/k
+    specific_properties:
+      block:
+        placed_model:
+          type: REAL_NOTE
+          break_particles_material: NOTE_BLOCK
+        break_tools_whitelist:
+          - _AXE
+          - _PICKAXE
+          - charmedchars:pyrite_axe
+          - charmedchars:pyrite_pickaxe
+        hardness: 0.8
+        light_level: 0
+
+  yellow_l:
+    display_name: "Yellow L Block"
+    permission: charmedchars.block
+    resource:
+      material: PAPER
+      generate: true
+      textures:
+        - block/yellow/l
+    specific_properties:
+      block:
+        placed_model:
+          type: REAL_NOTE
+          break_particles_material: NOTE_BLOCK
+        break_tools_whitelist:
+          - _AXE
+          - _PICKAXE
+          - charmedchars:pyrite_axe
+          - charmedchars:pyrite_pickaxe
+        hardness: 0.8
+        light_level: 0
+
+  yellow_m:
+    display_name: "Yellow M Block"
+    permission: charmedchars.block
+    resource:
+      material: PAPER
+      generate: true
+      textures:
+        - block/yellow/m
+    specific_properties:
+      block:
+        placed_model:
+          type: REAL_NOTE
+          break_particles_material: NOTE_BLOCK
+        break_tools_whitelist:
+          - _AXE
+          - _PICKAXE
+          - charmedchars:pyrite_axe
+          - charmedchars:pyrite_pickaxe
+        hardness: 0.8
+        light_level: 0
+
+  yellow_n:
+    display_name: "Yellow N Block"
+    permission: charmedchars.block
+    resource:
+      material: PAPER
+      generate: true
+      textures:
+        - block/yellow/n
+    specific_properties:
+      block:
+        placed_model:
+          type: REAL_NOTE
+          break_particles_material: NOTE_BLOCK
+        break_tools_whitelist:
+          - _AXE
+          - _PICKAXE
+          - charmedchars:pyrite_axe
+          - charmedchars:pyrite_pickaxe
+        hardness: 0.8
+        light_level: 0
+
+  yellow_o:
+    display_name: "Yellow O Block"
+    permission: charmedchars.block
+    resource:
+      material: PAPER
+      generate: true
+      textures:
+        - block/yellow/o
+    specific_properties:
+      block:
+        placed_model:
+          type: REAL_NOTE
+          break_particles_material: NOTE_BLOCK
+        break_tools_whitelist:
+          - _AXE
+          - _PICKAXE
+          - charmedchars:pyrite_axe
+          - charmedchars:pyrite_pickaxe
+        hardness: 0.8
+        light_level: 0
+
+  yellow_p:
+    display_name: "Yellow P Block"
+    permission: charmedchars.block
+    resource:
+      material: PAPER
+      generate: true
+      textures:
+        - block/yellow/p
+    specific_properties:
+      block:
+        placed_model:
+          type: REAL_NOTE
+          break_particles_material: NOTE_BLOCK
+        break_tools_whitelist:
+          - _AXE
+          - _PICKAXE
+          - charmedchars:pyrite_axe
+          - charmedchars:pyrite_pickaxe
+        hardness: 0.8
+        light_level: 0
+
+  yellow_q:
+    display_name: "Yellow Q Block"
+    permission: charmedchars.block
+    resource:
+      material: PAPER
+      generate: true
+      textures:
+        - block/yellow/q
+    specific_properties:
+      block:
+        placed_model:
+          type: REAL_NOTE
+          break_particles_material: NOTE_BLOCK
+        break_tools_whitelist:
+          - _AXE
+          - _PICKAXE
+          - charmedchars:pyrite_axe
+          - charmedchars:pyrite_pickaxe
+        hardness: 0.8
+        light_level: 0
+
+  yellow_r:
+    display_name: "Yellow R Block"
+    permission: charmedchars.block
+    resource:
+      material: PAPER
+      generate: true
+      textures:
+        - block/yellow/r
+    specific_properties:
+      block:
+        placed_model:
+          type: REAL_NOTE
+          break_particles_material: NOTE_BLOCK
+        break_tools_whitelist:
+          - _AXE
+          - _PICKAXE
+          - charmedchars:pyrite_axe
+          - charmedchars:pyrite_pickaxe
+        hardness: 0.8
+        light_level: 0
+
+  yellow_s:
+    display_name: "Yellow S Block"
+    permission: charmedchars.block
+    resource:
+      material: PAPER
+      generate: true
+      textures:
+        - block/yellow/s
+    specific_properties:
+      block:
+        placed_model:
+          type: REAL_NOTE
+          break_particles_material: NOTE_BLOCK
+        break_tools_whitelist:
+          - _AXE
+          - _PICKAXE
+          - charmedchars:pyrite_axe
+          - charmedchars:pyrite_pickaxe
+        hardness: 0.8
+        light_level: 0
+
+  yellow_t:
+    display_name: "Yellow T Block"
+    permission: charmedchars.block
+    resource:
+      material: PAPER
+      generate: true
+      textures:
+        - block/yellow/t
+    specific_properties:
+      block:
+        placed_model:
+          type: REAL_NOTE
+          break_particles_material: NOTE_BLOCK
+        break_tools_whitelist:
+          - _AXE
+          - _PICKAXE
+          - charmedchars:pyrite_axe
+          - charmedchars:pyrite_pickaxe
+        hardness: 0.8
+        light_level: 0
+
+  yellow_u:
+    display_name: "Yellow U Block"
+    permission: charmedchars.block
+    resource:
+      material: PAPER
+      generate: true
+      textures:
+        - block/yellow/u
+    specific_properties:
+      block:
+        placed_model:
+          type: REAL_NOTE
+          break_particles_material: NOTE_BLOCK
+        break_tools_whitelist:
+          - _AXE
+          - _PICKAXE
+          - charmedchars:pyrite_axe
+          - charmedchars:pyrite_pickaxe
+        hardness: 0.8
+        light_level: 0
+
+  yellow_v:
+    display_name: "Yellow V Block"
+    permission: charmedchars.block
+    resource:
+      material: PAPER
+      generate: true
+      textures:
+        - block/yellow/v
+    specific_properties:
+      block:
+        placed_model:
+          type: REAL_NOTE
+          break_particles_material: NOTE_BLOCK
+        break_tools_whitelist:
+          - _AXE
+          - _PICKAXE
+          - charmedchars:pyrite_axe
+          - charmedchars:pyrite_pickaxe
+        hardness: 0.8
+        light_level: 0
+
+  yellow_w:
+    display_name: "Yellow W Block"
+    permission: charmedchars.block
+    resource:
+      material: PAPER
+      generate: true
+      textures:
+        - block/yellow/w
+    specific_properties:
+      block:
+        placed_model:
+          type: REAL_NOTE
+          break_particles_material: NOTE_BLOCK
+        break_tools_whitelist:
+          - _AXE
+          - _PICKAXE
+          - charmedchars:pyrite_axe
+          - charmedchars:pyrite_pickaxe
+        hardness: 0.8
+        light_level: 0
+
+  yellow_x:
+    display_name: "Yellow X Block"
+    permission: charmedchars.block
+    resource:
+      material: PAPER
+      generate: true
+      textures:
+        - block/yellow/x
+    specific_properties:
+      block:
+        placed_model:
+          type: REAL_NOTE
+          break_particles_material: NOTE_BLOCK
+        break_tools_whitelist:
+          - _AXE
+          - _PICKAXE
+          - charmedchars:pyrite_axe
+          - charmedchars:pyrite_pickaxe
+        hardness: 0.8
+        light_level: 0
+
+  yellow_y:
+    display_name: "Yellow Y Block"
+    permission: charmedchars.block
+    resource:
+      material: PAPER
+      generate: true
+      textures:
+        - block/yellow/y
+    specific_properties:
+      block:
+        placed_model:
+          type: REAL_NOTE
+          break_particles_material: NOTE_BLOCK
+        break_tools_whitelist:
+          - _AXE
+          - _PICKAXE
+          - charmedchars:pyrite_axe
+          - charmedchars:pyrite_pickaxe
+        hardness: 0.8
+        light_level: 0
+
+  yellow_z:
+    display_name: "Yellow Z Block"
+    permission: charmedchars.block
+    resource:
+      material: PAPER
+      generate: true
+      textures:
+        - block/yellow/z
+    specific_properties:
+      block:
+        placed_model:
+          type: REAL_NOTE
+          break_particles_material: NOTE_BLOCK
+        break_tools_whitelist:
+          - _AXE
+          - _PICKAXE
+          - charmedchars:pyrite_axe
+          - charmedchars:pyrite_pickaxe
+        hardness: 0.8
+        light_level: 0
+
+  # ==================== NUMBER BLOCKS ====================
+  # Cyan Numbers
+  cyan_0:
+    display_name: "Cyan 0 Block"
+    permission: charmedchars.block
+    resource:
+      material: PAPER
+      generate: true
+      textures:
+        - block/cyan/0
+    specific_properties:
+      block:
+        placed_model:
+          type: REAL_NOTE
+          break_particles_material: NOTE_BLOCK
+        break_tools_whitelist:
+          - _AXE
+          - _PICKAXE
+          - charmedchars:pyrite_axe
+          - charmedchars:pyrite_pickaxe
+        hardness: 0.8
+        light_level: 0
+
+  cyan_1:
+    display_name: "Cyan 1 Block"
+    permission: charmedchars.block
+    resource:
+      material: PAPER
+      generate: true
+      textures:
+        - block/cyan/1
+    specific_properties:
+      block:
+        placed_model:
+          type: REAL_NOTE
+          break_particles_material: NOTE_BLOCK
+        break_tools_whitelist:
+          - _AXE
+          - _PICKAXE
+          - charmedchars:pyrite_axe
+          - charmedchars:pyrite_pickaxe
+        hardness: 0.8
+        light_level: 0
+
+  cyan_2:
+    display_name: "Cyan 2 Block"
+    permission: charmedchars.block
+    resource:
+      material: PAPER
+      generate: true
+      textures:
+        - block/cyan/2
+    specific_properties:
+      block:
+        placed_model:
+          type: REAL_NOTE
+          break_particles_material: NOTE_BLOCK
+        break_tools_whitelist:
+          - _AXE
+          - _PICKAXE
+          - charmedchars:pyrite_axe
+          - charmedchars:pyrite_pickaxe
+        hardness: 0.8
+        light_level: 0
+
+  cyan_3:
+    display_name: "Cyan 3 Block"
+    permission: charmedchars.block
+    resource:
+      material: PAPER
+      generate: true
+      textures:
+        - block/cyan/3
+    specific_properties:
+      block:
+        placed_model:
+          type: REAL_NOTE
+          break_particles_material: NOTE_BLOCK
+        break_tools_whitelist:
+          - _AXE
+          - _PICKAXE
+          - charmedchars:pyrite_axe
+          - charmedchars:pyrite_pickaxe
+        hardness: 0.8
+        light_level: 0
+
+  cyan_4:
+    display_name: "Cyan 4 Block"
+    permission: charmedchars.block
+    resource:
+      material: PAPER
+      generate: true
+      textures:
+        - block/cyan/4
+    specific_properties:
+      block:
+        placed_model:
+          type: REAL_NOTE
+          break_particles_material: NOTE_BLOCK
+        break_tools_whitelist:
+          - _AXE
+          - _PICKAXE
+          - charmedchars:pyrite_axe
+          - charmedchars:pyrite_pickaxe
+        hardness: 0.8
+        light_level: 0
+
+  cyan_5:
+    display_name: "Cyan 5 Block"
+    permission: charmedchars.block
+    resource:
+      material: PAPER
+      generate: true
+      textures:
+        - block/cyan/5
+    specific_properties:
+      block:
+        placed_model:
+          type: REAL_NOTE
+          break_particles_material: NOTE_BLOCK
+        break_tools_whitelist:
+          - _AXE
+          - _PICKAXE
+          - charmedchars:pyrite_axe
+          - charmedchars:pyrite_pickaxe
+        hardness: 0.8
+        light_level: 0
+
+  cyan_6:
+    display_name: "Cyan 6 Block"
+    permission: charmedchars.block
+    resource:
+      material: PAPER
+      generate: true
+      textures:
+        - block/cyan/6
+    specific_properties:
+      block:
+        placed_model:
+          type: REAL_NOTE
+          break_particles_material: NOTE_BLOCK
+        break_tools_whitelist:
+          - _AXE
+          - _PICKAXE
+          - charmedchars:pyrite_axe
+          - charmedchars:pyrite_pickaxe
+        hardness: 0.8
+        light_level: 0
+
+  cyan_7:
+    display_name: "Cyan 7 Block"
+    permission: charmedchars.block
+    resource:
+      material: PAPER
+      generate: true
+      textures:
+        - block/cyan/7
+    specific_properties:
+      block:
+        placed_model:
+          type: REAL_NOTE
+          break_particles_material: NOTE_BLOCK
+        break_tools_whitelist:
+          - _AXE
+          - _PICKAXE
+          - charmedchars:pyrite_axe
+          - charmedchars:pyrite_pickaxe
+        hardness: 0.8
+        light_level: 0
+
+  cyan_8:
+    display_name: "Cyan 8 Block"
+    permission: charmedchars.block
+    resource:
+      material: PAPER
+      generate: true
+      textures:
+        - block/cyan/8
+    specific_properties:
+      block:
+        placed_model:
+          type: REAL_NOTE
+          break_particles_material: NOTE_BLOCK
+        break_tools_whitelist:
+          - _AXE
+          - _PICKAXE
+          - charmedchars:pyrite_axe
+          - charmedchars:pyrite_pickaxe
+        hardness: 0.8
+        light_level: 0
+
+  cyan_9:
+    display_name: "Cyan 9 Block"
+    permission: charmedchars.block
+    resource:
+      material: PAPER
+      generate: true
+      textures:
+        - block/cyan/9
+    specific_properties:
+      block:
+        placed_model:
+          type: REAL_NOTE
+          break_particles_material: NOTE_BLOCK
+        break_tools_whitelist:
+          - _AXE
+          - _PICKAXE
+          - charmedchars:pyrite_axe
+          - charmedchars:pyrite_pickaxe
+        hardness: 0.8
+        light_level: 0
+
+  # Magenta Numbers
+  magenta_0:
+    display_name: "Magenta 0 Block"
+    permission: charmedchars.block
+    resource:
+      material: PAPER
+      generate: true
+      textures:
+        - block/magenta/0
+    specific_properties:
+      block:
+        placed_model:
+          type: REAL_NOTE
+          break_particles_material: NOTE_BLOCK
+        break_tools_whitelist:
+          - _AXE
+          - _PICKAXE
+          - charmedchars:pyrite_axe
+          - charmedchars:pyrite_pickaxe
+        hardness: 0.8
+        light_level: 0
+
+  magenta_1:
+    display_name: "Magenta 1 Block"
+    permission: charmedchars.block
+    resource:
+      material: PAPER
+      generate: true
+      textures:
+        - block/magenta/1
+    specific_properties:
+      block:
+        placed_model:
+          type: REAL_NOTE
+          break_particles_material: NOTE_BLOCK
+        break_tools_whitelist:
+          - _AXE
+          - _PICKAXE
+          - charmedchars:pyrite_axe
+          - charmedchars:pyrite_pickaxe
+        hardness: 0.8
+        light_level: 0
+
+  magenta_2:
+    display_name: "Magenta 2 Block"
+    permission: charmedchars.block
+    resource:
+      material: PAPER
+      generate: true
+      textures:
+        - block/magenta/2
+    specific_properties:
+      block:
+        placed_model:
+          type: REAL_NOTE
+          break_particles_material: NOTE_BLOCK
+        break_tools_whitelist:
+          - _AXE
+          - _PICKAXE
+          - charmedchars:pyrite_axe
+          - charmedchars:pyrite_pickaxe
+        hardness: 0.8
+        light_level: 0
+
+  magenta_3:
+    display_name: "Magenta 3 Block"
+    permission: charmedchars.block
+    resource:
+      material: PAPER
+      generate: true
+      textures:
+        - block/magenta/3
+    specific_properties:
+      block:
+        placed_model:
+          type: REAL_NOTE
+          break_particles_material: NOTE_BLOCK
+        break_tools_whitelist:
+          - _AXE
+          - _PICKAXE
+          - charmedchars:pyrite_axe
+          - charmedchars:pyrite_pickaxe
+        hardness: 0.8
+        light_level: 0
+
+  magenta_4:
+    display_name: "Magenta 4 Block"
+    permission: charmedchars.block
+    resource:
+      material: PAPER
+      generate: true
+      textures:
+        - block/magenta/4
+    specific_properties:
+      block:
+        placed_model:
+          type: REAL_NOTE
+          break_particles_material: NOTE_BLOCK
+        break_tools_whitelist:
+          - _AXE
+          - _PICKAXE
+          - charmedchars:pyrite_axe
+          - charmedchars:pyrite_pickaxe
+        hardness: 0.8
+        light_level: 0
+
+  magenta_5:
+    display_name: "Magenta 5 Block"
+    permission: charmedchars.block
+    resource:
+      material: PAPER
+      generate: true
+      textures:
+        - block/magenta/5
+    specific_properties:
+      block:
+        placed_model:
+          type: REAL_NOTE
+          break_particles_material: NOTE_BLOCK
+        break_tools_whitelist:
+          - _AXE
+          - _PICKAXE
+          - charmedchars:pyrite_axe
+          - charmedchars:pyrite_pickaxe
+        hardness: 0.8
+        light_level: 0
+
+  magenta_6:
+    display_name: "Magenta 6 Block"
+    permission: charmedchars.block
+    resource:
+      material: PAPER
+      generate: true
+      textures:
+        - block/magenta/6
+    specific_properties:
+      block:
+        placed_model:
+          type: REAL_NOTE
+          break_particles_material: NOTE_BLOCK
+        break_tools_whitelist:
+          - _AXE
+          - _PICKAXE
+          - charmedchars:pyrite_axe
+          - charmedchars:pyrite_pickaxe
+        hardness: 0.8
+        light_level: 0
+
+  magenta_7:
+    display_name: "Magenta 7 Block"
+    permission: charmedchars.block
+    resource:
+      material: PAPER
+      generate: true
+      textures:
+        - block/magenta/7
+    specific_properties:
+      block:
+        placed_model:
+          type: REAL_NOTE
+          break_particles_material: NOTE_BLOCK
+        break_tools_whitelist:
+          - _AXE
+          - _PICKAXE
+          - charmedchars:pyrite_axe
+          - charmedchars:pyrite_pickaxe
+        hardness: 0.8
+        light_level: 0
+
+  magenta_8:
+    display_name: "Magenta 8 Block"
+    permission: charmedchars.block
+    resource:
+      material: PAPER
+      generate: true
+      textures:
+        - block/magenta/8
+    specific_properties:
+      block:
+        placed_model:
+          type: REAL_NOTE
+          break_particles_material: NOTE_BLOCK
+        break_tools_whitelist:
+          - _AXE
+          - _PICKAXE
+          - charmedchars:pyrite_axe
+          - charmedchars:pyrite_pickaxe
+        hardness: 0.8
+        light_level: 0
+
+  magenta_9:
+    display_name: "Magenta 9 Block"
+    permission: charmedchars.block
+    resource:
+      material: PAPER
+      generate: true
+      textures:
+        - block/magenta/9
+    specific_properties:
+      block:
+        placed_model:
+          type: REAL_NOTE
+          break_particles_material: NOTE_BLOCK
+        break_tools_whitelist:
+          - _AXE
+          - _PICKAXE
+          - charmedchars:pyrite_axe
+          - charmedchars:pyrite_pickaxe
+        hardness: 0.8
+        light_level: 0
+
+  # Yellow Numbers
+  yellow_0:
+    display_name: "Yellow 0 Block"
+    permission: charmedchars.block
+    resource:
+      material: PAPER
+      generate: true
+      textures:
+        - block/yellow/0
+    specific_properties:
+      block:
+        placed_model:
+          type: REAL_NOTE
+          break_particles_material: NOTE_BLOCK
+        break_tools_whitelist:
+          - _AXE
+          - _PICKAXE
+          - charmedchars:pyrite_axe
+          - charmedchars:pyrite_pickaxe
+        hardness: 0.8
+        light_level: 0
+
+  yellow_1:
+    display_name: "Yellow 1 Block"
+    permission: charmedchars.block
+    resource:
+      material: PAPER
+      generate: true
+      textures:
+        - block/yellow/1
+    specific_properties:
+      block:
+        placed_model:
+          type: REAL_NOTE
+          break_particles_material: NOTE_BLOCK
+        break_tools_whitelist:
+          - _AXE
+          - _PICKAXE
+          - charmedchars:pyrite_axe
+          - charmedchars:pyrite_pickaxe
+        hardness: 0.8
+        light_level: 0
+
+  yellow_2:
+    display_name: "Yellow 2 Block"
+    permission: charmedchars.block
+    resource:
+      material: PAPER
+      generate: true
+      textures:
+        - block/yellow/2
+    specific_properties:
+      block:
+        placed_model:
+          type: REAL_NOTE
+          break_particles_material: NOTE_BLOCK
+        break_tools_whitelist:
+          - _AXE
+          - _PICKAXE
+          - charmedchars:pyrite_axe
+          - charmedchars:pyrite_pickaxe
+        hardness: 0.8
+        light_level: 0
+
+  yellow_3:
+    display_name: "Yellow 3 Block"
+    permission: charmedchars.block
+    resource:
+      material: PAPER
+      generate: true
+      textures:
+        - block/yellow/3
+    specific_properties:
+      block:
+        placed_model:
+          type: REAL_NOTE
+          break_particles_material: NOTE_BLOCK
+        break_tools_whitelist:
+          - _AXE
+          - _PICKAXE
+          - charmedchars:pyrite_axe
+          - charmedchars:pyrite_pickaxe
+        hardness: 0.8
+        light_level: 0
+
+  yellow_4:
+    display_name: "Yellow 4 Block"
+    permission: charmedchars.block
+    resource:
+      material: PAPER
+      generate: true
+      textures:
+        - block/yellow/4
+    specific_properties:
+      block:
+        placed_model:
+          type: REAL_NOTE
+          break_particles_material: NOTE_BLOCK
+        break_tools_whitelist:
+          - _AXE
+          - _PICKAXE
+          - charmedchars:pyrite_axe
+          - charmedchars:pyrite_pickaxe
+        hardness: 0.8
+        light_level: 0
+
+  yellow_5:
+    display_name: "Yellow 5 Block"
+    permission: charmedchars.block
+    resource:
+      material: PAPER
+      generate: true
+      textures:
+        - block/yellow/5
+    specific_properties:
+      block:
+        placed_model:
+          type: REAL_NOTE
+          break_particles_material: NOTE_BLOCK
+        break_tools_whitelist:
+          - _AXE
+          - _PICKAXE
+          - charmedchars:pyrite_axe
+          - charmedchars:pyrite_pickaxe
+        hardness: 0.8
+        light_level: 0
+
+  yellow_6:
+    display_name: "Yellow 6 Block"
+    permission: charmedchars.block
+    resource:
+      material: PAPER
+      generate: true
+      textures:
+        - block/yellow/6
+    specific_properties:
+      block:
+        placed_model:
+          type: REAL_NOTE
+          break_particles_material: NOTE_BLOCK
+        break_tools_whitelist:
+          - _AXE
+          - _PICKAXE
+          - charmedchars:pyrite_axe
+          - charmedchars:pyrite_pickaxe
+        hardness: 0.8
+        light_level: 0
+
+  yellow_7:
+    display_name: "Yellow 7 Block"
+    permission: charmedchars.block
+    resource:
+      material: PAPER
+      generate: true
+      textures:
+        - block/yellow/7
+    specific_properties:
+      block:
+        placed_model:
+          type: REAL_NOTE
+          break_particles_material: NOTE_BLOCK
+        break_tools_whitelist:
+          - _AXE
+          - _PICKAXE
+          - charmedchars:pyrite_axe
+          - charmedchars:pyrite_pickaxe
+        hardness: 0.8
+        light_level: 0
+
+  yellow_8:
+    display_name: "Yellow 8 Block"
+    permission: charmedchars.block
+    resource:
+      material: PAPER
+      generate: true
+      textures:
+        - block/yellow/8
+    specific_properties:
+      block:
+        placed_model:
+          type: REAL_NOTE
+          break_particles_material: NOTE_BLOCK
+        break_tools_whitelist:
+          - _AXE
+          - _PICKAXE
+          - charmedchars:pyrite_axe
+          - charmedchars:pyrite_pickaxe
+        hardness: 0.8
+        light_level: 0
+
+  yellow_9:
+    display_name: "Yellow 9 Block"
+    permission: charmedchars.block
+    resource:
+      material: PAPER
+      generate: true
+      textures:
+        - block/yellow/9
+    specific_properties:
+      block:
+        placed_model:
+          type: REAL_NOTE
+          break_particles_material: NOTE_BLOCK
+        break_tools_whitelist:
+          - _AXE
+          - _PICKAXE
+          - charmedchars:pyrite_axe
+          - charmedchars:pyrite_pickaxe
+        hardness: 0.8
+        light_level: 0
+
+  # ==================== SPECIAL CHARACTER BLOCKS ====================
+  # Plus Blocks
+  cyan_plus:
+    display_name: "Cyan + Block"
+    permission: charmedchars.block
+    resource:
+      material: PAPER
+      generate: true
+      textures:
+        - block/cyan/plus
+    specific_properties:
+      block:
+        placed_model:
+          type: REAL_NOTE
+          break_particles_material: NOTE_BLOCK
+        break_tools_whitelist:
+          - _AXE
+          - _PICKAXE
+          - charmedchars:pyrite_axe
+          - charmedchars:pyrite_pickaxe
+        hardness: 0.8
+        light_level: 0
+
+  magenta_plus:
+    display_name: "Magenta + Block"
+    permission: charmedchars.block
+    resource:
+      material: PAPER
+      generate: true
+      textures:
+        - block/magenta/plus
+    specific_properties:
+      block:
+        placed_model:
+          type: REAL_NOTE
+          break_particles_material: NOTE_BLOCK
+        break_tools_whitelist:
+          - _AXE
+          - _PICKAXE
+          - charmedchars:pyrite_axe
+          - charmedchars:pyrite_pickaxe
+        hardness: 0.8
+        light_level: 0
+
+  yellow_plus:
+    display_name: "Yellow + Block"
+    permission: charmedchars.block
+    resource:
+      material: PAPER
+      generate: true
+      textures:
+        - block/yellow/plus
+    specific_properties:
+      block:
+        placed_model:
+          type: REAL_NOTE
+          break_particles_material: NOTE_BLOCK
+        break_tools_whitelist:
+          - _AXE
+          - _PICKAXE
+          - charmedchars:pyrite_axe
+          - charmedchars:pyrite_pickaxe
+        hardness: 0.8
+        light_level: 0
+
+  # Minus Blocks
+  cyan_minus:
+    display_name: "Cyan - Block"
+    permission: charmedchars.block
+    resource:
+      material: PAPER
+      generate: true
+      textures:
+        - block/cyan/minus
+    specific_properties:
+      block:
+        placed_model:
+          type: REAL_NOTE
+          break_particles_material: NOTE_BLOCK
+        break_tools_whitelist:
+          - _AXE
+          - _PICKAXE
+          - charmedchars:pyrite_axe
+          - charmedchars:pyrite_pickaxe
+        hardness: 0.8
+        light_level: 0
+
+  magenta_minus:
+    display_name: "Magenta - Block"
+    permission: charmedchars.block
+    resource:
+      material: PAPER
+      generate: true
+      textures:
+        - block/magenta/minus
+    specific_properties:
+      block:
+        placed_model:
+          type: REAL_NOTE
+          break_particles_material: NOTE_BLOCK
+        break_tools_whitelist:
+          - _AXE
+          - _PICKAXE
+          - charmedchars:pyrite_axe
+          - charmedchars:pyrite_pickaxe
+        hardness: 0.8
+        light_level: 0
+
+  yellow_minus:
+    display_name: "Yellow - Block"
+    permission: charmedchars.block
+    resource:
+      material: PAPER
+      generate: true
+      textures:
+        - block/yellow/minus
+    specific_properties:
+      block:
+        placed_model:
+          type: REAL_NOTE
+          break_particles_material: NOTE_BLOCK
+        break_tools_whitelist:
+          - _AXE
+          - _PICKAXE
+          - charmedchars:pyrite_axe
+          - charmedchars:pyrite_pickaxe
+        hardness: 0.8
+        light_level: 0
+
+  # Multiply Blocks
+  cyan_multiply:
+    display_name: "Cyan × Block"
+    permission: charmedchars.block
+    resource:
+      material: PAPER
+      generate: true
+      textures:
+        - block/cyan/multiply
+    specific_properties:
+      block:
+        placed_model:
+          type: REAL_NOTE
+          break_particles_material: NOTE_BLOCK
+        break_tools_whitelist:
+          - _AXE
+          - _PICKAXE
+          - charmedchars:pyrite_axe
+          - charmedchars:pyrite_pickaxe
+        hardness: 0.8
+        light_level: 0
+
+  magenta_multiply:
+    display_name: "Magenta × Block"
+    permission: charmedchars.block
+    resource:
+      material: PAPER
+      generate: true
+      textures:
+        - block/magenta/multiply
+    specific_properties:
+      block:
+        placed_model:
+          type: REAL_NOTE
+          break_particles_material: NOTE_BLOCK
+        break_tools_whitelist:
+          - _AXE
+          - _PICKAXE
+          - charmedchars:pyrite_axe
+          - charmedchars:pyrite_pickaxe
+        hardness: 0.8
+        light_level: 0
+
+  yellow_multiply:
+    display_name: "Yellow × Block"
+    permission: charmedchars.block
+    resource:
+      material: PAPER
+      generate: true
+      textures:
+        - block/yellow/multiply
+    specific_properties:
+      block:
+        placed_model:
+          type: REAL_NOTE
+          break_particles_material: NOTE_BLOCK
+        break_tools_whitelist:
+          - _AXE
+          - _PICKAXE
+          - charmedchars:pyrite_axe
+          - charmedchars:pyrite_pickaxe
+        hardness: 0.8
+        light_level: 0
+
+  # Division Blocks
+  cyan_division:
+    display_name: "Cyan ÷ Block"
+    permission: charmedchars.block
+    resource:
+      material: PAPER
+      generate: true
+      textures:
+        - block/cyan/division
+    specific_properties:
+      block:
+        placed_model:
+          type: REAL_NOTE
+          break_particles_material: NOTE_BLOCK
+        break_tools_whitelist:
+          - _AXE
+          - _PICKAXE
+          - charmedchars:pyrite_axe
+          - charmedchars:pyrite_pickaxe
+        hardness: 0.8
+        light_level: 0
+
+  magenta_division:
+    display_name: "Magenta ÷ Block"
+    permission: charmedchars.block
+    resource:
+      material: PAPER
+      generate: true
+      textures:
+        - block/magenta/division
+    specific_properties:
+      block:
+        placed_model:
+          type: REAL_NOTE
+          break_particles_material: NOTE_BLOCK
+        break_tools_whitelist:
+          - _AXE
+          - _PICKAXE
+          - charmedchars:pyrite_axe
+          - charmedchars:pyrite_pickaxe
+        hardness: 0.8
+        light_level: 0
+
+  yellow_division:
+    display_name: "Yellow ÷ Block"
+    permission: charmedchars.block
+    resource:
+      material: PAPER
+      generate: true
+      textures:
+        - block/yellow/division
+    specific_properties:
+      block:
+        placed_model:
+          type: REAL_NOTE
+          break_particles_material: NOTE_BLOCK
+        break_tools_whitelist:
+          - _AXE
+          - _PICKAXE
+          - charmedchars:pyrite_axe
+          - charmedchars:pyrite_pickaxe
+        hardness: 0.8
+        light_level: 0
+
+  # ==================== LOGO BLOCK ====================
+  cyan_logo:
+    display_name: "Cyan Logo Block"
+    permission: charmedchars.block
+    resource:
+      material: PAPER
+      generate: true
+      textures:
+        - block/cyan/logo_block
+    specific_properties:
+      block:
+        placed_model:
+          type: REAL_NOTE
+          break_particles_material: NOTE_BLOCK
+        break_tools_whitelist:
+          - _AXE
+          - _PICKAXE
+          - charmedchars:pyrite_axe
+          - charmedchars:pyrite_pickaxe
+        hardness: 0.8
+        light_level: 0
+
+  magenta_logo:
+    display_name: "Magenta Logo Block"
+    permission: charmedchars.block
+    resource:
+      material: PAPER
+      generate: true
+      textures:
+        - block/magenta/logo_block
+    specific_properties:
+      block:
+        placed_model:
+          type: REAL_NOTE
+          break_particles_material: NOTE_BLOCK
+        break_tools_whitelist:
+          - _AXE
+          - _PICKAXE
+          - charmedchars:pyrite_axe
+          - charmedchars:pyrite_pickaxe
+        hardness: 0.8
+        light_level: 0
+
+  yellow_logo:
+    display_name: "Yellow Logo Block"
+    permission: charmedchars.block
+    resource:
+      material: PAPER
+      generate: true
+      textures:
+        - block/yellow/logo_block
+    specific_properties:
+      block:
+        placed_model:
+          type: REAL_NOTE
+          break_particles_material: NOTE_BLOCK
+        break_tools_whitelist:
+          - _AXE
+          - _PICKAXE
+          - charmedchars:pyrite_axe
+          - charmedchars:pyrite_pickaxe
+        hardness: 0.8
+        light_level: 0
+
+===== contents/charmedchars/configs/pyrite.yml =====
+info:
+  namespace: charmedchars
+
+recipes:
+  crafting_table:
+    pyrite_ingot_recipe:
+      enabled: true
+      shapeless: true
+      ingredients:
+        I: IRON_INGOT
+        R: REDSTONE
+      result:
+        item: charmedchars:pyrite_ingot
+        amount: 1
+
+    pyrite_ingot_sulfur_recipe:
+      enabled: true
+      shapeless: true
+      ingredients:
+        I: IRON_INGOT
+        S: POTENT_SULFUR
+      result:
+        item: charmedchars:pyrite_ingot
+        amount: 1
+
+    pyrite_pickaxe_recipe:
+      enabled: true
+      pattern:
+        - PPP
+        - " S "
+        - " S "
+      ingredients:
+        P: charmedchars:pyrite_ingot
+        S: STICK
+      result:
+        item: charmedchars:pyrite_pickaxe
+        amount: 1
+
+    pyrite_axe_recipe:
+      enabled: true
+      pattern:
+        - "PP "
+        - "PS "
+        - " S "
+      ingredients:
+        P: charmedchars:pyrite_ingot
+        S: STICK
+      result:
+        item: charmedchars:pyrite_axe
+        amount: 1
+
+    pyrite_shovel_recipe:
+      enabled: true
+      pattern:
+        - " P "
+        - " S "
+        - " S "
+      ingredients:
+        P: charmedchars:pyrite_ingot
+        S: STICK
+      result:
+        item: charmedchars:pyrite_shovel
+        amount: 1
+
+    pyrite_hoe_recipe:
+      enabled: true
+      pattern:
+        - "PP "
+        - " S "
+        - " S "
+      ingredients:
+        P: charmedchars:pyrite_ingot
+        S: STICK
+      result:
+        item: charmedchars:pyrite_hoe
+        amount: 1
+
+items:
+  # ==================== PYRITE (FOOL'S GOLD) MATERIALS ====================
+
+  pyrite_ingot:
+    display_name: "Pyrite Ingot"
+    permission: charmedchars.pyrite
+    resource:
+      material: GOLD_INGOT
+      generate: true
+      textures:
+        - item/pyrite/ingot
+
+  pyrite_pickaxe:
+    display_name: "Pyrite Pickaxe"
+    permission: charmedchars.pyrite
+    lore:
+      - "&7A fool's gold pickaxe"
+      - "&7Works like gold for scoring words"
+      - "&7Iron-tier durability and stats"
+    resource:
+      material: GOLDEN_PICKAXE
+      generate: true
+      textures:
+        - item/pyrite/pickaxe
+    durability:
+      max_custom_durability: 250
+    specific_properties:
+      tool:
+        tier: IRON
+    attribute_modifiers:
+      mainhand:
+        attackDamage: 4
+        attackSpeed: -2.8
+
+  pyrite_axe:
+    display_name: "Pyrite Axe"
+    permission: charmedchars.pyrite
+    lore:
+      - "&7A fool's gold axe"
+      - "&7Works like gold for scoring words"
+      - "&7Iron-tier durability and stats"
+    resource:
+      material: GOLDEN_AXE
+      generate: true
+      textures:
+        - item/pyrite/axe
+    durability:
+      max_custom_durability: 250
+    specific_properties:
+      tool:
+        tier: IRON
+    attribute_modifiers:
+      mainhand:
+        attackDamage: 9
+        attackSpeed: -3.1
+
+  pyrite_shovel:
+    display_name: "Pyrite Shovel"
+    permission: charmedchars.pyrite
+    lore:
+      - "&7A fool's gold shovel"
+      - "&7Works like gold for scoring words"
+      - "&7Iron-tier durability and stats"
+    resource:
+      material: GOLDEN_SHOVEL
+      generate: true
+      textures:
+        - item/pyrite/shovel
+    durability:
+      max_custom_durability: 250
+    specific_properties:
+      tool:
+        tier: IRON
+    attribute_modifiers:
+      mainhand:
+        attackDamage: 4.5
+        attackSpeed: -3.0
+
+  pyrite_hoe:
+    display_name: "Pyrite Hoe"
+    permission: charmedchars.pyrite
+    lore:
+      - "&7A fool's gold hoe"
+      - "&7Works like gold for scoring words"
+      - "&7Iron-tier durability and stats"
+    resource:
+      material: GOLDEN_HOE
+      generate: true
+      textures:
+        - item/pyrite/hoe
+    durability:
+      max_custom_durability: 250
+    specific_properties:
+      tool:
+        tier: IRON
+    attribute_modifiers:
+      mainhand:
+        attackDamage: 1
+        attackSpeed: -2.0
+
+===== contents/charmedchars/resourcepack/assets/charmedchars/textures/block/cyan/0.png [sha256 d481cdf0ec47c8b4f109e81ec2f9e1124236d0b904900072d1395742a7d45272] =====
+
+===== contents/charmedchars/resourcepack/assets/charmedchars/textures/block/cyan/1.png [sha256 1193d4b1e1ce3014475aae0e8753d1f1921fc914c4ceec61822bd9c3f2f5c2e8] =====
+
+===== contents/charmedchars/resourcepack/assets/charmedchars/textures/block/cyan/2.png [sha256 53448cb47dd92fb51193c6e3d3edc5e2ff3ab9c66e4c4dcfe4f5e0674b15188d] =====
+
+===== contents/charmedchars/resourcepack/assets/charmedchars/textures/block/cyan/3.png [sha256 c6eda6a8d9f6501ffedff6f4661adc01efe44f40c66593a094eabce38f550caa] =====
+
+===== contents/charmedchars/resourcepack/assets/charmedchars/textures/block/cyan/4.png [sha256 9774824949068c73b34d0d071fa9f80497cb3c8284f8d6f36ee54e4f99d175ab] =====
+
+===== contents/charmedchars/resourcepack/assets/charmedchars/textures/block/cyan/5.png [sha256 4a04869e6e65414c8e363721d7631a274ed1c62636433f42412233dd3ae54635] =====
+
+===== contents/charmedchars/resourcepack/assets/charmedchars/textures/block/cyan/6.png [sha256 1f1a89f1307ec1582cc9812c5c71afbebda0db77ee3eb90c6aa545092b4e6a7f] =====
+
+===== contents/charmedchars/resourcepack/assets/charmedchars/textures/block/cyan/7.png [sha256 97e2cf426179f8996e1acd7a5d17b30a47b633aa02358d84f17c0f59ab2d6adf] =====
+
+===== contents/charmedchars/resourcepack/assets/charmedchars/textures/block/cyan/8.png [sha256 d23e0fe52383f65ebc8c487159c5870624448af58bcc94ea1523f0a836a2a661] =====
+
+===== contents/charmedchars/resourcepack/assets/charmedchars/textures/block/cyan/9.png [sha256 8daaee379b4254aee2d09b37328776e9a92f9b0c53ec6227faa25febf25f27b4] =====
+
+===== contents/charmedchars/resourcepack/assets/charmedchars/textures/block/cyan/a.png [sha256 f7b651d992d7c6c8ac9a5a797cee130d8ec432cae7f8e321b0e65d7cd7b9ed49] =====
+
+===== contents/charmedchars/resourcepack/assets/charmedchars/textures/block/cyan/b.png [sha256 3b87fe624ff8816031c951d090ecf8b0db21d48d5840484361558ac2e1f40624] =====
+
+===== contents/charmedchars/resourcepack/assets/charmedchars/textures/block/cyan/c.png [sha256 f94cc8aa1b5bb2940fe2956b9cf859075ecd195822a1134ce96230650400a589] =====
+
+===== contents/charmedchars/resourcepack/assets/charmedchars/textures/block/cyan/d.png [sha256 e7a143b57db6e243bc3ac80e354da3a90a8bf4fd37f43e4ab9be79e62ed5f6a5] =====
+
+===== contents/charmedchars/resourcepack/assets/charmedchars/textures/block/cyan/division.png [sha256 69e4b9078ee252a96638ad8403588eeaa509997357c69309d96b17bca0fd55aa] =====
+
+===== contents/charmedchars/resourcepack/assets/charmedchars/textures/block/cyan/e.png [sha256 aa1bab90eba9847b33da87225bf2b5129febd916d993165f9f00e2c80378a1de] =====
+
+===== contents/charmedchars/resourcepack/assets/charmedchars/textures/block/cyan/f.png [sha256 698484d84639f133d33f9072aa1ea9363913baef1c6d97dc51c9d826c3374efb] =====
+
+===== contents/charmedchars/resourcepack/assets/charmedchars/textures/block/cyan/g.png [sha256 0f1d86c4a78133525c6257df9b0b3ed2f21ae9278caa7fd035b78ded987e38fa] =====
+
+===== contents/charmedchars/resourcepack/assets/charmedchars/textures/block/cyan/h.png [sha256 3f3ba37cb28475f93853349c4c850c5ad77b268e200043cdb6738f1a6322a724] =====
+
+===== contents/charmedchars/resourcepack/assets/charmedchars/textures/block/cyan/i.png [sha256 6d175a612dc4569ff81db5501beca407b8fafd72eaf6ef2be56cc97e0c0deae3] =====
+
+===== contents/charmedchars/resourcepack/assets/charmedchars/textures/block/cyan/j.png [sha256 8cfd7f4cafe9a621f532aeddaab1a1c0090c2be68cffc0735f782bc5830a7fc1] =====
+
+===== contents/charmedchars/resourcepack/assets/charmedchars/textures/block/cyan/k.png [sha256 f6c4272cb5c113c91e39c6b5c75770586ae92115f735fa5fef82639895e20f12] =====
+
+===== contents/charmedchars/resourcepack/assets/charmedchars/textures/block/cyan/l.png [sha256 c2c559cb924535fadf9b5acc3b8a9484430885dc7d36e34eb1ba1aafce83dd21] =====
+
+===== contents/charmedchars/resourcepack/assets/charmedchars/textures/block/cyan/logo_block.png [sha256 dc06c4868fb4ac194f6536faf5788c5df06dc5abd9a2930277822412209397c6] =====
+
+===== contents/charmedchars/resourcepack/assets/charmedchars/textures/block/cyan/m.png [sha256 a8c5f83f5b1599a53d7e18bf840b50f7a3a2cc4bd9d6bef55916f608e331b8a0] =====
+
+===== contents/charmedchars/resourcepack/assets/charmedchars/textures/block/cyan/minus.png [sha256 d7b184f9e944938481c103eaeb1f2b9910b53670fc4480b1994ed1eb9edcab71] =====
+
+===== contents/charmedchars/resourcepack/assets/charmedchars/textures/block/cyan/multiply.png [sha256 530b41ff3848acda00f4874ec6fda0bd925cb0886852aa4b0189366443974cbc] =====
+
+===== contents/charmedchars/resourcepack/assets/charmedchars/textures/block/cyan/n.png [sha256 d3fd1b70d3379b615028661efe9c684ae508b76c07830b8041db2ab28612790f] =====
+
+===== contents/charmedchars/resourcepack/assets/charmedchars/textures/block/cyan/o.png [sha256 d08b5e8745aa81a50c8552b6e6375367e0e1501af85c571d007ccf5e43410927] =====
+
+===== contents/charmedchars/resourcepack/assets/charmedchars/textures/block/cyan/p.png [sha256 75be77a9cd4643fc95eaa46d31b1eb4a6a8e6876c3b1aacdedc6121591b1b46e] =====
+
+===== contents/charmedchars/resourcepack/assets/charmedchars/textures/block/cyan/plus.png [sha256 e03779648a7b708b2dfebf361e1b1ab8644636ce46f17165bf72c51b2f6f44ef] =====
+
+===== contents/charmedchars/resourcepack/assets/charmedchars/textures/block/cyan/q.png [sha256 cbb9cf6620e7a67f84e51fc1aa65bda9650bfbf3dd63805247250c599cf2d4b4] =====
+
+===== contents/charmedchars/resourcepack/assets/charmedchars/textures/block/cyan/r.png [sha256 79b807f4b5634d8e5f6002414e5ef241f4d63f8ae1947b50e99e2fe4442ce695] =====
+
+===== contents/charmedchars/resourcepack/assets/charmedchars/textures/block/cyan/s.png [sha256 d94572949f0fd326d907768e873327cf9e0f0217b1980172c689c555f4187ff4] =====
+
+===== contents/charmedchars/resourcepack/assets/charmedchars/textures/block/cyan/t.png [sha256 5f1f634365025e5ff54bc633cbc1c7f2360612fcaa557730cc80511f37777641] =====
+
+===== contents/charmedchars/resourcepack/assets/charmedchars/textures/block/cyan/u.png [sha256 03817f0b469e15952ff31ffee1e30da0caf6728c74cb577c83af35130f54bcb4] =====
+
+===== contents/charmedchars/resourcepack/assets/charmedchars/textures/block/cyan/v.png [sha256 2912bea72bcfb078d018f658e2a721d5c9ed10c470f38578cf4c4a9411dcfb8d] =====
+
+===== contents/charmedchars/resourcepack/assets/charmedchars/textures/block/cyan/w.png [sha256 49d6675b31b7d7756f3ed9b54193fe4abe54ce71fcce9d1ac55572b80e6c69d4] =====
+
+===== contents/charmedchars/resourcepack/assets/charmedchars/textures/block/cyan/x.png [sha256 acbe1d143147ffaf415252df2ca62bc84ca74147440e996abc6218a06a4191a5] =====
+
+===== contents/charmedchars/resourcepack/assets/charmedchars/textures/block/cyan/y.png [sha256 f1199a3fac68b48bcc5cfd09a15d0ad627002a32f5acb22c1e159218120ac9d2] =====
+
+===== contents/charmedchars/resourcepack/assets/charmedchars/textures/block/cyan/z.png [sha256 1c475f9af9074c69e0e9f5b39fd6ce3569b6a8d14782a47489d374f4b7c26862] =====
+
+===== contents/charmedchars/resourcepack/assets/charmedchars/textures/block/magenta/0.png [sha256 03728a4ddc9b1ce0ca630c7a706056c0eda740d09bf61d07f616012e1e203c3e] =====
+
+===== contents/charmedchars/resourcepack/assets/charmedchars/textures/block/magenta/1.png [sha256 2de59720904365d7b2980001b9e26a12e764c0a7b52fae1511af14e6af4f3c28] =====
+
+===== contents/charmedchars/resourcepack/assets/charmedchars/textures/block/magenta/2.png [sha256 7ce51e587dd7599cfd9a14aaf73a5c55ebcf74eabf4edeb37f8006909c90b545] =====
+
+===== contents/charmedchars/resourcepack/assets/charmedchars/textures/block/magenta/3.png [sha256 d0b9fdded8c4f4d3ee5b69cc4ec2554ad520396328f5f902d3aacc7afd50dff5] =====
+
+===== contents/charmedchars/resourcepack/assets/charmedchars/textures/block/magenta/4.png [sha256 e0fb989911688a0a2d077c9f649f1db09d8defe05882d50900dc6fb7c312816a] =====
+
+===== contents/charmedchars/resourcepack/assets/charmedchars/textures/block/magenta/5.png [sha256 3a49c31c5e21a397ee66a26799925779e578b8eb4c0a0ae641197335629364ad] =====
+
+===== contents/charmedchars/resourcepack/assets/charmedchars/textures/block/magenta/6.png [sha256 bf542a2e2e3f81c765a3e51f800972a71a56f033aa0a9bc4185591a740c5755e] =====
+
+===== contents/charmedchars/resourcepack/assets/charmedchars/textures/block/magenta/7.png [sha256 2d52f9777ada61a8cedb40b2ea56b7da0a11d4f64191a8b96ad22628652decf7] =====
+
+===== contents/charmedchars/resourcepack/assets/charmedchars/textures/block/magenta/8.png [sha256 8b464f121c551bf6a1e106e7134399b0fb9d3d73eb0ea9b14fe836aaf96f9796] =====
+
+===== contents/charmedchars/resourcepack/assets/charmedchars/textures/block/magenta/9.png [sha256 d0bcd26ee5ea0cb7bd462a1b360acbd2abfc155560facbb6c1f6d60c162faa71] =====
+
+===== contents/charmedchars/resourcepack/assets/charmedchars/textures/block/magenta/a.png [sha256 def99088aa135772e47380a52b4f4a59b7b667cd1b9bc97a113977084d558411] =====
+
+===== contents/charmedchars/resourcepack/assets/charmedchars/textures/block/magenta/b.png [sha256 8b2adfc0042c67f7b7dc11aa2105df8ac416d53005f5f95ac8e15187c6b3a36d] =====
+
+===== contents/charmedchars/resourcepack/assets/charmedchars/textures/block/magenta/c.png [sha256 2ce648b903e1c2606f0acbc4d911b32c819d0a800a136a75957b48555a01da54] =====
+
+===== contents/charmedchars/resourcepack/assets/charmedchars/textures/block/magenta/d.png [sha256 175aa70be235baefe9dfa34d5e37d9f128ad4ebaacb3c2c98f69243a74293b44] =====
+
+===== contents/charmedchars/resourcepack/assets/charmedchars/textures/block/magenta/division.png [sha256 bebe61101b5d490bb132419f2c11b6e9122923f2ecce1089d135fe98939af4f5] =====
+
+===== contents/charmedchars/resourcepack/assets/charmedchars/textures/block/magenta/e.png [sha256 195f8ec311bcb51834e520761d429bc36b837b789bebfc98990cf6652362d932] =====
+
+===== contents/charmedchars/resourcepack/assets/charmedchars/textures/block/magenta/f.png [sha256 ea7eebb71889c492cb873ce0b18ff7152c49882717fd2557e129fcc1a65b07a6] =====
+
+===== contents/charmedchars/resourcepack/assets/charmedchars/textures/block/magenta/g.png [sha256 24809a133a8d7688f1bb13ee0abfca07da69c1185b2dc503ede66b66cd830b19] =====
+
+===== contents/charmedchars/resourcepack/assets/charmedchars/textures/block/magenta/h.png [sha256 6d07b561549b972ce6329e1bbb55323041bd869bd708a4d33f7cccde6d755b24] =====
+
+===== contents/charmedchars/resourcepack/assets/charmedchars/textures/block/magenta/i.png [sha256 c92fed6423be1996df82dc501c760f58854ddb86398034df79f461ff8413050a] =====
+
+===== contents/charmedchars/resourcepack/assets/charmedchars/textures/block/magenta/j.png [sha256 63bf97b1ca96844cd9086feb6b14f7f5cd12b11269f76a95cb72bfad9818b166] =====
+
+===== contents/charmedchars/resourcepack/assets/charmedchars/textures/block/magenta/k.png [sha256 e82670e75f8d89a08319062bb1bf64a75d6d98d19b14ff340b4dd00265617b5a] =====
+
+===== contents/charmedchars/resourcepack/assets/charmedchars/textures/block/magenta/l.png [sha256 29f5d66686101cf4acfdf9f40500442484bf562d4574af0a0881a5a5fe6acf13] =====
+
+===== contents/charmedchars/resourcepack/assets/charmedchars/textures/block/magenta/logo_block.png [sha256 710c531d9ac0c9d2cf6411f5c1fb1784feba63ebac1f2fd63c7ee2ec09701742] =====
+
+===== contents/charmedchars/resourcepack/assets/charmedchars/textures/block/magenta/m.png [sha256 7c5157eb626600cc5fed54a5785836fb6b79764b65a87a9334f486af3d6551b9] =====
+
+===== contents/charmedchars/resourcepack/assets/charmedchars/textures/block/magenta/minus.png [sha256 ba05374ca456a82556ca409c871e7330b151ec43257fa9842d0543104da4c274] =====
+
+===== contents/charmedchars/resourcepack/assets/charmedchars/textures/block/magenta/multiply.png [sha256 332de1be625bb26a4f28db5b0189ff7ce4549f3338e00976d1542cc4e1c24a6e] =====
+
+===== contents/charmedchars/resourcepack/assets/charmedchars/textures/block/magenta/n.png [sha256 865cbf8ded5349d3d309558ab54090b56a673d6186c3960f287a3ec5afbd337f] =====
+
+===== contents/charmedchars/resourcepack/assets/charmedchars/textures/block/magenta/o.png [sha256 87bada973f534a26c123eca03e269fe5e54e11bb6138162f295a160a25eeca0b] =====
+
+===== contents/charmedchars/resourcepack/assets/charmedchars/textures/block/magenta/p.png [sha256 d35ec6ee06d1cf779f522c676282b500dd6f7c92aaaac81a680d248b04d18b45] =====
+
+===== contents/charmedchars/resourcepack/assets/charmedchars/textures/block/magenta/plus.png [sha256 0aa81059cc61a6962a461e4c1d1247cdbeac3ee5d85f4ba01ba3bc0498a03535] =====
+
+===== contents/charmedchars/resourcepack/assets/charmedchars/textures/block/magenta/q.png [sha256 3430ea52032767cd41d0a7c0f81bfba5fe1525c9f0e3d71647e20b8de679cc1f] =====
+
+===== contents/charmedchars/resourcepack/assets/charmedchars/textures/block/magenta/r.png [sha256 16360ba4fbfcd6fe6f09d2bc1a7ca8d4f44df0aec484d6401fe8566a6178affc] =====
+
+===== contents/charmedchars/resourcepack/assets/charmedchars/textures/block/magenta/s.png [sha256 483088327275f47278d6da7757bd71eae2e7f65fd5f8b29fd9172c08ef5111eb] =====
+
+===== contents/charmedchars/resourcepack/assets/charmedchars/textures/block/magenta/t.png [sha256 cafa5d7dd03f1e8cb72c0f76629a22e0ebb9d1d0e42a72680ed12bdb1348912a] =====
+
+===== contents/charmedchars/resourcepack/assets/charmedchars/textures/block/magenta/u.png [sha256 b454f4a7976e7353d8ff5f4dd22cb711dea829563ef27af8eb458d973f1e1a06] =====
+
+===== contents/charmedchars/resourcepack/assets/charmedchars/textures/block/magenta/v.png [sha256 e7dcb6eb22b213e858de37f354b4281eab9682b5e8be7009b860fd582323368f] =====
+
+===== contents/charmedchars/resourcepack/assets/charmedchars/textures/block/magenta/w.png [sha256 17a4bb16665cab5ce790ef424dfac79e69defe87477fd258809e05d4cafb767e] =====
+
+===== contents/charmedchars/resourcepack/assets/charmedchars/textures/block/magenta/x.png [sha256 abca5aa85497615fd69f02c12e7604adce40fa4253cbefd28b11edca6a55944d] =====
+
+===== contents/charmedchars/resourcepack/assets/charmedchars/textures/block/magenta/y.png [sha256 d29ab4b3f2971fad83685c350bd92ac899ad41227fc7b3606ef48a5f0c362fc1] =====
+
+===== contents/charmedchars/resourcepack/assets/charmedchars/textures/block/magenta/z.png [sha256 b4d811bc5ee709942777858b452d9ff7b011db16a8b659738d5f3fa847ae52a2] =====
+
+===== contents/charmedchars/resourcepack/assets/charmedchars/textures/block/yellow/0.png [sha256 f84ddb7f02e4faed5fe37907c9aa335d1f77cf53e6ec27a694c7118214f0ae27] =====
+
+===== contents/charmedchars/resourcepack/assets/charmedchars/textures/block/yellow/1.png [sha256 5238fa94b93eaff2b9387b176bad71360e3df6db420db98dfae8381ae9aba2e8] =====
+
+===== contents/charmedchars/resourcepack/assets/charmedchars/textures/block/yellow/2.png [sha256 cfd64312fa1ee7bd37b00196cee55dc52871d3df208ecb2146582b016cbbc5af] =====
+
+===== contents/charmedchars/resourcepack/assets/charmedchars/textures/block/yellow/3.png [sha256 8111c4bd727dbf25ecf29c8b32748b7c27b622afa5aa8dab617250c1d80f8252] =====
+
+===== contents/charmedchars/resourcepack/assets/charmedchars/textures/block/yellow/4.png [sha256 bb57c78714cc193d8ad1cd43cddfbf31a2458641e4d8e223f1c12a4c1b6ab499] =====
+
+===== contents/charmedchars/resourcepack/assets/charmedchars/textures/block/yellow/5.png [sha256 c8f09d16408ab63acd4aeba94c297b15257cec8a158a4adb112382d5e4c052be] =====
+
+===== contents/charmedchars/resourcepack/assets/charmedchars/textures/block/yellow/6.png [sha256 02bd92ee3e648b69fecba80b5caa19830284bf70d4fb246a543c541788054496] =====
+
+===== contents/charmedchars/resourcepack/assets/charmedchars/textures/block/yellow/7.png [sha256 fefb3b8da220245609d7946106b6882b2c1c653d714db2f71283d75a245a49f8] =====
+
+===== contents/charmedchars/resourcepack/assets/charmedchars/textures/block/yellow/8.png [sha256 0a94c7ecf301935b5fdccd589c0e65cec09826afdd5ce1823b5aaf7d1202fdc0] =====
+
+===== contents/charmedchars/resourcepack/assets/charmedchars/textures/block/yellow/9.png [sha256 ee4bbeea665b32311b0475aca7f03630fefabf9811d7d7862f27a21b480555ac] =====
+
+===== contents/charmedchars/resourcepack/assets/charmedchars/textures/block/yellow/a.png [sha256 68a0a3db3117c9b2127d1982d5d574f76d13d050f01ff429228ab0aca47208bb] =====
+
+===== contents/charmedchars/resourcepack/assets/charmedchars/textures/block/yellow/b.png [sha256 e06315b982b3d8837b38048f87a6a6adff2e4a428346607bb7ff0c43c16b2385] =====
+
+===== contents/charmedchars/resourcepack/assets/charmedchars/textures/block/yellow/c.png [sha256 1500e9a99ba17592483025c06893be3ba7293f9ccba7899f564e64cf9bd32a71] =====
+
+===== contents/charmedchars/resourcepack/assets/charmedchars/textures/block/yellow/d.png [sha256 f10648d249fdec439994308c0a4e70b722c4b97460e1b03aefb848c67c34a4ed] =====
+
+===== contents/charmedchars/resourcepack/assets/charmedchars/textures/block/yellow/division.png [sha256 0a90beb6747bbf6d5cb6bb98e7668aab85d471d771e61596d71446a441f48036] =====
+
+===== contents/charmedchars/resourcepack/assets/charmedchars/textures/block/yellow/e.png [sha256 f9d71bd92acb7cd107869083b154f9d23d456f311403aa656267374ca90ecf65] =====
+
+===== contents/charmedchars/resourcepack/assets/charmedchars/textures/block/yellow/f.png [sha256 4d6b99b68df2997ce32fd2a8ae6dfdd598f2e5acc57375375793a3854ad20d03] =====
+
+===== contents/charmedchars/resourcepack/assets/charmedchars/textures/block/yellow/g.png [sha256 528d0c8526bef4876f661756bf804ab7d8ca89f65051ca24e25904755e631701] =====
+
+===== contents/charmedchars/resourcepack/assets/charmedchars/textures/block/yellow/h.png [sha256 fadfc044abb5e965c0e1c32b5f8495822287c23eff468fb62be0a4a38a04ab4f] =====
+
+===== contents/charmedchars/resourcepack/assets/charmedchars/textures/block/yellow/i.png [sha256 c5039dabe18a753378358ed6f0248cbccc0a3be1f90edb889d9c2344358b2c8d] =====
+
+===== contents/charmedchars/resourcepack/assets/charmedchars/textures/block/yellow/j.png [sha256 ca7997f11438852e902d4b1f4cc9355f954c3a471eb7abffc8b3beaa6cbc5ac5] =====
+
+===== contents/charmedchars/resourcepack/assets/charmedchars/textures/block/yellow/k.png [sha256 4bcb65fc1e86e151ae1c570e7a556b271faa90a53b5571cf354e80cf8e9da1f7] =====
+
+===== contents/charmedchars/resourcepack/assets/charmedchars/textures/block/yellow/l.png [sha256 1dc5863e0982552147e53b64e065e3d6d29aec6561a3fdc106e9af37b8ad21e8] =====
+
+===== contents/charmedchars/resourcepack/assets/charmedchars/textures/block/yellow/logo_block.png [sha256 b91ff216533012078c301fb24d0ad833697f311265f6d74ee542c491998db147] =====
+
+===== contents/charmedchars/resourcepack/assets/charmedchars/textures/block/yellow/m.png [sha256 dd5c0a09a57d391e915daff1a3d963c1084daa33c412fe8fbe595ba9e31c6168] =====
+
+===== contents/charmedchars/resourcepack/assets/charmedchars/textures/block/yellow/minus.png [sha256 2d4308580fba4b355d3251c7aa21fca8d86da9152372aa62e29d10fc12284570] =====
+
+===== contents/charmedchars/resourcepack/assets/charmedchars/textures/block/yellow/multiply.png [sha256 b4e5f9e1272128c05ac068d8338f414cec117f17a1894ff6a5fd58472e211ff0] =====
+
+===== contents/charmedchars/resourcepack/assets/charmedchars/textures/block/yellow/n.png [sha256 19cca0960461bcaa79bd857c9071b0874191caa4be550b1fdf8accfa0a5e4095] =====
+
+===== contents/charmedchars/resourcepack/assets/charmedchars/textures/block/yellow/o.png [sha256 9ee67b54276e8cd0db15c9fa2b77ec455bb949dfa95e7d39a4cfa3c0de7a8e78] =====
+
+===== contents/charmedchars/resourcepack/assets/charmedchars/textures/block/yellow/p.png [sha256 879f08c75acd6dcbdace2c0e17cceab96601cff3fddcd43092b0f2944c4fb5a2] =====
+
+===== contents/charmedchars/resourcepack/assets/charmedchars/textures/block/yellow/plus.png [sha256 8b91c5f0f8ee70adec330a50df6a9f77a4431c90a23ba824d390c168a1f64706] =====
+
+===== contents/charmedchars/resourcepack/assets/charmedchars/textures/block/yellow/q.png [sha256 c6c9a28c77101e977ee79a1925ce2868ad70813d9f907b63d179d9a66c09d9d0] =====
+
+===== contents/charmedchars/resourcepack/assets/charmedchars/textures/block/yellow/r.png [sha256 1a34ccc47a3d375f259618a2a7cb3148ab0e9fef0e99beb91dd29c4c33c727ef] =====
+
+===== contents/charmedchars/resourcepack/assets/charmedchars/textures/block/yellow/s.png [sha256 6fb89474a558144a1ab8ae51cc0d4db77f44d68a33e4d7bb50d4a544d69908ba] =====
+
+===== contents/charmedchars/resourcepack/assets/charmedchars/textures/block/yellow/t.png [sha256 35e990d5c8a98b313c9e9261562119b5eca5f0e92648ac9f737bf9e2d383e31d] =====
+
+===== contents/charmedchars/resourcepack/assets/charmedchars/textures/block/yellow/u.png [sha256 a9344bd4a4c0d87d49431bd6e35bc22b0f6ac134401181f8560e11fec090f29c] =====
+
+===== contents/charmedchars/resourcepack/assets/charmedchars/textures/block/yellow/v.png [sha256 4b3a8a154bfc755414b48dfc8e8b7ce03619625f28a88cc3aafc60f8e2b894e2] =====
+
+===== contents/charmedchars/resourcepack/assets/charmedchars/textures/block/yellow/w.png [sha256 4dfc97b751fe6c4d704440d78dfff02f700099402963736ad8a6f4c8604a9c7c] =====
+
+===== contents/charmedchars/resourcepack/assets/charmedchars/textures/block/yellow/x.png [sha256 9e63f78f5bc6b6a6ea199758145728fd739acaf5208ce6c93d7728313f991220] =====
+
+===== contents/charmedchars/resourcepack/assets/charmedchars/textures/block/yellow/y.png [sha256 277737e1f133034336488a2f88b325772cbc47032423597b475143ab27829b2d] =====
+
+===== contents/charmedchars/resourcepack/assets/charmedchars/textures/block/yellow/z.png [sha256 d99b4b57cf7929429e7b2145b9dcf1f0f5109cdaa6e4792698949c1ffd80d8aa] =====
+
+===== contents/charmedchars/resourcepack/assets/charmedchars/textures/item/pyrite/axe.png [sha256 eaa891ce6c2501caa2c9bfda7beb0e1b05b20e99b913fca9a1df5d6a6a8bbbe7] =====
+
+===== contents/charmedchars/resourcepack/assets/charmedchars/textures/item/pyrite/hoe.png [sha256 23a7d3643e925196033da54b34bcbb7142cabb68ac469cfd354e4a86956e7800] =====
+
+===== contents/charmedchars/resourcepack/assets/charmedchars/textures/item/pyrite/ingot.png [sha256 f338f74f7f0268a0288f8169e796d8fd626560e727f86968a46cf64ab3178757] =====
+
+===== contents/charmedchars/resourcepack/assets/charmedchars/textures/item/pyrite/pickaxe.png [sha256 0a39700299ee2c7f6651c33a0fcd3dbfc0d529226e0711b6cd725a8b9b1898f0] =====
+
+===== contents/charmedchars/resourcepack/assets/charmedchars/textures/item/pyrite/shovel.png [sha256 08587c1f6289fffb6839d512e1b0812dd60cf2223bc05c07f82877f6541d45cb] =====
+
+===== data/items_packs.yml =====
+# ItemsAdder items packs configuration
+# This file controls which custom item namespaces are loaded
+
+packs:
+  charmedchars:
+    enabled: true
+<no newline at end of file>

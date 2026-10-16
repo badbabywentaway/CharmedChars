@@ -1,0 +1,3803 @@
+##### RESULT MESSAGES #####
+Success
+
+##### FILES (255) #####
+CharmedChars_README.txt
+items/charmedchars_blocks.yml
+pack/assets/charmedchars/models/block/cyan/0.json
+pack/assets/charmedchars/models/block/cyan/1.json
+pack/assets/charmedchars/models/block/cyan/2.json
+pack/assets/charmedchars/models/block/cyan/3.json
+pack/assets/charmedchars/models/block/cyan/4.json
+pack/assets/charmedchars/models/block/cyan/5.json
+pack/assets/charmedchars/models/block/cyan/6.json
+pack/assets/charmedchars/models/block/cyan/7.json
+pack/assets/charmedchars/models/block/cyan/8.json
+pack/assets/charmedchars/models/block/cyan/9.json
+pack/assets/charmedchars/models/block/cyan/a.json
+pack/assets/charmedchars/models/block/cyan/b.json
+pack/assets/charmedchars/models/block/cyan/c.json
+pack/assets/charmedchars/models/block/cyan/d.json
+pack/assets/charmedchars/models/block/cyan/division.json
+pack/assets/charmedchars/models/block/cyan/e.json
+pack/assets/charmedchars/models/block/cyan/f.json
+pack/assets/charmedchars/models/block/cyan/g.json
+pack/assets/charmedchars/models/block/cyan/h.json
+pack/assets/charmedchars/models/block/cyan/i.json
+pack/assets/charmedchars/models/block/cyan/j.json
+pack/assets/charmedchars/models/block/cyan/k.json
+pack/assets/charmedchars/models/block/cyan/l.json
+pack/assets/charmedchars/models/block/cyan/logo_block.json
+pack/assets/charmedchars/models/block/cyan/m.json
+pack/assets/charmedchars/models/block/cyan/minus.json
+pack/assets/charmedchars/models/block/cyan/multiply.json
+pack/assets/charmedchars/models/block/cyan/n.json
+pack/assets/charmedchars/models/block/cyan/o.json
+pack/assets/charmedchars/models/block/cyan/p.json
+pack/assets/charmedchars/models/block/cyan/plus.json
+pack/assets/charmedchars/models/block/cyan/q.json
+pack/assets/charmedchars/models/block/cyan/r.json
+pack/assets/charmedchars/models/block/cyan/s.json
+pack/assets/charmedchars/models/block/cyan/t.json
+pack/assets/charmedchars/models/block/cyan/u.json
+pack/assets/charmedchars/models/block/cyan/v.json
+pack/assets/charmedchars/models/block/cyan/w.json
+pack/assets/charmedchars/models/block/cyan/x.json
+pack/assets/charmedchars/models/block/cyan/y.json
+pack/assets/charmedchars/models/block/cyan/z.json
+pack/assets/charmedchars/models/block/magenta/0.json
+pack/assets/charmedchars/models/block/magenta/1.json
+pack/assets/charmedchars/models/block/magenta/2.json
+pack/assets/charmedchars/models/block/magenta/3.json
+pack/assets/charmedchars/models/block/magenta/4.json
+pack/assets/charmedchars/models/block/magenta/5.json
+pack/assets/charmedchars/models/block/magenta/6.json
+pack/assets/charmedchars/models/block/magenta/7.json
+pack/assets/charmedchars/models/block/magenta/8.json
+pack/assets/charmedchars/models/block/magenta/9.json
+pack/assets/charmedchars/models/block/magenta/a.json
+pack/assets/charmedchars/models/block/magenta/b.json
+pack/assets/charmedchars/models/block/magenta/c.json
+pack/assets/charmedchars/models/block/magenta/d.json
+pack/assets/charmedchars/models/block/magenta/division.json
+pack/assets/charmedchars/models/block/magenta/e.json
+pack/assets/charmedchars/models/block/magenta/f.json
+pack/assets/charmedchars/models/block/magenta/g.json
+pack/assets/charmedchars/models/block/magenta/h.json
+pack/assets/charmedchars/models/block/magenta/i.json
+pack/assets/charmedchars/models/block/magenta/j.json
+pack/assets/charmedchars/models/block/magenta/k.json
+pack/assets/charmedchars/models/block/magenta/l.json
+pack/assets/charmedchars/models/block/magenta/logo_block.json
+pack/assets/charmedchars/models/block/magenta/m.json
+pack/assets/charmedchars/models/block/magenta/minus.json
+pack/assets/charmedchars/models/block/magenta/multiply.json
+pack/assets/charmedchars/models/block/magenta/n.json
+pack/assets/charmedchars/models/block/magenta/o.json
+pack/assets/charmedchars/models/block/magenta/p.json
+pack/assets/charmedchars/models/block/magenta/plus.json
+pack/assets/charmedchars/models/block/magenta/q.json
+pack/assets/charmedchars/models/block/magenta/r.json
+pack/assets/charmedchars/models/block/magenta/s.json
+pack/assets/charmedchars/models/block/magenta/t.json
+pack/assets/charmedchars/models/block/magenta/u.json
+pack/assets/charmedchars/models/block/magenta/v.json
+pack/assets/charmedchars/models/block/magenta/w.json
+pack/assets/charmedchars/models/block/magenta/x.json
+pack/assets/charmedchars/models/block/magenta/y.json
+pack/assets/charmedchars/models/block/magenta/z.json
+pack/assets/charmedchars/models/block/yellow/0.json
+pack/assets/charmedchars/models/block/yellow/1.json
+pack/assets/charmedchars/models/block/yellow/2.json
+pack/assets/charmedchars/models/block/yellow/3.json
+pack/assets/charmedchars/models/block/yellow/4.json
+pack/assets/charmedchars/models/block/yellow/5.json
+pack/assets/charmedchars/models/block/yellow/6.json
+pack/assets/charmedchars/models/block/yellow/7.json
+pack/assets/charmedchars/models/block/yellow/8.json
+pack/assets/charmedchars/models/block/yellow/9.json
+pack/assets/charmedchars/models/block/yellow/a.json
+pack/assets/charmedchars/models/block/yellow/b.json
+pack/assets/charmedchars/models/block/yellow/c.json
+pack/assets/charmedchars/models/block/yellow/d.json
+pack/assets/charmedchars/models/block/yellow/division.json
+pack/assets/charmedchars/models/block/yellow/e.json
+pack/assets/charmedchars/models/block/yellow/f.json
+pack/assets/charmedchars/models/block/yellow/g.json
+pack/assets/charmedchars/models/block/yellow/h.json
+pack/assets/charmedchars/models/block/yellow/i.json
+pack/assets/charmedchars/models/block/yellow/j.json
+pack/assets/charmedchars/models/block/yellow/k.json
+pack/assets/charmedchars/models/block/yellow/l.json
+pack/assets/charmedchars/models/block/yellow/logo_block.json
+pack/assets/charmedchars/models/block/yellow/m.json
+pack/assets/charmedchars/models/block/yellow/minus.json
+pack/assets/charmedchars/models/block/yellow/multiply.json
+pack/assets/charmedchars/models/block/yellow/n.json
+pack/assets/charmedchars/models/block/yellow/o.json
+pack/assets/charmedchars/models/block/yellow/p.json
+pack/assets/charmedchars/models/block/yellow/plus.json
+pack/assets/charmedchars/models/block/yellow/q.json
+pack/assets/charmedchars/models/block/yellow/r.json
+pack/assets/charmedchars/models/block/yellow/s.json
+pack/assets/charmedchars/models/block/yellow/t.json
+pack/assets/charmedchars/models/block/yellow/u.json
+pack/assets/charmedchars/models/block/yellow/v.json
+pack/assets/charmedchars/models/block/yellow/w.json
+pack/assets/charmedchars/models/block/yellow/x.json
+pack/assets/charmedchars/models/block/yellow/y.json
+pack/assets/charmedchars/models/block/yellow/z.json
+pack/assets/charmedchars/textures/block/cyan/0.png
+pack/assets/charmedchars/textures/block/cyan/1.png
+pack/assets/charmedchars/textures/block/cyan/2.png
+pack/assets/charmedchars/textures/block/cyan/3.png
+pack/assets/charmedchars/textures/block/cyan/4.png
+pack/assets/charmedchars/textures/block/cyan/5.png
+pack/assets/charmedchars/textures/block/cyan/6.png
+pack/assets/charmedchars/textures/block/cyan/7.png
+pack/assets/charmedchars/textures/block/cyan/8.png
+pack/assets/charmedchars/textures/block/cyan/9.png
+pack/assets/charmedchars/textures/block/cyan/a.png
+pack/assets/charmedchars/textures/block/cyan/b.png
+pack/assets/charmedchars/textures/block/cyan/c.png
+pack/assets/charmedchars/textures/block/cyan/d.png
+pack/assets/charmedchars/textures/block/cyan/division.png
+pack/assets/charmedchars/textures/block/cyan/e.png
+pack/assets/charmedchars/textures/block/cyan/f.png
+pack/assets/charmedchars/textures/block/cyan/g.png
+pack/assets/charmedchars/textures/block/cyan/h.png
+pack/assets/charmedchars/textures/block/cyan/i.png
+pack/assets/charmedchars/textures/block/cyan/j.png
+pack/assets/charmedchars/textures/block/cyan/k.png
+pack/assets/charmedchars/textures/block/cyan/l.png
+pack/assets/charmedchars/textures/block/cyan/logo_block.png
+pack/assets/charmedchars/textures/block/cyan/m.png
+pack/assets/charmedchars/textures/block/cyan/minus.png
+pack/assets/charmedchars/textures/block/cyan/multiply.png
+pack/assets/charmedchars/textures/block/cyan/n.png
+pack/assets/charmedchars/textures/block/cyan/o.png
+pack/assets/charmedchars/textures/block/cyan/p.png
+pack/assets/charmedchars/textures/block/cyan/plus.png
+pack/assets/charmedchars/textures/block/cyan/q.png
+pack/assets/charmedchars/textures/block/cyan/r.png
+pack/assets/charmedchars/textures/block/cyan/s.png
+pack/assets/charmedchars/textures/block/cyan/t.png
+pack/assets/charmedchars/textures/block/cyan/u.png
+pack/assets/charmedchars/textures/block/cyan/v.png
+pack/assets/charmedchars/textures/block/cyan/w.png
+pack/assets/charmedchars/textures/block/cyan/x.png
+pack/assets/charmedchars/textures/block/cyan/y.png
+pack/assets/charmedchars/textures/block/cyan/z.png
+pack/assets/charmedchars/textures/block/magenta/0.png
+pack/assets/charmedchars/textures/block/magenta/1.png
+pack/assets/charmedchars/textures/block/magenta/2.png
+pack/assets/charmedchars/textures/block/magenta/3.png
+pack/assets/charmedchars/textures/block/magenta/4.png
+pack/assets/charmedchars/textures/block/magenta/5.png
+pack/assets/charmedchars/textures/block/magenta/6.png
+pack/assets/charmedchars/textures/block/magenta/7.png
+pack/assets/charmedchars/textures/block/magenta/8.png
+pack/assets/charmedchars/textures/block/magenta/9.png
+pack/assets/charmedchars/textures/block/magenta/a.png
+pack/assets/charmedchars/textures/block/magenta/b.png
+pack/assets/charmedchars/textures/block/magenta/c.png
+pack/assets/charmedchars/textures/block/magenta/d.png
+pack/assets/charmedchars/textures/block/magenta/division.png
+pack/assets/charmedchars/textures/block/magenta/e.png
+pack/assets/charmedchars/textures/block/magenta/f.png
+pack/assets/charmedchars/textures/block/magenta/g.png
+pack/assets/charmedchars/textures/block/magenta/h.png
+pack/assets/charmedchars/textures/block/magenta/i.png
+pack/assets/charmedchars/textures/block/magenta/j.png
+pack/assets/charmedchars/textures/block/magenta/k.png
+pack/assets/charmedchars/textures/block/magenta/l.png
+pack/assets/charmedchars/textures/block/magenta/logo_block.png
+pack/assets/charmedchars/textures/block/magenta/m.png
+pack/assets/charmedchars/textures/block/magenta/minus.png
+pack/assets/charmedchars/textures/block/magenta/multiply.png
+pack/assets/charmedchars/textures/block/magenta/n.png
+pack/assets/charmedchars/textures/block/magenta/o.png
+pack/assets/charmedchars/textures/block/magenta/p.png
+pack/assets/charmedchars/textures/block/magenta/plus.png
+pack/assets/charmedchars/textures/block/magenta/q.png
+pack/assets/charmedchars/textures/block/magenta/r.png
+pack/assets/charmedchars/textures/block/magenta/s.png
+pack/assets/charmedchars/textures/block/magenta/t.png
+pack/assets/charmedchars/textures/block/magenta/u.png
+pack/assets/charmedchars/textures/block/magenta/v.png
+pack/assets/charmedchars/textures/block/magenta/w.png
+pack/assets/charmedchars/textures/block/magenta/x.png
+pack/assets/charmedchars/textures/block/magenta/y.png
+pack/assets/charmedchars/textures/block/magenta/z.png
+pack/assets/charmedchars/textures/block/yellow/0.png
+pack/assets/charmedchars/textures/block/yellow/1.png
+pack/assets/charmedchars/textures/block/yellow/2.png
+pack/assets/charmedchars/textures/block/yellow/3.png
+pack/assets/charmedchars/textures/block/yellow/4.png
+pack/assets/charmedchars/textures/block/yellow/5.png
+pack/assets/charmedchars/textures/block/yellow/6.png
+pack/assets/charmedchars/textures/block/yellow/7.png
+pack/assets/charmedchars/textures/block/yellow/8.png
+pack/assets/charmedchars/textures/block/yellow/9.png
+pack/assets/charmedchars/textures/block/yellow/a.png
+pack/assets/charmedchars/textures/block/yellow/b.png
+pack/assets/charmedchars/textures/block/yellow/c.png
+pack/assets/charmedchars/textures/block/yellow/d.png
+pack/assets/charmedchars/textures/block/yellow/division.png
+pack/assets/charmedchars/textures/block/yellow/e.png
+pack/assets/charmedchars/textures/block/yellow/f.png
+pack/assets/charmedchars/textures/block/yellow/g.png
+pack/assets/charmedchars/textures/block/yellow/h.png
+pack/assets/charmedchars/textures/block/yellow/i.png
+pack/assets/charmedchars/textures/block/yellow/j.png
+pack/assets/charmedchars/textures/block/yellow/k.png
+pack/assets/charmedchars/textures/block/yellow/l.png
+pack/assets/charmedchars/textures/block/yellow/logo_block.png
+pack/assets/charmedchars/textures/block/yellow/m.png
+pack/assets/charmedchars/textures/block/yellow/minus.png
+pack/assets/charmedchars/textures/block/yellow/multiply.png
+pack/assets/charmedchars/textures/block/yellow/n.png
+pack/assets/charmedchars/textures/block/yellow/o.png
+pack/assets/charmedchars/textures/block/yellow/p.png
+pack/assets/charmedchars/textures/block/yellow/plus.png
+pack/assets/charmedchars/textures/block/yellow/q.png
+pack/assets/charmedchars/textures/block/yellow/r.png
+pack/assets/charmedchars/textures/block/yellow/s.png
+pack/assets/charmedchars/textures/block/yellow/t.png
+pack/assets/charmedchars/textures/block/yellow/u.png
+pack/assets/charmedchars/textures/block/yellow/v.png
+pack/assets/charmedchars/textures/block/yellow/w.png
+pack/assets/charmedchars/textures/block/yellow/x.png
+pack/assets/charmedchars/textures/block/yellow/y.png
+pack/assets/charmedchars/textures/block/yellow/z.png
+pack/assets/charmedchars/textures/item/pyrite/pyrite_axe.png
+pack/assets/charmedchars/textures/item/pyrite/pyrite_hoe.png
+pack/assets/charmedchars/textures/item/pyrite/pyrite_ingot.png
+pack/assets/charmedchars/textures/item/pyrite/pyrite_pickaxe.png
+pack/assets/charmedchars/textures/item/pyrite/pyrite_shovel.png
+recipes/shaped/charmedchars.yml
+recipes/shapeless/charmedchars.yml
+
+===== CharmedChars_README.txt =====
+# CharmedChars - Nexo Integration
+
+This folder contains auto-generated configuration for CharmedChars custom items and blocks.
+
+## What was generated:
+
+- **items/charmedchars_blocks.yml**: 128 custom items (123 blocks + 5 pyrite items)
+- **pack/assets/charmedchars/textures/**: 128 texture files in cyan/magenta/yellow colors
+- **pack/assets/charmedchars/models/block/**: Block model JSON files
+- **recipes/shaped.yml**: Pyrite crafting recipes (updated)
+
+## Next Steps:
+
+1. Run `/nexo reload all` to load the new items
+2. Restart your server (recommended)
+3. Players will automatically receive the updated resource pack
+
+## Testing CharmedChars:
+
+- Use `/charblock <player> <color> <letter>` to give letter blocks
+- Place letter blocks in horizontal or vertical lines
+- Break any letter with a gold or pyrite tool to score words
+- See PLAY_INSTRUCTIONS.md for complete gameplay guide
+
+## Regenerating Configuration:
+
+If you need to regenerate this configuration:
+```
+/nexosetup force
+```
+
+## Support:
+
+- GitHub: https://github.com/badbabywentaway/CharmedChars
+- Issues: https://github.com/badbabywentaway/CharmedChars/issues
+
+---
+Generated by CharmedChars vGOLDEN
+**IMPORTANT**: Nexo integration requires Paper block update optimizations to be enabled.
+See NEXO_SETUP.md in the CharmedChars GitHub repository for configuration instructions.
+Report any issues on GitHub!
+<no newline at end of file>
+
+===== items/charmedchars_blocks.yml =====
+# CharmedChars Items Configuration for Nexo
+# Auto-generated by CharmedChars plugin
+# DO NOT EDIT MANUALLY - Use /nexosetup force to regenerate
+
+cyan_e:
+  itemname: "<gradient:#00FFFF:#00CED1>E</gradient>"
+  material: NOTE_BLOCK
+  Pack:
+    model: charmedchars:block/cyan/e
+  Mechanics:
+    custom_block:
+      type: NOTEBLOCK
+      drop:
+        silktouch: false
+        fortune: false
+        minimal_type: WOODEN
+        best_tool: null
+        loots:
+          - nexo_item: cyan_e
+
+cyan_m:
+  itemname: "<gradient:#00FFFF:#00CED1>M</gradient>"
+  material: NOTE_BLOCK
+  Pack:
+    model: charmedchars:block/cyan/m
+  Mechanics:
+    custom_block:
+      type: NOTEBLOCK
+      drop:
+        silktouch: false
+        fortune: false
+        minimal_type: WOODEN
+        best_tool: null
+        loots:
+          - nexo_item: cyan_m
+
+cyan_a:
+  itemname: "<gradient:#00FFFF:#00CED1>A</gradient>"
+  material: NOTE_BLOCK
+  Pack:
+    model: charmedchars:block/cyan/a
+  Mechanics:
+    custom_block:
+      type: NOTEBLOCK
+      drop:
+        silktouch: false
+        fortune: false
+        minimal_type: WOODEN
+        best_tool: null
+        loots:
+          - nexo_item: cyan_a
+
+cyan_h:
+  itemname: "<gradient:#00FFFF:#00CED1>H</gradient>"
+  material: NOTE_BLOCK
+  Pack:
+    model: charmedchars:block/cyan/h
+  Mechanics:
+    custom_block:
+      type: NOTEBLOCK
+      drop:
+        silktouch: false
+        fortune: false
+        minimal_type: WOODEN
+        best_tool: null
+        loots:
+          - nexo_item: cyan_h
+
+cyan_r:
+  itemname: "<gradient:#00FFFF:#00CED1>R</gradient>"
+  material: NOTE_BLOCK
+  Pack:
+    model: charmedchars:block/cyan/r
+  Mechanics:
+    custom_block:
+      type: NOTEBLOCK
+      drop:
+        silktouch: false
+        fortune: false
+        minimal_type: WOODEN
+        best_tool: null
+        loots:
+          - nexo_item: cyan_r
+
+cyan_g:
+  itemname: "<gradient:#00FFFF:#00CED1>G</gradient>"
+  material: NOTE_BLOCK
+  Pack:
+    model: charmedchars:block/cyan/g
+  Mechanics:
+    custom_block:
+      type: NOTEBLOCK
+      drop:
+        silktouch: false
+        fortune: false
+        minimal_type: WOODEN
+        best_tool: null
+        loots:
+          - nexo_item: cyan_g
+
+cyan_i:
+  itemname: "<gradient:#00FFFF:#00CED1>I</gradient>"
+  material: NOTE_BLOCK
+  Pack:
+    model: charmedchars:block/cyan/i
+  Mechanics:
+    custom_block:
+      type: NOTEBLOCK
+      drop:
+        silktouch: false
+        fortune: false
+        minimal_type: WOODEN
+        best_tool: null
+        loots:
+          - nexo_item: cyan_i
+
+cyan_b:
+  itemname: "<gradient:#00FFFF:#00CED1>B</gradient>"
+  material: NOTE_BLOCK
+  Pack:
+    model: charmedchars:block/cyan/b
+  Mechanics:
+    custom_block:
+      type: NOTEBLOCK
+      drop:
+        silktouch: false
+        fortune: false
+        minimal_type: WOODEN
+        best_tool: null
+        loots:
+          - nexo_item: cyan_b
+
+cyan_o:
+  itemname: "<gradient:#00FFFF:#00CED1>O</gradient>"
+  material: NOTE_BLOCK
+  Pack:
+    model: charmedchars:block/cyan/o
+  Mechanics:
+    custom_block:
+      type: NOTEBLOCK
+      drop:
+        silktouch: false
+        fortune: false
+        minimal_type: WOODEN
+        best_tool: null
+        loots:
+          - nexo_item: cyan_o
+
+cyan_f:
+  itemname: "<gradient:#00FFFF:#00CED1>F</gradient>"
+  material: NOTE_BLOCK
+  Pack:
+    model: charmedchars:block/cyan/f
+  Mechanics:
+    custom_block:
+      type: NOTEBLOCK
+      drop:
+        silktouch: false
+        fortune: false
+        minimal_type: WOODEN
+        best_tool: null
+        loots:
+          - nexo_item: cyan_f
+
+cyan_t:
+  itemname: "<gradient:#00FFFF:#00CED1>T</gradient>"
+  material: NOTE_BLOCK
+  Pack:
+    model: charmedchars:block/cyan/t
+  Mechanics:
+    custom_block:
+      type: NOTEBLOCK
+      drop:
+        silktouch: false
+        fortune: false
+        minimal_type: WOODEN
+        best_tool: null
+        loots:
+          - nexo_item: cyan_t
+
+cyan_y:
+  itemname: "<gradient:#00FFFF:#00CED1>Y</gradient>"
+  material: NOTE_BLOCK
+  Pack:
+    model: charmedchars:block/cyan/y
+  Mechanics:
+    custom_block:
+      type: NOTEBLOCK
+      drop:
+        silktouch: false
+        fortune: false
+        minimal_type: WOODEN
+        best_tool: null
+        loots:
+          - nexo_item: cyan_y
+
+cyan_n:
+  itemname: "<gradient:#00FFFF:#00CED1>N</gradient>"
+  material: NOTE_BLOCK
+  Pack:
+    model: charmedchars:block/cyan/n
+  Mechanics:
+    custom_block:
+      type: NOTEBLOCK
+      drop:
+        silktouch: false
+        fortune: false
+        minimal_type: WOODEN
+        best_tool: null
+        loots:
+          - nexo_item: cyan_n
+
+cyan_w:
+  itemname: "<gradient:#00FFFF:#00CED1>W</gradient>"
+  material: NOTE_BLOCK
+  Pack:
+    model: charmedchars:block/cyan/w
+  Mechanics:
+    custom_block:
+      type: NOTEBLOCK
+      drop:
+        silktouch: false
+        fortune: false
+        minimal_type: WOODEN
+        best_tool: null
+        loots:
+          - nexo_item: cyan_w
+
+cyan_s:
+  itemname: "<gradient:#00FFFF:#00CED1>S</gradient>"
+  material: NOTE_BLOCK
+  Pack:
+    model: charmedchars:block/cyan/s
+  Mechanics:
+    custom_block:
+      type: NOTEBLOCK
+      drop:
+        silktouch: false
+        fortune: false
+        minimal_type: WOODEN
+        best_tool: null
+        loots:
+          - nexo_item: cyan_s
+
+cyan_k:
+  itemname: "<gradient:#00FFFF:#00CED1>K</gradient>"
+  material: NOTE_BLOCK
+  Pack:
+    model: charmedchars:block/cyan/k
+  Mechanics:
+    custom_block:
+      type: NOTEBLOCK
+      drop:
+        silktouch: false
+        fortune: false
+        minimal_type: WOODEN
+        best_tool: null
+        loots:
+          - nexo_item: cyan_k
+
+cyan_l:
+  itemname: "<gradient:#00FFFF:#00CED1>L</gradient>"
+  material: NOTE_BLOCK
+  Pack:
+    model: charmedchars:block/cyan/l
+  Mechanics:
+    custom_block:
+      type: NOTEBLOCK
+      drop:
+        silktouch: false
+        fortune: false
+        minimal_type: WOODEN
+        best_tool: null
+        loots:
+          - nexo_item: cyan_l
+
+cyan_v:
+  itemname: "<gradient:#00FFFF:#00CED1>V</gradient>"
+  material: NOTE_BLOCK
+  Pack:
+    model: charmedchars:block/cyan/v
+  Mechanics:
+    custom_block:
+      type: NOTEBLOCK
+      drop:
+        silktouch: false
+        fortune: false
+        minimal_type: WOODEN
+        best_tool: null
+        loots:
+          - nexo_item: cyan_v
+
+cyan_c:
+  itemname: "<gradient:#00FFFF:#00CED1>C</gradient>"
+  material: NOTE_BLOCK
+  Pack:
+    model: charmedchars:block/cyan/c
+  Mechanics:
+    custom_block:
+      type: NOTEBLOCK
+      drop:
+        silktouch: false
+        fortune: false
+        minimal_type: WOODEN
+        best_tool: null
+        loots:
+          - nexo_item: cyan_c
+
+cyan_x:
+  itemname: "<gradient:#00FFFF:#00CED1>X</gradient>"
+  material: NOTE_BLOCK
+  Pack:
+    model: charmedchars:block/cyan/x
+  Mechanics:
+    custom_block:
+      type: NOTEBLOCK
+      drop:
+        silktouch: false
+        fortune: false
+        minimal_type: WOODEN
+        best_tool: null
+        loots:
+          - nexo_item: cyan_x
+
+cyan_u:
+  itemname: "<gradient:#00FFFF:#00CED1>U</gradient>"
+  material: NOTE_BLOCK
+  Pack:
+    model: charmedchars:block/cyan/u
+  Mechanics:
+    custom_block:
+      type: NOTEBLOCK
+      drop:
+        silktouch: false
+        fortune: false
+        minimal_type: WOODEN
+        best_tool: null
+        loots:
+          - nexo_item: cyan_u
+
+cyan_z:
+  itemname: "<gradient:#00FFFF:#00CED1>Z</gradient>"
+  material: NOTE_BLOCK
+  Pack:
+    model: charmedchars:block/cyan/z
+  Mechanics:
+    custom_block:
+      type: NOTEBLOCK
+      drop:
+        silktouch: false
+        fortune: false
+        minimal_type: WOODEN
+        best_tool: null
+        loots:
+          - nexo_item: cyan_z
+
+cyan_d:
+  itemname: "<gradient:#00FFFF:#00CED1>D</gradient>"
+  material: NOTE_BLOCK
+  Pack:
+    model: charmedchars:block/cyan/d
+  Mechanics:
+    custom_block:
+      type: NOTEBLOCK
+      drop:
+        silktouch: false
+        fortune: false
+        minimal_type: WOODEN
+        best_tool: null
+        loots:
+          - nexo_item: cyan_d
+
+cyan_j:
+  itemname: "<gradient:#00FFFF:#00CED1>J</gradient>"
+  material: NOTE_BLOCK
+  Pack:
+    model: charmedchars:block/cyan/j
+  Mechanics:
+    custom_block:
+      type: NOTEBLOCK
+      drop:
+        silktouch: false
+        fortune: false
+        minimal_type: WOODEN
+        best_tool: null
+        loots:
+          - nexo_item: cyan_j
+
+cyan_p:
+  itemname: "<gradient:#00FFFF:#00CED1>P</gradient>"
+  material: NOTE_BLOCK
+  Pack:
+    model: charmedchars:block/cyan/p
+  Mechanics:
+    custom_block:
+      type: NOTEBLOCK
+      drop:
+        silktouch: false
+        fortune: false
+        minimal_type: WOODEN
+        best_tool: null
+        loots:
+          - nexo_item: cyan_p
+
+cyan_q:
+  itemname: "<gradient:#00FFFF:#00CED1>Q</gradient>"
+  material: NOTE_BLOCK
+  Pack:
+    model: charmedchars:block/cyan/q
+  Mechanics:
+    custom_block:
+      type: NOTEBLOCK
+      drop:
+        silktouch: false
+        fortune: false
+        minimal_type: WOODEN
+        best_tool: null
+        loots:
+          - nexo_item: cyan_q
+
+magenta_e:
+  itemname: "<gradient:#FF00FF:#FF1493>E</gradient>"
+  material: NOTE_BLOCK
+  Pack:
+    model: charmedchars:block/magenta/e
+  Mechanics:
+    custom_block:
+      type: NOTEBLOCK
+      drop:
+        silktouch: false
+        fortune: false
+        minimal_type: WOODEN
+        best_tool: null
+        loots:
+          - nexo_item: magenta_e
+
+magenta_m:
+  itemname: "<gradient:#FF00FF:#FF1493>M</gradient>"
+  material: NOTE_BLOCK
+  Pack:
+    model: charmedchars:block/magenta/m
+  Mechanics:
+    custom_block:
+      type: NOTEBLOCK
+      drop:
+        silktouch: false
+        fortune: false
+        minimal_type: WOODEN
+        best_tool: null
+        loots:
+          - nexo_item: magenta_m
+
+magenta_a:
+  itemname: "<gradient:#FF00FF:#FF1493>A</gradient>"
+  material: NOTE_BLOCK
+  Pack:
+    model: charmedchars:block/magenta/a
+  Mechanics:
+    custom_block:
+      type: NOTEBLOCK
+      drop:
+        silktouch: false
+        fortune: false
+        minimal_type: WOODEN
+        best_tool: null
+        loots:
+          - nexo_item: magenta_a
+
+magenta_h:
+  itemname: "<gradient:#FF00FF:#FF1493>H</gradient>"
+  material: NOTE_BLOCK
+  Pack:
+    model: charmedchars:block/magenta/h
+  Mechanics:
+    custom_block:
+      type: NOTEBLOCK
+      drop:
+        silktouch: false
+        fortune: false
+        minimal_type: WOODEN
+        best_tool: null
+        loots:
+          - nexo_item: magenta_h
+
+magenta_r:
+  itemname: "<gradient:#FF00FF:#FF1493>R</gradient>"
+  material: NOTE_BLOCK
+  Pack:
+    model: charmedchars:block/magenta/r
+  Mechanics:
+    custom_block:
+      type: NOTEBLOCK
+      drop:
+        silktouch: false
+        fortune: false
+        minimal_type: WOODEN
+        best_tool: null
+        loots:
+          - nexo_item: magenta_r
+
+magenta_g:
+  itemname: "<gradient:#FF00FF:#FF1493>G</gradient>"
+  material: NOTE_BLOCK
+  Pack:
+    model: charmedchars:block/magenta/g
+  Mechanics:
+    custom_block:
+      type: NOTEBLOCK
+      drop:
+        silktouch: false
+        fortune: false
+        minimal_type: WOODEN
+        best_tool: null
+        loots:
+          - nexo_item: magenta_g
+
+magenta_i:
+  itemname: "<gradient:#FF00FF:#FF1493>I</gradient>"
+  material: NOTE_BLOCK
+  Pack:
+    model: charmedchars:block/magenta/i
+  Mechanics:
+    custom_block:
+      type: NOTEBLOCK
+      drop:
+        silktouch: false
+        fortune: false
+        minimal_type: WOODEN
+        best_tool: null
+        loots:
+          - nexo_item: magenta_i
+
+magenta_b:
+  itemname: "<gradient:#FF00FF:#FF1493>B</gradient>"
+  material: NOTE_BLOCK
+  Pack:
+    model: charmedchars:block/magenta/b
+  Mechanics:
+    custom_block:
+      type: NOTEBLOCK
+      drop:
+        silktouch: false
+        fortune: false
+        minimal_type: WOODEN
+        best_tool: null
+        loots:
+          - nexo_item: magenta_b
+
+magenta_o:
+  itemname: "<gradient:#FF00FF:#FF1493>O</gradient>"
+  material: NOTE_BLOCK
+  Pack:
+    model: charmedchars:block/magenta/o
+  Mechanics:
+    custom_block:
+      type: NOTEBLOCK
+      drop:
+        silktouch: false
+        fortune: false
+        minimal_type: WOODEN
+        best_tool: null
+        loots:
+          - nexo_item: magenta_o
+
+magenta_f:
+  itemname: "<gradient:#FF00FF:#FF1493>F</gradient>"
+  material: NOTE_BLOCK
+  Pack:
+    model: charmedchars:block/magenta/f
+  Mechanics:
+    custom_block:
+      type: NOTEBLOCK
+      drop:
+        silktouch: false
+        fortune: false
+        minimal_type: WOODEN
+        best_tool: null
+        loots:
+          - nexo_item: magenta_f
+
+magenta_t:
+  itemname: "<gradient:#FF00FF:#FF1493>T</gradient>"
+  material: NOTE_BLOCK
+  Pack:
+    model: charmedchars:block/magenta/t
+  Mechanics:
+    custom_block:
+      type: NOTEBLOCK
+      drop:
+        silktouch: false
+        fortune: false
+        minimal_type: WOODEN
+        best_tool: null
+        loots:
+          - nexo_item: magenta_t
+
+magenta_y:
+  itemname: "<gradient:#FF00FF:#FF1493>Y</gradient>"
+  material: NOTE_BLOCK
+  Pack:
+    model: charmedchars:block/magenta/y
+  Mechanics:
+    custom_block:
+      type: NOTEBLOCK
+      drop:
+        silktouch: false
+        fortune: false
+        minimal_type: WOODEN
+        best_tool: null
+        loots:
+          - nexo_item: magenta_y
+
+magenta_n:
+  itemname: "<gradient:#FF00FF:#FF1493>N</gradient>"
+  material: NOTE_BLOCK
+  Pack:
+    model: charmedchars:block/magenta/n
+  Mechanics:
+    custom_block:
+      type: NOTEBLOCK
+      drop:
+        silktouch: false
+        fortune: false
+        minimal_type: WOODEN
+        best_tool: null
+        loots:
+          - nexo_item: magenta_n
+
+magenta_w:
+  itemname: "<gradient:#FF00FF:#FF1493>W</gradient>"
+  material: NOTE_BLOCK
+  Pack:
+    model: charmedchars:block/magenta/w
+  Mechanics:
+    custom_block:
+      type: NOTEBLOCK
+      drop:
+        silktouch: false
+        fortune: false
+        minimal_type: WOODEN
+        best_tool: null
+        loots:
+          - nexo_item: magenta_w
+
+magenta_s:
+  itemname: "<gradient:#FF00FF:#FF1493>S</gradient>"
+  material: NOTE_BLOCK
+  Pack:
+    model: charmedchars:block/magenta/s
+  Mechanics:
+    custom_block:
+      type: NOTEBLOCK
+      drop:
+        silktouch: false
+        fortune: false
+        minimal_type: WOODEN
+        best_tool: null
+        loots:
+          - nexo_item: magenta_s
+
+magenta_k:
+  itemname: "<gradient:#FF00FF:#FF1493>K</gradient>"
+  material: NOTE_BLOCK
+  Pack:
+    model: charmedchars:block/magenta/k
+  Mechanics:
+    custom_block:
+      type: NOTEBLOCK
+      drop:
+        silktouch: false
+        fortune: false
+        minimal_type: WOODEN
+        best_tool: null
+        loots:
+          - nexo_item: magenta_k
+
+magenta_l:
+  itemname: "<gradient:#FF00FF:#FF1493>L</gradient>"
+  material: NOTE_BLOCK
+  Pack:
+    model: charmedchars:block/magenta/l
+  Mechanics:
+    custom_block:
+      type: NOTEBLOCK
+      drop:
+        silktouch: false
+        fortune: false
+        minimal_type: WOODEN
+        best_tool: null
+        loots:
+          - nexo_item: magenta_l
+
+magenta_v:
+  itemname: "<gradient:#FF00FF:#FF1493>V</gradient>"
+  material: NOTE_BLOCK
+  Pack:
+    model: charmedchars:block/magenta/v
+  Mechanics:
+    custom_block:
+      type: NOTEBLOCK
+      drop:
+        silktouch: false
+        fortune: false
+        minimal_type: WOODEN
+        best_tool: null
+        loots:
+          - nexo_item: magenta_v
+
+magenta_c:
+  itemname: "<gradient:#FF00FF:#FF1493>C</gradient>"
+  material: NOTE_BLOCK
+  Pack:
+    model: charmedchars:block/magenta/c
+  Mechanics:
+    custom_block:
+      type: NOTEBLOCK
+      drop:
+        silktouch: false
+        fortune: false
+        minimal_type: WOODEN
+        best_tool: null
+        loots:
+          - nexo_item: magenta_c
+
+magenta_x:
+  itemname: "<gradient:#FF00FF:#FF1493>X</gradient>"
+  material: NOTE_BLOCK
+  Pack:
+    model: charmedchars:block/magenta/x
+  Mechanics:
+    custom_block:
+      type: NOTEBLOCK
+      drop:
+        silktouch: false
+        fortune: false
+        minimal_type: WOODEN
+        best_tool: null
+        loots:
+          - nexo_item: magenta_x
+
+magenta_u:
+  itemname: "<gradient:#FF00FF:#FF1493>U</gradient>"
+  material: NOTE_BLOCK
+  Pack:
+    model: charmedchars:block/magenta/u
+  Mechanics:
+    custom_block:
+      type: NOTEBLOCK
+      drop:
+        silktouch: false
+        fortune: false
+        minimal_type: WOODEN
+        best_tool: null
+        loots:
+          - nexo_item: magenta_u
+
+magenta_z:
+  itemname: "<gradient:#FF00FF:#FF1493>Z</gradient>"
+  material: NOTE_BLOCK
+  Pack:
+    model: charmedchars:block/magenta/z
+  Mechanics:
+    custom_block:
+      type: NOTEBLOCK
+      drop:
+        silktouch: false
+        fortune: false
+        minimal_type: WOODEN
+        best_tool: null
+        loots:
+          - nexo_item: magenta_z
+
+magenta_d:
+  itemname: "<gradient:#FF00FF:#FF1493>D</gradient>"
+  material: NOTE_BLOCK
+  Pack:
+    model: charmedchars:block/magenta/d
+  Mechanics:
+    custom_block:
+      type: NOTEBLOCK
+      drop:
+        silktouch: false
+        fortune: false
+        minimal_type: WOODEN
+        best_tool: null
+        loots:
+          - nexo_item: magenta_d
+
+magenta_j:
+  itemname: "<gradient:#FF00FF:#FF1493>J</gradient>"
+  material: NOTE_BLOCK
+  Pack:
+    model: charmedchars:block/magenta/j
+  Mechanics:
+    custom_block:
+      type: NOTEBLOCK
+      drop:
+        silktouch: false
+        fortune: false
+        minimal_type: WOODEN
+        best_tool: null
+        loots:
+          - nexo_item: magenta_j
+
+magenta_p:
+  itemname: "<gradient:#FF00FF:#FF1493>P</gradient>"
+  material: NOTE_BLOCK
+  Pack:
+    model: charmedchars:block/magenta/p
+  Mechanics:
+    custom_block:
+      type: NOTEBLOCK
+      drop:
+        silktouch: false
+        fortune: false
+        minimal_type: WOODEN
+        best_tool: null
+        loots:
+          - nexo_item: magenta_p
+
+magenta_q:
+  itemname: "<gradient:#FF00FF:#FF1493>Q</gradient>"
+  material: NOTE_BLOCK
+  Pack:
+    model: charmedchars:block/magenta/q
+  Mechanics:
+    custom_block:
+      type: NOTEBLOCK
+      drop:
+        silktouch: false
+        fortune: false
+        minimal_type: WOODEN
+        best_tool: null
+        loots:
+          - nexo_item: magenta_q
+
+yellow_e:
+  itemname: "<gradient:#FFFF00:#FFD700>E</gradient>"
+  material: NOTE_BLOCK
+  Pack:
+    model: charmedchars:block/yellow/e
+  Mechanics:
+    custom_block:
+      type: NOTEBLOCK
+      drop:
+        silktouch: false
+        fortune: false
+        minimal_type: WOODEN
+        best_tool: null
+        loots:
+          - nexo_item: yellow_e
+
+yellow_m:
+  itemname: "<gradient:#FFFF00:#FFD700>M</gradient>"
+  material: NOTE_BLOCK
+  Pack:
+    model: charmedchars:block/yellow/m
+  Mechanics:
+    custom_block:
+      type: NOTEBLOCK
+      drop:
+        silktouch: false
+        fortune: false
+        minimal_type: WOODEN
+        best_tool: null
+        loots:
+          - nexo_item: yellow_m
+
+yellow_a:
+  itemname: "<gradient:#FFFF00:#FFD700>A</gradient>"
+  material: NOTE_BLOCK
+  Pack:
+    model: charmedchars:block/yellow/a
+  Mechanics:
+    custom_block:
+      type: NOTEBLOCK
+      drop:
+        silktouch: false
+        fortune: false
+        minimal_type: WOODEN
+        best_tool: null
+        loots:
+          - nexo_item: yellow_a
+
+yellow_h:
+  itemname: "<gradient:#FFFF00:#FFD700>H</gradient>"
+  material: NOTE_BLOCK
+  Pack:
+    model: charmedchars:block/yellow/h
+  Mechanics:
+    custom_block:
+      type: NOTEBLOCK
+      drop:
+        silktouch: false
+        fortune: false
+        minimal_type: WOODEN
+        best_tool: null
+        loots:
+          - nexo_item: yellow_h
+
+yellow_r:
+  itemname: "<gradient:#FFFF00:#FFD700>R</gradient>"
+  material: NOTE_BLOCK
+  Pack:
+    model: charmedchars:block/yellow/r
+  Mechanics:
+    custom_block:
+      type: NOTEBLOCK
+      drop:
+        silktouch: false
+        fortune: false
+        minimal_type: WOODEN
+        best_tool: null
+        loots:
+          - nexo_item: yellow_r
+
+yellow_g:
+  itemname: "<gradient:#FFFF00:#FFD700>G</gradient>"
+  material: NOTE_BLOCK
+  Pack:
+    model: charmedchars:block/yellow/g
+  Mechanics:
+    custom_block:
+      type: NOTEBLOCK
+      drop:
+        silktouch: false
+        fortune: false
+        minimal_type: WOODEN
+        best_tool: null
+        loots:
+          - nexo_item: yellow_g
+
+yellow_i:
+  itemname: "<gradient:#FFFF00:#FFD700>I</gradient>"
+  material: NOTE_BLOCK
+  Pack:
+    model: charmedchars:block/yellow/i
+  Mechanics:
+    custom_block:
+      type: NOTEBLOCK
+      drop:
+        silktouch: false
+        fortune: false
+        minimal_type: WOODEN
+        best_tool: null
+        loots:
+          - nexo_item: yellow_i
+
+yellow_b:
+  itemname: "<gradient:#FFFF00:#FFD700>B</gradient>"
+  material: NOTE_BLOCK
+  Pack:
+    model: charmedchars:block/yellow/b
+  Mechanics:
+    custom_block:
+      type: NOTEBLOCK
+      drop:
+        silktouch: false
+        fortune: false
+        minimal_type: WOODEN
+        best_tool: null
+        loots:
+          - nexo_item: yellow_b
+
+yellow_o:
+  itemname: "<gradient:#FFFF00:#FFD700>O</gradient>"
+  material: NOTE_BLOCK
+  Pack:
+    model: charmedchars:block/yellow/o
+  Mechanics:
+    custom_block:
+      type: NOTEBLOCK
+      drop:
+        silktouch: false
+        fortune: false
+        minimal_type: WOODEN
+        best_tool: null
+        loots:
+          - nexo_item: yellow_o
+
+yellow_f:
+  itemname: "<gradient:#FFFF00:#FFD700>F</gradient>"
+  material: NOTE_BLOCK
+  Pack:
+    model: charmedchars:block/yellow/f
+  Mechanics:
+    custom_block:
+      type: NOTEBLOCK
+      drop:
+        silktouch: false
+        fortune: false
+        minimal_type: WOODEN
+        best_tool: null
+        loots:
+          - nexo_item: yellow_f
+
+yellow_t:
+  itemname: "<gradient:#FFFF00:#FFD700>T</gradient>"
+  material: NOTE_BLOCK
+  Pack:
+    model: charmedchars:block/yellow/t
+  Mechanics:
+    custom_block:
+      type: NOTEBLOCK
+      drop:
+        silktouch: false
+        fortune: false
+        minimal_type: WOODEN
+        best_tool: null
+        loots:
+          - nexo_item: yellow_t
+
+yellow_y:
+  itemname: "<gradient:#FFFF00:#FFD700>Y</gradient>"
+  material: NOTE_BLOCK
+  Pack:
+    model: charmedchars:block/yellow/y
+  Mechanics:
+    custom_block:
+      type: NOTEBLOCK
+      drop:
+        silktouch: false
+        fortune: false
+        minimal_type: WOODEN
+        best_tool: null
+        loots:
+          - nexo_item: yellow_y
+
+yellow_n:
+  itemname: "<gradient:#FFFF00:#FFD700>N</gradient>"
+  material: NOTE_BLOCK
+  Pack:
+    model: charmedchars:block/yellow/n
+  Mechanics:
+    custom_block:
+      type: NOTEBLOCK
+      drop:
+        silktouch: false
+        fortune: false
+        minimal_type: WOODEN
+        best_tool: null
+        loots:
+          - nexo_item: yellow_n
+
+yellow_w:
+  itemname: "<gradient:#FFFF00:#FFD700>W</gradient>"
+  material: NOTE_BLOCK
+  Pack:
+    model: charmedchars:block/yellow/w
+  Mechanics:
+    custom_block:
+      type: NOTEBLOCK
+      drop:
+        silktouch: false
+        fortune: false
+        minimal_type: WOODEN
+        best_tool: null
+        loots:
+          - nexo_item: yellow_w
+
+yellow_s:
+  itemname: "<gradient:#FFFF00:#FFD700>S</gradient>"
+  material: NOTE_BLOCK
+  Pack:
+    model: charmedchars:block/yellow/s
+  Mechanics:
+    custom_block:
+      type: NOTEBLOCK
+      drop:
+        silktouch: false
+        fortune: false
+        minimal_type: WOODEN
+        best_tool: null
+        loots:
+          - nexo_item: yellow_s
+
+yellow_k:
+  itemname: "<gradient:#FFFF00:#FFD700>K</gradient>"
+  material: NOTE_BLOCK
+  Pack:
+    model: charmedchars:block/yellow/k
+  Mechanics:
+    custom_block:
+      type: NOTEBLOCK
+      drop:
+        silktouch: false
+        fortune: false
+        minimal_type: WOODEN
+        best_tool: null
+        loots:
+          - nexo_item: yellow_k
+
+yellow_l:
+  itemname: "<gradient:#FFFF00:#FFD700>L</gradient>"
+  material: NOTE_BLOCK
+  Pack:
+    model: charmedchars:block/yellow/l
+  Mechanics:
+    custom_block:
+      type: NOTEBLOCK
+      drop:
+        silktouch: false
+        fortune: false
+        minimal_type: WOODEN
+        best_tool: null
+        loots:
+          - nexo_item: yellow_l
+
+yellow_v:
+  itemname: "<gradient:#FFFF00:#FFD700>V</gradient>"
+  material: NOTE_BLOCK
+  Pack:
+    model: charmedchars:block/yellow/v
+  Mechanics:
+    custom_block:
+      type: NOTEBLOCK
+      drop:
+        silktouch: false
+        fortune: false
+        minimal_type: WOODEN
+        best_tool: null
+        loots:
+          - nexo_item: yellow_v
+
+yellow_c:
+  itemname: "<gradient:#FFFF00:#FFD700>C</gradient>"
+  material: NOTE_BLOCK
+  Pack:
+    model: charmedchars:block/yellow/c
+  Mechanics:
+    custom_block:
+      type: NOTEBLOCK
+      drop:
+        silktouch: false
+        fortune: false
+        minimal_type: WOODEN
+        best_tool: null
+        loots:
+          - nexo_item: yellow_c
+
+yellow_x:
+  itemname: "<gradient:#FFFF00:#FFD700>X</gradient>"
+  material: NOTE_BLOCK
+  Pack:
+    model: charmedchars:block/yellow/x
+  Mechanics:
+    custom_block:
+      type: NOTEBLOCK
+      drop:
+        silktouch: false
+        fortune: false
+        minimal_type: WOODEN
+        best_tool: null
+        loots:
+          - nexo_item: yellow_x
+
+yellow_u:
+  itemname: "<gradient:#FFFF00:#FFD700>U</gradient>"
+  material: NOTE_BLOCK
+  Pack:
+    model: charmedchars:block/yellow/u
+  Mechanics:
+    custom_block:
+      type: NOTEBLOCK
+      drop:
+        silktouch: false
+        fortune: false
+        minimal_type: WOODEN
+        best_tool: null
+        loots:
+          - nexo_item: yellow_u
+
+yellow_z:
+  itemname: "<gradient:#FFFF00:#FFD700>Z</gradient>"
+  material: NOTE_BLOCK
+  Pack:
+    model: charmedchars:block/yellow/z
+  Mechanics:
+    custom_block:
+      type: NOTEBLOCK
+      drop:
+        silktouch: false
+        fortune: false
+        minimal_type: WOODEN
+        best_tool: null
+        loots:
+          - nexo_item: yellow_z
+
+yellow_d:
+  itemname: "<gradient:#FFFF00:#FFD700>D</gradient>"
+  material: NOTE_BLOCK
+  Pack:
+    model: charmedchars:block/yellow/d
+  Mechanics:
+    custom_block:
+      type: NOTEBLOCK
+      drop:
+        silktouch: false
+        fortune: false
+        minimal_type: WOODEN
+        best_tool: null
+        loots:
+          - nexo_item: yellow_d
+
+yellow_j:
+  itemname: "<gradient:#FFFF00:#FFD700>J</gradient>"
+  material: NOTE_BLOCK
+  Pack:
+    model: charmedchars:block/yellow/j
+  Mechanics:
+    custom_block:
+      type: NOTEBLOCK
+      drop:
+        silktouch: false
+        fortune: false
+        minimal_type: WOODEN
+        best_tool: null
+        loots:
+          - nexo_item: yellow_j
+
+yellow_p:
+  itemname: "<gradient:#FFFF00:#FFD700>P</gradient>"
+  material: NOTE_BLOCK
+  Pack:
+    model: charmedchars:block/yellow/p
+  Mechanics:
+    custom_block:
+      type: NOTEBLOCK
+      drop:
+        silktouch: false
+        fortune: false
+        minimal_type: WOODEN
+        best_tool: null
+        loots:
+          - nexo_item: yellow_p
+
+yellow_q:
+  itemname: "<gradient:#FFFF00:#FFD700>Q</gradient>"
+  material: NOTE_BLOCK
+  Pack:
+    model: charmedchars:block/yellow/q
+  Mechanics:
+    custom_block:
+      type: NOTEBLOCK
+      drop:
+        silktouch: false
+        fortune: false
+        minimal_type: WOODEN
+        best_tool: null
+        loots:
+          - nexo_item: yellow_q
+
+cyan_0:
+  itemname: "<gradient:#00FFFF:#00CED1>0</gradient>"
+  material: NOTE_BLOCK
+  Pack:
+    model: charmedchars:block/cyan/0
+  Mechanics:
+    custom_block:
+      type: NOTEBLOCK
+      drop:
+        silktouch: false
+        fortune: false
+        minimal_type: WOODEN
+        best_tool: null
+        loots:
+          - nexo_item: cyan_0
+
+cyan_1:
+  itemname: "<gradient:#00FFFF:#00CED1>1</gradient>"
+  material: NOTE_BLOCK
+  Pack:
+    model: charmedchars:block/cyan/1
+  Mechanics:
+    custom_block:
+      type: NOTEBLOCK
+      drop:
+        silktouch: false
+        fortune: false
+        minimal_type: WOODEN
+        best_tool: null
+        loots:
+          - nexo_item: cyan_1
+
+cyan_2:
+  itemname: "<gradient:#00FFFF:#00CED1>2</gradient>"
+  material: NOTE_BLOCK
+  Pack:
+    model: charmedchars:block/cyan/2
+  Mechanics:
+    custom_block:
+      type: NOTEBLOCK
+      drop:
+        silktouch: false
+        fortune: false
+        minimal_type: WOODEN
+        best_tool: null
+        loots:
+          - nexo_item: cyan_2
+
+cyan_3:
+  itemname: "<gradient:#00FFFF:#00CED1>3</gradient>"
+  material: NOTE_BLOCK
+  Pack:
+    model: charmedchars:block/cyan/3
+  Mechanics:
+    custom_block:
+      type: NOTEBLOCK
+      drop:
+        silktouch: false
+        fortune: false
+        minimal_type: WOODEN
+        best_tool: null
+        loots:
+          - nexo_item: cyan_3
+
+cyan_4:
+  itemname: "<gradient:#00FFFF:#00CED1>4</gradient>"
+  material: NOTE_BLOCK
+  Pack:
+    model: charmedchars:block/cyan/4
+  Mechanics:
+    custom_block:
+      type: NOTEBLOCK
+      drop:
+        silktouch: false
+        fortune: false
+        minimal_type: WOODEN
+        best_tool: null
+        loots:
+          - nexo_item: cyan_4
+
+cyan_5:
+  itemname: "<gradient:#00FFFF:#00CED1>5</gradient>"
+  material: NOTE_BLOCK
+  Pack:
+    model: charmedchars:block/cyan/5
+  Mechanics:
+    custom_block:
+      type: NOTEBLOCK
+      drop:
+        silktouch: false
+        fortune: false
+        minimal_type: WOODEN
+        best_tool: null
+        loots:
+          - nexo_item: cyan_5
+
+cyan_6:
+  itemname: "<gradient:#00FFFF:#00CED1>6</gradient>"
+  material: NOTE_BLOCK
+  Pack:
+    model: charmedchars:block/cyan/6
+  Mechanics:
+    custom_block:
+      type: NOTEBLOCK
+      drop:
+        silktouch: false
+        fortune: false
+        minimal_type: WOODEN
+        best_tool: null
+        loots:
+          - nexo_item: cyan_6
+
+cyan_7:
+  itemname: "<gradient:#00FFFF:#00CED1>7</gradient>"
+  material: NOTE_BLOCK
+  Pack:
+    model: charmedchars:block/cyan/7
+  Mechanics:
+    custom_block:
+      type: NOTEBLOCK
+      drop:
+        silktouch: false
+        fortune: false
+        minimal_type: WOODEN
+        best_tool: null
+        loots:
+          - nexo_item: cyan_7
+
+cyan_8:
+  itemname: "<gradient:#00FFFF:#00CED1>8</gradient>"
+  material: NOTE_BLOCK
+  Pack:
+    model: charmedchars:block/cyan/8
+  Mechanics:
+    custom_block:
+      type: NOTEBLOCK
+      drop:
+        silktouch: false
+        fortune: false
+        minimal_type: WOODEN
+        best_tool: null
+        loots:
+          - nexo_item: cyan_8
+
+cyan_9:
+  itemname: "<gradient:#00FFFF:#00CED1>9</gradient>"
+  material: NOTE_BLOCK
+  Pack:
+    model: charmedchars:block/cyan/9
+  Mechanics:
+    custom_block:
+      type: NOTEBLOCK
+      drop:
+        silktouch: false
+        fortune: false
+        minimal_type: WOODEN
+        best_tool: null
+        loots:
+          - nexo_item: cyan_9
+
+magenta_0:
+  itemname: "<gradient:#FF00FF:#FF1493>0</gradient>"
+  material: NOTE_BLOCK
+  Pack:
+    model: charmedchars:block/magenta/0
+  Mechanics:
+    custom_block:
+      type: NOTEBLOCK
+      drop:
+        silktouch: false
+        fortune: false
+        minimal_type: WOODEN
+        best_tool: null
+        loots:
+          - nexo_item: magenta_0
+
+magenta_1:
+  itemname: "<gradient:#FF00FF:#FF1493>1</gradient>"
+  material: NOTE_BLOCK
+  Pack:
+    model: charmedchars:block/magenta/1
+  Mechanics:
+    custom_block:
+      type: NOTEBLOCK
+      drop:
+        silktouch: false
+        fortune: false
+        minimal_type: WOODEN
+        best_tool: null
+        loots:
+          - nexo_item: magenta_1
+
+magenta_2:
+  itemname: "<gradient:#FF00FF:#FF1493>2</gradient>"
+  material: NOTE_BLOCK
+  Pack:
+    model: charmedchars:block/magenta/2
+  Mechanics:
+    custom_block:
+      type: NOTEBLOCK
+      drop:
+        silktouch: false
+        fortune: false
+        minimal_type: WOODEN
+        best_tool: null
+        loots:
+          - nexo_item: magenta_2
+
+magenta_3:
+  itemname: "<gradient:#FF00FF:#FF1493>3</gradient>"
+  material: NOTE_BLOCK
+  Pack:
+    model: charmedchars:block/magenta/3
+  Mechanics:
+    custom_block:
+      type: NOTEBLOCK
+      drop:
+        silktouch: false
+        fortune: false
+        minimal_type: WOODEN
+        best_tool: null
+        loots:
+          - nexo_item: magenta_3
+
+magenta_4:
+  itemname: "<gradient:#FF00FF:#FF1493>4</gradient>"
+  material: NOTE_BLOCK
+  Pack:
+    model: charmedchars:block/magenta/4
+  Mechanics:
+    custom_block:
+      type: NOTEBLOCK
+      drop:
+        silktouch: false
+        fortune: false
+        minimal_type: WOODEN
+        best_tool: null
+        loots:
+          - nexo_item: magenta_4
+
+magenta_5:
+  itemname: "<gradient:#FF00FF:#FF1493>5</gradient>"
+  material: NOTE_BLOCK
+  Pack:
+    model: charmedchars:block/magenta/5
+  Mechanics:
+    custom_block:
+      type: NOTEBLOCK
+      drop:
+        silktouch: false
+        fortune: false
+        minimal_type: WOODEN
+        best_tool: null
+        loots:
+          - nexo_item: magenta_5
+
+magenta_6:
+  itemname: "<gradient:#FF00FF:#FF1493>6</gradient>"
+  material: NOTE_BLOCK
+  Pack:
+    model: charmedchars:block/magenta/6
+  Mechanics:
+    custom_block:
+      type: NOTEBLOCK
+      drop:
+        silktouch: false
+        fortune: false
+        minimal_type: WOODEN
+        best_tool: null
+        loots:
+          - nexo_item: magenta_6
+
+magenta_7:
+  itemname: "<gradient:#FF00FF:#FF1493>7</gradient>"
+  material: NOTE_BLOCK
+  Pack:
+    model: charmedchars:block/magenta/7
+  Mechanics:
+    custom_block:
+      type: NOTEBLOCK
+      drop:
+        silktouch: false
+        fortune: false
+        minimal_type: WOODEN
+        best_tool: null
+        loots:
+          - nexo_item: magenta_7
+
+magenta_8:
+  itemname: "<gradient:#FF00FF:#FF1493>8</gradient>"
+  material: NOTE_BLOCK
+  Pack:
+    model: charmedchars:block/magenta/8
+  Mechanics:
+    custom_block:
+      type: NOTEBLOCK
+      drop:
+        silktouch: false
+        fortune: false
+        minimal_type: WOODEN
+        best_tool: null
+        loots:
+          - nexo_item: magenta_8
+
+magenta_9:
+  itemname: "<gradient:#FF00FF:#FF1493>9</gradient>"
+  material: NOTE_BLOCK
+  Pack:
+    model: charmedchars:block/magenta/9
+  Mechanics:
+    custom_block:
+      type: NOTEBLOCK
+      drop:
+        silktouch: false
+        fortune: false
+        minimal_type: WOODEN
+        best_tool: null
+        loots:
+          - nexo_item: magenta_9
+
+yellow_0:
+  itemname: "<gradient:#FFFF00:#FFD700>0</gradient>"
+  material: NOTE_BLOCK
+  Pack:
+    model: charmedchars:block/yellow/0
+  Mechanics:
+    custom_block:
+      type: NOTEBLOCK
+      drop:
+        silktouch: false
+        fortune: false
+        minimal_type: WOODEN
+        best_tool: null
+        loots:
+          - nexo_item: yellow_0
+
+yellow_1:
+  itemname: "<gradient:#FFFF00:#FFD700>1</gradient>"
+  material: NOTE_BLOCK
+  Pack:
+    model: charmedchars:block/yellow/1
+  Mechanics:
+    custom_block:
+      type: NOTEBLOCK
+      drop:
+        silktouch: false
+        fortune: false
+        minimal_type: WOODEN
+        best_tool: null
+        loots:
+          - nexo_item: yellow_1
+
+yellow_2:
+  itemname: "<gradient:#FFFF00:#FFD700>2</gradient>"
+  material: NOTE_BLOCK
+  Pack:
+    model: charmedchars:block/yellow/2
+  Mechanics:
+    custom_block:
+      type: NOTEBLOCK
+      drop:
+        silktouch: false
+        fortune: false
+        minimal_type: WOODEN
+        best_tool: null
+        loots:
+          - nexo_item: yellow_2
+
+yellow_3:
+  itemname: "<gradient:#FFFF00:#FFD700>3</gradient>"
+  material: NOTE_BLOCK
+  Pack:
+    model: charmedchars:block/yellow/3
+  Mechanics:
+    custom_block:
+      type: NOTEBLOCK
+      drop:
+        silktouch: false
+        fortune: false
+        minimal_type: WOODEN
+        best_tool: null
+        loots:
+          - nexo_item: yellow_3
+
+yellow_4:
+  itemname: "<gradient:#FFFF00:#FFD700>4</gradient>"
+  material: NOTE_BLOCK
+  Pack:
+    model: charmedchars:block/yellow/4
+  Mechanics:
+    custom_block:
+      type: NOTEBLOCK
+      drop:
+        silktouch: false
+        fortune: false
+        minimal_type: WOODEN
+        best_tool: null
+        loots:
+          - nexo_item: yellow_4
+
+yellow_5:
+  itemname: "<gradient:#FFFF00:#FFD700>5</gradient>"
+  material: NOTE_BLOCK
+  Pack:
+    model: charmedchars:block/yellow/5
+  Mechanics:
+    custom_block:
+      type: NOTEBLOCK
+      drop:
+        silktouch: false
+        fortune: false
+        minimal_type: WOODEN
+        best_tool: null
+        loots:
+          - nexo_item: yellow_5
+
+yellow_6:
+  itemname: "<gradient:#FFFF00:#FFD700>6</gradient>"
+  material: NOTE_BLOCK
+  Pack:
+    model: charmedchars:block/yellow/6
+  Mechanics:
+    custom_block:
+      type: NOTEBLOCK
+      drop:
+        silktouch: false
+        fortune: false
+        minimal_type: WOODEN
+        best_tool: null
+        loots:
+          - nexo_item: yellow_6
+
+yellow_7:
+  itemname: "<gradient:#FFFF00:#FFD700>7</gradient>"
+  material: NOTE_BLOCK
+  Pack:
+    model: charmedchars:block/yellow/7
+  Mechanics:
+    custom_block:
+      type: NOTEBLOCK
+      drop:
+        silktouch: false
+        fortune: false
+        minimal_type: WOODEN
+        best_tool: null
+        loots:
+          - nexo_item: yellow_7
+
+yellow_8:
+  itemname: "<gradient:#FFFF00:#FFD700>8</gradient>"
+  material: NOTE_BLOCK
+  Pack:
+    model: charmedchars:block/yellow/8
+  Mechanics:
+    custom_block:
+      type: NOTEBLOCK
+      drop:
+        silktouch: false
+        fortune: false
+        minimal_type: WOODEN
+        best_tool: null
+        loots:
+          - nexo_item: yellow_8
+
+yellow_9:
+  itemname: "<gradient:#FFFF00:#FFD700>9</gradient>"
+  material: NOTE_BLOCK
+  Pack:
+    model: charmedchars:block/yellow/9
+  Mechanics:
+    custom_block:
+      type: NOTEBLOCK
+      drop:
+        silktouch: false
+        fortune: false
+        minimal_type: WOODEN
+        best_tool: null
+        loots:
+          - nexo_item: yellow_9
+
+cyan_plus:
+  itemname: "<gradient:#00FFFF:#00CED1>+</gradient>"
+  material: NOTE_BLOCK
+  Pack:
+    model: charmedchars:block/cyan/plus
+  Mechanics:
+    custom_block:
+      type: NOTEBLOCK
+      drop:
+        silktouch: false
+        fortune: false
+        minimal_type: WOODEN
+        best_tool: null
+        loots:
+          - nexo_item: cyan_plus
+
+cyan_minus:
+  itemname: "<gradient:#00FFFF:#00CED1>-</gradient>"
+  material: NOTE_BLOCK
+  Pack:
+    model: charmedchars:block/cyan/minus
+  Mechanics:
+    custom_block:
+      type: NOTEBLOCK
+      drop:
+        silktouch: false
+        fortune: false
+        minimal_type: WOODEN
+        best_tool: null
+        loots:
+          - nexo_item: cyan_minus
+
+cyan_multiply:
+  itemname: "<gradient:#00FFFF:#00CED1>*</gradient>"
+  material: NOTE_BLOCK
+  Pack:
+    model: charmedchars:block/cyan/multiply
+  Mechanics:
+    custom_block:
+      type: NOTEBLOCK
+      drop:
+        silktouch: false
+        fortune: false
+        minimal_type: WOODEN
+        best_tool: null
+        loots:
+          - nexo_item: cyan_multiply
+
+cyan_division:
+  itemname: "<gradient:#00FFFF:#00CED1>/</gradient>"
+  material: NOTE_BLOCK
+  Pack:
+    model: charmedchars:block/cyan/division
+  Mechanics:
+    custom_block:
+      type: NOTEBLOCK
+      drop:
+        silktouch: false
+        fortune: false
+        minimal_type: WOODEN
+        best_tool: null
+        loots:
+          - nexo_item: cyan_division
+
+magenta_plus:
+  itemname: "<gradient:#FF00FF:#FF1493>+</gradient>"
+  material: NOTE_BLOCK
+  Pack:
+    model: charmedchars:block/magenta/plus
+  Mechanics:
+    custom_block:
+      type: NOTEBLOCK
+      drop:
+        silktouch: false
+        fortune: false
+        minimal_type: WOODEN
+        best_tool: null
+        loots:
+          - nexo_item: magenta_plus
+
+magenta_minus:
+  itemname: "<gradient:#FF00FF:#FF1493>-</gradient>"
+  material: NOTE_BLOCK
+  Pack:
+    model: charmedchars:block/magenta/minus
+  Mechanics:
+    custom_block:
+      type: NOTEBLOCK
+      drop:
+        silktouch: false
+        fortune: false
+        minimal_type: WOODEN
+        best_tool: null
+        loots:
+          - nexo_item: magenta_minus
+
+magenta_multiply:
+  itemname: "<gradient:#FF00FF:#FF1493>*</gradient>"
+  material: NOTE_BLOCK
+  Pack:
+    model: charmedchars:block/magenta/multiply
+  Mechanics:
+    custom_block:
+      type: NOTEBLOCK
+      drop:
+        silktouch: false
+        fortune: false
+        minimal_type: WOODEN
+        best_tool: null
+        loots:
+          - nexo_item: magenta_multiply
+
+magenta_division:
+  itemname: "<gradient:#FF00FF:#FF1493>/</gradient>"
+  material: NOTE_BLOCK
+  Pack:
+    model: charmedchars:block/magenta/division
+  Mechanics:
+    custom_block:
+      type: NOTEBLOCK
+      drop:
+        silktouch: false
+        fortune: false
+        minimal_type: WOODEN
+        best_tool: null
+        loots:
+          - nexo_item: magenta_division
+
+yellow_plus:
+  itemname: "<gradient:#FFFF00:#FFD700>+</gradient>"
+  material: NOTE_BLOCK
+  Pack:
+    model: charmedchars:block/yellow/plus
+  Mechanics:
+    custom_block:
+      type: NOTEBLOCK
+      drop:
+        silktouch: false
+        fortune: false
+        minimal_type: WOODEN
+        best_tool: null
+        loots:
+          - nexo_item: yellow_plus
+
+yellow_minus:
+  itemname: "<gradient:#FFFF00:#FFD700>-</gradient>"
+  material: NOTE_BLOCK
+  Pack:
+    model: charmedchars:block/yellow/minus
+  Mechanics:
+    custom_block:
+      type: NOTEBLOCK
+      drop:
+        silktouch: false
+        fortune: false
+        minimal_type: WOODEN
+        best_tool: null
+        loots:
+          - nexo_item: yellow_minus
+
+yellow_multiply:
+  itemname: "<gradient:#FFFF00:#FFD700>*</gradient>"
+  material: NOTE_BLOCK
+  Pack:
+    model: charmedchars:block/yellow/multiply
+  Mechanics:
+    custom_block:
+      type: NOTEBLOCK
+      drop:
+        silktouch: false
+        fortune: false
+        minimal_type: WOODEN
+        best_tool: null
+        loots:
+          - nexo_item: yellow_multiply
+
+yellow_division:
+  itemname: "<gradient:#FFFF00:#FFD700>/</gradient>"
+  material: NOTE_BLOCK
+  Pack:
+    model: charmedchars:block/yellow/division
+  Mechanics:
+    custom_block:
+      type: NOTEBLOCK
+      drop:
+        silktouch: false
+        fortune: false
+        minimal_type: WOODEN
+        best_tool: null
+        loots:
+          - nexo_item: yellow_division
+
+cyan_logo:
+  itemname: "<gradient:#00FFFF:#00CED1>Logo</gradient>"
+  material: NOTE_BLOCK
+  Pack:
+    model: charmedchars:block/cyan/logo_block
+  Mechanics:
+    custom_block:
+      type: NOTEBLOCK
+      drop:
+        silktouch: false
+        fortune: false
+        minimal_type: WOODEN
+        best_tool: null
+        loots:
+          - nexo_item: cyan_logo
+
+magenta_logo:
+  itemname: "<gradient:#FF00FF:#FF1493>Logo</gradient>"
+  material: NOTE_BLOCK
+  Pack:
+    model: charmedchars:block/magenta/logo_block
+  Mechanics:
+    custom_block:
+      type: NOTEBLOCK
+      drop:
+        silktouch: false
+        fortune: false
+        minimal_type: WOODEN
+        best_tool: null
+        loots:
+          - nexo_item: magenta_logo
+
+yellow_logo:
+  itemname: "<gradient:#FFFF00:#FFD700>Logo</gradient>"
+  material: NOTE_BLOCK
+  Pack:
+    model: charmedchars:block/yellow/logo_block
+  Mechanics:
+    custom_block:
+      type: NOTEBLOCK
+      drop:
+        silktouch: false
+        fortune: false
+        minimal_type: WOODEN
+        best_tool: null
+        loots:
+          - nexo_item: yellow_logo
+
+pyrite_ingot:
+  itemname: "<gradient:#FFD700:#B8860B>Pyrite Ingot</gradient>"
+  material: BRICK
+  Pack:
+    generate_model: true
+    parent_model: "item/handheld"
+    textures:
+      layer0: charmedchars:item/pyrite/pyrite_ingot
+
+pyrite_pickaxe:
+  itemname: "<gradient:#FFD700:#B8860B>Pyrite Pickaxe</gradient>"
+  material: IRON_PICKAXE
+  Pack:
+    generate_model: true
+    parent_model: "item/handheld"
+    textures:
+      layer0: charmedchars:item/pyrite/pyrite_pickaxe
+  Mechanics:
+    durability:
+      value: 250
+    tool:
+      tier: IRON
+
+pyrite_axe:
+  itemname: "<gradient:#FFD700:#B8860B>Pyrite Axe</gradient>"
+  material: IRON_AXE
+  Pack:
+    generate_model: true
+    parent_model: "item/handheld"
+    textures:
+      layer0: charmedchars:item/pyrite/pyrite_axe
+  Mechanics:
+    durability:
+      value: 250
+    tool:
+      tier: IRON
+
+pyrite_shovel:
+  itemname: "<gradient:#FFD700:#B8860B>Pyrite Shovel</gradient>"
+  material: IRON_SHOVEL
+  Pack:
+    generate_model: true
+    parent_model: "item/handheld"
+    textures:
+      layer0: charmedchars:item/pyrite/pyrite_shovel
+  Mechanics:
+    durability:
+      value: 250
+    tool:
+      tier: IRON
+
+pyrite_hoe:
+  itemname: "<gradient:#FFD700:#B8860B>Pyrite Hoe</gradient>"
+  material: IRON_HOE
+  Pack:
+    generate_model: true
+    parent_model: "item/handheld"
+    textures:
+      layer0: charmedchars:item/pyrite/pyrite_hoe
+  Mechanics:
+    durability:
+      value: 250
+    tool:
+      tier: IRON
+
+
+===== pack/assets/charmedchars/models/block/cyan/0.json =====
+{
+  "parent": "block/cube_all",
+  "textures": {
+    "all": "charmedchars:block/cyan/0"
+  }
+}
+<no newline at end of file>
+
+===== pack/assets/charmedchars/models/block/cyan/1.json =====
+{
+  "parent": "block/cube_all",
+  "textures": {
+    "all": "charmedchars:block/cyan/1"
+  }
+}
+<no newline at end of file>
+
+===== pack/assets/charmedchars/models/block/cyan/2.json =====
+{
+  "parent": "block/cube_all",
+  "textures": {
+    "all": "charmedchars:block/cyan/2"
+  }
+}
+<no newline at end of file>
+
+===== pack/assets/charmedchars/models/block/cyan/3.json =====
+{
+  "parent": "block/cube_all",
+  "textures": {
+    "all": "charmedchars:block/cyan/3"
+  }
+}
+<no newline at end of file>
+
+===== pack/assets/charmedchars/models/block/cyan/4.json =====
+{
+  "parent": "block/cube_all",
+  "textures": {
+    "all": "charmedchars:block/cyan/4"
+  }
+}
+<no newline at end of file>
+
+===== pack/assets/charmedchars/models/block/cyan/5.json =====
+{
+  "parent": "block/cube_all",
+  "textures": {
+    "all": "charmedchars:block/cyan/5"
+  }
+}
+<no newline at end of file>
+
+===== pack/assets/charmedchars/models/block/cyan/6.json =====
+{
+  "parent": "block/cube_all",
+  "textures": {
+    "all": "charmedchars:block/cyan/6"
+  }
+}
+<no newline at end of file>
+
+===== pack/assets/charmedchars/models/block/cyan/7.json =====
+{
+  "parent": "block/cube_all",
+  "textures": {
+    "all": "charmedchars:block/cyan/7"
+  }
+}
+<no newline at end of file>
+
+===== pack/assets/charmedchars/models/block/cyan/8.json =====
+{
+  "parent": "block/cube_all",
+  "textures": {
+    "all": "charmedchars:block/cyan/8"
+  }
+}
+<no newline at end of file>
+
+===== pack/assets/charmedchars/models/block/cyan/9.json =====
+{
+  "parent": "block/cube_all",
+  "textures": {
+    "all": "charmedchars:block/cyan/9"
+  }
+}
+<no newline at end of file>
+
+===== pack/assets/charmedchars/models/block/cyan/a.json =====
+{
+  "parent": "block/cube_all",
+  "textures": {
+    "all": "charmedchars:block/cyan/a"
+  }
+}
+<no newline at end of file>
+
+===== pack/assets/charmedchars/models/block/cyan/b.json =====
+{
+  "parent": "block/cube_all",
+  "textures": {
+    "all": "charmedchars:block/cyan/b"
+  }
+}
+<no newline at end of file>
+
+===== pack/assets/charmedchars/models/block/cyan/c.json =====
+{
+  "parent": "block/cube_all",
+  "textures": {
+    "all": "charmedchars:block/cyan/c"
+  }
+}
+<no newline at end of file>
+
+===== pack/assets/charmedchars/models/block/cyan/d.json =====
+{
+  "parent": "block/cube_all",
+  "textures": {
+    "all": "charmedchars:block/cyan/d"
+  }
+}
+<no newline at end of file>
+
+===== pack/assets/charmedchars/models/block/cyan/division.json =====
+{
+  "parent": "block/cube_all",
+  "textures": {
+    "all": "charmedchars:block/cyan/division"
+  }
+}
+<no newline at end of file>
+
+===== pack/assets/charmedchars/models/block/cyan/e.json =====
+{
+  "parent": "block/cube_all",
+  "textures": {
+    "all": "charmedchars:block/cyan/e"
+  }
+}
+<no newline at end of file>
+
+===== pack/assets/charmedchars/models/block/cyan/f.json =====
+{
+  "parent": "block/cube_all",
+  "textures": {
+    "all": "charmedchars:block/cyan/f"
+  }
+}
+<no newline at end of file>
+
+===== pack/assets/charmedchars/models/block/cyan/g.json =====
+{
+  "parent": "block/cube_all",
+  "textures": {
+    "all": "charmedchars:block/cyan/g"
+  }
+}
+<no newline at end of file>
+
+===== pack/assets/charmedchars/models/block/cyan/h.json =====
+{
+  "parent": "block/cube_all",
+  "textures": {
+    "all": "charmedchars:block/cyan/h"
+  }
+}
+<no newline at end of file>
+
+===== pack/assets/charmedchars/models/block/cyan/i.json =====
+{
+  "parent": "block/cube_all",
+  "textures": {
+    "all": "charmedchars:block/cyan/i"
+  }
+}
+<no newline at end of file>
+
+===== pack/assets/charmedchars/models/block/cyan/j.json =====
+{
+  "parent": "block/cube_all",
+  "textures": {
+    "all": "charmedchars:block/cyan/j"
+  }
+}
+<no newline at end of file>
+
+===== pack/assets/charmedchars/models/block/cyan/k.json =====
+{
+  "parent": "block/cube_all",
+  "textures": {
+    "all": "charmedchars:block/cyan/k"
+  }
+}
+<no newline at end of file>
+
+===== pack/assets/charmedchars/models/block/cyan/l.json =====
+{
+  "parent": "block/cube_all",
+  "textures": {
+    "all": "charmedchars:block/cyan/l"
+  }
+}
+<no newline at end of file>
+
+===== pack/assets/charmedchars/models/block/cyan/logo_block.json =====
+{
+  "parent": "block/cube_all",
+  "textures": {
+    "all": "charmedchars:block/cyan/logo_block"
+  }
+}
+<no newline at end of file>
+
+===== pack/assets/charmedchars/models/block/cyan/m.json =====
+{
+  "parent": "block/cube_all",
+  "textures": {
+    "all": "charmedchars:block/cyan/m"
+  }
+}
+<no newline at end of file>
+
+===== pack/assets/charmedchars/models/block/cyan/minus.json =====
+{
+  "parent": "block/cube_all",
+  "textures": {
+    "all": "charmedchars:block/cyan/minus"
+  }
+}
+<no newline at end of file>
+
+===== pack/assets/charmedchars/models/block/cyan/multiply.json =====
+{
+  "parent": "block/cube_all",
+  "textures": {
+    "all": "charmedchars:block/cyan/multiply"
+  }
+}
+<no newline at end of file>
+
+===== pack/assets/charmedchars/models/block/cyan/n.json =====
+{
+  "parent": "block/cube_all",
+  "textures": {
+    "all": "charmedchars:block/cyan/n"
+  }
+}
+<no newline at end of file>
+
+===== pack/assets/charmedchars/models/block/cyan/o.json =====
+{
+  "parent": "block/cube_all",
+  "textures": {
+    "all": "charmedchars:block/cyan/o"
+  }
+}
+<no newline at end of file>
+
+===== pack/assets/charmedchars/models/block/cyan/p.json =====
+{
+  "parent": "block/cube_all",
+  "textures": {
+    "all": "charmedchars:block/cyan/p"
+  }
+}
+<no newline at end of file>
+
+===== pack/assets/charmedchars/models/block/cyan/plus.json =====
+{
+  "parent": "block/cube_all",
+  "textures": {
+    "all": "charmedchars:block/cyan/plus"
+  }
+}
+<no newline at end of file>
+
+===== pack/assets/charmedchars/models/block/cyan/q.json =====
+{
+  "parent": "block/cube_all",
+  "textures": {
+    "all": "charmedchars:block/cyan/q"
+  }
+}
+<no newline at end of file>
+
+===== pack/assets/charmedchars/models/block/cyan/r.json =====
+{
+  "parent": "block/cube_all",
+  "textures": {
+    "all": "charmedchars:block/cyan/r"
+  }
+}
+<no newline at end of file>
+
+===== pack/assets/charmedchars/models/block/cyan/s.json =====
+{
+  "parent": "block/cube_all",
+  "textures": {
+    "all": "charmedchars:block/cyan/s"
+  }
+}
+<no newline at end of file>
+
+===== pack/assets/charmedchars/models/block/cyan/t.json =====
+{
+  "parent": "block/cube_all",
+  "textures": {
+    "all": "charmedchars:block/cyan/t"
+  }
+}
+<no newline at end of file>
+
+===== pack/assets/charmedchars/models/block/cyan/u.json =====
+{
+  "parent": "block/cube_all",
+  "textures": {
+    "all": "charmedchars:block/cyan/u"
+  }
+}
+<no newline at end of file>
+
+===== pack/assets/charmedchars/models/block/cyan/v.json =====
+{
+  "parent": "block/cube_all",
+  "textures": {
+    "all": "charmedchars:block/cyan/v"
+  }
+}
+<no newline at end of file>
+
+===== pack/assets/charmedchars/models/block/cyan/w.json =====
+{
+  "parent": "block/cube_all",
+  "textures": {
+    "all": "charmedchars:block/cyan/w"
+  }
+}
+<no newline at end of file>
+
+===== pack/assets/charmedchars/models/block/cyan/x.json =====
+{
+  "parent": "block/cube_all",
+  "textures": {
+    "all": "charmedchars:block/cyan/x"
+  }
+}
+<no newline at end of file>
+
+===== pack/assets/charmedchars/models/block/cyan/y.json =====
+{
+  "parent": "block/cube_all",
+  "textures": {
+    "all": "charmedchars:block/cyan/y"
+  }
+}
+<no newline at end of file>
+
+===== pack/assets/charmedchars/models/block/cyan/z.json =====
+{
+  "parent": "block/cube_all",
+  "textures": {
+    "all": "charmedchars:block/cyan/z"
+  }
+}
+<no newline at end of file>
+
+===== pack/assets/charmedchars/models/block/magenta/0.json =====
+{
+  "parent": "block/cube_all",
+  "textures": {
+    "all": "charmedchars:block/magenta/0"
+  }
+}
+<no newline at end of file>
+
+===== pack/assets/charmedchars/models/block/magenta/1.json =====
+{
+  "parent": "block/cube_all",
+  "textures": {
+    "all": "charmedchars:block/magenta/1"
+  }
+}
+<no newline at end of file>
+
+===== pack/assets/charmedchars/models/block/magenta/2.json =====
+{
+  "parent": "block/cube_all",
+  "textures": {
+    "all": "charmedchars:block/magenta/2"
+  }
+}
+<no newline at end of file>
+
+===== pack/assets/charmedchars/models/block/magenta/3.json =====
+{
+  "parent": "block/cube_all",
+  "textures": {
+    "all": "charmedchars:block/magenta/3"
+  }
+}
+<no newline at end of file>
+
+===== pack/assets/charmedchars/models/block/magenta/4.json =====
+{
+  "parent": "block/cube_all",
+  "textures": {
+    "all": "charmedchars:block/magenta/4"
+  }
+}
+<no newline at end of file>
+
+===== pack/assets/charmedchars/models/block/magenta/5.json =====
+{
+  "parent": "block/cube_all",
+  "textures": {
+    "all": "charmedchars:block/magenta/5"
+  }
+}
+<no newline at end of file>
+
+===== pack/assets/charmedchars/models/block/magenta/6.json =====
+{
+  "parent": "block/cube_all",
+  "textures": {
+    "all": "charmedchars:block/magenta/6"
+  }
+}
+<no newline at end of file>
+
+===== pack/assets/charmedchars/models/block/magenta/7.json =====
+{
+  "parent": "block/cube_all",
+  "textures": {
+    "all": "charmedchars:block/magenta/7"
+  }
+}
+<no newline at end of file>
+
+===== pack/assets/charmedchars/models/block/magenta/8.json =====
+{
+  "parent": "block/cube_all",
+  "textures": {
+    "all": "charmedchars:block/magenta/8"
+  }
+}
+<no newline at end of file>
+
+===== pack/assets/charmedchars/models/block/magenta/9.json =====
+{
+  "parent": "block/cube_all",
+  "textures": {
+    "all": "charmedchars:block/magenta/9"
+  }
+}
+<no newline at end of file>
+
+===== pack/assets/charmedchars/models/block/magenta/a.json =====
+{
+  "parent": "block/cube_all",
+  "textures": {
+    "all": "charmedchars:block/magenta/a"
+  }
+}
+<no newline at end of file>
+
+===== pack/assets/charmedchars/models/block/magenta/b.json =====
+{
+  "parent": "block/cube_all",
+  "textures": {
+    "all": "charmedchars:block/magenta/b"
+  }
+}
+<no newline at end of file>
+
+===== pack/assets/charmedchars/models/block/magenta/c.json =====
+{
+  "parent": "block/cube_all",
+  "textures": {
+    "all": "charmedchars:block/magenta/c"
+  }
+}
+<no newline at end of file>
+
+===== pack/assets/charmedchars/models/block/magenta/d.json =====
+{
+  "parent": "block/cube_all",
+  "textures": {
+    "all": "charmedchars:block/magenta/d"
+  }
+}
+<no newline at end of file>
+
+===== pack/assets/charmedchars/models/block/magenta/division.json =====
+{
+  "parent": "block/cube_all",
+  "textures": {
+    "all": "charmedchars:block/magenta/division"
+  }
+}
+<no newline at end of file>
+
+===== pack/assets/charmedchars/models/block/magenta/e.json =====
+{
+  "parent": "block/cube_all",
+  "textures": {
+    "all": "charmedchars:block/magenta/e"
+  }
+}
+<no newline at end of file>
+
+===== pack/assets/charmedchars/models/block/magenta/f.json =====
+{
+  "parent": "block/cube_all",
+  "textures": {
+    "all": "charmedchars:block/magenta/f"
+  }
+}
+<no newline at end of file>
+
+===== pack/assets/charmedchars/models/block/magenta/g.json =====
+{
+  "parent": "block/cube_all",
+  "textures": {
+    "all": "charmedchars:block/magenta/g"
+  }
+}
+<no newline at end of file>
+
+===== pack/assets/charmedchars/models/block/magenta/h.json =====
+{
+  "parent": "block/cube_all",
+  "textures": {
+    "all": "charmedchars:block/magenta/h"
+  }
+}
+<no newline at end of file>
+
+===== pack/assets/charmedchars/models/block/magenta/i.json =====
+{
+  "parent": "block/cube_all",
+  "textures": {
+    "all": "charmedchars:block/magenta/i"
+  }
+}
+<no newline at end of file>
+
+===== pack/assets/charmedchars/models/block/magenta/j.json =====
+{
+  "parent": "block/cube_all",
+  "textures": {
+    "all": "charmedchars:block/magenta/j"
+  }
+}
+<no newline at end of file>
+
+===== pack/assets/charmedchars/models/block/magenta/k.json =====
+{
+  "parent": "block/cube_all",
+  "textures": {
+    "all": "charmedchars:block/magenta/k"
+  }
+}
+<no newline at end of file>
+
+===== pack/assets/charmedchars/models/block/magenta/l.json =====
+{
+  "parent": "block/cube_all",
+  "textures": {
+    "all": "charmedchars:block/magenta/l"
+  }
+}
+<no newline at end of file>
+
+===== pack/assets/charmedchars/models/block/magenta/logo_block.json =====
+{
+  "parent": "block/cube_all",
+  "textures": {
+    "all": "charmedchars:block/magenta/logo_block"
+  }
+}
+<no newline at end of file>
+
+===== pack/assets/charmedchars/models/block/magenta/m.json =====
+{
+  "parent": "block/cube_all",
+  "textures": {
+    "all": "charmedchars:block/magenta/m"
+  }
+}
+<no newline at end of file>
+
+===== pack/assets/charmedchars/models/block/magenta/minus.json =====
+{
+  "parent": "block/cube_all",
+  "textures": {
+    "all": "charmedchars:block/magenta/minus"
+  }
+}
+<no newline at end of file>
+
+===== pack/assets/charmedchars/models/block/magenta/multiply.json =====
+{
+  "parent": "block/cube_all",
+  "textures": {
+    "all": "charmedchars:block/magenta/multiply"
+  }
+}
+<no newline at end of file>
+
+===== pack/assets/charmedchars/models/block/magenta/n.json =====
+{
+  "parent": "block/cube_all",
+  "textures": {
+    "all": "charmedchars:block/magenta/n"
+  }
+}
+<no newline at end of file>
+
+===== pack/assets/charmedchars/models/block/magenta/o.json =====
+{
+  "parent": "block/cube_all",
+  "textures": {
+    "all": "charmedchars:block/magenta/o"
+  }
+}
+<no newline at end of file>
+
+===== pack/assets/charmedchars/models/block/magenta/p.json =====
+{
+  "parent": "block/cube_all",
+  "textures": {
+    "all": "charmedchars:block/magenta/p"
+  }
+}
+<no newline at end of file>
+
+===== pack/assets/charmedchars/models/block/magenta/plus.json =====
+{
+  "parent": "block/cube_all",
+  "textures": {
+    "all": "charmedchars:block/magenta/plus"
+  }
+}
+<no newline at end of file>
+
+===== pack/assets/charmedchars/models/block/magenta/q.json =====
+{
+  "parent": "block/cube_all",
+  "textures": {
+    "all": "charmedchars:block/magenta/q"
+  }
+}
+<no newline at end of file>
+
+===== pack/assets/charmedchars/models/block/magenta/r.json =====
+{
+  "parent": "block/cube_all",
+  "textures": {
+    "all": "charmedchars:block/magenta/r"
+  }
+}
+<no newline at end of file>
+
+===== pack/assets/charmedchars/models/block/magenta/s.json =====
+{
+  "parent": "block/cube_all",
+  "textures": {
+    "all": "charmedchars:block/magenta/s"
+  }
+}
+<no newline at end of file>
+
+===== pack/assets/charmedchars/models/block/magenta/t.json =====
+{
+  "parent": "block/cube_all",
+  "textures": {
+    "all": "charmedchars:block/magenta/t"
+  }
+}
+<no newline at end of file>
+
+===== pack/assets/charmedchars/models/block/magenta/u.json =====
+{
+  "parent": "block/cube_all",
+  "textures": {
+    "all": "charmedchars:block/magenta/u"
+  }
+}
+<no newline at end of file>
+
+===== pack/assets/charmedchars/models/block/magenta/v.json =====
+{
+  "parent": "block/cube_all",
+  "textures": {
+    "all": "charmedchars:block/magenta/v"
+  }
+}
+<no newline at end of file>
+
+===== pack/assets/charmedchars/models/block/magenta/w.json =====
+{
+  "parent": "block/cube_all",
+  "textures": {
+    "all": "charmedchars:block/magenta/w"
+  }
+}
+<no newline at end of file>
+
+===== pack/assets/charmedchars/models/block/magenta/x.json =====
+{
+  "parent": "block/cube_all",
+  "textures": {
+    "all": "charmedchars:block/magenta/x"
+  }
+}
+<no newline at end of file>
+
+===== pack/assets/charmedchars/models/block/magenta/y.json =====
+{
+  "parent": "block/cube_all",
+  "textures": {
+    "all": "charmedchars:block/magenta/y"
+  }
+}
+<no newline at end of file>
+
+===== pack/assets/charmedchars/models/block/magenta/z.json =====
+{
+  "parent": "block/cube_all",
+  "textures": {
+    "all": "charmedchars:block/magenta/z"
+  }
+}
+<no newline at end of file>
+
+===== pack/assets/charmedchars/models/block/yellow/0.json =====
+{
+  "parent": "block/cube_all",
+  "textures": {
+    "all": "charmedchars:block/yellow/0"
+  }
+}
+<no newline at end of file>
+
+===== pack/assets/charmedchars/models/block/yellow/1.json =====
+{
+  "parent": "block/cube_all",
+  "textures": {
+    "all": "charmedchars:block/yellow/1"
+  }
+}
+<no newline at end of file>
+
+===== pack/assets/charmedchars/models/block/yellow/2.json =====
+{
+  "parent": "block/cube_all",
+  "textures": {
+    "all": "charmedchars:block/yellow/2"
+  }
+}
+<no newline at end of file>
+
+===== pack/assets/charmedchars/models/block/yellow/3.json =====
+{
+  "parent": "block/cube_all",
+  "textures": {
+    "all": "charmedchars:block/yellow/3"
+  }
+}
+<no newline at end of file>
+
+===== pack/assets/charmedchars/models/block/yellow/4.json =====
+{
+  "parent": "block/cube_all",
+  "textures": {
+    "all": "charmedchars:block/yellow/4"
+  }
+}
+<no newline at end of file>
+
+===== pack/assets/charmedchars/models/block/yellow/5.json =====
+{
+  "parent": "block/cube_all",
+  "textures": {
+    "all": "charmedchars:block/yellow/5"
+  }
+}
+<no newline at end of file>
+
+===== pack/assets/charmedchars/models/block/yellow/6.json =====
+{
+  "parent": "block/cube_all",
+  "textures": {
+    "all": "charmedchars:block/yellow/6"
+  }
+}
+<no newline at end of file>
+
+===== pack/assets/charmedchars/models/block/yellow/7.json =====
+{
+  "parent": "block/cube_all",
+  "textures": {
+    "all": "charmedchars:block/yellow/7"
+  }
+}
+<no newline at end of file>
+
+===== pack/assets/charmedchars/models/block/yellow/8.json =====
+{
+  "parent": "block/cube_all",
+  "textures": {
+    "all": "charmedchars:block/yellow/8"
+  }
+}
+<no newline at end of file>
+
+===== pack/assets/charmedchars/models/block/yellow/9.json =====
+{
+  "parent": "block/cube_all",
+  "textures": {
+    "all": "charmedchars:block/yellow/9"
+  }
+}
+<no newline at end of file>
+
+===== pack/assets/charmedchars/models/block/yellow/a.json =====
+{
+  "parent": "block/cube_all",
+  "textures": {
+    "all": "charmedchars:block/yellow/a"
+  }
+}
+<no newline at end of file>
+
+===== pack/assets/charmedchars/models/block/yellow/b.json =====
+{
+  "parent": "block/cube_all",
+  "textures": {
+    "all": "charmedchars:block/yellow/b"
+  }
+}
+<no newline at end of file>
+
+===== pack/assets/charmedchars/models/block/yellow/c.json =====
+{
+  "parent": "block/cube_all",
+  "textures": {
+    "all": "charmedchars:block/yellow/c"
+  }
+}
+<no newline at end of file>
+
+===== pack/assets/charmedchars/models/block/yellow/d.json =====
+{
+  "parent": "block/cube_all",
+  "textures": {
+    "all": "charmedchars:block/yellow/d"
+  }
+}
+<no newline at end of file>
+
+===== pack/assets/charmedchars/models/block/yellow/division.json =====
+{
+  "parent": "block/cube_all",
+  "textures": {
+    "all": "charmedchars:block/yellow/division"
+  }
+}
+<no newline at end of file>
+
+===== pack/assets/charmedchars/models/block/yellow/e.json =====
+{
+  "parent": "block/cube_all",
+  "textures": {
+    "all": "charmedchars:block/yellow/e"
+  }
+}
+<no newline at end of file>
+
+===== pack/assets/charmedchars/models/block/yellow/f.json =====
+{
+  "parent": "block/cube_all",
+  "textures": {
+    "all": "charmedchars:block/yellow/f"
+  }
+}
+<no newline at end of file>
+
+===== pack/assets/charmedchars/models/block/yellow/g.json =====
+{
+  "parent": "block/cube_all",
+  "textures": {
+    "all": "charmedchars:block/yellow/g"
+  }
+}
+<no newline at end of file>
+
+===== pack/assets/charmedchars/models/block/yellow/h.json =====
+{
+  "parent": "block/cube_all",
+  "textures": {
+    "all": "charmedchars:block/yellow/h"
+  }
+}
+<no newline at end of file>
+
+===== pack/assets/charmedchars/models/block/yellow/i.json =====
+{
+  "parent": "block/cube_all",
+  "textures": {
+    "all": "charmedchars:block/yellow/i"
+  }
+}
+<no newline at end of file>
+
+===== pack/assets/charmedchars/models/block/yellow/j.json =====
+{
+  "parent": "block/cube_all",
+  "textures": {
+    "all": "charmedchars:block/yellow/j"
+  }
+}
+<no newline at end of file>
+
+===== pack/assets/charmedchars/models/block/yellow/k.json =====
+{
+  "parent": "block/cube_all",
+  "textures": {
+    "all": "charmedchars:block/yellow/k"
+  }
+}
+<no newline at end of file>
+
+===== pack/assets/charmedchars/models/block/yellow/l.json =====
+{
+  "parent": "block/cube_all",
+  "textures": {
+    "all": "charmedchars:block/yellow/l"
+  }
+}
+<no newline at end of file>
+
+===== pack/assets/charmedchars/models/block/yellow/logo_block.json =====
+{
+  "parent": "block/cube_all",
+  "textures": {
+    "all": "charmedchars:block/yellow/logo_block"
+  }
+}
+<no newline at end of file>
+
+===== pack/assets/charmedchars/models/block/yellow/m.json =====
+{
+  "parent": "block/cube_all",
+  "textures": {
+    "all": "charmedchars:block/yellow/m"
+  }
+}
+<no newline at end of file>
+
+===== pack/assets/charmedchars/models/block/yellow/minus.json =====
+{
+  "parent": "block/cube_all",
+  "textures": {
+    "all": "charmedchars:block/yellow/minus"
+  }
+}
+<no newline at end of file>
+
+===== pack/assets/charmedchars/models/block/yellow/multiply.json =====
+{
+  "parent": "block/cube_all",
+  "textures": {
+    "all": "charmedchars:block/yellow/multiply"
+  }
+}
+<no newline at end of file>
+
+===== pack/assets/charmedchars/models/block/yellow/n.json =====
+{
+  "parent": "block/cube_all",
+  "textures": {
+    "all": "charmedchars:block/yellow/n"
+  }
+}
+<no newline at end of file>
+
+===== pack/assets/charmedchars/models/block/yellow/o.json =====
+{
+  "parent": "block/cube_all",
+  "textures": {
+    "all": "charmedchars:block/yellow/o"
+  }
+}
+<no newline at end of file>
+
+===== pack/assets/charmedchars/models/block/yellow/p.json =====
+{
+  "parent": "block/cube_all",
+  "textures": {
+    "all": "charmedchars:block/yellow/p"
+  }
+}
+<no newline at end of file>
+
+===== pack/assets/charmedchars/models/block/yellow/plus.json =====
+{
+  "parent": "block/cube_all",
+  "textures": {
+    "all": "charmedchars:block/yellow/plus"
+  }
+}
+<no newline at end of file>
+
+===== pack/assets/charmedchars/models/block/yellow/q.json =====
+{
+  "parent": "block/cube_all",
+  "textures": {
+    "all": "charmedchars:block/yellow/q"
+  }
+}
+<no newline at end of file>
+
+===== pack/assets/charmedchars/models/block/yellow/r.json =====
+{
+  "parent": "block/cube_all",
+  "textures": {
+    "all": "charmedchars:block/yellow/r"
+  }
+}
+<no newline at end of file>
+
+===== pack/assets/charmedchars/models/block/yellow/s.json =====
+{
+  "parent": "block/cube_all",
+  "textures": {
+    "all": "charmedchars:block/yellow/s"
+  }
+}
+<no newline at end of file>
+
+===== pack/assets/charmedchars/models/block/yellow/t.json =====
+{
+  "parent": "block/cube_all",
+  "textures": {
+    "all": "charmedchars:block/yellow/t"
+  }
+}
+<no newline at end of file>
+
+===== pack/assets/charmedchars/models/block/yellow/u.json =====
+{
+  "parent": "block/cube_all",
+  "textures": {
+    "all": "charmedchars:block/yellow/u"
+  }
+}
+<no newline at end of file>
+
+===== pack/assets/charmedchars/models/block/yellow/v.json =====
+{
+  "parent": "block/cube_all",
+  "textures": {
+    "all": "charmedchars:block/yellow/v"
+  }
+}
+<no newline at end of file>
+
+===== pack/assets/charmedchars/models/block/yellow/w.json =====
+{
+  "parent": "block/cube_all",
+  "textures": {
+    "all": "charmedchars:block/yellow/w"
+  }
+}
+<no newline at end of file>
+
+===== pack/assets/charmedchars/models/block/yellow/x.json =====
+{
+  "parent": "block/cube_all",
+  "textures": {
+    "all": "charmedchars:block/yellow/x"
+  }
+}
+<no newline at end of file>
+
+===== pack/assets/charmedchars/models/block/yellow/y.json =====
+{
+  "parent": "block/cube_all",
+  "textures": {
+    "all": "charmedchars:block/yellow/y"
+  }
+}
+<no newline at end of file>
+
+===== pack/assets/charmedchars/models/block/yellow/z.json =====
+{
+  "parent": "block/cube_all",
+  "textures": {
+    "all": "charmedchars:block/yellow/z"
+  }
+}
+<no newline at end of file>
+
+===== pack/assets/charmedchars/textures/block/cyan/0.png [sha256 d481cdf0ec47c8b4f109e81ec2f9e1124236d0b904900072d1395742a7d45272] =====
+
+===== pack/assets/charmedchars/textures/block/cyan/1.png [sha256 1193d4b1e1ce3014475aae0e8753d1f1921fc914c4ceec61822bd9c3f2f5c2e8] =====
+
+===== pack/assets/charmedchars/textures/block/cyan/2.png [sha256 53448cb47dd92fb51193c6e3d3edc5e2ff3ab9c66e4c4dcfe4f5e0674b15188d] =====
+
+===== pack/assets/charmedchars/textures/block/cyan/3.png [sha256 c6eda6a8d9f6501ffedff6f4661adc01efe44f40c66593a094eabce38f550caa] =====
+
+===== pack/assets/charmedchars/textures/block/cyan/4.png [sha256 9774824949068c73b34d0d071fa9f80497cb3c8284f8d6f36ee54e4f99d175ab] =====
+
+===== pack/assets/charmedchars/textures/block/cyan/5.png [sha256 4a04869e6e65414c8e363721d7631a274ed1c62636433f42412233dd3ae54635] =====
+
+===== pack/assets/charmedchars/textures/block/cyan/6.png [sha256 1f1a89f1307ec1582cc9812c5c71afbebda0db77ee3eb90c6aa545092b4e6a7f] =====
+
+===== pack/assets/charmedchars/textures/block/cyan/7.png [sha256 97e2cf426179f8996e1acd7a5d17b30a47b633aa02358d84f17c0f59ab2d6adf] =====
+
+===== pack/assets/charmedchars/textures/block/cyan/8.png [sha256 d23e0fe52383f65ebc8c487159c5870624448af58bcc94ea1523f0a836a2a661] =====
+
+===== pack/assets/charmedchars/textures/block/cyan/9.png [sha256 8daaee379b4254aee2d09b37328776e9a92f9b0c53ec6227faa25febf25f27b4] =====
+
+===== pack/assets/charmedchars/textures/block/cyan/a.png [sha256 f7b651d992d7c6c8ac9a5a797cee130d8ec432cae7f8e321b0e65d7cd7b9ed49] =====
+
+===== pack/assets/charmedchars/textures/block/cyan/b.png [sha256 3b87fe624ff8816031c951d090ecf8b0db21d48d5840484361558ac2e1f40624] =====
+
+===== pack/assets/charmedchars/textures/block/cyan/c.png [sha256 f94cc8aa1b5bb2940fe2956b9cf859075ecd195822a1134ce96230650400a589] =====
+
+===== pack/assets/charmedchars/textures/block/cyan/d.png [sha256 e7a143b57db6e243bc3ac80e354da3a90a8bf4fd37f43e4ab9be79e62ed5f6a5] =====
+
+===== pack/assets/charmedchars/textures/block/cyan/division.png [sha256 69e4b9078ee252a96638ad8403588eeaa509997357c69309d96b17bca0fd55aa] =====
+
+===== pack/assets/charmedchars/textures/block/cyan/e.png [sha256 aa1bab90eba9847b33da87225bf2b5129febd916d993165f9f00e2c80378a1de] =====
+
+===== pack/assets/charmedchars/textures/block/cyan/f.png [sha256 698484d84639f133d33f9072aa1ea9363913baef1c6d97dc51c9d826c3374efb] =====
+
+===== pack/assets/charmedchars/textures/block/cyan/g.png [sha256 0f1d86c4a78133525c6257df9b0b3ed2f21ae9278caa7fd035b78ded987e38fa] =====
+
+===== pack/assets/charmedchars/textures/block/cyan/h.png [sha256 3f3ba37cb28475f93853349c4c850c5ad77b268e200043cdb6738f1a6322a724] =====
+
+===== pack/assets/charmedchars/textures/block/cyan/i.png [sha256 6d175a612dc4569ff81db5501beca407b8fafd72eaf6ef2be56cc97e0c0deae3] =====
+
+===== pack/assets/charmedchars/textures/block/cyan/j.png [sha256 8cfd7f4cafe9a621f532aeddaab1a1c0090c2be68cffc0735f782bc5830a7fc1] =====
+
+===== pack/assets/charmedchars/textures/block/cyan/k.png [sha256 f6c4272cb5c113c91e39c6b5c75770586ae92115f735fa5fef82639895e20f12] =====
+
+===== pack/assets/charmedchars/textures/block/cyan/l.png [sha256 c2c559cb924535fadf9b5acc3b8a9484430885dc7d36e34eb1ba1aafce83dd21] =====
+
+===== pack/assets/charmedchars/textures/block/cyan/logo_block.png [sha256 dc06c4868fb4ac194f6536faf5788c5df06dc5abd9a2930277822412209397c6] =====
+
+===== pack/assets/charmedchars/textures/block/cyan/m.png [sha256 a8c5f83f5b1599a53d7e18bf840b50f7a3a2cc4bd9d6bef55916f608e331b8a0] =====
+
+===== pack/assets/charmedchars/textures/block/cyan/minus.png [sha256 d7b184f9e944938481c103eaeb1f2b9910b53670fc4480b1994ed1eb9edcab71] =====
+
+===== pack/assets/charmedchars/textures/block/cyan/multiply.png [sha256 530b41ff3848acda00f4874ec6fda0bd925cb0886852aa4b0189366443974cbc] =====
+
+===== pack/assets/charmedchars/textures/block/cyan/n.png [sha256 d3fd1b70d3379b615028661efe9c684ae508b76c07830b8041db2ab28612790f] =====
+
+===== pack/assets/charmedchars/textures/block/cyan/o.png [sha256 d08b5e8745aa81a50c8552b6e6375367e0e1501af85c571d007ccf5e43410927] =====
+
+===== pack/assets/charmedchars/textures/block/cyan/p.png [sha256 75be77a9cd4643fc95eaa46d31b1eb4a6a8e6876c3b1aacdedc6121591b1b46e] =====
+
+===== pack/assets/charmedchars/textures/block/cyan/plus.png [sha256 e03779648a7b708b2dfebf361e1b1ab8644636ce46f17165bf72c51b2f6f44ef] =====
+
+===== pack/assets/charmedchars/textures/block/cyan/q.png [sha256 cbb9cf6620e7a67f84e51fc1aa65bda9650bfbf3dd63805247250c599cf2d4b4] =====
+
+===== pack/assets/charmedchars/textures/block/cyan/r.png [sha256 79b807f4b5634d8e5f6002414e5ef241f4d63f8ae1947b50e99e2fe4442ce695] =====
+
+===== pack/assets/charmedchars/textures/block/cyan/s.png [sha256 d94572949f0fd326d907768e873327cf9e0f0217b1980172c689c555f4187ff4] =====
+
+===== pack/assets/charmedchars/textures/block/cyan/t.png [sha256 5f1f634365025e5ff54bc633cbc1c7f2360612fcaa557730cc80511f37777641] =====
+
+===== pack/assets/charmedchars/textures/block/cyan/u.png [sha256 03817f0b469e15952ff31ffee1e30da0caf6728c74cb577c83af35130f54bcb4] =====
+
+===== pack/assets/charmedchars/textures/block/cyan/v.png [sha256 2912bea72bcfb078d018f658e2a721d5c9ed10c470f38578cf4c4a9411dcfb8d] =====
+
+===== pack/assets/charmedchars/textures/block/cyan/w.png [sha256 49d6675b31b7d7756f3ed9b54193fe4abe54ce71fcce9d1ac55572b80e6c69d4] =====
+
+===== pack/assets/charmedchars/textures/block/cyan/x.png [sha256 acbe1d143147ffaf415252df2ca62bc84ca74147440e996abc6218a06a4191a5] =====
+
+===== pack/assets/charmedchars/textures/block/cyan/y.png [sha256 f1199a3fac68b48bcc5cfd09a15d0ad627002a32f5acb22c1e159218120ac9d2] =====
+
+===== pack/assets/charmedchars/textures/block/cyan/z.png [sha256 1c475f9af9074c69e0e9f5b39fd6ce3569b6a8d14782a47489d374f4b7c26862] =====
+
+===== pack/assets/charmedchars/textures/block/magenta/0.png [sha256 03728a4ddc9b1ce0ca630c7a706056c0eda740d09bf61d07f616012e1e203c3e] =====
+
+===== pack/assets/charmedchars/textures/block/magenta/1.png [sha256 2de59720904365d7b2980001b9e26a12e764c0a7b52fae1511af14e6af4f3c28] =====
+
+===== pack/assets/charmedchars/textures/block/magenta/2.png [sha256 7ce51e587dd7599cfd9a14aaf73a5c55ebcf74eabf4edeb37f8006909c90b545] =====
+
+===== pack/assets/charmedchars/textures/block/magenta/3.png [sha256 d0b9fdded8c4f4d3ee5b69cc4ec2554ad520396328f5f902d3aacc7afd50dff5] =====
+
+===== pack/assets/charmedchars/textures/block/magenta/4.png [sha256 e0fb989911688a0a2d077c9f649f1db09d8defe05882d50900dc6fb7c312816a] =====
+
+===== pack/assets/charmedchars/textures/block/magenta/5.png [sha256 3a49c31c5e21a397ee66a26799925779e578b8eb4c0a0ae641197335629364ad] =====
+
+===== pack/assets/charmedchars/textures/block/magenta/6.png [sha256 bf542a2e2e3f81c765a3e51f800972a71a56f033aa0a9bc4185591a740c5755e] =====
+
+===== pack/assets/charmedchars/textures/block/magenta/7.png [sha256 2d52f9777ada61a8cedb40b2ea56b7da0a11d4f64191a8b96ad22628652decf7] =====
+
+===== pack/assets/charmedchars/textures/block/magenta/8.png [sha256 8b464f121c551bf6a1e106e7134399b0fb9d3d73eb0ea9b14fe836aaf96f9796] =====
+
+===== pack/assets/charmedchars/textures/block/magenta/9.png [sha256 d0bcd26ee5ea0cb7bd462a1b360acbd2abfc155560facbb6c1f6d60c162faa71] =====
+
+===== pack/assets/charmedchars/textures/block/magenta/a.png [sha256 def99088aa135772e47380a52b4f4a59b7b667cd1b9bc97a113977084d558411] =====
+
+===== pack/assets/charmedchars/textures/block/magenta/b.png [sha256 8b2adfc0042c67f7b7dc11aa2105df8ac416d53005f5f95ac8e15187c6b3a36d] =====
+
+===== pack/assets/charmedchars/textures/block/magenta/c.png [sha256 2ce648b903e1c2606f0acbc4d911b32c819d0a800a136a75957b48555a01da54] =====
+
+===== pack/assets/charmedchars/textures/block/magenta/d.png [sha256 175aa70be235baefe9dfa34d5e37d9f128ad4ebaacb3c2c98f69243a74293b44] =====
+
+===== pack/assets/charmedchars/textures/block/magenta/division.png [sha256 bebe61101b5d490bb132419f2c11b6e9122923f2ecce1089d135fe98939af4f5] =====
+
+===== pack/assets/charmedchars/textures/block/magenta/e.png [sha256 195f8ec311bcb51834e520761d429bc36b837b789bebfc98990cf6652362d932] =====
+
+===== pack/assets/charmedchars/textures/block/magenta/f.png [sha256 ea7eebb71889c492cb873ce0b18ff7152c49882717fd2557e129fcc1a65b07a6] =====
+
+===== pack/assets/charmedchars/textures/block/magenta/g.png [sha256 24809a133a8d7688f1bb13ee0abfca07da69c1185b2dc503ede66b66cd830b19] =====
+
+===== pack/assets/charmedchars/textures/block/magenta/h.png [sha256 6d07b561549b972ce6329e1bbb55323041bd869bd708a4d33f7cccde6d755b24] =====
+
+===== pack/assets/charmedchars/textures/block/magenta/i.png [sha256 c92fed6423be1996df82dc501c760f58854ddb86398034df79f461ff8413050a] =====
+
+===== pack/assets/charmedchars/textures/block/magenta/j.png [sha256 63bf97b1ca96844cd9086feb6b14f7f5cd12b11269f76a95cb72bfad9818b166] =====
+
+===== pack/assets/charmedchars/textures/block/magenta/k.png [sha256 e82670e75f8d89a08319062bb1bf64a75d6d98d19b14ff340b4dd00265617b5a] =====
+
+===== pack/assets/charmedchars/textures/block/magenta/l.png [sha256 29f5d66686101cf4acfdf9f40500442484bf562d4574af0a0881a5a5fe6acf13] =====
+
+===== pack/assets/charmedchars/textures/block/magenta/logo_block.png [sha256 710c531d9ac0c9d2cf6411f5c1fb1784feba63ebac1f2fd63c7ee2ec09701742] =====
+
+===== pack/assets/charmedchars/textures/block/magenta/m.png [sha256 7c5157eb626600cc5fed54a5785836fb6b79764b65a87a9334f486af3d6551b9] =====
+
+===== pack/assets/charmedchars/textures/block/magenta/minus.png [sha256 ba05374ca456a82556ca409c871e7330b151ec43257fa9842d0543104da4c274] =====
+
+===== pack/assets/charmedchars/textures/block/magenta/multiply.png [sha256 332de1be625bb26a4f28db5b0189ff7ce4549f3338e00976d1542cc4e1c24a6e] =====
+
+===== pack/assets/charmedchars/textures/block/magenta/n.png [sha256 865cbf8ded5349d3d309558ab54090b56a673d6186c3960f287a3ec5afbd337f] =====
+
+===== pack/assets/charmedchars/textures/block/magenta/o.png [sha256 87bada973f534a26c123eca03e269fe5e54e11bb6138162f295a160a25eeca0b] =====
+
+===== pack/assets/charmedchars/textures/block/magenta/p.png [sha256 d35ec6ee06d1cf779f522c676282b500dd6f7c92aaaac81a680d248b04d18b45] =====
+
+===== pack/assets/charmedchars/textures/block/magenta/plus.png [sha256 0aa81059cc61a6962a461e4c1d1247cdbeac3ee5d85f4ba01ba3bc0498a03535] =====
+
+===== pack/assets/charmedchars/textures/block/magenta/q.png [sha256 3430ea52032767cd41d0a7c0f81bfba5fe1525c9f0e3d71647e20b8de679cc1f] =====
+
+===== pack/assets/charmedchars/textures/block/magenta/r.png [sha256 16360ba4fbfcd6fe6f09d2bc1a7ca8d4f44df0aec484d6401fe8566a6178affc] =====
+
+===== pack/assets/charmedchars/textures/block/magenta/s.png [sha256 483088327275f47278d6da7757bd71eae2e7f65fd5f8b29fd9172c08ef5111eb] =====
+
+===== pack/assets/charmedchars/textures/block/magenta/t.png [sha256 cafa5d7dd03f1e8cb72c0f76629a22e0ebb9d1d0e42a72680ed12bdb1348912a] =====
+
+===== pack/assets/charmedchars/textures/block/magenta/u.png [sha256 b454f4a7976e7353d8ff5f4dd22cb711dea829563ef27af8eb458d973f1e1a06] =====
+
+===== pack/assets/charmedchars/textures/block/magenta/v.png [sha256 e7dcb6eb22b213e858de37f354b4281eab9682b5e8be7009b860fd582323368f] =====
+
+===== pack/assets/charmedchars/textures/block/magenta/w.png [sha256 17a4bb16665cab5ce790ef424dfac79e69defe87477fd258809e05d4cafb767e] =====
+
+===== pack/assets/charmedchars/textures/block/magenta/x.png [sha256 abca5aa85497615fd69f02c12e7604adce40fa4253cbefd28b11edca6a55944d] =====
+
+===== pack/assets/charmedchars/textures/block/magenta/y.png [sha256 d29ab4b3f2971fad83685c350bd92ac899ad41227fc7b3606ef48a5f0c362fc1] =====
+
+===== pack/assets/charmedchars/textures/block/magenta/z.png [sha256 b4d811bc5ee709942777858b452d9ff7b011db16a8b659738d5f3fa847ae52a2] =====
+
+===== pack/assets/charmedchars/textures/block/yellow/0.png [sha256 f84ddb7f02e4faed5fe37907c9aa335d1f77cf53e6ec27a694c7118214f0ae27] =====
+
+===== pack/assets/charmedchars/textures/block/yellow/1.png [sha256 5238fa94b93eaff2b9387b176bad71360e3df6db420db98dfae8381ae9aba2e8] =====
+
+===== pack/assets/charmedchars/textures/block/yellow/2.png [sha256 cfd64312fa1ee7bd37b00196cee55dc52871d3df208ecb2146582b016cbbc5af] =====
+
+===== pack/assets/charmedchars/textures/block/yellow/3.png [sha256 8111c4bd727dbf25ecf29c8b32748b7c27b622afa5aa8dab617250c1d80f8252] =====
+
+===== pack/assets/charmedchars/textures/block/yellow/4.png [sha256 bb57c78714cc193d8ad1cd43cddfbf31a2458641e4d8e223f1c12a4c1b6ab499] =====
+
+===== pack/assets/charmedchars/textures/block/yellow/5.png [sha256 c8f09d16408ab63acd4aeba94c297b15257cec8a158a4adb112382d5e4c052be] =====
+
+===== pack/assets/charmedchars/textures/block/yellow/6.png [sha256 02bd92ee3e648b69fecba80b5caa19830284bf70d4fb246a543c541788054496] =====
+
+===== pack/assets/charmedchars/textures/block/yellow/7.png [sha256 fefb3b8da220245609d7946106b6882b2c1c653d714db2f71283d75a245a49f8] =====
+
+===== pack/assets/charmedchars/textures/block/yellow/8.png [sha256 0a94c7ecf301935b5fdccd589c0e65cec09826afdd5ce1823b5aaf7d1202fdc0] =====
+
+===== pack/assets/charmedchars/textures/block/yellow/9.png [sha256 ee4bbeea665b32311b0475aca7f03630fefabf9811d7d7862f27a21b480555ac] =====
+
+===== pack/assets/charmedchars/textures/block/yellow/a.png [sha256 68a0a3db3117c9b2127d1982d5d574f76d13d050f01ff429228ab0aca47208bb] =====
+
+===== pack/assets/charmedchars/textures/block/yellow/b.png [sha256 e06315b982b3d8837b38048f87a6a6adff2e4a428346607bb7ff0c43c16b2385] =====
+
+===== pack/assets/charmedchars/textures/block/yellow/c.png [sha256 1500e9a99ba17592483025c06893be3ba7293f9ccba7899f564e64cf9bd32a71] =====
+
+===== pack/assets/charmedchars/textures/block/yellow/d.png [sha256 f10648d249fdec439994308c0a4e70b722c4b97460e1b03aefb848c67c34a4ed] =====
+
+===== pack/assets/charmedchars/textures/block/yellow/division.png [sha256 0a90beb6747bbf6d5cb6bb98e7668aab85d471d771e61596d71446a441f48036] =====
+
+===== pack/assets/charmedchars/textures/block/yellow/e.png [sha256 f9d71bd92acb7cd107869083b154f9d23d456f311403aa656267374ca90ecf65] =====
+
+===== pack/assets/charmedchars/textures/block/yellow/f.png [sha256 4d6b99b68df2997ce32fd2a8ae6dfdd598f2e5acc57375375793a3854ad20d03] =====
+
+===== pack/assets/charmedchars/textures/block/yellow/g.png [sha256 528d0c8526bef4876f661756bf804ab7d8ca89f65051ca24e25904755e631701] =====
+
+===== pack/assets/charmedchars/textures/block/yellow/h.png [sha256 fadfc044abb5e965c0e1c32b5f8495822287c23eff468fb62be0a4a38a04ab4f] =====
+
+===== pack/assets/charmedchars/textures/block/yellow/i.png [sha256 c5039dabe18a753378358ed6f0248cbccc0a3be1f90edb889d9c2344358b2c8d] =====
+
+===== pack/assets/charmedchars/textures/block/yellow/j.png [sha256 ca7997f11438852e902d4b1f4cc9355f954c3a471eb7abffc8b3beaa6cbc5ac5] =====
+
+===== pack/assets/charmedchars/textures/block/yellow/k.png [sha256 4bcb65fc1e86e151ae1c570e7a556b271faa90a53b5571cf354e80cf8e9da1f7] =====
+
+===== pack/assets/charmedchars/textures/block/yellow/l.png [sha256 1dc5863e0982552147e53b64e065e3d6d29aec6561a3fdc106e9af37b8ad21e8] =====
+
+===== pack/assets/charmedchars/textures/block/yellow/logo_block.png [sha256 b91ff216533012078c301fb24d0ad833697f311265f6d74ee542c491998db147] =====
+
+===== pack/assets/charmedchars/textures/block/yellow/m.png [sha256 dd5c0a09a57d391e915daff1a3d963c1084daa33c412fe8fbe595ba9e31c6168] =====
+
+===== pack/assets/charmedchars/textures/block/yellow/minus.png [sha256 2d4308580fba4b355d3251c7aa21fca8d86da9152372aa62e29d10fc12284570] =====
+
+===== pack/assets/charmedchars/textures/block/yellow/multiply.png [sha256 b4e5f9e1272128c05ac068d8338f414cec117f17a1894ff6a5fd58472e211ff0] =====
+
+===== pack/assets/charmedchars/textures/block/yellow/n.png [sha256 19cca0960461bcaa79bd857c9071b0874191caa4be550b1fdf8accfa0a5e4095] =====
+
+===== pack/assets/charmedchars/textures/block/yellow/o.png [sha256 9ee67b54276e8cd0db15c9fa2b77ec455bb949dfa95e7d39a4cfa3c0de7a8e78] =====
+
+===== pack/assets/charmedchars/textures/block/yellow/p.png [sha256 879f08c75acd6dcbdace2c0e17cceab96601cff3fddcd43092b0f2944c4fb5a2] =====
+
+===== pack/assets/charmedchars/textures/block/yellow/plus.png [sha256 8b91c5f0f8ee70adec330a50df6a9f77a4431c90a23ba824d390c168a1f64706] =====
+
+===== pack/assets/charmedchars/textures/block/yellow/q.png [sha256 c6c9a28c77101e977ee79a1925ce2868ad70813d9f907b63d179d9a66c09d9d0] =====
+
+===== pack/assets/charmedchars/textures/block/yellow/r.png [sha256 1a34ccc47a3d375f259618a2a7cb3148ab0e9fef0e99beb91dd29c4c33c727ef] =====
+
+===== pack/assets/charmedchars/textures/block/yellow/s.png [sha256 6fb89474a558144a1ab8ae51cc0d4db77f44d68a33e4d7bb50d4a544d69908ba] =====
+
+===== pack/assets/charmedchars/textures/block/yellow/t.png [sha256 35e990d5c8a98b313c9e9261562119b5eca5f0e92648ac9f737bf9e2d383e31d] =====
+
+===== pack/assets/charmedchars/textures/block/yellow/u.png [sha256 a9344bd4a4c0d87d49431bd6e35bc22b0f6ac134401181f8560e11fec090f29c] =====
+
+===== pack/assets/charmedchars/textures/block/yellow/v.png [sha256 4b3a8a154bfc755414b48dfc8e8b7ce03619625f28a88cc3aafc60f8e2b894e2] =====
+
+===== pack/assets/charmedchars/textures/block/yellow/w.png [sha256 4dfc97b751fe6c4d704440d78dfff02f700099402963736ad8a6f4c8604a9c7c] =====
+
+===== pack/assets/charmedchars/textures/block/yellow/x.png [sha256 9e63f78f5bc6b6a6ea199758145728fd739acaf5208ce6c93d7728313f991220] =====
+
+===== pack/assets/charmedchars/textures/block/yellow/y.png [sha256 277737e1f133034336488a2f88b325772cbc47032423597b475143ab27829b2d] =====
+
+===== pack/assets/charmedchars/textures/block/yellow/z.png [sha256 d99b4b57cf7929429e7b2145b9dcf1f0f5109cdaa6e4792698949c1ffd80d8aa] =====
+
+===== pack/assets/charmedchars/textures/item/pyrite/pyrite_axe.png [sha256 eaa891ce6c2501caa2c9bfda7beb0e1b05b20e99b913fca9a1df5d6a6a8bbbe7] =====
+
+===== pack/assets/charmedchars/textures/item/pyrite/pyrite_hoe.png [sha256 23a7d3643e925196033da54b34bcbb7142cabb68ac469cfd354e4a86956e7800] =====
+
+===== pack/assets/charmedchars/textures/item/pyrite/pyrite_ingot.png [sha256 f338f74f7f0268a0288f8169e796d8fd626560e727f86968a46cf64ab3178757] =====
+
+===== pack/assets/charmedchars/textures/item/pyrite/pyrite_pickaxe.png [sha256 0a39700299ee2c7f6651c33a0fcd3dbfc0d529226e0711b6cd725a8b9b1898f0] =====
+
+===== pack/assets/charmedchars/textures/item/pyrite/pyrite_shovel.png [sha256 08587c1f6289fffb6839d512e1b0812dd60cf2223bc05c07f82877f6541d45cb] =====
+
+===== recipes/shaped/charmedchars.yml =====
+# CharmedChars Shaped Recipes
+# Auto-generated by CharmedChars plugin
+
+pyrite_pickaxe:
+  result:
+    nexo_item: pyrite_pickaxe
+    amount: 1
+  ingredients:
+    P:
+      amount: 3
+      nexo_item: pyrite_ingot
+    S:
+      amount: 2
+      minecraft_type: STICK
+  shape:
+    - PPP
+    - ' S '
+    - ' S '
+
+pyrite_axe:
+  result:
+    nexo_item: pyrite_axe
+    amount: 1
+  ingredients:
+    P:
+      amount: 3
+      nexo_item: pyrite_ingot
+    S:
+      amount: 2
+      minecraft_type: STICK
+  shape:
+    - 'PP '
+    - 'PS '
+    - ' S '
+
+pyrite_shovel:
+  result:
+    nexo_item: pyrite_shovel
+    amount: 1
+  ingredients:
+    P:
+      amount: 1
+      nexo_item: pyrite_ingot
+    S:
+      amount: 2
+      minecraft_type: STICK
+  shape:
+    - ' P '
+    - ' S '
+    - ' S '
+
+pyrite_hoe:
+  result:
+    nexo_item: pyrite_hoe
+    amount: 1
+  ingredients:
+    P:
+      amount: 2
+      nexo_item: pyrite_ingot
+    S:
+      amount: 2
+      minecraft_type: STICK
+  shape:
+    - 'PP '
+    - ' S '
+    - ' S '
+
+
+===== recipes/shapeless/charmedchars.yml =====
+# CharmedChars Shapeless Recipes
+# Auto-generated by CharmedChars plugin
+
+pyrite_ingot:
+  result:
+    nexo_item: pyrite_ingot
+    amount: 1
+  ingredients:
+    A:
+      amount: 1
+      minecraft_type: IRON_INGOT
+    B:
+      amount: 1
+      minecraft_type: REDSTONE
+
+pyrite_ingot_sulfur:
+  result:
+    nexo_item: pyrite_ingot
+    amount: 1
+  ingredients:
+    A:
+      amount: 1
+      minecraft_type: IRON_INGOT
+    B:
+      amount: 1
+      minecraft_type: POTENT_SULFUR
+

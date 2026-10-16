@@ -1,0 +1,6696 @@
+##### RESULT MESSAGES #####
+Creating directory structure...
+Generating items configuration...
+  ✓ Items configuration created (128 items)
+Generating recipes configuration...
+  ✓ Recipes configuration created (5 recipes)
+Generating model files...
+  ✓ Generated 246 model files (blocks + items)
+Copying texture files...
+  ✓ Copied 123 block texture files
+Copying pyrite item textures...
+  ✓ Copied 5 pyrite texture files
+Creating README...
+  ✓ README.txt created
+
+=== Setup Complete! ===
+Files copied to: <TMP>/plugins/Oraxen/items
+
+NEXT STEPS:
+1. Run /oraxen reload all
+2. Restart the server (recommended)
+3. Test with /charblock <player> cyan hello
+
+success=true alreadySetup=false
+
+##### FILES (378) #####
+items/CHARMEDCHARS_README.txt
+items/charmedchars_blocks.yml
+pack/assets/charmedchars/textures/block/cyan/0.png
+pack/assets/charmedchars/textures/block/cyan/1.png
+pack/assets/charmedchars/textures/block/cyan/2.png
+pack/assets/charmedchars/textures/block/cyan/3.png
+pack/assets/charmedchars/textures/block/cyan/4.png
+pack/assets/charmedchars/textures/block/cyan/5.png
+pack/assets/charmedchars/textures/block/cyan/6.png
+pack/assets/charmedchars/textures/block/cyan/7.png
+pack/assets/charmedchars/textures/block/cyan/8.png
+pack/assets/charmedchars/textures/block/cyan/9.png
+pack/assets/charmedchars/textures/block/cyan/a.png
+pack/assets/charmedchars/textures/block/cyan/b.png
+pack/assets/charmedchars/textures/block/cyan/c.png
+pack/assets/charmedchars/textures/block/cyan/d.png
+pack/assets/charmedchars/textures/block/cyan/division.png
+pack/assets/charmedchars/textures/block/cyan/e.png
+pack/assets/charmedchars/textures/block/cyan/f.png
+pack/assets/charmedchars/textures/block/cyan/g.png
+pack/assets/charmedchars/textures/block/cyan/h.png
+pack/assets/charmedchars/textures/block/cyan/i.png
+pack/assets/charmedchars/textures/block/cyan/j.png
+pack/assets/charmedchars/textures/block/cyan/k.png
+pack/assets/charmedchars/textures/block/cyan/l.png
+pack/assets/charmedchars/textures/block/cyan/logo_block.png
+pack/assets/charmedchars/textures/block/cyan/m.png
+pack/assets/charmedchars/textures/block/cyan/minus.png
+pack/assets/charmedchars/textures/block/cyan/multiply.png
+pack/assets/charmedchars/textures/block/cyan/n.png
+pack/assets/charmedchars/textures/block/cyan/o.png
+pack/assets/charmedchars/textures/block/cyan/p.png
+pack/assets/charmedchars/textures/block/cyan/plus.png
+pack/assets/charmedchars/textures/block/cyan/q.png
+pack/assets/charmedchars/textures/block/cyan/r.png
+pack/assets/charmedchars/textures/block/cyan/s.png
+pack/assets/charmedchars/textures/block/cyan/t.png
+pack/assets/charmedchars/textures/block/cyan/u.png
+pack/assets/charmedchars/textures/block/cyan/v.png
+pack/assets/charmedchars/textures/block/cyan/w.png
+pack/assets/charmedchars/textures/block/cyan/x.png
+pack/assets/charmedchars/textures/block/cyan/y.png
+pack/assets/charmedchars/textures/block/cyan/z.png
+pack/assets/charmedchars/textures/block/magenta/0.png
+pack/assets/charmedchars/textures/block/magenta/1.png
+pack/assets/charmedchars/textures/block/magenta/2.png
+pack/assets/charmedchars/textures/block/magenta/3.png
+pack/assets/charmedchars/textures/block/magenta/4.png
+pack/assets/charmedchars/textures/block/magenta/5.png
+pack/assets/charmedchars/textures/block/magenta/6.png
+pack/assets/charmedchars/textures/block/magenta/7.png
+pack/assets/charmedchars/textures/block/magenta/8.png
+pack/assets/charmedchars/textures/block/magenta/9.png
+pack/assets/charmedchars/textures/block/magenta/a.png
+pack/assets/charmedchars/textures/block/magenta/b.png
+pack/assets/charmedchars/textures/block/magenta/c.png
+pack/assets/charmedchars/textures/block/magenta/d.png
+pack/assets/charmedchars/textures/block/magenta/division.png
+pack/assets/charmedchars/textures/block/magenta/e.png
+pack/assets/charmedchars/textures/block/magenta/f.png
+pack/assets/charmedchars/textures/block/magenta/g.png
+pack/assets/charmedchars/textures/block/magenta/h.png
+pack/assets/charmedchars/textures/block/magenta/i.png
+pack/assets/charmedchars/textures/block/magenta/j.png
+pack/assets/charmedchars/textures/block/magenta/k.png
+pack/assets/charmedchars/textures/block/magenta/l.png
+pack/assets/charmedchars/textures/block/magenta/logo_block.png
+pack/assets/charmedchars/textures/block/magenta/m.png
+pack/assets/charmedchars/textures/block/magenta/minus.png
+pack/assets/charmedchars/textures/block/magenta/multiply.png
+pack/assets/charmedchars/textures/block/magenta/n.png
+pack/assets/charmedchars/textures/block/magenta/o.png
+pack/assets/charmedchars/textures/block/magenta/p.png
+pack/assets/charmedchars/textures/block/magenta/plus.png
+pack/assets/charmedchars/textures/block/magenta/q.png
+pack/assets/charmedchars/textures/block/magenta/r.png
+pack/assets/charmedchars/textures/block/magenta/s.png
+pack/assets/charmedchars/textures/block/magenta/t.png
+pack/assets/charmedchars/textures/block/magenta/u.png
+pack/assets/charmedchars/textures/block/magenta/v.png
+pack/assets/charmedchars/textures/block/magenta/w.png
+pack/assets/charmedchars/textures/block/magenta/x.png
+pack/assets/charmedchars/textures/block/magenta/y.png
+pack/assets/charmedchars/textures/block/magenta/z.png
+pack/assets/charmedchars/textures/block/yellow/0.png
+pack/assets/charmedchars/textures/block/yellow/1.png
+pack/assets/charmedchars/textures/block/yellow/2.png
+pack/assets/charmedchars/textures/block/yellow/3.png
+pack/assets/charmedchars/textures/block/yellow/4.png
+pack/assets/charmedchars/textures/block/yellow/5.png
+pack/assets/charmedchars/textures/block/yellow/6.png
+pack/assets/charmedchars/textures/block/yellow/7.png
+pack/assets/charmedchars/textures/block/yellow/8.png
+pack/assets/charmedchars/textures/block/yellow/9.png
+pack/assets/charmedchars/textures/block/yellow/a.png
+pack/assets/charmedchars/textures/block/yellow/b.png
+pack/assets/charmedchars/textures/block/yellow/c.png
+pack/assets/charmedchars/textures/block/yellow/d.png
+pack/assets/charmedchars/textures/block/yellow/division.png
+pack/assets/charmedchars/textures/block/yellow/e.png
+pack/assets/charmedchars/textures/block/yellow/f.png
+pack/assets/charmedchars/textures/block/yellow/g.png
+pack/assets/charmedchars/textures/block/yellow/h.png
+pack/assets/charmedchars/textures/block/yellow/i.png
+pack/assets/charmedchars/textures/block/yellow/j.png
+pack/assets/charmedchars/textures/block/yellow/k.png
+pack/assets/charmedchars/textures/block/yellow/l.png
+pack/assets/charmedchars/textures/block/yellow/logo_block.png
+pack/assets/charmedchars/textures/block/yellow/m.png
+pack/assets/charmedchars/textures/block/yellow/minus.png
+pack/assets/charmedchars/textures/block/yellow/multiply.png
+pack/assets/charmedchars/textures/block/yellow/n.png
+pack/assets/charmedchars/textures/block/yellow/o.png
+pack/assets/charmedchars/textures/block/yellow/p.png
+pack/assets/charmedchars/textures/block/yellow/plus.png
+pack/assets/charmedchars/textures/block/yellow/q.png
+pack/assets/charmedchars/textures/block/yellow/r.png
+pack/assets/charmedchars/textures/block/yellow/s.png
+pack/assets/charmedchars/textures/block/yellow/t.png
+pack/assets/charmedchars/textures/block/yellow/u.png
+pack/assets/charmedchars/textures/block/yellow/v.png
+pack/assets/charmedchars/textures/block/yellow/w.png
+pack/assets/charmedchars/textures/block/yellow/x.png
+pack/assets/charmedchars/textures/block/yellow/y.png
+pack/assets/charmedchars/textures/block/yellow/z.png
+pack/assets/charmedchars/textures/item/pyrite/axe.png
+pack/assets/charmedchars/textures/item/pyrite/hoe.png
+pack/assets/charmedchars/textures/item/pyrite/ingot.png
+pack/assets/charmedchars/textures/item/pyrite/pickaxe.png
+pack/assets/charmedchars/textures/item/pyrite/shovel.png
+pack/assets/minecraft/models/block/cyan_0.json
+pack/assets/minecraft/models/block/cyan_1.json
+pack/assets/minecraft/models/block/cyan_2.json
+pack/assets/minecraft/models/block/cyan_3.json
+pack/assets/minecraft/models/block/cyan_4.json
+pack/assets/minecraft/models/block/cyan_5.json
+pack/assets/minecraft/models/block/cyan_6.json
+pack/assets/minecraft/models/block/cyan_7.json
+pack/assets/minecraft/models/block/cyan_8.json
+pack/assets/minecraft/models/block/cyan_9.json
+pack/assets/minecraft/models/block/cyan_a.json
+pack/assets/minecraft/models/block/cyan_b.json
+pack/assets/minecraft/models/block/cyan_c.json
+pack/assets/minecraft/models/block/cyan_d.json
+pack/assets/minecraft/models/block/cyan_division.json
+pack/assets/minecraft/models/block/cyan_e.json
+pack/assets/minecraft/models/block/cyan_f.json
+pack/assets/minecraft/models/block/cyan_g.json
+pack/assets/minecraft/models/block/cyan_h.json
+pack/assets/minecraft/models/block/cyan_i.json
+pack/assets/minecraft/models/block/cyan_j.json
+pack/assets/minecraft/models/block/cyan_k.json
+pack/assets/minecraft/models/block/cyan_l.json
+pack/assets/minecraft/models/block/cyan_logo.json
+pack/assets/minecraft/models/block/cyan_m.json
+pack/assets/minecraft/models/block/cyan_minus.json
+pack/assets/minecraft/models/block/cyan_multiply.json
+pack/assets/minecraft/models/block/cyan_n.json
+pack/assets/minecraft/models/block/cyan_o.json
+pack/assets/minecraft/models/block/cyan_p.json
+pack/assets/minecraft/models/block/cyan_plus.json
+pack/assets/minecraft/models/block/cyan_q.json
+pack/assets/minecraft/models/block/cyan_r.json
+pack/assets/minecraft/models/block/cyan_s.json
+pack/assets/minecraft/models/block/cyan_t.json
+pack/assets/minecraft/models/block/cyan_u.json
+pack/assets/minecraft/models/block/cyan_v.json
+pack/assets/minecraft/models/block/cyan_w.json
+pack/assets/minecraft/models/block/cyan_x.json
+pack/assets/minecraft/models/block/cyan_y.json
+pack/assets/minecraft/models/block/cyan_z.json
+pack/assets/minecraft/models/block/magenta_0.json
+pack/assets/minecraft/models/block/magenta_1.json
+pack/assets/minecraft/models/block/magenta_2.json
+pack/assets/minecraft/models/block/magenta_3.json
+pack/assets/minecraft/models/block/magenta_4.json
+pack/assets/minecraft/models/block/magenta_5.json
+pack/assets/minecraft/models/block/magenta_6.json
+pack/assets/minecraft/models/block/magenta_7.json
+pack/assets/minecraft/models/block/magenta_8.json
+pack/assets/minecraft/models/block/magenta_9.json
+pack/assets/minecraft/models/block/magenta_a.json
+pack/assets/minecraft/models/block/magenta_b.json
+pack/assets/minecraft/models/block/magenta_c.json
+pack/assets/minecraft/models/block/magenta_d.json
+pack/assets/minecraft/models/block/magenta_division.json
+pack/assets/minecraft/models/block/magenta_e.json
+pack/assets/minecraft/models/block/magenta_f.json
+pack/assets/minecraft/models/block/magenta_g.json
+pack/assets/minecraft/models/block/magenta_h.json
+pack/assets/minecraft/models/block/magenta_i.json
+pack/assets/minecraft/models/block/magenta_j.json
+pack/assets/minecraft/models/block/magenta_k.json
+pack/assets/minecraft/models/block/magenta_l.json
+pack/assets/minecraft/models/block/magenta_logo.json
+pack/assets/minecraft/models/block/magenta_m.json
+pack/assets/minecraft/models/block/magenta_minus.json
+pack/assets/minecraft/models/block/magenta_multiply.json
+pack/assets/minecraft/models/block/magenta_n.json
+pack/assets/minecraft/models/block/magenta_o.json
+pack/assets/minecraft/models/block/magenta_p.json
+pack/assets/minecraft/models/block/magenta_plus.json
+pack/assets/minecraft/models/block/magenta_q.json
+pack/assets/minecraft/models/block/magenta_r.json
+pack/assets/minecraft/models/block/magenta_s.json
+pack/assets/minecraft/models/block/magenta_t.json
+pack/assets/minecraft/models/block/magenta_u.json
+pack/assets/minecraft/models/block/magenta_v.json
+pack/assets/minecraft/models/block/magenta_w.json
+pack/assets/minecraft/models/block/magenta_x.json
+pack/assets/minecraft/models/block/magenta_y.json
+pack/assets/minecraft/models/block/magenta_z.json
+pack/assets/minecraft/models/block/yellow_0.json
+pack/assets/minecraft/models/block/yellow_1.json
+pack/assets/minecraft/models/block/yellow_2.json
+pack/assets/minecraft/models/block/yellow_3.json
+pack/assets/minecraft/models/block/yellow_4.json
+pack/assets/minecraft/models/block/yellow_5.json
+pack/assets/minecraft/models/block/yellow_6.json
+pack/assets/minecraft/models/block/yellow_7.json
+pack/assets/minecraft/models/block/yellow_8.json
+pack/assets/minecraft/models/block/yellow_9.json
+pack/assets/minecraft/models/block/yellow_a.json
+pack/assets/minecraft/models/block/yellow_b.json
+pack/assets/minecraft/models/block/yellow_c.json
+pack/assets/minecraft/models/block/yellow_d.json
+pack/assets/minecraft/models/block/yellow_division.json
+pack/assets/minecraft/models/block/yellow_e.json
+pack/assets/minecraft/models/block/yellow_f.json
+pack/assets/minecraft/models/block/yellow_g.json
+pack/assets/minecraft/models/block/yellow_h.json
+pack/assets/minecraft/models/block/yellow_i.json
+pack/assets/minecraft/models/block/yellow_j.json
+pack/assets/minecraft/models/block/yellow_k.json
+pack/assets/minecraft/models/block/yellow_l.json
+pack/assets/minecraft/models/block/yellow_logo.json
+pack/assets/minecraft/models/block/yellow_m.json
+pack/assets/minecraft/models/block/yellow_minus.json
+pack/assets/minecraft/models/block/yellow_multiply.json
+pack/assets/minecraft/models/block/yellow_n.json
+pack/assets/minecraft/models/block/yellow_o.json
+pack/assets/minecraft/models/block/yellow_p.json
+pack/assets/minecraft/models/block/yellow_plus.json
+pack/assets/minecraft/models/block/yellow_q.json
+pack/assets/minecraft/models/block/yellow_r.json
+pack/assets/minecraft/models/block/yellow_s.json
+pack/assets/minecraft/models/block/yellow_t.json
+pack/assets/minecraft/models/block/yellow_u.json
+pack/assets/minecraft/models/block/yellow_v.json
+pack/assets/minecraft/models/block/yellow_w.json
+pack/assets/minecraft/models/block/yellow_x.json
+pack/assets/minecraft/models/block/yellow_y.json
+pack/assets/minecraft/models/block/yellow_z.json
+pack/assets/minecraft/models/item/cyan_0.json
+pack/assets/minecraft/models/item/cyan_1.json
+pack/assets/minecraft/models/item/cyan_2.json
+pack/assets/minecraft/models/item/cyan_3.json
+pack/assets/minecraft/models/item/cyan_4.json
+pack/assets/minecraft/models/item/cyan_5.json
+pack/assets/minecraft/models/item/cyan_6.json
+pack/assets/minecraft/models/item/cyan_7.json
+pack/assets/minecraft/models/item/cyan_8.json
+pack/assets/minecraft/models/item/cyan_9.json
+pack/assets/minecraft/models/item/cyan_a.json
+pack/assets/minecraft/models/item/cyan_b.json
+pack/assets/minecraft/models/item/cyan_c.json
+pack/assets/minecraft/models/item/cyan_d.json
+pack/assets/minecraft/models/item/cyan_division.json
+pack/assets/minecraft/models/item/cyan_e.json
+pack/assets/minecraft/models/item/cyan_f.json
+pack/assets/minecraft/models/item/cyan_g.json
+pack/assets/minecraft/models/item/cyan_h.json
+pack/assets/minecraft/models/item/cyan_i.json
+pack/assets/minecraft/models/item/cyan_j.json
+pack/assets/minecraft/models/item/cyan_k.json
+pack/assets/minecraft/models/item/cyan_l.json
+pack/assets/minecraft/models/item/cyan_logo.json
+pack/assets/minecraft/models/item/cyan_m.json
+pack/assets/minecraft/models/item/cyan_minus.json
+pack/assets/minecraft/models/item/cyan_multiply.json
+pack/assets/minecraft/models/item/cyan_n.json
+pack/assets/minecraft/models/item/cyan_o.json
+pack/assets/minecraft/models/item/cyan_p.json
+pack/assets/minecraft/models/item/cyan_plus.json
+pack/assets/minecraft/models/item/cyan_q.json
+pack/assets/minecraft/models/item/cyan_r.json
+pack/assets/minecraft/models/item/cyan_s.json
+pack/assets/minecraft/models/item/cyan_t.json
+pack/assets/minecraft/models/item/cyan_u.json
+pack/assets/minecraft/models/item/cyan_v.json
+pack/assets/minecraft/models/item/cyan_w.json
+pack/assets/minecraft/models/item/cyan_x.json
+pack/assets/minecraft/models/item/cyan_y.json
+pack/assets/minecraft/models/item/cyan_z.json
+pack/assets/minecraft/models/item/magenta_0.json
+pack/assets/minecraft/models/item/magenta_1.json
+pack/assets/minecraft/models/item/magenta_2.json
+pack/assets/minecraft/models/item/magenta_3.json
+pack/assets/minecraft/models/item/magenta_4.json
+pack/assets/minecraft/models/item/magenta_5.json
+pack/assets/minecraft/models/item/magenta_6.json
+pack/assets/minecraft/models/item/magenta_7.json
+pack/assets/minecraft/models/item/magenta_8.json
+pack/assets/minecraft/models/item/magenta_9.json
+pack/assets/minecraft/models/item/magenta_a.json
+pack/assets/minecraft/models/item/magenta_b.json
+pack/assets/minecraft/models/item/magenta_c.json
+pack/assets/minecraft/models/item/magenta_d.json
+pack/assets/minecraft/models/item/magenta_division.json
+pack/assets/minecraft/models/item/magenta_e.json
+pack/assets/minecraft/models/item/magenta_f.json
+pack/assets/minecraft/models/item/magenta_g.json
+pack/assets/minecraft/models/item/magenta_h.json
+pack/assets/minecraft/models/item/magenta_i.json
+pack/assets/minecraft/models/item/magenta_j.json
+pack/assets/minecraft/models/item/magenta_k.json
+pack/assets/minecraft/models/item/magenta_l.json
+pack/assets/minecraft/models/item/magenta_logo.json
+pack/assets/minecraft/models/item/magenta_m.json
+pack/assets/minecraft/models/item/magenta_minus.json
+pack/assets/minecraft/models/item/magenta_multiply.json
+pack/assets/minecraft/models/item/magenta_n.json
+pack/assets/minecraft/models/item/magenta_o.json
+pack/assets/minecraft/models/item/magenta_p.json
+pack/assets/minecraft/models/item/magenta_plus.json
+pack/assets/minecraft/models/item/magenta_q.json
+pack/assets/minecraft/models/item/magenta_r.json
+pack/assets/minecraft/models/item/magenta_s.json
+pack/assets/minecraft/models/item/magenta_t.json
+pack/assets/minecraft/models/item/magenta_u.json
+pack/assets/minecraft/models/item/magenta_v.json
+pack/assets/minecraft/models/item/magenta_w.json
+pack/assets/minecraft/models/item/magenta_x.json
+pack/assets/minecraft/models/item/magenta_y.json
+pack/assets/minecraft/models/item/magenta_z.json
+pack/assets/minecraft/models/item/yellow_0.json
+pack/assets/minecraft/models/item/yellow_1.json
+pack/assets/minecraft/models/item/yellow_2.json
+pack/assets/minecraft/models/item/yellow_3.json
+pack/assets/minecraft/models/item/yellow_4.json
+pack/assets/minecraft/models/item/yellow_5.json
+pack/assets/minecraft/models/item/yellow_6.json
+pack/assets/minecraft/models/item/yellow_7.json
+pack/assets/minecraft/models/item/yellow_8.json
+pack/assets/minecraft/models/item/yellow_9.json
+pack/assets/minecraft/models/item/yellow_a.json
+pack/assets/minecraft/models/item/yellow_b.json
+pack/assets/minecraft/models/item/yellow_c.json
+pack/assets/minecraft/models/item/yellow_d.json
+pack/assets/minecraft/models/item/yellow_division.json
+pack/assets/minecraft/models/item/yellow_e.json
+pack/assets/minecraft/models/item/yellow_f.json
+pack/assets/minecraft/models/item/yellow_g.json
+pack/assets/minecraft/models/item/yellow_h.json
+pack/assets/minecraft/models/item/yellow_i.json
+pack/assets/minecraft/models/item/yellow_j.json
+pack/assets/minecraft/models/item/yellow_k.json
+pack/assets/minecraft/models/item/yellow_l.json
+pack/assets/minecraft/models/item/yellow_logo.json
+pack/assets/minecraft/models/item/yellow_m.json
+pack/assets/minecraft/models/item/yellow_minus.json
+pack/assets/minecraft/models/item/yellow_multiply.json
+pack/assets/minecraft/models/item/yellow_n.json
+pack/assets/minecraft/models/item/yellow_o.json
+pack/assets/minecraft/models/item/yellow_p.json
+pack/assets/minecraft/models/item/yellow_plus.json
+pack/assets/minecraft/models/item/yellow_q.json
+pack/assets/minecraft/models/item/yellow_r.json
+pack/assets/minecraft/models/item/yellow_s.json
+pack/assets/minecraft/models/item/yellow_t.json
+pack/assets/minecraft/models/item/yellow_u.json
+pack/assets/minecraft/models/item/yellow_v.json
+pack/assets/minecraft/models/item/yellow_w.json
+pack/assets/minecraft/models/item/yellow_x.json
+pack/assets/minecraft/models/item/yellow_y.json
+pack/assets/minecraft/models/item/yellow_z.json
+recipes/shaped.yml
+recipes/shapeless.yml
+
+===== items/CHARMEDCHARS_README.txt =====
+CharmedChars - Oraxen Integration
+======================================
+
+This folder contains CharmedChars custom items for Oraxen.
+
+AUTO-GENERATED by CharmedChars plugin via /oraxensetup command.
+
+Contents:
+---------
+- charmedchars_blocks.yml  - Item definitions (128 items total)
+- ../recipes/charmedchars.yml - Pyrite tool recipes (5 recipes)
+- ../pack/textures/charmedchars/ - All texture files
+
+Setup:
+------
+1. This configuration was automatically generated by CharmedChars
+2. Run /oraxen reload all to load the new items
+3. Restart your server (recommended)
+4. Test with /charblock <player> cyan hello
+
+Items Included:
+----------------
+- 78 Letter blocks (A-Z × 3 colors: cyan, magenta, yellow)
+- 30 Number blocks (0-9 × 3 colors)
+- 12 Operator blocks (+, -, ×, ÷ × 3 colors)
+- 3 Logo blocks (1 × 3 colors)
+- 5 Pyrite items (ingot, pickaxe, axe, shovel, hoe)
+
+Total: 128 items
+
+Item ID Format:
+----------------
+<color>_<character>
+
+Examples:
+- cyan_a
+- magenta_5
+- yellow_plus
+- pyrite_pickaxe
+
+Commands:
+---------
+/charblock <player> cyan hello  - Give blocks to player
+/oraxen reload all              - Reload Oraxen configurations
+/oraxensetup force              - Regenerate this configuration
+
+For more information, see the CharmedChars documentation.
+<no newline at end of file>
+
+===== items/charmedchars_blocks.yml =====
+# CharmedChars - Oraxen Items Configuration
+# Auto-generated by CharmedChars plugin
+# Total: 131 items (126 blocks + 5 pyrite items)
+
+# ==================== CYAN LETTER BLOCKS ====================
+cyan_a:
+  displayname: "<aqua>A Block"
+  material: PAPER
+  Pack:
+    generate_model: false
+    model: item/cyan_a
+  Mechanics:
+    noteblock:
+      custom_variation: 1
+      directional: false
+      hardness: 0.8
+      block_model: block/cyan_a
+      drop:
+        silktouch: false
+        minimal_type:
+          - WOODEN_PICKAXE
+          - WOODEN_AXE
+          - STONE_PICKAXE
+          - STONE_AXE
+          - COPPER_PICKAXE
+          - COPPER_AXE
+          - IRON_PICKAXE
+          - IRON_AXE
+          - GOLDEN_PICKAXE
+          - GOLDEN_AXE
+          - DIAMOND_PICKAXE
+          - DIAMOND_AXE
+          - NETHERITE_PICKAXE
+          - NETHERITE_AXE
+        loots:
+          - { oraxen_item: cyan_a, probability: 1.0 }
+
+cyan_b:
+  displayname: "<aqua>B Block"
+  material: PAPER
+  Pack:
+    generate_model: false
+    model: item/cyan_b
+  Mechanics:
+    noteblock:
+      custom_variation: 2
+      directional: false
+      hardness: 0.8
+      block_model: block/cyan_b
+      drop:
+        silktouch: false
+        minimal_type:
+          - WOODEN_PICKAXE
+          - WOODEN_AXE
+          - STONE_PICKAXE
+          - STONE_AXE
+          - COPPER_PICKAXE
+          - COPPER_AXE
+          - IRON_PICKAXE
+          - IRON_AXE
+          - GOLDEN_PICKAXE
+          - GOLDEN_AXE
+          - DIAMOND_PICKAXE
+          - DIAMOND_AXE
+          - NETHERITE_PICKAXE
+          - NETHERITE_AXE
+        loots:
+          - { oraxen_item: cyan_b, probability: 1.0 }
+
+cyan_c:
+  displayname: "<aqua>C Block"
+  material: PAPER
+  Pack:
+    generate_model: false
+    model: item/cyan_c
+  Mechanics:
+    noteblock:
+      custom_variation: 3
+      directional: false
+      hardness: 0.8
+      block_model: block/cyan_c
+      drop:
+        silktouch: false
+        minimal_type:
+          - WOODEN_PICKAXE
+          - WOODEN_AXE
+          - STONE_PICKAXE
+          - STONE_AXE
+          - COPPER_PICKAXE
+          - COPPER_AXE
+          - IRON_PICKAXE
+          - IRON_AXE
+          - GOLDEN_PICKAXE
+          - GOLDEN_AXE
+          - DIAMOND_PICKAXE
+          - DIAMOND_AXE
+          - NETHERITE_PICKAXE
+          - NETHERITE_AXE
+        loots:
+          - { oraxen_item: cyan_c, probability: 1.0 }
+
+cyan_d:
+  displayname: "<aqua>D Block"
+  material: PAPER
+  Pack:
+    generate_model: false
+    model: item/cyan_d
+  Mechanics:
+    noteblock:
+      custom_variation: 4
+      directional: false
+      hardness: 0.8
+      block_model: block/cyan_d
+      drop:
+        silktouch: false
+        minimal_type:
+          - WOODEN_PICKAXE
+          - WOODEN_AXE
+          - STONE_PICKAXE
+          - STONE_AXE
+          - COPPER_PICKAXE
+          - COPPER_AXE
+          - IRON_PICKAXE
+          - IRON_AXE
+          - GOLDEN_PICKAXE
+          - GOLDEN_AXE
+          - DIAMOND_PICKAXE
+          - DIAMOND_AXE
+          - NETHERITE_PICKAXE
+          - NETHERITE_AXE
+        loots:
+          - { oraxen_item: cyan_d, probability: 1.0 }
+
+cyan_e:
+  displayname: "<aqua>E Block"
+  material: PAPER
+  Pack:
+    generate_model: false
+    model: item/cyan_e
+  Mechanics:
+    noteblock:
+      custom_variation: 5
+      directional: false
+      hardness: 0.8
+      block_model: block/cyan_e
+      drop:
+        silktouch: false
+        minimal_type:
+          - WOODEN_PICKAXE
+          - WOODEN_AXE
+          - STONE_PICKAXE
+          - STONE_AXE
+          - COPPER_PICKAXE
+          - COPPER_AXE
+          - IRON_PICKAXE
+          - IRON_AXE
+          - GOLDEN_PICKAXE
+          - GOLDEN_AXE
+          - DIAMOND_PICKAXE
+          - DIAMOND_AXE
+          - NETHERITE_PICKAXE
+          - NETHERITE_AXE
+        loots:
+          - { oraxen_item: cyan_e, probability: 1.0 }
+
+cyan_f:
+  displayname: "<aqua>F Block"
+  material: PAPER
+  Pack:
+    generate_model: false
+    model: item/cyan_f
+  Mechanics:
+    noteblock:
+      custom_variation: 6
+      directional: false
+      hardness: 0.8
+      block_model: block/cyan_f
+      drop:
+        silktouch: false
+        minimal_type:
+          - WOODEN_PICKAXE
+          - WOODEN_AXE
+          - STONE_PICKAXE
+          - STONE_AXE
+          - COPPER_PICKAXE
+          - COPPER_AXE
+          - IRON_PICKAXE
+          - IRON_AXE
+          - GOLDEN_PICKAXE
+          - GOLDEN_AXE
+          - DIAMOND_PICKAXE
+          - DIAMOND_AXE
+          - NETHERITE_PICKAXE
+          - NETHERITE_AXE
+        loots:
+          - { oraxen_item: cyan_f, probability: 1.0 }
+
+cyan_g:
+  displayname: "<aqua>G Block"
+  material: PAPER
+  Pack:
+    generate_model: false
+    model: item/cyan_g
+  Mechanics:
+    noteblock:
+      custom_variation: 7
+      directional: false
+      hardness: 0.8
+      block_model: block/cyan_g
+      drop:
+        silktouch: false
+        minimal_type:
+          - WOODEN_PICKAXE
+          - WOODEN_AXE
+          - STONE_PICKAXE
+          - STONE_AXE
+          - COPPER_PICKAXE
+          - COPPER_AXE
+          - IRON_PICKAXE
+          - IRON_AXE
+          - GOLDEN_PICKAXE
+          - GOLDEN_AXE
+          - DIAMOND_PICKAXE
+          - DIAMOND_AXE
+          - NETHERITE_PICKAXE
+          - NETHERITE_AXE
+        loots:
+          - { oraxen_item: cyan_g, probability: 1.0 }
+
+cyan_h:
+  displayname: "<aqua>H Block"
+  material: PAPER
+  Pack:
+    generate_model: false
+    model: item/cyan_h
+  Mechanics:
+    noteblock:
+      custom_variation: 8
+      directional: false
+      hardness: 0.8
+      block_model: block/cyan_h
+      drop:
+        silktouch: false
+        minimal_type:
+          - WOODEN_PICKAXE
+          - WOODEN_AXE
+          - STONE_PICKAXE
+          - STONE_AXE
+          - COPPER_PICKAXE
+          - COPPER_AXE
+          - IRON_PICKAXE
+          - IRON_AXE
+          - GOLDEN_PICKAXE
+          - GOLDEN_AXE
+          - DIAMOND_PICKAXE
+          - DIAMOND_AXE
+          - NETHERITE_PICKAXE
+          - NETHERITE_AXE
+        loots:
+          - { oraxen_item: cyan_h, probability: 1.0 }
+
+cyan_i:
+  displayname: "<aqua>I Block"
+  material: PAPER
+  Pack:
+    generate_model: false
+    model: item/cyan_i
+  Mechanics:
+    noteblock:
+      custom_variation: 9
+      directional: false
+      hardness: 0.8
+      block_model: block/cyan_i
+      drop:
+        silktouch: false
+        minimal_type:
+          - WOODEN_PICKAXE
+          - WOODEN_AXE
+          - STONE_PICKAXE
+          - STONE_AXE
+          - COPPER_PICKAXE
+          - COPPER_AXE
+          - IRON_PICKAXE
+          - IRON_AXE
+          - GOLDEN_PICKAXE
+          - GOLDEN_AXE
+          - DIAMOND_PICKAXE
+          - DIAMOND_AXE
+          - NETHERITE_PICKAXE
+          - NETHERITE_AXE
+        loots:
+          - { oraxen_item: cyan_i, probability: 1.0 }
+
+cyan_j:
+  displayname: "<aqua>J Block"
+  material: PAPER
+  Pack:
+    generate_model: false
+    model: item/cyan_j
+  Mechanics:
+    noteblock:
+      custom_variation: 10
+      directional: false
+      hardness: 0.8
+      block_model: block/cyan_j
+      drop:
+        silktouch: false
+        minimal_type:
+          - WOODEN_PICKAXE
+          - WOODEN_AXE
+          - STONE_PICKAXE
+          - STONE_AXE
+          - COPPER_PICKAXE
+          - COPPER_AXE
+          - IRON_PICKAXE
+          - IRON_AXE
+          - GOLDEN_PICKAXE
+          - GOLDEN_AXE
+          - DIAMOND_PICKAXE
+          - DIAMOND_AXE
+          - NETHERITE_PICKAXE
+          - NETHERITE_AXE
+        loots:
+          - { oraxen_item: cyan_j, probability: 1.0 }
+
+cyan_k:
+  displayname: "<aqua>K Block"
+  material: PAPER
+  Pack:
+    generate_model: false
+    model: item/cyan_k
+  Mechanics:
+    noteblock:
+      custom_variation: 11
+      directional: false
+      hardness: 0.8
+      block_model: block/cyan_k
+      drop:
+        silktouch: false
+        minimal_type:
+          - WOODEN_PICKAXE
+          - WOODEN_AXE
+          - STONE_PICKAXE
+          - STONE_AXE
+          - COPPER_PICKAXE
+          - COPPER_AXE
+          - IRON_PICKAXE
+          - IRON_AXE
+          - GOLDEN_PICKAXE
+          - GOLDEN_AXE
+          - DIAMOND_PICKAXE
+          - DIAMOND_AXE
+          - NETHERITE_PICKAXE
+          - NETHERITE_AXE
+        loots:
+          - { oraxen_item: cyan_k, probability: 1.0 }
+
+cyan_l:
+  displayname: "<aqua>L Block"
+  material: PAPER
+  Pack:
+    generate_model: false
+    model: item/cyan_l
+  Mechanics:
+    noteblock:
+      custom_variation: 12
+      directional: false
+      hardness: 0.8
+      block_model: block/cyan_l
+      drop:
+        silktouch: false
+        minimal_type:
+          - WOODEN_PICKAXE
+          - WOODEN_AXE
+          - STONE_PICKAXE
+          - STONE_AXE
+          - COPPER_PICKAXE
+          - COPPER_AXE
+          - IRON_PICKAXE
+          - IRON_AXE
+          - GOLDEN_PICKAXE
+          - GOLDEN_AXE
+          - DIAMOND_PICKAXE
+          - DIAMOND_AXE
+          - NETHERITE_PICKAXE
+          - NETHERITE_AXE
+        loots:
+          - { oraxen_item: cyan_l, probability: 1.0 }
+
+cyan_m:
+  displayname: "<aqua>M Block"
+  material: PAPER
+  Pack:
+    generate_model: false
+    model: item/cyan_m
+  Mechanics:
+    noteblock:
+      custom_variation: 13
+      directional: false
+      hardness: 0.8
+      block_model: block/cyan_m
+      drop:
+        silktouch: false
+        minimal_type:
+          - WOODEN_PICKAXE
+          - WOODEN_AXE
+          - STONE_PICKAXE
+          - STONE_AXE
+          - COPPER_PICKAXE
+          - COPPER_AXE
+          - IRON_PICKAXE
+          - IRON_AXE
+          - GOLDEN_PICKAXE
+          - GOLDEN_AXE
+          - DIAMOND_PICKAXE
+          - DIAMOND_AXE
+          - NETHERITE_PICKAXE
+          - NETHERITE_AXE
+        loots:
+          - { oraxen_item: cyan_m, probability: 1.0 }
+
+cyan_n:
+  displayname: "<aqua>N Block"
+  material: PAPER
+  Pack:
+    generate_model: false
+    model: item/cyan_n
+  Mechanics:
+    noteblock:
+      custom_variation: 14
+      directional: false
+      hardness: 0.8
+      block_model: block/cyan_n
+      drop:
+        silktouch: false
+        minimal_type:
+          - WOODEN_PICKAXE
+          - WOODEN_AXE
+          - STONE_PICKAXE
+          - STONE_AXE
+          - COPPER_PICKAXE
+          - COPPER_AXE
+          - IRON_PICKAXE
+          - IRON_AXE
+          - GOLDEN_PICKAXE
+          - GOLDEN_AXE
+          - DIAMOND_PICKAXE
+          - DIAMOND_AXE
+          - NETHERITE_PICKAXE
+          - NETHERITE_AXE
+        loots:
+          - { oraxen_item: cyan_n, probability: 1.0 }
+
+cyan_o:
+  displayname: "<aqua>O Block"
+  material: PAPER
+  Pack:
+    generate_model: false
+    model: item/cyan_o
+  Mechanics:
+    noteblock:
+      custom_variation: 15
+      directional: false
+      hardness: 0.8
+      block_model: block/cyan_o
+      drop:
+        silktouch: false
+        minimal_type:
+          - WOODEN_PICKAXE
+          - WOODEN_AXE
+          - STONE_PICKAXE
+          - STONE_AXE
+          - COPPER_PICKAXE
+          - COPPER_AXE
+          - IRON_PICKAXE
+          - IRON_AXE
+          - GOLDEN_PICKAXE
+          - GOLDEN_AXE
+          - DIAMOND_PICKAXE
+          - DIAMOND_AXE
+          - NETHERITE_PICKAXE
+          - NETHERITE_AXE
+        loots:
+          - { oraxen_item: cyan_o, probability: 1.0 }
+
+cyan_p:
+  displayname: "<aqua>P Block"
+  material: PAPER
+  Pack:
+    generate_model: false
+    model: item/cyan_p
+  Mechanics:
+    noteblock:
+      custom_variation: 16
+      directional: false
+      hardness: 0.8
+      block_model: block/cyan_p
+      drop:
+        silktouch: false
+        minimal_type:
+          - WOODEN_PICKAXE
+          - WOODEN_AXE
+          - STONE_PICKAXE
+          - STONE_AXE
+          - COPPER_PICKAXE
+          - COPPER_AXE
+          - IRON_PICKAXE
+          - IRON_AXE
+          - GOLDEN_PICKAXE
+          - GOLDEN_AXE
+          - DIAMOND_PICKAXE
+          - DIAMOND_AXE
+          - NETHERITE_PICKAXE
+          - NETHERITE_AXE
+        loots:
+          - { oraxen_item: cyan_p, probability: 1.0 }
+
+cyan_q:
+  displayname: "<aqua>Q Block"
+  material: PAPER
+  Pack:
+    generate_model: false
+    model: item/cyan_q
+  Mechanics:
+    noteblock:
+      custom_variation: 17
+      directional: false
+      hardness: 0.8
+      block_model: block/cyan_q
+      drop:
+        silktouch: false
+        minimal_type:
+          - WOODEN_PICKAXE
+          - WOODEN_AXE
+          - STONE_PICKAXE
+          - STONE_AXE
+          - COPPER_PICKAXE
+          - COPPER_AXE
+          - IRON_PICKAXE
+          - IRON_AXE
+          - GOLDEN_PICKAXE
+          - GOLDEN_AXE
+          - DIAMOND_PICKAXE
+          - DIAMOND_AXE
+          - NETHERITE_PICKAXE
+          - NETHERITE_AXE
+        loots:
+          - { oraxen_item: cyan_q, probability: 1.0 }
+
+cyan_r:
+  displayname: "<aqua>R Block"
+  material: PAPER
+  Pack:
+    generate_model: false
+    model: item/cyan_r
+  Mechanics:
+    noteblock:
+      custom_variation: 18
+      directional: false
+      hardness: 0.8
+      block_model: block/cyan_r
+      drop:
+        silktouch: false
+        minimal_type:
+          - WOODEN_PICKAXE
+          - WOODEN_AXE
+          - STONE_PICKAXE
+          - STONE_AXE
+          - COPPER_PICKAXE
+          - COPPER_AXE
+          - IRON_PICKAXE
+          - IRON_AXE
+          - GOLDEN_PICKAXE
+          - GOLDEN_AXE
+          - DIAMOND_PICKAXE
+          - DIAMOND_AXE
+          - NETHERITE_PICKAXE
+          - NETHERITE_AXE
+        loots:
+          - { oraxen_item: cyan_r, probability: 1.0 }
+
+cyan_s:
+  displayname: "<aqua>S Block"
+  material: PAPER
+  Pack:
+    generate_model: false
+    model: item/cyan_s
+  Mechanics:
+    noteblock:
+      custom_variation: 19
+      directional: false
+      hardness: 0.8
+      block_model: block/cyan_s
+      drop:
+        silktouch: false
+        minimal_type:
+          - WOODEN_PICKAXE
+          - WOODEN_AXE
+          - STONE_PICKAXE
+          - STONE_AXE
+          - COPPER_PICKAXE
+          - COPPER_AXE
+          - IRON_PICKAXE
+          - IRON_AXE
+          - GOLDEN_PICKAXE
+          - GOLDEN_AXE
+          - DIAMOND_PICKAXE
+          - DIAMOND_AXE
+          - NETHERITE_PICKAXE
+          - NETHERITE_AXE
+        loots:
+          - { oraxen_item: cyan_s, probability: 1.0 }
+
+cyan_t:
+  displayname: "<aqua>T Block"
+  material: PAPER
+  Pack:
+    generate_model: false
+    model: item/cyan_t
+  Mechanics:
+    noteblock:
+      custom_variation: 20
+      directional: false
+      hardness: 0.8
+      block_model: block/cyan_t
+      drop:
+        silktouch: false
+        minimal_type:
+          - WOODEN_PICKAXE
+          - WOODEN_AXE
+          - STONE_PICKAXE
+          - STONE_AXE
+          - COPPER_PICKAXE
+          - COPPER_AXE
+          - IRON_PICKAXE
+          - IRON_AXE
+          - GOLDEN_PICKAXE
+          - GOLDEN_AXE
+          - DIAMOND_PICKAXE
+          - DIAMOND_AXE
+          - NETHERITE_PICKAXE
+          - NETHERITE_AXE
+        loots:
+          - { oraxen_item: cyan_t, probability: 1.0 }
+
+cyan_u:
+  displayname: "<aqua>U Block"
+  material: PAPER
+  Pack:
+    generate_model: false
+    model: item/cyan_u
+  Mechanics:
+    noteblock:
+      custom_variation: 21
+      directional: false
+      hardness: 0.8
+      block_model: block/cyan_u
+      drop:
+        silktouch: false
+        minimal_type:
+          - WOODEN_PICKAXE
+          - WOODEN_AXE
+          - STONE_PICKAXE
+          - STONE_AXE
+          - COPPER_PICKAXE
+          - COPPER_AXE
+          - IRON_PICKAXE
+          - IRON_AXE
+          - GOLDEN_PICKAXE
+          - GOLDEN_AXE
+          - DIAMOND_PICKAXE
+          - DIAMOND_AXE
+          - NETHERITE_PICKAXE
+          - NETHERITE_AXE
+        loots:
+          - { oraxen_item: cyan_u, probability: 1.0 }
+
+cyan_v:
+  displayname: "<aqua>V Block"
+  material: PAPER
+  Pack:
+    generate_model: false
+    model: item/cyan_v
+  Mechanics:
+    noteblock:
+      custom_variation: 22
+      directional: false
+      hardness: 0.8
+      block_model: block/cyan_v
+      drop:
+        silktouch: false
+        minimal_type:
+          - WOODEN_PICKAXE
+          - WOODEN_AXE
+          - STONE_PICKAXE
+          - STONE_AXE
+          - COPPER_PICKAXE
+          - COPPER_AXE
+          - IRON_PICKAXE
+          - IRON_AXE
+          - GOLDEN_PICKAXE
+          - GOLDEN_AXE
+          - DIAMOND_PICKAXE
+          - DIAMOND_AXE
+          - NETHERITE_PICKAXE
+          - NETHERITE_AXE
+        loots:
+          - { oraxen_item: cyan_v, probability: 1.0 }
+
+cyan_w:
+  displayname: "<aqua>W Block"
+  material: PAPER
+  Pack:
+    generate_model: false
+    model: item/cyan_w
+  Mechanics:
+    noteblock:
+      custom_variation: 23
+      directional: false
+      hardness: 0.8
+      block_model: block/cyan_w
+      drop:
+        silktouch: false
+        minimal_type:
+          - WOODEN_PICKAXE
+          - WOODEN_AXE
+          - STONE_PICKAXE
+          - STONE_AXE
+          - COPPER_PICKAXE
+          - COPPER_AXE
+          - IRON_PICKAXE
+          - IRON_AXE
+          - GOLDEN_PICKAXE
+          - GOLDEN_AXE
+          - DIAMOND_PICKAXE
+          - DIAMOND_AXE
+          - NETHERITE_PICKAXE
+          - NETHERITE_AXE
+        loots:
+          - { oraxen_item: cyan_w, probability: 1.0 }
+
+cyan_x:
+  displayname: "<aqua>X Block"
+  material: PAPER
+  Pack:
+    generate_model: false
+    model: item/cyan_x
+  Mechanics:
+    noteblock:
+      custom_variation: 24
+      directional: false
+      hardness: 0.8
+      block_model: block/cyan_x
+      drop:
+        silktouch: false
+        minimal_type:
+          - WOODEN_PICKAXE
+          - WOODEN_AXE
+          - STONE_PICKAXE
+          - STONE_AXE
+          - COPPER_PICKAXE
+          - COPPER_AXE
+          - IRON_PICKAXE
+          - IRON_AXE
+          - GOLDEN_PICKAXE
+          - GOLDEN_AXE
+          - DIAMOND_PICKAXE
+          - DIAMOND_AXE
+          - NETHERITE_PICKAXE
+          - NETHERITE_AXE
+        loots:
+          - { oraxen_item: cyan_x, probability: 1.0 }
+
+cyan_y:
+  displayname: "<aqua>Y Block"
+  material: PAPER
+  Pack:
+    generate_model: false
+    model: item/cyan_y
+  Mechanics:
+    noteblock:
+      custom_variation: 25
+      directional: false
+      hardness: 0.8
+      block_model: block/cyan_y
+      drop:
+        silktouch: false
+        minimal_type:
+          - WOODEN_PICKAXE
+          - WOODEN_AXE
+          - STONE_PICKAXE
+          - STONE_AXE
+          - COPPER_PICKAXE
+          - COPPER_AXE
+          - IRON_PICKAXE
+          - IRON_AXE
+          - GOLDEN_PICKAXE
+          - GOLDEN_AXE
+          - DIAMOND_PICKAXE
+          - DIAMOND_AXE
+          - NETHERITE_PICKAXE
+          - NETHERITE_AXE
+        loots:
+          - { oraxen_item: cyan_y, probability: 1.0 }
+
+cyan_z:
+  displayname: "<aqua>Z Block"
+  material: PAPER
+  Pack:
+    generate_model: false
+    model: item/cyan_z
+  Mechanics:
+    noteblock:
+      custom_variation: 26
+      directional: false
+      hardness: 0.8
+      block_model: block/cyan_z
+      drop:
+        silktouch: false
+        minimal_type:
+          - WOODEN_PICKAXE
+          - WOODEN_AXE
+          - STONE_PICKAXE
+          - STONE_AXE
+          - COPPER_PICKAXE
+          - COPPER_AXE
+          - IRON_PICKAXE
+          - IRON_AXE
+          - GOLDEN_PICKAXE
+          - GOLDEN_AXE
+          - DIAMOND_PICKAXE
+          - DIAMOND_AXE
+          - NETHERITE_PICKAXE
+          - NETHERITE_AXE
+        loots:
+          - { oraxen_item: cyan_z, probability: 1.0 }
+
+# ==================== MAGENTA LETTER BLOCKS ====================
+magenta_a:
+  displayname: "<light_purple>A Block"
+  material: PAPER
+  Pack:
+    generate_model: false
+    model: item/magenta_a
+  Mechanics:
+    noteblock:
+      custom_variation: 27
+      directional: false
+      hardness: 0.8
+      block_model: block/magenta_a
+      drop:
+        silktouch: false
+        minimal_type:
+          - WOODEN_PICKAXE
+          - WOODEN_AXE
+          - STONE_PICKAXE
+          - STONE_AXE
+          - COPPER_PICKAXE
+          - COPPER_AXE
+          - IRON_PICKAXE
+          - IRON_AXE
+          - GOLDEN_PICKAXE
+          - GOLDEN_AXE
+          - DIAMOND_PICKAXE
+          - DIAMOND_AXE
+          - NETHERITE_PICKAXE
+          - NETHERITE_AXE
+        loots:
+          - { oraxen_item: magenta_a, probability: 1.0 }
+
+magenta_b:
+  displayname: "<light_purple>B Block"
+  material: PAPER
+  Pack:
+    generate_model: false
+    model: item/magenta_b
+  Mechanics:
+    noteblock:
+      custom_variation: 28
+      directional: false
+      hardness: 0.8
+      block_model: block/magenta_b
+      drop:
+        silktouch: false
+        minimal_type:
+          - WOODEN_PICKAXE
+          - WOODEN_AXE
+          - STONE_PICKAXE
+          - STONE_AXE
+          - COPPER_PICKAXE
+          - COPPER_AXE
+          - IRON_PICKAXE
+          - IRON_AXE
+          - GOLDEN_PICKAXE
+          - GOLDEN_AXE
+          - DIAMOND_PICKAXE
+          - DIAMOND_AXE
+          - NETHERITE_PICKAXE
+          - NETHERITE_AXE
+        loots:
+          - { oraxen_item: magenta_b, probability: 1.0 }
+
+magenta_c:
+  displayname: "<light_purple>C Block"
+  material: PAPER
+  Pack:
+    generate_model: false
+    model: item/magenta_c
+  Mechanics:
+    noteblock:
+      custom_variation: 29
+      directional: false
+      hardness: 0.8
+      block_model: block/magenta_c
+      drop:
+        silktouch: false
+        minimal_type:
+          - WOODEN_PICKAXE
+          - WOODEN_AXE
+          - STONE_PICKAXE
+          - STONE_AXE
+          - COPPER_PICKAXE
+          - COPPER_AXE
+          - IRON_PICKAXE
+          - IRON_AXE
+          - GOLDEN_PICKAXE
+          - GOLDEN_AXE
+          - DIAMOND_PICKAXE
+          - DIAMOND_AXE
+          - NETHERITE_PICKAXE
+          - NETHERITE_AXE
+        loots:
+          - { oraxen_item: magenta_c, probability: 1.0 }
+
+magenta_d:
+  displayname: "<light_purple>D Block"
+  material: PAPER
+  Pack:
+    generate_model: false
+    model: item/magenta_d
+  Mechanics:
+    noteblock:
+      custom_variation: 30
+      directional: false
+      hardness: 0.8
+      block_model: block/magenta_d
+      drop:
+        silktouch: false
+        minimal_type:
+          - WOODEN_PICKAXE
+          - WOODEN_AXE
+          - STONE_PICKAXE
+          - STONE_AXE
+          - COPPER_PICKAXE
+          - COPPER_AXE
+          - IRON_PICKAXE
+          - IRON_AXE
+          - GOLDEN_PICKAXE
+          - GOLDEN_AXE
+          - DIAMOND_PICKAXE
+          - DIAMOND_AXE
+          - NETHERITE_PICKAXE
+          - NETHERITE_AXE
+        loots:
+          - { oraxen_item: magenta_d, probability: 1.0 }
+
+magenta_e:
+  displayname: "<light_purple>E Block"
+  material: PAPER
+  Pack:
+    generate_model: false
+    model: item/magenta_e
+  Mechanics:
+    noteblock:
+      custom_variation: 31
+      directional: false
+      hardness: 0.8
+      block_model: block/magenta_e
+      drop:
+        silktouch: false
+        minimal_type:
+          - WOODEN_PICKAXE
+          - WOODEN_AXE
+          - STONE_PICKAXE
+          - STONE_AXE
+          - COPPER_PICKAXE
+          - COPPER_AXE
+          - IRON_PICKAXE
+          - IRON_AXE
+          - GOLDEN_PICKAXE
+          - GOLDEN_AXE
+          - DIAMOND_PICKAXE
+          - DIAMOND_AXE
+          - NETHERITE_PICKAXE
+          - NETHERITE_AXE
+        loots:
+          - { oraxen_item: magenta_e, probability: 1.0 }
+
+magenta_f:
+  displayname: "<light_purple>F Block"
+  material: PAPER
+  Pack:
+    generate_model: false
+    model: item/magenta_f
+  Mechanics:
+    noteblock:
+      custom_variation: 32
+      directional: false
+      hardness: 0.8
+      block_model: block/magenta_f
+      drop:
+        silktouch: false
+        minimal_type:
+          - WOODEN_PICKAXE
+          - WOODEN_AXE
+          - STONE_PICKAXE
+          - STONE_AXE
+          - COPPER_PICKAXE
+          - COPPER_AXE
+          - IRON_PICKAXE
+          - IRON_AXE
+          - GOLDEN_PICKAXE
+          - GOLDEN_AXE
+          - DIAMOND_PICKAXE
+          - DIAMOND_AXE
+          - NETHERITE_PICKAXE
+          - NETHERITE_AXE
+        loots:
+          - { oraxen_item: magenta_f, probability: 1.0 }
+
+magenta_g:
+  displayname: "<light_purple>G Block"
+  material: PAPER
+  Pack:
+    generate_model: false
+    model: item/magenta_g
+  Mechanics:
+    noteblock:
+      custom_variation: 33
+      directional: false
+      hardness: 0.8
+      block_model: block/magenta_g
+      drop:
+        silktouch: false
+        minimal_type:
+          - WOODEN_PICKAXE
+          - WOODEN_AXE
+          - STONE_PICKAXE
+          - STONE_AXE
+          - COPPER_PICKAXE
+          - COPPER_AXE
+          - IRON_PICKAXE
+          - IRON_AXE
+          - GOLDEN_PICKAXE
+          - GOLDEN_AXE
+          - DIAMOND_PICKAXE
+          - DIAMOND_AXE
+          - NETHERITE_PICKAXE
+          - NETHERITE_AXE
+        loots:
+          - { oraxen_item: magenta_g, probability: 1.0 }
+
+magenta_h:
+  displayname: "<light_purple>H Block"
+  material: PAPER
+  Pack:
+    generate_model: false
+    model: item/magenta_h
+  Mechanics:
+    noteblock:
+      custom_variation: 34
+      directional: false
+      hardness: 0.8
+      block_model: block/magenta_h
+      drop:
+        silktouch: false
+        minimal_type:
+          - WOODEN_PICKAXE
+          - WOODEN_AXE
+          - STONE_PICKAXE
+          - STONE_AXE
+          - COPPER_PICKAXE
+          - COPPER_AXE
+          - IRON_PICKAXE
+          - IRON_AXE
+          - GOLDEN_PICKAXE
+          - GOLDEN_AXE
+          - DIAMOND_PICKAXE
+          - DIAMOND_AXE
+          - NETHERITE_PICKAXE
+          - NETHERITE_AXE
+        loots:
+          - { oraxen_item: magenta_h, probability: 1.0 }
+
+magenta_i:
+  displayname: "<light_purple>I Block"
+  material: PAPER
+  Pack:
+    generate_model: false
+    model: item/magenta_i
+  Mechanics:
+    noteblock:
+      custom_variation: 35
+      directional: false
+      hardness: 0.8
+      block_model: block/magenta_i
+      drop:
+        silktouch: false
+        minimal_type:
+          - WOODEN_PICKAXE
+          - WOODEN_AXE
+          - STONE_PICKAXE
+          - STONE_AXE
+          - COPPER_PICKAXE
+          - COPPER_AXE
+          - IRON_PICKAXE
+          - IRON_AXE
+          - GOLDEN_PICKAXE
+          - GOLDEN_AXE
+          - DIAMOND_PICKAXE
+          - DIAMOND_AXE
+          - NETHERITE_PICKAXE
+          - NETHERITE_AXE
+        loots:
+          - { oraxen_item: magenta_i, probability: 1.0 }
+
+magenta_j:
+  displayname: "<light_purple>J Block"
+  material: PAPER
+  Pack:
+    generate_model: false
+    model: item/magenta_j
+  Mechanics:
+    noteblock:
+      custom_variation: 36
+      directional: false
+      hardness: 0.8
+      block_model: block/magenta_j
+      drop:
+        silktouch: false
+        minimal_type:
+          - WOODEN_PICKAXE
+          - WOODEN_AXE
+          - STONE_PICKAXE
+          - STONE_AXE
+          - COPPER_PICKAXE
+          - COPPER_AXE
+          - IRON_PICKAXE
+          - IRON_AXE
+          - GOLDEN_PICKAXE
+          - GOLDEN_AXE
+          - DIAMOND_PICKAXE
+          - DIAMOND_AXE
+          - NETHERITE_PICKAXE
+          - NETHERITE_AXE
+        loots:
+          - { oraxen_item: magenta_j, probability: 1.0 }
+
+magenta_k:
+  displayname: "<light_purple>K Block"
+  material: PAPER
+  Pack:
+    generate_model: false
+    model: item/magenta_k
+  Mechanics:
+    noteblock:
+      custom_variation: 37
+      directional: false
+      hardness: 0.8
+      block_model: block/magenta_k
+      drop:
+        silktouch: false
+        minimal_type:
+          - WOODEN_PICKAXE
+          - WOODEN_AXE
+          - STONE_PICKAXE
+          - STONE_AXE
+          - COPPER_PICKAXE
+          - COPPER_AXE
+          - IRON_PICKAXE
+          - IRON_AXE
+          - GOLDEN_PICKAXE
+          - GOLDEN_AXE
+          - DIAMOND_PICKAXE
+          - DIAMOND_AXE
+          - NETHERITE_PICKAXE
+          - NETHERITE_AXE
+        loots:
+          - { oraxen_item: magenta_k, probability: 1.0 }
+
+magenta_l:
+  displayname: "<light_purple>L Block"
+  material: PAPER
+  Pack:
+    generate_model: false
+    model: item/magenta_l
+  Mechanics:
+    noteblock:
+      custom_variation: 38
+      directional: false
+      hardness: 0.8
+      block_model: block/magenta_l
+      drop:
+        silktouch: false
+        minimal_type:
+          - WOODEN_PICKAXE
+          - WOODEN_AXE
+          - STONE_PICKAXE
+          - STONE_AXE
+          - COPPER_PICKAXE
+          - COPPER_AXE
+          - IRON_PICKAXE
+          - IRON_AXE
+          - GOLDEN_PICKAXE
+          - GOLDEN_AXE
+          - DIAMOND_PICKAXE
+          - DIAMOND_AXE
+          - NETHERITE_PICKAXE
+          - NETHERITE_AXE
+        loots:
+          - { oraxen_item: magenta_l, probability: 1.0 }
+
+magenta_m:
+  displayname: "<light_purple>M Block"
+  material: PAPER
+  Pack:
+    generate_model: false
+    model: item/magenta_m
+  Mechanics:
+    noteblock:
+      custom_variation: 39
+      directional: false
+      hardness: 0.8
+      block_model: block/magenta_m
+      drop:
+        silktouch: false
+        minimal_type:
+          - WOODEN_PICKAXE
+          - WOODEN_AXE
+          - STONE_PICKAXE
+          - STONE_AXE
+          - COPPER_PICKAXE
+          - COPPER_AXE
+          - IRON_PICKAXE
+          - IRON_AXE
+          - GOLDEN_PICKAXE
+          - GOLDEN_AXE
+          - DIAMOND_PICKAXE
+          - DIAMOND_AXE
+          - NETHERITE_PICKAXE
+          - NETHERITE_AXE
+        loots:
+          - { oraxen_item: magenta_m, probability: 1.0 }
+
+magenta_n:
+  displayname: "<light_purple>N Block"
+  material: PAPER
+  Pack:
+    generate_model: false
+    model: item/magenta_n
+  Mechanics:
+    noteblock:
+      custom_variation: 40
+      directional: false
+      hardness: 0.8
+      block_model: block/magenta_n
+      drop:
+        silktouch: false
+        minimal_type:
+          - WOODEN_PICKAXE
+          - WOODEN_AXE
+          - STONE_PICKAXE
+          - STONE_AXE
+          - COPPER_PICKAXE
+          - COPPER_AXE
+          - IRON_PICKAXE
+          - IRON_AXE
+          - GOLDEN_PICKAXE
+          - GOLDEN_AXE
+          - DIAMOND_PICKAXE
+          - DIAMOND_AXE
+          - NETHERITE_PICKAXE
+          - NETHERITE_AXE
+        loots:
+          - { oraxen_item: magenta_n, probability: 1.0 }
+
+magenta_o:
+  displayname: "<light_purple>O Block"
+  material: PAPER
+  Pack:
+    generate_model: false
+    model: item/magenta_o
+  Mechanics:
+    noteblock:
+      custom_variation: 41
+      directional: false
+      hardness: 0.8
+      block_model: block/magenta_o
+      drop:
+        silktouch: false
+        minimal_type:
+          - WOODEN_PICKAXE
+          - WOODEN_AXE
+          - STONE_PICKAXE
+          - STONE_AXE
+          - COPPER_PICKAXE
+          - COPPER_AXE
+          - IRON_PICKAXE
+          - IRON_AXE
+          - GOLDEN_PICKAXE
+          - GOLDEN_AXE
+          - DIAMOND_PICKAXE
+          - DIAMOND_AXE
+          - NETHERITE_PICKAXE
+          - NETHERITE_AXE
+        loots:
+          - { oraxen_item: magenta_o, probability: 1.0 }
+
+magenta_p:
+  displayname: "<light_purple>P Block"
+  material: PAPER
+  Pack:
+    generate_model: false
+    model: item/magenta_p
+  Mechanics:
+    noteblock:
+      custom_variation: 42
+      directional: false
+      hardness: 0.8
+      block_model: block/magenta_p
+      drop:
+        silktouch: false
+        minimal_type:
+          - WOODEN_PICKAXE
+          - WOODEN_AXE
+          - STONE_PICKAXE
+          - STONE_AXE
+          - COPPER_PICKAXE
+          - COPPER_AXE
+          - IRON_PICKAXE
+          - IRON_AXE
+          - GOLDEN_PICKAXE
+          - GOLDEN_AXE
+          - DIAMOND_PICKAXE
+          - DIAMOND_AXE
+          - NETHERITE_PICKAXE
+          - NETHERITE_AXE
+        loots:
+          - { oraxen_item: magenta_p, probability: 1.0 }
+
+magenta_q:
+  displayname: "<light_purple>Q Block"
+  material: PAPER
+  Pack:
+    generate_model: false
+    model: item/magenta_q
+  Mechanics:
+    noteblock:
+      custom_variation: 43
+      directional: false
+      hardness: 0.8
+      block_model: block/magenta_q
+      drop:
+        silktouch: false
+        minimal_type:
+          - WOODEN_PICKAXE
+          - WOODEN_AXE
+          - STONE_PICKAXE
+          - STONE_AXE
+          - COPPER_PICKAXE
+          - COPPER_AXE
+          - IRON_PICKAXE
+          - IRON_AXE
+          - GOLDEN_PICKAXE
+          - GOLDEN_AXE
+          - DIAMOND_PICKAXE
+          - DIAMOND_AXE
+          - NETHERITE_PICKAXE
+          - NETHERITE_AXE
+        loots:
+          - { oraxen_item: magenta_q, probability: 1.0 }
+
+magenta_r:
+  displayname: "<light_purple>R Block"
+  material: PAPER
+  Pack:
+    generate_model: false
+    model: item/magenta_r
+  Mechanics:
+    noteblock:
+      custom_variation: 44
+      directional: false
+      hardness: 0.8
+      block_model: block/magenta_r
+      drop:
+        silktouch: false
+        minimal_type:
+          - WOODEN_PICKAXE
+          - WOODEN_AXE
+          - STONE_PICKAXE
+          - STONE_AXE
+          - COPPER_PICKAXE
+          - COPPER_AXE
+          - IRON_PICKAXE
+          - IRON_AXE
+          - GOLDEN_PICKAXE
+          - GOLDEN_AXE
+          - DIAMOND_PICKAXE
+          - DIAMOND_AXE
+          - NETHERITE_PICKAXE
+          - NETHERITE_AXE
+        loots:
+          - { oraxen_item: magenta_r, probability: 1.0 }
+
+magenta_s:
+  displayname: "<light_purple>S Block"
+  material: PAPER
+  Pack:
+    generate_model: false
+    model: item/magenta_s
+  Mechanics:
+    noteblock:
+      custom_variation: 45
+      directional: false
+      hardness: 0.8
+      block_model: block/magenta_s
+      drop:
+        silktouch: false
+        minimal_type:
+          - WOODEN_PICKAXE
+          - WOODEN_AXE
+          - STONE_PICKAXE
+          - STONE_AXE
+          - COPPER_PICKAXE
+          - COPPER_AXE
+          - IRON_PICKAXE
+          - IRON_AXE
+          - GOLDEN_PICKAXE
+          - GOLDEN_AXE
+          - DIAMOND_PICKAXE
+          - DIAMOND_AXE
+          - NETHERITE_PICKAXE
+          - NETHERITE_AXE
+        loots:
+          - { oraxen_item: magenta_s, probability: 1.0 }
+
+magenta_t:
+  displayname: "<light_purple>T Block"
+  material: PAPER
+  Pack:
+    generate_model: false
+    model: item/magenta_t
+  Mechanics:
+    noteblock:
+      custom_variation: 46
+      directional: false
+      hardness: 0.8
+      block_model: block/magenta_t
+      drop:
+        silktouch: false
+        minimal_type:
+          - WOODEN_PICKAXE
+          - WOODEN_AXE
+          - STONE_PICKAXE
+          - STONE_AXE
+          - COPPER_PICKAXE
+          - COPPER_AXE
+          - IRON_PICKAXE
+          - IRON_AXE
+          - GOLDEN_PICKAXE
+          - GOLDEN_AXE
+          - DIAMOND_PICKAXE
+          - DIAMOND_AXE
+          - NETHERITE_PICKAXE
+          - NETHERITE_AXE
+        loots:
+          - { oraxen_item: magenta_t, probability: 1.0 }
+
+magenta_u:
+  displayname: "<light_purple>U Block"
+  material: PAPER
+  Pack:
+    generate_model: false
+    model: item/magenta_u
+  Mechanics:
+    noteblock:
+      custom_variation: 47
+      directional: false
+      hardness: 0.8
+      block_model: block/magenta_u
+      drop:
+        silktouch: false
+        minimal_type:
+          - WOODEN_PICKAXE
+          - WOODEN_AXE
+          - STONE_PICKAXE
+          - STONE_AXE
+          - COPPER_PICKAXE
+          - COPPER_AXE
+          - IRON_PICKAXE
+          - IRON_AXE
+          - GOLDEN_PICKAXE
+          - GOLDEN_AXE
+          - DIAMOND_PICKAXE
+          - DIAMOND_AXE
+          - NETHERITE_PICKAXE
+          - NETHERITE_AXE
+        loots:
+          - { oraxen_item: magenta_u, probability: 1.0 }
+
+magenta_v:
+  displayname: "<light_purple>V Block"
+  material: PAPER
+  Pack:
+    generate_model: false
+    model: item/magenta_v
+  Mechanics:
+    noteblock:
+      custom_variation: 48
+      directional: false
+      hardness: 0.8
+      block_model: block/magenta_v
+      drop:
+        silktouch: false
+        minimal_type:
+          - WOODEN_PICKAXE
+          - WOODEN_AXE
+          - STONE_PICKAXE
+          - STONE_AXE
+          - COPPER_PICKAXE
+          - COPPER_AXE
+          - IRON_PICKAXE
+          - IRON_AXE
+          - GOLDEN_PICKAXE
+          - GOLDEN_AXE
+          - DIAMOND_PICKAXE
+          - DIAMOND_AXE
+          - NETHERITE_PICKAXE
+          - NETHERITE_AXE
+        loots:
+          - { oraxen_item: magenta_v, probability: 1.0 }
+
+magenta_w:
+  displayname: "<light_purple>W Block"
+  material: PAPER
+  Pack:
+    generate_model: false
+    model: item/magenta_w
+  Mechanics:
+    noteblock:
+      custom_variation: 49
+      directional: false
+      hardness: 0.8
+      block_model: block/magenta_w
+      drop:
+        silktouch: false
+        minimal_type:
+          - WOODEN_PICKAXE
+          - WOODEN_AXE
+          - STONE_PICKAXE
+          - STONE_AXE
+          - COPPER_PICKAXE
+          - COPPER_AXE
+          - IRON_PICKAXE
+          - IRON_AXE
+          - GOLDEN_PICKAXE
+          - GOLDEN_AXE
+          - DIAMOND_PICKAXE
+          - DIAMOND_AXE
+          - NETHERITE_PICKAXE
+          - NETHERITE_AXE
+        loots:
+          - { oraxen_item: magenta_w, probability: 1.0 }
+
+magenta_x:
+  displayname: "<light_purple>X Block"
+  material: PAPER
+  Pack:
+    generate_model: false
+    model: item/magenta_x
+  Mechanics:
+    noteblock:
+      custom_variation: 50
+      directional: false
+      hardness: 0.8
+      block_model: block/magenta_x
+      drop:
+        silktouch: false
+        minimal_type:
+          - WOODEN_PICKAXE
+          - WOODEN_AXE
+          - STONE_PICKAXE
+          - STONE_AXE
+          - COPPER_PICKAXE
+          - COPPER_AXE
+          - IRON_PICKAXE
+          - IRON_AXE
+          - GOLDEN_PICKAXE
+          - GOLDEN_AXE
+          - DIAMOND_PICKAXE
+          - DIAMOND_AXE
+          - NETHERITE_PICKAXE
+          - NETHERITE_AXE
+        loots:
+          - { oraxen_item: magenta_x, probability: 1.0 }
+
+magenta_y:
+  displayname: "<light_purple>Y Block"
+  material: PAPER
+  Pack:
+    generate_model: false
+    model: item/magenta_y
+  Mechanics:
+    noteblock:
+      custom_variation: 51
+      directional: false
+      hardness: 0.8
+      block_model: block/magenta_y
+      drop:
+        silktouch: false
+        minimal_type:
+          - WOODEN_PICKAXE
+          - WOODEN_AXE
+          - STONE_PICKAXE
+          - STONE_AXE
+          - COPPER_PICKAXE
+          - COPPER_AXE
+          - IRON_PICKAXE
+          - IRON_AXE
+          - GOLDEN_PICKAXE
+          - GOLDEN_AXE
+          - DIAMOND_PICKAXE
+          - DIAMOND_AXE
+          - NETHERITE_PICKAXE
+          - NETHERITE_AXE
+        loots:
+          - { oraxen_item: magenta_y, probability: 1.0 }
+
+magenta_z:
+  displayname: "<light_purple>Z Block"
+  material: PAPER
+  Pack:
+    generate_model: false
+    model: item/magenta_z
+  Mechanics:
+    noteblock:
+      custom_variation: 52
+      directional: false
+      hardness: 0.8
+      block_model: block/magenta_z
+      drop:
+        silktouch: false
+        minimal_type:
+          - WOODEN_PICKAXE
+          - WOODEN_AXE
+          - STONE_PICKAXE
+          - STONE_AXE
+          - COPPER_PICKAXE
+          - COPPER_AXE
+          - IRON_PICKAXE
+          - IRON_AXE
+          - GOLDEN_PICKAXE
+          - GOLDEN_AXE
+          - DIAMOND_PICKAXE
+          - DIAMOND_AXE
+          - NETHERITE_PICKAXE
+          - NETHERITE_AXE
+        loots:
+          - { oraxen_item: magenta_z, probability: 1.0 }
+
+# ==================== YELLOW LETTER BLOCKS ====================
+yellow_a:
+  displayname: "<yellow>A Block"
+  material: PAPER
+  Pack:
+    generate_model: false
+    model: item/yellow_a
+  Mechanics:
+    noteblock:
+      custom_variation: 53
+      directional: false
+      hardness: 0.8
+      block_model: block/yellow_a
+      drop:
+        silktouch: false
+        minimal_type:
+          - WOODEN_PICKAXE
+          - WOODEN_AXE
+          - STONE_PICKAXE
+          - STONE_AXE
+          - COPPER_PICKAXE
+          - COPPER_AXE
+          - IRON_PICKAXE
+          - IRON_AXE
+          - GOLDEN_PICKAXE
+          - GOLDEN_AXE
+          - DIAMOND_PICKAXE
+          - DIAMOND_AXE
+          - NETHERITE_PICKAXE
+          - NETHERITE_AXE
+        loots:
+          - { oraxen_item: yellow_a, probability: 1.0 }
+
+yellow_b:
+  displayname: "<yellow>B Block"
+  material: PAPER
+  Pack:
+    generate_model: false
+    model: item/yellow_b
+  Mechanics:
+    noteblock:
+      custom_variation: 54
+      directional: false
+      hardness: 0.8
+      block_model: block/yellow_b
+      drop:
+        silktouch: false
+        minimal_type:
+          - WOODEN_PICKAXE
+          - WOODEN_AXE
+          - STONE_PICKAXE
+          - STONE_AXE
+          - COPPER_PICKAXE
+          - COPPER_AXE
+          - IRON_PICKAXE
+          - IRON_AXE
+          - GOLDEN_PICKAXE
+          - GOLDEN_AXE
+          - DIAMOND_PICKAXE
+          - DIAMOND_AXE
+          - NETHERITE_PICKAXE
+          - NETHERITE_AXE
+        loots:
+          - { oraxen_item: yellow_b, probability: 1.0 }
+
+yellow_c:
+  displayname: "<yellow>C Block"
+  material: PAPER
+  Pack:
+    generate_model: false
+    model: item/yellow_c
+  Mechanics:
+    noteblock:
+      custom_variation: 55
+      directional: false
+      hardness: 0.8
+      block_model: block/yellow_c
+      drop:
+        silktouch: false
+        minimal_type:
+          - WOODEN_PICKAXE
+          - WOODEN_AXE
+          - STONE_PICKAXE
+          - STONE_AXE
+          - COPPER_PICKAXE
+          - COPPER_AXE
+          - IRON_PICKAXE
+          - IRON_AXE
+          - GOLDEN_PICKAXE
+          - GOLDEN_AXE
+          - DIAMOND_PICKAXE
+          - DIAMOND_AXE
+          - NETHERITE_PICKAXE
+          - NETHERITE_AXE
+        loots:
+          - { oraxen_item: yellow_c, probability: 1.0 }
+
+yellow_d:
+  displayname: "<yellow>D Block"
+  material: PAPER
+  Pack:
+    generate_model: false
+    model: item/yellow_d
+  Mechanics:
+    noteblock:
+      custom_variation: 56
+      directional: false
+      hardness: 0.8
+      block_model: block/yellow_d
+      drop:
+        silktouch: false
+        minimal_type:
+          - WOODEN_PICKAXE
+          - WOODEN_AXE
+          - STONE_PICKAXE
+          - STONE_AXE
+          - COPPER_PICKAXE
+          - COPPER_AXE
+          - IRON_PICKAXE
+          - IRON_AXE
+          - GOLDEN_PICKAXE
+          - GOLDEN_AXE
+          - DIAMOND_PICKAXE
+          - DIAMOND_AXE
+          - NETHERITE_PICKAXE
+          - NETHERITE_AXE
+        loots:
+          - { oraxen_item: yellow_d, probability: 1.0 }
+
+yellow_e:
+  displayname: "<yellow>E Block"
+  material: PAPER
+  Pack:
+    generate_model: false
+    model: item/yellow_e
+  Mechanics:
+    noteblock:
+      custom_variation: 57
+      directional: false
+      hardness: 0.8
+      block_model: block/yellow_e
+      drop:
+        silktouch: false
+        minimal_type:
+          - WOODEN_PICKAXE
+          - WOODEN_AXE
+          - STONE_PICKAXE
+          - STONE_AXE
+          - COPPER_PICKAXE
+          - COPPER_AXE
+          - IRON_PICKAXE
+          - IRON_AXE
+          - GOLDEN_PICKAXE
+          - GOLDEN_AXE
+          - DIAMOND_PICKAXE
+          - DIAMOND_AXE
+          - NETHERITE_PICKAXE
+          - NETHERITE_AXE
+        loots:
+          - { oraxen_item: yellow_e, probability: 1.0 }
+
+yellow_f:
+  displayname: "<yellow>F Block"
+  material: PAPER
+  Pack:
+    generate_model: false
+    model: item/yellow_f
+  Mechanics:
+    noteblock:
+      custom_variation: 58
+      directional: false
+      hardness: 0.8
+      block_model: block/yellow_f
+      drop:
+        silktouch: false
+        minimal_type:
+          - WOODEN_PICKAXE
+          - WOODEN_AXE
+          - STONE_PICKAXE
+          - STONE_AXE
+          - COPPER_PICKAXE
+          - COPPER_AXE
+          - IRON_PICKAXE
+          - IRON_AXE
+          - GOLDEN_PICKAXE
+          - GOLDEN_AXE
+          - DIAMOND_PICKAXE
+          - DIAMOND_AXE
+          - NETHERITE_PICKAXE
+          - NETHERITE_AXE
+        loots:
+          - { oraxen_item: yellow_f, probability: 1.0 }
+
+yellow_g:
+  displayname: "<yellow>G Block"
+  material: PAPER
+  Pack:
+    generate_model: false
+    model: item/yellow_g
+  Mechanics:
+    noteblock:
+      custom_variation: 59
+      directional: false
+      hardness: 0.8
+      block_model: block/yellow_g
+      drop:
+        silktouch: false
+        minimal_type:
+          - WOODEN_PICKAXE
+          - WOODEN_AXE
+          - STONE_PICKAXE
+          - STONE_AXE
+          - COPPER_PICKAXE
+          - COPPER_AXE
+          - IRON_PICKAXE
+          - IRON_AXE
+          - GOLDEN_PICKAXE
+          - GOLDEN_AXE
+          - DIAMOND_PICKAXE
+          - DIAMOND_AXE
+          - NETHERITE_PICKAXE
+          - NETHERITE_AXE
+        loots:
+          - { oraxen_item: yellow_g, probability: 1.0 }
+
+yellow_h:
+  displayname: "<yellow>H Block"
+  material: PAPER
+  Pack:
+    generate_model: false
+    model: item/yellow_h
+  Mechanics:
+    noteblock:
+      custom_variation: 60
+      directional: false
+      hardness: 0.8
+      block_model: block/yellow_h
+      drop:
+        silktouch: false
+        minimal_type:
+          - WOODEN_PICKAXE
+          - WOODEN_AXE
+          - STONE_PICKAXE
+          - STONE_AXE
+          - COPPER_PICKAXE
+          - COPPER_AXE
+          - IRON_PICKAXE
+          - IRON_AXE
+          - GOLDEN_PICKAXE
+          - GOLDEN_AXE
+          - DIAMOND_PICKAXE
+          - DIAMOND_AXE
+          - NETHERITE_PICKAXE
+          - NETHERITE_AXE
+        loots:
+          - { oraxen_item: yellow_h, probability: 1.0 }
+
+yellow_i:
+  displayname: "<yellow>I Block"
+  material: PAPER
+  Pack:
+    generate_model: false
+    model: item/yellow_i
+  Mechanics:
+    noteblock:
+      custom_variation: 61
+      directional: false
+      hardness: 0.8
+      block_model: block/yellow_i
+      drop:
+        silktouch: false
+        minimal_type:
+          - WOODEN_PICKAXE
+          - WOODEN_AXE
+          - STONE_PICKAXE
+          - STONE_AXE
+          - COPPER_PICKAXE
+          - COPPER_AXE
+          - IRON_PICKAXE
+          - IRON_AXE
+          - GOLDEN_PICKAXE
+          - GOLDEN_AXE
+          - DIAMOND_PICKAXE
+          - DIAMOND_AXE
+          - NETHERITE_PICKAXE
+          - NETHERITE_AXE
+        loots:
+          - { oraxen_item: yellow_i, probability: 1.0 }
+
+yellow_j:
+  displayname: "<yellow>J Block"
+  material: PAPER
+  Pack:
+    generate_model: false
+    model: item/yellow_j
+  Mechanics:
+    noteblock:
+      custom_variation: 62
+      directional: false
+      hardness: 0.8
+      block_model: block/yellow_j
+      drop:
+        silktouch: false
+        minimal_type:
+          - WOODEN_PICKAXE
+          - WOODEN_AXE
+          - STONE_PICKAXE
+          - STONE_AXE
+          - COPPER_PICKAXE
+          - COPPER_AXE
+          - IRON_PICKAXE
+          - IRON_AXE
+          - GOLDEN_PICKAXE
+          - GOLDEN_AXE
+          - DIAMOND_PICKAXE
+          - DIAMOND_AXE
+          - NETHERITE_PICKAXE
+          - NETHERITE_AXE
+        loots:
+          - { oraxen_item: yellow_j, probability: 1.0 }
+
+yellow_k:
+  displayname: "<yellow>K Block"
+  material: PAPER
+  Pack:
+    generate_model: false
+    model: item/yellow_k
+  Mechanics:
+    noteblock:
+      custom_variation: 63
+      directional: false
+      hardness: 0.8
+      block_model: block/yellow_k
+      drop:
+        silktouch: false
+        minimal_type:
+          - WOODEN_PICKAXE
+          - WOODEN_AXE
+          - STONE_PICKAXE
+          - STONE_AXE
+          - COPPER_PICKAXE
+          - COPPER_AXE
+          - IRON_PICKAXE
+          - IRON_AXE
+          - GOLDEN_PICKAXE
+          - GOLDEN_AXE
+          - DIAMOND_PICKAXE
+          - DIAMOND_AXE
+          - NETHERITE_PICKAXE
+          - NETHERITE_AXE
+        loots:
+          - { oraxen_item: yellow_k, probability: 1.0 }
+
+yellow_l:
+  displayname: "<yellow>L Block"
+  material: PAPER
+  Pack:
+    generate_model: false
+    model: item/yellow_l
+  Mechanics:
+    noteblock:
+      custom_variation: 64
+      directional: false
+      hardness: 0.8
+      block_model: block/yellow_l
+      drop:
+        silktouch: false
+        minimal_type:
+          - WOODEN_PICKAXE
+          - WOODEN_AXE
+          - STONE_PICKAXE
+          - STONE_AXE
+          - COPPER_PICKAXE
+          - COPPER_AXE
+          - IRON_PICKAXE
+          - IRON_AXE
+          - GOLDEN_PICKAXE
+          - GOLDEN_AXE
+          - DIAMOND_PICKAXE
+          - DIAMOND_AXE
+          - NETHERITE_PICKAXE
+          - NETHERITE_AXE
+        loots:
+          - { oraxen_item: yellow_l, probability: 1.0 }
+
+yellow_m:
+  displayname: "<yellow>M Block"
+  material: PAPER
+  Pack:
+    generate_model: false
+    model: item/yellow_m
+  Mechanics:
+    noteblock:
+      custom_variation: 65
+      directional: false
+      hardness: 0.8
+      block_model: block/yellow_m
+      drop:
+        silktouch: false
+        minimal_type:
+          - WOODEN_PICKAXE
+          - WOODEN_AXE
+          - STONE_PICKAXE
+          - STONE_AXE
+          - COPPER_PICKAXE
+          - COPPER_AXE
+          - IRON_PICKAXE
+          - IRON_AXE
+          - GOLDEN_PICKAXE
+          - GOLDEN_AXE
+          - DIAMOND_PICKAXE
+          - DIAMOND_AXE
+          - NETHERITE_PICKAXE
+          - NETHERITE_AXE
+        loots:
+          - { oraxen_item: yellow_m, probability: 1.0 }
+
+yellow_n:
+  displayname: "<yellow>N Block"
+  material: PAPER
+  Pack:
+    generate_model: false
+    model: item/yellow_n
+  Mechanics:
+    noteblock:
+      custom_variation: 66
+      directional: false
+      hardness: 0.8
+      block_model: block/yellow_n
+      drop:
+        silktouch: false
+        minimal_type:
+          - WOODEN_PICKAXE
+          - WOODEN_AXE
+          - STONE_PICKAXE
+          - STONE_AXE
+          - COPPER_PICKAXE
+          - COPPER_AXE
+          - IRON_PICKAXE
+          - IRON_AXE
+          - GOLDEN_PICKAXE
+          - GOLDEN_AXE
+          - DIAMOND_PICKAXE
+          - DIAMOND_AXE
+          - NETHERITE_PICKAXE
+          - NETHERITE_AXE
+        loots:
+          - { oraxen_item: yellow_n, probability: 1.0 }
+
+yellow_o:
+  displayname: "<yellow>O Block"
+  material: PAPER
+  Pack:
+    generate_model: false
+    model: item/yellow_o
+  Mechanics:
+    noteblock:
+      custom_variation: 67
+      directional: false
+      hardness: 0.8
+      block_model: block/yellow_o
+      drop:
+        silktouch: false
+        minimal_type:
+          - WOODEN_PICKAXE
+          - WOODEN_AXE
+          - STONE_PICKAXE
+          - STONE_AXE
+          - COPPER_PICKAXE
+          - COPPER_AXE
+          - IRON_PICKAXE
+          - IRON_AXE
+          - GOLDEN_PICKAXE
+          - GOLDEN_AXE
+          - DIAMOND_PICKAXE
+          - DIAMOND_AXE
+          - NETHERITE_PICKAXE
+          - NETHERITE_AXE
+        loots:
+          - { oraxen_item: yellow_o, probability: 1.0 }
+
+yellow_p:
+  displayname: "<yellow>P Block"
+  material: PAPER
+  Pack:
+    generate_model: false
+    model: item/yellow_p
+  Mechanics:
+    noteblock:
+      custom_variation: 68
+      directional: false
+      hardness: 0.8
+      block_model: block/yellow_p
+      drop:
+        silktouch: false
+        minimal_type:
+          - WOODEN_PICKAXE
+          - WOODEN_AXE
+          - STONE_PICKAXE
+          - STONE_AXE
+          - COPPER_PICKAXE
+          - COPPER_AXE
+          - IRON_PICKAXE
+          - IRON_AXE
+          - GOLDEN_PICKAXE
+          - GOLDEN_AXE
+          - DIAMOND_PICKAXE
+          - DIAMOND_AXE
+          - NETHERITE_PICKAXE
+          - NETHERITE_AXE
+        loots:
+          - { oraxen_item: yellow_p, probability: 1.0 }
+
+yellow_q:
+  displayname: "<yellow>Q Block"
+  material: PAPER
+  Pack:
+    generate_model: false
+    model: item/yellow_q
+  Mechanics:
+    noteblock:
+      custom_variation: 69
+      directional: false
+      hardness: 0.8
+      block_model: block/yellow_q
+      drop:
+        silktouch: false
+        minimal_type:
+          - WOODEN_PICKAXE
+          - WOODEN_AXE
+          - STONE_PICKAXE
+          - STONE_AXE
+          - COPPER_PICKAXE
+          - COPPER_AXE
+          - IRON_PICKAXE
+          - IRON_AXE
+          - GOLDEN_PICKAXE
+          - GOLDEN_AXE
+          - DIAMOND_PICKAXE
+          - DIAMOND_AXE
+          - NETHERITE_PICKAXE
+          - NETHERITE_AXE
+        loots:
+          - { oraxen_item: yellow_q, probability: 1.0 }
+
+yellow_r:
+  displayname: "<yellow>R Block"
+  material: PAPER
+  Pack:
+    generate_model: false
+    model: item/yellow_r
+  Mechanics:
+    noteblock:
+      custom_variation: 70
+      directional: false
+      hardness: 0.8
+      block_model: block/yellow_r
+      drop:
+        silktouch: false
+        minimal_type:
+          - WOODEN_PICKAXE
+          - WOODEN_AXE
+          - STONE_PICKAXE
+          - STONE_AXE
+          - COPPER_PICKAXE
+          - COPPER_AXE
+          - IRON_PICKAXE
+          - IRON_AXE
+          - GOLDEN_PICKAXE
+          - GOLDEN_AXE
+          - DIAMOND_PICKAXE
+          - DIAMOND_AXE
+          - NETHERITE_PICKAXE
+          - NETHERITE_AXE
+        loots:
+          - { oraxen_item: yellow_r, probability: 1.0 }
+
+yellow_s:
+  displayname: "<yellow>S Block"
+  material: PAPER
+  Pack:
+    generate_model: false
+    model: item/yellow_s
+  Mechanics:
+    noteblock:
+      custom_variation: 71
+      directional: false
+      hardness: 0.8
+      block_model: block/yellow_s
+      drop:
+        silktouch: false
+        minimal_type:
+          - WOODEN_PICKAXE
+          - WOODEN_AXE
+          - STONE_PICKAXE
+          - STONE_AXE
+          - COPPER_PICKAXE
+          - COPPER_AXE
+          - IRON_PICKAXE
+          - IRON_AXE
+          - GOLDEN_PICKAXE
+          - GOLDEN_AXE
+          - DIAMOND_PICKAXE
+          - DIAMOND_AXE
+          - NETHERITE_PICKAXE
+          - NETHERITE_AXE
+        loots:
+          - { oraxen_item: yellow_s, probability: 1.0 }
+
+yellow_t:
+  displayname: "<yellow>T Block"
+  material: PAPER
+  Pack:
+    generate_model: false
+    model: item/yellow_t
+  Mechanics:
+    noteblock:
+      custom_variation: 72
+      directional: false
+      hardness: 0.8
+      block_model: block/yellow_t
+      drop:
+        silktouch: false
+        minimal_type:
+          - WOODEN_PICKAXE
+          - WOODEN_AXE
+          - STONE_PICKAXE
+          - STONE_AXE
+          - COPPER_PICKAXE
+          - COPPER_AXE
+          - IRON_PICKAXE
+          - IRON_AXE
+          - GOLDEN_PICKAXE
+          - GOLDEN_AXE
+          - DIAMOND_PICKAXE
+          - DIAMOND_AXE
+          - NETHERITE_PICKAXE
+          - NETHERITE_AXE
+        loots:
+          - { oraxen_item: yellow_t, probability: 1.0 }
+
+yellow_u:
+  displayname: "<yellow>U Block"
+  material: PAPER
+  Pack:
+    generate_model: false
+    model: item/yellow_u
+  Mechanics:
+    noteblock:
+      custom_variation: 73
+      directional: false
+      hardness: 0.8
+      block_model: block/yellow_u
+      drop:
+        silktouch: false
+        minimal_type:
+          - WOODEN_PICKAXE
+          - WOODEN_AXE
+          - STONE_PICKAXE
+          - STONE_AXE
+          - COPPER_PICKAXE
+          - COPPER_AXE
+          - IRON_PICKAXE
+          - IRON_AXE
+          - GOLDEN_PICKAXE
+          - GOLDEN_AXE
+          - DIAMOND_PICKAXE
+          - DIAMOND_AXE
+          - NETHERITE_PICKAXE
+          - NETHERITE_AXE
+        loots:
+          - { oraxen_item: yellow_u, probability: 1.0 }
+
+yellow_v:
+  displayname: "<yellow>V Block"
+  material: PAPER
+  Pack:
+    generate_model: false
+    model: item/yellow_v
+  Mechanics:
+    noteblock:
+      custom_variation: 74
+      directional: false
+      hardness: 0.8
+      block_model: block/yellow_v
+      drop:
+        silktouch: false
+        minimal_type:
+          - WOODEN_PICKAXE
+          - WOODEN_AXE
+          - STONE_PICKAXE
+          - STONE_AXE
+          - COPPER_PICKAXE
+          - COPPER_AXE
+          - IRON_PICKAXE
+          - IRON_AXE
+          - GOLDEN_PICKAXE
+          - GOLDEN_AXE
+          - DIAMOND_PICKAXE
+          - DIAMOND_AXE
+          - NETHERITE_PICKAXE
+          - NETHERITE_AXE
+        loots:
+          - { oraxen_item: yellow_v, probability: 1.0 }
+
+yellow_w:
+  displayname: "<yellow>W Block"
+  material: PAPER
+  Pack:
+    generate_model: false
+    model: item/yellow_w
+  Mechanics:
+    noteblock:
+      custom_variation: 75
+      directional: false
+      hardness: 0.8
+      block_model: block/yellow_w
+      drop:
+        silktouch: false
+        minimal_type:
+          - WOODEN_PICKAXE
+          - WOODEN_AXE
+          - STONE_PICKAXE
+          - STONE_AXE
+          - COPPER_PICKAXE
+          - COPPER_AXE
+          - IRON_PICKAXE
+          - IRON_AXE
+          - GOLDEN_PICKAXE
+          - GOLDEN_AXE
+          - DIAMOND_PICKAXE
+          - DIAMOND_AXE
+          - NETHERITE_PICKAXE
+          - NETHERITE_AXE
+        loots:
+          - { oraxen_item: yellow_w, probability: 1.0 }
+
+yellow_x:
+  displayname: "<yellow>X Block"
+  material: PAPER
+  Pack:
+    generate_model: false
+    model: item/yellow_x
+  Mechanics:
+    noteblock:
+      custom_variation: 76
+      directional: false
+      hardness: 0.8
+      block_model: block/yellow_x
+      drop:
+        silktouch: false
+        minimal_type:
+          - WOODEN_PICKAXE
+          - WOODEN_AXE
+          - STONE_PICKAXE
+          - STONE_AXE
+          - COPPER_PICKAXE
+          - COPPER_AXE
+          - IRON_PICKAXE
+          - IRON_AXE
+          - GOLDEN_PICKAXE
+          - GOLDEN_AXE
+          - DIAMOND_PICKAXE
+          - DIAMOND_AXE
+          - NETHERITE_PICKAXE
+          - NETHERITE_AXE
+        loots:
+          - { oraxen_item: yellow_x, probability: 1.0 }
+
+yellow_y:
+  displayname: "<yellow>Y Block"
+  material: PAPER
+  Pack:
+    generate_model: false
+    model: item/yellow_y
+  Mechanics:
+    noteblock:
+      custom_variation: 77
+      directional: false
+      hardness: 0.8
+      block_model: block/yellow_y
+      drop:
+        silktouch: false
+        minimal_type:
+          - WOODEN_PICKAXE
+          - WOODEN_AXE
+          - STONE_PICKAXE
+          - STONE_AXE
+          - COPPER_PICKAXE
+          - COPPER_AXE
+          - IRON_PICKAXE
+          - IRON_AXE
+          - GOLDEN_PICKAXE
+          - GOLDEN_AXE
+          - DIAMOND_PICKAXE
+          - DIAMOND_AXE
+          - NETHERITE_PICKAXE
+          - NETHERITE_AXE
+        loots:
+          - { oraxen_item: yellow_y, probability: 1.0 }
+
+yellow_z:
+  displayname: "<yellow>Z Block"
+  material: PAPER
+  Pack:
+    generate_model: false
+    model: item/yellow_z
+  Mechanics:
+    noteblock:
+      custom_variation: 78
+      directional: false
+      hardness: 0.8
+      block_model: block/yellow_z
+      drop:
+        silktouch: false
+        minimal_type:
+          - WOODEN_PICKAXE
+          - WOODEN_AXE
+          - STONE_PICKAXE
+          - STONE_AXE
+          - COPPER_PICKAXE
+          - COPPER_AXE
+          - IRON_PICKAXE
+          - IRON_AXE
+          - GOLDEN_PICKAXE
+          - GOLDEN_AXE
+          - DIAMOND_PICKAXE
+          - DIAMOND_AXE
+          - NETHERITE_PICKAXE
+          - NETHERITE_AXE
+        loots:
+          - { oraxen_item: yellow_z, probability: 1.0 }
+
+# ==================== CYAN NUMBER BLOCKS ====================
+cyan_0:
+  displayname: "<aqua>0 Block"
+  material: PAPER
+  Pack:
+    generate_model: false
+    model: item/cyan_0
+  Mechanics:
+    noteblock:
+      custom_variation: 79
+      directional: false
+      hardness: 0.8
+      block_model: block/cyan_0
+      drop:
+        silktouch: false
+        minimal_type:
+          - WOODEN_PICKAXE
+          - WOODEN_AXE
+          - STONE_PICKAXE
+          - STONE_AXE
+          - COPPER_PICKAXE
+          - COPPER_AXE
+          - IRON_PICKAXE
+          - IRON_AXE
+          - GOLDEN_PICKAXE
+          - GOLDEN_AXE
+          - DIAMOND_PICKAXE
+          - DIAMOND_AXE
+          - NETHERITE_PICKAXE
+          - NETHERITE_AXE
+        loots:
+          - { oraxen_item: cyan_0, probability: 1.0 }
+
+cyan_1:
+  displayname: "<aqua>1 Block"
+  material: PAPER
+  Pack:
+    generate_model: false
+    model: item/cyan_1
+  Mechanics:
+    noteblock:
+      custom_variation: 80
+      directional: false
+      hardness: 0.8
+      block_model: block/cyan_1
+      drop:
+        silktouch: false
+        minimal_type:
+          - WOODEN_PICKAXE
+          - WOODEN_AXE
+          - STONE_PICKAXE
+          - STONE_AXE
+          - COPPER_PICKAXE
+          - COPPER_AXE
+          - IRON_PICKAXE
+          - IRON_AXE
+          - GOLDEN_PICKAXE
+          - GOLDEN_AXE
+          - DIAMOND_PICKAXE
+          - DIAMOND_AXE
+          - NETHERITE_PICKAXE
+          - NETHERITE_AXE
+        loots:
+          - { oraxen_item: cyan_1, probability: 1.0 }
+
+cyan_2:
+  displayname: "<aqua>2 Block"
+  material: PAPER
+  Pack:
+    generate_model: false
+    model: item/cyan_2
+  Mechanics:
+    noteblock:
+      custom_variation: 81
+      directional: false
+      hardness: 0.8
+      block_model: block/cyan_2
+      drop:
+        silktouch: false
+        minimal_type:
+          - WOODEN_PICKAXE
+          - WOODEN_AXE
+          - STONE_PICKAXE
+          - STONE_AXE
+          - COPPER_PICKAXE
+          - COPPER_AXE
+          - IRON_PICKAXE
+          - IRON_AXE
+          - GOLDEN_PICKAXE
+          - GOLDEN_AXE
+          - DIAMOND_PICKAXE
+          - DIAMOND_AXE
+          - NETHERITE_PICKAXE
+          - NETHERITE_AXE
+        loots:
+          - { oraxen_item: cyan_2, probability: 1.0 }
+
+cyan_3:
+  displayname: "<aqua>3 Block"
+  material: PAPER
+  Pack:
+    generate_model: false
+    model: item/cyan_3
+  Mechanics:
+    noteblock:
+      custom_variation: 82
+      directional: false
+      hardness: 0.8
+      block_model: block/cyan_3
+      drop:
+        silktouch: false
+        minimal_type:
+          - WOODEN_PICKAXE
+          - WOODEN_AXE
+          - STONE_PICKAXE
+          - STONE_AXE
+          - COPPER_PICKAXE
+          - COPPER_AXE
+          - IRON_PICKAXE
+          - IRON_AXE
+          - GOLDEN_PICKAXE
+          - GOLDEN_AXE
+          - DIAMOND_PICKAXE
+          - DIAMOND_AXE
+          - NETHERITE_PICKAXE
+          - NETHERITE_AXE
+        loots:
+          - { oraxen_item: cyan_3, probability: 1.0 }
+
+cyan_4:
+  displayname: "<aqua>4 Block"
+  material: PAPER
+  Pack:
+    generate_model: false
+    model: item/cyan_4
+  Mechanics:
+    noteblock:
+      custom_variation: 83
+      directional: false
+      hardness: 0.8
+      block_model: block/cyan_4
+      drop:
+        silktouch: false
+        minimal_type:
+          - WOODEN_PICKAXE
+          - WOODEN_AXE
+          - STONE_PICKAXE
+          - STONE_AXE
+          - COPPER_PICKAXE
+          - COPPER_AXE
+          - IRON_PICKAXE
+          - IRON_AXE
+          - GOLDEN_PICKAXE
+          - GOLDEN_AXE
+          - DIAMOND_PICKAXE
+          - DIAMOND_AXE
+          - NETHERITE_PICKAXE
+          - NETHERITE_AXE
+        loots:
+          - { oraxen_item: cyan_4, probability: 1.0 }
+
+cyan_5:
+  displayname: "<aqua>5 Block"
+  material: PAPER
+  Pack:
+    generate_model: false
+    model: item/cyan_5
+  Mechanics:
+    noteblock:
+      custom_variation: 84
+      directional: false
+      hardness: 0.8
+      block_model: block/cyan_5
+      drop:
+        silktouch: false
+        minimal_type:
+          - WOODEN_PICKAXE
+          - WOODEN_AXE
+          - STONE_PICKAXE
+          - STONE_AXE
+          - COPPER_PICKAXE
+          - COPPER_AXE
+          - IRON_PICKAXE
+          - IRON_AXE
+          - GOLDEN_PICKAXE
+          - GOLDEN_AXE
+          - DIAMOND_PICKAXE
+          - DIAMOND_AXE
+          - NETHERITE_PICKAXE
+          - NETHERITE_AXE
+        loots:
+          - { oraxen_item: cyan_5, probability: 1.0 }
+
+cyan_6:
+  displayname: "<aqua>6 Block"
+  material: PAPER
+  Pack:
+    generate_model: false
+    model: item/cyan_6
+  Mechanics:
+    noteblock:
+      custom_variation: 85
+      directional: false
+      hardness: 0.8
+      block_model: block/cyan_6
+      drop:
+        silktouch: false
+        minimal_type:
+          - WOODEN_PICKAXE
+          - WOODEN_AXE
+          - STONE_PICKAXE
+          - STONE_AXE
+          - COPPER_PICKAXE
+          - COPPER_AXE
+          - IRON_PICKAXE
+          - IRON_AXE
+          - GOLDEN_PICKAXE
+          - GOLDEN_AXE
+          - DIAMOND_PICKAXE
+          - DIAMOND_AXE
+          - NETHERITE_PICKAXE
+          - NETHERITE_AXE
+        loots:
+          - { oraxen_item: cyan_6, probability: 1.0 }
+
+cyan_7:
+  displayname: "<aqua>7 Block"
+  material: PAPER
+  Pack:
+    generate_model: false
+    model: item/cyan_7
+  Mechanics:
+    noteblock:
+      custom_variation: 86
+      directional: false
+      hardness: 0.8
+      block_model: block/cyan_7
+      drop:
+        silktouch: false
+        minimal_type:
+          - WOODEN_PICKAXE
+          - WOODEN_AXE
+          - STONE_PICKAXE
+          - STONE_AXE
+          - COPPER_PICKAXE
+          - COPPER_AXE
+          - IRON_PICKAXE
+          - IRON_AXE
+          - GOLDEN_PICKAXE
+          - GOLDEN_AXE
+          - DIAMOND_PICKAXE
+          - DIAMOND_AXE
+          - NETHERITE_PICKAXE
+          - NETHERITE_AXE
+        loots:
+          - { oraxen_item: cyan_7, probability: 1.0 }
+
+cyan_8:
+  displayname: "<aqua>8 Block"
+  material: PAPER
+  Pack:
+    generate_model: false
+    model: item/cyan_8
+  Mechanics:
+    noteblock:
+      custom_variation: 87
+      directional: false
+      hardness: 0.8
+      block_model: block/cyan_8
+      drop:
+        silktouch: false
+        minimal_type:
+          - WOODEN_PICKAXE
+          - WOODEN_AXE
+          - STONE_PICKAXE
+          - STONE_AXE
+          - COPPER_PICKAXE
+          - COPPER_AXE
+          - IRON_PICKAXE
+          - IRON_AXE
+          - GOLDEN_PICKAXE
+          - GOLDEN_AXE
+          - DIAMOND_PICKAXE
+          - DIAMOND_AXE
+          - NETHERITE_PICKAXE
+          - NETHERITE_AXE
+        loots:
+          - { oraxen_item: cyan_8, probability: 1.0 }
+
+cyan_9:
+  displayname: "<aqua>9 Block"
+  material: PAPER
+  Pack:
+    generate_model: false
+    model: item/cyan_9
+  Mechanics:
+    noteblock:
+      custom_variation: 88
+      directional: false
+      hardness: 0.8
+      block_model: block/cyan_9
+      drop:
+        silktouch: false
+        minimal_type:
+          - WOODEN_PICKAXE
+          - WOODEN_AXE
+          - STONE_PICKAXE
+          - STONE_AXE
+          - COPPER_PICKAXE
+          - COPPER_AXE
+          - IRON_PICKAXE
+          - IRON_AXE
+          - GOLDEN_PICKAXE
+          - GOLDEN_AXE
+          - DIAMOND_PICKAXE
+          - DIAMOND_AXE
+          - NETHERITE_PICKAXE
+          - NETHERITE_AXE
+        loots:
+          - { oraxen_item: cyan_9, probability: 1.0 }
+
+# ==================== MAGENTA NUMBER BLOCKS ====================
+magenta_0:
+  displayname: "<light_purple>0 Block"
+  material: PAPER
+  Pack:
+    generate_model: false
+    model: item/magenta_0
+  Mechanics:
+    noteblock:
+      custom_variation: 89
+      directional: false
+      hardness: 0.8
+      block_model: block/magenta_0
+      drop:
+        silktouch: false
+        minimal_type:
+          - WOODEN_PICKAXE
+          - WOODEN_AXE
+          - STONE_PICKAXE
+          - STONE_AXE
+          - COPPER_PICKAXE
+          - COPPER_AXE
+          - IRON_PICKAXE
+          - IRON_AXE
+          - GOLDEN_PICKAXE
+          - GOLDEN_AXE
+          - DIAMOND_PICKAXE
+          - DIAMOND_AXE
+          - NETHERITE_PICKAXE
+          - NETHERITE_AXE
+        loots:
+          - { oraxen_item: magenta_0, probability: 1.0 }
+
+magenta_1:
+  displayname: "<light_purple>1 Block"
+  material: PAPER
+  Pack:
+    generate_model: false
+    model: item/magenta_1
+  Mechanics:
+    noteblock:
+      custom_variation: 90
+      directional: false
+      hardness: 0.8
+      block_model: block/magenta_1
+      drop:
+        silktouch: false
+        minimal_type:
+          - WOODEN_PICKAXE
+          - WOODEN_AXE
+          - STONE_PICKAXE
+          - STONE_AXE
+          - COPPER_PICKAXE
+          - COPPER_AXE
+          - IRON_PICKAXE
+          - IRON_AXE
+          - GOLDEN_PICKAXE
+          - GOLDEN_AXE
+          - DIAMOND_PICKAXE
+          - DIAMOND_AXE
+          - NETHERITE_PICKAXE
+          - NETHERITE_AXE
+        loots:
+          - { oraxen_item: magenta_1, probability: 1.0 }
+
+magenta_2:
+  displayname: "<light_purple>2 Block"
+  material: PAPER
+  Pack:
+    generate_model: false
+    model: item/magenta_2
+  Mechanics:
+    noteblock:
+      custom_variation: 91
+      directional: false
+      hardness: 0.8
+      block_model: block/magenta_2
+      drop:
+        silktouch: false
+        minimal_type:
+          - WOODEN_PICKAXE
+          - WOODEN_AXE
+          - STONE_PICKAXE
+          - STONE_AXE
+          - COPPER_PICKAXE
+          - COPPER_AXE
+          - IRON_PICKAXE
+          - IRON_AXE
+          - GOLDEN_PICKAXE
+          - GOLDEN_AXE
+          - DIAMOND_PICKAXE
+          - DIAMOND_AXE
+          - NETHERITE_PICKAXE
+          - NETHERITE_AXE
+        loots:
+          - { oraxen_item: magenta_2, probability: 1.0 }
+
+magenta_3:
+  displayname: "<light_purple>3 Block"
+  material: PAPER
+  Pack:
+    generate_model: false
+    model: item/magenta_3
+  Mechanics:
+    noteblock:
+      custom_variation: 92
+      directional: false
+      hardness: 0.8
+      block_model: block/magenta_3
+      drop:
+        silktouch: false
+        minimal_type:
+          - WOODEN_PICKAXE
+          - WOODEN_AXE
+          - STONE_PICKAXE
+          - STONE_AXE
+          - COPPER_PICKAXE
+          - COPPER_AXE
+          - IRON_PICKAXE
+          - IRON_AXE
+          - GOLDEN_PICKAXE
+          - GOLDEN_AXE
+          - DIAMOND_PICKAXE
+          - DIAMOND_AXE
+          - NETHERITE_PICKAXE
+          - NETHERITE_AXE
+        loots:
+          - { oraxen_item: magenta_3, probability: 1.0 }
+
+magenta_4:
+  displayname: "<light_purple>4 Block"
+  material: PAPER
+  Pack:
+    generate_model: false
+    model: item/magenta_4
+  Mechanics:
+    noteblock:
+      custom_variation: 93
+      directional: false
+      hardness: 0.8
+      block_model: block/magenta_4
+      drop:
+        silktouch: false
+        minimal_type:
+          - WOODEN_PICKAXE
+          - WOODEN_AXE
+          - STONE_PICKAXE
+          - STONE_AXE
+          - COPPER_PICKAXE
+          - COPPER_AXE
+          - IRON_PICKAXE
+          - IRON_AXE
+          - GOLDEN_PICKAXE
+          - GOLDEN_AXE
+          - DIAMOND_PICKAXE
+          - DIAMOND_AXE
+          - NETHERITE_PICKAXE
+          - NETHERITE_AXE
+        loots:
+          - { oraxen_item: magenta_4, probability: 1.0 }
+
+magenta_5:
+  displayname: "<light_purple>5 Block"
+  material: PAPER
+  Pack:
+    generate_model: false
+    model: item/magenta_5
+  Mechanics:
+    noteblock:
+      custom_variation: 94
+      directional: false
+      hardness: 0.8
+      block_model: block/magenta_5
+      drop:
+        silktouch: false
+        minimal_type:
+          - WOODEN_PICKAXE
+          - WOODEN_AXE
+          - STONE_PICKAXE
+          - STONE_AXE
+          - COPPER_PICKAXE
+          - COPPER_AXE
+          - IRON_PICKAXE
+          - IRON_AXE
+          - GOLDEN_PICKAXE
+          - GOLDEN_AXE
+          - DIAMOND_PICKAXE
+          - DIAMOND_AXE
+          - NETHERITE_PICKAXE
+          - NETHERITE_AXE
+        loots:
+          - { oraxen_item: magenta_5, probability: 1.0 }
+
+magenta_6:
+  displayname: "<light_purple>6 Block"
+  material: PAPER
+  Pack:
+    generate_model: false
+    model: item/magenta_6
+  Mechanics:
+    noteblock:
+      custom_variation: 95
+      directional: false
+      hardness: 0.8
+      block_model: block/magenta_6
+      drop:
+        silktouch: false
+        minimal_type:
+          - WOODEN_PICKAXE
+          - WOODEN_AXE
+          - STONE_PICKAXE
+          - STONE_AXE
+          - COPPER_PICKAXE
+          - COPPER_AXE
+          - IRON_PICKAXE
+          - IRON_AXE
+          - GOLDEN_PICKAXE
+          - GOLDEN_AXE
+          - DIAMOND_PICKAXE
+          - DIAMOND_AXE
+          - NETHERITE_PICKAXE
+          - NETHERITE_AXE
+        loots:
+          - { oraxen_item: magenta_6, probability: 1.0 }
+
+magenta_7:
+  displayname: "<light_purple>7 Block"
+  material: PAPER
+  Pack:
+    generate_model: false
+    model: item/magenta_7
+  Mechanics:
+    noteblock:
+      custom_variation: 96
+      directional: false
+      hardness: 0.8
+      block_model: block/magenta_7
+      drop:
+        silktouch: false
+        minimal_type:
+          - WOODEN_PICKAXE
+          - WOODEN_AXE
+          - STONE_PICKAXE
+          - STONE_AXE
+          - COPPER_PICKAXE
+          - COPPER_AXE
+          - IRON_PICKAXE
+          - IRON_AXE
+          - GOLDEN_PICKAXE
+          - GOLDEN_AXE
+          - DIAMOND_PICKAXE
+          - DIAMOND_AXE
+          - NETHERITE_PICKAXE
+          - NETHERITE_AXE
+        loots:
+          - { oraxen_item: magenta_7, probability: 1.0 }
+
+magenta_8:
+  displayname: "<light_purple>8 Block"
+  material: PAPER
+  Pack:
+    generate_model: false
+    model: item/magenta_8
+  Mechanics:
+    noteblock:
+      custom_variation: 97
+      directional: false
+      hardness: 0.8
+      block_model: block/magenta_8
+      drop:
+        silktouch: false
+        minimal_type:
+          - WOODEN_PICKAXE
+          - WOODEN_AXE
+          - STONE_PICKAXE
+          - STONE_AXE
+          - COPPER_PICKAXE
+          - COPPER_AXE
+          - IRON_PICKAXE
+          - IRON_AXE
+          - GOLDEN_PICKAXE
+          - GOLDEN_AXE
+          - DIAMOND_PICKAXE
+          - DIAMOND_AXE
+          - NETHERITE_PICKAXE
+          - NETHERITE_AXE
+        loots:
+          - { oraxen_item: magenta_8, probability: 1.0 }
+
+magenta_9:
+  displayname: "<light_purple>9 Block"
+  material: PAPER
+  Pack:
+    generate_model: false
+    model: item/magenta_9
+  Mechanics:
+    noteblock:
+      custom_variation: 98
+      directional: false
+      hardness: 0.8
+      block_model: block/magenta_9
+      drop:
+        silktouch: false
+        minimal_type:
+          - WOODEN_PICKAXE
+          - WOODEN_AXE
+          - STONE_PICKAXE
+          - STONE_AXE
+          - COPPER_PICKAXE
+          - COPPER_AXE
+          - IRON_PICKAXE
+          - IRON_AXE
+          - GOLDEN_PICKAXE
+          - GOLDEN_AXE
+          - DIAMOND_PICKAXE
+          - DIAMOND_AXE
+          - NETHERITE_PICKAXE
+          - NETHERITE_AXE
+        loots:
+          - { oraxen_item: magenta_9, probability: 1.0 }
+
+# ==================== YELLOW NUMBER BLOCKS ====================
+yellow_0:
+  displayname: "<yellow>0 Block"
+  material: PAPER
+  Pack:
+    generate_model: false
+    model: item/yellow_0
+  Mechanics:
+    noteblock:
+      custom_variation: 99
+      directional: false
+      hardness: 0.8
+      block_model: block/yellow_0
+      drop:
+        silktouch: false
+        minimal_type:
+          - WOODEN_PICKAXE
+          - WOODEN_AXE
+          - STONE_PICKAXE
+          - STONE_AXE
+          - COPPER_PICKAXE
+          - COPPER_AXE
+          - IRON_PICKAXE
+          - IRON_AXE
+          - GOLDEN_PICKAXE
+          - GOLDEN_AXE
+          - DIAMOND_PICKAXE
+          - DIAMOND_AXE
+          - NETHERITE_PICKAXE
+          - NETHERITE_AXE
+        loots:
+          - { oraxen_item: yellow_0, probability: 1.0 }
+
+yellow_1:
+  displayname: "<yellow>1 Block"
+  material: PAPER
+  Pack:
+    generate_model: false
+    model: item/yellow_1
+  Mechanics:
+    noteblock:
+      custom_variation: 100
+      directional: false
+      hardness: 0.8
+      block_model: block/yellow_1
+      drop:
+        silktouch: false
+        minimal_type:
+          - WOODEN_PICKAXE
+          - WOODEN_AXE
+          - STONE_PICKAXE
+          - STONE_AXE
+          - COPPER_PICKAXE
+          - COPPER_AXE
+          - IRON_PICKAXE
+          - IRON_AXE
+          - GOLDEN_PICKAXE
+          - GOLDEN_AXE
+          - DIAMOND_PICKAXE
+          - DIAMOND_AXE
+          - NETHERITE_PICKAXE
+          - NETHERITE_AXE
+        loots:
+          - { oraxen_item: yellow_1, probability: 1.0 }
+
+yellow_2:
+  displayname: "<yellow>2 Block"
+  material: PAPER
+  Pack:
+    generate_model: false
+    model: item/yellow_2
+  Mechanics:
+    noteblock:
+      custom_variation: 101
+      directional: false
+      hardness: 0.8
+      block_model: block/yellow_2
+      drop:
+        silktouch: false
+        minimal_type:
+          - WOODEN_PICKAXE
+          - WOODEN_AXE
+          - STONE_PICKAXE
+          - STONE_AXE
+          - COPPER_PICKAXE
+          - COPPER_AXE
+          - IRON_PICKAXE
+          - IRON_AXE
+          - GOLDEN_PICKAXE
+          - GOLDEN_AXE
+          - DIAMOND_PICKAXE
+          - DIAMOND_AXE
+          - NETHERITE_PICKAXE
+          - NETHERITE_AXE
+        loots:
+          - { oraxen_item: yellow_2, probability: 1.0 }
+
+yellow_3:
+  displayname: "<yellow>3 Block"
+  material: PAPER
+  Pack:
+    generate_model: false
+    model: item/yellow_3
+  Mechanics:
+    noteblock:
+      custom_variation: 102
+      directional: false
+      hardness: 0.8
+      block_model: block/yellow_3
+      drop:
+        silktouch: false
+        minimal_type:
+          - WOODEN_PICKAXE
+          - WOODEN_AXE
+          - STONE_PICKAXE
+          - STONE_AXE
+          - COPPER_PICKAXE
+          - COPPER_AXE
+          - IRON_PICKAXE
+          - IRON_AXE
+          - GOLDEN_PICKAXE
+          - GOLDEN_AXE
+          - DIAMOND_PICKAXE
+          - DIAMOND_AXE
+          - NETHERITE_PICKAXE
+          - NETHERITE_AXE
+        loots:
+          - { oraxen_item: yellow_3, probability: 1.0 }
+
+yellow_4:
+  displayname: "<yellow>4 Block"
+  material: PAPER
+  Pack:
+    generate_model: false
+    model: item/yellow_4
+  Mechanics:
+    noteblock:
+      custom_variation: 103
+      directional: false
+      hardness: 0.8
+      block_model: block/yellow_4
+      drop:
+        silktouch: false
+        minimal_type:
+          - WOODEN_PICKAXE
+          - WOODEN_AXE
+          - STONE_PICKAXE
+          - STONE_AXE
+          - COPPER_PICKAXE
+          - COPPER_AXE
+          - IRON_PICKAXE
+          - IRON_AXE
+          - GOLDEN_PICKAXE
+          - GOLDEN_AXE
+          - DIAMOND_PICKAXE
+          - DIAMOND_AXE
+          - NETHERITE_PICKAXE
+          - NETHERITE_AXE
+        loots:
+          - { oraxen_item: yellow_4, probability: 1.0 }
+
+yellow_5:
+  displayname: "<yellow>5 Block"
+  material: PAPER
+  Pack:
+    generate_model: false
+    model: item/yellow_5
+  Mechanics:
+    noteblock:
+      custom_variation: 104
+      directional: false
+      hardness: 0.8
+      block_model: block/yellow_5
+      drop:
+        silktouch: false
+        minimal_type:
+          - WOODEN_PICKAXE
+          - WOODEN_AXE
+          - STONE_PICKAXE
+          - STONE_AXE
+          - COPPER_PICKAXE
+          - COPPER_AXE
+          - IRON_PICKAXE
+          - IRON_AXE
+          - GOLDEN_PICKAXE
+          - GOLDEN_AXE
+          - DIAMOND_PICKAXE
+          - DIAMOND_AXE
+          - NETHERITE_PICKAXE
+          - NETHERITE_AXE
+        loots:
+          - { oraxen_item: yellow_5, probability: 1.0 }
+
+yellow_6:
+  displayname: "<yellow>6 Block"
+  material: PAPER
+  Pack:
+    generate_model: false
+    model: item/yellow_6
+  Mechanics:
+    noteblock:
+      custom_variation: 105
+      directional: false
+      hardness: 0.8
+      block_model: block/yellow_6
+      drop:
+        silktouch: false
+        minimal_type:
+          - WOODEN_PICKAXE
+          - WOODEN_AXE
+          - STONE_PICKAXE
+          - STONE_AXE
+          - COPPER_PICKAXE
+          - COPPER_AXE
+          - IRON_PICKAXE
+          - IRON_AXE
+          - GOLDEN_PICKAXE
+          - GOLDEN_AXE
+          - DIAMOND_PICKAXE
+          - DIAMOND_AXE
+          - NETHERITE_PICKAXE
+          - NETHERITE_AXE
+        loots:
+          - { oraxen_item: yellow_6, probability: 1.0 }
+
+yellow_7:
+  displayname: "<yellow>7 Block"
+  material: PAPER
+  Pack:
+    generate_model: false
+    model: item/yellow_7
+  Mechanics:
+    noteblock:
+      custom_variation: 106
+      directional: false
+      hardness: 0.8
+      block_model: block/yellow_7
+      drop:
+        silktouch: false
+        minimal_type:
+          - WOODEN_PICKAXE
+          - WOODEN_AXE
+          - STONE_PICKAXE
+          - STONE_AXE
+          - COPPER_PICKAXE
+          - COPPER_AXE
+          - IRON_PICKAXE
+          - IRON_AXE
+          - GOLDEN_PICKAXE
+          - GOLDEN_AXE
+          - DIAMOND_PICKAXE
+          - DIAMOND_AXE
+          - NETHERITE_PICKAXE
+          - NETHERITE_AXE
+        loots:
+          - { oraxen_item: yellow_7, probability: 1.0 }
+
+yellow_8:
+  displayname: "<yellow>8 Block"
+  material: PAPER
+  Pack:
+    generate_model: false
+    model: item/yellow_8
+  Mechanics:
+    noteblock:
+      custom_variation: 107
+      directional: false
+      hardness: 0.8
+      block_model: block/yellow_8
+      drop:
+        silktouch: false
+        minimal_type:
+          - WOODEN_PICKAXE
+          - WOODEN_AXE
+          - STONE_PICKAXE
+          - STONE_AXE
+          - COPPER_PICKAXE
+          - COPPER_AXE
+          - IRON_PICKAXE
+          - IRON_AXE
+          - GOLDEN_PICKAXE
+          - GOLDEN_AXE
+          - DIAMOND_PICKAXE
+          - DIAMOND_AXE
+          - NETHERITE_PICKAXE
+          - NETHERITE_AXE
+        loots:
+          - { oraxen_item: yellow_8, probability: 1.0 }
+
+yellow_9:
+  displayname: "<yellow>9 Block"
+  material: PAPER
+  Pack:
+    generate_model: false
+    model: item/yellow_9
+  Mechanics:
+    noteblock:
+      custom_variation: 108
+      directional: false
+      hardness: 0.8
+      block_model: block/yellow_9
+      drop:
+        silktouch: false
+        minimal_type:
+          - WOODEN_PICKAXE
+          - WOODEN_AXE
+          - STONE_PICKAXE
+          - STONE_AXE
+          - COPPER_PICKAXE
+          - COPPER_AXE
+          - IRON_PICKAXE
+          - IRON_AXE
+          - GOLDEN_PICKAXE
+          - GOLDEN_AXE
+          - DIAMOND_PICKAXE
+          - DIAMOND_AXE
+          - NETHERITE_PICKAXE
+          - NETHERITE_AXE
+        loots:
+          - { oraxen_item: yellow_9, probability: 1.0 }
+
+# ==================== CYAN OPERATOR BLOCKS ====================
+cyan_plus:
+  displayname: "<aqua>+ Block"
+  material: PAPER
+  Pack:
+    generate_model: false
+    model: item/cyan_plus
+  Mechanics:
+    noteblock:
+      custom_variation: 109
+      directional: false
+      hardness: 0.8
+      block_model: block/cyan_plus
+      drop:
+        silktouch: false
+        minimal_type:
+          - WOODEN_PICKAXE
+          - WOODEN_AXE
+          - STONE_PICKAXE
+          - STONE_AXE
+          - COPPER_PICKAXE
+          - COPPER_AXE
+          - IRON_PICKAXE
+          - IRON_AXE
+          - GOLDEN_PICKAXE
+          - GOLDEN_AXE
+          - DIAMOND_PICKAXE
+          - DIAMOND_AXE
+          - NETHERITE_PICKAXE
+          - NETHERITE_AXE
+        loots:
+          - { oraxen_item: cyan_plus, probability: 1.0 }
+
+cyan_minus:
+  displayname: "<aqua>- Block"
+  material: PAPER
+  Pack:
+    generate_model: false
+    model: item/cyan_minus
+  Mechanics:
+    noteblock:
+      custom_variation: 110
+      directional: false
+      hardness: 0.8
+      block_model: block/cyan_minus
+      drop:
+        silktouch: false
+        minimal_type:
+          - WOODEN_PICKAXE
+          - WOODEN_AXE
+          - STONE_PICKAXE
+          - STONE_AXE
+          - COPPER_PICKAXE
+          - COPPER_AXE
+          - IRON_PICKAXE
+          - IRON_AXE
+          - GOLDEN_PICKAXE
+          - GOLDEN_AXE
+          - DIAMOND_PICKAXE
+          - DIAMOND_AXE
+          - NETHERITE_PICKAXE
+          - NETHERITE_AXE
+        loots:
+          - { oraxen_item: cyan_minus, probability: 1.0 }
+
+cyan_multiply:
+  displayname: "<aqua>× Block"
+  material: PAPER
+  Pack:
+    generate_model: false
+    model: item/cyan_multiply
+  Mechanics:
+    noteblock:
+      custom_variation: 111
+      directional: false
+      hardness: 0.8
+      block_model: block/cyan_multiply
+      drop:
+        silktouch: false
+        minimal_type:
+          - WOODEN_PICKAXE
+          - WOODEN_AXE
+          - STONE_PICKAXE
+          - STONE_AXE
+          - COPPER_PICKAXE
+          - COPPER_AXE
+          - IRON_PICKAXE
+          - IRON_AXE
+          - GOLDEN_PICKAXE
+          - GOLDEN_AXE
+          - DIAMOND_PICKAXE
+          - DIAMOND_AXE
+          - NETHERITE_PICKAXE
+          - NETHERITE_AXE
+        loots:
+          - { oraxen_item: cyan_multiply, probability: 1.0 }
+
+cyan_division:
+  displayname: "<aqua>÷ Block"
+  material: PAPER
+  Pack:
+    generate_model: false
+    model: item/cyan_division
+  Mechanics:
+    noteblock:
+      custom_variation: 112
+      directional: false
+      hardness: 0.8
+      block_model: block/cyan_division
+      drop:
+        silktouch: false
+        minimal_type:
+          - WOODEN_PICKAXE
+          - WOODEN_AXE
+          - STONE_PICKAXE
+          - STONE_AXE
+          - COPPER_PICKAXE
+          - COPPER_AXE
+          - IRON_PICKAXE
+          - IRON_AXE
+          - GOLDEN_PICKAXE
+          - GOLDEN_AXE
+          - DIAMOND_PICKAXE
+          - DIAMOND_AXE
+          - NETHERITE_PICKAXE
+          - NETHERITE_AXE
+        loots:
+          - { oraxen_item: cyan_division, probability: 1.0 }
+
+# ==================== MAGENTA OPERATOR BLOCKS ====================
+magenta_plus:
+  displayname: "<light_purple>+ Block"
+  material: PAPER
+  Pack:
+    generate_model: false
+    model: item/magenta_plus
+  Mechanics:
+    noteblock:
+      custom_variation: 113
+      directional: false
+      hardness: 0.8
+      block_model: block/magenta_plus
+      drop:
+        silktouch: false
+        minimal_type:
+          - WOODEN_PICKAXE
+          - WOODEN_AXE
+          - STONE_PICKAXE
+          - STONE_AXE
+          - COPPER_PICKAXE
+          - COPPER_AXE
+          - IRON_PICKAXE
+          - IRON_AXE
+          - GOLDEN_PICKAXE
+          - GOLDEN_AXE
+          - DIAMOND_PICKAXE
+          - DIAMOND_AXE
+          - NETHERITE_PICKAXE
+          - NETHERITE_AXE
+        loots:
+          - { oraxen_item: magenta_plus, probability: 1.0 }
+
+magenta_minus:
+  displayname: "<light_purple>- Block"
+  material: PAPER
+  Pack:
+    generate_model: false
+    model: item/magenta_minus
+  Mechanics:
+    noteblock:
+      custom_variation: 114
+      directional: false
+      hardness: 0.8
+      block_model: block/magenta_minus
+      drop:
+        silktouch: false
+        minimal_type:
+          - WOODEN_PICKAXE
+          - WOODEN_AXE
+          - STONE_PICKAXE
+          - STONE_AXE
+          - COPPER_PICKAXE
+          - COPPER_AXE
+          - IRON_PICKAXE
+          - IRON_AXE
+          - GOLDEN_PICKAXE
+          - GOLDEN_AXE
+          - DIAMOND_PICKAXE
+          - DIAMOND_AXE
+          - NETHERITE_PICKAXE
+          - NETHERITE_AXE
+        loots:
+          - { oraxen_item: magenta_minus, probability: 1.0 }
+
+magenta_multiply:
+  displayname: "<light_purple>× Block"
+  material: PAPER
+  Pack:
+    generate_model: false
+    model: item/magenta_multiply
+  Mechanics:
+    noteblock:
+      custom_variation: 115
+      directional: false
+      hardness: 0.8
+      block_model: block/magenta_multiply
+      drop:
+        silktouch: false
+        minimal_type:
+          - WOODEN_PICKAXE
+          - WOODEN_AXE
+          - STONE_PICKAXE
+          - STONE_AXE
+          - COPPER_PICKAXE
+          - COPPER_AXE
+          - IRON_PICKAXE
+          - IRON_AXE
+          - GOLDEN_PICKAXE
+          - GOLDEN_AXE
+          - DIAMOND_PICKAXE
+          - DIAMOND_AXE
+          - NETHERITE_PICKAXE
+          - NETHERITE_AXE
+        loots:
+          - { oraxen_item: magenta_multiply, probability: 1.0 }
+
+magenta_division:
+  displayname: "<light_purple>÷ Block"
+  material: PAPER
+  Pack:
+    generate_model: false
+    model: item/magenta_division
+  Mechanics:
+    noteblock:
+      custom_variation: 116
+      directional: false
+      hardness: 0.8
+      block_model: block/magenta_division
+      drop:
+        silktouch: false
+        minimal_type:
+          - WOODEN_PICKAXE
+          - WOODEN_AXE
+          - STONE_PICKAXE
+          - STONE_AXE
+          - COPPER_PICKAXE
+          - COPPER_AXE
+          - IRON_PICKAXE
+          - IRON_AXE
+          - GOLDEN_PICKAXE
+          - GOLDEN_AXE
+          - DIAMOND_PICKAXE
+          - DIAMOND_AXE
+          - NETHERITE_PICKAXE
+          - NETHERITE_AXE
+        loots:
+          - { oraxen_item: magenta_division, probability: 1.0 }
+
+# ==================== YELLOW OPERATOR BLOCKS ====================
+yellow_plus:
+  displayname: "<yellow>+ Block"
+  material: PAPER
+  Pack:
+    generate_model: false
+    model: item/yellow_plus
+  Mechanics:
+    noteblock:
+      custom_variation: 117
+      directional: false
+      hardness: 0.8
+      block_model: block/yellow_plus
+      drop:
+        silktouch: false
+        minimal_type:
+          - WOODEN_PICKAXE
+          - WOODEN_AXE
+          - STONE_PICKAXE
+          - STONE_AXE
+          - COPPER_PICKAXE
+          - COPPER_AXE
+          - IRON_PICKAXE
+          - IRON_AXE
+          - GOLDEN_PICKAXE
+          - GOLDEN_AXE
+          - DIAMOND_PICKAXE
+          - DIAMOND_AXE
+          - NETHERITE_PICKAXE
+          - NETHERITE_AXE
+        loots:
+          - { oraxen_item: yellow_plus, probability: 1.0 }
+
+yellow_minus:
+  displayname: "<yellow>- Block"
+  material: PAPER
+  Pack:
+    generate_model: false
+    model: item/yellow_minus
+  Mechanics:
+    noteblock:
+      custom_variation: 118
+      directional: false
+      hardness: 0.8
+      block_model: block/yellow_minus
+      drop:
+        silktouch: false
+        minimal_type:
+          - WOODEN_PICKAXE
+          - WOODEN_AXE
+          - STONE_PICKAXE
+          - STONE_AXE
+          - COPPER_PICKAXE
+          - COPPER_AXE
+          - IRON_PICKAXE
+          - IRON_AXE
+          - GOLDEN_PICKAXE
+          - GOLDEN_AXE
+          - DIAMOND_PICKAXE
+          - DIAMOND_AXE
+          - NETHERITE_PICKAXE
+          - NETHERITE_AXE
+        loots:
+          - { oraxen_item: yellow_minus, probability: 1.0 }
+
+yellow_multiply:
+  displayname: "<yellow>× Block"
+  material: PAPER
+  Pack:
+    generate_model: false
+    model: item/yellow_multiply
+  Mechanics:
+    noteblock:
+      custom_variation: 119
+      directional: false
+      hardness: 0.8
+      block_model: block/yellow_multiply
+      drop:
+        silktouch: false
+        minimal_type:
+          - WOODEN_PICKAXE
+          - WOODEN_AXE
+          - STONE_PICKAXE
+          - STONE_AXE
+          - COPPER_PICKAXE
+          - COPPER_AXE
+          - IRON_PICKAXE
+          - IRON_AXE
+          - GOLDEN_PICKAXE
+          - GOLDEN_AXE
+          - DIAMOND_PICKAXE
+          - DIAMOND_AXE
+          - NETHERITE_PICKAXE
+          - NETHERITE_AXE
+        loots:
+          - { oraxen_item: yellow_multiply, probability: 1.0 }
+
+yellow_division:
+  displayname: "<yellow>÷ Block"
+  material: PAPER
+  Pack:
+    generate_model: false
+    model: item/yellow_division
+  Mechanics:
+    noteblock:
+      custom_variation: 120
+      directional: false
+      hardness: 0.8
+      block_model: block/yellow_division
+      drop:
+        silktouch: false
+        minimal_type:
+          - WOODEN_PICKAXE
+          - WOODEN_AXE
+          - STONE_PICKAXE
+          - STONE_AXE
+          - COPPER_PICKAXE
+          - COPPER_AXE
+          - IRON_PICKAXE
+          - IRON_AXE
+          - GOLDEN_PICKAXE
+          - GOLDEN_AXE
+          - DIAMOND_PICKAXE
+          - DIAMOND_AXE
+          - NETHERITE_PICKAXE
+          - NETHERITE_AXE
+        loots:
+          - { oraxen_item: yellow_division, probability: 1.0 }
+
+# ==================== CYAN LOGO BLOCK ====================
+cyan_logo:
+  displayname: "<aqua> Logo Block"
+  material: PAPER
+  Pack:
+    generate_model: false
+    model: item/cyan_logo
+  Mechanics:
+    noteblock:
+      custom_variation: 121
+      directional: false
+      hardness: 0.8
+      block_model: block/cyan_logo
+      drop:
+        silktouch: false
+        minimal_type:
+          - WOODEN_PICKAXE
+          - WOODEN_AXE
+          - STONE_PICKAXE
+          - STONE_AXE
+          - COPPER_PICKAXE
+          - COPPER_AXE
+          - IRON_PICKAXE
+          - IRON_AXE
+          - GOLDEN_PICKAXE
+          - GOLDEN_AXE
+          - DIAMOND_PICKAXE
+          - DIAMOND_AXE
+          - NETHERITE_PICKAXE
+          - NETHERITE_AXE
+        loots:
+          - { oraxen_item: cyan_logo, probability: 1.0 }
+
+# ==================== MAGENTA LOGO BLOCK ====================
+magenta_logo:
+  displayname: "<light_purple> Logo Block"
+  material: PAPER
+  Pack:
+    generate_model: false
+    model: item/magenta_logo
+  Mechanics:
+    noteblock:
+      custom_variation: 122
+      directional: false
+      hardness: 0.8
+      block_model: block/magenta_logo
+      drop:
+        silktouch: false
+        minimal_type:
+          - WOODEN_PICKAXE
+          - WOODEN_AXE
+          - STONE_PICKAXE
+          - STONE_AXE
+          - COPPER_PICKAXE
+          - COPPER_AXE
+          - IRON_PICKAXE
+          - IRON_AXE
+          - GOLDEN_PICKAXE
+          - GOLDEN_AXE
+          - DIAMOND_PICKAXE
+          - DIAMOND_AXE
+          - NETHERITE_PICKAXE
+          - NETHERITE_AXE
+        loots:
+          - { oraxen_item: magenta_logo, probability: 1.0 }
+
+# ==================== YELLOW LOGO BLOCK ====================
+yellow_logo:
+  displayname: "<yellow> Logo Block"
+  material: PAPER
+  Pack:
+    generate_model: false
+    model: item/yellow_logo
+  Mechanics:
+    noteblock:
+      custom_variation: 123
+      directional: false
+      hardness: 0.8
+      block_model: block/yellow_logo
+      drop:
+        silktouch: false
+        minimal_type:
+          - WOODEN_PICKAXE
+          - WOODEN_AXE
+          - STONE_PICKAXE
+          - STONE_AXE
+          - COPPER_PICKAXE
+          - COPPER_AXE
+          - IRON_PICKAXE
+          - IRON_AXE
+          - GOLDEN_PICKAXE
+          - GOLDEN_AXE
+          - DIAMOND_PICKAXE
+          - DIAMOND_AXE
+          - NETHERITE_PICKAXE
+          - NETHERITE_AXE
+        loots:
+          - { oraxen_item: yellow_logo, probability: 1.0 }
+
+# ==================== PYRITE (FOOL'S GOLD) ITEMS ====================
+pyrite_ingot:
+  displayname: "<gold>Pyrite Ingot"
+  material: PAPER
+  Pack:
+    generate_model: true
+    parent_model: "item/generated"
+    textures:
+      layer0: charmedchars:item/pyrite/ingot
+
+pyrite_pickaxe:
+  displayname: "<gold>Pyrite Pickaxe"
+  material: GOLDEN_PICKAXE
+  excludeFromInventory: false
+  lore:
+    - "<gray>A fool's gold pickaxe"
+    - "<gray>Works like gold for scoring words"
+    - "<gray>Iron-tier durability and stats"
+  Pack:
+    generate_model: true
+    parent_model: "item/handheld"
+    textures:
+      layer0: charmedchars:item/pyrite/pickaxe
+  Mechanics:
+    durability:
+      value: 250
+  AttributeModifiers:
+    GENERIC_ATTACK_DAMAGE:
+      amount: 4
+      slot: HAND
+    GENERIC_ATTACK_SPEED:
+      amount: -2.8
+      slot: HAND
+
+pyrite_axe:
+  displayname: "<gold>Pyrite Axe"
+  material: GOLDEN_AXE
+  excludeFromInventory: false
+  lore:
+    - "<gray>A fool's gold axe"
+    - "<gray>Works like gold for scoring words"
+    - "<gray>Iron-tier durability and stats"
+  Pack:
+    generate_model: true
+    parent_model: "item/handheld"
+    textures:
+      layer0: charmedchars:item/pyrite/axe
+  Mechanics:
+    durability:
+      value: 250
+  AttributeModifiers:
+    GENERIC_ATTACK_DAMAGE:
+      amount: 9
+      slot: HAND
+    GENERIC_ATTACK_SPEED:
+      amount: -3.1
+      slot: HAND
+
+pyrite_shovel:
+  displayname: "<gold>Pyrite Shovel"
+  material: GOLDEN_SHOVEL
+  excludeFromInventory: false
+  lore:
+    - "<gray>A fool's gold shovel"
+    - "<gray>Works like gold for scoring words"
+    - "<gray>Iron-tier durability and stats"
+  Pack:
+    generate_model: true
+    parent_model: "item/handheld"
+    textures:
+      layer0: charmedchars:item/pyrite/shovel
+  Mechanics:
+    durability:
+      value: 250
+  AttributeModifiers:
+    GENERIC_ATTACK_DAMAGE:
+      amount: 4.5
+      slot: HAND
+    GENERIC_ATTACK_SPEED:
+      amount: -3.0
+      slot: HAND
+
+pyrite_hoe:
+  displayname: "<gold>Pyrite Hoe"
+  material: GOLDEN_HOE
+  excludeFromInventory: false
+  lore:
+    - "<gray>A fool's gold hoe"
+    - "<gray>Works like gold for scoring words"
+    - "<gray>Iron-tier durability and stats"
+  Pack:
+    generate_model: true
+    parent_model: "item/handheld"
+    textures:
+      layer0: charmedchars:item/pyrite/hoe
+  Mechanics:
+    durability:
+      value: 250
+  AttributeModifiers:
+    GENERIC_ATTACK_DAMAGE:
+      amount: 1
+      slot: HAND
+    GENERIC_ATTACK_SPEED:
+      amount: -1.0
+      slot: HAND
+
+
+===== pack/assets/charmedchars/textures/block/cyan/0.png [sha256 d481cdf0ec47c8b4f109e81ec2f9e1124236d0b904900072d1395742a7d45272] =====
+
+===== pack/assets/charmedchars/textures/block/cyan/1.png [sha256 1193d4b1e1ce3014475aae0e8753d1f1921fc914c4ceec61822bd9c3f2f5c2e8] =====
+
+===== pack/assets/charmedchars/textures/block/cyan/2.png [sha256 53448cb47dd92fb51193c6e3d3edc5e2ff3ab9c66e4c4dcfe4f5e0674b15188d] =====
+
+===== pack/assets/charmedchars/textures/block/cyan/3.png [sha256 c6eda6a8d9f6501ffedff6f4661adc01efe44f40c66593a094eabce38f550caa] =====
+
+===== pack/assets/charmedchars/textures/block/cyan/4.png [sha256 9774824949068c73b34d0d071fa9f80497cb3c8284f8d6f36ee54e4f99d175ab] =====
+
+===== pack/assets/charmedchars/textures/block/cyan/5.png [sha256 4a04869e6e65414c8e363721d7631a274ed1c62636433f42412233dd3ae54635] =====
+
+===== pack/assets/charmedchars/textures/block/cyan/6.png [sha256 1f1a89f1307ec1582cc9812c5c71afbebda0db77ee3eb90c6aa545092b4e6a7f] =====
+
+===== pack/assets/charmedchars/textures/block/cyan/7.png [sha256 97e2cf426179f8996e1acd7a5d17b30a47b633aa02358d84f17c0f59ab2d6adf] =====
+
+===== pack/assets/charmedchars/textures/block/cyan/8.png [sha256 d23e0fe52383f65ebc8c487159c5870624448af58bcc94ea1523f0a836a2a661] =====
+
+===== pack/assets/charmedchars/textures/block/cyan/9.png [sha256 8daaee379b4254aee2d09b37328776e9a92f9b0c53ec6227faa25febf25f27b4] =====
+
+===== pack/assets/charmedchars/textures/block/cyan/a.png [sha256 f7b651d992d7c6c8ac9a5a797cee130d8ec432cae7f8e321b0e65d7cd7b9ed49] =====
+
+===== pack/assets/charmedchars/textures/block/cyan/b.png [sha256 3b87fe624ff8816031c951d090ecf8b0db21d48d5840484361558ac2e1f40624] =====
+
+===== pack/assets/charmedchars/textures/block/cyan/c.png [sha256 f94cc8aa1b5bb2940fe2956b9cf859075ecd195822a1134ce96230650400a589] =====
+
+===== pack/assets/charmedchars/textures/block/cyan/d.png [sha256 e7a143b57db6e243bc3ac80e354da3a90a8bf4fd37f43e4ab9be79e62ed5f6a5] =====
+
+===== pack/assets/charmedchars/textures/block/cyan/division.png [sha256 69e4b9078ee252a96638ad8403588eeaa509997357c69309d96b17bca0fd55aa] =====
+
+===== pack/assets/charmedchars/textures/block/cyan/e.png [sha256 aa1bab90eba9847b33da87225bf2b5129febd916d993165f9f00e2c80378a1de] =====
+
+===== pack/assets/charmedchars/textures/block/cyan/f.png [sha256 698484d84639f133d33f9072aa1ea9363913baef1c6d97dc51c9d826c3374efb] =====
+
+===== pack/assets/charmedchars/textures/block/cyan/g.png [sha256 0f1d86c4a78133525c6257df9b0b3ed2f21ae9278caa7fd035b78ded987e38fa] =====
+
+===== pack/assets/charmedchars/textures/block/cyan/h.png [sha256 3f3ba37cb28475f93853349c4c850c5ad77b268e200043cdb6738f1a6322a724] =====
+
+===== pack/assets/charmedchars/textures/block/cyan/i.png [sha256 6d175a612dc4569ff81db5501beca407b8fafd72eaf6ef2be56cc97e0c0deae3] =====
+
+===== pack/assets/charmedchars/textures/block/cyan/j.png [sha256 8cfd7f4cafe9a621f532aeddaab1a1c0090c2be68cffc0735f782bc5830a7fc1] =====
+
+===== pack/assets/charmedchars/textures/block/cyan/k.png [sha256 f6c4272cb5c113c91e39c6b5c75770586ae92115f735fa5fef82639895e20f12] =====
+
+===== pack/assets/charmedchars/textures/block/cyan/l.png [sha256 c2c559cb924535fadf9b5acc3b8a9484430885dc7d36e34eb1ba1aafce83dd21] =====
+
+===== pack/assets/charmedchars/textures/block/cyan/logo_block.png [sha256 dc06c4868fb4ac194f6536faf5788c5df06dc5abd9a2930277822412209397c6] =====
+
+===== pack/assets/charmedchars/textures/block/cyan/m.png [sha256 a8c5f83f5b1599a53d7e18bf840b50f7a3a2cc4bd9d6bef55916f608e331b8a0] =====
+
+===== pack/assets/charmedchars/textures/block/cyan/minus.png [sha256 d7b184f9e944938481c103eaeb1f2b9910b53670fc4480b1994ed1eb9edcab71] =====
+
+===== pack/assets/charmedchars/textures/block/cyan/multiply.png [sha256 530b41ff3848acda00f4874ec6fda0bd925cb0886852aa4b0189366443974cbc] =====
+
+===== pack/assets/charmedchars/textures/block/cyan/n.png [sha256 d3fd1b70d3379b615028661efe9c684ae508b76c07830b8041db2ab28612790f] =====
+
+===== pack/assets/charmedchars/textures/block/cyan/o.png [sha256 d08b5e8745aa81a50c8552b6e6375367e0e1501af85c571d007ccf5e43410927] =====
+
+===== pack/assets/charmedchars/textures/block/cyan/p.png [sha256 75be77a9cd4643fc95eaa46d31b1eb4a6a8e6876c3b1aacdedc6121591b1b46e] =====
+
+===== pack/assets/charmedchars/textures/block/cyan/plus.png [sha256 e03779648a7b708b2dfebf361e1b1ab8644636ce46f17165bf72c51b2f6f44ef] =====
+
+===== pack/assets/charmedchars/textures/block/cyan/q.png [sha256 cbb9cf6620e7a67f84e51fc1aa65bda9650bfbf3dd63805247250c599cf2d4b4] =====
+
+===== pack/assets/charmedchars/textures/block/cyan/r.png [sha256 79b807f4b5634d8e5f6002414e5ef241f4d63f8ae1947b50e99e2fe4442ce695] =====
+
+===== pack/assets/charmedchars/textures/block/cyan/s.png [sha256 d94572949f0fd326d907768e873327cf9e0f0217b1980172c689c555f4187ff4] =====
+
+===== pack/assets/charmedchars/textures/block/cyan/t.png [sha256 5f1f634365025e5ff54bc633cbc1c7f2360612fcaa557730cc80511f37777641] =====
+
+===== pack/assets/charmedchars/textures/block/cyan/u.png [sha256 03817f0b469e15952ff31ffee1e30da0caf6728c74cb577c83af35130f54bcb4] =====
+
+===== pack/assets/charmedchars/textures/block/cyan/v.png [sha256 2912bea72bcfb078d018f658e2a721d5c9ed10c470f38578cf4c4a9411dcfb8d] =====
+
+===== pack/assets/charmedchars/textures/block/cyan/w.png [sha256 49d6675b31b7d7756f3ed9b54193fe4abe54ce71fcce9d1ac55572b80e6c69d4] =====
+
+===== pack/assets/charmedchars/textures/block/cyan/x.png [sha256 acbe1d143147ffaf415252df2ca62bc84ca74147440e996abc6218a06a4191a5] =====
+
+===== pack/assets/charmedchars/textures/block/cyan/y.png [sha256 f1199a3fac68b48bcc5cfd09a15d0ad627002a32f5acb22c1e159218120ac9d2] =====
+
+===== pack/assets/charmedchars/textures/block/cyan/z.png [sha256 1c475f9af9074c69e0e9f5b39fd6ce3569b6a8d14782a47489d374f4b7c26862] =====
+
+===== pack/assets/charmedchars/textures/block/magenta/0.png [sha256 03728a4ddc9b1ce0ca630c7a706056c0eda740d09bf61d07f616012e1e203c3e] =====
+
+===== pack/assets/charmedchars/textures/block/magenta/1.png [sha256 2de59720904365d7b2980001b9e26a12e764c0a7b52fae1511af14e6af4f3c28] =====
+
+===== pack/assets/charmedchars/textures/block/magenta/2.png [sha256 7ce51e587dd7599cfd9a14aaf73a5c55ebcf74eabf4edeb37f8006909c90b545] =====
+
+===== pack/assets/charmedchars/textures/block/magenta/3.png [sha256 d0b9fdded8c4f4d3ee5b69cc4ec2554ad520396328f5f902d3aacc7afd50dff5] =====
+
+===== pack/assets/charmedchars/textures/block/magenta/4.png [sha256 e0fb989911688a0a2d077c9f649f1db09d8defe05882d50900dc6fb7c312816a] =====
+
+===== pack/assets/charmedchars/textures/block/magenta/5.png [sha256 3a49c31c5e21a397ee66a26799925779e578b8eb4c0a0ae641197335629364ad] =====
+
+===== pack/assets/charmedchars/textures/block/magenta/6.png [sha256 bf542a2e2e3f81c765a3e51f800972a71a56f033aa0a9bc4185591a740c5755e] =====
+
+===== pack/assets/charmedchars/textures/block/magenta/7.png [sha256 2d52f9777ada61a8cedb40b2ea56b7da0a11d4f64191a8b96ad22628652decf7] =====
+
+===== pack/assets/charmedchars/textures/block/magenta/8.png [sha256 8b464f121c551bf6a1e106e7134399b0fb9d3d73eb0ea9b14fe836aaf96f9796] =====
+
+===== pack/assets/charmedchars/textures/block/magenta/9.png [sha256 d0bcd26ee5ea0cb7bd462a1b360acbd2abfc155560facbb6c1f6d60c162faa71] =====
+
+===== pack/assets/charmedchars/textures/block/magenta/a.png [sha256 def99088aa135772e47380a52b4f4a59b7b667cd1b9bc97a113977084d558411] =====
+
+===== pack/assets/charmedchars/textures/block/magenta/b.png [sha256 8b2adfc0042c67f7b7dc11aa2105df8ac416d53005f5f95ac8e15187c6b3a36d] =====
+
+===== pack/assets/charmedchars/textures/block/magenta/c.png [sha256 2ce648b903e1c2606f0acbc4d911b32c819d0a800a136a75957b48555a01da54] =====
+
+===== pack/assets/charmedchars/textures/block/magenta/d.png [sha256 175aa70be235baefe9dfa34d5e37d9f128ad4ebaacb3c2c98f69243a74293b44] =====
+
+===== pack/assets/charmedchars/textures/block/magenta/division.png [sha256 bebe61101b5d490bb132419f2c11b6e9122923f2ecce1089d135fe98939af4f5] =====
+
+===== pack/assets/charmedchars/textures/block/magenta/e.png [sha256 195f8ec311bcb51834e520761d429bc36b837b789bebfc98990cf6652362d932] =====
+
+===== pack/assets/charmedchars/textures/block/magenta/f.png [sha256 ea7eebb71889c492cb873ce0b18ff7152c49882717fd2557e129fcc1a65b07a6] =====
+
+===== pack/assets/charmedchars/textures/block/magenta/g.png [sha256 24809a133a8d7688f1bb13ee0abfca07da69c1185b2dc503ede66b66cd830b19] =====
+
+===== pack/assets/charmedchars/textures/block/magenta/h.png [sha256 6d07b561549b972ce6329e1bbb55323041bd869bd708a4d33f7cccde6d755b24] =====
+
+===== pack/assets/charmedchars/textures/block/magenta/i.png [sha256 c92fed6423be1996df82dc501c760f58854ddb86398034df79f461ff8413050a] =====
+
+===== pack/assets/charmedchars/textures/block/magenta/j.png [sha256 63bf97b1ca96844cd9086feb6b14f7f5cd12b11269f76a95cb72bfad9818b166] =====
+
+===== pack/assets/charmedchars/textures/block/magenta/k.png [sha256 e82670e75f8d89a08319062bb1bf64a75d6d98d19b14ff340b4dd00265617b5a] =====
+
+===== pack/assets/charmedchars/textures/block/magenta/l.png [sha256 29f5d66686101cf4acfdf9f40500442484bf562d4574af0a0881a5a5fe6acf13] =====
+
+===== pack/assets/charmedchars/textures/block/magenta/logo_block.png [sha256 710c531d9ac0c9d2cf6411f5c1fb1784feba63ebac1f2fd63c7ee2ec09701742] =====
+
+===== pack/assets/charmedchars/textures/block/magenta/m.png [sha256 7c5157eb626600cc5fed54a5785836fb6b79764b65a87a9334f486af3d6551b9] =====
+
+===== pack/assets/charmedchars/textures/block/magenta/minus.png [sha256 ba05374ca456a82556ca409c871e7330b151ec43257fa9842d0543104da4c274] =====
+
+===== pack/assets/charmedchars/textures/block/magenta/multiply.png [sha256 332de1be625bb26a4f28db5b0189ff7ce4549f3338e00976d1542cc4e1c24a6e] =====
+
+===== pack/assets/charmedchars/textures/block/magenta/n.png [sha256 865cbf8ded5349d3d309558ab54090b56a673d6186c3960f287a3ec5afbd337f] =====
+
+===== pack/assets/charmedchars/textures/block/magenta/o.png [sha256 87bada973f534a26c123eca03e269fe5e54e11bb6138162f295a160a25eeca0b] =====
+
+===== pack/assets/charmedchars/textures/block/magenta/p.png [sha256 d35ec6ee06d1cf779f522c676282b500dd6f7c92aaaac81a680d248b04d18b45] =====
+
+===== pack/assets/charmedchars/textures/block/magenta/plus.png [sha256 0aa81059cc61a6962a461e4c1d1247cdbeac3ee5d85f4ba01ba3bc0498a03535] =====
+
+===== pack/assets/charmedchars/textures/block/magenta/q.png [sha256 3430ea52032767cd41d0a7c0f81bfba5fe1525c9f0e3d71647e20b8de679cc1f] =====
+
+===== pack/assets/charmedchars/textures/block/magenta/r.png [sha256 16360ba4fbfcd6fe6f09d2bc1a7ca8d4f44df0aec484d6401fe8566a6178affc] =====
+
+===== pack/assets/charmedchars/textures/block/magenta/s.png [sha256 483088327275f47278d6da7757bd71eae2e7f65fd5f8b29fd9172c08ef5111eb] =====
+
+===== pack/assets/charmedchars/textures/block/magenta/t.png [sha256 cafa5d7dd03f1e8cb72c0f76629a22e0ebb9d1d0e42a72680ed12bdb1348912a] =====
+
+===== pack/assets/charmedchars/textures/block/magenta/u.png [sha256 b454f4a7976e7353d8ff5f4dd22cb711dea829563ef27af8eb458d973f1e1a06] =====
+
+===== pack/assets/charmedchars/textures/block/magenta/v.png [sha256 e7dcb6eb22b213e858de37f354b4281eab9682b5e8be7009b860fd582323368f] =====
+
+===== pack/assets/charmedchars/textures/block/magenta/w.png [sha256 17a4bb16665cab5ce790ef424dfac79e69defe87477fd258809e05d4cafb767e] =====
+
+===== pack/assets/charmedchars/textures/block/magenta/x.png [sha256 abca5aa85497615fd69f02c12e7604adce40fa4253cbefd28b11edca6a55944d] =====
+
+===== pack/assets/charmedchars/textures/block/magenta/y.png [sha256 d29ab4b3f2971fad83685c350bd92ac899ad41227fc7b3606ef48a5f0c362fc1] =====
+
+===== pack/assets/charmedchars/textures/block/magenta/z.png [sha256 b4d811bc5ee709942777858b452d9ff7b011db16a8b659738d5f3fa847ae52a2] =====
+
+===== pack/assets/charmedchars/textures/block/yellow/0.png [sha256 f84ddb7f02e4faed5fe37907c9aa335d1f77cf53e6ec27a694c7118214f0ae27] =====
+
+===== pack/assets/charmedchars/textures/block/yellow/1.png [sha256 5238fa94b93eaff2b9387b176bad71360e3df6db420db98dfae8381ae9aba2e8] =====
+
+===== pack/assets/charmedchars/textures/block/yellow/2.png [sha256 cfd64312fa1ee7bd37b00196cee55dc52871d3df208ecb2146582b016cbbc5af] =====
+
+===== pack/assets/charmedchars/textures/block/yellow/3.png [sha256 8111c4bd727dbf25ecf29c8b32748b7c27b622afa5aa8dab617250c1d80f8252] =====
+
+===== pack/assets/charmedchars/textures/block/yellow/4.png [sha256 bb57c78714cc193d8ad1cd43cddfbf31a2458641e4d8e223f1c12a4c1b6ab499] =====
+
+===== pack/assets/charmedchars/textures/block/yellow/5.png [sha256 c8f09d16408ab63acd4aeba94c297b15257cec8a158a4adb112382d5e4c052be] =====
+
+===== pack/assets/charmedchars/textures/block/yellow/6.png [sha256 02bd92ee3e648b69fecba80b5caa19830284bf70d4fb246a543c541788054496] =====
+
+===== pack/assets/charmedchars/textures/block/yellow/7.png [sha256 fefb3b8da220245609d7946106b6882b2c1c653d714db2f71283d75a245a49f8] =====
+
+===== pack/assets/charmedchars/textures/block/yellow/8.png [sha256 0a94c7ecf301935b5fdccd589c0e65cec09826afdd5ce1823b5aaf7d1202fdc0] =====
+
+===== pack/assets/charmedchars/textures/block/yellow/9.png [sha256 ee4bbeea665b32311b0475aca7f03630fefabf9811d7d7862f27a21b480555ac] =====
+
+===== pack/assets/charmedchars/textures/block/yellow/a.png [sha256 68a0a3db3117c9b2127d1982d5d574f76d13d050f01ff429228ab0aca47208bb] =====
+
+===== pack/assets/charmedchars/textures/block/yellow/b.png [sha256 e06315b982b3d8837b38048f87a6a6adff2e4a428346607bb7ff0c43c16b2385] =====
+
+===== pack/assets/charmedchars/textures/block/yellow/c.png [sha256 1500e9a99ba17592483025c06893be3ba7293f9ccba7899f564e64cf9bd32a71] =====
+
+===== pack/assets/charmedchars/textures/block/yellow/d.png [sha256 f10648d249fdec439994308c0a4e70b722c4b97460e1b03aefb848c67c34a4ed] =====
+
+===== pack/assets/charmedchars/textures/block/yellow/division.png [sha256 0a90beb6747bbf6d5cb6bb98e7668aab85d471d771e61596d71446a441f48036] =====
+
+===== pack/assets/charmedchars/textures/block/yellow/e.png [sha256 f9d71bd92acb7cd107869083b154f9d23d456f311403aa656267374ca90ecf65] =====
+
+===== pack/assets/charmedchars/textures/block/yellow/f.png [sha256 4d6b99b68df2997ce32fd2a8ae6dfdd598f2e5acc57375375793a3854ad20d03] =====
+
+===== pack/assets/charmedchars/textures/block/yellow/g.png [sha256 528d0c8526bef4876f661756bf804ab7d8ca89f65051ca24e25904755e631701] =====
+
+===== pack/assets/charmedchars/textures/block/yellow/h.png [sha256 fadfc044abb5e965c0e1c32b5f8495822287c23eff468fb62be0a4a38a04ab4f] =====
+
+===== pack/assets/charmedchars/textures/block/yellow/i.png [sha256 c5039dabe18a753378358ed6f0248cbccc0a3be1f90edb889d9c2344358b2c8d] =====
+
+===== pack/assets/charmedchars/textures/block/yellow/j.png [sha256 ca7997f11438852e902d4b1f4cc9355f954c3a471eb7abffc8b3beaa6cbc5ac5] =====
+
+===== pack/assets/charmedchars/textures/block/yellow/k.png [sha256 4bcb65fc1e86e151ae1c570e7a556b271faa90a53b5571cf354e80cf8e9da1f7] =====
+
+===== pack/assets/charmedchars/textures/block/yellow/l.png [sha256 1dc5863e0982552147e53b64e065e3d6d29aec6561a3fdc106e9af37b8ad21e8] =====
+
+===== pack/assets/charmedchars/textures/block/yellow/logo_block.png [sha256 b91ff216533012078c301fb24d0ad833697f311265f6d74ee542c491998db147] =====
+
+===== pack/assets/charmedchars/textures/block/yellow/m.png [sha256 dd5c0a09a57d391e915daff1a3d963c1084daa33c412fe8fbe595ba9e31c6168] =====
+
+===== pack/assets/charmedchars/textures/block/yellow/minus.png [sha256 2d4308580fba4b355d3251c7aa21fca8d86da9152372aa62e29d10fc12284570] =====
+
+===== pack/assets/charmedchars/textures/block/yellow/multiply.png [sha256 b4e5f9e1272128c05ac068d8338f414cec117f17a1894ff6a5fd58472e211ff0] =====
+
+===== pack/assets/charmedchars/textures/block/yellow/n.png [sha256 19cca0960461bcaa79bd857c9071b0874191caa4be550b1fdf8accfa0a5e4095] =====
+
+===== pack/assets/charmedchars/textures/block/yellow/o.png [sha256 9ee67b54276e8cd0db15c9fa2b77ec455bb949dfa95e7d39a4cfa3c0de7a8e78] =====
+
+===== pack/assets/charmedchars/textures/block/yellow/p.png [sha256 879f08c75acd6dcbdace2c0e17cceab96601cff3fddcd43092b0f2944c4fb5a2] =====
+
+===== pack/assets/charmedchars/textures/block/yellow/plus.png [sha256 8b91c5f0f8ee70adec330a50df6a9f77a4431c90a23ba824d390c168a1f64706] =====
+
+===== pack/assets/charmedchars/textures/block/yellow/q.png [sha256 c6c9a28c77101e977ee79a1925ce2868ad70813d9f907b63d179d9a66c09d9d0] =====
+
+===== pack/assets/charmedchars/textures/block/yellow/r.png [sha256 1a34ccc47a3d375f259618a2a7cb3148ab0e9fef0e99beb91dd29c4c33c727ef] =====
+
+===== pack/assets/charmedchars/textures/block/yellow/s.png [sha256 6fb89474a558144a1ab8ae51cc0d4db77f44d68a33e4d7bb50d4a544d69908ba] =====
+
+===== pack/assets/charmedchars/textures/block/yellow/t.png [sha256 35e990d5c8a98b313c9e9261562119b5eca5f0e92648ac9f737bf9e2d383e31d] =====
+
+===== pack/assets/charmedchars/textures/block/yellow/u.png [sha256 a9344bd4a4c0d87d49431bd6e35bc22b0f6ac134401181f8560e11fec090f29c] =====
+
+===== pack/assets/charmedchars/textures/block/yellow/v.png [sha256 4b3a8a154bfc755414b48dfc8e8b7ce03619625f28a88cc3aafc60f8e2b894e2] =====
+
+===== pack/assets/charmedchars/textures/block/yellow/w.png [sha256 4dfc97b751fe6c4d704440d78dfff02f700099402963736ad8a6f4c8604a9c7c] =====
+
+===== pack/assets/charmedchars/textures/block/yellow/x.png [sha256 9e63f78f5bc6b6a6ea199758145728fd739acaf5208ce6c93d7728313f991220] =====
+
+===== pack/assets/charmedchars/textures/block/yellow/y.png [sha256 277737e1f133034336488a2f88b325772cbc47032423597b475143ab27829b2d] =====
+
+===== pack/assets/charmedchars/textures/block/yellow/z.png [sha256 d99b4b57cf7929429e7b2145b9dcf1f0f5109cdaa6e4792698949c1ffd80d8aa] =====
+
+===== pack/assets/charmedchars/textures/item/pyrite/axe.png [sha256 eaa891ce6c2501caa2c9bfda7beb0e1b05b20e99b913fca9a1df5d6a6a8bbbe7] =====
+
+===== pack/assets/charmedchars/textures/item/pyrite/hoe.png [sha256 23a7d3643e925196033da54b34bcbb7142cabb68ac469cfd354e4a86956e7800] =====
+
+===== pack/assets/charmedchars/textures/item/pyrite/ingot.png [sha256 f338f74f7f0268a0288f8169e796d8fd626560e727f86968a46cf64ab3178757] =====
+
+===== pack/assets/charmedchars/textures/item/pyrite/pickaxe.png [sha256 0a39700299ee2c7f6651c33a0fcd3dbfc0d529226e0711b6cd725a8b9b1898f0] =====
+
+===== pack/assets/charmedchars/textures/item/pyrite/shovel.png [sha256 08587c1f6289fffb6839d512e1b0812dd60cf2223bc05c07f82877f6541d45cb] =====
+
+===== pack/assets/minecraft/models/block/cyan_0.json =====
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "charmedchars:block/cyan/0"
+  }
+}
+<no newline at end of file>
+
+===== pack/assets/minecraft/models/block/cyan_1.json =====
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "charmedchars:block/cyan/1"
+  }
+}
+<no newline at end of file>
+
+===== pack/assets/minecraft/models/block/cyan_2.json =====
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "charmedchars:block/cyan/2"
+  }
+}
+<no newline at end of file>
+
+===== pack/assets/minecraft/models/block/cyan_3.json =====
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "charmedchars:block/cyan/3"
+  }
+}
+<no newline at end of file>
+
+===== pack/assets/minecraft/models/block/cyan_4.json =====
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "charmedchars:block/cyan/4"
+  }
+}
+<no newline at end of file>
+
+===== pack/assets/minecraft/models/block/cyan_5.json =====
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "charmedchars:block/cyan/5"
+  }
+}
+<no newline at end of file>
+
+===== pack/assets/minecraft/models/block/cyan_6.json =====
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "charmedchars:block/cyan/6"
+  }
+}
+<no newline at end of file>
+
+===== pack/assets/minecraft/models/block/cyan_7.json =====
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "charmedchars:block/cyan/7"
+  }
+}
+<no newline at end of file>
+
+===== pack/assets/minecraft/models/block/cyan_8.json =====
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "charmedchars:block/cyan/8"
+  }
+}
+<no newline at end of file>
+
+===== pack/assets/minecraft/models/block/cyan_9.json =====
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "charmedchars:block/cyan/9"
+  }
+}
+<no newline at end of file>
+
+===== pack/assets/minecraft/models/block/cyan_a.json =====
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "charmedchars:block/cyan/a"
+  }
+}
+<no newline at end of file>
+
+===== pack/assets/minecraft/models/block/cyan_b.json =====
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "charmedchars:block/cyan/b"
+  }
+}
+<no newline at end of file>
+
+===== pack/assets/minecraft/models/block/cyan_c.json =====
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "charmedchars:block/cyan/c"
+  }
+}
+<no newline at end of file>
+
+===== pack/assets/minecraft/models/block/cyan_d.json =====
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "charmedchars:block/cyan/d"
+  }
+}
+<no newline at end of file>
+
+===== pack/assets/minecraft/models/block/cyan_division.json =====
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "charmedchars:block/cyan/division"
+  }
+}
+<no newline at end of file>
+
+===== pack/assets/minecraft/models/block/cyan_e.json =====
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "charmedchars:block/cyan/e"
+  }
+}
+<no newline at end of file>
+
+===== pack/assets/minecraft/models/block/cyan_f.json =====
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "charmedchars:block/cyan/f"
+  }
+}
+<no newline at end of file>
+
+===== pack/assets/minecraft/models/block/cyan_g.json =====
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "charmedchars:block/cyan/g"
+  }
+}
+<no newline at end of file>
+
+===== pack/assets/minecraft/models/block/cyan_h.json =====
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "charmedchars:block/cyan/h"
+  }
+}
+<no newline at end of file>
+
+===== pack/assets/minecraft/models/block/cyan_i.json =====
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "charmedchars:block/cyan/i"
+  }
+}
+<no newline at end of file>
+
+===== pack/assets/minecraft/models/block/cyan_j.json =====
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "charmedchars:block/cyan/j"
+  }
+}
+<no newline at end of file>
+
+===== pack/assets/minecraft/models/block/cyan_k.json =====
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "charmedchars:block/cyan/k"
+  }
+}
+<no newline at end of file>
+
+===== pack/assets/minecraft/models/block/cyan_l.json =====
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "charmedchars:block/cyan/l"
+  }
+}
+<no newline at end of file>
+
+===== pack/assets/minecraft/models/block/cyan_logo.json =====
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "charmedchars:block/cyan/logo_block"
+  }
+}
+<no newline at end of file>
+
+===== pack/assets/minecraft/models/block/cyan_m.json =====
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "charmedchars:block/cyan/m"
+  }
+}
+<no newline at end of file>
+
+===== pack/assets/minecraft/models/block/cyan_minus.json =====
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "charmedchars:block/cyan/minus"
+  }
+}
+<no newline at end of file>
+
+===== pack/assets/minecraft/models/block/cyan_multiply.json =====
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "charmedchars:block/cyan/multiply"
+  }
+}
+<no newline at end of file>
+
+===== pack/assets/minecraft/models/block/cyan_n.json =====
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "charmedchars:block/cyan/n"
+  }
+}
+<no newline at end of file>
+
+===== pack/assets/minecraft/models/block/cyan_o.json =====
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "charmedchars:block/cyan/o"
+  }
+}
+<no newline at end of file>
+
+===== pack/assets/minecraft/models/block/cyan_p.json =====
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "charmedchars:block/cyan/p"
+  }
+}
+<no newline at end of file>
+
+===== pack/assets/minecraft/models/block/cyan_plus.json =====
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "charmedchars:block/cyan/plus"
+  }
+}
+<no newline at end of file>
+
+===== pack/assets/minecraft/models/block/cyan_q.json =====
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "charmedchars:block/cyan/q"
+  }
+}
+<no newline at end of file>
+
+===== pack/assets/minecraft/models/block/cyan_r.json =====
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "charmedchars:block/cyan/r"
+  }
+}
+<no newline at end of file>
+
+===== pack/assets/minecraft/models/block/cyan_s.json =====
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "charmedchars:block/cyan/s"
+  }
+}
+<no newline at end of file>
+
+===== pack/assets/minecraft/models/block/cyan_t.json =====
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "charmedchars:block/cyan/t"
+  }
+}
+<no newline at end of file>
+
+===== pack/assets/minecraft/models/block/cyan_u.json =====
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "charmedchars:block/cyan/u"
+  }
+}
+<no newline at end of file>
+
+===== pack/assets/minecraft/models/block/cyan_v.json =====
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "charmedchars:block/cyan/v"
+  }
+}
+<no newline at end of file>
+
+===== pack/assets/minecraft/models/block/cyan_w.json =====
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "charmedchars:block/cyan/w"
+  }
+}
+<no newline at end of file>
+
+===== pack/assets/minecraft/models/block/cyan_x.json =====
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "charmedchars:block/cyan/x"
+  }
+}
+<no newline at end of file>
+
+===== pack/assets/minecraft/models/block/cyan_y.json =====
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "charmedchars:block/cyan/y"
+  }
+}
+<no newline at end of file>
+
+===== pack/assets/minecraft/models/block/cyan_z.json =====
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "charmedchars:block/cyan/z"
+  }
+}
+<no newline at end of file>
+
+===== pack/assets/minecraft/models/block/magenta_0.json =====
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "charmedchars:block/magenta/0"
+  }
+}
+<no newline at end of file>
+
+===== pack/assets/minecraft/models/block/magenta_1.json =====
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "charmedchars:block/magenta/1"
+  }
+}
+<no newline at end of file>
+
+===== pack/assets/minecraft/models/block/magenta_2.json =====
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "charmedchars:block/magenta/2"
+  }
+}
+<no newline at end of file>
+
+===== pack/assets/minecraft/models/block/magenta_3.json =====
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "charmedchars:block/magenta/3"
+  }
+}
+<no newline at end of file>
+
+===== pack/assets/minecraft/models/block/magenta_4.json =====
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "charmedchars:block/magenta/4"
+  }
+}
+<no newline at end of file>
+
+===== pack/assets/minecraft/models/block/magenta_5.json =====
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "charmedchars:block/magenta/5"
+  }
+}
+<no newline at end of file>
+
+===== pack/assets/minecraft/models/block/magenta_6.json =====
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "charmedchars:block/magenta/6"
+  }
+}
+<no newline at end of file>
+
+===== pack/assets/minecraft/models/block/magenta_7.json =====
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "charmedchars:block/magenta/7"
+  }
+}
+<no newline at end of file>
+
+===== pack/assets/minecraft/models/block/magenta_8.json =====
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "charmedchars:block/magenta/8"
+  }
+}
+<no newline at end of file>
+
+===== pack/assets/minecraft/models/block/magenta_9.json =====
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "charmedchars:block/magenta/9"
+  }
+}
+<no newline at end of file>
+
+===== pack/assets/minecraft/models/block/magenta_a.json =====
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "charmedchars:block/magenta/a"
+  }
+}
+<no newline at end of file>
+
+===== pack/assets/minecraft/models/block/magenta_b.json =====
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "charmedchars:block/magenta/b"
+  }
+}
+<no newline at end of file>
+
+===== pack/assets/minecraft/models/block/magenta_c.json =====
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "charmedchars:block/magenta/c"
+  }
+}
+<no newline at end of file>
+
+===== pack/assets/minecraft/models/block/magenta_d.json =====
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "charmedchars:block/magenta/d"
+  }
+}
+<no newline at end of file>
+
+===== pack/assets/minecraft/models/block/magenta_division.json =====
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "charmedchars:block/magenta/division"
+  }
+}
+<no newline at end of file>
+
+===== pack/assets/minecraft/models/block/magenta_e.json =====
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "charmedchars:block/magenta/e"
+  }
+}
+<no newline at end of file>
+
+===== pack/assets/minecraft/models/block/magenta_f.json =====
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "charmedchars:block/magenta/f"
+  }
+}
+<no newline at end of file>
+
+===== pack/assets/minecraft/models/block/magenta_g.json =====
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "charmedchars:block/magenta/g"
+  }
+}
+<no newline at end of file>
+
+===== pack/assets/minecraft/models/block/magenta_h.json =====
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "charmedchars:block/magenta/h"
+  }
+}
+<no newline at end of file>
+
+===== pack/assets/minecraft/models/block/magenta_i.json =====
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "charmedchars:block/magenta/i"
+  }
+}
+<no newline at end of file>
+
+===== pack/assets/minecraft/models/block/magenta_j.json =====
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "charmedchars:block/magenta/j"
+  }
+}
+<no newline at end of file>
+
+===== pack/assets/minecraft/models/block/magenta_k.json =====
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "charmedchars:block/magenta/k"
+  }
+}
+<no newline at end of file>
+
+===== pack/assets/minecraft/models/block/magenta_l.json =====
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "charmedchars:block/magenta/l"
+  }
+}
+<no newline at end of file>
+
+===== pack/assets/minecraft/models/block/magenta_logo.json =====
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "charmedchars:block/magenta/logo_block"
+  }
+}
+<no newline at end of file>
+
+===== pack/assets/minecraft/models/block/magenta_m.json =====
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "charmedchars:block/magenta/m"
+  }
+}
+<no newline at end of file>
+
+===== pack/assets/minecraft/models/block/magenta_minus.json =====
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "charmedchars:block/magenta/minus"
+  }
+}
+<no newline at end of file>
+
+===== pack/assets/minecraft/models/block/magenta_multiply.json =====
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "charmedchars:block/magenta/multiply"
+  }
+}
+<no newline at end of file>
+
+===== pack/assets/minecraft/models/block/magenta_n.json =====
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "charmedchars:block/magenta/n"
+  }
+}
+<no newline at end of file>
+
+===== pack/assets/minecraft/models/block/magenta_o.json =====
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "charmedchars:block/magenta/o"
+  }
+}
+<no newline at end of file>
+
+===== pack/assets/minecraft/models/block/magenta_p.json =====
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "charmedchars:block/magenta/p"
+  }
+}
+<no newline at end of file>
+
+===== pack/assets/minecraft/models/block/magenta_plus.json =====
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "charmedchars:block/magenta/plus"
+  }
+}
+<no newline at end of file>
+
+===== pack/assets/minecraft/models/block/magenta_q.json =====
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "charmedchars:block/magenta/q"
+  }
+}
+<no newline at end of file>
+
+===== pack/assets/minecraft/models/block/magenta_r.json =====
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "charmedchars:block/magenta/r"
+  }
+}
+<no newline at end of file>
+
+===== pack/assets/minecraft/models/block/magenta_s.json =====
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "charmedchars:block/magenta/s"
+  }
+}
+<no newline at end of file>
+
+===== pack/assets/minecraft/models/block/magenta_t.json =====
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "charmedchars:block/magenta/t"
+  }
+}
+<no newline at end of file>
+
+===== pack/assets/minecraft/models/block/magenta_u.json =====
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "charmedchars:block/magenta/u"
+  }
+}
+<no newline at end of file>
+
+===== pack/assets/minecraft/models/block/magenta_v.json =====
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "charmedchars:block/magenta/v"
+  }
+}
+<no newline at end of file>
+
+===== pack/assets/minecraft/models/block/magenta_w.json =====
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "charmedchars:block/magenta/w"
+  }
+}
+<no newline at end of file>
+
+===== pack/assets/minecraft/models/block/magenta_x.json =====
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "charmedchars:block/magenta/x"
+  }
+}
+<no newline at end of file>
+
+===== pack/assets/minecraft/models/block/magenta_y.json =====
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "charmedchars:block/magenta/y"
+  }
+}
+<no newline at end of file>
+
+===== pack/assets/minecraft/models/block/magenta_z.json =====
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "charmedchars:block/magenta/z"
+  }
+}
+<no newline at end of file>
+
+===== pack/assets/minecraft/models/block/yellow_0.json =====
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "charmedchars:block/yellow/0"
+  }
+}
+<no newline at end of file>
+
+===== pack/assets/minecraft/models/block/yellow_1.json =====
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "charmedchars:block/yellow/1"
+  }
+}
+<no newline at end of file>
+
+===== pack/assets/minecraft/models/block/yellow_2.json =====
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "charmedchars:block/yellow/2"
+  }
+}
+<no newline at end of file>
+
+===== pack/assets/minecraft/models/block/yellow_3.json =====
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "charmedchars:block/yellow/3"
+  }
+}
+<no newline at end of file>
+
+===== pack/assets/minecraft/models/block/yellow_4.json =====
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "charmedchars:block/yellow/4"
+  }
+}
+<no newline at end of file>
+
+===== pack/assets/minecraft/models/block/yellow_5.json =====
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "charmedchars:block/yellow/5"
+  }
+}
+<no newline at end of file>
+
+===== pack/assets/minecraft/models/block/yellow_6.json =====
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "charmedchars:block/yellow/6"
+  }
+}
+<no newline at end of file>
+
+===== pack/assets/minecraft/models/block/yellow_7.json =====
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "charmedchars:block/yellow/7"
+  }
+}
+<no newline at end of file>
+
+===== pack/assets/minecraft/models/block/yellow_8.json =====
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "charmedchars:block/yellow/8"
+  }
+}
+<no newline at end of file>
+
+===== pack/assets/minecraft/models/block/yellow_9.json =====
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "charmedchars:block/yellow/9"
+  }
+}
+<no newline at end of file>
+
+===== pack/assets/minecraft/models/block/yellow_a.json =====
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "charmedchars:block/yellow/a"
+  }
+}
+<no newline at end of file>
+
+===== pack/assets/minecraft/models/block/yellow_b.json =====
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "charmedchars:block/yellow/b"
+  }
+}
+<no newline at end of file>
+
+===== pack/assets/minecraft/models/block/yellow_c.json =====
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "charmedchars:block/yellow/c"
+  }
+}
+<no newline at end of file>
+
+===== pack/assets/minecraft/models/block/yellow_d.json =====
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "charmedchars:block/yellow/d"
+  }
+}
+<no newline at end of file>
+
+===== pack/assets/minecraft/models/block/yellow_division.json =====
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "charmedchars:block/yellow/division"
+  }
+}
+<no newline at end of file>
+
+===== pack/assets/minecraft/models/block/yellow_e.json =====
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "charmedchars:block/yellow/e"
+  }
+}
+<no newline at end of file>
+
+===== pack/assets/minecraft/models/block/yellow_f.json =====
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "charmedchars:block/yellow/f"
+  }
+}
+<no newline at end of file>
+
+===== pack/assets/minecraft/models/block/yellow_g.json =====
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "charmedchars:block/yellow/g"
+  }
+}
+<no newline at end of file>
+
+===== pack/assets/minecraft/models/block/yellow_h.json =====
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "charmedchars:block/yellow/h"
+  }
+}
+<no newline at end of file>
+
+===== pack/assets/minecraft/models/block/yellow_i.json =====
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "charmedchars:block/yellow/i"
+  }
+}
+<no newline at end of file>
+
+===== pack/assets/minecraft/models/block/yellow_j.json =====
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "charmedchars:block/yellow/j"
+  }
+}
+<no newline at end of file>
+
+===== pack/assets/minecraft/models/block/yellow_k.json =====
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "charmedchars:block/yellow/k"
+  }
+}
+<no newline at end of file>
+
+===== pack/assets/minecraft/models/block/yellow_l.json =====
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "charmedchars:block/yellow/l"
+  }
+}
+<no newline at end of file>
+
+===== pack/assets/minecraft/models/block/yellow_logo.json =====
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "charmedchars:block/yellow/logo_block"
+  }
+}
+<no newline at end of file>
+
+===== pack/assets/minecraft/models/block/yellow_m.json =====
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "charmedchars:block/yellow/m"
+  }
+}
+<no newline at end of file>
+
+===== pack/assets/minecraft/models/block/yellow_minus.json =====
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "charmedchars:block/yellow/minus"
+  }
+}
+<no newline at end of file>
+
+===== pack/assets/minecraft/models/block/yellow_multiply.json =====
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "charmedchars:block/yellow/multiply"
+  }
+}
+<no newline at end of file>
+
+===== pack/assets/minecraft/models/block/yellow_n.json =====
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "charmedchars:block/yellow/n"
+  }
+}
+<no newline at end of file>
+
+===== pack/assets/minecraft/models/block/yellow_o.json =====
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "charmedchars:block/yellow/o"
+  }
+}
+<no newline at end of file>
+
+===== pack/assets/minecraft/models/block/yellow_p.json =====
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "charmedchars:block/yellow/p"
+  }
+}
+<no newline at end of file>
+
+===== pack/assets/minecraft/models/block/yellow_plus.json =====
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "charmedchars:block/yellow/plus"
+  }
+}
+<no newline at end of file>
+
+===== pack/assets/minecraft/models/block/yellow_q.json =====
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "charmedchars:block/yellow/q"
+  }
+}
+<no newline at end of file>
+
+===== pack/assets/minecraft/models/block/yellow_r.json =====
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "charmedchars:block/yellow/r"
+  }
+}
+<no newline at end of file>
+
+===== pack/assets/minecraft/models/block/yellow_s.json =====
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "charmedchars:block/yellow/s"
+  }
+}
+<no newline at end of file>
+
+===== pack/assets/minecraft/models/block/yellow_t.json =====
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "charmedchars:block/yellow/t"
+  }
+}
+<no newline at end of file>
+
+===== pack/assets/minecraft/models/block/yellow_u.json =====
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "charmedchars:block/yellow/u"
+  }
+}
+<no newline at end of file>
+
+===== pack/assets/minecraft/models/block/yellow_v.json =====
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "charmedchars:block/yellow/v"
+  }
+}
+<no newline at end of file>
+
+===== pack/assets/minecraft/models/block/yellow_w.json =====
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "charmedchars:block/yellow/w"
+  }
+}
+<no newline at end of file>
+
+===== pack/assets/minecraft/models/block/yellow_x.json =====
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "charmedchars:block/yellow/x"
+  }
+}
+<no newline at end of file>
+
+===== pack/assets/minecraft/models/block/yellow_y.json =====
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "charmedchars:block/yellow/y"
+  }
+}
+<no newline at end of file>
+
+===== pack/assets/minecraft/models/block/yellow_z.json =====
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "charmedchars:block/yellow/z"
+  }
+}
+<no newline at end of file>
+
+===== pack/assets/minecraft/models/item/cyan_0.json =====
+{
+  "parent": "minecraft:block/cyan_0"
+}
+<no newline at end of file>
+
+===== pack/assets/minecraft/models/item/cyan_1.json =====
+{
+  "parent": "minecraft:block/cyan_1"
+}
+<no newline at end of file>
+
+===== pack/assets/minecraft/models/item/cyan_2.json =====
+{
+  "parent": "minecraft:block/cyan_2"
+}
+<no newline at end of file>
+
+===== pack/assets/minecraft/models/item/cyan_3.json =====
+{
+  "parent": "minecraft:block/cyan_3"
+}
+<no newline at end of file>
+
+===== pack/assets/minecraft/models/item/cyan_4.json =====
+{
+  "parent": "minecraft:block/cyan_4"
+}
+<no newline at end of file>
+
+===== pack/assets/minecraft/models/item/cyan_5.json =====
+{
+  "parent": "minecraft:block/cyan_5"
+}
+<no newline at end of file>
+
+===== pack/assets/minecraft/models/item/cyan_6.json =====
+{
+  "parent": "minecraft:block/cyan_6"
+}
+<no newline at end of file>
+
+===== pack/assets/minecraft/models/item/cyan_7.json =====
+{
+  "parent": "minecraft:block/cyan_7"
+}
+<no newline at end of file>
+
+===== pack/assets/minecraft/models/item/cyan_8.json =====
+{
+  "parent": "minecraft:block/cyan_8"
+}
+<no newline at end of file>
+
+===== pack/assets/minecraft/models/item/cyan_9.json =====
+{
+  "parent": "minecraft:block/cyan_9"
+}
+<no newline at end of file>
+
+===== pack/assets/minecraft/models/item/cyan_a.json =====
+{
+  "parent": "minecraft:block/cyan_a"
+}
+<no newline at end of file>
+
+===== pack/assets/minecraft/models/item/cyan_b.json =====
+{
+  "parent": "minecraft:block/cyan_b"
+}
+<no newline at end of file>
+
+===== pack/assets/minecraft/models/item/cyan_c.json =====
+{
+  "parent": "minecraft:block/cyan_c"
+}
+<no newline at end of file>
+
+===== pack/assets/minecraft/models/item/cyan_d.json =====
+{
+  "parent": "minecraft:block/cyan_d"
+}
+<no newline at end of file>
+
+===== pack/assets/minecraft/models/item/cyan_division.json =====
+{
+  "parent": "minecraft:block/cyan_division"
+}
+<no newline at end of file>
+
+===== pack/assets/minecraft/models/item/cyan_e.json =====
+{
+  "parent": "minecraft:block/cyan_e"
+}
+<no newline at end of file>
+
+===== pack/assets/minecraft/models/item/cyan_f.json =====
+{
+  "parent": "minecraft:block/cyan_f"
+}
+<no newline at end of file>
+
+===== pack/assets/minecraft/models/item/cyan_g.json =====
+{
+  "parent": "minecraft:block/cyan_g"
+}
+<no newline at end of file>
+
+===== pack/assets/minecraft/models/item/cyan_h.json =====
+{
+  "parent": "minecraft:block/cyan_h"
+}
+<no newline at end of file>
+
+===== pack/assets/minecraft/models/item/cyan_i.json =====
+{
+  "parent": "minecraft:block/cyan_i"
+}
+<no newline at end of file>
+
+===== pack/assets/minecraft/models/item/cyan_j.json =====
+{
+  "parent": "minecraft:block/cyan_j"
+}
+<no newline at end of file>
+
+===== pack/assets/minecraft/models/item/cyan_k.json =====
+{
+  "parent": "minecraft:block/cyan_k"
+}
+<no newline at end of file>
+
+===== pack/assets/minecraft/models/item/cyan_l.json =====
+{
+  "parent": "minecraft:block/cyan_l"
+}
+<no newline at end of file>
+
+===== pack/assets/minecraft/models/item/cyan_logo.json =====
+{
+  "parent": "minecraft:block/cyan_logo"
+}
+<no newline at end of file>
+
+===== pack/assets/minecraft/models/item/cyan_m.json =====
+{
+  "parent": "minecraft:block/cyan_m"
+}
+<no newline at end of file>
+
+===== pack/assets/minecraft/models/item/cyan_minus.json =====
+{
+  "parent": "minecraft:block/cyan_minus"
+}
+<no newline at end of file>
+
+===== pack/assets/minecraft/models/item/cyan_multiply.json =====
+{
+  "parent": "minecraft:block/cyan_multiply"
+}
+<no newline at end of file>
+
+===== pack/assets/minecraft/models/item/cyan_n.json =====
+{
+  "parent": "minecraft:block/cyan_n"
+}
+<no newline at end of file>
+
+===== pack/assets/minecraft/models/item/cyan_o.json =====
+{
+  "parent": "minecraft:block/cyan_o"
+}
+<no newline at end of file>
+
+===== pack/assets/minecraft/models/item/cyan_p.json =====
+{
+  "parent": "minecraft:block/cyan_p"
+}
+<no newline at end of file>
+
+===== pack/assets/minecraft/models/item/cyan_plus.json =====
+{
+  "parent": "minecraft:block/cyan_plus"
+}
+<no newline at end of file>
+
+===== pack/assets/minecraft/models/item/cyan_q.json =====
+{
+  "parent": "minecraft:block/cyan_q"
+}
+<no newline at end of file>
+
+===== pack/assets/minecraft/models/item/cyan_r.json =====
+{
+  "parent": "minecraft:block/cyan_r"
+}
+<no newline at end of file>
+
+===== pack/assets/minecraft/models/item/cyan_s.json =====
+{
+  "parent": "minecraft:block/cyan_s"
+}
+<no newline at end of file>
+
+===== pack/assets/minecraft/models/item/cyan_t.json =====
+{
+  "parent": "minecraft:block/cyan_t"
+}
+<no newline at end of file>
+
+===== pack/assets/minecraft/models/item/cyan_u.json =====
+{
+  "parent": "minecraft:block/cyan_u"
+}
+<no newline at end of file>
+
+===== pack/assets/minecraft/models/item/cyan_v.json =====
+{
+  "parent": "minecraft:block/cyan_v"
+}
+<no newline at end of file>
+
+===== pack/assets/minecraft/models/item/cyan_w.json =====
+{
+  "parent": "minecraft:block/cyan_w"
+}
+<no newline at end of file>
+
+===== pack/assets/minecraft/models/item/cyan_x.json =====
+{
+  "parent": "minecraft:block/cyan_x"
+}
+<no newline at end of file>
+
+===== pack/assets/minecraft/models/item/cyan_y.json =====
+{
+  "parent": "minecraft:block/cyan_y"
+}
+<no newline at end of file>
+
+===== pack/assets/minecraft/models/item/cyan_z.json =====
+{
+  "parent": "minecraft:block/cyan_z"
+}
+<no newline at end of file>
+
+===== pack/assets/minecraft/models/item/magenta_0.json =====
+{
+  "parent": "minecraft:block/magenta_0"
+}
+<no newline at end of file>
+
+===== pack/assets/minecraft/models/item/magenta_1.json =====
+{
+  "parent": "minecraft:block/magenta_1"
+}
+<no newline at end of file>
+
+===== pack/assets/minecraft/models/item/magenta_2.json =====
+{
+  "parent": "minecraft:block/magenta_2"
+}
+<no newline at end of file>
+
+===== pack/assets/minecraft/models/item/magenta_3.json =====
+{
+  "parent": "minecraft:block/magenta_3"
+}
+<no newline at end of file>
+
+===== pack/assets/minecraft/models/item/magenta_4.json =====
+{
+  "parent": "minecraft:block/magenta_4"
+}
+<no newline at end of file>
+
+===== pack/assets/minecraft/models/item/magenta_5.json =====
+{
+  "parent": "minecraft:block/magenta_5"
+}
+<no newline at end of file>
+
+===== pack/assets/minecraft/models/item/magenta_6.json =====
+{
+  "parent": "minecraft:block/magenta_6"
+}
+<no newline at end of file>
+
+===== pack/assets/minecraft/models/item/magenta_7.json =====
+{
+  "parent": "minecraft:block/magenta_7"
+}
+<no newline at end of file>
+
+===== pack/assets/minecraft/models/item/magenta_8.json =====
+{
+  "parent": "minecraft:block/magenta_8"
+}
+<no newline at end of file>
+
+===== pack/assets/minecraft/models/item/magenta_9.json =====
+{
+  "parent": "minecraft:block/magenta_9"
+}
+<no newline at end of file>
+
+===== pack/assets/minecraft/models/item/magenta_a.json =====
+{
+  "parent": "minecraft:block/magenta_a"
+}
+<no newline at end of file>
+
+===== pack/assets/minecraft/models/item/magenta_b.json =====
+{
+  "parent": "minecraft:block/magenta_b"
+}
+<no newline at end of file>
+
+===== pack/assets/minecraft/models/item/magenta_c.json =====
+{
+  "parent": "minecraft:block/magenta_c"
+}
+<no newline at end of file>
+
+===== pack/assets/minecraft/models/item/magenta_d.json =====
+{
+  "parent": "minecraft:block/magenta_d"
+}
+<no newline at end of file>
+
+===== pack/assets/minecraft/models/item/magenta_division.json =====
+{
+  "parent": "minecraft:block/magenta_division"
+}
+<no newline at end of file>
+
+===== pack/assets/minecraft/models/item/magenta_e.json =====
+{
+  "parent": "minecraft:block/magenta_e"
+}
+<no newline at end of file>
+
+===== pack/assets/minecraft/models/item/magenta_f.json =====
+{
+  "parent": "minecraft:block/magenta_f"
+}
+<no newline at end of file>
+
+===== pack/assets/minecraft/models/item/magenta_g.json =====
+{
+  "parent": "minecraft:block/magenta_g"
+}
+<no newline at end of file>
+
+===== pack/assets/minecraft/models/item/magenta_h.json =====
+{
+  "parent": "minecraft:block/magenta_h"
+}
+<no newline at end of file>
+
+===== pack/assets/minecraft/models/item/magenta_i.json =====
+{
+  "parent": "minecraft:block/magenta_i"
+}
+<no newline at end of file>
+
+===== pack/assets/minecraft/models/item/magenta_j.json =====
+{
+  "parent": "minecraft:block/magenta_j"
+}
+<no newline at end of file>
+
+===== pack/assets/minecraft/models/item/magenta_k.json =====
+{
+  "parent": "minecraft:block/magenta_k"
+}
+<no newline at end of file>
+
+===== pack/assets/minecraft/models/item/magenta_l.json =====
+{
+  "parent": "minecraft:block/magenta_l"
+}
+<no newline at end of file>
+
+===== pack/assets/minecraft/models/item/magenta_logo.json =====
+{
+  "parent": "minecraft:block/magenta_logo"
+}
+<no newline at end of file>
+
+===== pack/assets/minecraft/models/item/magenta_m.json =====
+{
+  "parent": "minecraft:block/magenta_m"
+}
+<no newline at end of file>
+
+===== pack/assets/minecraft/models/item/magenta_minus.json =====
+{
+  "parent": "minecraft:block/magenta_minus"
+}
+<no newline at end of file>
+
+===== pack/assets/minecraft/models/item/magenta_multiply.json =====
+{
+  "parent": "minecraft:block/magenta_multiply"
+}
+<no newline at end of file>
+
+===== pack/assets/minecraft/models/item/magenta_n.json =====
+{
+  "parent": "minecraft:block/magenta_n"
+}
+<no newline at end of file>
+
+===== pack/assets/minecraft/models/item/magenta_o.json =====
+{
+  "parent": "minecraft:block/magenta_o"
+}
+<no newline at end of file>
+
+===== pack/assets/minecraft/models/item/magenta_p.json =====
+{
+  "parent": "minecraft:block/magenta_p"
+}
+<no newline at end of file>
+
+===== pack/assets/minecraft/models/item/magenta_plus.json =====
+{
+  "parent": "minecraft:block/magenta_plus"
+}
+<no newline at end of file>
+
+===== pack/assets/minecraft/models/item/magenta_q.json =====
+{
+  "parent": "minecraft:block/magenta_q"
+}
+<no newline at end of file>
+
+===== pack/assets/minecraft/models/item/magenta_r.json =====
+{
+  "parent": "minecraft:block/magenta_r"
+}
+<no newline at end of file>
+
+===== pack/assets/minecraft/models/item/magenta_s.json =====
+{
+  "parent": "minecraft:block/magenta_s"
+}
+<no newline at end of file>
+
+===== pack/assets/minecraft/models/item/magenta_t.json =====
+{
+  "parent": "minecraft:block/magenta_t"
+}
+<no newline at end of file>
+
+===== pack/assets/minecraft/models/item/magenta_u.json =====
+{
+  "parent": "minecraft:block/magenta_u"
+}
+<no newline at end of file>
+
+===== pack/assets/minecraft/models/item/magenta_v.json =====
+{
+  "parent": "minecraft:block/magenta_v"
+}
+<no newline at end of file>
+
+===== pack/assets/minecraft/models/item/magenta_w.json =====
+{
+  "parent": "minecraft:block/magenta_w"
+}
+<no newline at end of file>
+
+===== pack/assets/minecraft/models/item/magenta_x.json =====
+{
+  "parent": "minecraft:block/magenta_x"
+}
+<no newline at end of file>
+
+===== pack/assets/minecraft/models/item/magenta_y.json =====
+{
+  "parent": "minecraft:block/magenta_y"
+}
+<no newline at end of file>
+
+===== pack/assets/minecraft/models/item/magenta_z.json =====
+{
+  "parent": "minecraft:block/magenta_z"
+}
+<no newline at end of file>
+
+===== pack/assets/minecraft/models/item/yellow_0.json =====
+{
+  "parent": "minecraft:block/yellow_0"
+}
+<no newline at end of file>
+
+===== pack/assets/minecraft/models/item/yellow_1.json =====
+{
+  "parent": "minecraft:block/yellow_1"
+}
+<no newline at end of file>
+
+===== pack/assets/minecraft/models/item/yellow_2.json =====
+{
+  "parent": "minecraft:block/yellow_2"
+}
+<no newline at end of file>
+
+===== pack/assets/minecraft/models/item/yellow_3.json =====
+{
+  "parent": "minecraft:block/yellow_3"
+}
+<no newline at end of file>
+
+===== pack/assets/minecraft/models/item/yellow_4.json =====
+{
+  "parent": "minecraft:block/yellow_4"
+}
+<no newline at end of file>
+
+===== pack/assets/minecraft/models/item/yellow_5.json =====
+{
+  "parent": "minecraft:block/yellow_5"
+}
+<no newline at end of file>
+
+===== pack/assets/minecraft/models/item/yellow_6.json =====
+{
+  "parent": "minecraft:block/yellow_6"
+}
+<no newline at end of file>
+
+===== pack/assets/minecraft/models/item/yellow_7.json =====
+{
+  "parent": "minecraft:block/yellow_7"
+}
+<no newline at end of file>
+
+===== pack/assets/minecraft/models/item/yellow_8.json =====
+{
+  "parent": "minecraft:block/yellow_8"
+}
+<no newline at end of file>
+
+===== pack/assets/minecraft/models/item/yellow_9.json =====
+{
+  "parent": "minecraft:block/yellow_9"
+}
+<no newline at end of file>
+
+===== pack/assets/minecraft/models/item/yellow_a.json =====
+{
+  "parent": "minecraft:block/yellow_a"
+}
+<no newline at end of file>
+
+===== pack/assets/minecraft/models/item/yellow_b.json =====
+{
+  "parent": "minecraft:block/yellow_b"
+}
+<no newline at end of file>
+
+===== pack/assets/minecraft/models/item/yellow_c.json =====
+{
+  "parent": "minecraft:block/yellow_c"
+}
+<no newline at end of file>
+
+===== pack/assets/minecraft/models/item/yellow_d.json =====
+{
+  "parent": "minecraft:block/yellow_d"
+}
+<no newline at end of file>
+
+===== pack/assets/minecraft/models/item/yellow_division.json =====
+{
+  "parent": "minecraft:block/yellow_division"
+}
+<no newline at end of file>
+
+===== pack/assets/minecraft/models/item/yellow_e.json =====
+{
+  "parent": "minecraft:block/yellow_e"
+}
+<no newline at end of file>
+
+===== pack/assets/minecraft/models/item/yellow_f.json =====
+{
+  "parent": "minecraft:block/yellow_f"
+}
+<no newline at end of file>
+
+===== pack/assets/minecraft/models/item/yellow_g.json =====
+{
+  "parent": "minecraft:block/yellow_g"
+}
+<no newline at end of file>
+
+===== pack/assets/minecraft/models/item/yellow_h.json =====
+{
+  "parent": "minecraft:block/yellow_h"
+}
+<no newline at end of file>
+
+===== pack/assets/minecraft/models/item/yellow_i.json =====
+{
+  "parent": "minecraft:block/yellow_i"
+}
+<no newline at end of file>
+
+===== pack/assets/minecraft/models/item/yellow_j.json =====
+{
+  "parent": "minecraft:block/yellow_j"
+}
+<no newline at end of file>
+
+===== pack/assets/minecraft/models/item/yellow_k.json =====
+{
+  "parent": "minecraft:block/yellow_k"
+}
+<no newline at end of file>
+
+===== pack/assets/minecraft/models/item/yellow_l.json =====
+{
+  "parent": "minecraft:block/yellow_l"
+}
+<no newline at end of file>
+
+===== pack/assets/minecraft/models/item/yellow_logo.json =====
+{
+  "parent": "minecraft:block/yellow_logo"
+}
+<no newline at end of file>
+
+===== pack/assets/minecraft/models/item/yellow_m.json =====
+{
+  "parent": "minecraft:block/yellow_m"
+}
+<no newline at end of file>
+
+===== pack/assets/minecraft/models/item/yellow_minus.json =====
+{
+  "parent": "minecraft:block/yellow_minus"
+}
+<no newline at end of file>
+
+===== pack/assets/minecraft/models/item/yellow_multiply.json =====
+{
+  "parent": "minecraft:block/yellow_multiply"
+}
+<no newline at end of file>
+
+===== pack/assets/minecraft/models/item/yellow_n.json =====
+{
+  "parent": "minecraft:block/yellow_n"
+}
+<no newline at end of file>
+
+===== pack/assets/minecraft/models/item/yellow_o.json =====
+{
+  "parent": "minecraft:block/yellow_o"
+}
+<no newline at end of file>
+
+===== pack/assets/minecraft/models/item/yellow_p.json =====
+{
+  "parent": "minecraft:block/yellow_p"
+}
+<no newline at end of file>
+
+===== pack/assets/minecraft/models/item/yellow_plus.json =====
+{
+  "parent": "minecraft:block/yellow_plus"
+}
+<no newline at end of file>
+
+===== pack/assets/minecraft/models/item/yellow_q.json =====
+{
+  "parent": "minecraft:block/yellow_q"
+}
+<no newline at end of file>
+
+===== pack/assets/minecraft/models/item/yellow_r.json =====
+{
+  "parent": "minecraft:block/yellow_r"
+}
+<no newline at end of file>
+
+===== pack/assets/minecraft/models/item/yellow_s.json =====
+{
+  "parent": "minecraft:block/yellow_s"
+}
+<no newline at end of file>
+
+===== pack/assets/minecraft/models/item/yellow_t.json =====
+{
+  "parent": "minecraft:block/yellow_t"
+}
+<no newline at end of file>
+
+===== pack/assets/minecraft/models/item/yellow_u.json =====
+{
+  "parent": "minecraft:block/yellow_u"
+}
+<no newline at end of file>
+
+===== pack/assets/minecraft/models/item/yellow_v.json =====
+{
+  "parent": "minecraft:block/yellow_v"
+}
+<no newline at end of file>
+
+===== pack/assets/minecraft/models/item/yellow_w.json =====
+{
+  "parent": "minecraft:block/yellow_w"
+}
+<no newline at end of file>
+
+===== pack/assets/minecraft/models/item/yellow_x.json =====
+{
+  "parent": "minecraft:block/yellow_x"
+}
+<no newline at end of file>
+
+===== pack/assets/minecraft/models/item/yellow_y.json =====
+{
+  "parent": "minecraft:block/yellow_y"
+}
+<no newline at end of file>
+
+===== pack/assets/minecraft/models/item/yellow_z.json =====
+{
+  "parent": "minecraft:block/yellow_z"
+}
+<no newline at end of file>
+
+===== recipes/shaped.yml =====
+
+# CharmedChars - Pyrite Tool Recipes
+charmedchars_pyrite_pickaxe:
+  shape:
+    - PPP
+    - _S_
+    - _S_
+  result:
+    oraxen_item: pyrite_pickaxe
+  ingredients:
+    P:
+      oraxen_item: pyrite_ingot
+    S:
+      minecraft_type: STICK
+
+charmedchars_pyrite_axe:
+  shape:
+    - PP_
+    - PS_
+    - _S_
+  result:
+    oraxen_item: pyrite_axe
+  ingredients:
+    P:
+      oraxen_item: pyrite_ingot
+    S:
+      minecraft_type: STICK
+
+charmedchars_pyrite_shovel:
+  shape:
+    - _P_
+    - _S_
+    - _S_
+  result:
+    oraxen_item: pyrite_shovel
+  ingredients:
+    P:
+      oraxen_item: pyrite_ingot
+    S:
+      minecraft_type: STICK
+
+charmedchars_pyrite_hoe:
+  shape:
+    - PP_
+    - _S_
+    - _S_
+  result:
+    oraxen_item: pyrite_hoe
+  ingredients:
+    P:
+      oraxen_item: pyrite_ingot
+    S:
+      minecraft_type: STICK
+
+===== recipes/shapeless.yml =====
+
+# CharmedChars - Pyrite Ingot Recipe
+charmedchars_pyrite_ingot:
+  result:
+    oraxen_item: pyrite_ingot
+  ingredients:
+    A:
+      amount: 1
+      minecraft_type: IRON_INGOT
+    B:
+      amount: 1
+      minecraft_type: REDSTONE
+
+# CharmedChars - Pyrite Ingot (Potent Sulfur alt)
+charmedchars_pyrite_ingot_sulfur:
+  result:
+    oraxen_item: pyrite_ingot
+  ingredients:
+    A:
+      amount: 1
+      minecraft_type: IRON_INGOT
+    B:
+      amount: 1
+      minecraft_type: POTENT_SULFUR
