@@ -186,6 +186,12 @@ echo   Removing old plugin data...
 if exist "c:\Users\steve\Documents\NativePapermc\plugins\CharmedChars\native-pack" (
     rmdir /s /q "c:\Users\steve\Documents\NativePapermc\plugins\CharmedChars\native-pack"
 )
+if exist "c:\Users\steve\Documents\NativePapermc\plugins\CharmedChars\CharmedChars-native-pack.zip" (
+    del /q "c:\Users\steve\Documents\NativePapermc\plugins\CharmedChars\CharmedChars-native-pack.zip"
+)
+if exist "c:\Users\steve\Documents\NativePapermc\plugins\CharmedChars\placed-blocks.txt" (
+    del /q "c:\Users\steve\Documents\NativePapermc\plugins\CharmedChars\placed-blocks.txt"
+)
 if exist "c:\Users\steve\Documents\NativePapermc\plugins\CharmedChars\config.yml" (
     del /q "c:\Users\steve\Documents\NativePapermc\plugins\CharmedChars\config.yml"
 )

@@ -115,6 +115,8 @@ echo "  [OK] Old JARs removed"
 
 echo "  Removing old plugin data..."
 remove_if_exists "$NA/CharmedChars/native-pack"
+remove_if_exists "$NA/CharmedChars/CharmedChars-native-pack.zip"
+remove_if_exists "$NA/CharmedChars/placed-blocks.txt"
 remove_if_exists "$NA/CharmedChars/config.yml"
 echo "  [OK] Plugin data cleaned"
 
