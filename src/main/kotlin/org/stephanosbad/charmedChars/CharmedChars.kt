@@ -222,6 +222,10 @@ class CharmedChars : JavaPlugin(), CoroutineScope {
         }
 
         // Register event listeners
+        // EventOrderDebugListener goes first so its LOWEST-priority "before" hooks run
+        // before any other listener (e.g. LogoBlockListener) can remove/transform the
+        // block it's trying to log - same priority tier runs in registration order.
+        Bukkit.getPluginManager().registerEvents(EventOrderDebugListener(this), this)
         if (nativeProvider != null) {
             Bukkit.getPluginManager().registerEvents(
                 NativePlacementListener(this, nativeProvider) { itemCatalog.isBlock(it.namespacedId) }, this
@@ -238,9 +242,6 @@ class CharmedChars : JavaPlugin(), CoroutineScope {
         Bukkit.getPluginManager().registerEvents(OperatorActivationListener(this), this)
         Bukkit.getPluginManager().registerEvents(EnderDragonKillListener(this), this)
         Bukkit.getPluginManager().registerEvents(LogoBlockListener(this), this)
-        Bukkit.getPluginManager().registerEvents(EventOrderDebugListener(this), this)
-
-
     }
 
     /**

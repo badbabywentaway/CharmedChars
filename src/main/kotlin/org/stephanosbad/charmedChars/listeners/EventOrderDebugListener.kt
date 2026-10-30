@@ -102,9 +102,15 @@ class EventOrderDebugListener(private val plugin: CharmedChars) : Listener {
         val key = "${block.world.name}:${block.x}:${block.y}:${block.z}"
         recent.entries.removeIf { tick - it.value.second > RECENT_TICKS }
 
-        val custom = plugin.customItemProviderManager.getProvider()?.getCustomBlock(block)?.namespacedId
+        val provider = plugin.customItemProviderManager.getProvider()
+        val custom = provider?.getCustomBlock(block)?.namespacedId
+        // Oraxen/Nexo have no real namespaces, so their providers prefix with their own
+        // name (e.g. "oraxen:cyan_a") instead of "charmedchars:" - accept both, same as
+        // ItemManager.getCustomVariation() already does when parsing this same ID.
+        val ownPrefix = provider?.getProviderName()?.lowercase() + ":"
         val shown = when {
             custom?.startsWith("charmedchars:") == true -> custom.also { recent[key] = it to tick }
+            custom?.startsWith(ownPrefix) == true -> custom.also { recent[key] = it to tick }
             key in recent -> "gone(was ${recent.getValue(key).first})"
             else -> return // not a CharmedChars block
         }
