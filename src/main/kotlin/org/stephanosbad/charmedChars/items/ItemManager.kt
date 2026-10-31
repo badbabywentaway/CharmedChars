@@ -36,8 +36,27 @@ import org.stephanosbad.charmedChars.rewards.RewardType
 import org.stephanosbad.charmedChars.utility.LocationPair
 import org.stephanosbad.charmedChars.utility.SimpleTuple
 import org.stephanosbad.charmedChars.utility.WordDict
+import org.stephanosbad.integrare.CustomBlockHitListener
 import java.util.*
 import java.util.concurrent.atomic.AtomicReference
+
+/**
+ * Registers letter-block word-scoring as a [Listener].
+ *
+ * Event-order handling (providers fire Interact/Damage/Break in different orders,
+ * and even the same provider changes order between its own versions) is delegated
+ * to [CustomBlockHitListener] rather than reimplemented here. Wood-breaking stays on
+ * [itemManager] itself since it isn't a custom-block interaction.
+ */
+fun letterBlockHitListener(itemManager: ItemManager): Listener {
+    val provider = itemManager.plugin.customItemProviderManager.getProvider()
+        ?: error("letterBlockHitListener requires an initialized custom item provider")
+    return CustomBlockHitListener(
+        provider = provider,
+        matches = { !it.blockName.endsWith("_logo") },
+        onHit = itemManager::onLetterBlockHit
+    )
+}
 
 /**
  * Main event handler for letter block drops and word validation
@@ -268,16 +287,10 @@ class ItemManager @JvmOverloads constructor(localPlugin: CharmedChars? = null) :
     }
 
     /**
-     * Main event handler for block breaking
-     *
-     * Handles two scenarios:
-     * 1. Breaking logs with gold/pyrite tools (without Silk Touch) - drops letter blocks
-     * 2. Breaking letter blocks - validates words and awards scores
-     *
-     * Uses LOWEST priority to run before all other handlers (including Oraxen's HIGHEST).
-     * This ensures we can detect letter blocks and process word scoring before Oraxen
-     * removes the blocks. When we cancel the event, Oraxen's handler (ignoreCancelled=true)
-     * will not run, preventing double-processing.
+     * Handles breaking logs with gold/pyrite tools (without Silk Touch) to drop letter
+     * blocks. Letter-block word-scoring itself is handled separately, by
+     * [letterBlockHitListener], since it's a custom-block interaction rather than a
+     * vanilla log break.
      *
      * @param e The block break event from Bukkit/Spigot
      */
@@ -287,100 +300,26 @@ class ItemManager @JvmOverloads constructor(localPlugin: CharmedChars? = null) :
         val hand = player.inventory.itemInMainHand
         val material = e.getBlock().blockData.material
 
-        if (!(hand.containsEnchantment(Enchantment.SILK_TOUCH))) {
-            //If there is no silk touch on it
+        if (hand.containsEnchantment(Enchantment.SILK_TOUCH)) return
+        if (!list.containsKey(material)) return
 
-            if (list.containsKey(material)) {
-                //Must be gold or pyrite tool in hand
-                if (!isValidTool(hand)) {
-                    return
-                }
+        //Must be gold or pyrite tool in hand
+        if (!isValidTool(hand)) return
 
-                var chance = plugin.configManager.letterBlockDropChance
-                if (hand.containsEnchantment(Enchantment.FORTUNE)) {
-                    val baseChance = plugin.configManager.letterBlockDropChance
-                    when (hand.enchantments[Enchantment.FORTUNE]) {
-                        1 -> chance = baseChance * plugin.configManager.lootingMultiplier1
-                        2 -> chance = baseChance * plugin.configManager.lootingMultiplier2
-                        3 -> chance = baseChance * plugin.configManager.lootingMultiplier3
-                        else -> {}
-                    }
-                }
-
-                if (Math.random() < chance) {
-                    //check wood
-                    woodBlockBreak(e, list.get(material)!!, material)
-                }
-            } else {
-                //check letter
-                letterBlockBreak(e)
+        var chance = plugin.configManager.letterBlockDropChance
+        if (hand.containsEnchantment(Enchantment.FORTUNE)) {
+            val baseChance = plugin.configManager.letterBlockDropChance
+            when (hand.enchantments[Enchantment.FORTUNE]) {
+                1 -> chance = baseChance * plugin.configManager.lootingMultiplier1
+                2 -> chance = baseChance * plugin.configManager.lootingMultiplier2
+                3 -> chance = baseChance * plugin.configManager.lootingMultiplier3
+                else -> {}
             }
         }
-    }
 
-    /**
-     * Handles left-clicking letter blocks for word scoring
-     *
-     * PlayerInteractEvent fires immediately when a player left-clicks a block,
-     * making it more reliable than BlockDamageEvent for Oraxen custom blocks.
-     * This is the primary scoring trigger for the plugin.
-     *
-     * @param e The player interact event
-     */
-    @EventHandler(priority = org.bukkit.event.EventPriority.LOWEST, ignoreCancelled = false)
-    fun onInteractLetterBlock(e: org.bukkit.event.player.PlayerInteractEvent) {
-        // Only care about left-clicking blocks
-        if (e.action != org.bukkit.event.block.Action.LEFT_CLICK_BLOCK) {
-            return
+        if (Math.random() < chance) {
+            woodBlockBreak(e, list.get(material)!!, material)
         }
-
-        val block = e.clickedBlock ?: return
-        val player = e.player
-        val hand = player.inventory.itemInMainHand
-
-        // Check if this is a letter block
-        val letterCheck = testForLetter(player, block)
-        if (letterCheck.first == '\u0000') {
-            return
-        }
-
-        // Only process word scoring if using valid tool
-        if (!isValidTool(hand)) {
-            return
-        }
-
-        // Process word scoring on interaction
-        processWordScoring(player, block)
-    }
-
-    /**
-     * Handles block damage events for letter blocks (Nexo compatibility)
-     *
-     * BlockDamageEvent fires when a player starts breaking a block (left-click and hold).
-     * This is more reliable than PlayerInteractEvent when noteblock updates are disabled.
-     * Works better with Nexo when Paper's block-updates.disable-noteblock-updates is enabled.
-     *
-     * @param e The block damage event
-     */
-    @EventHandler(priority = org.bukkit.event.EventPriority.LOWEST, ignoreCancelled = false)
-    fun onDamageLetterBlock(e: org.bukkit.event.block.BlockDamageEvent) {
-        val block = e.block
-        val player = e.player
-        val hand = player.inventory.itemInMainHand
-
-        // Check if this is a letter block
-        val letterCheck = testForLetter(player, block)
-        if (letterCheck.first == '\u0000') {
-            return
-        }
-
-        // Only process word scoring if using valid tool
-        if (!isValidTool(hand)) {
-            return
-        }
-
-        // Process word scoring on damage
-        processWordScoring(player, block)
     }
 
     /**
@@ -448,43 +387,26 @@ class ItemManager @JvmOverloads constructor(localPlugin: CharmedChars? = null) :
     }
 
     /**
-     * Handles breaking letter blocks to form and validate words
+     * Handles a left-click/damage/break hit on a letter block to validate and score
+     * words. Called via [letterBlockHitListener], which absorbs the Interact/Damage/
+     * Break ordering differences between providers - this no longer needs to worry
+     * about which event got there first.
      *
-     * Fallback handler for BlockBreakEvent. Word scoring is primarily handled by
-     * PlayerInteractEvent/BlockDamageEvent, which normally fire before the block is
-     * removed. Some custom item managers fire BlockBreakEvent first instead, so this
-     * also triggers scoring directly using the still-intact block reference - if the
-     * block was already scored (and removed) by an earlier event, testForLetter will
-     * no longer recognize it here and this becomes a no-op.
-     *
-     * @param e The block break event
+     * @return true if the block was consumed (scored, or blocked as protected), so
+     *   the triggering event is cancelled; false lets the block break normally (a miss).
      */
-    fun letterBlockBreak(e: BlockBreakEvent) {
-        val brokenBlock = e.getBlock()
+    fun onLetterBlockHit(block: Block, player: Player): Boolean {
+        val letterCheck = testForLetter(player, block)
+        if (letterCheck.first == '\u0000') return false
 
-        // Check if this is a letter block
-        var c: SimpleTuple<Char, Double> = testForLetter(e.player, brokenBlock)
-        if (c.first == '\u0000') {
-            // Not a letter block, let it break normally
-            return
+        if (protectedSpot(player, block.location, block)) {
+            player.sendMessage("Protected block: " + block.location)
+            return true
         }
 
-        // It IS a letter block - check protection
-        if (protectedSpot(e.player, brokenBlock.location, brokenBlock)) {
-            e.player.sendMessage("Protected block: " + brokenBlock.location)
-            e.isCancelled = true
-            return
-        }
+        if (!isValidTool(player.inventory.itemInMainHand)) return false
 
-        if (!isValidTool(e.player.inventory.itemInMainHand)) {
-            return
-        }
-
-        // A scored word's blocks, this one included, have already been removed;
-        // cancel the break so the provider doesn't also drop this block as an item
-        if (processWordScoring(e.player, brokenBlock)) {
-            e.isCancelled = true
-        }
+        return processWordScoring(player, block)
     }
 
     /**

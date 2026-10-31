@@ -21,18 +21,32 @@ import net.kyori.adventure.text.Component
 import net.kyori.adventure.text.format.NamedTextColor
 import org.bukkit.Material
 import org.bukkit.World
+import org.bukkit.block.Block
 import org.bukkit.block.ShulkerBox
 import org.bukkit.enchantments.Enchantment
-import org.bukkit.event.EventHandler
-import org.bukkit.event.EventPriority
-import org.bukkit.event.Listener
 import org.bukkit.entity.Player
-import org.bukkit.event.block.Action
-import org.bukkit.event.block.BlockBreakEvent
-import org.bukkit.event.block.BlockDamageEvent
-import org.bukkit.event.player.PlayerInteractEvent
+import org.bukkit.event.Listener
 import org.bukkit.inventory.ItemStack
 import org.stephanosbad.charmedChars.CharmedChars
+import org.stephanosbad.integrare.CustomBlockHitListener
+
+/**
+ * Registers the logo-block-to-shulker-box transform as a [Listener].
+ *
+ * Event-order handling (providers fire Interact/Damage/Break in different orders,
+ * and even the same provider changes order between its own versions) is delegated
+ * to [CustomBlockHitListener] rather than reimplemented here.
+ */
+fun logoBlockListener(plugin: CharmedChars): Listener {
+    val transform = LogoBlockTransform(plugin)
+    val provider = plugin.customItemProviderManager.getProvider()
+        ?: error("logoBlockListener requires an initialized custom item provider")
+    return CustomBlockHitListener(
+        provider = provider,
+        matches = { it.blockName.endsWith("_logo") },
+        onHit = transform::tryTransform
+    )
+}
 
 /**
  * Transforms a placed logo block into a filled shulker box when hit with a gold/pyrite
@@ -43,51 +57,19 @@ import org.stephanosbad.charmedChars.CharmedChars
  *
  * @property plugin Reference to the main plugin instance
  */
-class LogoBlockListener(
-    private val plugin: CharmedChars
-) : Listener {
-
-    // Guard against processing the same block twice when both events fire together
-    private val processingBlocks = mutableSetOf<String>()
-
-    @EventHandler(priority = EventPriority.LOWEST, ignoreCancelled = false)
-    fun onInteractLogoBlock(event: PlayerInteractEvent) {
-        if (event.action != Action.LEFT_CLICK_BLOCK) return
-        val block = event.clickedBlock ?: return
-        if (tryTransform(block, event.player)) event.isCancelled = true
-    }
-
-    // BlockDamageEvent for Nexo compatibility (noteblock updates disabled)
-    @EventHandler(priority = EventPriority.LOWEST, ignoreCancelled = false)
-    fun onDamageLogoBlock(event: BlockDamageEvent) {
-        if (tryTransform(event.block, event.player)) event.isCancelled = true
-    }
-
-    // Some providers (ItemsAdder's NativePackets line) fire BlockBreakEvent before the
-    // interact/damage events, by which time the logo block has already been broken
-    // and dropped. Cancelling the break here keeps the block for the transformation.
-    @EventHandler(priority = EventPriority.LOWEST, ignoreCancelled = false)
-    fun onBreakLogoBlock(event: BlockBreakEvent) {
-        if (tryTransform(event.block, event.player)) event.isCancelled = true
-    }
+class LogoBlockTransform(private val plugin: CharmedChars) {
 
     /**
-     * Starts transforming [block] if it is a logo block in The End hit with a valid
-     * tool, and returns true so the caller cancels its event.
+     * Transforms [block] if it is a logo block in The End hit with a valid tool, and
+     * returns true so the caller cancels its event.
      */
-    private fun tryTransform(block: org.bukkit.block.Block, player: Player): Boolean {
+    fun tryTransform(block: Block, player: Player): Boolean {
         val color = getLogoBlockColor(block) ?: return false
 
         if (block.world.environment != World.Environment.THE_END) return false
         if (!isValidTool(player.inventory.itemInMainHand)) return false
 
-        val key = blockKey(block)
-        if (!processingBlocks.add(key)) return false
-
-        // Key is intentionally NOT removed here — transformToShulkerBox removes it after
-        // the 2-tick deferred work completes so that a second event fired for the same
-        // click cannot start another transformation mid-replacement.
-        transformToShulkerBox(block, color, key)
+        transformToShulkerBox(block, color)
         player.sendMessage(
             Component.text("The logo block transforms into a shulker box!")
                 .color(NamedTextColor.GOLD)
@@ -95,7 +77,7 @@ class LogoBlockListener(
         return true
     }
 
-    private fun transformToShulkerBox(block: org.bukkit.block.Block, color: String, processingKey: String) {
+    private fun transformToShulkerBox(block: Block, color: String) {
         val shulkerMaterial = shulkerMaterialFor(color)
 
         val provider = plugin.customItemProviderManager.getProvider()
@@ -106,20 +88,15 @@ class LogoBlockListener(
         }
 
         // Tick+1: let the custom item provider finish its own block removal, then place the shulker.
-        // Tick+2: populate the inventory once the tile entity is fully initialized, then release
-        //         the processing guard so future interactions on this location are accepted.
+        // Tick+2: populate the inventory once the tile entity is fully initialized.
         // Note: do NOT call shulkerState.update() after adding items — it writes the empty snapshot
         //       back over the live tile entity inventory, wiping the contents.
         plugin.server.scheduler.runTask(plugin) { _ ->
             block.type = shulkerMaterial
             plugin.server.scheduler.runTask(plugin) { _ ->
-                try {
-                    val shulkerState = block.state as? ShulkerBox ?: return@runTask
-                    plugin.configManager.logoBlockShulkerContents().forEach { (material, quantity) ->
-                        shulkerState.inventory.addItem(ItemStack(material, quantity))
-                    }
-                } finally {
-                    processingBlocks.remove(processingKey)
+                val shulkerState = block.state as? ShulkerBox ?: return@runTask
+                plugin.configManager.logoBlockShulkerContents().forEach { (material, quantity) ->
+                    shulkerState.inventory.addItem(ItemStack(material, quantity))
                 }
             }
         }
@@ -128,10 +105,10 @@ class LogoBlockListener(
     /**
      * Returns the color name (cyan/magenta/yellow) if the block is a logo block, else null.
      */
-    private fun getLogoBlockColor(block: org.bukkit.block.Block): String? {
+    private fun getLogoBlockColor(block: Block): String? {
         val provider = plugin.customItemProviderManager.getProvider() ?: return null
         val customBlock = provider.getCustomBlock(block) ?: return null
-        val itemName = customBlock.namespacedId.substringAfter(":")
+        val itemName = customBlock.blockName
         if (!itemName.endsWith("_logo")) return null
         return itemName.removeSuffix("_logo")
     }
@@ -160,7 +137,4 @@ class LogoBlockListener(
             .serialize(displayName).lowercase()
         return plain.contains("gold") || plain.contains("pyrite")
     }
-
-    private fun blockKey(block: org.bukkit.block.Block) =
-        "${block.world.name}:${block.x}:${block.y}:${block.z}"
 }

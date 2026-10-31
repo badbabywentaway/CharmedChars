@@ -27,6 +27,7 @@ import net.kyori.adventure.text.format.NamedTextColor
 import org.stephanosbad.charmedChars.commands.CharBlock
 import org.stephanosbad.charmedChars.config.ConfigDataHandler
 import org.stephanosbad.charmedChars.items.ItemManager
+import org.stephanosbad.charmedChars.items.letterBlockHitListener
 import org.stephanosbad.charmedChars.utility.WordDict
 import org.bukkit.plugin.java.JavaPlugin
 import org.bukkit.Bukkit
@@ -55,7 +56,7 @@ import org.stephanosbad.charmedChars.listeners.BastionNumberGameListener
 import org.stephanosbad.charmedChars.listeners.GlassingBedsListener
 import org.stephanosbad.charmedChars.listeners.OperatorActivationListener
 import org.stephanosbad.charmedChars.listeners.EnderDragonKillListener
-import org.stephanosbad.charmedChars.listeners.LogoBlockListener
+import org.stephanosbad.charmedChars.listeners.logoBlockListener
 import org.stephanosbad.charmedChars.listeners.EventOrderDebugListener
 import java.io.IOException
 import kotlin.coroutines.CoroutineContext
@@ -234,14 +235,16 @@ class CharmedChars : JavaPlugin(), CoroutineScope {
                 NativePackListener(nativeProvider) { configManager.nativeItemsPackRequired }, this
             )
         }
-        Bukkit.getPluginManager().registerEvents(ItemManager(this), this)
+        val itemManager = ItemManager(this)
+        Bukkit.getPluginManager().registerEvents(itemManager, this)
+        Bukkit.getPluginManager().registerEvents(letterBlockHitListener(itemManager), this)
         Bukkit.getPluginManager().registerEvents(StructureListener(this, structureDatabase), this)
         Bukkit.getPluginManager().registerEvents(FortressNumberGameListener(this, structureDatabase), this)
         Bukkit.getPluginManager().registerEvents(BastionNumberGameListener(this, structureDatabase), this)
         Bukkit.getPluginManager().registerEvents(GlassingBedsListener(this), this)
         Bukkit.getPluginManager().registerEvents(OperatorActivationListener(this), this)
         Bukkit.getPluginManager().registerEvents(EnderDragonKillListener(this), this)
-        Bukkit.getPluginManager().registerEvents(LogoBlockListener(this), this)
+        Bukkit.getPluginManager().registerEvents(logoBlockListener(this), this)
     }
 
     /**
