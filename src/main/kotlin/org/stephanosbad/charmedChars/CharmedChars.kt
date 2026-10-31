@@ -51,10 +51,11 @@ import org.stephanosbad.integrare.provider.NativeItemProvider
 import org.stephanosbad.charmedChars.utility.ConfigManager
 import org.stephanosbad.charmedChars.database.StructureDatabase
 import org.stephanosbad.charmedChars.listeners.StructureListener
-import org.stephanosbad.charmedChars.listeners.FortressNumberGameListener
-import org.stephanosbad.charmedChars.listeners.BastionNumberGameListener
+import org.stephanosbad.charmedChars.listeners.fortressNumberGameListener
+import org.stephanosbad.charmedChars.listeners.bastionNumberGameListener
 import org.stephanosbad.charmedChars.listeners.GlassingBedsListener
 import org.stephanosbad.charmedChars.listeners.OperatorActivationListener
+import org.stephanosbad.charmedChars.listeners.operatorClickListener
 import org.stephanosbad.charmedChars.listeners.EnderDragonKillListener
 import org.stephanosbad.charmedChars.listeners.logoBlockListener
 import org.stephanosbad.charmedChars.listeners.EventOrderDebugListener
@@ -239,10 +240,12 @@ class CharmedChars : JavaPlugin(), CoroutineScope {
         Bukkit.getPluginManager().registerEvents(itemManager, this)
         Bukkit.getPluginManager().registerEvents(letterBlockHitListener(itemManager), this)
         Bukkit.getPluginManager().registerEvents(StructureListener(this, structureDatabase), this)
-        Bukkit.getPluginManager().registerEvents(FortressNumberGameListener(this, structureDatabase), this)
-        Bukkit.getPluginManager().registerEvents(BastionNumberGameListener(this, structureDatabase), this)
+        Bukkit.getPluginManager().registerEvents(fortressNumberGameListener(this, structureDatabase), this)
+        Bukkit.getPluginManager().registerEvents(bastionNumberGameListener(this, structureDatabase), this)
         Bukkit.getPluginManager().registerEvents(GlassingBedsListener(this), this)
-        Bukkit.getPluginManager().registerEvents(OperatorActivationListener(this), this)
+        val operatorActivation = OperatorActivationListener(this)
+        Bukkit.getPluginManager().registerEvents(operatorActivation, this)
+        Bukkit.getPluginManager().registerEvents(operatorClickListener(this, operatorActivation), this)
         Bukkit.getPluginManager().registerEvents(EnderDragonKillListener(this), this)
         Bukkit.getPluginManager().registerEvents(logoBlockListener(this), this)
     }

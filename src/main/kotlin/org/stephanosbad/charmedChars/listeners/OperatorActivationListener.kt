@@ -11,10 +11,7 @@ import org.bukkit.entity.Player
 import org.bukkit.event.EventHandler
 import org.bukkit.event.EventPriority
 import org.bukkit.event.Listener
-import org.bukkit.event.block.Action
-import org.bukkit.event.block.BlockDamageEvent
 import org.bukkit.event.player.PlayerChangedWorldEvent
-import org.bukkit.event.player.PlayerInteractEvent
 import org.bukkit.event.player.PlayerMoveEvent
 import org.bukkit.event.player.PlayerQuitEvent
 import org.bukkit.event.player.PlayerRespawnEvent
@@ -23,6 +20,31 @@ import org.stephanosbad.charmedChars.CharmedChars
 import org.stephanosbad.charmedChars.items.BlockColor
 import org.stephanosbad.charmedChars.items.LateralDirection
 import org.stephanosbad.charmedChars.items.NonAlphaNumBlocks
+import org.stephanosbad.integrare.CustomBlockClickListener
+
+/**
+ * Registers operator-sequence click detection as a [Listener], separate from
+ * [OperatorActivationListener] itself since that also handles Nether-session
+ * reset events (world change, move, quit, respawn) that have nothing to do with
+ * a block click.
+ *
+ * Operator blocks are never consumed or cancelled on a mere click - only once a
+ * valid 4-operator sequence completes - so this uses [CustomBlockClickListener]
+ * rather than [org.stephanosbad.integrare.CustomBlockHitListener]: there's no
+ * break/cancel decision to make, just a click to observe.
+ */
+fun operatorClickListener(plugin: CharmedChars, activation: OperatorActivationListener): Listener {
+    val provider = plugin.customItemProviderManager.getProvider()
+        ?: error("operatorClickListener requires an initialized custom item provider")
+    return CustomBlockClickListener(
+        provider = provider,
+        matches = { info ->
+            val parts = info.blockName.split("_")
+            parts.size == 2 && NonAlphaNumBlocks.entries.any { it.nonAlphaNumBlockName.equals(parts[1], ignoreCase = true) }
+        },
+        onClick = activation::onOperatorBlockClick
+    )
+}
 
 /**
  * Listener for the Glassing Beds operator activation system
@@ -51,30 +73,13 @@ class OperatorActivationListener(
     }
 
     /**
-     * Primary event handler for operator sequence detection (Oraxen compatibility)
-     *
-     * Fires immediately on LEFT_CLICK_BLOCK action.
-     * Uses LOWEST priority to run before other plugins.
+     * Called via [operatorClickListener] for a left-click/damage hit on an
+     * operator block - absorbs the Interact/Damage provider-order differences,
+     * so this only needs to check the tool and process the sequence.
      */
-    @EventHandler(priority = EventPriority.LOWEST, ignoreCancelled = false)
-    fun onPlayerInteract(event: PlayerInteractEvent) {
-        if (event.action != Action.LEFT_CLICK_BLOCK) return
-        if (!isValidTool(event.item)) return
-
-        val clickedBlock = event.clickedBlock ?: return
-        processOperatorSequence(event.player, clickedBlock)
-    }
-
-    /**
-     * Fallback event handler for operator sequence detection (Nexo compatibility)
-     *
-     * Fires when player starts breaking a block (left-click and hold).
-     * Works better for Nexo when Paper disables noteblock updates.
-     */
-    @EventHandler(priority = EventPriority.LOWEST, ignoreCancelled = false)
-    fun onBlockDamage(event: BlockDamageEvent) {
-        if (!isValidTool(event.itemInHand)) return
-        processOperatorSequence(event.player, event.block)
+    fun onOperatorBlockClick(block: Block, player: Player) {
+        if (!isValidTool(player.inventory.itemInMainHand)) return
+        processOperatorSequence(player, block)
     }
 
     /**
