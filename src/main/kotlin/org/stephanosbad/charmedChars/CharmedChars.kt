@@ -41,6 +41,8 @@ import org.stephanosbad.charmedChars.commands.GlassingBedsCommand
 import org.stephanosbad.charmedChars.integration.CharmedCharsCatalog
 import org.stephanosbad.integrare.CustomItemProviderManager
 import org.stephanosbad.integrare.ProviderKind
+import org.stephanosbad.integrare.SlotRegistry
+import org.stephanosbad.integrare.catalog.CatalogItem
 import org.stephanosbad.integrare.catalog.ItemCatalog
 import org.stephanosbad.integrare.setup.NativeSetup
 import org.stephanosbad.integrare.setup.ProviderSetup
@@ -111,12 +113,32 @@ class CharmedChars : JavaPlugin(), CoroutineScope {
 
     /**
      * Native provider setup for [itemCatalog]
+     *
+     * Reserves CharmedChars's custom model data and note block state ranges
+     * through [SlotRegistry] - shared with any other Integrare-based plugin
+     * also falling back to the native provider on this server - rather than
+     * using `configManager.nativeCmdBase` and 0 directly. The reservation is
+     * idempotent and migration-safe: it tries those exact values first, so an
+     * existing CharmedChars install keeps the numbers already on its
+     * placed blocks.
      */
-    fun nativeSetup(provider: NativeItemProvider) = NativeSetup(
-        itemCatalog, provider, dataFolder, logger, configManager.nativeCmdBase,
-        zipFileName = "CharmedChars-native-pack.zip",
-        packDescription = "CharmedChars Native Item Pack"
-    )
+    fun nativeSetup(provider: NativeItemProvider): NativeSetup {
+        val slots = SlotRegistry(this)
+        val cmdRange = slots.reserve(
+            "native.cmd", CharmedCharsCatalog.NAMESPACE, itemCatalog.items.size,
+            preferredStart = configManager.nativeCmdBase
+        )
+        val blockCount = itemCatalog.items.count { it is CatalogItem.Block }
+        val noteRange = slots.reserve(
+            "native.noteblock", CharmedCharsCatalog.NAMESPACE, blockCount, preferredStart = 0
+        )
+        return NativeSetup(
+            itemCatalog, provider, dataFolder, logger, cmdBase = cmdRange.first,
+            zipFileName = "CharmedChars-native-pack.zip",
+            packDescription = "CharmedChars Native Item Pack",
+            noteBlockStateOffset = noteRange.first
+        )
+    }
 
     /**
      * Called when the plugin is enabled
