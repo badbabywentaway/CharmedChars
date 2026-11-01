@@ -268,10 +268,6 @@ class CharBlock : CommandExecutor, TabCompleter {
         return completions
     }
 
-
-
-
-
     companion object {
         /**
          * The command name used to register this command executor
