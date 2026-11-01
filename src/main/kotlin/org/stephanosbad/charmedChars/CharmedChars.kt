@@ -38,6 +38,7 @@ import org.stephanosbad.charmedChars.commands.StructureDatabaseCommand
 import org.stephanosbad.charmedChars.commands.VersionCommand
 import org.stephanosbad.charmedChars.commands.GlassingBedsCommand
 import org.stephanosbad.charmedChars.integration.CharmedCharsCatalog
+import org.stephanosbad.integrare.CatalogItems
 import org.stephanosbad.integrare.CustomItemProviderManager
 import org.stephanosbad.integrare.ProviderKind
 import org.stephanosbad.integrare.SlotRegistry
@@ -107,6 +108,14 @@ class CharmedChars : JavaPlugin(), CoroutineScope {
     lateinit var itemCatalog: ItemCatalog
         private set
 
+    /**
+     * Cached [ItemStack][org.bukkit.inventory.ItemStack] lookups by catalog item id, for
+     * commands that hand items to players. Call [CatalogItems.invalidate] after re-running
+     * provider setup so stale lookups from before setup don't stick around.
+     */
+    lateinit var catalogItems: CatalogItems
+        private set
+
     private var nativePackServer: NativePackServer? = null
 
     /**
@@ -152,6 +161,7 @@ class CharmedChars : JavaPlugin(), CoroutineScope {
         // Initialize custom item provider (must be first!)
         itemCatalog = CharmedCharsCatalog.create(this)
         customItemProviderManager = CustomItemProviderManager(this, CharmedCharsCatalog.NATIVE_NBT_KEY)
+        catalogItems = CatalogItems(itemCatalog) { customItemProviderManager.getProvider() }
         val providerResult = customItemProviderManager.initialize()
 
         if (!providerResult.success) {

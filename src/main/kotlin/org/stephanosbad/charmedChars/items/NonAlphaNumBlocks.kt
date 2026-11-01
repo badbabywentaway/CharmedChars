@@ -37,33 +37,18 @@ enum class NonAlphaNumBlocks(val charVal: Char, blockName: String) {
     DIVISION('/', "division");
 
     /**
-     * Lazy-initialized map of ItemStacks for each block color
+     * ItemStack for each block color (cyan, magenta, yellow), looked up fresh from
+     * [CharmedChars.catalogItems] each access (which does its own caching with proper
+     * invalidation after setup reruns - unlike a `by lazy` here, which would cache a
+     * null forever if the provider wasn't ready yet the first time this was read).
      */
-    private val _itemStacks: MutableMap<BlockColor, ItemStack?> by lazy {
-        mutableMapOf<BlockColor, ItemStack?>().apply {
+    val itemStacks: Map<BlockColor, ItemStack?>
+        get() {
             val plugin = Bukkit.getPluginManager().getPlugin("CharmedChars") as? CharmedChars
-            val provider = plugin?.customItemProviderManager?.getProvider()
-
-            if (provider == null) {
-                System.err.println("WARNING: CustomItemProvider not available when initializing NonAlphaNumBlocks")
-            }
-
-            for (color in BlockColor.entries) {
-                val itemId = "charmedchars:${color.directoryName}_${this@NonAlphaNumBlocks.nonAlphaNumBlockName}"
-                val itemStack = provider?.getItemStack(itemId)
-                if (itemStack == null) {
-                    System.err.println("WARNING: CustomItemProvider returned null for $itemId")
-                }
-                this[color] = itemStack
+            return BlockColor.entries.associateWith { color ->
+                plugin?.catalogItems?.get("${color.directoryName}_$nonAlphaNumBlockName")
             }
         }
-    }
-
-    /**
-     * Map of ItemStacks for each block color (cyan, magenta, yellow)
-     */
-    val itemStacks: MutableMap<BlockColor, ItemStack?>
-        get() = _itemStacks
 
     /**
      * The ItemsAdder block name for this operator

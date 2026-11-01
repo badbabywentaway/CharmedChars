@@ -52,17 +52,11 @@ class EnderDragonKillListener(
         val world = event.entity.world
 
         val color = BlockColor.getRand()
-        val itemId = "charmedchars:${color.directoryName}_logo"
+        val itemId = "${color.directoryName}_logo"
 
-        val provider = plugin.customItemProviderManager.getProvider()
-        if (provider == null) {
-            plugin.logger.warning("EnderDragonKillListener: no custom item provider available, cannot drop logo block")
-            return
-        }
-
-        val logoItem = provider.getItemStack(itemId)
+        val logoItem = plugin.catalogItems.get(itemId)
         if (logoItem == null) {
-            plugin.logger.warning("EnderDragonKillListener: item '$itemId' not found in provider ${provider.getProviderName()}")
+            plugin.logger.warning("EnderDragonKillListener: item '$itemId' not found")
             return
         }
 

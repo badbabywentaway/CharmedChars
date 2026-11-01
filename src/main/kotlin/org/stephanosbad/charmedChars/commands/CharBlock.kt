@@ -28,7 +28,6 @@ import org.bukkit.entity.Player
 import org.bukkit.inventory.ItemStack
 import org.bukkit.util.StringUtil
 import org.stephanosbad.charmedChars.CharmedChars
-import org.stephanosbad.charmedChars.integration.CharmedCharsCatalog
 import org.stephanosbad.charmedChars.items.BlockColor
 import org.stephanosbad.charmedChars.items.LetterBlock
 import org.stephanosbad.charmedChars.items.NonAlphaNumBlocks
@@ -200,15 +199,14 @@ class CharBlock : CommandExecutor, TabCompleter {
     }
 
     /**
-     * The logo block of [color], or null if the provider doesn't have it.
+     * The logo block of [color], or null if the catalog/provider doesn't have it.
      *
      * Logo blocks have no enum of their own, so they are looked up by item id
-     * through the active custom item provider, as the Ender Dragon reward does.
+     * through [CharmedChars.catalogItems].
      */
     private fun logoItemStack(color: BlockColor): ItemStack? {
         val plugin = Bukkit.getPluginManager().getPlugin("CharmedChars") as? CharmedChars
-        return plugin?.customItemProviderManager?.getProvider()
-            ?.getItemStack("${CharmedCharsCatalog.NAMESPACE}:${color.directoryName}_logo")
+        return plugin?.catalogItems?.get("${color.directoryName}_logo")
     }
 
     /**

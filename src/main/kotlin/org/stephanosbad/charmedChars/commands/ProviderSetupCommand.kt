@@ -88,6 +88,12 @@ class ProviderSetupCommand(
         sender.sendMessage(Component.text("Starting $providerName setup...").color(NamedTextColor.AQUA))
         val result = setup.install(force)
 
+        // Setup can bring items into existence (or change which provider has them) that
+        // earlier lookups cached as missing - forget those so the next /charblock etc. resolves fresh.
+        if (result.success && !result.alreadySetup) {
+            plugin.catalogItems.invalidate()
+        }
+
         if (!result.success) {
             sender.sendMessage(Component.text("Setup failed!").color(NamedTextColor.RED))
         }
