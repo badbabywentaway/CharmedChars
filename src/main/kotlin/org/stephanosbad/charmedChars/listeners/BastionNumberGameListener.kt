@@ -32,6 +32,8 @@ import org.stephanosbad.charmedChars.CharmedChars
 import org.stephanosbad.charmedChars.database.StructureDatabase
 import org.stephanosbad.charmedChars.database.StructureType
 import org.stephanosbad.integrare.CustomBlockHitListener
+import org.stephanosbad.integrare.matchesTool
+import org.stephanosbad.integrare.splitName
 
 /**
  * Listener for the Bastion Remnant number guessing game
@@ -356,19 +358,8 @@ class BastionNumberGame(
 
         val provider = plugin.customItemProviderManager.getProvider() ?: return null
         val customBlockInfo = provider.getCustomBlock(block) ?: return null
-        val namespacedId = customBlockInfo.namespacedId
+        val (_, character) = customBlockInfo.splitName() ?: return null
 
-        // Parse the namespaced ID (e.g., "charmedchars:cyan_5" or "oraxen:cyan_5")
-        val parts = namespacedId.split(":")
-        if (parts.size != 2) return null
-
-        val blockName = parts[1]  // e.g., "cyan_5"
-        val nameParts = blockName.split("_")
-        if (nameParts.size != 2) return null
-
-        val character = nameParts[1]  // e.g., "5"
-
-        // Check if it's a digit
         return character.toIntOrNull()
     }
 
@@ -382,28 +373,6 @@ class BastionNumberGame(
      * @param item The item to check
      * @return true if the item is a valid gold or pyrite tool
      */
-    private fun isValidTool(item: ItemStack): Boolean {
-        if (item.itemMeta == null) {
-            return false
-        }
-
-        // Check if it's a gold tool (vanilla)
-        if (item.type.name.lowercase().contains("gold")) {
-            return true
-        }
-
-        // Check if it's a pyrite tool using the custom item provider
-        val provider = plugin.customItemProviderManager.getProvider()
-        if (provider != null) {
-            val customItem = provider.getCustomItem(item)
-            if (customItem != null) {
-                val namespacedId = customItem.namespacedId.lowercase()
-                if (namespacedId.contains("pyrite")) {
-                    return true
-                }
-            }
-        }
-
-        return false
-    }
+    private fun isValidTool(item: ItemStack): Boolean =
+        plugin.customItemProviderManager.getProvider().matchesTool(item, "gold", "pyrite")
 }

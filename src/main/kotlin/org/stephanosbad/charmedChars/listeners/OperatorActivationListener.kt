@@ -21,6 +21,8 @@ import org.stephanosbad.charmedChars.items.BlockColor
 import org.stephanosbad.charmedChars.items.LateralDirection
 import org.stephanosbad.charmedChars.items.NonAlphaNumBlocks
 import org.stephanosbad.integrare.CustomBlockClickListener
+import org.stephanosbad.integrare.matchesTool
+import org.stephanosbad.integrare.splitName
 
 /**
  * Listener for the Glassing Beds operator activation system
@@ -65,8 +67,8 @@ class OperatorActivationListener(
             return CustomBlockClickListener(
                 provider = provider,
                 matches = { info ->
-                    val parts = info.blockName.split("_")
-                    parts.size == 2 && NonAlphaNumBlocks.entries.any { it.nonAlphaNumBlockName.equals(parts[1], ignoreCase = true) }
+                    val operatorName = info.splitName()?.second
+                    NonAlphaNumBlocks.entries.any { it.nonAlphaNumBlockName.equals(operatorName, ignoreCase = true) }
                 },
                 onClick = activation::onOperatorBlockClick
             )
@@ -236,37 +238,8 @@ class OperatorActivationListener(
     /**
      * Check if item is a valid gold or pyrite tool
      */
-    private fun isValidTool(item: ItemStack?): Boolean {
-        if (item == null || item.itemMeta == null) {
-            return false
-        }
-
-        // Check if it's a gold tool (vanilla)
-        if (item.type.name.lowercase().contains("gold")) {
-            return true
-        }
-
-        // Check if it's a pyrite tool using the custom item provider
-        val provider = plugin.customItemProviderManager.getProvider()
-        if (provider != null) {
-            val customItem = provider.getCustomItem(item)
-            if (customItem != null && customItem.namespacedId.lowercase().contains("pyrite")) {
-                return true
-            }
-        }
-
-        // Fallback: check if display name contains "gold" or "pyrite"
-        val displayName = item.itemMeta.displayName()
-        if (displayName != null) {
-            val plainText = net.kyori.adventure.text.serializer.plain.PlainTextComponentSerializer.plainText()
-                .serialize(displayName).lowercase()
-            if (plainText.contains("gold") || plainText.contains("pyrite")) {
-                return true
-            }
-        }
-
-        return false
-    }
+    private fun isValidTool(item: ItemStack?): Boolean =
+        plugin.customItemProviderManager.getProvider().matchesTool(item, "gold", "pyrite")
 
     /**
      * Get operator and color from a block
@@ -280,12 +253,7 @@ class OperatorActivationListener(
         val provider = plugin.customItemProviderManager.getProvider()
         val blockInfo = provider?.getCustomBlock(block) ?: return null
 
-        // Parse namespaced ID: "charmedchars:cyan_plus" → "cyan" + "plus"
-        val parts = blockInfo.blockName.split("_")
-        if (parts.size != 2) return null
-
-        val colorName = parts[0]
-        val operatorName = parts[1]
+        val (colorName, operatorName) = blockInfo.splitName() ?: return null
 
         // Match color
         val color = BlockColor.entries.find {

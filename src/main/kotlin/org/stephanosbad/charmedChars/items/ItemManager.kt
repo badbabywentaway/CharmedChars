@@ -37,6 +37,8 @@ import org.stephanosbad.charmedChars.utility.LocationPair
 import org.stephanosbad.charmedChars.utility.SimpleTuple
 import org.stephanosbad.charmedChars.utility.WordDict
 import org.stephanosbad.integrare.CustomBlockHitListener
+import org.stephanosbad.integrare.matchesTool
+import org.stephanosbad.integrare.splitName
 import java.util.*
 import java.util.concurrent.atomic.AtomicReference
 
@@ -259,36 +261,8 @@ class ItemManager @JvmOverloads constructor(localPlugin: CharmedChars? = null) :
      * @param item The ItemStack to check
      * @return true if the tool is valid for letter drops and word scoring
      */
-    private fun isValidTool(item: ItemStack): Boolean {
-        if (item.itemMeta == null) {
-            return false
-        }
-
-        // Check if it's a gold tool (vanilla)
-        if (item.type.name.lowercase().contains("gold")) {
-            return true
-        }
-
-        // Check if it's a pyrite tool using the custom item provider
-        val provider = plugin.customItemProviderManager.getProvider()
-        if (provider != null) {
-            val customItem = provider.getCustomItem(item)
-            if (customItem != null && customItem.namespacedId.lowercase().contains("pyrite")) {
-                return true
-            }
-        }
-
-        // Fallback: check if display name contains "gold" (for any gold-like custom items)
-        val displayName = item.itemMeta.displayName()
-        if (displayName != null) {
-            val plainText = net.kyori.adventure.text.serializer.plain.PlainTextComponentSerializer.plainText().serialize(displayName).lowercase()
-            if (plainText.contains("gold") || plainText.contains("pyrite")) {
-                return true
-            }
-        }
-
-        return false
-    }
+    private fun isValidTool(item: ItemStack): Boolean =
+        plugin.customItemProviderManager.getProvider().matchesTool(item, "gold", "pyrite")
 
     /**
      * Handles breaking logs with gold/pyrite tools (without Silk Touch) to drop letter
@@ -634,20 +608,9 @@ class ItemManager @JvmOverloads constructor(localPlugin: CharmedChars? = null) :
 
         val provider = plugin.customItemProviderManager.getProvider() ?: return null
         val customBlock = provider.getCustomBlock(block) ?: return null
-        val namespacedId = customBlock.namespacedId
+        val (_, letter) = customBlock.splitName() ?: return null
 
-        // Parse the namespaced ID (e.g., "charmedchars:cyan_a" or "oraxen:cyan_a")
-        val parts = namespacedId.split(":")
-        if (parts.size != 2) return null
-
-        val blockName = parts[1]  // e.g., "cyan_a"
-        val nameParts = blockName.split("_")
-        if (nameParts.size != 2) return null
-
-        val letter = nameParts[1].uppercase()
-
-        // Find the matching LetterBlock
-        return LetterBlock.entries.firstOrNull { it.name == letter }
+        return LetterBlock.entries.firstOrNull { it.name == letter.uppercase() }
     }
 
     /**
@@ -664,20 +627,9 @@ class ItemManager @JvmOverloads constructor(localPlugin: CharmedChars? = null) :
 
         val provider = plugin.customItemProviderManager.getProvider() ?: return null
         val customBlock = provider.getCustomBlock(block) ?: return null
-        val namespacedId = customBlock.namespacedId
+        val (color, _) = customBlock.splitName() ?: return null
 
-        // Parse the namespaced ID (e.g., "charmedchars:cyan_a" or "oraxen:cyan_a")
-        val parts = namespacedId.split(":")
-        if (parts.size != 2) return null
-
-        val blockName = parts[1]  // e.g., "cyan_a"
-        val nameParts = blockName.split("_")
-        if (nameParts.isEmpty()) return null
-
-        val colorName = nameParts[0].uppercase()
-
-        // Find the matching BlockColor
-        return BlockColor.entries.firstOrNull { it.name == colorName }
+        return BlockColor.entries.firstOrNull { it.name == color.uppercase() }
     }
 
     /**

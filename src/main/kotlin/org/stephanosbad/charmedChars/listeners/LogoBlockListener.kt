@@ -29,6 +29,7 @@ import org.bukkit.event.Listener
 import org.bukkit.inventory.ItemStack
 import org.stephanosbad.charmedChars.CharmedChars
 import org.stephanosbad.integrare.CustomBlockHitListener
+import org.stephanosbad.integrare.matchesTool
 
 /**
  * Transforms a placed logo block into a filled shulker box when hit with a gold/pyrite
@@ -124,20 +125,7 @@ class LogoBlockTransform(private val plugin: CharmedChars) {
     }
 
     private fun isValidTool(item: ItemStack): Boolean {
-        if (item.itemMeta == null) return false
         if (item.containsEnchantment(Enchantment.SILK_TOUCH)) return false
-
-        if (item.type.name.lowercase().contains("gold")) return true
-
-        val provider = plugin.customItemProviderManager.getProvider()
-        if (provider != null) {
-            val customItem = provider.getCustomItem(item)
-            if (customItem != null && customItem.namespacedId.lowercase().contains("pyrite")) return true
-        }
-
-        val displayName = item.itemMeta?.displayName() ?: return false
-        val plain = net.kyori.adventure.text.serializer.plain.PlainTextComponentSerializer.plainText()
-            .serialize(displayName).lowercase()
-        return plain.contains("gold") || plain.contains("pyrite")
+        return plugin.customItemProviderManager.getProvider().matchesTool(item, "gold", "pyrite")
     }
 }
