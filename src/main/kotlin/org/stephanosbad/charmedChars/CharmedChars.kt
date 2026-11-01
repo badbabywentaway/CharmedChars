@@ -39,6 +39,7 @@ import org.stephanosbad.charmedChars.commands.VersionCommand
 import org.stephanosbad.charmedChars.commands.GlassingBedsCommand
 import org.stephanosbad.charmedChars.integration.CharmedCharsCatalog
 import org.stephanosbad.integrare.CatalogItems
+import org.stephanosbad.integrare.command.CatalogGiveCommand
 import org.stephanosbad.integrare.CustomItemProviderManager
 import org.stephanosbad.integrare.ProviderKind
 import org.stephanosbad.integrare.SlotRegistry
@@ -227,6 +228,9 @@ class CharmedChars : JavaPlugin(), CoroutineScope {
         val glassingBedsCommand = GlassingBedsCommand(this)
         getCommand("glassingbeds")?.setExecutor(glassingBedsCommand)
         getCommand("glassingbeds")?.tabCompleter = glassingBedsCommand
+        val catalogGiveCommand = CatalogGiveCommand(itemCatalog, catalogItems, "charmedchars.admin")
+        getCommand("charmedcharsitem")?.setExecutor(catalogGiveCommand)
+        getCommand("charmedcharsitem")?.tabCompleter = catalogGiveCommand
 
         // Async startup operations
         launch {

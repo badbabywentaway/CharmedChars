@@ -62,6 +62,11 @@ commands:
     usage: /glassingbeds <enable|disable|status>
     permission: charmedchars.admin
     aliases: [gbeds, bedglass]
+  charmedcharsitem:
+    description: Give any CharmedChars catalog item (block, tool, or ingot) to a player by its id
+    usage: /charmedcharsitem <item-id> [player]
+    permission: charmedchars.admin
+    aliases: [ccitem, givecharmedchars]
 
 permissions:
   charmedChars.blocks:
