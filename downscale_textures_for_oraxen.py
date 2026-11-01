@@ -9,7 +9,7 @@ Usage:
     python3 downscale_textures_for_oraxen.py
 
 Output:
-    Creates 256x256 textures in src/main/resources/pack-oraxen/
+    Creates 256x256 textures in src/main/resources/pack-reduced/
 """
 
 from PIL import Image
@@ -18,7 +18,7 @@ from pathlib import Path
 
 # Source and destination directories
 SOURCE_DIR = Path("src/main/resources/pack/assets/minecraft/textures")
-DEST_DIR = Path("src/main/resources/pack-oraxen/assets/minecraft/textures")
+DEST_DIR = Path("src/main/resources/pack-reduced/assets/minecraft/textures")
 
 # Target resolution for Oraxen
 TARGET_SIZE = (256, 256)

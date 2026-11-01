@@ -199,7 +199,7 @@ object CharmedCharsCatalog {
             textures = TextureSource.fromPluginJar(
                 plugin,
                 fullRoot = "pack/assets/minecraft/textures",
-                reducedRoot = "pack-oraxen/assets/minecraft/textures"
+                reducedRoot = "pack-reduced/assets/minecraft/textures"
             ),
             slotOrder = mapOf(ProviderKind.NATIVE to nativeOrder)
         )
