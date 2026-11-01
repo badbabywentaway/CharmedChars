@@ -23,30 +23,6 @@ import org.stephanosbad.charmedChars.items.NonAlphaNumBlocks
 import org.stephanosbad.integrare.CustomBlockClickListener
 
 /**
- * Registers operator-sequence click detection as a [Listener], separate from
- * [OperatorActivationListener] itself since that also handles Nether-session
- * reset events (world change, move, quit, respawn) that have nothing to do with
- * a block click.
- *
- * Operator blocks are never consumed or cancelled on a mere click - only once a
- * valid 4-operator sequence completes - so this uses [CustomBlockClickListener]
- * rather than [org.stephanosbad.integrare.CustomBlockHitListener]: there's no
- * break/cancel decision to make, just a click to observe.
- */
-fun operatorClickListener(plugin: CharmedChars, activation: OperatorActivationListener): Listener {
-    val provider = plugin.customItemProviderManager.getProvider()
-        ?: error("operatorClickListener requires an initialized custom item provider")
-    return CustomBlockClickListener(
-        provider = provider,
-        matches = { info ->
-            val parts = info.blockName.split("_")
-            parts.size == 2 && NonAlphaNumBlocks.entries.any { it.nonAlphaNumBlockName.equals(parts[1], ignoreCase = true) }
-        },
-        onClick = activation::onOperatorBlockClick
-    )
-}
-
-/**
  * Listener for the Glassing Beds operator activation system
  *
  * Players must hit a sequence of 4 different operator blocks (+, -, ×, ÷) of the same color
@@ -70,10 +46,35 @@ class OperatorActivationListener(
         fun isPlayerActivated(player: Player): Boolean {
             return playerGlassingBedsActive[player.uniqueId.toString()] == true
         }
+
+        /**
+         * Registers operator-sequence click detection as a [Listener], separate
+         * from [OperatorActivationListener] itself since that also handles
+         * Nether-session reset events (world change, move, quit, respawn) that
+         * have nothing to do with a block click.
+         *
+         * Operator blocks are never consumed or cancelled on a mere click - only
+         * once a valid 4-operator sequence completes - so this uses
+         * [CustomBlockClickListener] rather than
+         * [org.stephanosbad.integrare.CustomBlockHitListener]: there's no
+         * break/cancel decision to make, just a click to observe.
+         */
+        fun clickListener(plugin: CharmedChars, activation: OperatorActivationListener): Listener {
+            val provider = plugin.customItemProviderManager.getProvider()
+                ?: error("OperatorActivationListener.clickListener requires an initialized custom item provider")
+            return CustomBlockClickListener(
+                provider = provider,
+                matches = { info ->
+                    val parts = info.blockName.split("_")
+                    parts.size == 2 && NonAlphaNumBlocks.entries.any { it.nonAlphaNumBlockName.equals(parts[1], ignoreCase = true) }
+                },
+                onClick = activation::onOperatorBlockClick
+            )
+        }
     }
 
     /**
-     * Called via [operatorClickListener] for a left-click/damage hit on an
+     * Called via [clickListener] for a left-click/damage hit on an
      * operator block - absorbs the Interact/Damage provider-order differences,
      * so this only needs to check the tool and process the sequence.
      */

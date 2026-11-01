@@ -31,24 +31,6 @@ import org.stephanosbad.charmedChars.CharmedChars
 import org.stephanosbad.integrare.CustomBlockHitListener
 
 /**
- * Registers the logo-block-to-shulker-box transform as a [Listener].
- *
- * Event-order handling (providers fire Interact/Damage/Break in different orders,
- * and even the same provider changes order between its own versions) is delegated
- * to [CustomBlockHitListener] rather than reimplemented here.
- */
-fun logoBlockListener(plugin: CharmedChars): Listener {
-    val transform = LogoBlockTransform(plugin)
-    val provider = plugin.customItemProviderManager.getProvider()
-        ?: error("logoBlockListener requires an initialized custom item provider")
-    return CustomBlockHitListener(
-        provider = provider,
-        matches = { it.blockName.endsWith("_logo") },
-        onHit = transform::tryTransform
-    )
-}
-
-/**
  * Transforms a placed logo block into a filled shulker box when hit with a gold/pyrite
  * tool in The End dimension.
  *
@@ -58,6 +40,27 @@ fun logoBlockListener(plugin: CharmedChars): Listener {
  * @property plugin Reference to the main plugin instance
  */
 class LogoBlockTransform(private val plugin: CharmedChars) {
+
+    companion object {
+        /**
+         * Registers the logo-block-to-shulker-box transform as a [Listener].
+         *
+         * Event-order handling (providers fire Interact/Damage/Break in different
+         * orders, and even the same provider changes order between its own
+         * versions) is delegated to [CustomBlockHitListener] rather than
+         * reimplemented here.
+         */
+        fun listener(plugin: CharmedChars): Listener {
+            val transform = LogoBlockTransform(plugin)
+            val provider = plugin.customItemProviderManager.getProvider()
+                ?: error("LogoBlockTransform.listener requires an initialized custom item provider")
+            return CustomBlockHitListener(
+                provider = provider,
+                matches = { it.blockName.endsWith("_logo") },
+                onHit = transform::tryTransform
+            )
+        }
+    }
 
     /**
      * Transforms [block] if it is a logo block in The End hit with a valid tool, and

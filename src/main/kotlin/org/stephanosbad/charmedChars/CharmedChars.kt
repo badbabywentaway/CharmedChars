@@ -27,7 +27,6 @@ import net.kyori.adventure.text.format.NamedTextColor
 import org.stephanosbad.charmedChars.commands.CharBlock
 import org.stephanosbad.charmedChars.config.ConfigDataHandler
 import org.stephanosbad.charmedChars.items.ItemManager
-import org.stephanosbad.charmedChars.items.letterBlockHitListener
 import org.stephanosbad.charmedChars.utility.WordDict
 import org.bukkit.plugin.java.JavaPlugin
 import org.bukkit.Bukkit
@@ -53,13 +52,12 @@ import org.stephanosbad.integrare.provider.NativeItemProvider
 import org.stephanosbad.charmedChars.utility.ConfigManager
 import org.stephanosbad.charmedChars.database.StructureDatabase
 import org.stephanosbad.charmedChars.listeners.StructureListener
-import org.stephanosbad.charmedChars.listeners.fortressNumberGameListener
-import org.stephanosbad.charmedChars.listeners.bastionNumberGameListener
+import org.stephanosbad.charmedChars.listeners.FortressNumberGame
+import org.stephanosbad.charmedChars.listeners.BastionNumberGame
 import org.stephanosbad.charmedChars.listeners.GlassingBedsListener
 import org.stephanosbad.charmedChars.listeners.OperatorActivationListener
-import org.stephanosbad.charmedChars.listeners.operatorClickListener
 import org.stephanosbad.charmedChars.listeners.EnderDragonKillListener
-import org.stephanosbad.charmedChars.listeners.logoBlockListener
+import org.stephanosbad.charmedChars.listeners.LogoBlockTransform
 import org.stephanosbad.charmedChars.listeners.EventOrderDebugListener
 import java.io.IOException
 import kotlin.coroutines.CoroutineContext
@@ -247,7 +245,7 @@ class CharmedChars : JavaPlugin(), CoroutineScope {
 
         // Register event listeners
         // EventOrderDebugListener goes first so its LOWEST-priority "before" hooks run
-        // before any other listener (e.g. LogoBlockListener) can remove/transform the
+        // before any other listener (e.g. LogoBlockTransform's) can remove/transform the
         // block it's trying to log - same priority tier runs in registration order.
         Bukkit.getPluginManager().registerEvents(EventOrderDebugListener(this), this)
         if (nativeProvider != null) {
@@ -260,16 +258,16 @@ class CharmedChars : JavaPlugin(), CoroutineScope {
         }
         val itemManager = ItemManager(this)
         Bukkit.getPluginManager().registerEvents(itemManager, this)
-        Bukkit.getPluginManager().registerEvents(letterBlockHitListener(itemManager), this)
+        Bukkit.getPluginManager().registerEvents(ItemManager.hitListener(itemManager), this)
         Bukkit.getPluginManager().registerEvents(StructureListener(this, structureDatabase), this)
-        Bukkit.getPluginManager().registerEvents(fortressNumberGameListener(this, structureDatabase), this)
-        Bukkit.getPluginManager().registerEvents(bastionNumberGameListener(this, structureDatabase), this)
+        Bukkit.getPluginManager().registerEvents(FortressNumberGame.listener(this, structureDatabase), this)
+        Bukkit.getPluginManager().registerEvents(BastionNumberGame.listener(this, structureDatabase), this)
         Bukkit.getPluginManager().registerEvents(GlassingBedsListener(this), this)
         val operatorActivation = OperatorActivationListener(this)
         Bukkit.getPluginManager().registerEvents(operatorActivation, this)
-        Bukkit.getPluginManager().registerEvents(operatorClickListener(this, operatorActivation), this)
+        Bukkit.getPluginManager().registerEvents(OperatorActivationListener.clickListener(this, operatorActivation), this)
         Bukkit.getPluginManager().registerEvents(EnderDragonKillListener(this), this)
-        Bukkit.getPluginManager().registerEvents(logoBlockListener(this), this)
+        Bukkit.getPluginManager().registerEvents(LogoBlockTransform.listener(this), this)
     }
 
     /**

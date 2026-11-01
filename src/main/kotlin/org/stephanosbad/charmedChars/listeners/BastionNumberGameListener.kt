@@ -34,23 +34,6 @@ import org.stephanosbad.charmedChars.database.StructureType
 import org.stephanosbad.integrare.CustomBlockHitListener
 
 /**
- * Registers the Bastion Remnant number guessing game as a [Listener].
- *
- * Event-order handling (providers fire Interact/Damage/Break in different orders)
- * is delegated to [CustomBlockHitListener] rather than reimplemented here.
- */
-fun bastionNumberGameListener(plugin: CharmedChars, database: StructureDatabase): Listener {
-    val game = BastionNumberGame(plugin, database)
-    val provider = plugin.customItemProviderManager.getProvider()
-        ?: error("bastionNumberGameListener requires an initialized custom item provider")
-    return CustomBlockHitListener(
-        provider = provider,
-        matches = { it.blockName.substringAfterLast("_").toIntOrNull() != null },
-        onHit = game::onNumberBlockHit
-    )
-}
-
-/**
  * Listener for the Bastion Remnant number guessing game
  *
  * When a player breaks a sequence of 3 number blocks in a Bastion Remnant
@@ -65,9 +48,29 @@ class BastionNumberGame(
     private val database: StructureDatabase
 ) {
 
+    companion object {
+        /**
+         * Registers the Bastion Remnant number guessing game as a [Listener].
+         *
+         * Event-order handling (providers fire Interact/Damage/Break in different
+         * orders) is delegated to [CustomBlockHitListener] rather than
+         * reimplemented here.
+         */
+        fun listener(plugin: CharmedChars, database: StructureDatabase): Listener {
+            val game = BastionNumberGame(plugin, database)
+            val provider = plugin.customItemProviderManager.getProvider()
+                ?: error("BastionNumberGame.listener requires an initialized custom item provider")
+            return CustomBlockHitListener(
+                provider = provider,
+                matches = { it.blockName.substringAfterLast("_").toIntOrNull() != null },
+                onHit = game::onNumberBlockHit
+            )
+        }
+    }
+
     /**
      * Core number sequence detection and scoring logic, called via
-     * [bastionNumberGameListener] for a left-click/damage/break hit on a number
+     * [listener] for a left-click/damage/break hit on a number
      * block:
      * 1. Checks if player is in the Nether
      * 2. Validates the player is using a gold or pyrite tool

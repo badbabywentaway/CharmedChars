@@ -41,24 +41,6 @@ import java.util.*
 import java.util.concurrent.atomic.AtomicReference
 
 /**
- * Registers letter-block word-scoring as a [Listener].
- *
- * Event-order handling (providers fire Interact/Damage/Break in different orders,
- * and even the same provider changes order between its own versions) is delegated
- * to [CustomBlockHitListener] rather than reimplemented here. Wood-breaking stays on
- * [itemManager] itself since it isn't a custom-block interaction.
- */
-fun letterBlockHitListener(itemManager: ItemManager): Listener {
-    val provider = itemManager.plugin.customItemProviderManager.getProvider()
-        ?: error("letterBlockHitListener requires an initialized custom item provider")
-    return CustomBlockHitListener(
-        provider = provider,
-        matches = { !it.blockName.endsWith("_logo") },
-        onHit = itemManager::onLetterBlockHit
-    )
-}
-
-/**
  * Main event handler for letter block drops and word validation
  *
  * This class manages the core gameplay loop:
@@ -73,6 +55,28 @@ fun letterBlockHitListener(itemManager: ItemManager): Listener {
  */
 class ItemManager @JvmOverloads constructor(localPlugin: CharmedChars? = null) :
     Listener {
+
+    companion object {
+        /**
+         * Registers letter-block word-scoring as a [Listener].
+         *
+         * Event-order handling (providers fire Interact/Damage/Break in different
+         * orders, and even the same provider changes order between its own
+         * versions) is delegated to [CustomBlockHitListener] rather than
+         * reimplemented here. Wood-breaking stays on [itemManager] itself since
+         * it isn't a custom-block interaction.
+         */
+        fun hitListener(itemManager: ItemManager): Listener {
+            val provider = itemManager.plugin.customItemProviderManager.getProvider()
+                ?: error("ItemManager.hitListener requires an initialized custom item provider")
+            return CustomBlockHitListener(
+                provider = provider,
+                matches = { !it.blockName.endsWith("_logo") },
+                onHit = itemManager::onLetterBlockHit
+            )
+        }
+    }
+
     /**
      * Wood material list mapping regular logs to stripped logs
      *

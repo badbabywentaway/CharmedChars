@@ -34,23 +34,6 @@ import org.stephanosbad.charmedChars.database.StructureType
 import org.stephanosbad.integrare.CustomBlockHitListener
 
 /**
- * Registers the Fortress number guessing game as a [Listener].
- *
- * Event-order handling (providers fire Interact/Damage/Break in different orders)
- * is delegated to [CustomBlockHitListener] rather than reimplemented here.
- */
-fun fortressNumberGameListener(plugin: CharmedChars, database: StructureDatabase): Listener {
-    val game = FortressNumberGame(plugin, database)
-    val provider = plugin.customItemProviderManager.getProvider()
-        ?: error("fortressNumberGameListener requires an initialized custom item provider")
-    return CustomBlockHitListener(
-        provider = provider,
-        matches = { it.blockName.substringAfterLast("_").toIntOrNull() != null },
-        onHit = game::onNumberBlockHit
-    )
-}
-
-/**
  * Listener for the Fortress number guessing game
  *
  * When a player breaks a sequence of 3 number blocks in a Nether Fortress
@@ -65,9 +48,29 @@ class FortressNumberGame(
     private val database: StructureDatabase
 ) {
 
+    companion object {
+        /**
+         * Registers the Fortress number guessing game as a [Listener].
+         *
+         * Event-order handling (providers fire Interact/Damage/Break in different
+         * orders) is delegated to [CustomBlockHitListener] rather than
+         * reimplemented here.
+         */
+        fun listener(plugin: CharmedChars, database: StructureDatabase): Listener {
+            val game = FortressNumberGame(plugin, database)
+            val provider = plugin.customItemProviderManager.getProvider()
+                ?: error("FortressNumberGame.listener requires an initialized custom item provider")
+            return CustomBlockHitListener(
+                provider = provider,
+                matches = { it.blockName.substringAfterLast("_").toIntOrNull() != null },
+                onHit = game::onNumberBlockHit
+            )
+        }
+    }
+
     /**
      * Core number sequence detection and scoring logic, called via
-     * [fortressNumberGameListener] for a left-click/damage/break hit on a number
+     * [listener] for a left-click/damage/break hit on a number
      * block:
      * 1. Validates the player is using a gold or pyrite tool
      * 2. Scans for a 3-digit sequence in all four cardinal directions
