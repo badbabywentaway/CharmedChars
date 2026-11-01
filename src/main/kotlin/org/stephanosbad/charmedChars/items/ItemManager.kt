@@ -69,9 +69,9 @@ class ItemManager @JvmOverloads constructor(localPlugin: CharmedChars? = null) :
          * reimplemented here. Wood-breaking stays on [itemManager] itself since
          * it isn't a custom-block interaction.
          */
-        fun hitListener(itemManager: ItemManager): Listener {
+        fun listener(itemManager: ItemManager): Listener {
             val provider = itemManager.plugin.customItemProviderManager.getProvider()
-                ?: error("ItemManager.hitListener requires an initialized custom item provider")
+                ?: error("ItemManager.listener requires an initialized custom item provider")
             return CustomBlockHitListener(
                 provider = provider,
                 matches = { !it.blockName.endsWith("_logo") },

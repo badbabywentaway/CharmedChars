@@ -274,7 +274,7 @@ class CharmedChars : JavaPlugin(), CoroutineScope {
         }
         val itemManager = ItemManager(this)
         Bukkit.getPluginManager().registerEvents(itemManager, this)
-        Bukkit.getPluginManager().registerEvents(ItemManager.hitListener(itemManager), this)
+        Bukkit.getPluginManager().registerEvents(ItemManager.listener(itemManager), this)
         Bukkit.getPluginManager().registerEvents(StructureListener(this, structureDatabase), this)
         Bukkit.getPluginManager().registerEvents(FortressNumberGame.listener(this, structureDatabase), this)
         Bukkit.getPluginManager().registerEvents(BastionNumberGame.listener(this, structureDatabase), this)

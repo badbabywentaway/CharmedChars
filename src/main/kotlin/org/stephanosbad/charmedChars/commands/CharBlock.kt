@@ -52,7 +52,7 @@ class CharBlock : CommandExecutor, TabCompleter {
      * @param args Command arguments: [player] [color] [text]
      * @return true if the command was handled successfully
      */
-    override fun onCommand(sender: CommandSender, _command: Command, _label: kotlin.String, args: Array<out kotlin.String>): Boolean {
+    override fun onCommand(sender: CommandSender, command: Command, label: String, args: Array<out String>): Boolean {
         // Check permission
         if (!sender.hasPermission("charmedChars.blocks")) {
             sender.sendMessage(
@@ -219,38 +219,38 @@ class CharBlock : CommandExecutor, TabCompleter {
      * @return List of completion suggestions
      */
     override fun onTabComplete(
-        _sender: CommandSender,
-        _cmd: Command,
-        _label: kotlin.String,
-        args: Array<out kotlin.String>
-    ): List<kotlin.String?>? {
-        var completions: MutableList<kotlin.String?> = ArrayList<kotlin.String?>()
-        val mainArg: kotlin.String?
+        sender: CommandSender,
+        cmd: Command,
+        label: String,
+        args: Array<out String>
+    ): List<String?>? {
+        var completions: MutableList<String?> = ArrayList<String?>()
+        val mainArg: String?
 
         if (args.isEmpty()) return null
 
 
         if (args.size == 1) {
             mainArg = args[0].lowercase()
-            val onlinePlayers: MutableList<kotlin.String?> = ArrayList<kotlin.String?>()
+            val onlinePlayers: MutableList<String?> = ArrayList<String?>()
             for (p in Bukkit.getOnlinePlayers()) {
                 onlinePlayers.add(p.name)
             }
-            StringUtil.copyPartialMatches<MutableList<kotlin.String?>?>(mainArg, onlinePlayers, completions)
+            StringUtil.copyPartialMatches<MutableList<String?>?>(mainArg, onlinePlayers, completions)
         }
 
         if (args.size == 2) {
             val player = args[1].lowercase()
-            val colorMatches: MutableList<kotlin.String?> = ArrayList<kotlin.String?>()
+            val colorMatches: MutableList<String?> = ArrayList<String?>()
             for (c in BlockColor.entries)
             {
                 colorMatches.add(c.name.lowercase())
             }
-            StringUtil.copyPartialMatches<MutableList<kotlin.String?>?>(player, colorMatches, completions)
+            StringUtil.copyPartialMatches<MutableList<String?>?>(player, colorMatches, completions)
         }
 
         if (args.size == 3) {
-            val characterMatches: MutableList<kotlin.String?> = ArrayList<kotlin.String?>()
+            val characterMatches: MutableList<String?> = ArrayList<String?>()
             for (letter in LetterBlock.entries) {
                 characterMatches.add(letter.character.toString())
             }
@@ -272,7 +272,7 @@ class CharBlock : CommandExecutor, TabCompleter {
         /**
          * The command name used to register this command executor
          */
-        var CommandName: kotlin.String = "charblock"
+        var CommandName: String = "charblock"
 
         /**
          * Character that gives a logo block, which has no character of its own
