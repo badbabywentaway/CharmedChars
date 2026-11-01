@@ -25,6 +25,7 @@ import org.bukkit.block.data.type.NoteBlock
 import org.bukkit.enchantments.Enchantment
 import org.bukkit.entity.Player
 import org.bukkit.event.EventHandler
+import org.bukkit.event.EventPriority
 import org.bukkit.event.Listener
 import org.bukkit.event.block.BlockBreakEvent
 import org.bukkit.event.block.BlockDamageEvent
@@ -272,7 +273,7 @@ class ItemManager @JvmOverloads constructor(localPlugin: CharmedChars? = null) :
      *
      * @param e The block break event from Bukkit/Spigot
      */
-    @EventHandler(priority = org.bukkit.event.EventPriority.LOWEST, ignoreCancelled = false)
+    @EventHandler(priority = EventPriority.LOWEST)
     fun onBreakWoodOrLetter(e: BlockBreakEvent) {
         val player = e.player
         val hand = player.inventory.itemInMainHand

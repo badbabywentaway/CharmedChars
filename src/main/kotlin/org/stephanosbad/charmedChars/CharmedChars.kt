@@ -29,6 +29,8 @@ import org.stephanosbad.charmedChars.config.ConfigDataHandler
 import org.stephanosbad.charmedChars.items.ItemManager
 import org.stephanosbad.charmedChars.utility.WordDict
 import org.bukkit.plugin.java.JavaPlugin
+import org.bukkit.configuration.file.YamlConfiguration
+import java.io.File
 import org.bukkit.Bukkit
 import org.stephanosbad.charmedChars.commands.ItemsAdderStatusCommand
 import org.stephanosbad.charmedChars.commands.ReloadCommand
@@ -338,7 +340,7 @@ class CharmedChars : JavaPlugin(), CoroutineScope {
      * custom blocks. If not configured, sends warnings to the console and notifies
      * online operators with setup instructions.
      */
-    fun startNativePackHosting(provider: NativeItemProvider, zipFile: java.io.File) {
+    fun startNativePackHosting(provider: NativeItemProvider, zipFile: File) {
         val hostname = resolveNativeHostname()
         val port = configManager.nativeItemsHttpPort
         val url = "http://$hostname:$port/${zipFile.name}"
@@ -421,10 +423,9 @@ class CharmedChars : JavaPlugin(), CoroutineScope {
         // resets the instrument state (which drives the texture) whenever the block
         // beneath a note block changes. disable-noteblock-updates suppresses that and
         // is REQUIRED for stable letter-block textures in this mode.
-        val paperConfig = java.io.File("config/paper-global.yml")
+        val paperConfig = File("config/paper-global.yml")
         val noteBlockUpdatesDisabled = if (paperConfig.exists()) {
-            org.bukkit.configuration.file.YamlConfiguration
-                .loadConfiguration(paperConfig)
+            YamlConfiguration.loadConfiguration(paperConfig)
                 .getBoolean("block-updates.disable-noteblock-updates", false)
         } else false
 

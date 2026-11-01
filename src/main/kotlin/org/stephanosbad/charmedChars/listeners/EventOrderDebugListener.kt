@@ -60,32 +60,32 @@ class EventOrderDebugListener(private val plugin: CharmedChars) : Listener {
 
     private val enabled get() = plugin.configManager.debugEventOrder
 
-    @EventHandler(priority = EventPriority.LOWEST, ignoreCancelled = false)
+    @EventHandler(priority = EventPriority.LOWEST)
     fun beforeInteract(e: PlayerInteractEvent) {
         if (e.action == Action.LEFT_CLICK_BLOCK) e.clickedBlock?.let { log("before", "Interact", e, e.player, it) }
     }
 
-    @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = false)
+    @EventHandler(priority = EventPriority.MONITOR)
     fun afterInteract(e: PlayerInteractEvent) {
         if (e.action == Action.LEFT_CLICK_BLOCK) e.clickedBlock?.let { log("after ", "Interact", e, e.player, it) }
     }
 
-    @EventHandler(priority = EventPriority.LOWEST, ignoreCancelled = false)
+    @EventHandler(priority = EventPriority.LOWEST)
     fun beforeDamage(e: BlockDamageEvent) = log("before", "Damage", e, e.player, e.block, "instaBreak=${e.instaBreak}")
 
-    @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = false)
+    @EventHandler(priority = EventPriority.MONITOR)
     fun afterDamage(e: BlockDamageEvent) = log("after ", "Damage", e, e.player, e.block, "instaBreak=${e.instaBreak}")
 
-    @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = false)
+    @EventHandler(priority = EventPriority.MONITOR)
     fun onDamageAbort(e: BlockDamageAbortEvent) = log("      ", "DamageAbort", null, e.player, e.block)
 
-    @EventHandler(priority = EventPriority.LOWEST, ignoreCancelled = false)
+    @EventHandler(priority = EventPriority.LOWEST)
     fun beforeBreak(e: BlockBreakEvent) = log("before", "Break", e, e.player, e.block, "dropItems=${e.isDropItems}")
 
-    @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = false)
+    @EventHandler(priority = EventPriority.MONITOR)
     fun afterBreak(e: BlockBreakEvent) = log("after ", "Break", e, e.player, e.block, "dropItems=${e.isDropItems}")
 
-    @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = false)
+    @EventHandler(priority = EventPriority.MONITOR)
     fun onDrop(e: BlockDropItemEvent) {
         if (!enabled) return
         val drops = e.items.joinToString { item ->
