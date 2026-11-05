@@ -56,8 +56,7 @@ import org.stephanosbad.integrare.provider.NativeItemProvider
 import org.stephanosbad.charmedchars.utility.ConfigManager
 import org.stephanosbad.charmedchars.database.StructureDatabase
 import org.stephanosbad.charmedchars.listeners.StructureListener
-import org.stephanosbad.charmedchars.listeners.FortressNumberGame
-import org.stephanosbad.charmedchars.listeners.BastionNumberGame
+import org.stephanosbad.charmedchars.listeners.StructureNumberGame
 import org.stephanosbad.charmedchars.listeners.GlassingBedsListener
 import org.stephanosbad.charmedchars.listeners.OperatorActivationListener
 import org.stephanosbad.charmedchars.listeners.EnderDragonKillListener
@@ -241,7 +240,7 @@ class CharmedChars : JavaPlugin(), CoroutineScope {
         }
 
         // Plugin startup logic using Paper's Adventure API
-        logger.info("CharmedChars v${description.version} has been enabled!")
+        logger.info("CharmedChars v${pluginMeta.version} has been enabled!")
 
         server.consoleSender.sendMessage(
             Component.text("CharmedChars loaded successfully with ${customItemProviderManager.getProviderName()} integration!")
@@ -276,8 +275,7 @@ class CharmedChars : JavaPlugin(), CoroutineScope {
         Bukkit.getPluginManager().registerEvents(itemManager, this)
         Bukkit.getPluginManager().registerEvents(ItemManager.listener(itemManager), this)
         Bukkit.getPluginManager().registerEvents(StructureListener(this, structureDatabase), this)
-        Bukkit.getPluginManager().registerEvents(FortressNumberGame.listener(this, structureDatabase), this)
-        Bukkit.getPluginManager().registerEvents(BastionNumberGame.listener(this, structureDatabase), this)
+        Bukkit.getPluginManager().registerEvents(StructureNumberGame.listener(this, structureDatabase), this)
         Bukkit.getPluginManager().registerEvents(GlassingBedsListener(this), this)
         val operatorActivation = OperatorActivationListener(this)
         Bukkit.getPluginManager().registerEvents(operatorActivation, this)
@@ -346,7 +344,7 @@ class CharmedChars : JavaPlugin(), CoroutineScope {
         val url = "http://$hostname:$port/${zipFile.name}"
 
         provider.packUrl = url
-        provider.packHash = provider.packHash  // hash already set by caller
+        // hash already set by caller
 
         if (nativePackServer == null) {
             nativePackServer = NativePackServer(logger)
