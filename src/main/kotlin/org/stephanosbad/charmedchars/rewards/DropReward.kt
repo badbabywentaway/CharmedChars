@@ -91,7 +91,7 @@ class DropReward(
         if (netAmount > maximumRewardCap) {
             netAmount = maximumRewardCap
         }
-        val count = netAmount.roundToInt().toInt()
+        val count = netAmount.roundToInt()
         if (location.world == null || material == null) {
             return
         }

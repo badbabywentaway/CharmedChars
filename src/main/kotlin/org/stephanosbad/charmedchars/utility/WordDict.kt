@@ -38,7 +38,7 @@ class WordDict {
      * Words are stored in lowercase for case-insensitive matching.
      */
     @SerializedName("Words")
-    var words: HashSet<String?> = HashSet<String?>()
+    var words: HashSet<String?> = HashSet()
 
     companion object {
         /**
@@ -61,12 +61,9 @@ class WordDict {
         fun init(sourceClass: CharmedChars) {
             val gson = Gson()
             val loader =
-                sourceClass.javaClass.getResourceAsStream("/Words.json")
-            if (loader == null) {
-                throw (FileNotFoundException("Words.json"))
-            }
+                sourceClass.javaClass.getResourceAsStream("/Words.json") ?: throw (FileNotFoundException("Words.json"))
             singleton = gson.fromJson<WordDict?>(InputStreamReader(loader), WordDict::class.java)
-            org.bukkit.Bukkit.getLogger().info("WordDict loaded with ${singleton?.words?.size ?: 0} words")
+            sourceClass.logger.info("WordDict loaded with ${singleton?.words?.size ?: 0} words")
         }
     }
 }

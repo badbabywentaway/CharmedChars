@@ -26,16 +26,4 @@ package org.stephanosbad.charmedchars.items
  * @property xOffset The offset in the X direction (-1, 0, or 1)
  * @property zOffset The offset in the Z direction (-1, 0, or 1)
  */
-class LateralDirection(var xOffset: Int, var zOffset: Int) {
-    /**
-     * Checks if this direction is valid (non-zero)
-     *
-     * A valid direction must have at least one non-zero offset.
-     * Valid examples: (1,0), (0,1), (-1,0), (0,-1)
-     * Invalid: (0,0)
-     *
-     * @return true if the direction has at least one non-zero component
-     */
-    val isValid: Boolean
-        get() = xOffset != 0 || zOffset != 0
-}
+class LateralDirection(var xOffset: Int, var zOffset: Int)

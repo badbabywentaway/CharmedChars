@@ -52,7 +52,7 @@ class CharBlock : CommandExecutor, TabCompleter {
      * @param args Command arguments: [player] [color] [text]
      * @return true if the command was handled successfully
      */
-    override fun onCommand(sender: CommandSender, command: Command, label: String, args: Array<out String>): Boolean {
+    override fun onCommand(sender: CommandSender, _command: Command, _label: String, args: Array<out String>): Boolean {
         // Check permission
         if (!sender.hasPermission("charmedChars.blocks")) {
             sender.sendMessage(
@@ -90,7 +90,7 @@ class CharBlock : CommandExecutor, TabCompleter {
         }
 
         val colorName = args[1]
-        val blockColor =  BlockColor.entries.firstOrNull { colorName.lowercase() ==  it.name.lowercase()}
+        val blockColor =  BlockColor.entries.firstOrNull { colorName.equals(it.name, ignoreCase = true) }
         if(blockColor == null)
         {
             sender.sendMessage(
@@ -219,12 +219,12 @@ class CharBlock : CommandExecutor, TabCompleter {
      * @return List of completion suggestions
      */
     override fun onTabComplete(
-        sender: CommandSender,
-        cmd: Command,
-        label: String,
+        _sender: CommandSender,
+        _cmd: Command,
+        _label: String,
         args: Array<out String>
     ): List<String?>? {
-        var completions: MutableList<String?> = ArrayList<String?>()
+        var completions: MutableList<String?> = ArrayList()
         val mainArg: String?
 
         if (args.isEmpty()) return null
@@ -232,7 +232,7 @@ class CharBlock : CommandExecutor, TabCompleter {
 
         if (args.size == 1) {
             mainArg = args[0].lowercase()
-            val onlinePlayers: MutableList<String?> = ArrayList<String?>()
+            val onlinePlayers: MutableList<String?> = ArrayList()
             for (p in Bukkit.getOnlinePlayers()) {
                 onlinePlayers.add(p.name)
             }
@@ -241,7 +241,7 @@ class CharBlock : CommandExecutor, TabCompleter {
 
         if (args.size == 2) {
             val player = args[1].lowercase()
-            val colorMatches: MutableList<String?> = ArrayList<String?>()
+            val colorMatches: MutableList<String?> = ArrayList()
             for (c in BlockColor.entries)
             {
                 colorMatches.add(c.name.lowercase())
@@ -250,7 +250,7 @@ class CharBlock : CommandExecutor, TabCompleter {
         }
 
         if (args.size == 3) {
-            val characterMatches: MutableList<String?> = ArrayList<String?>()
+            val characterMatches: MutableList<String?> = ArrayList()
             for (letter in LetterBlock.entries) {
                 characterMatches.add(letter.character.toString())
             }

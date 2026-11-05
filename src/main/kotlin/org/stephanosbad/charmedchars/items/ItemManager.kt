@@ -100,14 +100,7 @@ class ItemManager @JvmOverloads constructor(localPlugin: CharmedChars? = null) :
             put(Material.WARPED_STEM, Material.STRIPPED_WARPED_STEM)
             put(Material.CRIMSON_STEM, Material.STRIPPED_CRIMSON_STEM)
             put(Material.BAMBOO_BLOCK, Material.STRIPPED_BAMBOO_BLOCK)
-
-            // Poplar wood isn't in every running Paper build yet (e.g. 26.2 stable) -
-            // matchMaterial() resolves it only where the server actually has it.
-            Material.matchMaterial("POPLAR_LOG")?.let { poplarLog ->
-                Material.matchMaterial("STRIPPED_POPLAR_LOG")?.let { strippedPoplarLog ->
-                    put(poplarLog, strippedPoplarLog)
-                }
-            }
+            put(Material.POPLAR_LOG, Material.STRIPPED_POPLAR_LOG)
         }
     }
 
@@ -191,7 +184,7 @@ class ItemManager @JvmOverloads constructor(localPlugin: CharmedChars? = null) :
      * Populated from config.yml. Currently supports drop-based rewards
      * (spawning items based on word score).
      */
-    var rewards: MutableList<Reward> = ArrayList<Reward>()
+    var rewards: MutableList<Reward> = ArrayList()
 
     /**
      * Reference to the main CharmedChars plugin instance
@@ -219,12 +212,12 @@ class ItemManager @JvmOverloads constructor(localPlugin: CharmedChars? = null) :
 
             if (worldGuardPlugin != null && worldGuard != null) {
                 val status = if (plugin.configManager.worldGuardIntegration) "enabled" else "disabled in config"
-                Bukkit.getLogger().info("WorldGuard found - integration $status")
+                plugin.logger.info("WorldGuard found - integration $status")
             }
         } catch (e: ClassNotFoundException) {
-            Bukkit.getLogger().info("WorldGuard not available (optional)")
+            plugin.logger.info("WorldGuard not available (optional)")
         } catch (e: Exception) {
-            Bukkit.getLogger().info("WorldGuard not available (optional)")
+            plugin.logger.info("WorldGuard not available (optional)")
         }
 
         // GriefPrevention integration (optional soft dependency)
@@ -233,22 +226,22 @@ class ItemManager @JvmOverloads constructor(localPlugin: CharmedChars? = null) :
             if (gpPlugin != null && gpPlugin.isEnabled) {
                 griefPrevention = gpPlugin
                 val status = if (plugin.configManager.griefPreventionIntegration) "enabled" else "disabled in config"
-                Bukkit.getLogger().info("GriefPrevention found - integration $status")
+                plugin.logger.info("GriefPrevention found - integration $status")
             } else {
-                Bukkit.getLogger().info("GriefPrevention not available (optional)")
+                plugin.logger.info("GriefPrevention not available (optional)")
             }
         } catch (e: Exception) {
-            Bukkit.getLogger().info("GriefPrevention not available (optional)")
+            plugin.logger.info("GriefPrevention not available (optional)")
         } catch (e: Error) {
-            Bukkit.getLogger().info("GriefPrevention not available (optional)")
+            plugin.logger.info("GriefPrevention not available (optional)")
         }
 
         try {
             setRewards()
         } catch (e: Exception) {
-            Bukkit.getLogger().info("Rewards not available.")
+            plugin.logger.info("Rewards not available.")
         } catch (e: Error) {
-            Bukkit.getLogger().info("Rewards not available.")
+            plugin.logger.info("Rewards not available.")
         }
     }
 
@@ -349,7 +342,7 @@ class ItemManager @JvmOverloads constructor(localPlugin: CharmedChars? = null) :
      */
     private fun randomNumAndCharacter(): ItemStack? {
         if (characterBlocksAvailableInNether == null) {
-            characterBlocksAvailableInNether = ArrayList<ItemStack?>()
+            characterBlocksAvailableInNether = ArrayList()
             for (c in BlockColor.entries) {
                 for (x in NumericBlock.entries) {
                     characterBlocksAvailableInNether!!.add(x.itemStacks[c])
@@ -454,7 +447,7 @@ class ItemManager @JvmOverloads constructor(localPlugin: CharmedChars? = null) :
         var testBlock = startBlock
         var score = 0.0
         val outString = StringBuilder()
-        val blockArray: MutableList<Location> = ArrayList<Location>()
+        val blockArray: MutableList<Location> = ArrayList()
         var isSameColor = true
         var colorTest: BlockColor? = null
 
@@ -663,7 +656,7 @@ class ItemManager @JvmOverloads constructor(localPlugin: CharmedChars? = null) :
                 }
             } catch (e: Exception) {
                 // If reflection fails, log and continue
-                Bukkit.getLogger().warning("GriefPrevention integration error: ${e.message}")
+                plugin.logger.warning("GriefPrevention integration error: ${e.message}")
             }
         }
 
@@ -770,9 +763,9 @@ class ItemManager @JvmOverloads constructor(localPlugin: CharmedChars? = null) :
                                 )
                             )
                         } catch (e: Exception) {
-                            Bukkit.getLogger().info(e.toString())
+                            plugin.logger.info(e.toString())
                         } catch (e: Error) {
-                            Bukkit.getLogger().info(e.toString())
+                            plugin.logger.info(e.toString())
                         }
                     }
                 }

@@ -17,7 +17,6 @@
  */
 package org.stephanosbad.charmedchars.config
 
-import org.bukkit.Bukkit
 import org.bukkit.Location
 import org.bukkit.Material
 import org.bukkit.configuration.file.YamlConfiguration
@@ -122,17 +121,17 @@ class ConfigDataHandler(private val plugin: CharmedChars) {
         vaultConfiguration.set("maximumRewardCap", 2000.0)
         configuration!!.save(file!!)
         val dropReward = HashMap<String?, Any?>()
-        dropReward.put("materialName", Material.IRON_INGOT.toString())
-        dropReward.put("minimumRewardCount", 1.0)
-        dropReward.put("multiplier", 0.01)
-        dropReward.put("minimumThreshold", 100.0)
-        dropReward.put("maximumRewardCap", 20.0)
+        dropReward["materialName"] = Material.IRON_INGOT.toString()
+        dropReward["minimumRewardCount"] = 1.0
+        dropReward["multiplier"] = 0.01
+        dropReward["minimumThreshold"] = 100.0
+        dropReward["maximumRewardCap"] = 20.0
         val dropReward1 = HashMap<String?, Any?>()
-        dropReward1.put("materialName", Material.GOLD_NUGGET.toString())
-        dropReward1.put("minimumRewardCount", 0.0)
-        dropReward1.put("multiplier", 0.01)
-        dropReward1.put("minimumThreshold", 200.0)
-        dropReward1.put("maximumRewardCap", 50.0)
+        dropReward1["materialName"] = Material.GOLD_NUGGET.toString()
+        dropReward1["minimumRewardCount"] = 0.0
+        dropReward1["multiplier"] = 0.01
+        dropReward1["minimumThreshold"] = 200.0
+        dropReward1["maximumRewardCap"] = 50.0
         val dropsConfiguration = listOf<MutableMap<String?, Any?>?>(dropReward, dropReward1)
         configuration!!.set("letter-blocks.Drop", dropsConfiguration)
         configuration!!.save(file!!)
@@ -182,12 +181,11 @@ class ConfigDataHandler(private val plugin: CharmedChars) {
                 if (drop !is MutableMap<*, *>) {
                     continue
                 }
-                val dropParams = drop as MutableMap<*, *>
-                val materialName = dropParams["materialName"] as? String ?: continue
-                val minimumRewardCount = dropParams["minimumRewardCount"] as? Double ?: 0.0
-                val multiplier = dropParams["multiplier"] as? Double ?: 0.0
-                val minimumThreshold = dropParams["minimumThreshold"] as? Double ?: 0.0
-                val maximumRewardCap = dropParams["maximumRewardCap"] as? Double ?: 0.0
+                val materialName = drop["materialName"] as? String ?: continue
+                val minimumRewardCount = drop["minimumRewardCount"] as? Double ?: 0.0
+                val multiplier = drop["multiplier"] as? Double ?: 0.0
+                val minimumThreshold = drop["minimumThreshold"] as? Double ?: 0.0
+                val maximumRewardCap = drop["maximumRewardCap"] as? Double ?: 0.0
 
                 rewards.add(
                     DropReward(

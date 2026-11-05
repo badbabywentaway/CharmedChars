@@ -68,8 +68,8 @@ class LocationPair(first: Location, second: Location) : SimplerTuple<Location>(f
      */
     private fun inMcRange(testValue: Double, x1: Double, x2: Double): Boolean {
         if (x1 > x2) {
-            return testValue <= x1 && testValue >= x2
+            return testValue in x2..x1
         }
-        return testValue >= x1 && testValue <= x2
+        return testValue in x1..x2
     }
 }

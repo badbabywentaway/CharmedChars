@@ -1,7 +1,7 @@
 name: CharmedChars
 version: ${version}
 main: org.stephanosbad.charmedchars.CharmedChars
-api-version: '1.21'
+api-version: '26.3'
 load: POSTWORLD
 softdepend: [ItemsAdder, Oraxen, Nexo, ProtocolLib, WorldGuard, GriefPrevention]
 authors: [ StephanosBad ]

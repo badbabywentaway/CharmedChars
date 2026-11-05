@@ -107,7 +107,7 @@ class OperatorActivationListener(
     @EventHandler(priority = EventPriority.MONITOR)
     fun onPlayerMove(event: PlayerMoveEvent) {
         val from = event.from
-        val to = event.to ?: return
+        val to = event.to
 
         // Check if player entered Nether
         if (from.world.environment != World.Environment.NETHER &&

@@ -17,6 +17,8 @@
  */
 package org.stephanosbad.charmedchars.listeners
 
+import io.papermc.paper.registry.RegistryAccess
+import io.papermc.paper.registry.RegistryKey
 import net.kyori.adventure.text.Component
 import net.kyori.adventure.text.format.NamedTextColor
 import net.kyori.adventure.text.format.TextDecoration
@@ -24,9 +26,7 @@ import org.bukkit.event.EventHandler
 import org.bukkit.event.EventPriority
 import org.bukkit.event.Listener
 import org.bukkit.event.player.PlayerMoveEvent
-import org.bukkit.generator.structure.Structure
 import org.bukkit.NamespacedKey
-import org.bukkit.Registry
 import org.stephanosbad.charmedchars.CharmedChars
 import org.stephanosbad.charmedchars.database.StructureDatabase
 import org.stephanosbad.charmedchars.database.StructureType
@@ -60,25 +60,24 @@ class StructureListener(
     fun onPlayerMove(event: PlayerMoveEvent) {
         // Only check if player moved to a new block
         val from = event.from
-        val to = event.to ?: return
+        val to = event.to
 
         if (from.blockX == to.blockX && from.blockY == to.blockY && from.blockZ == to.blockZ) {
             return
         }
 
         val player = event.player
-        val location = to
 
         // Only check in the Nether
-        if (!location.world.environment.name.equals("NETHER", ignoreCase = true)) {
+        if (!to.world.environment.name.equals("NETHER", ignoreCase = true)) {
             // If player left the Nether, clear their current structure
             playerCurrentStructure.remove(player.uniqueId.toString())
             return
         }
 
         // Check for structures at player's location using registry
-        val chunk = location.chunk
-        val registry = Registry.STRUCTURE
+        val chunk = to.chunk
+        val registry = RegistryAccess.registryAccess().getRegistry(RegistryKey.STRUCTURE)
 
         // Get all structure types we care about
         val bastionRemnant = registry.get(NamespacedKey.minecraft("bastion_remnant"))
@@ -108,7 +107,7 @@ class StructureListener(
             return
         }
 
-        val worldName = location.world.name
+        val worldName = to.world.name
 
         // Get the structure's origin coordinates from its bounding box
         // This ensures all chunks of the same structure use the same database entry

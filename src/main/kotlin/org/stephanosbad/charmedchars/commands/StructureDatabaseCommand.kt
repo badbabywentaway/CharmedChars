@@ -26,6 +26,7 @@ import org.bukkit.command.CommandExecutor
 import org.bukkit.command.CommandSender
 import org.bukkit.command.TabCompleter
 import org.stephanosbad.charmedchars.CharmedChars
+import org.stephanosbad.charmedchars.database.StructureData
 import org.stephanosbad.charmedchars.database.StructureType
 import java.text.SimpleDateFormat
 import java.util.*
@@ -309,23 +310,7 @@ class StructureDatabaseCommand(private val plugin: CharmedChars) : CommandExecut
             return
         }
 
-        val number = args[1].toIntOrNull()
-        if (number == null || number < 100 || number > 999) {
-            sender.sendMessage(
-                Component.text("Invalid number. Must be between 100 and 999.")
-                    .color(NamedTextColor.RED)
-            )
-            return
-        }
-
-        val structure = plugin.structureDatabase.getStructureByNumber(number)
-        if (structure == null) {
-            sender.sendMessage(
-                Component.text("No structure found with number $number.")
-                    .color(NamedTextColor.YELLOW)
-            )
-            return
-        }
+        val structure = parseAndLookupStructure(sender, args) ?: return
 
         val playerName = Bukkit.getOfflinePlayer(structure.discoveredBy).name ?: "Unknown"
         val rewardStatus = if (structure.rewardsDispensed) "✓ Claimed" else "✗ Unclaimed"
@@ -445,26 +430,10 @@ class StructureDatabaseCommand(private val plugin: CharmedChars) : CommandExecut
             return
         }
 
-        val number = args[1].toIntOrNull()
-        if (number == null || number < 100 || number > 999) {
-            sender.sendMessage(
-                Component.text("Invalid number. Must be between 100 and 999.")
-                    .color(NamedTextColor.RED)
-            )
-            return
-        }
-
         // Get structure info before deleting for confirmation message
-        val structure = plugin.structureDatabase.getStructureByNumber(number)
-        if (structure == null) {
-            sender.sendMessage(
-                Component.text("No structure found with number $number.")
-                    .color(NamedTextColor.YELLOW)
-            )
-            return
-        }
+        val structure = parseAndLookupStructure(sender, args) ?: return
 
-        val deleted = plugin.structureDatabase.deleteStructureByNumber(number)
+        val deleted = plugin.structureDatabase.deleteStructureByNumber(structure.assignedNumber)
         if (deleted) {
             sender.sendMessage(
                 Component.text("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━")
@@ -480,7 +449,7 @@ class StructureDatabaseCommand(private val plugin: CharmedChars) : CommandExecut
                     .color(NamedTextColor.RED)
             )
             sender.sendMessage(
-                Component.text("${structure.structureType.displayName} #$number has been deleted.")
+                Component.text("${structure.structureType.displayName} #${structure.assignedNumber} has been deleted.")
                     .color(NamedTextColor.WHITE)
             )
             sender.sendMessage(
@@ -491,13 +460,40 @@ class StructureDatabaseCommand(private val plugin: CharmedChars) : CommandExecut
                 Component.text("Location: Chunk (${structure.chunkX}, ${structure.chunkZ})")
                     .color(NamedTextColor.GRAY)
             )
-            plugin.logger.info("${sender.name} removed structure #$number (${structure.structureType.displayName})")
+            plugin.logger.info("${sender.name} removed structure #${structure.assignedNumber} (${structure.structureType.displayName})")
         } else {
             sender.sendMessage(
-                Component.text("Failed to delete structure #$number.")
+                Component.text("Failed to delete structure #${structure.assignedNumber}.")
                     .color(NamedTextColor.RED)
             )
         }
+    }
+
+    /**
+     * Parses args[1] as a structure number (100-999) and looks it up in the database,
+     * sending [sender] an error message and returning null if parsing fails or no
+     * structure exists with that number.
+     */
+    private fun parseAndLookupStructure(sender: CommandSender, args: Array<out String>): StructureData? {
+        val number = args[1].toIntOrNull()
+        if (number == null || number < 100 || number > 999) {
+            sender.sendMessage(
+                Component.text("Invalid number. Must be between 100 and 999.")
+                    .color(NamedTextColor.RED)
+            )
+            return null
+        }
+
+        val structure = plugin.structureDatabase.getStructureByNumber(number)
+        if (structure == null) {
+            sender.sendMessage(
+                Component.text("No structure found with number $number.")
+                    .color(NamedTextColor.YELLOW)
+            )
+            return null
+        }
+
+        return structure
     }
 
     /**

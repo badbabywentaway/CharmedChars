@@ -90,7 +90,7 @@ class ConfigManager(private val plugin: CharmedChars) {
         get() = config.getInt("letter-blocks.min-word-length.same-color", 3)
 
     /**
-     * Minimum word length for multi-color words
+     * Minimum word length for multicolor words
      *
      * Default: 4 letters
      */
@@ -246,12 +246,4 @@ class ConfigManager(private val plugin: CharmedChars) {
         this.config = plugin.config
     }
 
-    /**
-     * Saves the current configuration to disk
-     *
-     * Writes any programmatic changes to the config.yml file.
-     */
-    fun saveConfig() {
-        plugin.saveConfig()
-    }
 }

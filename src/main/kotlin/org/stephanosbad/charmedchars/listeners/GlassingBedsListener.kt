@@ -138,7 +138,7 @@ class GlassingBedsListener(
         } else {
             // Extract color from bed type name (e.g., "RED_BED" → "RED")
             val bedColor = bedType.name.removeSuffix("_BED")
-            // Map to stained glass (e.g., "RED" → "RED_STAINED_GLASS")
+            // Map to stained-glass (e.g., "RED" → "RED_STAINED_GLASS")
             Material.getMaterial("${bedColor}_STAINED_GLASS") ?: Material.GLASS
         }
 

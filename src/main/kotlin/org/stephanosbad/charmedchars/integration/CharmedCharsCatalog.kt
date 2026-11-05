@@ -99,10 +99,7 @@ object CharmedCharsCatalog {
     private fun operator(color: BlockColor, op: NonAlphaNumBlocks) =
         block(color, op.nonAlphaNumBlockName, op.nonAlphaNumBlockName, operatorSymbols.getValue(op), op.charVal.toString())
 
-    private fun logo(color: BlockColor) = block(color, "logo", "logo_block", "Logo", "Logo").let {
-        // Oraxen's logo name has no glyph before " Logo Block"
-        it.copy(displayName = "${color.miniMessageTag} Logo Block")
-    }
+    private fun logo(color: BlockColor) = block(color, "logo", "logo_block", "Logo", "Logo").copy(displayName = "${color.miniMessageTag} Logo Block")
 
     private val pyriteLore = listOf(
         "<gray>A fool's gold %s",

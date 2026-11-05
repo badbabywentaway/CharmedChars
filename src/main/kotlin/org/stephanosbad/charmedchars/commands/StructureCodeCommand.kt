@@ -17,15 +17,18 @@
  */
 package org.stephanosbad.charmedchars.commands
 
+import io.papermc.paper.registry.RegistryAccess
+import io.papermc.paper.registry.RegistryKey
 import net.kyori.adventure.text.Component
 import net.kyori.adventure.text.format.NamedTextColor
 import net.kyori.adventure.text.format.TextDecoration
+import org.bukkit.Chunk
 import org.bukkit.NamespacedKey
-import org.bukkit.Registry
 import org.bukkit.command.Command
 import org.bukkit.command.CommandExecutor
 import org.bukkit.command.CommandSender
 import org.bukkit.entity.Player
+import org.bukkit.generator.structure.Structure
 import org.stephanosbad.charmedchars.CharmedChars
 import org.stephanosbad.charmedchars.database.StructureType
 
@@ -86,119 +89,21 @@ class StructureCodeCommand(private val plugin: CharmedChars) : CommandExecutor {
             return true
         }
 
-        val registry = Registry.STRUCTURE
+        val registry = RegistryAccess.registryAccess().getRegistry(RegistryKey.STRUCTURE)
 
-        // Check for Nether Fortress
         val fortress = registry.get(NamespacedKey.minecraft("fortress"))
-        if (fortress != null && chunk.getStructures(fortress).isNotEmpty()) {
-            // Get structure's origin coordinates from bounding box
-            val structure = chunk.getStructures(fortress).firstOrNull()
-            if (structure == null) {
-                sender.sendMessage(
-                    Component.text("Error: Could not get structure data.")
-                        .color(NamedTextColor.RED)
-                )
-                return true
-            }
-
-            val boundingBox = structure.boundingBox
-            // Use Math.floorDiv for proper handling of negative coordinates
-            val originChunkX = Math.floorDiv(boundingBox.minX.toInt(), 16)
-            val originChunkZ = Math.floorDiv(boundingBox.minZ.toInt(), 16)
-
-            val fortressData = plugin.structureDatabase.getStructure(
-                worldName = location.world.name,
-                structureType = StructureType.FORTRESS,
-                chunkX = originChunkX,
-                chunkZ = originChunkZ
+        if (announceStructureCode(
+                sender, chunk, fortress, StructureType.FORTRESS, location.world.name,
+                headerText = "NETHER FORTRESS CODE", borderColor = NamedTextColor.GOLD, codeColor = NamedTextColor.YELLOW
             )
+        ) return true
 
-            if (fortressData != null) {
-                sender.sendMessage(
-                    Component.text("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━")
-                        .color(NamedTextColor.GOLD)
-                )
-                sender.sendMessage(
-                    Component.text("  NETHER FORTRESS CODE")
-                        .color(NamedTextColor.GOLD)
-                        .decorate(TextDecoration.BOLD)
-                )
-                sender.sendMessage(
-                    Component.text("  Code: ${fortressData.assignedNumber}")
-                        .color(NamedTextColor.YELLOW)
-                        .decorate(TextDecoration.BOLD)
-                )
-                sender.sendMessage(
-                    Component.text("  Rewards dispensed: ${if (fortressData.rewardsDispensed) "Yes" else "No"}")
-                        .color(if (fortressData.rewardsDispensed) NamedTextColor.RED else NamedTextColor.GREEN)
-                )
-                sender.sendMessage(
-                    Component.text("  Origin: ($originChunkX, $originChunkZ)")
-                        .color(NamedTextColor.GRAY)
-                )
-                sender.sendMessage(
-                    Component.text("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━")
-                        .color(NamedTextColor.GOLD)
-                )
-                return true
-            }
-        }
-
-        // Check for Bastion Remnant
         val bastionRemnant = registry.get(NamespacedKey.minecraft("bastion_remnant"))
-        if (bastionRemnant != null && chunk.getStructures(bastionRemnant).isNotEmpty()) {
-            // Get structure's origin coordinates from bounding box
-            val structure = chunk.getStructures(bastionRemnant).firstOrNull()
-            if (structure == null) {
-                sender.sendMessage(
-                    Component.text("Error: Could not get structure data.")
-                        .color(NamedTextColor.RED)
-                )
-                return true
-            }
-
-            val boundingBox = structure.boundingBox
-            // Use Math.floorDiv for proper handling of negative coordinates
-            val originChunkX = Math.floorDiv(boundingBox.minX.toInt(), 16)
-            val originChunkZ = Math.floorDiv(boundingBox.minZ.toInt(), 16)
-
-            val bastionData = plugin.structureDatabase.getStructure(
-                worldName = location.world.name,
-                structureType = StructureType.BASTION_REMNANT,
-                chunkX = originChunkX,
-                chunkZ = originChunkZ
+        if (announceStructureCode(
+                sender, chunk, bastionRemnant, StructureType.BASTION_REMNANT, location.world.name,
+                headerText = "BASTION REMNANT CODE", borderColor = NamedTextColor.LIGHT_PURPLE, codeColor = NamedTextColor.DARK_PURPLE
             )
-
-            if (bastionData != null) {
-                sender.sendMessage(
-                    Component.text("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━")
-                        .color(NamedTextColor.LIGHT_PURPLE)
-                )
-                sender.sendMessage(
-                    Component.text("  BASTION REMNANT CODE")
-                        .color(NamedTextColor.LIGHT_PURPLE)
-                        .decorate(TextDecoration.BOLD)
-                )
-                sender.sendMessage(
-                    Component.text("  Code: ${bastionData.assignedNumber}")
-                        .color(NamedTextColor.DARK_PURPLE)
-                        .decorate(TextDecoration.BOLD)
-                )
-                sender.sendMessage(
-                    Component.text("  Rewards dispensed: ${if (bastionData.rewardsDispensed) "Yes" else "No"}")
-                        .color(if (bastionData.rewardsDispensed) NamedTextColor.RED else NamedTextColor.GREEN)
-                )
-                sender.sendMessage(
-                    Component.text("  Origin: ($originChunkX, $originChunkZ)")
-                        .color(NamedTextColor.GRAY)
-                )
-                sender.sendMessage(
-                    Component.text("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━")
-                        .color(NamedTextColor.LIGHT_PURPLE)
-                )
-                return true
-            }
-        }
+        ) return true
 
         // Not in any structure
         sender.sendMessage(
@@ -210,6 +115,76 @@ class StructureCodeCommand(private val plugin: CharmedChars) : CommandExecutor {
                 .color(NamedTextColor.GRAY)
         )
 
+        return true
+    }
+
+    /**
+     * Looks up [structureKey] in [chunk] and, if found and recorded in the database, sends
+     * [sender] its three-digit code. Returns true if the caller should stop checking further
+     * structure types - either because the code was shown, or because structure data in the
+     * chunk couldn't be read. Returns false both when [structureKey] isn't present in the chunk
+     * and when it is present but not yet in the database, so the caller can fall through to the
+     * next structure type (matching the original un-refactored behavior).
+     */
+    private fun announceStructureCode(
+        sender: Player,
+        chunk: Chunk,
+        structureKey: Structure?,
+        databaseType: StructureType,
+        worldName: String,
+        headerText: String,
+        borderColor: NamedTextColor,
+        codeColor: NamedTextColor
+    ): Boolean {
+        if (structureKey == null || chunk.getStructures(structureKey).isEmpty()) return false
+
+        val structure = chunk.getStructures(structureKey).firstOrNull()
+        if (structure == null) {
+            sender.sendMessage(
+                Component.text("Error: Could not get structure data.")
+                    .color(NamedTextColor.RED)
+            )
+            return true
+        }
+
+        val boundingBox = structure.boundingBox
+        // Use Math.floorDiv for proper handling of negative coordinates
+        val originChunkX = Math.floorDiv(boundingBox.minX.toInt(), 16)
+        val originChunkZ = Math.floorDiv(boundingBox.minZ.toInt(), 16)
+
+        val data = plugin.structureDatabase.getStructure(
+            worldName = worldName,
+            structureType = databaseType,
+            chunkX = originChunkX,
+            chunkZ = originChunkZ
+        ) ?: return false
+
+        sender.sendMessage(
+            Component.text("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━")
+                .color(borderColor)
+        )
+        sender.sendMessage(
+            Component.text("  $headerText")
+                .color(borderColor)
+                .decorate(TextDecoration.BOLD)
+        )
+        sender.sendMessage(
+            Component.text("  Code: ${data.assignedNumber}")
+                .color(codeColor)
+                .decorate(TextDecoration.BOLD)
+        )
+        sender.sendMessage(
+            Component.text("  Rewards dispensed: ${if (data.rewardsDispensed) "Yes" else "No"}")
+                .color(if (data.rewardsDispensed) NamedTextColor.RED else NamedTextColor.GREEN)
+        )
+        sender.sendMessage(
+            Component.text("  Origin: ($originChunkX, $originChunkZ)")
+                .color(NamedTextColor.GRAY)
+        )
+        sender.sendMessage(
+            Component.text("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━")
+                .color(borderColor)
+        )
         return true
     }
 }

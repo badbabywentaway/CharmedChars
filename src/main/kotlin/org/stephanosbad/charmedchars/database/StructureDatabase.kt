@@ -177,11 +177,11 @@ class StructureDatabase(private val plugin: CharmedChars) {
         chunkZ: Int
     ): StructureData? {
         return transaction(database) {
-            StructureTable.select {
+            StructureTable.selectAll().where {
                 (StructureTable.worldName eq worldName) and
-                (StructureTable.structureType eq structureType.name) and
-                (StructureTable.chunkX eq chunkX) and
-                (StructureTable.chunkZ eq chunkZ)
+                        (StructureTable.structureType eq structureType.name) and
+                        (StructureTable.chunkX eq chunkX) and
+                        (StructureTable.chunkZ eq chunkZ)
             }.firstOrNull()?.let { rowToStructureData(it) }
         }
     }
@@ -194,9 +194,7 @@ class StructureDatabase(private val plugin: CharmedChars) {
      */
     fun getStructureByNumber(number: Int): StructureData? {
         return transaction(database) {
-            StructureTable.select {
-                StructureTable.assignedNumber eq number
-            }.firstOrNull()?.let { rowToStructureData(it) }
+            StructureTable.selectAll().where { StructureTable.assignedNumber eq number }.firstOrNull()?.let { rowToStructureData(it) }
         }
     }
 
@@ -208,9 +206,7 @@ class StructureDatabase(private val plugin: CharmedChars) {
      */
     fun getStructuresByPlayer(playerUuid: UUID): List<StructureData> {
         return transaction(database) {
-            StructureTable.select {
-                StructureTable.discoveredBy eq playerUuid.toString()
-            }.map { rowToStructureData(it) }
+            StructureTable.selectAll().where { StructureTable.discoveredBy eq playerUuid.toString() }.map { rowToStructureData(it) }
         }
     }
 
@@ -222,9 +218,7 @@ class StructureDatabase(private val plugin: CharmedChars) {
      */
     fun getStructuresByWorld(worldName: String): List<StructureData> {
         return transaction(database) {
-            StructureTable.select {
-                StructureTable.worldName eq worldName
-            }.map { rowToStructureData(it) }
+            StructureTable.selectAll().where { StructureTable.worldName eq worldName }.map { rowToStructureData(it) }
         }
     }
 
@@ -262,14 +256,9 @@ class StructureDatabase(private val plugin: CharmedChars) {
      */
      fun deleteStructureByNumber(number: Int): Boolean {
         return transaction(database) {
-            val structure = StructureTable.select { StructureTable.assignedNumber eq number }.firstOrNull()
-            if (structure != null) {
-                exec("DELETE FROM ${StructureTable.tableName} WHERE ${StructureTable.assignedNumber.name} = $number")
-                usedNumbers.remove(number)
-                true
-            } else {
-                false
-            }
+            val deleted = StructureTable.deleteWhere { builder -> builder.run { StructureTable.assignedNumber eq number } } > 0
+            if (deleted) usedNumbers.remove(number)
+            deleted
         }
     }
 
@@ -281,11 +270,10 @@ class StructureDatabase(private val plugin: CharmedChars) {
      */
     fun deleteStructuresByWorld(worldName: String): Int {
         return transaction(database) {
-            val numbers = StructureTable.select {
-                StructureTable.worldName eq worldName
-            }.map { it[StructureTable.assignedNumber] }
+            val numbers = StructureTable.selectAll().where { StructureTable.worldName eq worldName }
+                .map { it[StructureTable.assignedNumber] }
 
-            exec("DELETE FROM ${StructureTable.tableName} WHERE ${StructureTable.worldName.name} = '$worldName'")
+            StructureTable.deleteWhere { builder -> builder.run { StructureTable.worldName eq worldName } }
 
             numbers.forEach { usedNumbers.remove(it) }
             numbers.size
@@ -300,11 +288,10 @@ class StructureDatabase(private val plugin: CharmedChars) {
      */
     fun deleteStructuresByType(structureType: StructureType): Int {
         return transaction(database) {
-            val numbers = StructureTable.select {
-                StructureTable.structureType eq structureType.name
-            }.map { it[StructureTable.assignedNumber] }
+            val numbers = StructureTable.selectAll().where { StructureTable.structureType eq structureType.name }
+                .map { it[StructureTable.assignedNumber] }
 
-            exec("DELETE FROM ${StructureTable.tableName} WHERE ${StructureTable.structureType.name} = '${structureType.name}'")
+            StructureTable.deleteWhere { builder -> builder.run { StructureTable.structureType eq structureType.name } }
 
             numbers.forEach { usedNumbers.remove(it) }
             numbers.size
