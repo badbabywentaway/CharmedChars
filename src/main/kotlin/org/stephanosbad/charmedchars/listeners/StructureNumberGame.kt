@@ -29,6 +29,11 @@ import org.bukkit.entity.Player
 import org.bukkit.event.Listener
 import org.stephanosbad.charmedchars.CharmedChars
 import org.stephanosbad.charmedchars.database.StructureDatabase
+import org.stephanosbad.charmedchars.listeners.NumberSequenceGame.dropBlocksAsItems
+import org.stephanosbad.charmedchars.listeners.NumberSequenceGame.findThreeDigitSequence
+import org.stephanosbad.charmedchars.listeners.NumberSequenceGame.getNumberFromBlock
+import org.stephanosbad.charmedchars.listeners.NumberSequenceGame.isValidTool
+import org.stephanosbad.charmedchars.listeners.NumberSequenceGame.removeBlocks
 import org.stephanosbad.charmedchars.database.StructureType
 import org.stephanosbad.charmedchars.rewards.DropReward
 import org.stephanosbad.integrare.CustomBlockHitListener
