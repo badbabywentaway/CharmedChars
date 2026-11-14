@@ -68,8 +68,10 @@ remove_if_exists "$OR/CharmedChars/resourcepack"
 remove_if_exists "$OR/CharmedChars/config.yml"
 remove_if_exists "$OR/Oraxen/items/charmedchars_blocks.yml"
 remove_if_exists "$OR/Oraxen/pack/assets/charmedchars"
-remove_if_exists "$OR/Oraxen/pack/textures/charmedchars"
-remove_if_exists "$OR/Oraxen/recipes/charmedchars_recipes.yml"
+# Recipes are appended into Oraxen's shared recipes/shaped.yml and shapeless.yml
+# (not a dedicated charmedchars file), so they can't be blindly deleted here without
+# destroying other plugins' recipes too. /oraxensetup force removes CharmedChars'
+# own recipe entries by key (OraxenSetup.removeOwnRecipes()) before regenerating them.
 echo "  [OK] Plugin data cleaned"
 
 echo "  Copying new JAR..."

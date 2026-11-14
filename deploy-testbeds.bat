@@ -99,12 +99,10 @@ if exist "c:\Users\steve\Documents\OraxenPapermc\plugins\Oraxen\items\charmedcha
 if exist "c:\Users\steve\Documents\OraxenPapermc\plugins\Oraxen\pack\assets\charmedchars" (
     rmdir /s /q "c:\Users\steve\Documents\OraxenPapermc\plugins\Oraxen\pack\assets\charmedchars"
 )
-if exist "c:\Users\steve\Documents\OraxenPapermc\plugins\Oraxen\pack\textures\charmedchars" (
-    rmdir /s /q "c:\Users\steve\Documents\OraxenPapermc\plugins\Oraxen\pack\textures\charmedchars"
-)
-if exist "c:\Users\steve\Documents\OraxenPapermc\plugins\Oraxen\recipes\charmedchars_recipes.yml" (
-    del /q "c:\Users\steve\Documents\OraxenPapermc\plugins\Oraxen\recipes\charmedchars_recipes.yml"
-)
+rem Recipes are appended into Oraxen's shared recipes\shaped.yml and shapeless.yml
+rem (not a dedicated charmedchars file), so they can't be blindly deleted here without
+rem destroying other plugins' recipes too. /oraxensetup force removes CharmedChars'
+rem own recipe entries by key (OraxenSetup.removeOwnRecipes()) before regenerating them.
 echo   [OK] Plugin data cleaned
 
 echo   Copying new JAR...
