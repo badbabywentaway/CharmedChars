@@ -3790,10 +3790,10 @@ pyrite_pickaxe:
     amount: 1
   ingredients:
     P:
-      amount: 3
+      amount: 1
       nexo_item: pyrite_ingot
     S:
-      amount: 2
+      amount: 1
       minecraft_type: STICK
   shape:
     - PPP
@@ -3806,10 +3806,10 @@ pyrite_axe:
     amount: 1
   ingredients:
     P:
-      amount: 3
+      amount: 1
       nexo_item: pyrite_ingot
     S:
-      amount: 2
+      amount: 1
       minecraft_type: STICK
   shape:
     - 'PP '
@@ -3825,7 +3825,7 @@ pyrite_shovel:
       amount: 1
       nexo_item: pyrite_ingot
     S:
-      amount: 2
+      amount: 1
       minecraft_type: STICK
   shape:
     - ' P '
@@ -3838,10 +3838,10 @@ pyrite_hoe:
     amount: 1
   ingredients:
     P:
-      amount: 2
+      amount: 1
       nexo_item: pyrite_ingot
     S:
-      amount: 2
+      amount: 1
       minecraft_type: STICK
   shape:
     - 'PP '

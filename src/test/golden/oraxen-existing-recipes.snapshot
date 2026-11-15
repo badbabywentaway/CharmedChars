@@ -4386,12 +4386,8 @@ pyrite_pickaxe:
     durability:
       value: 250
   AttributeModifiers:
-    GENERIC_ATTACK_DAMAGE:
-      amount: 4
-      slot: HAND
-    GENERIC_ATTACK_SPEED:
-      amount: -2.8
-      slot: HAND
+    - { attribute: ATTACK_DAMAGE, amount: 4, operation: 0, slot: HAND }
+    - { attribute: ATTACK_SPEED, amount: -2.8, operation: 0, slot: HAND }
   Components:
     tool:
       default_mining_speed: 1.0
@@ -4420,12 +4416,8 @@ pyrite_axe:
     durability:
       value: 250
   AttributeModifiers:
-    GENERIC_ATTACK_DAMAGE:
-      amount: 9
-      slot: HAND
-    GENERIC_ATTACK_SPEED:
-      amount: -3.1
-      slot: HAND
+    - { attribute: ATTACK_DAMAGE, amount: 9, operation: 0, slot: HAND }
+    - { attribute: ATTACK_SPEED, amount: -3.1, operation: 0, slot: HAND }
   Components:
     tool:
       default_mining_speed: 1.0
@@ -4454,12 +4446,8 @@ pyrite_shovel:
     durability:
       value: 250
   AttributeModifiers:
-    GENERIC_ATTACK_DAMAGE:
-      amount: 4.5
-      slot: HAND
-    GENERIC_ATTACK_SPEED:
-      amount: -3.0
-      slot: HAND
+    - { attribute: ATTACK_DAMAGE, amount: 4.5, operation: 0, slot: HAND }
+    - { attribute: ATTACK_SPEED, amount: -3.0, operation: 0, slot: HAND }
   Components:
     tool:
       default_mining_speed: 1.0
@@ -4488,12 +4476,8 @@ pyrite_hoe:
     durability:
       value: 250
   AttributeModifiers:
-    GENERIC_ATTACK_DAMAGE:
-      amount: 1
-      slot: HAND
-    GENERIC_ATTACK_SPEED:
-      amount: -1.0
-      slot: HAND
+    - { attribute: ATTACK_DAMAGE, amount: 1, operation: 0, slot: HAND }
+    - { attribute: ATTACK_SPEED, amount: -1.0, operation: 0, slot: HAND }
   Components:
     tool:
       default_mining_speed: 1.0
